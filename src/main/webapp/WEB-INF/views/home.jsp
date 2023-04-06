@@ -4,10 +4,10 @@
 <html>
 <head>
 	<title>SPOUTING</title>
-	<link rel="stylesheet" href="../../resources/mainCss/home.css">
+	<link rel="stylesheet" href="../../resources/css/mainCss/home.css">
 </head>
 <body>
-	<jsp:include page="./header.jsp"></jsp:include>
+	<jsp:include page="./common/header.jsp"></jsp:include>
 	<div id="img-box">
         <img class="img" src="../../resources/images/homeImg/mainimg1.jpg" alt="mainimg1">
         <img class="img" src="../../resources/images/homeImg/mainimg2.jpg" alt="mainimg2">
@@ -61,7 +61,7 @@
 
     </div>
     
-    <jsp:include page="./footer.jsp"></jsp:include>
+    <jsp:include page="./common/footer.jsp"></jsp:include>
     <script>
         const images = document.querySelectorAll('.img');
         let current = 0;

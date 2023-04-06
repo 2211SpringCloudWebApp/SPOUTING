@@ -5,7 +5,7 @@
 <head>
 	<meta charset="UTF-8">
 	<title>Insert title here</title>
-	<link rel="stylesheet" href="../../resources/mainCss/footer.css">
+	<link rel="stylesheet" href="../../../resources/css/mainCss/footer.css">
 </head>
 <body>
 	<div id="footerContainer">
@@ -21,4 +21,4 @@
         </div>
     </div>	
 </body>
-</html>
+</html>/
