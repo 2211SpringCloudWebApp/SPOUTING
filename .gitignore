@@ -5,3 +5,5 @@
 .DS_Store
 target/*
 bin/*
+servlet-context.xml
+pom.xml
