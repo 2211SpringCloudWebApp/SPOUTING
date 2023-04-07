@@ -31,12 +31,12 @@
     </style>
 </head>
 <body>
-	<jsp:include page="../header.jsp"></jsp:include>
+	<jsp:include page="../common/header.jsp"></jsp:include>
 	
 	<div id="sns-main">
 	    <h1 id="sns-header">sns 들어갈 부분</h1>
     </div>
 
-	<jsp:include page="../footer.jsp"></jsp:include>
+	<jsp:include page="../common/footer.jsp"></jsp:include>
 </body>
 </html>

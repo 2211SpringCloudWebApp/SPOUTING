@@ -49,7 +49,7 @@
     </style>
 </head>
 <body>
-	<jsp:include page="../header.jsp"></jsp:include>
+	<jsp:include page="../common/header.jsp"></jsp:include>
 	
 	<div id="meeting-main">
 	    <h1 id="meeting-header">🎯 모집 중인 소셜링</h1>
@@ -58,6 +58,6 @@
 	    <div id="meeting-startBtn"><b>소셜링 주최하기👆</b></div>
     </div>
 
-	<jsp:include page="../footer.jsp"></jsp:include>
+	<jsp:include page="../common/footer.jsp"></jsp:include>
 </body>
 </html>

@@ -19,7 +19,7 @@
 	    </style>
 	</head>
 	<body>
-		<jsp:include page="../header.jsp"></jsp:include>
+		<jsp:include page="../common/header.jsp"></jsp:include>
 		
 <!-- 		메인테이블 -->
 	    <div id="main">
@@ -70,6 +70,6 @@
 	      <button>공지사항작성</button>
 	    </div>
 	    
-	    <jsp:include page="../footer.jsp"></jsp:include>
+	    <jsp:include page="../common/footer.jsp"></jsp:include>
 	</body>
 </html>
