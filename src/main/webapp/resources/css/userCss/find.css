@@ -1,0 +1,62 @@
+@font-face {
+    font-family: 'Pretendard-Regular';
+    src: url('https://cdn.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Regular.woff') format('woff');
+    font-weight: 400;
+    font-style: normal;
+}
+
+* {
+    font-family: 'Pretendard-Regular'; 
+}
+#find-main {
+    width: 350px;
+    height: 450px;
+    margin: 30px auto;
+    text-align: center;   
+}
+    #logo-main {
+        border-bottom: 1px solid #ccc;
+        font-size: 22px;
+        font-weight: 800;
+        padding-top: 30px;
+        margin-bottom: 20px;
+        padding-bottom: 10px;
+        color: #1c3879c2;
+    }
+    #find-box {
+        margin: 0 auto;
+        color: #1C3879;
+    }
+    .account {
+        width: 165px;
+        height: 50px;
+        margin: 15px;
+        border: none;
+        border-radius: 3px;
+        background-color: #afb0b325;
+    }
+    .account:focus {
+        background-color: aliceblue;
+    }
+    #find-submit {
+        width: 250px;
+        height: 40px;
+        border: none;
+        background-color: #afafafa8;
+        border-radius: 5px;
+        color: #ffffff;
+        margin: 25px;
+    }
+        #find-submit:hover {
+            cursor: pointer;
+            background-color: #1C3879;
+        }
+    #find-result {
+        width: 250px;
+        height: 50px;
+        text-align: center;
+        color: #1C3879;
+        font-weight: 800;
+        text-align: center;
+        margin: 0 auto;
+    }
