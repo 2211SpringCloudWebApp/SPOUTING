@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="MeetingMapper">
+	<resultMap id="meetingResultMap" type="com.kh.spouting.meeting.domain.Meeting">
+		<id 	property="meetingNo" 		column="MEETING_NO"/>
+		<result property="readerNo" 		column="READER_NO"/>
+		<result property="meetingName" 		column="MEETING_NAME"/>
+		<result property="meetingDetail" 	column="MEETING_DETAIL"/>		
+		<result property="meetingPeople" 	column="MEETING_PEOPLE"/>
+		<result property="meetingDay" 	column="MEETING_DAY"/>
+	</resultMap>
+	
+	<!-- select -->
+	<select id="selectMeeting" resultType="com.kh.spouting.meeting.domain.Meeting">
+		SELECT * FROM MEETING_TBL
+	</select>
+	
+</mapper>

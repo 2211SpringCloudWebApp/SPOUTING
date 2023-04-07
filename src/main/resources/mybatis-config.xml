@@ -7,8 +7,10 @@
 	</settings>
 	<typeAliases>
 		<typeAlias type="com.kh.spouting.user.domain.User" alias="User"/>
+		<typeAlias type="com.kh.spouting.meeting.domain.Meeting" alias="Meeting"/>
 	</typeAliases>
 	<mappers>
 		<mapper resource="mappers/user-mapper.xml"/>
+		<mapper resource="mappers/meeting-mapper.xml"/>
 	</mappers>
 </configuration>
