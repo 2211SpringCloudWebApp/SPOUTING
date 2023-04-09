@@ -8,7 +8,9 @@
 		<title>지점 목록</title>
 	</head>
 	<body>
-		
+		<!-- header -->
+		<jsp:include page="../common/header.jsp"></jsp:include>
+		<!-- main -->
 		<main>
 			<h1>지점 목록</h1>
 			<h2>SPOUTING</h2>
@@ -29,16 +31,26 @@
 						</tr>
 					</thead>
 					<tbody>
+						<c:forEach items="${cList }" var="center">
 						<tr>
 							<td>${center.centerName}</td>
 							<td>${center.centerAddr}</td>
 							<td>${center.centerTel}</td>
-							<td><input type="submit" value="삭제"></td>
+							<td>
+							<a href="/center/modify">지점수정</a>
+							<input type="submit" value="지점 삭제">
+							</td>
 						</tr>
+						</c:forEach>
 					</tbody>
 				</table>
 			</div>
+			
+			<button><a href="/center/registerView">지점 추가하기</a></button>
 		</main>
+		
+		<!-- footer -->
+		<jsp:include page="../common/footer.jsp"></jsp:include>
 		
 	</body>
 </html>
