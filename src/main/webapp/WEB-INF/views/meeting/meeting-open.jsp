@@ -28,7 +28,7 @@
 <body>
     <h1>소셜링 오픈하기</h1>
 
-    <form action="" method="post">
+    <form action="/meetingOpen" method="post">
         제목 : <input type="text" name="meetingName"> 
         <br>
         내용 : <input type="text" name="meetingDetail">

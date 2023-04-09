@@ -16,7 +16,7 @@
 	    <h1 id="meeting-header">🎯 모집 중인 소셜링</h1>
 	
 	    <br>
-	    <div id="meeting-startBtn"><b>소셜링 주최하기👆</b></div>
+	    <div id="meeting-startBtn" onclick="window.open('/meetingOpenPage','','top=500, left=700, width=500, height=600')"><b>소셜링 주최하기👆</b></div>
     </div>
     
 <!--     여기는 데이터 영역~!~! -->

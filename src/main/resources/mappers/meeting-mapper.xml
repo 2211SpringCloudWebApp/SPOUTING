@@ -15,4 +15,8 @@
 		SELECT * FROM MEETING_TBL
 	</select>
 	
+	<insert id="insertMeeting">
+		INSERT INTO MEETING_TBL VALUES(SEQ_MEETING_NO.NEXTVAL, #{readerNo}, #{meetingName}, #{meetingDetail}, #{meetingPeople}, #{meetingDay})
+	</insert>
+	
 </mapper>

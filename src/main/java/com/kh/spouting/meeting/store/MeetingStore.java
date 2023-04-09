@@ -10,5 +10,7 @@ public interface MeetingStore {
 
 	List<Meeting> selectMeeting(SqlSession session);
 
+	int insertMeeting(SqlSession session, Meeting meeting);
+
 
 }

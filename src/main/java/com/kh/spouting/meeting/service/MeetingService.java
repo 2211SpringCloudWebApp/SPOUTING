@@ -7,5 +7,7 @@ import com.kh.spouting.meeting.domain.Meeting;
 public interface MeetingService {
 
 	List<Meeting> selectMeeting();
+
+	int insertMeeting(Meeting meeting);
 	
 }

@@ -17,4 +17,10 @@ public class MeetingStoreLogic implements MeetingStore {
 		return session.selectList("MeetingMapper.selectMeeting");
 	}
 
+	@Override
+	public int insertMeeting(SqlSession session, Meeting meeting) {
+		// TODO Auto-generated method stub
+		return session.insert("MeetingMapper.insertMeeting", meeting);
+	}
+
 }
