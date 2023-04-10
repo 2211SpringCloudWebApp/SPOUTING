@@ -1,6 +1,7 @@
 package com.kh.spouting.center.controller;
 
 import java.io.File;
+import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -118,17 +119,47 @@ public class CenterController {
 	
 	
 	/* 지점목록 조회 */
-//	@RequestMapping(value="/center/listView", method=RequestMethod.GET)
-//	public String centerListView(
-//			HttpSession session
-//			, Model model) {
+	@RequestMapping(value="/center/listView", method=RequestMethod.GET)
+	public String centerListView(
+			HttpSession session,
+			@ModelAttribute Center center
+			, Model model) {
 //		User user = (User)session.getAttribute("loginUser");
 //		if (user == null) {
 //			model.addAttribute("msg", "관리자 로그인 후 이용해주세요");
-//			model.addAttribute("url", "/");
+//			model.addAttribute("url", "/user/login");
+//			//return "commnon/alert";
 //
 //		}
-//		int centerNo = center.getCenterNo();
-//	}
+		List<Center> cList = cService.selectCenterList(center);
+		if(cList != null) {
+			model.addAttribute("cList", cList);
+			return "center/list";
+		}else {
+			model.addAttribute("msg", "지점 내역이 존재하지 않습니다.");
+			return "common/error";
+		}
+		
+	}
+	
+	
+	/* 지점정보 수정 */
+	@RequestMapping(value="/center/modify", method=RequestMethod.POST)
+	public String centerModify(
+			@ModelAttribute Center center,
+			Model model) {
+		try {
+			int result = cService.updateCenter(center);
+			if(result > 0) {
+				return "redirect:/list.jsp";
+			}else {
+				model.addAttribute("msg", "센터 정보수정이 완료되지 않았습니다.");
+				return "common/error";
+			}
+		} catch (Exception e) {
+			model.addAttribute("msg", e.getMessage());
+			return "common/error";
+		}
+	}
 
 }

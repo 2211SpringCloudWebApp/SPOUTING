@@ -3,8 +3,29 @@
 
 <mapper namespace="CenterMapper">
 
+	<resultMap type="Center" id="centerResultMap">
+		<id property="centerNo" column="CENTER_NO"/>
+		<result property="centerName" column="CENTER_NAME"/>
+		<result property="centerAddr" column="CENTER_ADDR"/>
+		<result property="centerTel" column="CENTER_TEL"/>
+		<result property="centerFilename1" column="CENTER_FILENAME1"/>
+		<result property="centerFilepath1" column="CENTER_FILEPATH1"/>
+		<result property="centerFilename2" column="CENTER_FILENAME2"/>
+		<result property="centerFilepath2" column="CENTER_FILEPATH2"/>
+	</resultMap>
+
 	<!-- 지점 등록 -->
 	<insert id="insertCenter">
 		INSERT INTO CENTER_TBL VALUES(SEQ_CENTER_NO.NEXTVAL, #{centerName}, #{centerAddr}, #{centerTel}, #{centerFilename1}, #{centerFilepath1}, #{centerFilename2}, #{centerFilepath2})
 	</insert>
+	
+	<!-- 지점목록 조회 -->
+	<select id="selectCenter" resultMap="centerResultMap">
+		SELECT * FROM CENTER_TBL
+	</select>
+	
+	<!-- 지점정보 수정 -->
+	<update id="updateCenter">
+		UPDATE CENTER_TBL SET CENTER_NAME = #{centerName}, CENTER_ADDR = #{centerAddr}, CENTER_TEL = #{centerTel}, UPLOAD_FILE = #{uploadFile} WHERE CENTER_NO = #{centerNo}
+	</update>
 </mapper>
