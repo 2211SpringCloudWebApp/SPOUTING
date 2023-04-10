@@ -51,12 +51,22 @@ header {
         height: 100px;
         line-height: 40px;
         padding-right: 30px;
+        padding-top: 20px;
         text-align: end;
     }
     #login a {
-        color: black;
+        color: rgb(73, 73, 73);
     }
-
+    #login a:hover {
+        cursor: pointer;
+        color: #607EAA;
+        text-decoration: underline;
+    }
+    #login span {
+        font-size: 17px;
+        font-weight: 600;
+        color: #043dc2;
+    }
 
     /* 네비게이터 */
 nav {
@@ -84,7 +94,7 @@ nav {
         cursor: pointer;
     }
     .item_name a {
-        color: #003bc4;
+        color: #274ca3;
         font-weight: 600;
     }
     .item_name a:hover {
@@ -93,11 +103,11 @@ nav {
 
     .item_content {
         display: none;
-        background-color: #929292;
-        min-width: 160px;
+        background-color: #696969c5;
+        min-width: 200px;
         box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
         z-index: 1;
-        border-radius: 10px;
+        border-radius: 3px;
     }
 
     .item_content li a {
@@ -105,11 +115,11 @@ nav {
         padding: 12px 16px;
         text-decoration: none;
         display: block;
-        border-radius: 7px;
+        border-radius: 3px;
     }
 
     .item_content li a:hover {
-        background-color: #002f9e;
+        background-color: #00206994;
     }
 
     .item_part:hover .item_content {

@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -11,11 +12,20 @@
 <div id="container">
         <header>
             <div id="logo">
-                <img src="../../resources/images/homeImg/logo.png" alt="logo">
+                <a href="/"><img src="../../resources/images/homeImg/logo.png" alt="logo"></a>
             </div>
             <div id="login">
-                <img src="" alt="">
-                <a href="">Login/Mypage</a>
+                <c:if test="${sessionScope.loginUser.userId eq null}">
+                    <br><a href="/user/login">Login </a> | 
+                    <a href="/user/register"> Join</a>
+                </c:if>
+                <c:if test="${sessionScope.loginUser.userId ne null}">
+                    <input type="hidden" id="userId" value="${sessionScope.loginUser.userId}">
+                    <span>반가워요! Spouter ${sessionScope.loginUser.userName}</span><br>
+                    <a href="/user/logout">Logout </a> | 
+                    <a href="/user/mypage"> Mypage</a>
+                </c:if>
+               
             </div>
             <nav>
                 <ul class="drop_nav">

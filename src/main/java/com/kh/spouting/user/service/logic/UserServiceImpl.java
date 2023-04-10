@@ -17,9 +17,35 @@ public class UserServiceImpl implements UserService{
 	private SqlSession session;
 	
 	
+	@Override //로그인
+	public User selectIdPw(User user) {
+		User userOne = uStore.selectIdPw(session, user);
+		return userOne;
+	}
+	
 	@Override //회원가입
 	public int insertUser(User user) {
 		int result = uStore.insertUser(session, user);
 		return result;
 	}
+
+	@Override //아이디로찾기
+	public User selectOneById(String userId) {
+		User user = uStore.selectOneById(session, userId);
+		return user;
+	}
+
+	@Override //아이디찾기
+	public User findId(User uParam) {
+		User user = uStore.findId(session, uParam);
+		return user;
+	}
+
+	@Override //비밀번호 찾기
+	public User findPw(User uParam) {
+		User user = uStore.findPw(session, uParam);
+		return user;
+	}
+
+	
 }

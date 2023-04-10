@@ -29,12 +29,12 @@
             text-align: center;
         }
             #regi-msg h3 {
-                color: #1C3879;
+                color: #1245bb;
                 margin-top: 20px;
             }
             #regi-msg p {
                 font-size: 15px;
-                color: #807f7f;
+                color: #ffffffe3;
                 margin-bottom: 20px;
             }
         #regi-area table {
@@ -42,7 +42,7 @@
         }
         #regi-area th {
             width: 30%;
-            color: blue;
+            color: #133383;
             text-align: right;
             padding-right: 10px;
         }
@@ -52,20 +52,33 @@
             border: none;
             border-radius: 5px;
         }
+        #regi-area [type=button] {
+            width: 80px;
+            height: 25px;
+            border: 1.5px solid #1245bb7c;
+            border-radius: 5px;
+            background-color: #1245bb00;
+            color: #133383;
+        }
+        #regi-area [type=button]:hover {
+            background-color: rgba(19, 73, 145, 0.63);
+            border: none;
+            color: rgb(219, 219, 219);
+        }
     #join-btn {
         text-align: center;
     }    
-        #join-btn [type=button]{
+        #join-btn [type=submit]{
             width: 150px;
             height: 40px;
             border: none;
-            background-color: #afafafa8;
+            background-color: #969696dc;
             border-radius: 5px;
             color: #eeeeee;
             margin: 15px;
             text-align: center;
         }
-        #join-btn [type=button]:hover {
+        #join-btn [type=submit]:hover {
             background-color: rgba(228, 80, 80, 0.74);
             cursor: pointer;
         }

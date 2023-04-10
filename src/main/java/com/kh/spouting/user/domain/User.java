@@ -20,7 +20,7 @@ public class User {
 		super();
 		this.userId = userId;
 		this.userPw = userPw;
-	}
+	}	
 
 	public User(int userNo, String userId, String userPw, String userName, String userEmail, String userGender,
 			int userType, Timestamp userDate) {
