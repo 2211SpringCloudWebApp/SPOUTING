@@ -28,4 +28,9 @@
 	<update id="updateCenter">
 		UPDATE CENTER_TBL SET CENTER_NAME = #{centerName}, CENTER_ADDR = #{centerAddr}, CENTER_TEL = #{centerTel}, UPLOAD_FILE = #{uploadFile} WHERE CENTER_NO = #{centerNo}
 	</update>
+	
+	<!-- 지점정보 상세조회 -->
+	<select id="selectOneById" resultMap="centerResultMap">
+		SELECT * FROM CENTER_TBL WHERE CENTER_NO = #{centerNo }
+	</select>
 </mapper>

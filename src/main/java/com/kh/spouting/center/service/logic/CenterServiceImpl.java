@@ -39,4 +39,11 @@ public class CenterServiceImpl implements CenterService{
 		return result;
 	}
 
+	/* 지점정보 상세조회 ServiceImpl */
+	@Override
+	public Center selectOnById(Integer centerNo) {
+		Center center = cStore.selectOneById(session, centerNo);
+		return center;
+	}
+
 }

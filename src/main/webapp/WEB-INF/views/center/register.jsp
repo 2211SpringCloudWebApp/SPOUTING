@@ -7,6 +7,8 @@
 		<title>지점 등록</title>
 	</head>
 	<body>
+		<!-- header -->
+		<jsp:include page="../common/header.jsp"></jsp:include>
 		
 		<form action="/center/register" method="post" enctype="multipart/form-data">
 			센터명 : <input type="text" name="centerName"><br>
@@ -17,5 +19,8 @@
 			<input type="submit" value="등록하기">
 			<input type="reset" value="취소">
 		</form>
+		
+		<!-- footer -->
+		<jsp:include page="../common/footer.jsp"></jsp:include>
 	</body>
 </html>

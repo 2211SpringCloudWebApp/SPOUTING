@@ -33,4 +33,11 @@ public class CenterStoreLogic implements CenterStore{
 		return result;
 	}
 
+	/* 지점정보 상세조회 StoreLogic */
+	@Override
+	public Center selectOneById(SqlSession session, Integer centerNo) {
+		Center center = session.selectOne("CenterMapper.selectOneById", centerNo);
+		return center;
+	}
+
 }

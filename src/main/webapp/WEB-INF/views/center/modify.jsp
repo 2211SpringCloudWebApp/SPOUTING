@@ -7,15 +7,24 @@
 		<title>지점 등록</title>
 	</head>
 	<body>
+		<!-- header -->
+		<jsp:include page="../common/header.jsp"></jsp:include>
 		
 		<form action="/center/modify" method="post" enctype="multipart/form-data">
+			<input type="hidden" name="centerNo" value="${center.centerNo }">
 			센터명 : <input type="text" name="centerName" value="${center.centerName }"><br>
 			주소 : <input type="text" name="centerAddr" value="${center.centerAddr }"><br>
 			전화번호 : <input type="text" name="centerTel" value="${center.centerTel }"><br>
-			센터사진 : <input type="file" name="uploadFile" value="${center.uploadFile }"><br>
+			센터사진 : <input type="file" name="uploadFile">&nbsp;&nbsp; ${center.centerFilename1 }<br>
+			<input type="hidden" name="uploadFilePath" value="${center.centerFilepath1 }">
+			센터사진2 : <input type="file" name="uploadFile2">&nbsp;&nbsp; ${center.centerFilename2 }<br>
+			<input type="hidden" name="uploadFilePath2" value="${center.centerFilePath2 }"> 
 			
 			<input type="submit" value="수정완료">
 			<input type="reset" value="취소">
 		</form>
+		
+		<!-- footer -->
+		<jsp:include page="../common/footer.jsp"></jsp:include>
 	</body>
 </html>
