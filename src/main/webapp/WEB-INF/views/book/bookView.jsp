@@ -224,14 +224,14 @@ flex-direction: row;
                 </div>
                 <!--time까지 선택하면 요금란 보이기-->
                 <div class="booking-option" id="price" style="display:none;">
-                    요금: <!-- {facilities.price} x인원x시간 -->
+                    <!--요금:  {facilities.price} x인원x시간 -->
                     
                 </div>
                 <!--요금 보이고 2초 후에 결제 버튼 보이기-->
                 <button id="payment-btn" style="display:none;">이 정보로 예약하기</button>
             </div>
         </main>   
-        <br><br><br><br><br><br><br><br><br><br><br><br>
+        <br><br><br><br><br><br><br><br><br><br>
         <input type="hidden" id="chosenFacilPrice" value="">
         
         
@@ -378,6 +378,8 @@ flex-direction: row;
             }
 
             function showDateInput() {
+            	
+            	
                 document.getElementById("date").style.display = "flex";
                 document.getElementById("date").querySelector("input[type=date]").focus();
 
@@ -416,7 +418,13 @@ flex-direction: row;
                     top: dateDiv.offsetTop,
                     behavior: "smooth"
                 });
-
+                
+                let priceDiv = document.querySelector("#price");
+                
+                
+                
+                
+				//버튼 보이기
                 setTimeout(function() {
                     document.querySelector("button").style.display = "flex";
                 }, 2000);
