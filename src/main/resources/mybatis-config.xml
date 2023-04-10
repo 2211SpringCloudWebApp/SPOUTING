@@ -8,10 +8,11 @@
 	<typeAliases>
 		<typeAlias type="com.kh.spouting.user.domain.User" alias="User"/>
 		<typeAlias type="com.kh.spouting.center.domain.Center" alias="Center"/>
-		
+		<typeAlias type="com.kh.spouting.book.domain.Facilities" alias="Facilities"/>
 	</typeAliases>
 	<mappers>
 		<mapper resource="mappers/user-mapper.xml"/>
 		<mapper resource="mappers/center-mapper.xml"/>
+		<mapper resource="mappers/facilities-mapper.xml"/>
 	</mappers>
 </configuration>
