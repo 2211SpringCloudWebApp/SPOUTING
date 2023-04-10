@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>    
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<!-- 날짜변환용 -->
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>   
 <!DOCTYPE html>
 <html>
 	<head>
@@ -41,30 +43,14 @@
 	          </tr>
 	        </thead>
 	        <tbody class="table-group-divider" style="border-top-color : #1C3879;">
-	          <tr>
-	              <td>2</td>
-	              <td>공지사항1</td>
-	              <td>스파우터</td>
-	              <td>23/03/05</td>
-	          </tr>
-	          <tr>
-	            <td>2</td>
-	            <td>공지사항1</td>
-	            <td>스파우터</td>
-	            <td>23/03/05</td>
-	          </tr>
-	          <tr>
-	            <td>2</td>
-	            <td>공지사항1</td>
-	            <td>스파우터</td>
-	            <td>23/03/05</td>
-	          </tr>
-	          <tr>
-	            <td>2</td>
-	            <td>공지사항1</td>
-	            <td>스파우터</td>
-	            <td>23/03/05</td>
-	          </tr>
+		        <c:forEach items="${nList }" var="notice" varStatus="i">
+		          <tr>
+		              <td>${notice.noticeNo }</td>
+		              <td>${notice.noticeTitle }</td>
+		              <td>${notice.userNo }</td>
+		              <td><fmt:formatDate value="${notice.nCreateDate }" pattern="yyyy-MM-dd" /></td>
+		          </tr>
+		        </c:forEach>
 	        </tbody>
 	      </table>
 	      <button>공지사항작성</button>
