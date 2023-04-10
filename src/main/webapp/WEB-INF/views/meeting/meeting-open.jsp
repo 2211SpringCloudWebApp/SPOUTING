@@ -35,7 +35,7 @@
         <br>
         인원 : <input type="number" value="2" name="meetingPeople">
         <br>
-        날짜 : <input type="datetime-local" name="meetingDay">
+        날짜 : <input type="datetime-local" name="meetingDate">
         <br>
         작성자 : <input type="number" value="3" name="readerNo">
         <br><br>

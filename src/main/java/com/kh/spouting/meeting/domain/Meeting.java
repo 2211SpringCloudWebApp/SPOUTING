@@ -2,6 +2,8 @@ package com.kh.spouting.meeting.domain;
 
 import java.sql.Timestamp;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 public class Meeting {
 	
 	private int meetingNo;
@@ -9,10 +11,22 @@ public class Meeting {
 	private String meetingName;
 	private String meetingDetail;
 	private int meetingPeople;
+	@DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
 	private Timestamp meetingDay;
 	
 	public Meeting() {
 		// TODO Auto-generated constructor stub
+	}
+
+	public Meeting(int meetingNo, int readerNo, String meetingName, String meetingDetail, int meetingPeople,
+			Timestamp meetingDay) {
+		super();
+		this.meetingNo = meetingNo;
+		this.readerNo = readerNo;
+		this.meetingName = meetingName;
+		this.meetingDetail = meetingDetail;
+		this.meetingPeople = meetingPeople;
+		this.meetingDay = meetingDay;
 	}
 
 	public int getMeetingNo() {
@@ -63,24 +77,14 @@ public class Meeting {
 		this.meetingDay = meetingDay;
 	}
 
-	public Meeting(int meetingNo, int readerNo, String meetingName, String meetingDetail, int meetingPeople,
-			Timestamp meetingDay) {
-		super();
-		this.meetingNo = meetingNo;
-		this.readerNo = readerNo;
-		this.meetingName = meetingName;
-		this.meetingDetail = meetingDetail;
-		this.meetingPeople = meetingPeople;
-		this.meetingDay = meetingDay;
-	}
-
 	@Override
 	public String toString() {
 		return "Meeting [meetingNo=" + meetingNo + ", readerNo=" + readerNo + ", meetingName=" + meetingName
 				+ ", meetingDetail=" + meetingDetail + ", meetingPeople=" + meetingPeople + ", meetingDay=" + meetingDay
 				+ "]";
 	}
-	
-	
+
+
+
 
 }

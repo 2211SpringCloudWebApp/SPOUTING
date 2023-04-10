@@ -20,7 +20,9 @@
     </div>
     
 <!--     여기는 데이터 영역~!~! -->
-		<div id="meeting-data">
+		<div id="meeting-data" style="overflow: scroll; height: 600px;">
+		
+<!-- 		예시 영역 -->
 		<div class="meeting-box">
 
             <div class="meeting-img">
@@ -30,8 +32,8 @@
             <div id="meeting-content">
                 <div class="meeting-title">
                     <h1 class="meeting-title-h1">제목 들어갈 부분~!</h1>
-                </div>
-
+                </div><br>
+				
                 <div class="meeting-day">
                     <span>날짜 들어갈 부분~!</span>
                 </div>
@@ -42,6 +44,36 @@
             </div>
 
         </div>
+<!--         예시 영역 끝 -->
+
+<!-- 반복되는 부분 -->
+        <c:forEach items="${meetingList }" var="meeting" varStatus="i">
+	        <div class="meeting-box">
+	
+	            <div class="meeting-img">
+	                <img class="meeting-img" src="/resources/images/meeting/image1.jpg" alt="">
+	            </div>
+	
+	            <div id="meeting-content">
+	                <div class="meeting-title">
+	                    <h1 class="meeting-title-h1">${meeting.meetingName }</h1>
+	                </div> <br>
+	
+	                <div class="meeting-day">
+	                    <span>${meeting.meetingDay }</span>
+	                </div>
+	
+	                <div class="meeting-people">
+	                    <span>${meeting.meetingPeople }</span>
+	                </div>
+	            </div>
+	
+	        </div>
+        </c:forEach>
+<!--         반복되는 부분 끝 -->
+        
+        
+        
 	</div>
     
 

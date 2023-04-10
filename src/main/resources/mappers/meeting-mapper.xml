@@ -11,12 +11,13 @@
 	</resultMap>
 	
 	<!-- select -->
-	<select id="selectMeeting" resultType="com.kh.spouting.meeting.domain.Meeting">
+	<select id="selectMeeting" resultMap="meetingResultMap">
 		SELECT * FROM MEETING_TBL
 	</select>
 	
 	<insert id="insertMeeting">
-		INSERT INTO MEETING_TBL VALUES(SEQ_MEETING_NO.NEXTVAL, #{readerNo}, #{meetingName}, #{meetingDetail}, #{meetingPeople}, #{meetingDay})
+		INSERT INTO MEETING_TBL VALUES(SEQ_MEETING_NO.NEXTVAL, #{readerNo}, #{meetingName}, #{meetingDetail}, #{meetingPeople}
+		, #{meetingDay})
 	</insert>
 	
 </mapper>
