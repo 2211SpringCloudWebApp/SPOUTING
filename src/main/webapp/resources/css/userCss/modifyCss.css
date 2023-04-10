@@ -1,0 +1,80 @@
+@font-face {
+    font-family: 'Pretendard-Regular';
+    src: url('https://cdn.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Regular.woff') format('woff');
+    font-weight: 400;
+    font-style: normal;
+}
+
+* {
+    font-family: 'Pretendard-Regular'; 
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+#modi-container {
+    width: 100%;
+    height: 500px;
+}
+    #modi-box {
+        width: 30%;
+        height: 450px;
+        margin: 0 auto;
+        background-color: rgba(206, 206, 206, 0.199);  
+        line-height: 2.5; 
+        padding-top: 3px;
+    }
+        #modi-msg {
+            text-align: center;
+        }
+            #modi-msg h2 {
+                color: #123a97;
+                margin: 30px;
+            }
+        #modi-area table {
+            width: 100%;
+            line-height: 3
+        }
+        #modi-area th {
+            width: 30%;
+            color: #133383;
+            text-align: right;
+            padding-right: 10px;
+        }
+        #modi-area [type=text], [type=password] {
+            width: 70%;
+            height: 33px;
+            border: none;
+            border-radius: 5px;
+        }
+#btn-box {
+    text-align: center;
+    margin: 20px auto;
+}
+    #modi-btn{
+        width: 160px;
+        height: 45px;
+        border: none;
+        border-radius: 5px;
+        background-color: #7393ddfa;
+        color: #ffffff;
+        margin-bottom: 5px;
+    }
+    #modi-btn:hover {
+        background-color: rgba(82, 82, 82, 0.63);
+        border: none;
+        color: rgb(241, 239, 239);
+    }
+    #remo-btn{
+        width: 160px;
+        height: 45px;
+        border: none;
+        border-radius: 5px;
+        background-color: #db2a2aa9;
+        color: #ffffff;
+    }
+    #remo-btn:hover {
+        background-color: rgba(82, 82, 82, 0.63);
+        border: none;
+        color: rgb(241, 239, 239);
+    }
+        

@@ -23,7 +23,7 @@
                     <input type="hidden" id="userId" value="${sessionScope.loginUser.userId}">
                     <span>반가워요! Spouter ${sessionScope.loginUser.userName}</span><br>
                     <a href="/user/logout">Logout </a> | 
-                    <a href="/user/mypage"> Mypage</a>
+                    <a href="/mypage/myinfo"> Mypage</a>
                 </c:if>
                
             </div>
