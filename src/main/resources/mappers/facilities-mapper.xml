@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="FacilitiesMapper">
+	<resultMap type="Facilities" id="FacilResultMap">
+		<id 	property="facilityNo" 		column="FACILITY_NO"/>
+		<result property="centerNo" 		column="CENTER_NO"/>
+		<result property="facilityName"     column="FACILITY_NAME"/>
+		<result property="maxPeople" 	    column="MAX_PEOPLE"/>		
+		<result property="currPeople" 	    column="CURRENT_PEOPLE"/>
+		<result property="facilityPrice" 	column="FACILITY_PRICE"/>
+	
+	</resultMap>
+	
+	<!-- select -->
+	<select id="selectAllFacil" resultMap="FacilResultMap">
+		SELECT * FROM FACILITIES_TBL
+	</select>
+
+	
+</mapper>
