@@ -10,11 +10,13 @@
 		<typeAlias type="com.kh.spouting.center.domain.Center" alias="Center"/>
 		<typeAlias type="com.kh.spouting.book.domain.Facilities" alias="Facilities"/>
 		<typeAlias type="com.kh.spouting.meeting.domain.Meeting" alias="Meeting"/>
+		<typeAlias type="com.kh.spouting.notice.domain.Notice" alias="Notice"/>
 	</typeAliases>
 	<mappers>
 		<mapper resource="mappers/user-mapper.xml"/>
 		<mapper resource="mappers/center-mapper.xml"/>
 		<mapper resource="mappers/facilities-mapper.xml"/>
 		<mapper resource="mappers/meeting-mapper.xml"/>
+		<mapper resource="mappers/notice-mapper.xml"/>
 	</mappers>
 </configuration>
