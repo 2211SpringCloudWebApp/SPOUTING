@@ -7,8 +7,11 @@
 	</settings>
 	<typeAliases>
 		<typeAlias type="com.kh.spouting.user.domain.User" alias="User"/>
+		<typeAlias type="com.kh.spouting.center.domain.Center" alias="Center"/>
+		
 	</typeAliases>
 	<mappers>
 		<mapper resource="mappers/user-mapper.xml"/>
+		<mapper resource="mappers/center-mapper.xml"/>
 	</mappers>
 </configuration>
