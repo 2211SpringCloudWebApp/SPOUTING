@@ -4,7 +4,7 @@ import java.sql.Timestamp;
 
 public class Notice {
 
-	private String noticeNo;
+	private int noticeNo;
 	private int userNo;
 	private String noticeTitle;
 	private String noticeContent;
@@ -16,11 +16,11 @@ public class Notice {
 	
 	public Notice() {}
 
-	public String getNoticeNo() {
+	public int getNoticeNo() {
 		return noticeNo;
 	}
 
-	public void setNoticeNo(String noticeNo) {
+	public void setNoticeNo(int noticeNo) {
 		this.noticeNo = noticeNo;
 	}
 

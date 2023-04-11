@@ -18,5 +18,18 @@ public class NoticeStoreLogic implements NoticeStore{
 		return nList;
 	}
 
+	// 공지사항 디테일 Store
+	@Override
+	public Notice selectOneNotice(SqlSession session, int noticeNo) {
+		Notice notice = session.selectOne("NoticeMapper.selectOneNotice", noticeNo);
+		return notice;
+	}
+
+	@Override
+	public int insertNotice(SqlSession session, Notice notice) {
+		int result = session.insert("NoticeMapper.insertNotice", notice);
+		return result;
+	}
+
 	
 }

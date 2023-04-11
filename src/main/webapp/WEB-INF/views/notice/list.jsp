@@ -28,25 +28,25 @@
 	      <h2>공지사항</h2>
 	      <h5>스파우팅의 새로운 소식을 만나보세요!</h5>
 	      <table class="table table-hover">
+		          <colgroup>
+		            <col style="width:10%">
+		            <col style="width:50%">
+		            <col style="width:20%">
+		            <col style="width:20%">
+		          </colgroup>
 	        <thead>
-	          <colgroup>
-	            <col style="width:10%">
-	            <col style="width:50%">
-	            <col style="width:20%">
-	            <col style="width:20%">
-	          </colgroup>
-	          <tr>
-	              <th>번호</th>
-	              <th>제목</th>
-	              <th>작성자</th>
-	              <th>작성일</th>
-	          </tr>
+		          <tr>
+		              <th>번호</th>
+		              <th>제목</th>
+		              <th>작성자</th>
+		              <th>작성일</th>
+		          </tr>
 	        </thead>
 	        <tbody class="table-group-divider" style="border-top-color : #1C3879;">
 		        <c:forEach items="${nList }" var="notice" varStatus="i">
 		          <tr>
 		              <td>${notice.noticeNo }</td>
-		              <td>${notice.noticeTitle }</td>
+		              <td><a href="detail?noticeNo=${notice.noticeNo }">${notice.noticeTitle }</a></td>
 		              <td>${notice.userNo }</td>
 		              <td><fmt:formatDate value="${notice.nCreateDate }" pattern="yyyy-MM-dd" /></td>
 		          </tr>
