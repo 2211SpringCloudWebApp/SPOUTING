@@ -39,6 +39,20 @@ public interface UserService {
 	 */
 	public User findPw(User uParam);
 
+	/** 
+	 * 회원정보 수정 Service
+	 * @param user
+	 * @return int
+	 */
+	public int updateUser(User user);
+
+	/**
+	 * 회원 탈퇴 Service
+	 * @param userId
+	 * @return int
+	 */
+	public int deleteUser(String userId);
+
 	
 
 }

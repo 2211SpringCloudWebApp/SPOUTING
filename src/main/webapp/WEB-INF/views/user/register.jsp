@@ -25,7 +25,7 @@
                             <th>ID</th>
                             <td>
                                 <input type="text" id="userId" name="userId" maxlength="15" required>
-                                <input type="button" id="idCheck-btn" value="중복확인"><br>
+                                <input type="button" onclick="return idCheck()" value="중복확인"><br>
                                 <span id="idCheck-msg"></span>
                             </td>
                         </tr>
@@ -77,7 +77,7 @@
 
     <script>
         //아이디 중복확인 ajax
-        $("#idCheck-btn").click(function() {
+        function idCheck() {
             const userId = $("#userId").val();
             $.ajax({
                 type : "get",
@@ -92,7 +92,7 @@
                     }
                 }
             });
-        });
+        };
 
         var ckeckRegi = () => {
             

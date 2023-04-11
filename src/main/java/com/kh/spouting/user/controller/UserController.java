@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -38,9 +39,9 @@ public class UserController {
 		return "user/login";
 	}
 	
-	@PostMapping("/user/loginCheck")
+	@PostMapping("/user/loginCheck") //로그인 ajax Logic
 	@ResponseBody
-	public String loginCheckLogic(  //로그인 ajax Logic
+	public String loginCheckLogic(  
 			HttpServletRequest request
 			, String userId
 			, String userPw) {
@@ -75,14 +76,14 @@ public class UserController {
 	}
 	
 	// 아이디 찾기
-	@GetMapping("/user/findid") 
-	public String findidView() { //아이디찾기 View
+	@GetMapping("/user/findid")  //아이디찾기 View
+	public String findidView() { 
 		return "user/findid";
 	}
 	
-	@PostMapping("/user/findid")
+	@PostMapping("/user/findid") //아이디찾기 ajax Logic
 	@ResponseBody
-	public String findidLogic( //아이디찾기 ajax Logic
+	public String findidLogic( 
 			String userName
 			,String userEmail) {
 		User uParam = new User();
@@ -96,14 +97,14 @@ public class UserController {
 		}
 	}
 	// 비밀번호 찾기
-	@GetMapping("/user/findpw") 
-	public String findpwView() { //아이디찾기 View
+	@GetMapping("/user/findpw")  //아이디찾기 View
+	public String findpwView() { 
 		return "user/findpw";
 	}
 	
-	@PostMapping("/user/findpw")
+	@PostMapping("/user/findpw") //아이디찾기 ajax Logic
 	@ResponseBody
-	public String findpwLogic( //아이디찾기 ajax Logic
+	public String findpwLogic( 
 			String userId
 			,String userEmail) {
 		User uParam = new User();
@@ -135,7 +136,7 @@ public class UserController {
 		if(result > 0) {
 			return "redirect:/";
 		} else {
-			model.addAttribute("msg", "회원가입이 완료하지 못했습니다.");
+			model.addAttribute("msg", "회원가입을 완료하지 못했습니다.");
 			return "common/error";
 		}
 	}
@@ -158,7 +159,63 @@ public class UserController {
 	 * 마이페이지 기능
 	 *===================================================*/
 	
-	// 회원 탈퇴
+	//정보수정 전 비번확인
+	@GetMapping("/mypage/myinfo") //View
+	public String myinfoView() {
+		return "mypage/myinfo";
+	}
+	
+	//회원 정보수정
+	@GetMapping("/user/modify") //회원정보 수정 View
+	public String userModifyView(HttpSession session, Model model) {
+		User userOne = (User)session.getAttribute("loginUser");
+		String userId = userOne.getUserId();
+		User user = uService.selectOneById(userId);
+		model.addAttribute("user", user);
+		return "user/modify";
+	}
+	
+	@PostMapping("/user/modify") //회원정보 수정 Logic
+	public String userModifyLogic(
+			@ModelAttribute User user
+			, Model model) {
+		try {
+			int result = uService.updateUser(user);
+			if(result > 0) {
+				model.addAttribute("user", user);
+				return "redirect:/user/modify";
+			}else {
+				model.addAttribute("msg", "정보수정에 실패하였습니다.");
+				return "common/error";
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			model.addAttribute("msg", "정보수정 실패.");
+			return "common/error";
+		}
+		
+	}
+	
+	//회원 탈퇴
+	@GetMapping("/user/delete") //회원탈퇴
+	public String removeUser(
+			@RequestParam("userId") String userId
+			,Model model) {
+		try {
+			int result = uService.deleteUser(userId);
+			model.addAttribute("user", userId);
+			if(result > 0) {
+				return "redirect:/user/logout";
+			}else {
+				model.addAttribute("msg", "탈퇴가 완료되지 않았습니다.");
+				return "common/error";
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			model.addAttribute("msg", e.getMessage());
+			return "member/modify";
+		}
+	}
 	
 	
 	

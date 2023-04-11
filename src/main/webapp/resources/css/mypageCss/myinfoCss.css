@@ -1,0 +1,60 @@
+@font-face {
+    font-family: 'Pretendard-Regular';
+    src: url('https://cdn.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Regular.woff') format('woff');
+    font-weight: 400;
+    font-style: normal;
+}
+
+* {
+    font-family: 'Pretendard-Regular'; 
+}
+#main-box {
+    width: calc(100% - 200px);
+    height: 352px;
+    float: left;
+    border-top: 1px solid rgb(242, 242, 242);
+
+}
+#check-box {
+    width: 400px;
+    height: 300px;
+    margin: 0 auto;
+    text-align: center;  
+}
+    #logo-main {
+        border-bottom: 1px solid #ccc;
+        font-size: 20px;
+        font-weight: 800;
+        padding-top: 30px;
+        margin-bottom: 20px;
+        padding-bottom: 10px;
+        color: #1C3879;
+    }
+    #info-box {
+        margin: 0 auto;
+        color: #1C3879;
+    }
+    .info {
+        width: 160px;
+        height: 40px;
+        margin: 10px;
+        border: none;
+        border-radius: 3px;
+        background-color: #afb0b325;
+    }
+    .info:focus {
+        background-color: aliceblue;
+    }
+    #check-btn {
+        width: 200px;
+        height: 40px;
+        border: none;
+        background-color: #afafafa8;
+        border-radius: 5px;
+        color: #ffffff;
+        margin: 20px;
+    }
+        #check-btn:hover {
+            cursor: pointer;
+            background-color: #1C3879;
+        }

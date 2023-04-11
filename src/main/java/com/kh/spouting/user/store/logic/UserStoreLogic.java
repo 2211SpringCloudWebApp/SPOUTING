@@ -39,6 +39,18 @@ public class UserStoreLogic implements UserStore {
 		return user;
 	}
 
+	@Override //회원정보 수정
+	public int updateUser(SqlSession session, User user) {
+		int result = session.update("UserMapper.updateUser", user);
+		return result;
+	}
+
+	@Override //회원 탈퇴
+	public int deleteUser(SqlSession session, String userId) {
+		int result = session.delete("UserMapper.deleteUser", userId);
+		return result;
+	}
+
 	
 
 }

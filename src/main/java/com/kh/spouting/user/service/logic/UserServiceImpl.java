@@ -47,5 +47,17 @@ public class UserServiceImpl implements UserService{
 		return user;
 	}
 
+	@Override //회원정보 수정
+	public int updateUser(User user) {
+		int result = uStore.updateUser(session, user);
+		return result;
+	}
+
+	@Override //회원 탈퇴
+	public int deleteUser(String userId) {
+		int result = uStore.deleteUser(session, userId);
+		return result;
+	}
+
 	
 }

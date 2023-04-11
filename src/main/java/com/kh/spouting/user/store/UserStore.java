@@ -47,5 +47,21 @@ public interface UserStore {
 	 */
 	public User findPw(SqlSession session, User uParam);
 
+	/**
+	 * 회원정보 수정 Store
+	 * @param session
+	 * @param user
+	 * @return int
+	 */
+	public int updateUser(SqlSession session, User user);
+
+	/**
+	 * 회원 탈퇴 Store
+	 * @param session
+	 * @param userId
+	 * @return int
+	 */
+	public int deleteUser(SqlSession session, String userId);
+
 	
 }
