@@ -6,6 +6,18 @@
 	<head>
 		<meta charset="UTF-8">
 		<title>지점 목록</title>
+		<style>
+			table {
+				border : 1px solid black;
+			}
+			th {
+				background-color : lightgray;
+			}
+			th, td {
+				padding : 5px;
+				border : 1px solid black;
+			}
+		</style>
 	</head>
 	<body>
 		<!-- header -->
@@ -33,11 +45,11 @@
 					<tbody>
 						<c:forEach items="${cList }" var="center">
 						<tr>
-							<td>${center.centerName}</td>
+							<td><a href="/center/detail?centerNo=${center.centerNo} ">${center.centerName}</a></td>
 							<td>${center.centerAddr}</td>
 							<td>${center.centerTel}</td>
 							<td>
-							<a href="/center/modify">지점수정</a>
+							<a href="/center/modifyView?centerNo=${center.centerNo}">지점수정</a>
 							<input type="submit" value="지점 삭제">
 							</td>
 						</tr>
@@ -46,7 +58,7 @@
 				</table>
 			</div>
 			
-			<button><a href="/center/registerView">지점 추가하기</a></button>
+			<button onclick="location.href='/center/registerView'">지점 추가하기</button>
 		</main>
 		
 		<!-- footer -->
