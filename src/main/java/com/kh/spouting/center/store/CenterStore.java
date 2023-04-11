@@ -32,4 +32,12 @@ public interface CenterStore {
 	 */
 	public int updateCenter(SqlSession session, Center center);
 
+	/**
+	 * 지점정보 상세 조회 Store
+	 * @param session
+	 * @param centerNo
+	 * @return Center
+	 */
+	public Center selectOneById(SqlSession session, Integer centerNo);
+
 }

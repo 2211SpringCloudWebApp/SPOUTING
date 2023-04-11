@@ -2,6 +2,7 @@ package com.kh.spouting.center.controller;
 
 import java.io.File;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -73,8 +74,8 @@ public class CenterController {
 			
 			int result = cService.insertCenter(center);
 			if(result > 0) {
-				// 지점등록 성공 시 메인페이지로 이동
-				return "redirect:/xxx";
+				// 지점등록 성공 시 지점목록 페이지로 이동
+				return "redirect:/center/listView";
 			}else {
 				// 지점등록 실패 시 에러페이지로 이동
 				model.addAttribute("msg", "지점등록이 완료되지 않았습니다. 관리자에게 문의해주세요");
@@ -82,7 +83,7 @@ public class CenterController {
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
-			model.addAttribute("msg", e.getMessage());
+			model.addAttribute("msg", "모든 정보를 입력해주세요");
 			return "common/error";
 		}
 		
@@ -91,7 +92,7 @@ public class CenterController {
 	// 지점 경로로 파일 복사(파일업로드)
 	// 파일복사에 필요한 업로드 파일과 servlet 생성
 	private String saveFile(MultipartFile uploadFile, HttpServletRequest request) {
-		// 원하는 경로
+		// 원하는 저장 경로
 		String root = request.getSession().getServletContext().getRealPath("resources");
 		String savePath = root + "\\centeruploadFiles";
 		// 폴더가 없을 경우 자동 생성
@@ -143,23 +144,104 @@ public class CenterController {
 	}
 	
 	
+	/* 지점정보 수정화면 */
+	@RequestMapping(value="/center/modifyView", method=RequestMethod.GET)
+	public String centerModifyView(@RequestParam("centerNo") Integer centerNo, Model model) {
+		try {
+			Center center = cService.selectOnById(centerNo);
+			if(center != null) {
+				model.addAttribute("center", center);
+				return "/center/modify";
+			}else {
+				model.addAttribute("msg", "지점정보 수정에 실패하였습니다.");
+				return "common/error";
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			model.addAttribute("msg", e.getMessage());
+			return "common/error";
+		}
+	}
+	
 	/* 지점정보 수정 */
 	@RequestMapping(value="/center/modify", method=RequestMethod.POST)
 	public String centerModify(
-			@ModelAttribute Center center,
-			Model model) {
+	    @ModelAttribute Center center,
+	    @RequestParam(value="centerFilename1", required=false) MultipartFile centerFilename1,
+	    @RequestParam(value="centerFilename2", required=false) MultipartFile centerFilename2,
+	    Model model,
+	    HttpServletRequest request) {
 		try {
+			// 수정 시 새로 업로드된 파일 존재
+			if(!centerFilename1.isEmpty()) {
+				// 기존 업로드된 파일 체크 후
+				if(center.getCenterFilename1() != null) {
+					// 기존 파일 삭제
+					this.deleteFile1(center.getCenterFilename1(), request);
+				}
+				// saveFile() 사용하여 새로 업로드된 파일 복사
+				String modifyPath1 = this.saveFile(centerFilename1, request);
+				if(modifyPath1 != null) {
+					// center에 새로운 파일이름, 파일경로 set
+					center.setCenterFilename1(centerFilename1.getOriginalFilename());
+					center.setCenterFilepath1(modifyPath1);
+				}
+			}
+			
+			if(!centerFilename2.isEmpty()) {
+				// 기존 업로드된 파일 체크 후
+				if(center.getCenterFilename2() != null) {
+					// 기존 파일 삭제
+					this.deleteFile2(center.getCenterFilename2(), request);
+				}
+				// saveFile() 사용하여 새로 업로드된 파일 복사
+				String modifyPath2 = this.saveFile(centerFilename2, request);
+				if(modifyPath2 != null) {
+					// center에 새로운 파일이름, 파일경로 set
+					center.setCenterFilename2(centerFilename2.getOriginalFilename());
+					center.setCenterFilepath2(modifyPath2);
+				}
+			}
+			
+			// DB에서 지점정보 수정
 			int result = cService.updateCenter(center);
 			if(result > 0) {
-				return "redirect:/list.jsp";
+				return "redirect:/center/modifyView?centerNo=" + center.getCenterNo();
 			}else {
 				model.addAttribute("msg", "센터 정보수정이 완료되지 않았습니다.");
 				return "common/error";
 			}
 		} catch (Exception e) {
+			e.printStackTrace();
 			model.addAttribute("msg", e.getMessage());
 			return "common/error";
 		}
 	}
+
+	// 기존 파일 삭제 메소드 (첫번째 사진)
+	private void deleteFile1(String centerFilename1, HttpServletRequest request) throws Exception {
+		String root1 = request.getSession().getServletContext().getRealPath("resources");
+		String delPath1 = root1 + "\\centeruploadFiles";
+		String delFilepath1 = delPath1 + "\\" + centerFilename1;
+		File delFile = new File(delFilepath1);
+		if(delFile.exists()) {
+			delFile.delete();
+		}
+	}
+	
+	// 기존 파일 삭제 메소드 (두번째 사진)
+	private void deleteFile2(String centerFilename1, HttpServletRequest request) throws Exception {
+		String root2 = request.getSession().getServletContext().getRealPath("resources");
+		String delPath2 = root2 + "\\centeruploadFiles";
+		String delFilepath2 = delPath2 + "\\" + centerFilename1;
+		File delFile = new File(delFilepath2);
+		if(delFile.exists()) {
+			delFile.delete();
+		}
+	}
+	
+	
+	
+	
 
 }

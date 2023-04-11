@@ -27,4 +27,11 @@ public interface CenterService {
 	 */
 	public int updateCenter(Center center);
 
+	/**
+	 * 지점정보 상세 조회 Service
+	 * @param centerNo
+	 * @return Center
+	 */
+	public Center selectOnById(Integer centerNo);
+
 }
