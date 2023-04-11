@@ -147,6 +147,7 @@ flex-direction: row;
 }
         </style>
 	</head>
+	<!-- !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!바디바디!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! -->
 	<body>
 		<jsp:include page="../common/header.jsp"></jsp:include>
 		<!-- 사진슬라이드 -->
@@ -162,9 +163,11 @@ flex-direction: row;
             <div id='calendar-container'>
               <div id='calendar'></div>
             </div>
-
+            
+            <form action="" method="post">
             <div id="booking-info">
                 <div class="booking-option" id="option-branch">
+<!-- 	${loginUser } -->
                   <p>지점 선택</p><br>
                     <select id="select-branch" >
                         <option value="" selected>선택</option>
@@ -177,7 +180,7 @@ flex-direction: row;
                 <!--지점선택하면 시설선택 selectbox 보이기-->    
                 <div class="booking-option" id="branch-a" style="display: none;">
                    <p>a-지점 시설 선택</p><br>
-                    <select class="facilBox" id="facilities-a" >
+                    <select class="facilBox" id="facilities-a"  name= "facilityName">
                         <option value="" selected>선택</option>
                         <option value="a-1">클라이밍센터</option>
                         <option value="a-2">잠수풀</option>
@@ -186,7 +189,7 @@ flex-direction: row;
             
                 <div class="booking-option" id="branch-b" style="display: none;">
                    <p>b-지점 시설 선택</p><br>
-                    <select class="facilBox" id="facilities-b" >
+                    <select class="facilBox" id="facilities-b" name= "facilityName">
                         <option value="" selected>선택</option>
                         <option value="b-1">테니스장</option>
                         <option value="b-2">농구코트</option>
@@ -198,13 +201,13 @@ flex-direction: row;
 
                 <div class="booking-option" id="num-people" style="display:none;">
                     <p>인원 수 입력</p><br>
-                    <input type="number" onchange="showDateInput()" min="1" id="numPpl">
+                    <input type="number" id="numOfPpl" onchange="showDateInput()" min="1" id="numPpl" name="numPeople">
                 </div>    
 
                 <!--인원 입력하고 입력란에서 빠져나오면 date 선택란 보이기-->
                 <div class="booking-option" id="date" style="display:none;">
                     <p>이용 날짜</p><br>
-                    <input type="date" onchange="showTimeInput()">
+                    <input type="date" onchange="showTimeInput()" name="useDate">
                 </div>
                 <!--날짜 선택하면 풀캘린더 API 등장 ㅜㅜ 우얄꼬-->
                 
@@ -217,8 +220,8 @@ flex-direction: row;
 <!--                     예)오후 1시~3시까지 이용할 경우<br>13~15 입력<br> -->
 					<div>
                     <div id="timeInput">
-	                    <input type="number" id="startTime" placeholder="시작시간" min="0">~
-	                    <input type="number" id="endTime" placeholder="종료시간" onchange="showPrice()" min="1">
+	                    <input type="number" id="startTime" placeholder="시작시간" min="0" name="startParam">~
+	                    <input type="number" id="endTime" placeholder="종료시간" onchange="showPrice()" min="1" name="endParam">
                     </div>
                     </div>
                 </div>
@@ -233,10 +236,13 @@ flex-direction: row;
         </main>   
         <br><br><br><br><br><br><br><br><br><br><br><br>
         <input type="hidden" id="chosenFacil" value="">
+        <input type="hidden" id="facilNo" value="" name="facilityNo">
+        <input type="hidden" id="bookPrice" value="" name="bookPrice">
         
+        </form>
         
         <script>
-            
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////스크립트영역 
             //슬라이드이미지
             const images = document.querySelectorAll('#image-wrapper img');
             let index = 0;
@@ -258,16 +264,6 @@ flex-direction: row;
             }
 
            
-            
-            
-            
-            
-            
-          //포커스에 따른 자동 스크롤
-            window.addEventListener('lord', function(){
-              var inputs = document.querySelectorAll('');
-            })
-
 
             //브랜치, 시설 입력(선택)하면 동작하는 함수(display, 스크롤)
             document.getElementById("select-branch").addEventListener("change", function() {
@@ -296,59 +292,53 @@ flex-direction: row;
 	            }
        		});
           
-          //이름 값 가져다 주고 가격 받아오기 아작쓰 도전
-            document.querySelector('.facilBox').addEventListener("change", function(){
-	            let selectBox = document.querySelector('.facilBox'); // 선택된 select 요소 가져오기
-	            let selectedOption = selectBox.options[selectBox.selectedIndex]; // 선택된 option 요소 가져오기
-	            let selectedValue = selectedOption.innerHTML; // 선택된 option 요소의 innerHTML 값 가져오기
-	            console.log(selectedValue); // 선택된 option 요소의 innerHTML 값 출력하기. selectedValue=시설이름
-	            document.querySelector('#chosenFacil').value=selectedValue;
-          	    let selectedFacil= document.querySelector('#chosenFacil').value //이게 시설명
-	            
-            	
-            	$.ajax({
-            		url: "/book/getPrice",
-            		data:{"facilityName": selectedFacil},
-            		type:"get",
-            		success: function(facility){
-            			let str="";
-            			for(var i = 0; i<facility.length; i++){
-            				if(facility[i].facilityName==selectedFacil){
-            					str=facility[i].facilityPrice;
-            					console.log(str);
-            					
-            					//여기까지 했다!! 콘솔 출력된다(갬격)
-            				}
-            			};
-            		},
-            		error: function(){
-            			console.log("ajax 실패 서버 처리 실패 실패실패");
-            		}
-            		
-            	});
-             })
-//           	  let facilities = []; //배열임
-//           	  let facilityPrice; //가격을 찾아낼것
-//           	  <c:forEach var="facility" items="${fList}">
-// 	          	  	var facilityOne = {};
-// 	          	 	facilityOne.facilityName = "${facility.facilityName}";
-// 	          	  	facilityOne.facilityPrice = "${facility.facilityPrice}";
-//         	  		facilities.push(facilityOne);
-//           	  </c:forEach>
-//           	  facilities.forEach(function(facility){//배열에서 객체 뽑아냄
-//           		  if(facility.facilityName==selectedFacil){
-//           			  facilityPrice = facility.facilityPrice;
-          			 
-//           		  }
-//           	  })
-//           	  console.log(facilityPrice);
+            //시설 고르기
+            let str = "";
+            let getFacilNo = 0;
+			//str=시설 1시간 1명 이용료
+            document.querySelector('#facilities-a').addEventListener("change", function() {
+                chooseFacil('#facilities-a');
+            });
+
+            document.querySelector('#facilities-b').addEventListener("change", function() {
+                chooseFacil('#facilities-b');
+            });
+
+            function chooseFacil(facilityId) {
+                let selectBox = document.querySelector(facilityId); // 선택된 select 요소 가져오기
+                let selectedOption = selectBox.options[selectBox.selectedIndex]; // 선택된 option 요소 가져오기
+                let selectedValue = selectedOption.innerHTML; // 선택된 option 요소의 innerHTML 값 가져오기
+                console.log(selectedValue); // 선택된 option 요소의 innerHTML 값 출력하기. selectedValue=시설이름               
+                document.querySelector('#chosenFacil').value = selectedValue; //#chosenFacil얘는 인풋타입히든임(히든에 태워서 보내?)
+                let selectedFacil = document.querySelector('#chosenFacil').value; //시설명을 변수에 넣고
+
+                $.ajax({
+                    url: "/book/getPrice",
+                    data:{"facilityName": selectedFacil},
+                    type:"get",
+                    //async : false,
+                    success: function(facility){
+                        for(var i = 0; i<facility.length; i++){
+                            if(facility[i].facilityName==selectedFacil){ //시설명이랑 배열에 있는 애들 비교해서 
+                                str=facility[i].facilityPrice; //가격 가져오기
+                                getFacilNo=facility[i].facilityNo;
+                                console.log(str);
+                                console.log(getFacilNo);
+                                
+                            }
+                        };
+               			 document.querySelector("#facilNo").value=getFacilNo;
+                         showPrice();// 아 빡쳐 일단 여기까지 해ㅠ 이렇게 하면 누르자마자 요금 div flex돼버림
+                    },
+                    error: function(){
+                        console.log("ajax 실패 서버 처리 실패 실패실패");
+                    }
+                });
+            }
+			
+
             
-//            console.log("${fList }");
-//           인원수= document.querySelector('#numPpl').value            
-//           이용시간= document.querySelector('#endTime').value-document.querySelector('#startTime').value
-            
-            
-            
+          
             //농구코트 선택했을때 요금 안내
             document.getElementById("facilities-b").addEventListener("change", function() {
                 const facilitiesSelect = document.getElementById("facilities-b");
@@ -362,7 +352,7 @@ flex-direction: row;
             });    
 
             
-
+			//인원수 입력란
             function showPeopleInput() {
                 document.getElementById("num-people").style.display = "flex";
                 document.getElementById("num-people").querySelector("input[type=number]").focus();
@@ -374,7 +364,9 @@ flex-direction: row;
                     behavior: "smooth"
                 });
                 
-    			//console.log(documentnum-people)
+                let numOfPpl = document.querySelector("#numOfPpl").value;
+
+                		
             }
 
             function showDateInput() {
@@ -387,6 +379,8 @@ flex-direction: row;
                     top: dateDiv.offsetTop,
                     behavior: "smooth"
                 });
+                
+                
             }
 
             //document.getElementById("select-branch").addEventListener("change", showFacilitiesInput);
@@ -406,11 +400,45 @@ flex-direction: row;
                     top: dateDiv.offsetTop,
                     behavior: "smooth"
                 });
+                
+                
+              
             }
 
+            
             function showPrice() {
-                document.getElementById("price").style.display = "flex";
-                // 요소의 위치로 스크롤 이동
+                 
+            	  let numOfPpl = document.getElementById("numOfPpl").value;
+            	  let startTime = document.getElementById("startTime").value;
+            	  let endTime = document.getElementById("endTime").value;
+				  	
+            	  //농구 가격 처리. 좋은 코드는 아닌거같다. 잘 바꿀수 있는 방법 생각해보기
+            	  if(str==4000){
+            		  if(numOfPpl >=1 && numOfPpl <=5 ){
+            			  numOfPpl = 5;
+            		  }else if(numOfPpl > 5 && numOfPpl <= 10 ){
+            			  numOfPpl = 10;
+            		  }else{
+            			  numOfPpl = 100; //나중에 수정하기
+            		  }
+            	  }
+            	  
+            	  let price = str * numOfPpl * (endTime - startTime);
+            		  
+            	  
+
+            	  let priceElement = document.getElementById("price");
+            	  priceElement.innerHTML = "요금: " + price;
+            	  document.querySelector("#bookPrice").value=price; //폼에 태워보낼애
+            	  priceElement.style.display = "flex";
+            	  
+                
+                
+                document.getElementById("numOfPpl").addEventListener("change", showPrice);
+                
+                
+                
+                // 예약하기버튼 위치로 스크롤 이동
                 const dateDiv = document.getElementById("price");
                 window.scrollTo({
                     top: dateDiv.offsetTop,
@@ -428,11 +456,14 @@ flex-direction: row;
                 });
             }
 
+            
+            
+            
+            
+            
            
         </script>
-         
-         
-         
+       
 		<jsp:include page="../common/footer.jsp"></jsp:include>
 	</body>
 </html>
