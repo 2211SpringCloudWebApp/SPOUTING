@@ -12,7 +12,7 @@
 	
 	<!-- select -->
 	<select id="selectMeeting" resultMap="meetingResultMap">
-		SELECT * FROM MEETING_TBL
+		SELECT * FROM MEETING_TBL WHERE MEETING_DAY > SYSTIMESTAMP ORDER BY MEETING_DAY ASC
 	</select>
 	
 	<insert id="insertMeeting">

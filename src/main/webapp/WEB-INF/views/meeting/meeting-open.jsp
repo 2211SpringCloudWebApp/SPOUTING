@@ -28,7 +28,8 @@
 <body>
     <h1>소셜링 오픈하기</h1>
 
-    <form action="/meetingOpen" method="post">
+    <form action="/meetingOpen" method="POST" id="meetingForm">
+    <input type="hidden" id="readerNo" name="readerNo" value=${loginUser.userNo }>
         제목 : <input type="text" name="meetingName"> 
         <br>
         내용 : <input type="text" name="meetingDetail">
@@ -37,12 +38,27 @@
         <br>
         날짜 : <input type="datetime-local" name="meetingDate">
         <br>
-        작성자 : <input type="number" value="3" name="readerNo">
+<!--         작성자 : <input type="number" value="3" name="readerNo"> -->
         <br><br>
 
         <input type="submit" value="등록">
-        <input type="button" value="닫기" onclick="self.close()">
+<!--         <input type="button" value="닫기" onclick="self.close()"> -->
     </form>
-
+    
+    
+	<script>
+		
+// 	onclick="doMeetOpen();
+	
+		function doMeetOpen() {
+// 			action="/meetingOpen" method="post"
+			var form = document.querySelector("#meetingForm");
+			form.action = "/meetingOpen";
+			form.method = "get";
+			form.submit();
+			window.opener.location.href = "/meeting";
+			window.close();
+		}
+	</script>
 </body>
 </html>
