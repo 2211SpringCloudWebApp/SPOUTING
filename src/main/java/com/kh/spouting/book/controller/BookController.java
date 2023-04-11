@@ -29,11 +29,20 @@ public class BookController {
 		return "book/bookView";
 	}
 	
-	@ResponseBody
-	@RequestMapping(value="/getPrice", method=RequestMethod.GET, produces="application/json;charset=utf-8")
-	public String getPrice(@RequestParam("facilityName") String facilityName) {
-		List<Facilities> fList = bService.selectAllFacil();
-		return new Gson().toJson(fList);
-		
-		}
-	}
+	//시설 리스트 예약페이지로 불러오기
+//	@ResponseBody
+//	@RequestMapping(value="/getPrice", method=RequestMethod.GET, produces="application/json;charset=utf-8")
+//	public String getPrice(@RequestParam("facilityName") String facilityName) {
+//		List<Facilities> fList = bService.selectAllFacil();
+//		return new Gson().toJson(fList);
+//		
+//		}
+//	
+//	@RequestMapping(value="/confirmBook", method=RequestMethod.POST)
+//	public String confirmBook(@RequestParam("facilityNo") int facilityNo
+//							, @RequestParam("")) {
+//		user
+//		return "redirect: book/bookView";
+//	}
+//	
+}
