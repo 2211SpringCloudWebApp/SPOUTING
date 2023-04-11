@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="ProductMapper">
+
+	<resultMap type="Product" id="productResultMap">
+		<id property="productNo" column="PRODUCT_NO"/>
+		<result property="categoryNo" column="CATEGORY_NO"/>
+		<result property="productName" column="PRODUCT_NAME"/>
+		<result property="productPrice" column="PRODUCT_PRICE"/>
+		<result property="productDescription" column="PRODUCT_DESCRIPTION"/>
+		<result property="productFilename" column="PRODUCT_FILENAME"/>
+		<result property="productFilerename" column="PRODUCT_FILERENAME"/>
+		<result property="productFilepath" column="PRODUCT_FILEPATH"/>
+	</resultMap>
+		<resultMap type="Category" id="categoryResultMap">
+		<id property="categoryNo" column="CATEGORY_NO"/>
+		<result property="categoryName" column="CATEGORY_NAME"/>
+	</resultMap>
+	
+	<select id="selectProductList" resultMap="productResultMap">
+	  SELECT PRODUCT_NO, PRODUCT_NAME, PRODUCT_PRICE, PRODUCT_FILENAME
+	  FROM PRODUCT_TBL
+	  ORDER BY PRODUCT_NO
+	</select>
+
+	
+</mapper>

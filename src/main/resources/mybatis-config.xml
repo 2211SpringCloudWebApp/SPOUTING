@@ -11,6 +11,8 @@
 		<typeAlias type="com.kh.spouting.book.domain.Facilities" alias="Facilities"/>
 		<typeAlias type="com.kh.spouting.meeting.domain.Meeting" alias="Meeting"/>
 		<typeAlias type="com.kh.spouting.notice.domain.Notice" alias="Notice"/>
+		<typeAlias type="com.kh.spouting.product.domain.Product" alias="Product"/>
+		<typeAlias type="com.kh.spouting.product.domain.Category" alias="Category"/>
 	</typeAliases>
 	<mappers>
 		<mapper resource="mappers/user-mapper.xml"/>
@@ -18,5 +20,6 @@
 		<mapper resource="mappers/facilities-mapper.xml"/>
 		<mapper resource="mappers/meeting-mapper.xml"/>
 		<mapper resource="mappers/notice-mapper.xml"/>
+		<mapper resource="mappers/product-mapper.xml"/>
 	</mappers>
 </configuration>

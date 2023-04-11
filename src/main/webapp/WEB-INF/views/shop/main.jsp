@@ -7,10 +7,6 @@
 	<title>피트니스 마켓</title>
 	<link rel="stylesheet" href="../../../resources/css/shopCss/main.css">
 	<style>
-		#maincontainer {
-			margin-left : 200px;
-            height : 120vh;
-		}
 		#nav {
 		  float: left;
 		  width: 200px;
@@ -24,9 +20,9 @@
 		<jsp:include page="./menu.jsp"></jsp:include>
 	</div>
 	<div id="maincontainer">
-    	<h1 style="text-align: center;">SPOUTING MARKET</h1>
+    	<h1 style="color:#1C3879">SPOUTING MARKET</h1>
     	<br>
-        <p style="text-align: center;">스파우팅만의 제품들을 만나보세요.</p>
+        <p>스파우팅만의 제품들을 만나보세요.</p>
 		<div id="prebox">
             <div class="box1">
                 <div class="prolist">
@@ -35,21 +31,23 @@
                     <p>8,000</p>
                 </div>
             </div>
-            <div class="box1">
+            <div class="box2">
                 <div class="prolist">
                     <img src="/resources/images/product/acc/magnet1.jpg">
                     <p>운동하는 곰 파우치</p>
                     <p>8,000</p>
                 </div>
             </div>
-            <div class="box1">
+            <div class="box3">
                 <div class="prolist">
                     <img src="/resources/images/product/acc/magnet1.jpg">
                     <p>운동하는 곰 파우치</p>
                     <p>8,000</p>
                 </div>
             </div>
-            <a href="">전체 상품 보기</a>          
+        </div>
+        <div id="movebtn">
+	        <a href="/shop/productList" style="text-align : center;">전체 상품 보기</a>          
         </div>
         <div class="box">
             <div class="slide">
@@ -60,12 +58,12 @@
                     <img src="/resources/images/product/ad/ad4.jpg">
                 </div>
             </div>
-                <button class="back">❮</button>
+                <button type="button" class="back">❮</button>
                 <button class="next">❯</button>
             </div>
     	</div>
-	<jsp:include page="../common/footer.jsp"></jsp:include>
 
+	<jsp:include page="../common/footer.jsp"></jsp:include>
     <script>
         let pages = 0;//현재 인덱스 번호
         let positionValue = 0;//images 위치값

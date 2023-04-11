@@ -11,21 +11,34 @@
 }
 
 #maincontainer {
-    width: 100%;
-    height : 150vh;
-    margin: 0 auto;
+    width: calc(100% - 200px);
+    margin-left : 200px;
+    height : 2000px;
     padding-top : 150px;
 }
+
 #prebox {
     width: 100%;
     height: 60vh;
-    background-color: antiquewhite;
+    padding : 10vh;
+    
 }
-.box1 {
-    width: 20%;
-    float: left;
+.box1, .box2, .box3 {
+    width: 33%;
+    height : 45vh;
     border: 0.5px solid black;
-    align-items : center;
+	display : inline-block;
+	text-align : center;
+	align-items : center;
+}
+h1, p {
+	text-align : center;
+}
+
+#movebtn {
+	display: flex;
+    justify-content: center;
+    height : 10vh;
 }
 
 .prolist {
@@ -43,7 +56,7 @@ img {
 
 .box {
     width: 100%;
-    height: 300px;
+    height: 50vh;
     margin: 0;
     padding-top : 50px;
 }
@@ -69,12 +82,12 @@ img {
 .back {
     position: relative;
     bottom: 150px;
-    left : 20%;
+    left : 7%;
 }
 .next {
     position: relative;
     bottom: 150px;
-    left : 80%;
+    left : 85%;
 }
 button {
     width: 40px;
