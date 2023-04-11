@@ -10,4 +10,8 @@ public interface NoticeStore {
 
 	List<Notice> selectAllNotice(SqlSession session);
 
+	Notice selectOneNotice(SqlSession session, int noticeNo);
+
+	int insertNotice(SqlSession session, Notice notice);
+
 }

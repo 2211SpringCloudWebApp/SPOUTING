@@ -25,4 +25,17 @@ public class NoticeServiceImpl implements NoticeService{
 		return nList;
 	}
 
+	// 공지사항 디테일 Service
+	@Override
+	public Notice selectOneNotice(int noticeNo) {
+		Notice notice = nStore.selectOneNotice(session, noticeNo);
+		return notice;
+	}
+
+	@Override
+	public int insertNotice(Notice notice) {
+		int result = nStore.insertNotice(session, notice);
+		return result;
+	}
+
 }
