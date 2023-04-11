@@ -11,6 +11,7 @@ public class Product {
 	private String productFilerename;
 	private String productFilepath;
 	
+	
 	public int getProductNo() {
 		return productNo;
 	}
@@ -59,6 +60,7 @@ public class Product {
 	public void setProductFilepath(String productFilepath) {
 		this.productFilepath = productFilepath;
 	}
+	
 	
 	@Override
 	public String toString() {

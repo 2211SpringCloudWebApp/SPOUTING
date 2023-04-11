@@ -12,7 +12,7 @@
 <div id="container">
         <header>
             <div id="logo">
-                <a href="/"><img src="../../resources/images/homeImg/logo.png" alt="logo"></a>
+                <a href=""><img src="../../resources/images/homeImg/logo.png" alt="logo"></a>
             </div>
             <div id="login">
                 <c:if test="${sessionScope.loginUser.userId eq null}">
@@ -46,11 +46,10 @@
                     </div>
 ​
                     <div class="item_part">
-                        <div class="item_name"><a href="">판매</a></div>
+                        <div class="item_name"><a href="/shop/main">마켓</a></div>
                         <div class="item_content">
-                            <li><a href="">상품 카테고리</a></li>
-                            <li><a href="">의류</a></li>
-                            <li><a href="">잡화</a></li>
+                            <li><a href="/shop/productList">카테고리</a></li>
+                            <li><a href="">상품후기</a></li>
                         </div>
                     </div>
 ​
@@ -70,11 +69,6 @@
                         </div>
                     </div>
                     
-                    <!-- <li><a href="">소개</a></li>
-                    <li><a href="">예약</a></li>
-                    <li><a href="">판매</a></li>
-                    <li><a href="">커뮤니티</a></li>
-                    <li><a href="">게시판</a></li> -->
                 </ul>
             </nav>
 ​
