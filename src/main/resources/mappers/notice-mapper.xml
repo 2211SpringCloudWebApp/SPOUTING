@@ -11,6 +11,7 @@
 		<result property="noticeViews" column="NOTICE_VIEWS"/>
 		<result property="noticeFilename" column="NOTICE_FILENAME"/>
 		<result property="noticeFilepath" column="NOTICE_FILEPATH"/>
+		<result property="noticeFilerename" column="NOTICE_FILERENAME"/>
 	</resultMap>
 
 <!-- 	공지사항 리스트 -->
@@ -23,7 +24,8 @@
 		SELECT * FROM NOTICE_TBL WHERE NOTICE_NO = #{noticeNo}
 	</select>
 	
+<!-- 	공지사항 등록 -->
 	<insert id="insertNotice">
-		INSERT INTO NOTICE_TBL VALUES(SEQ_NOTICE_NO.NEXTVAL, 1, #{noticeTitle}, #{noticeContent}, DEFAULT, DEFAULT, DEFAULT, NULL, NULL)
+		INSERT INTO NOTICE_TBL VALUES(SEQ_NOTICE_NO.NEXTVAL, #{userNo}, #{noticeTitle}, #{noticeContent}, DEFAULT, DEFAULT, DEFAULT, #{noticeFilename}, #{noticeFilepath}, #{noticeFilerename})
 	</insert>
 </mapper>
