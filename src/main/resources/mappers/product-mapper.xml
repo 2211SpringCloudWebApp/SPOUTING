@@ -21,8 +21,11 @@
 	<select id="selectProductList" resultMap="productResultMap">
 	  SELECT PRODUCT_NO, PRODUCT_NAME, PRODUCT_PRICE, PRODUCT_FILENAME
 	  FROM PRODUCT_TBL
-	  ORDER BY PRODUCT_NO
+	  ORDER BY CATEGORY_NO
 	</select>
 
+	<select id="getListCount" resultType="_int">
+		SELECT COUNT(*) FROM PRODUCT_TBL
+	</select>
 	
 </mapper>

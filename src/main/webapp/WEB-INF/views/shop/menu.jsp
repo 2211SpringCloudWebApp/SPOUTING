@@ -68,19 +68,24 @@
 	<div id="navcontainer">
 		<ul id="nav-v2">
             <h3>카테고리</h3>
-			<li class="menu-v2"><a href="#">패션</a>
+			<li class="menu-v2"><a href="#">APPAREL</a>
 				<ul class="submenu">
-					<li><a href="#">의류</a></li>
-					<li><a href="#">가방</a></li>
+					<li><a href="#">CLOTHES</a></li>
+					<li><a href="#">BAG&POUCH</a></li>
 				</ul>
 			</li>
-			<li class="menu-v2"><a href="#">악세사리</a>
+			<li class="menu-v2"><a href="#">LIFE</a>
 				<ul class="submenu">
-					<li><a href="#">핸드폰 케이스</a></li>
-					<li><a href="#">이어폰 케이스</a></li>
+					<li><a href="#">TECH</a></li>
+					<li><a href="#">LIVING</a></li>
 				</ul>
 			</li>
-			<li class="menu-v2"><a href="#">문구</a></li>
+			<li class="menu-v2"><a href="#">LEISURE</a>
+				<ul class="submenu">
+					<li><a href="#">SPORTS</a></li>
+					<li><a href="#">OFFICE</a></li>
+				</ul>
+			</li>
 		</ul>
             
 
