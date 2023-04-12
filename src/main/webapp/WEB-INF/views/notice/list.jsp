@@ -53,9 +53,17 @@
 		        </c:forEach>
 	        </tbody>
 	      </table>
-	      <button>공지사항작성</button>
+	      <div>
+	      	<c:if test="${user.userType eq '1' }">
+	      		<button type="button" onclick="location.href='/notice/write'">공지사항 작성</button>
+	      	</c:if>		     
+	      </div>
 	    </div>
 	    
 	    <jsp:include page="../common/footer.jsp"></jsp:include>
+	    
+	    <script type="text/javascript">
+	    	console.log(${notice.noticeNo})
+	    </script>
 	</body>
 </html>
