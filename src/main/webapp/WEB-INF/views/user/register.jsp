@@ -95,7 +95,7 @@
         };
 
         var ckeckRegi = () => {
-            
+            alert("가입을 환영합니다. Spouting Together!");
         }
         
     </script>
