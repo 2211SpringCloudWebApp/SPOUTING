@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.kh.spouting.notice.domain.FileUtil;
+import com.kh.spouting.common.FileUtil;
 import com.kh.spouting.notice.domain.Notice;
 import com.kh.spouting.notice.service.NoticeService;
 import com.kh.spouting.user.domain.User;

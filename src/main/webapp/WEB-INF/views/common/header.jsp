@@ -54,17 +54,13 @@
                     </div>
 ​
                     <div class="item_part">
-                        <div class="item_name"><a href="">커뮤니티</a></div>
-                        <div class="item_content">
-                            <li><a href="">모임찾기</a></li>
-                            <li><a href="">소모임</a></li>
-                        </div>
+                        <div class="item_name"><a href="/meeting">커뮤니티</a></div>
                     </div>
 ​
                     <div class="item_part">
-                        <div class="item_name"><a href="">게시판</a></div>
+                        <div class="item_name"><a href="/notice/list">게시판</a></div>
                         <div class="item_content">
-                            <li><a href="">공지사항</a></li>
+                            <li><a href="/notice/list">공지사항</a></li>
                             <li><a href="">문의사항</a></li>
                         </div>
                     </div>
