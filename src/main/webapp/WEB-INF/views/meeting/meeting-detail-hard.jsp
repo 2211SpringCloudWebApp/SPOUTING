@@ -86,16 +86,15 @@
 
             <div id="meeting-content">
                 <div class="meeting-title">
-                	<input type="hidden" value="${meeting.meetingNo }" name="meetingNo">
-                    <h1 class="meeting-title-h1">${meeting.meetingName }</h1> <br>
+                    <h1 class="meeting-title-h1">제목 들어갈 부분~!</h1> <br>
                 </div>
 
                 <div class="meeting-day">
-                    <span>${meeting.meetingDay }</span>
+                    <span>날짜 들어갈 부분~!</span>
                 </div>
 
                 <div class="meeting-people">
-                    <span>${meeting.meetingPeople }</span>
+                    <span>인원 들어갈 부분~!</span>
                 </div>
             </div>
 
@@ -104,23 +103,24 @@
         <div id="meeting-detail-box">
             <br><br><br><br><br>
             <div class="meeting-detail">
-		                ${meeting.meetingDetail }
+		                안녕하세요 <br>
+		                여기는 미팅 상세 내용을 넣을 부분입니다 <br>
+		                테스트 좀 해볼게요 <br>
+		                가나다라 마바사<br>
+                abcdefg
             </div>
         </div>
 
-        <div id="meeting-joinBtn" onclick="joinCheck(${meeting.meetingNo });">
-        	<input type="hidden" value="${meeting.meetingNo }" name="meetingNo">
-        	<b>소셜링 참여하기👀</b>
-        </div>
+        <div id="meeting-joinBtn" onclick="joinCheck();"><b>소셜링 참여하기👀</b></div>
 
 	</div>
 	
 	<jsp:include page="../common/footer.jsp"></jsp:include>
 	
 	<script>
-		function joinCheck(meetingNo) {
+		function joinCheck() {
 			if(confirm("소셜링에 참여하시겠습니까?")) {
-				location.href="/joinMeeting?meetingNo="+meetingNo;
+				location.href="";
 			}
 		}
 	

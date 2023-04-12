@@ -20,4 +20,12 @@
 		, #{meetingDay})
 	</insert>
 	
+	<select id="selectOneMeeting" resultMap="meetingResultMap">
+		SELECT * FROM MEETING_TBL WHERE MEETING_NO = #{meetingNo}
+	</select>
+	
+	<insert id="joinMeeting">
+		INSERT INTO LINEUP_TBL VALUES(#{meetingNo}, #{userNo})
+	</insert>
+	
 </mapper>
