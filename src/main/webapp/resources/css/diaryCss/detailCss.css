@@ -1,0 +1,88 @@
+@font-face {
+    font-family: 'Pretendard-Regular';
+    src: url('https://cdn.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Regular.woff') format('woff');
+    font-weight: 400;
+    font-style: normal;
+}
+
+* {
+    font-family: 'Pretendard-Regular'; 
+}
+#insert-title {
+    text-align: center;
+    color: rgb(94, 94, 94);
+    font-size: 22px;
+    font-weight: 800;
+    height: 70px;   
+}
+    #insert-title span {
+        margin: 0 auto;
+        padding: 5px;
+        padding-left: 20px;
+        padding-right: 20px;
+        border-bottom: 2px solid #0645daab;
+    }
+#insert-main {
+    width: 850px;
+    height: 800px;
+    margin: 0 auto;
+}
+#insert-detail {
+    width: 410px;
+    margin: 0 auto;
+    text-align: center;
+}
+    #insert-detail td {
+        width: 400px;
+    }
+    #img-box {
+        width: 410px;
+        height: 430px;
+        border: 1px solid rgba(94, 94, 94, 0.589);
+        border-radius: 5px;
+    }
+    .input-box {
+        width: 410px;
+        height: 30px;
+        font-size: 18px;
+        border-radius: 5px;
+        border: 1px solid #3d5a9e80;
+    }
+    .input-box:focus {
+        background-color: #c3d5ff7c;
+    }
+    #insert-detail textarea {
+        height: 100px;
+    }
+#diary-btn {
+    width: 160px;
+    height: 50px;
+    border: none;
+    background-color: #0645daab;
+    border-radius: 5px;
+    color: #fafafa;
+    margin: 20px;
+    font-size: 16px;
+}
+    #diary-btn:hover {
+        color: #32529ec2;
+        background-color: #d8d8d885;
+        font-weight: 800;
+        cursor: pointer;
+    }
+#delete-btn {
+    width: 160px;
+    height: 50px;
+    border: none;
+    background-color: #da0646ab;
+    border-radius: 5px;
+    color: #fafafa;
+    margin: 20px;
+    font-size: 16px;
+}
+    #delete-btn:hover {
+        color: #ca1f53c2;
+        background-color: #d8d8d885;
+        font-weight: 800;
+        cursor: pointer;
+    }
