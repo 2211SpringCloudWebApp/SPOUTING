@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttribute;
 
+import com.kh.spouting.meeting.domain.Lineup;
 import com.kh.spouting.meeting.domain.Meeting;
 import com.kh.spouting.meeting.service.MeetingService;
 import com.kh.spouting.user.domain.User;
@@ -26,6 +27,7 @@ public class MeetingController {
 	@Autowired
 	private MeetingService meetingService;
 
+	//커뮤니티 목록 페이지
 	@RequestMapping(value="/meeting", method=RequestMethod.GET)
 	public String meetingPage(Model model) {
 		try {
@@ -43,13 +45,14 @@ public class MeetingController {
 		}
 	}
 	
+	//커뮤니티 주최 페이지
 	@RequestMapping(value="/meetingOpenPage", method=RequestMethod.GET)
 	public String meetingOpenPage(Model model, @SessionAttribute("loginUser") User loginUser) {
 		model.addAttribute("loginUser",loginUser);
 		return "meeting/meeting-open";
 	}
 	
-	
+	//커뮤니티 주최 데이터 넘겨주기
 	@RequestMapping(value="/meetingOpen", method=RequestMethod.POST)
 	public String meetingOpen(HttpServletRequest request
 			,@ModelAttribute Meeting meeting
@@ -82,5 +85,38 @@ public class MeetingController {
 		}
 	}
 	
+	// 소셜링 상세 페이지 예제
+	@RequestMapping(value="/meetingDetailPageHard", method=RequestMethod.GET)
+	public String meetingDetailPageEx(Model model) {
+		return "meeting/meeting-detail-hard";
+	}
+	
+	// 소셜링 상세 페이지
+	@RequestMapping(value="/meetingDetailPage", method=RequestMethod.GET)
+	public String meetingDetailPage(@RequestParam("meetingNo") int meetingNo, Model model) {
+		Meeting meeting = meetingService.selectOneByNumber(meetingNo);
+		model.addAttribute("meeting", meeting);
+		return "meeting/meeting-detail";
+	}
+	
+	@RequestMapping(value="/joinMeeting", method=RequestMethod.GET)
+	public String meetingJoin(@RequestParam("meetingNo") int meetingNo,
+							@SessionAttribute("loginUser") User loginUser
+							,Model model) {
+		try {
+			Lineup JoinMember = new Lineup(meetingNo, loginUser.getUserNo());
+			int result = meetingService.joinMeeting(JoinMember);
+			if(result > 0) {
+				return "redirect:/meeting";
+			} else {
+				model.addAttribute("msg","이미 참여신청한 소셜링입니다.");
+				return "common/error";
+			}			
+		} catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+			return "common/error";
+		}
+	}
 	
 }
