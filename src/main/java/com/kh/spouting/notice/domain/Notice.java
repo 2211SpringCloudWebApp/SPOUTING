@@ -13,6 +13,7 @@ public class Notice {
 	private int noticeViews;
 	private String noticeFilename;
 	private String noticeFilepath;
+	private String noticeFilerename;
 	
 	public Notice() {}
 
@@ -87,13 +88,21 @@ public class Notice {
 	public void setNoticeFilepath(String noticeFilepath) {
 		this.noticeFilepath = noticeFilepath;
 	}
+	
+	public String getNoticeFilerename() {
+		return noticeFilerename;
+	}
+
+	public void setNoticeFilerename(String noticeFilerename) {
+		this.noticeFilerename = noticeFilerename;
+	}
 
 	@Override
 	public String toString() {
 		return "Notice [noticeNo=" + noticeNo + ", userNo=" + userNo + ", noticeTitle=" + noticeTitle
 				+ ", noticeContent=" + noticeContent + ", nCreateDate=" + nCreateDate + ", nUpdateDate=" + nUpdateDate
 				+ ", noticeViews=" + noticeViews + ", noticeFilename=" + noticeFilename + ", noticeFilepath="
-				+ noticeFilepath + "]";
+				+ noticeFilepath + ", noticeFilerename=" + noticeFilename + "]";
 	}
 	
 	

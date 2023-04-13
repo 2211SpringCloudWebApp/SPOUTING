@@ -11,11 +11,25 @@
 		<result property="noticeViews" column="NOTICE_VIEWS"/>
 		<result property="noticeFilename" column="NOTICE_FILENAME"/>
 		<result property="noticeFilepath" column="NOTICE_FILEPATH"/>
+		<result property="noticeFilerename" column="NOTICE_FILERENAME"/>
+	</resultMap>
+	<resultMap type="NoticeJoin" id="noticeJoinResultMap">
+		<id property="noticeNo" column="NOTICE_NO"/>
+		<result property="userNo" column="USER_NO"/>
+		<result property="noticeTitle" column="NOTICE_TITLE"/>
+		<result property="noticeContent" column="NOTICE_CONTENT"/>
+		<result property="nCreateDate" column="N_CREATE_DATE"/>
+		<result property="nUpdateDate" column="N_UPDATE_DATE"/>
+		<result property="noticeViews" column="NOTICE_VIEWS"/>
+		<result property="noticeFilename" column="NOTICE_FILENAME"/>
+		<result property="noticeFilepath" column="NOTICE_FILEPATH"/>
+		<result property="noticeFilerename" column="NOTICE_FILERENAME"/>
+		<result property="userId" column="USER_ID"/>
 	</resultMap>
 
 <!-- 	공지사항 리스트 -->
-	<select id="selectAllNotice" resultMap="noticeResultMap">
-		SELECT * FROM NOTICE_TBL
+	<select id="selectAllNotice" resultMap="noticeJoinResultMap">
+		SELECT N.*, U.USER_ID FROM NOTICE_TBL N JOIN USER_TBL U ON N.USER_NO = U.USER_NO
 	</select>
 	
 <!-- 	공지사항 디테일 -->
@@ -23,7 +37,13 @@
 		SELECT * FROM NOTICE_TBL WHERE NOTICE_NO = #{noticeNo}
 	</select>
 	
+<!-- 	공지사항 등록 -->
 	<insert id="insertNotice">
-		INSERT INTO NOTICE_TBL VALUES(SEQ_NOTICE_NO.NEXTVAL, 1, #{noticeTitle}, #{noticeContent}, DEFAULT, DEFAULT, DEFAULT, NULL, NULL)
+		INSERT INTO NOTICE_TBL VALUES(SEQ_NOTICE_NO.NEXTVAL, #{userNo}, #{noticeTitle}, #{noticeContent}, DEFAULT, DEFAULT, DEFAULT, #{noticeFilename}, #{noticeFilepath}, #{noticeFilerename})
 	</insert>
+	
+<!-- 	페이징처리(공지사항 총 갯수) -->
+	<select id="getNoticeListCount" resultType="_int">
+		SELECT COUNT(*) FROM NOTICE_TBL
+	</select>
 </mapper>

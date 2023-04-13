@@ -6,7 +6,9 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.kh.spouting.common.PageInfo;
 import com.kh.spouting.notice.domain.Notice;
+import com.kh.spouting.notice.domain.NoticeJoin;
 import com.kh.spouting.notice.service.NoticeService;
 import com.kh.spouting.notice.store.NoticeStore;
 
@@ -20,8 +22,8 @@ public class NoticeServiceImpl implements NoticeService{
 	
 	// 공지사항 리스트 Service
 	@Override
-	public List<Notice> selectAllNotice() {
-		List<Notice> nList = nStore.selectAllNotice(session);
+	public List<NoticeJoin> selectAllNotice(PageInfo pi) {
+		List<NoticeJoin> nList = nStore.selectAllNotice(session, pi);
 		return nList;
 	}
 
@@ -32,9 +34,17 @@ public class NoticeServiceImpl implements NoticeService{
 		return notice;
 	}
 
+	// 공지사항 등록 Service
 	@Override
 	public int insertNotice(Notice notice) {
 		int result = nStore.insertNotice(session, notice);
+		return result;
+	}
+
+	// 페이징처리(총 공지사항 수)
+	@Override
+	public int getNoticeListCount() {
+		int result = nStore.getNoticeListCount(session);
 		return result;
 	}
 

@@ -4,7 +4,7 @@
 <html>
 <head>
 	<meta charset="UTF-8">
-	<title>피트니스 마켓</title>
+	<title>SPOUTING MARKET</title>
 	<link rel="stylesheet" href="../../../resources/css/shopCss/main.css">
 	<style>
 		#nav {
@@ -26,23 +26,23 @@
 		<div id="prebox">
             <div class="box1">
                 <div class="prolist">
-                    <img src="/resources/images/product/acc/magnet1.jpg">
-                    <p>운동하는 곰 파우치</p>
-                    <p>8,000</p>
+                    <img src="/resources/images/product/items/unitop3.jpg">
+                    <p>스파우팅 한정 제작 아노락</p>
+                    <p>35,000</p>
                 </div>
             </div>
             <div class="box2">
                 <div class="prolist">
-                    <img src="/resources/images/product/acc/magnet1.jpg">
-                    <p>운동하는 곰 파우치</p>
-                    <p>8,000</p>
+                    <img src="/resources/images/product/items/living9.jpg">
+                    <p>(회원전용) 워시</p>
+                    <p>20,000</p>
                 </div>
             </div>
             <div class="box3">
                 <div class="prolist">
-                    <img src="/resources/images/product/acc/magnet1.jpg">
-                    <p>운동하는 곰 파우치</p>
-                    <p>8,000</p>
+                    <img src="/resources/images/product/items/office7.jpg">
+                    <p>스파우터 키링</p>
+                    <p>10,000</p>
                 </div>
             </div>
         </div>

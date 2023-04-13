@@ -20,16 +20,16 @@
 }
     #regi-box {
         width: 30%;
-        height: 450px;
+        height: 500px;
         margin: 0 auto;
         background-color: rgba(179, 179, 179, 0.548);  
-        line-height: 2.5; 
+        line-height: 2.6; 
     }
         #regi-msg {
             text-align: center;
         }
             #regi-msg h3 {
-                color: #1245bb;
+                color: #072364;
                 margin-top: 20px;
             }
             #regi-msg p {
@@ -47,23 +47,24 @@
             padding-right: 10px;
         }
         #regi-area [type=text], [type=password] {
-            width: 55%;
-            height: 30px;
+            width: 50%;
+            height: 35px;
             border: none;
             border-radius: 5px;
         }
         #regi-area [type=button] {
             width: 80px;
-            height: 25px;
-            border: 1.5px solid #1245bb7c;
+            height: 30px;
+            border: 1.5px solid rgba(12, 51, 134, 0.685);
             border-radius: 5px;
-            background-color: #1245bb00;
-            color: #133383;
+            background-color: rgba(12, 51, 134, 0.685);
+            color: #eeeeee;
         }
         #regi-area [type=button]:hover {
-            background-color: rgba(19, 73, 145, 0.63);
+            background-color: rgba(3, 165, 3, 0.664);
             border: none;
-            color: rgb(219, 219, 219);
+            color: #eeeeee;
+            cursor: pointer;
         }
     #join-btn {
         text-align: center;
@@ -72,14 +73,14 @@
             width: 150px;
             height: 40px;
             border: none;
-            background-color: #969696dc;
+            background-color: rgba(6, 129, 6, 0.904);
             border-radius: 5px;
             color: #eeeeee;
             margin: 15px;
             text-align: center;
         }
         #join-btn [type=submit]:hover {
-            background-color: rgba(228, 80, 80, 0.74);
+            background-color: rgba(5, 37, 107, 0.651);
             cursor: pointer;
         }
         

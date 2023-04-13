@@ -47,15 +47,45 @@
 		          <tr>
 		              <td>${notice.noticeNo }</td>
 		              <td><a href="detail?noticeNo=${notice.noticeNo }">${notice.noticeTitle }</a></td>
-		              <td>${notice.userNo }</td>
+		              <td>${notice.userId }</td>
 		              <td><fmt:formatDate value="${notice.nCreateDate }" pattern="yyyy-MM-dd" /></td>
 		          </tr>
 		        </c:forEach>
 	        </tbody>
 	      </table>
-	      <button>공지사항작성</button>
+	        <div class="pageWrap">
+	        	<div class="pageNation">
+	       			<c:if test="${pi.currentPage > 1}">
+	       				<a href="/notice/list?page=1" class="first-last-page"><<</a>
+	       			</c:if>
+	       			<c:if test="${pi.currentPage > 1}">
+	       				<a href="/notice/list?page=${pi.currentPage - 1}" class="prev-next-page"><</a>
+	       			</c:if>
+	       			<c:forEach begin="${pi.startNavi}" end="${pi.endNavi}" var="page">
+	       				<c:url var="pageUrl" value="/notice/list">
+	       					<c:param name="page" value="${page}" />
+	       				</c:url>
+	       				<a href="${pageUrl}" <c:if test="${pi.currentPage == page}"></c:if>>${page}</a>
+	       			</c:forEach>
+	       			<c:if test="${pi.currentPage < pi.maxPage}">
+	       				<a href="/notice/list?page=${pi.currentPage + 1}" class="prev-next-page">></a>
+	       			</c:if>
+	       			<c:if test="${pi.currentPage < pi.maxPage}">
+	       				<a href="/notice/list?page=${pi.maxPage}" class="first-last-page">>></a>
+	       			</c:if>
+				</div>
+		    </div>
+	      <div>
+	      	<c:if test="${user.userType eq '1' }">
+	      		<button type="button" onclick="location.href='/notice/write'">공지사항 작성</button>
+	      	</c:if>		     
+	      </div>
 	    </div>
 	    
 	    <jsp:include page="../common/footer.jsp"></jsp:include>
+	    
+	    <script type="text/javascript">
+	    	console.log(${notice.noticeNo})
+	    </script>
 	</body>
 </html>

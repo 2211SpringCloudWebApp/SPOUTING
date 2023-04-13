@@ -147,7 +147,6 @@ flex-direction: row;
 }
         </style>
 	</head>
-	<!-- !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!바디바디!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! -->
 	<body>
 		<jsp:include page="../common/header.jsp"></jsp:include>
 		<!-- 사진슬라이드 -->
@@ -163,8 +162,9 @@ flex-direction: row;
             <div id='calendar-container'>
               <div id='calendar'></div>
             </div>
+	<!-- !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!폼!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! -->
             
-            <form action="" method="post">
+            <form action="/book/confirm" method="post">
             <div id="booking-info">
                 <div class="booking-option" id="option-branch">
 <!-- 	${loginUser } -->
@@ -230,16 +230,16 @@ flex-direction: row;
                     요금: <!-- {facilities.price} x인원x시간 -->
                     
                 </div>
+		        <input type="hidden" id="chosenFacil" value="">
+		        <input type="hidden" id="facilNo" value="" name="facilityNo">
+		        <input type="hidden" id="bookPrice" value="" name="bookPrice">
                 <!--요금 보이고 2초 후에 결제 버튼 보이기-->
                 <button id="payment-btn" style="display:none;">이 정보로 예약하기</button>
             </div>
+        </form>
         </main>   
         <br><br><br><br><br><br><br><br><br><br><br><br>
-        <input type="hidden" id="chosenFacil" value="">
-        <input type="hidden" id="facilNo" value="" name="facilityNo">
-        <input type="hidden" id="bookPrice" value="" name="bookPrice">
         
-        </form>
         
         <script>
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////스크립트영역 

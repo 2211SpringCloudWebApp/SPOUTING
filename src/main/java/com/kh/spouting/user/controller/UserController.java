@@ -122,7 +122,6 @@ public class UserController {
 	/*===================================================
 	 * 회원가입 기능
 	 *===================================================*/
-	
 
 	// 회원가입
 	@GetMapping("/user/register") //회원가입 View
@@ -143,6 +142,7 @@ public class UserController {
 	
 	//아이디 중복 체크
 	@GetMapping("/user/register/idCheck")
+	@ResponseBody
 	public String idCheckLogic(String userId) {
 		User user = uService.selectOneById(userId);
 		if(user != null) {

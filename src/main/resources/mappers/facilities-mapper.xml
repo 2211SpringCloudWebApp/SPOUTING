@@ -6,7 +6,6 @@
 		<result property="centerNo" 		column="CENTER_NO"/>
 		<result property="facilityName"     column="FACILITY_NAME"/>
 		<result property="maxPeople" 	    column="MAX_PEOPLE"/>		
-		<result property="currPeople" 	    column="CURRENT_PEOPLE"/>
 		<result property="facilityPrice" 	column="FACILITY_PRICE"/>
 	
 	</resultMap>
