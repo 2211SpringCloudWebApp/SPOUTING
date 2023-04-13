@@ -9,6 +9,7 @@
 		<typeAlias type="com.kh.spouting.user.domain.User" alias="User"/>
 		<typeAlias type="com.kh.spouting.center.domain.Center" alias="Center"/>
 		<typeAlias type="com.kh.spouting.book.domain.Facilities" alias="Facilities"/>
+		<typeAlias type="com.kh.spouting.book.domain.Book" alias="Book"/>
 		<typeAlias type="com.kh.spouting.meeting.domain.Meeting" alias="Meeting"/>
 		<typeAlias type="com.kh.spouting.notice.domain.Notice" alias="Notice"/>
 		<typeAlias type="com.kh.spouting.product.domain.Product" alias="Product"/>
@@ -18,6 +19,7 @@
 		<mapper resource="mappers/user-mapper.xml"/>
 		<mapper resource="mappers/center-mapper.xml"/>
 		<mapper resource="mappers/facilities-mapper.xml"/>
+		<mapper resource="mappers/book-mapper.xml"/>
 		<mapper resource="mappers/meeting-mapper.xml"/>
 		<mapper resource="mappers/notice-mapper.xml"/>
 		<mapper resource="mappers/product-mapper.xml"/>
