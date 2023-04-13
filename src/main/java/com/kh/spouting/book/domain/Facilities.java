@@ -6,7 +6,7 @@ public class Facilities {
 	private int centerNo;
 	private String facilityName;
 	private int maxPeople;
-	private int currPeople;
+	private int currPeople; //일단 내비둬 나중에수정해
 	private int facilityPrice;
 	
 	
