@@ -16,6 +16,8 @@ public class NoticeJoin {
 	private String noticeFilerename;
 	private String userId;
 	
+	public NoticeJoin() {}
+	
 	public int getNoticeNo() {
 		return noticeNo;
 	}

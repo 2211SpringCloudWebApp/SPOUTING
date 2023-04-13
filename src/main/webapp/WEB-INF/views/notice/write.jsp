@@ -38,6 +38,7 @@
 		</div>
 		<jsp:include page="../common/footer.jsp"></jsp:include>
 	  <script>
+	  	console.log(${sessionScope.loginUser.userNo})
 		// 1. 썸머노트설정
 // 		var setting = {
 // 	            height : 300,
@@ -86,7 +87,7 @@
 			         tabsize: 2,
 			         height: 500,
 			         maxHeight: 500,
-			         lang : 'ko-KR'
+			         lang : 'ko-KR',
 			         // 이미지 업로드
 // 		        	   callbacks: {
 // 		        	     onImageLinkInsert: function(url) {

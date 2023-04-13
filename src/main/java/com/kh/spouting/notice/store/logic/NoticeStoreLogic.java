@@ -2,10 +2,13 @@ package com.kh.spouting.notice.store.logic;
 
 import java.util.List;
 
+import org.apache.ibatis.session.RowBounds;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
 
+import com.kh.spouting.common.PageInfo;
 import com.kh.spouting.notice.domain.Notice;
+import com.kh.spouting.notice.domain.NoticeJoin;
 import com.kh.spouting.notice.store.NoticeStore;
 
 @Repository
@@ -13,8 +16,12 @@ public class NoticeStoreLogic implements NoticeStore{
 
 	// 공지사항 리스트 Store
 	@Override
-	public List<Notice> selectAllNotice(SqlSession session) {
-		List<Notice> nList = session.selectList("NoticeMapper.selectAllNotice");
+	public List<NoticeJoin> selectAllNotice(SqlSession session, PageInfo pi) {
+		int limit = pi.getBoardLimit();
+		int currentPage = pi.getCurrentPage();
+		int offset = (currentPage - 1) * limit;
+		RowBounds rowBounds = new RowBounds(offset, limit);
+		List<NoticeJoin> nList = session.selectList("NoticeMapper.selectAllNotice", null, rowBounds);
 		return nList;
 	}
 
@@ -25,9 +32,17 @@ public class NoticeStoreLogic implements NoticeStore{
 		return notice;
 	}
 
+	// 공지사항 등록 Store
 	@Override
 	public int insertNotice(SqlSession session, Notice notice) {
 		int result = session.insert("NoticeMapper.insertNotice", notice);
+		return result;
+	}
+
+	// 페이징처리(총 공지사항 수)
+	@Override
+	public int getNoticeListCount(SqlSession session) {
+		int result = session.selectOne("NoticeMapper.getNoticeListCount");
 		return result;
 	}
 

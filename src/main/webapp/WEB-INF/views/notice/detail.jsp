@@ -36,7 +36,14 @@
 					<td>${notice.nCreateDate } </td>
 				</tr>
 			</table>
-			${notice.noticeContent }
+			<div>
+				<div id="content">
+					${notice.noticeContent }
+				</div>
+				<div id="contentImg">
+					<img src="/resources/images/notice/${notice.noticeFilerename}" width="400">
+				</div>
+			</div>
 		</div>
 		<div id="buttonTag">
 			<c:if test="${user.userType eq 1 }">
