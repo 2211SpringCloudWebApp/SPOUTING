@@ -25,8 +25,12 @@
                             <th>ID</th>
                             <td>
                                 <input type="text" id="userId" name="userId" maxlength="15" required>
-                                <input type="button" onclick="return idCheck()" value="중복확인"><br>
-                                <span id="idCheck-msg"></span>
+                                <input type="button" id="idCheck" value="중복확인"><br>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="2">
+                                <div id="idCheck-msg" style="text-align: center;"></div>
                             </td>
                         </tr>
                         <tr>
@@ -39,7 +43,6 @@
                             <th>PW:re</th>
                             <td>
                                 <input type="password" id="userPw2" name="userPw2" placeholder="비밀번호를 다시 입력하세요" maxlength="15">
-                                <span id="pwdCheck-msg"></span>
                             </td>
                         </tr>
                         <tr>
@@ -60,9 +63,9 @@
                         </tr>
                         <tr>
                             <th>Gender</th>
-                            <td>
-                                <input type="radio" value="M" name="userGender"> 남
-                                <input type="radio" value="F" name="userGender"> 여
+                            <td style="padding-left: 20px;">
+                                <input type="radio" value="M" name="userGender"> 남  
+                                <input type="radio" value="F" name="userGender"> 여  
                             </td>
                         </tr>
                     </table>
@@ -77,13 +80,14 @@
 
     <script>
         //아이디 중복확인 ajax
-        function idCheck() {
+        $("#idCheck").click(function() {
             const userId = $("#userId").val();
             $.ajax({
                 type : "get",
                 url : "/user/register/idCheck?userId="+userId,
                 success : function(data) {
-                    if(data === "true") {
+                    answer = data;
+                    if(answer === "true") {
                         $('#idCheck-msg').html("사용 가능한 아이디입니다.");
 				        $('#idCheck-msg').css("color", "green");
                     } else {
@@ -92,9 +96,29 @@
                     }
                 }
             });
-        };
+        });
 
         var ckeckRegi = () => {
+            //아이디 중복확인 했는지 체크
+            if($("#idCheck-msg").text() === "") {
+                alert("아이디 중복확인을 해주세요.");
+                return false;
+            }
+            //아이디 중복 여부 체크
+            if(answer === "false") {
+                $("#userId").focus();
+                $('#idCheck-msg').html("이미 사용중인 아이디입니다.");
+				$('#idCheck-msg').css("color", "red");
+                return false;
+            }
+
+            const userPw = $("#userPw").val();
+            const userPw2 = $("#userPw2").val();
+            //비밀번호 일치 여부 체크
+            if(userPw !== userPw2) {
+                alert("비밀번호가 일치하지 않습니다!")
+                return false;
+            }
             alert("가입을 환영합니다. Spouting Together!");
         }
         

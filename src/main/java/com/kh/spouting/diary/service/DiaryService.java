@@ -23,10 +23,11 @@ public interface DiaryService {
 	/**
 	 * 회원번호로 찾기 Service
 	 * @param userNo
+	 * @param start 
 	 * @param pi
 	 * @return List<Diary>
 	 */
-	public List<Diary> selectByNo(int userNo);
+	public List<Diary> selectDiaryList(int userNo, Integer start);
 
 	/**
 	 * 글번호로 찾기 Service

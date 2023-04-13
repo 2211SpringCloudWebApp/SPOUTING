@@ -75,6 +75,7 @@
 
         function removeUser() {
             if(window.confirm("정말 탈퇴하시겠습니까?😢")) {
+                alert("탈퇴완료! 꼭 다시 만나요~")
                 var userId = "${user.userId}";
                 location.href = "/user/delete?userId=" + userId;
             }
