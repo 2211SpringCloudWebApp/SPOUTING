@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="BookMapper">
+	<resultMap type="Book" id="BookResultMap">
+		<id 	property="bookNo" 		column="BOOK_NO"/>
+		<result property="facilityNo" 		column="FACILITY_NO"/>
+		<result property="userNo"     column="USER_NO"/>
+		<result property="useDate" 	    column="USE_DATE"/>		
+		<result property="startTime" 	    column="START_TIME"/>
+		<result property="endTime" 	column="END_TIME"/>
+		<result property="bookPrice" 	column="BOOK_PRICE"/>
+		<result property="numPeople" 	column="NUM_PEOPLE"/>
+		<result property="payTime" 	column="PAY_TIME"/>
+		<result property="facilityName" 	column="FACILITY_NAME"/>
+		<result property="centerName" 	column="CENTER_NAME"/>
+		<result property="userName" 	column="USER_NAME"/>
+		<result property="userEmail" 	column="USER_EMAIL"/>
+		<result property="pointChange" 	column="POINT_CHANGE"/>
+	
+	</resultMap>
+	<select id="getSequence" resultType="_int">
+		SELECT SEQ_BOOK_NO.NEXTVAL FROM DUAL
+	</select>
+	<!-- 예약정보저장하기 -->
+	<insert id="insertBook">
+	<!--예약 완료시 payTime 넣음(결제될때 DEFAULT로들어가기) -->
+		INSERT INTO BOOK_TBL VALUES(#{bookNo}, #{facilityNo}, #{userNo}, #{useDate}, #{startTime}, #{endTime}, #{bookPrice}, #{numPeople}, NULL)
+	</insert>
+
+	
+</mapper>

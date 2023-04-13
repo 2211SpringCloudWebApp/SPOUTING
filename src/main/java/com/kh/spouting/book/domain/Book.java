@@ -8,18 +8,41 @@ public class Book {
 	private int bookNo; //시퀀스
 	private int facilityNo; // 넣음
 	private int userNo; //세션에서 가져오기(일단하드)
-	private Date useDate;
+	private Date useDate;//입격
 	private Timestamp startTime; //startParam
 	private Timestamp endTime; //endParam
 	private int bookPrice; //넣음
 	private int numPeople; //입력
 	private Timestamp payTime; //결제순 정렬
-	private String facilityName; //입력
+	//여기서부턴 예약확인페이지에서 보일것
+	private String facilityName; //
+	private String centerName; //centerNo로 조인한 뭔가를 하나 만들어놔야겠다
 	private String userName; //userNo로 받아올것.. 폰, 메일, ?? 폰이 없네...?
 	private String userEmail;
-	private int pointChange; //사용포인트 (얜 입력만 포인트상세테이블에 하기)
+	private int pointChange; //사용포인트 (얜 입력만 포인트상세테이블에 하기)	
+	
+	public Book() {
+		super();
+	}
 	
 	
+	
+	
+	public Book(int facilityNo, int userNo, Date useDate, Timestamp startTime, Timestamp endTime, int bookPrice,
+			int numPeople) {
+		super();
+		this.facilityNo = facilityNo;
+		this.userNo = userNo;
+		this.useDate = useDate;
+		this.startTime = startTime;
+		this.endTime = endTime;
+		this.bookPrice = bookPrice;
+		this.numPeople = numPeople;
+	}
+
+
+
+
 	public int getBookNo() {
 		return bookNo;
 	}
