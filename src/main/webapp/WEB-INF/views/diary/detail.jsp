@@ -32,7 +32,7 @@
                         <input type="text" id="diaryTitle" name="diaryTitle" class="input-box" value="${diary.diaryTitle }">
                         <textarea name="diaryDetail" id="diaryDetail" class="input-box">${diary.diaryDetail }</textarea>
                         <button type="submit" id="diary-btn" onclick="return checkInput(event)">수정하기</button>
-                        <button type="submit" id="delete-btn" onclick="return deleteBtn(event)">삭제하기</button>
+                        <button type="button" id="delete-btn" onclick="return deleteBtn(event)">삭제하기</button>
                     </td>
                 </tr>
             </table> 
@@ -56,6 +56,7 @@
 
         function deleteBtn() {
             if(window.confirm("삭제하시겠습니까?")) {
+                alert("삭제 완료!")
                 var diaryNo = "${diary.diaryNo}";
                 location.href = "/diary/delete?diaryNo=" + diaryNo;
             }

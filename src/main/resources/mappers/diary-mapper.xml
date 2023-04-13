@@ -24,11 +24,12 @@
 		UPDATE DIARY_TBL SET DIARY_TITLE = #{diaryTitle}, DIARY_DETAIL = #{diaryDetail}, DIARY_DATE = SYSDATE WHERE DIARY_NO = #{diaryNo}
 	</update>
 	
+	
 	<!-- select -->
 	<select id="getTotalCount" resultType="_int">
 		SELECT COUNT(*) FROM DIARY_TBL WHERE USER_NO = #{userNo}
 	</select>
-	<select id="selectByNo" resultMap="diaryResultMap">
+	<select id="selectDiaryList" resultMap="diaryResultMap">
 		SELECT * FROM DIARY_TBL WHERE USER_NO = #{userNo}
 	</select>
 	<select id="selectByDiaryNo" resultMap="diaryResultMap">

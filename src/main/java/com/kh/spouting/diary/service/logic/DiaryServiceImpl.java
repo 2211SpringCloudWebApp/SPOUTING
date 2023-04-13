@@ -32,8 +32,8 @@ public class DiaryServiceImpl implements DiaryService{
 	}
 
 	@Override //회원번호로 찾기
-	public List<Diary> selectByNo(int userNo) {
-		List<Diary> dList = dStore.selectByNo(session, userNo);
+	public List<Diary> selectDiaryList(int userNo, Integer start) {
+		List<Diary> dList = dStore.selectDiaryList(session, userNo, start);
 		return dList;
 	}
 

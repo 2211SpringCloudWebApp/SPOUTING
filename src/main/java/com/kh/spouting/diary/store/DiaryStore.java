@@ -28,11 +28,11 @@ public interface DiaryStore {
 	 * 회원번호로 찾기 Store
 	 * @param session
 	 * @param userNo
-	 * @param pi
+	 * @param start
 	 * @return List<Diary>
 	 */
-	public List<Diary> selectByNo(SqlSession session, int userNo);
-
+	public List<Diary> selectDiaryList(SqlSession session, int userNo, Integer start);
+	
 	/**
 	 * 글번호로 찾기 Store
 	 * @param session
@@ -56,5 +56,7 @@ public interface DiaryStore {
 	 * @return int
 	 */
 	public int modifyDiary(SqlSession session, Diary diary);
+
+	
 
 }

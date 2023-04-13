@@ -25,8 +25,11 @@ public class DiaryStoreLogic implements DiaryStore{
 	}
 
 	@Override //회원번호로 찾기
-	public List<Diary> selectByNo(SqlSession session, int userNo) {
-		List<Diary> dList = session.selectList("DiaryMapper.selectByNo", userNo);
+	public List<Diary> selectDiaryList(SqlSession session, int userNo, Integer start) {
+		int limit = 6;
+		int offset = (start - 1) * limit;
+		RowBounds rowBounds = new RowBounds(offset, limit);
+		List<Diary> dList = session.selectList("DiaryMapper.selectDiaryList", userNo, rowBounds);
 		return dList;
 	}
 
@@ -42,11 +45,13 @@ public class DiaryStoreLogic implements DiaryStore{
 		return result;
 	}
 
-	@Override //글 삭제
+	@Override //글 수정
 	public int modifyDiary(SqlSession session, Diary diary) {
-		int result = session.delete("DiaryMapper.modifyDiary", diary);
+		int result = session.update("DiaryMapper.modifyDiary", diary);
 		return result;
 	}
+
+
 	
 	
 

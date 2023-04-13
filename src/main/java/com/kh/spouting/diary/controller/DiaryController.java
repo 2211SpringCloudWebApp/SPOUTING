@@ -1,5 +1,6 @@
 package com.kh.spouting.diary.controller;
 
+import java.io.File;
 import java.util.List;
 import java.util.Map;
 
@@ -12,10 +13,14 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.google.gson.Gson;
 import com.kh.spouting.common.FileUtil;
 import com.kh.spouting.diary.domain.Diary;
 import com.kh.spouting.diary.service.DiaryService;
@@ -72,22 +77,24 @@ public class DiaryController {
 	}
 	
 	//글 목록
-	
 	@GetMapping("/diary/list") //글 목록 View
-	public String diaryListView(
+	public String diaryListView(HttpServletRequest request, Model model) {
+		HttpSession session = request.getSession();
+		int userNo = ((User)session.getAttribute("loginUser")).getUserNo();
+		int totalCount = dService.getTotalCount(userNo); //개수 넘겨서 스크롤이벤트
+		model.addAttribute("totalCount", totalCount);
+		return "diary/list";
+	}
+	
+	@ResponseBody //목록 ajax
+	@RequestMapping(value = "/diary/total", method=RequestMethod.POST, produces = "application/json; charset=utf-8")
+	public String diaryListScroll(
 			HttpServletRequest request
-			,Model model) {
-		try {
-			HttpSession session = request.getSession();
-			int userNo = ((User)session.getAttribute("loginUser")).getUserNo();
-			List<Diary> dList = dService.selectByNo(userNo);
-			model.addAttribute("dList", dList);
-			return "diary/list";
-		} catch (Exception e) {
-			e.printStackTrace();
-			model.addAttribute("msg", e.getMessage());
-			return "common/error";
-		}
+			, Integer start) {
+		HttpSession session = request.getSession();
+		int userNo = ((User)session.getAttribute("loginUser")).getUserNo();
+		List<Diary> dList = dService.selectDiaryList(userNo, start);
+		return new Gson().toJson(dList);
 	}
 	
 	//글 수정
@@ -114,7 +121,7 @@ public class DiaryController {
 			if(result>0) {
 				return "redirect:/diary/detail?diaryNo="+diary.getDiaryNo();
 			} else {
-				model.addAttribute("msg", "레슨 수정 실패");
+				model.addAttribute("msg", "글 수정 실패");
 				return "common/error";
 			}
 		} catch (Exception e) {
@@ -130,10 +137,16 @@ public class DiaryController {
 			@RequestParam("diaryNo") int diaryNo
 			, Model model) {
 		try {
+			Diary diary = dService.selectByDiaryNo(diaryNo);
+			int userNo = diary.getUserNo();
+			String diaryFilepath = diary.getDiaryFilepath();
+			File file = new File(diaryFilepath);
 			int result = dService.deleteDiary(diaryNo);
-			model.addAttribute("diary", diaryNo);
 			if(result > 0) {
-				return "redirect:/diary/list";
+				if(file.exists()) { //해당 글의 사진도 삭제
+					file.delete();
+				}
+				return "redirect:/diary/list?userNo="+userNo;
 			} else {
 				model.addAttribute("msg", "삭제 실패");
 				return "common/error";
