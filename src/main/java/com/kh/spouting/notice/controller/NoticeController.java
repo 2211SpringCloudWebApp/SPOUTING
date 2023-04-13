@@ -100,7 +100,7 @@ public class NoticeController {
 			// 작성자아이디 가져오기?
 //			String noticeWriterId = user.getUserId();
 			
-			fileInfo = fileUtil.saveFile(multi, request);
+			fileInfo = fileUtil.saveFile(multi, request, "notice");
 			notice.setNoticeFilename(fileInfo.get("original"));
 			notice.setNoticeFilerename(fileInfo.get("rename"));
 			notice.setNoticeFilepath(fileInfo.get("renameFilepath"));

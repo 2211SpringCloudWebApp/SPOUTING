@@ -4,7 +4,7 @@
 <html>
 <head>
 	<meta charset="UTF-8">
-	<title>피트니스 마켓</title>
+	<title>SPOUTING MARKET</title>
 	<link rel="stylesheet" href="../../../resources/css/shopCss/main.css">
 	<style>
 		#nav {

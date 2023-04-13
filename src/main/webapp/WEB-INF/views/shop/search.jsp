@@ -35,7 +35,7 @@
 			</tr>
 		</thead>
 		<tbody>
-			<c:forEach var="row" items="${pList }">
+			<c:forEach var="row" items="${sList }">
 				<tr>
 					<td>${row.productNo }</td>
 					<td>
@@ -55,6 +55,8 @@
 					<c:forEach begin="${pi.startNavi }" end="${pi.endNavi }" var="p">
 							<c:url var="pageUrl" value="/shop/productList">
 								<c:param name="page" value="${p }"></c:param>
+								<c:param name="searchValue" value="${search.searchValue }"></c:param>
+								<c:param name="searchCondition" value="${search.searchCondition }"></c:param>
 							</c:url>
 							<a href="${pageUrl }">${p }</a>&nbsp;&nbsp;&nbsp;
 					</c:forEach>
@@ -65,10 +67,10 @@
 				<td colspan="4" align="center" style="height : 50px;">
 					<form action="/product/search" method="get">
 						<select name="searchCondition">
-								<option value="all">전체</option>
-								<option value="no">상품번호</option>
-								<option value="title">상품명</option>
-								<option value="description">상품설명</option>
+								<option value="all" <c:if test="${search.searchCondition == 'all' }">selected</c:if>>전체</option>
+								<option value="no" <c:if test="${search.searchCondition == 'no' }">selected</c:if>>상품번호</option>
+								<option value="title" <c:if test="${search.searchCondition == 'title' }">selected</c:if>>상품명</option>
+								<option value="description" <c:if test="${search.searchCondition == 'description' }">selected</c:if>>상품설명</option>
 							</select>
 							<input type="text" name="searchValue" placeholder="검색어를 입력하세요.">
 							<input type="submit" value="검색">

@@ -17,10 +17,12 @@ public class FileUtil {
 
 	public Map<String, String> saveFile(
 			MultipartFile multi
-			, HttpServletRequest request) throws Exception{
+			, HttpServletRequest request
+			, String folderName) throws Exception{
 		Map<String, String> result = null;
 		String reFilename = null;
 		String reFilepath = null;
+		
 		
 		if(multi != null && !multi.equals("")) {
 			result = new HashMap<String, String>();
@@ -28,7 +30,7 @@ public class FileUtil {
 			//지정 폴더에 저장
 			String originName = multi.getOriginalFilename();
 			String wasRoot = request.getSession().getServletContext().getRealPath("/resources/images");
-			String savePath = wasRoot + "\\" + "diary";
+			String savePath = wasRoot + "\\" + folderName;
 			
 			//폴더 없으면 만들어주기
 			File folder = new File(savePath);

@@ -6,26 +6,26 @@
 	<!-- Root Context: defines shared resources visible to all other web components -->
 	
 	<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close">
-		<property name="driverClassName" 	value="oracle.jdbc.driver.OracleDriver"></property>
-		<property name="url" 				value="jdbc:oracle:thin:@sonof.iptime.org:8510:xe"></property>
+		<property name="driverClassName" 	value="net.sf.log4jdbc.sql.jdbcapi.DriverSpy"></property>
+		<property name="url" 				value="jdbc:log4jdbc:oracle:thin:@sonof.iptime.org:8510:xe"></property>
 		<property name="username" 			value="SPOUTING"></property>
 		<property name="password" 			value="SPOUTING"></property>
 	</bean>
 	
 	<!-- 등록된 JDBC드라이버 객체를 참고하여 SqlSessionTemplate을 만들기 위한 SqlSessionFactoryBean 객체 생성 -->
 	<bean id="sqlSession" class="org.mybatis.spring.SqlSessionFactoryBean">
-		<property name="configLocation" 	value="classpath:mybatis-config.xml"/>
-		<!-- 등록한 dataSource Bean을 의존성 주입 할 수 있도록 함 -->
-		<property name="dataSource" 		ref="dataSource"/>
+		<property name="configLocation" 	value="classpath:mybatis-config.xml"></property>
+		<property name="dataSource" ref="dataSource"></property>
 	</bean>
 	
 	<!-- SqlSessionFactoryBean을 통해 SqlSessionTemplate 객체 생성 -->
 	<bean id="sqlSessionTemplate" class="org.mybatis.spring.SqlSessionTemplate">
-		<constructor-arg ref="sqlSession"/>
+		<constructor-arg ref="sqlSession"></constructor-arg>
 	</bean>
 	
 	<!-- 최대 업로드/메모리 크기 -->
 	<bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+		<property name="defaultEncoding" value="utf-8"></property>
 		<property name="maxUploadSize" value="100000000"></property>
 		<property name="maxInMemorySize" value="100000000"></property>
 	</bean>

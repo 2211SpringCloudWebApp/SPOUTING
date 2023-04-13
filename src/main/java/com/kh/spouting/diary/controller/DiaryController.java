@@ -55,7 +55,7 @@ public class DiaryController {
 			int userNo = ((User)session.getAttribute("loginUser")).getUserNo();
 			diary.setUserNo(userNo);
 			
-			fileInfo = fileUtil.saveFile(multi, request);
+			fileInfo = fileUtil.saveFile(multi, request, "diary");
 			diary.setDiaryFilename(fileInfo.get("rename"));
 			diary.setDiaryFilepath(fileInfo.get("renameFilepath"));
 			
