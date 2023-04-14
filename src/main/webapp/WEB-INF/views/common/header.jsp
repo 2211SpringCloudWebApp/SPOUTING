@@ -5,27 +5,30 @@
 <html>
 <head>
 	<meta charset="UTF-8">
-	<title>Insert title here</title>
 	<link rel="stylesheet" href="../../../resources/css/mainCss/header.css">
 </head>
 <body>
 <div id="container">
         <header>
             <div id="logo">
-                <a href=""><img src="../../resources/images/homeImg/logo.png" alt="logo"></a>
+                <a href="/"><img src="../../resources/images/homeImg/logo.png" alt="logo"></a>
             </div>
             <div id="login">
                 <c:if test="${sessionScope.loginUser.userId eq null}">
-                    <br><a href="/user/login">Login </a> | 
-                    <a href="/user/register"> Join</a>
+                    <br><a href="/user/login">LOGIN </a> | 
+                    <a href="/user/register"> JOIN</a>
                 </c:if>
                 <c:if test="${sessionScope.loginUser.userId ne null}">
                     <input type="hidden" id="userId" value="${sessionScope.loginUser.userId}">
-                    <span>반가워요! Spouter ${sessionScope.loginUser.userName}</span><br>
-                    <a href="/user/logout">Logout </a> | 
-                    <a href="/mypage/myinfo"> Mypage</a>
-                </c:if>
-               
+                    <div id="user-drop">
+                        <span id="user-box">${sessionScope.loginUser.userName} SPOUTER🏆</span>
+                        <ul id="user-menu">
+                            <li><a href="/diary/list">TODAY'S SPOUTING</a></li>
+                            <li><a href="/mypage/myinfo">MY PAGE</a></li>
+                            <li><a href="/user/logout">LOGOUT</a></li>                    
+                        </ul>
+                    </div>
+                </c:if>          
             </div>
             <nav>
                 <ul class="drop_nav">

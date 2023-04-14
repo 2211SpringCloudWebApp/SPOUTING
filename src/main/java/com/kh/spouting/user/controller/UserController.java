@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.kh.spouting.common.MailSendService;
 import com.kh.spouting.user.domain.User;
 import com.kh.spouting.user.service.UserService;
 
@@ -22,6 +23,8 @@ public class UserController {
 	
 	@Autowired
 	private UserService uService;
+	@Autowired
+	private MailSendService mailService;
 	
 	@GetMapping("/")
 	public String indexPage() {
@@ -140,7 +143,7 @@ public class UserController {
 		}
 	}
 	
-	//아이디 중복 체크
+	//아이디 중복 체크 ajax
 	@GetMapping("/user/register/idCheck")
 	@ResponseBody
 	public String idCheckLogic(String userId) {
@@ -152,7 +155,13 @@ public class UserController {
 		}
 	}
 	
-	//이메일 인증
+	//이메일 인증 ajax
+	@GetMapping("/user/register/mailCheck")
+	@ResponseBody
+	public String mailCheckLogic(String email) {
+		String code = mailService.registerEmail(email);
+		return code;
+	}
 
 	
 	/*===================================================

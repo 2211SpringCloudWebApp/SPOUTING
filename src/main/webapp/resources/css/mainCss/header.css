@@ -47,7 +47,7 @@ header {
 
     #login {
         float: right;
-        width: 30%;
+        width: 50%;
         height: 100px;
         line-height: 40px;
         padding-right: 30px;
@@ -59,13 +59,48 @@ header {
     }
     #login a:hover {
         cursor: pointer;
-        color: #607EAA;
+        color: #043dc2;
         text-decoration: underline;
     }
-    #login span {
-        font-size: 17px;
-        font-weight: 600;
+
+    /* 로그인 완료 */
+    #user-box {
+        line-height:2;
+        font-size: 22px;
+        font-weight: 700;
         color: #043dc2;
+        padding-right: 20px;
+    }
+    
+    #user-menu {
+        position:absolute;
+        right: 30px;
+        width: 450px;
+        display:none;
+        z-index: 1;
+        border-top: 1px solid #ccc;
+    }
+    #user-menu li {
+        float: left;
+        margin-left: 30px;
+    }
+    #user-menu li a {
+        font-size: 17px;
+    }
+    #user-menu li a:hover {
+        font-size: 18px;
+        font-weight: 700;
+        text-decoration: none;
+        transition: all 0.1s linear;
+    }
+    #user-drop:hover #user-box {
+        color: rgb(255, 187, 0);
+        font-weight: 800;
+        cursor: pointer;
+    }
+    #user-drop:hover #user-menu {
+        display: block;
+        position: fixed;
     }
 
     /* 네비게이터 */
@@ -76,11 +111,13 @@ nav {
     margin-top: 8px;
 }
     .drop_nav {
+        width: 80%;
         height: 50px;
         display: flex;
         flex-direction: row;
         justify-content: space-around;
         align-items: center;
+        margin: 0 auto;
     }
 
     .drop_nav .item_part {
