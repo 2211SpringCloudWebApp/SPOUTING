@@ -19,6 +19,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.kh.spouting.common.FileUtil;
 import com.kh.spouting.common.PageInfo;
+import com.kh.spouting.common.Search;
 import com.kh.spouting.notice.domain.Notice;
 import com.kh.spouting.notice.domain.NoticeJoin;
 import com.kh.spouting.notice.service.NoticeService;
@@ -47,7 +48,7 @@ public class NoticeController {
 			, @RequestParam(value="page", required = false, defaultValue = "1") Integer page) {
 		try {
 			// 페이징처리
-			int totalCount = nService.getNoticeListCount();
+			int totalCount = nService.getNoticeCount();
 			PageInfo pi = this.getPageInfo(page, totalCount);
 			// 로그인유저정보 보내기(관리자전용버튼위해서)
 			User user = (User) session.getAttribute("loginUser");
@@ -146,5 +147,50 @@ public class NoticeController {
 		}
 		pi = new PageInfo(currentPage, boardLimit, naviLimit, startNavi, endNavi, totalCount, maxPage);
 		return pi;
+	}
+	
+	/**
+	 * 공지사항 검색 Controller
+	 * @param mv
+	 * @param search
+	 * @param page
+	 * @return
+	 */
+	@RequestMapping(value="/search", method = RequestMethod.GET)
+	public ModelAndView searchNotice(
+			ModelAndView mv
+			, @ModelAttribute Search search
+			, @RequestParam(value="page", required = false, defaultValue = "1") Integer page ) {
+		try {
+			int totalCount = nService.getSearchNoticeCount(search);
+			PageInfo pi = this.getPageInfo(page, totalCount);
+			
+			List<NoticeJoin> nList = nService.searchNotice(search, pi);
+			
+			if(!nList.isEmpty()) {
+				mv.addObject("pi", pi).addObject("search", search).addObject("nList", nList).setViewName("notice/search");
+			}else {
+				mv.addObject("msg", "검색하신 내용이 존재하지 않습니다.").setViewName("common/error");
+			}
+		} catch (Exception e) {
+			mv.addObject("msg", e.getMessage()).setViewName("common/error");
+		}
+		return mv;
+	}
+	
+	/**
+	 * 공지사항 수정 View Controller
+	 * @param mv
+	 * @param notice
+	 * @return mv
+	 */
+	@RequestMapping(value="/modify", method = RequestMethod.POST)
+	public ModelAndView modifyNotice(
+			ModelAndView mv,
+			@ModelAttribute Notice notice
+			) {
+		Notice noticeResult = nService.selectOneNotice(notice.getNoticeNo());
+		mv.addObject("notice", noticeResult).setViewName("notice/modify");
+		return mv;
 	}
 }
