@@ -40,4 +40,11 @@ public class CenterStoreLogic implements CenterStore{
 		return center;
 	}
 
+	/* 지점 삭제 StoreLogic */
+	@Override
+	public int deleteCenter(SqlSession session, int centerNo) {
+		int result = session.delete("CenterMapper.deleteCenter", centerNo);
+		return result;
+	}
+
 }

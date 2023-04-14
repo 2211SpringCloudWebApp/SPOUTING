@@ -40,4 +40,12 @@ public interface CenterStore {
 	 */
 	public Center selectOneById(SqlSession session, Integer centerNo);
 
+	/**
+	 * 지점 삭제 Store
+	 * @param session
+	 * @param centerNo
+	 * @return int
+	 */
+	public int deleteCenter(SqlSession session, int centerNo);
+
 }

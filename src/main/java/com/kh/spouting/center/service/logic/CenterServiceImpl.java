@@ -46,4 +46,12 @@ public class CenterServiceImpl implements CenterService{
 		return center;
 	}
 
+	/* 지점 삭제 ServiceImpl */
+	@Override
+	public int deleteCenter(int centerNo) {
+		int result = cStore.deleteCenter(session, centerNo);
+		return result;
+	}
+
+
 }
