@@ -31,10 +31,16 @@ public class BookServiceImpl implements BookService{
 	}
 
 	
+	@Override
+	public Book selectBook(int bookNo) {
+		Book book = bStore.selectBook(session, bookNo);
+		return book;
+	}
 	
 	@Override
 	public int getSequence() {	
 		return bStore.getSequence(session);
 	}
+
 
 }

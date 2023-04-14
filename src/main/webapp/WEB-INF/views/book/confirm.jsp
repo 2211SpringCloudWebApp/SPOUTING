@@ -42,7 +42,31 @@
 		<jsp:include page="../common/header.jsp"></jsp:include>
 		
 		<main>
-           으 jsp 누가 대신 써줬음 좋겟다 쌉노잼
+          
+           <form action ="/book/bookUp" method="post">         
+           <input type="hidden" value="${book.bookNo }" name="bookNo">  
+<!--            //a지점//시설이름//인원수//이용날짜//이용시간//총금액//포인트불러오기 -->
+<!-- 			//--//사용포인트입력//결제금액//api -->
+			<br>지점명: ${book.centerName }
+			<br>시설명: ${book.facilityName }
+			<br>예약자명: ${book.userName }
+			<br>예약자이메일: ${book.userEmail }
+			<br>이용인원수: ${book.numPeople }
+			<br>이용일: ${book.useDate }
+			<br>이용시간: ${book.startTime }~${book.endTime }
+			<br>총이용금액: ${book.bookPrice }
+			
+			<br>-----------------
+			<br>사용포인트 입력:<input type="text" name="pointChange">
+			
+			<br>결제금액: ${book.bookPrice } - 포인트사용액
+			
+			<br><button>결제갈겨</button>
+<!--            -사용포인트 이 안에 써줘야함->인서트 포인트상세테이블 -->
+<!--            -업데이트(페이시간, 남은포인트(원래남은포인트-입력한포인트)."수정내역이 있다면 뒤로가기눌러주셈"   -->
+<!--            -api쓰기    -->
+           </form>
+           
        	</main>
 		<jsp:include page="../common/footer.jsp"></jsp:include>
 	</body>

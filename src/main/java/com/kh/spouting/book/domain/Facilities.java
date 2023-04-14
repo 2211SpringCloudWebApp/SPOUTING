@@ -1,13 +1,21 @@
 package com.kh.spouting.book.domain;
 
+import java.sql.Timestamp;
+import java.util.Date;
+
 public class Facilities {
 	
 	private int facilityNo;
 	private int centerNo;
 	private String facilityName;
 	private int maxPeople;
-	private int currPeople; //일단 내비둬 나중에수정해
 	private int facilityPrice;
+	//여기서부턴 캘린더용 데이터
+	private int timeNo;
+	private Date useDate;
+	private Timestamp startTime; 
+	private Timestamp endTime; 
+	private int currPeople; 
 	
 	
 	public int getFacilityNo() {
@@ -46,11 +54,38 @@ public class Facilities {
 	public void setFacilityPrice(int facilityPrice) {
 		this.facilityPrice = facilityPrice;
 	}
+	public int getTimeNo() {
+		return timeNo;
+	}
+	public void setTimeNo(int timeNo) {
+		this.timeNo = timeNo;
+	}
+	public Date getUseDate() {
+		return useDate;
+	}
+	public void setUseDate(Date useDate) {
+		this.useDate = useDate;
+	}
+	public Timestamp getStartTime() {
+		return startTime;
+	}
+	public void setStartTime(Timestamp startTime) {
+		this.startTime = startTime;
+	}
+	public Timestamp getEndTime() {
+		return endTime;
+	}
+	public void setEndTime(Timestamp endTime) {
+		this.endTime = endTime;
+	}
 	@Override
 	public String toString() {
 		return "Facilities [facilityNo=" + facilityNo + ", centerNo=" + centerNo + ", facilityName=" + facilityName
-				+ ", maxPeople=" + maxPeople + ", currPeople=" + currPeople + ", facilityPrice=" + facilityPrice + "]";
+				+ ", maxPeople=" + maxPeople + ", facilityPrice=" + facilityPrice + ", timeNo=" + timeNo + ", useDate="
+				+ useDate + ", startTime=" + startTime + ", endTime=" + endTime + ", currPeople=" + currPeople + "]";
 	}
+	
+	
 	
 	
 }

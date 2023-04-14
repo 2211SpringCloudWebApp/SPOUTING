@@ -145,6 +145,15 @@ input:focus, select:focus {
 display: flex;
 flex-direction: row;
 }
+
+/* #calendar-container{ */
+/* width:400px; */
+/* --height: 600px; */
+/* --text-align: center; */
+/* } */
+/* .fc .fc-scroller-liquid-absolute{ */
+/* position: relative;  */
+/* } */
         </style>
 	</head>
 	<body>
@@ -191,7 +200,7 @@ flex-direction: row;
                    <p>b-지점 시설 선택</p><br>
                     <select class="facilBox" id="facilities-b" name= "facilityName">
                         <option value="" selected>선택</option>
-                        <option value="b-1">테니스장</option>
+                        <option value="b-1">테니스코트</option>
                         <option value="b-2">농구코트</option>
                     </select>
                     <div id="infoNumBasket" style="color:red; margin-bottom:20px;"></div>
@@ -210,6 +219,12 @@ flex-direction: row;
                     <input type="date" onchange="showTimeInput()" name="useDate">
                 </div>
                 <!--날짜 선택하면 풀캘린더 API 등장 ㅜㅜ 우얄꼬-->
+                <div id="calendar" >
+                <div id="calendar-container" >
+                </div>
+                
+                
+                
                 
 
                 <!--date 선택하면 time 란 보이기-->
@@ -243,6 +258,21 @@ flex-direction: row;
         
         <script>
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////스크립트영역 
+            //지도와의 사투
+         
+
+//       document.addEventListener('DOMContentLoaded', function() {
+//         var calendarEl = document.getElementById('calendar');
+//         var calendar = new FullCalendar.Calendar(calendarEl, {
+//           initialView: 'dayGridMonth'
+//         });
+//         calendar.render();
+//       });
+
+
+            
+            
+            
             //슬라이드이미지
             const images = document.querySelectorAll('#image-wrapper img');
             let index = 0;

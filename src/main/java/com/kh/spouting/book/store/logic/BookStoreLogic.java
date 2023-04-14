@@ -24,9 +24,18 @@ public class BookStoreLogic implements BookStore{
 	}
 
 	@Override
+	public Book selectBook(SqlSession session, int bookNo) {
+		Book book = session.selectOne("BookMapper.selectBook", bookNo); 
+		return book;
+	}
+	
+	
+	
+	@Override
 	public int getSequence(SqlSession session) {
 		return  session.selectOne("BookMapper.getSequence");
 		
 	}
+
 
 }

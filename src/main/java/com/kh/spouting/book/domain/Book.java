@@ -5,21 +5,21 @@ import java.util.Date;
 
 public class Book {
 
-	private int bookNo; //시퀀스
-	private int facilityNo; // 넣음
-	private int userNo; //세션에서 가져오기(일단하드)
-	private Date useDate;//입격
-	private Timestamp startTime; //startParam
-	private Timestamp endTime; //endParam
-	private int bookPrice; //넣음
-	private int numPeople; //입력
-	private Timestamp payTime; //결제순 정렬
+	private int bookNo; 
+	private int facilityNo;
+	private int userNo; 
+	private Date useDate;
+	private Timestamp startTime; 
+	private Timestamp endTime; 
+	private int bookPrice; 
+	private int numPeople; 
+	private Timestamp payTime; 
 	//여기서부턴 예약확인페이지에서 보일것
-	private String facilityName; //
-	private String centerName; //centerNo로 조인한 뭔가를 하나 만들어놔야겠다
+	private String facilityName; 
+	private String centerName; 
 	private String userName; //userNo로 받아올것.. 폰, 메일, ?? 폰이 없네...?
 	private String userEmail;
-	private int pointChange; //사용포인트 (얜 입력만 포인트상세테이블에 하기)	
+	private int userPoint; //사용포인트 (얜 입력만 포인트상세테이블에 하기)	
 	
 	public Book() {
 		super();
@@ -115,11 +115,18 @@ public class Book {
 	public void setUserEmail(String userEmail) {
 		this.userEmail = userEmail;
 	}
-	public int getPointChange() {
-		return pointChange;
+	public int getUserPoint() {
+		return userPoint;
 	}
-	public void setPointChange(int pointChange) {
-		this.pointChange = pointChange;
+	public void setUserPoint(int userPoint) {
+		this.userPoint = userPoint;
+	}
+	public String getCenterName() {
+		return centerName;
+	}
+	
+	public void setCenterName(String centerName) {
+		this.centerName = centerName;
 	}
 	
 	@Override
@@ -127,8 +134,12 @@ public class Book {
 		return "Book [bookNo=" + bookNo + ", facilityNo=" + facilityNo + ", userNo=" + userNo + ", useDate=" + useDate
 				+ ", startTime=" + startTime + ", endTime=" + endTime + ", bookPrice=" + bookPrice + ", numPeople="
 				+ numPeople + ", payTime=" + payTime + ", facilityName=" + facilityName + ", userName=" + userName
-				+ ", userEmail=" + userEmail + ", pointChange=" + pointChange + "]";
+				+ ", userEmail=" + userEmail + ", userPoint=" + userPoint + "]";
 	}
+
+
+
+
 	
 	
 	

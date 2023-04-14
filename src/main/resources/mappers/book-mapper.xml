@@ -15,17 +15,20 @@
 		<result property="centerName" 	column="CENTER_NAME"/>
 		<result property="userName" 	column="USER_NAME"/>
 		<result property="userEmail" 	column="USER_EMAIL"/>
-		<result property="pointChange" 	column="POINT_CHANGE"/>
+		<result property="userPoint" 	column="USER_POINT"/>
 	
 	</resultMap>
+	<!-- 가예약정보 미리 저장하는 용도로 시퀀스 불러오기(nextval은 셀렉트하는 동시에 번호생성가능 -->
 	<select id="getSequence" resultType="_int">
 		SELECT SEQ_BOOK_NO.NEXTVAL FROM DUAL
 	</select>
+	<!-- 가예약정보 불러오기 -->
+	<select id="selectBook" resultMap="BookResultMap">
+	SELECT * FROM BOOK_TBL RIGHT JOIN USER_TBL USING(USER_NO) RIGHT JOIN POINT_TBL USING(USER_NO) LEFT JOIN FACILITIES_TBL USING(FACILITY_NO) LEFT JOIN CENTER_TBL USING(CENTER_NO) WHERE BOOK_NO=#{bookNo}
+	</select>	
 	<!-- 예약정보저장하기 -->
 	<insert id="insertBook">
-	<!--예약 완료시 payTime 넣음(결제될때 DEFAULT로들어가기) -->
+		<!--예약 완료시 payTime 업뎃치기(결제될때 DEFAULT로들어가기) -->
 		INSERT INTO BOOK_TBL VALUES(#{bookNo}, #{facilityNo}, #{userNo}, #{useDate}, #{startTime}, #{endTime}, #{bookPrice}, #{numPeople}, NULL)
 	</insert>
-
-	
 </mapper>

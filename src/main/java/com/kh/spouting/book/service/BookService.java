@@ -26,4 +26,11 @@ public interface BookService {
 	 */
 	public int getSequence();
 
+	/**
+	 * 결제 전 예약정보 정보 불러오기
+	 * @param bookNo
+	 * @return Book
+	 */
+	public Book selectBook(int bookNo);
+
 }
