@@ -21,18 +21,20 @@
 	
 	<resultMap id="snsProfileResultMap" type="com.kh.spouting.sns.domain.SnsProfile">
 		<id 	property="userNo" 		column="USER_NO"/>
-		<result property="userNo" 		column="USER_NO"/>
-		<result property="snsContent" 		column="SNS_CONTENT"/>
-		<result property="snsFilename" 	column="SNS_FILENAME"/>		
-		<result property="snsFileRename" 	column="SNS_FILERENAME"/>
+		<result property="userName" 		column="USER_NAME"/>
+		<result property="profileFilename" 		column="PROFILE_FILENAME"/>
+		<result property="profileFilepath" 	column="PROFILE_FILEPATH"/>		
+		<result property="profileIntoduce" 	column="PROFILE_INTRODUCE"/>
 	</resultMap>
 	
 	<insert id="insertPhoto">
 		INSERT INTO SNSPHOTO_TBL VALUES(SEQ_SNSPHOTO_NO.NEXTVAL, #{userNo}, #{snsContent}, #{snsFilename},#{snsFileRename}, #{snsFilepath}, DEFAULT)
 	</insert>
 	
-	<select id="selectOneSns" resultMap="snsResultMap">
-		SELECT * FROM SNS_TBL WHERE USER_NO = #{userNo}
+	<select id="selectOneSns" resultMap="snsProfileResultMap">
+		SELECT U.USER_NAME, S.PROFILE_FILENAME, S.PROFILE_FILEPATH, S.PROFILE_INTRODUCE
+		FROM SNS_TBL S JOIN USER_TBL U ON S.USER_NO = U.USER_NO
+		WHERE U.USER_NO = #{userNo}
 	</select>
 	
 </mapper>

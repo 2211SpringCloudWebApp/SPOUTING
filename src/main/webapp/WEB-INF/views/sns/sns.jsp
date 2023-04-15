@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <html>
 <head>
     <meta charset="UTF-8">
@@ -21,6 +22,11 @@
 		    font-family: 'Pretendard-Regular';
 		}
 		
+		.modify-btn {
+			--float: right;
+			cursor: pointer;
+		}
+		
 		#sns-main {
 			padding: 40px;
 			height: 700px;
@@ -30,15 +36,15 @@
 		}
 
 		#sns-profile {
-			width: inherit;
+			width: 700px;
 			height: 160px;
-			--background-color:rgb(187, 187, 255);
+			background-color:rgb(187, 187, 255);
 		}
 
 		#img-box {
 			height: inherit;
 			width: 200px;
-			--background-color: beige;
+			background-color: beige;
 			float: left;
 			display: flex;
 			justify-content: center;
@@ -47,8 +53,8 @@
 
 		#profile-box {
 			height: inherit;
-			width: 600px;
-			--background-color: coral;
+			width: 500px;
+			background-color: coral;
 			float: left;
 			display: flex;
 			flex-direction: column;
@@ -84,14 +90,21 @@
 	<jsp:include page="../common/header.jsp"></jsp:include>
 	<br>
 	<div id="sns-main">
+	<button type="button" class="modify-btn">프로필 수정</button>
 		<!-- 프로필 영역 -->
         <div id="sns-profile">
 			<div id="img-box">
 				<img id="sns-profile-img" src="/resources/images/meeting/image1.jpg" alt="">
+<!-- 				이미지 업로드 영역 -->
+<!-- 				<input type='file' name='uploadFile'><br/> -->
+
+<!-- 				<button id='uploadBtn'>Upload</button> -->
+<!-- 				<button id='removeBtn'>Remove</button> -->
+<!-- 				업로드 영역 끝 -->
 			</div>
 			<div id="profile-box">
-				<h1>${oneSns.userNo }</h1> <br>
-				<span>한줄소개</span>
+				<h1>${oneSns.userName }</h1> <br>
+				<span>${oneSns.profileIntoduce }</span>
 			</div>
 		</div>
 
@@ -108,6 +121,10 @@
     
     <br>
 	<jsp:include page="../common/footer.jsp"></jsp:include>
+	
+	<script>
+		
+	</script>
 	
 </body>
 </html>

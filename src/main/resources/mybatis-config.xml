@@ -17,6 +17,7 @@
 		<typeAlias type="com.kh.spouting.product.domain.Category" alias="Category"/>
 		<typeAlias type="com.kh.spouting.diary.domain.Diary" alias="Diary"/>
 		<typeAlias type="com.kh.spouting.sns.domain.Sns" alias="Sns"/>
+		<typeAlias type="com.kh.spouting.sns.domain.SnsProfile" alias="SnsProfile"/>
 	</typeAliases>
 	<mappers>
 		<mapper resource="mappers/user-mapper.xml"/>

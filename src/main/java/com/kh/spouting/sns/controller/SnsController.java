@@ -16,8 +16,8 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.kh.spouting.common.FileUtil;
-import com.kh.spouting.sns.domain.Sns;
 import com.kh.spouting.sns.domain.SnsPhoto;
+import com.kh.spouting.sns.domain.SnsProfile;
 import com.kh.spouting.sns.service.SnsService;
 
 @Controller
@@ -33,7 +33,7 @@ public class SnsController {
 	@RequestMapping(value="/sns", method=RequestMethod.GET)
 	public String snsPage(Model model, @RequestParam("userNo") int userNo) {
 		try {
-			Sns oneSns = snsService.selectOneById(userNo);
+			SnsProfile oneSns = snsService.selectOneById(userNo);
 			if(oneSns != null) {
 				model.addAttribute("oneSns", oneSns);
 				return "sns/sns";
