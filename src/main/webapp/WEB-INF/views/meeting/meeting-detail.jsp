@@ -7,85 +7,26 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>소셜링 상세 페이지</title>
-    <link rel="stylesheet" href="/resources/css/meetingCss/meeting.css">
-    <style>
-        @font-face {
-            font-family: 'Pretendard-Regular';
-            src: url('https://cdn.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Regular.woff') format('woff');
-            font-weight: 400;
-            font-style: normal;
-            }
-
-        .meeting-subject {
-            width: 700px;
-            height: 140px;
-            background-color: white;
-            border-radius: 30px;
-            display: flex;
-            --justify-content: center;
-            --align-items: center;
-            margin: auto;
-            position: relative;
-            z-index: 2;
-            border: 1px solid black;
-        }
-
-        #meeting-detail-box{
-            position: relative;
-            z-index: 1;
-            width: 1000px;
-            height: 400px;
-            background-color: rgb(207, 207, 207);
-            margin: auto;
-            top: -70px;
-            border-radius: 30px;
-        }
-
-        .meeting-detail {
-            width: 800px;
-            height: 250px;
-            --background-color: aqua;
-            margin: auto;
-        }
-
-        #meeting-joinBtn {
-            font-size: 22px;
-            width: 700px;
-            height: 60px;
-            background-color: rgb(231, 231, 231);
-            border-radius: 20px;
-            cursor: pointer;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            margin: 0 auto;
-            border: 1px solid black;
-        }
-
-        #meeting-joinBtn:hover {
-            background-color: rgb(55, 115, 179);
-            color: white;
-        }
-
-    </style>
+    <link rel="stylesheet" href="/resources/css/meetingCss/meeting-detail.css">
 </head>
 <body>
 	<jsp:include page="../common/header.jsp"></jsp:include>
 
 <!--     <h1 id="meeting-header">🎯소셜링 상세 페이지</h1> -->
-	<br>
+	<br><br><br>
 	
     <!--     여기는 데이터 영역~!~! -->
 	<div id="meeting-data">
 
 		<div class="meeting-subject">
 
-            <div class="meeting-img">
-                <img class="meeting-img" src="/resources/images/meeting/image1.jpg" alt="">
+            <div class="meeting-img-box">
+                <img class="meeting-img" src="/resources/images/meeting/image1.jpg" alt="" onclick="location.href='/sns?userNo=${meeting.readerNo }'">
             </div>
 
-            <div id="meeting-content">
+            <div id="meeting-content-box">
                 <div class="meeting-title">
+                	<input type="hidden" value="${meeting.readerNo }" name="userNo">
                 	<input type="hidden" value="${meeting.meetingNo }" name="meetingNo">
                     <h1 class="meeting-title-h1">${meeting.meetingName }</h1> <br>
                 </div>

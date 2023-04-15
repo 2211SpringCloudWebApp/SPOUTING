@@ -16,6 +16,7 @@
 		<typeAlias type="com.kh.spouting.product.domain.Product" alias="Product"/>
 		<typeAlias type="com.kh.spouting.product.domain.Category" alias="Category"/>
 		<typeAlias type="com.kh.spouting.diary.domain.Diary" alias="Diary"/>
+		<typeAlias type="com.kh.spouting.sns.domain.Sns" alias="Sns"/>
 	</typeAliases>
 	<mappers>
 		<mapper resource="mappers/user-mapper.xml"/>
@@ -26,5 +27,6 @@
 		<mapper resource="mappers/notice-mapper.xml"/>
 		<mapper resource="mappers/product-mapper.xml"/>
 		<mapper resource="mappers/diary-mapper.xml"/>
+		<mapper resource="mappers/sns-mapper.xml"/>
 	</mappers>
 </configuration>
