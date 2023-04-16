@@ -29,8 +29,8 @@
 				</tr>
 				<tr>
 					<th>센터사진</th>
-					<td><input type="file" name="reloadFile1">${center.centerFilename1 }</td>
-					<td><input type="file" name="reloadFile2">&nbsp;&nbsp; ${center.centerFilename2 }</td>
+					<td><input type="file" name="uploadFile1">${center.centerFilename1 }</td>
+					<td><input type="file" name="uploadFile2">&nbsp;&nbsp; ${center.centerFilename2 }</td>
 				</tr>
 			</table>
 <%-- 			<input type="hidden" name="centerNo" value="${center.centerNo }"> --%>

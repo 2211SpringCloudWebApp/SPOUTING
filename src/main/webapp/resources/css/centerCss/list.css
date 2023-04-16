@@ -1,0 +1,116 @@
+@charset "UTF-8";
+@font-face {
+    font-family: 'Pretendard-Regular';
+    src: url('https://cdn.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Regular.woff') format('woff');
+    font-weight: 400;
+    font-style: normal;
+}
+
+
+/* --------- COMMON ---------- */
+* {
+    font-family:'Pretendard-Regular'; 
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html, body {
+  width: 100%;
+  height: 100%;
+}
+
+ul {
+    list-style-type: none;
+}
+
+a{
+	text-decoration: none;
+	padding : 2px auto;
+}
+
+img {
+  display: block;
+}
+
+
+/* body { */
+/* 	height : calc(100vh - 150px); */
+	
+/* } */
+
+main {
+	flex : 1;
+  	text-align: center;
+  	margin: 0 auto;
+  	width : 70%
+}
+
+colgroup {
+	display: table-column-group;
+}
+col {
+	display: table-column;
+}
+
+
+
+.listTbl table {
+	line-height: 2.8rem;
+	color: #666;
+	margin : 0 auto;
+	text-align: center;
+	border-collapse: separate;
+	border-spacing: 0;
+	display: table;
+	text-indent: initial;
+}
+
+.listTbl {
+	margin : 30px;
+}
+
+
+.listTbl table thead tr th {
+/* 	padding: 10px; */
+	vertical-align: middle;
+	color: #000;
+    line-height: 3rem;
+/* 	font-size: 0.7rem; */
+/* 	font-weight: 600; */
+	border-bottom: 2px solid #1C3879;
+}
+
+.listTbl table tbody tr td{
+	vertical-align: middle;
+    border-bottom: 1px solid #eee;
+}
+
+
+
+.button {
+	padding : 15px;
+	margin-bottom : 20px;
+    background-color: #1C3879;
+    color : white;
+/*     border: none; */
+}
+
+.link {
+	display: inline-block;
+	padding-right : 7px;
+	text-decoration: none;
+	cursor: pointer;
+	overflow: hidden;
+	color: rgba(0, 0, 0, 0);
+	text-shadow: 0 0 0 #000000, 0 3rem 0 #f86868;
+	transition: text-shadow 200ms;
+	vertical-align: bottom;
+}
+	.link:hover {
+		text-shadow: 0 -3rem 0 #748ffc, 0 0 0 rgb(47, 0, 255);
+/*         background-color: #1450dd77; */
+/*         border-radius: 10px; */
+/*         padding : 2px auto; */
+	}
+

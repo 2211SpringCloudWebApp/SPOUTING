@@ -19,17 +19,36 @@
 		INSERT INTO CENTER_TBL VALUES(SEQ_CENTER_NO.NEXTVAL, #{centerName}, #{centerAddr}, #{centerTel}, #{centerFilename1}, #{centerFilepath1}, #{centerFilename2}, #{centerFilepath2})
 	</insert>
 	
+	<!-- 지점 상세조회 -->
+	<select id="selectCenterOne" resultMap="centerResultMap">
+		SELECT * FROM CENTER_TBL WHERE CENTER_NO = #{centerNo }
+	</select>
+	
+	<!-- 이미지 불러오기 -->
+	<select id="selectImg" resultMap="centerResultMap">
+		SELECT * FROM CENTER_TBL WHERE CENTER_NO = #{centerNo }
+	</select>
+	
 	<!-- 지점목록 조회 -->
 	<select id="selectCenter" resultMap="centerResultMap">
 		SELECT * FROM CENTER_TBL
 	</select>
 	
 	<!-- 지점정보 수정 -->
-	<update id="updateCenter">
-		UPDATE CENTER_TBL SET CENTER_NAME = #{centerName}, CENTER_ADDR = #{centerAddr}, CENTER_TEL = #{centerTel}, CENTER_FILENAME1 = #{reloadFile1}, CENTER_FILENAME2 = #{reloadFile2} WHERE CENTER_NO = #{centerNo}
+<!-- 	<update id="updateCenter"> -->
+<!-- 		UPDATE CENTER_TBL SET CENTER_NAME = #{centerName}, CENTER_ADDR = #{centerAddr}, CENTER_TEL = #{centerTel}, CENTER_FILENAME1 = #{reloadFile1}, CENTER_FILENAME2 = #{reloadFile2} WHERE CENTER_NO = #{centerNo} -->
+<!-- 	</update> -->
+	<update id="updateCenter" parameterType="center">
+	    UPDATE CENTER_TBL SET 
+	        CENTER_NAME = #{centerName}, 
+	        CENTER_ADDR = #{centerAddr}, 
+	        CENTER_TEL = #{centerTel}
+	        <if test="uploadFile1 != null">, CENTER_FILENAME1 = #{uploadFile1}</if>
+	        <if test="uploadFile2 != null">, CENTER_FILENAME2 = #{uploadFile2}</if>
+	    WHERE CENTER_NO = #{centerNo}
 	</update>
 	
-	<!-- 지점정보 상세조회 -->
+	<!-- 지점정보 수정화면 페이지 -->
 	<select id="selectOneById" resultMap="centerResultMap">
 		SELECT * FROM CENTER_TBL WHERE CENTER_NO = #{centerNo }
 	</select>
