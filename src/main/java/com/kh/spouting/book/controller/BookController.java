@@ -114,13 +114,26 @@ public class BookController {
 	}
 	
 	//예약확인->결제갈기기
-//	@RequestMapping(value="/bookUp", method=RequestMethod.POST)
-//	public String confirmView(@RequestParam("bookNo") int bookNo, Model model){
-//		
-//		
-//		
-//		return "redirect:/book/bookView"; // 페이지 하나 만들고 예약확인됐슴다 애니메이션 해준담에 마이페이지 링크 달아주자
-//	}
+	@RequestMapping(value="/bookUp", method=RequestMethod.POST)
+	public String confirmView(@RequestParam("bookNo") int bookNo
+							 ,@RequestParam("pointChange") int pointChange 
+							 ,@RequestParam("userNo") int userNo
+							 , Model model){
+		//pay_time업뎃용
+		int result = bService.bookUp(bookNo);
+		if(result>0) {
+			//포인트쓴거 업뎃!
+			//Pdetail뭐시기 저장해야함
+			
+			
+		}else {
+			model.addAttribute("msg", "결제실패!!");
+			return "/common/error";
+		}
+		
+		
+		return "redirect:/book/bookView"; // 페이지 하나 만들고 예약확인됐슴다 애니메이션 해준담에 마이페이지 링크 달아주자
+	}
 	
 	
 	//풀캘린더(에이젝스

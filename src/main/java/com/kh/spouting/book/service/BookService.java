@@ -33,4 +33,11 @@ public interface BookService {
 	 */
 	public Book selectBook(int bookNo);
 
+	/**
+	 * 결제하기(payTime업뎃)
+	 * @param bookNo
+	 * @return int
+	 */
+	public int bookUp(int bookNo);
+
 }

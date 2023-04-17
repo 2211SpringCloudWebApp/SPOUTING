@@ -39,4 +39,12 @@ public interface BookStore {
 	 */
 	public Book selectBook(SqlSession session, int bookNo);
 
+	/**
+	 * 결제하기
+	 * @param session
+	 * @param bookNo
+	 * @return int
+	 */
+	public int updatePayTime(SqlSession session, int bookNo);
+
 }

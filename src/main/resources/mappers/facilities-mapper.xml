@@ -19,7 +19,7 @@
 	
 	<!-- select -->
 	<select id="selectAllFacil" resultMap="FacilResultMap">
-		SELECT * FROM FACILITIES_TBL JOIN TIME_TBL USING(FACILITY_NO)
+		SELECT * FROM FACILITIES_TBL LEFT JOIN TIME_TBL USING(FACILITY_NO)
 	</select>
 
 	
