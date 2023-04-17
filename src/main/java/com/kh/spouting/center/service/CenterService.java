@@ -10,6 +10,7 @@ public interface CenterService {
 	/**
 	 * 지점 등록 Service
 	 * @param center
+	 * @param userNo 
 	 * @return int
 	 */
 	public int insertCenter(Center center);
@@ -21,12 +22,6 @@ public interface CenterService {
 	 */
 	public Center seletOneCenter(Integer centerNo);
 
-	/**
-	 * 이미지 불러오기 Serivce
-	 * @param centerNo
-	 * @return Map<String, String>
-	 */
-	public Center loadImage(String centerNo);
 
 	/**
 	 * 지점 목록 조회 Service
@@ -55,5 +50,6 @@ public interface CenterService {
 	 * @return int
 	 */
 	public int deleteCenter(int centerNo);
+
 
 }

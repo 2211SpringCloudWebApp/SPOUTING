@@ -27,15 +27,6 @@ public class CenterStoreLogic implements CenterStore{
 		return center;
 	}
 
-	/* 이미지 불러오기 StoreLogic */
-	@Override
-	public Center loadImage(SqlSession session, String centerNo) {
-		Center center = session.selectOne("CenterMapper.selectImg", centerNo);
-//		return mapper.loadImage(centerNo);
-		return center;
-	}
-
-
 	/* 지점 목록 조회 StoreLogic */
 	@Override
 	public List<Center> selectCenterList(SqlSession session, Center center) {
@@ -46,7 +37,7 @@ public class CenterStoreLogic implements CenterStore{
 	/* 지점정보 수정 StoreLogic */
 	@Override
 	public int updateCenter(SqlSession session, Center center) {
-		int result = session.update("CenterMapper.updateCenter");
+		int result = session.update("CenterMapper.updateCenter", center);
 		return result;
 	}
 
@@ -63,5 +54,6 @@ public class CenterStoreLogic implements CenterStore{
 		int result = session.delete("CenterMapper.deleteCenter", centerNo);
 		return result;
 	}
+
 
 }

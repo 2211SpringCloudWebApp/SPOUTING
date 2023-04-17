@@ -25,13 +25,6 @@ public interface CenterStore {
 	 */
 	public Center selectOneCenter(SqlSession session, Integer centerNo);
 
-	/**
-	 * 이미지 불러오기 Store
-	 * @param session
-	 * @param centerNo
-	 * @return
-	 */
-	public Center loadImage(SqlSession session, String centerNo);
 
 	/**
 	 * 지점 목록 조회 Store

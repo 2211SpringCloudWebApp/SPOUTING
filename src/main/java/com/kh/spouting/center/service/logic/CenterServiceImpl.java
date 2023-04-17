@@ -33,12 +33,6 @@ public class CenterServiceImpl implements CenterService{
 		return center;
 	}
 
-	/* 이미지 불러오기 ServiceImpl */
-	@Override
-	public Center loadImage(String centerNo) {
-		Center center = cStore.loadImage(session, centerNo);
-		return center;
-	}
 
 	/* 지점 목록 조회 SerivceImpl */
 	@Override
@@ -67,6 +61,7 @@ public class CenterServiceImpl implements CenterService{
 		int result = cStore.deleteCenter(session, centerNo);
 		return result;
 	}
+
 
 
 }
