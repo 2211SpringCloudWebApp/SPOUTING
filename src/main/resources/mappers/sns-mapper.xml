@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="SnsMapper">
+
+<resultMap id="snsResultMap" type="com.kh.spouting.sns.domain.Sns">
+		<id 	property="userNo" 		column="USER_NO"/>
+		<result property="profileFilename" 		column="PROFILE_FILENAME"/>
+		<result property="profileFilepath" 		column="PROFILE_FILEPATH"/>
+		<result property="profileIntoduce" 	column="PROFILE_INTRODUCE"/>		
+	</resultMap>
+
+	<resultMap id="snsPhotoResultMap" type="com.kh.spouting.sns.domain.SnsPhoto">
+		<id 	property="snsPhotoNo" 		column="SNSPHOTO_NO"/>
+		<result property="userNo" 		column="USER_NO"/>
+		<result property="snsContent" 		column="SNS_CONTENT"/>
+		<result property="snsFilename" 	column="SNS_FILENAME"/>		
+		<result property="snsFileRename" 	column="SNS_FILERENAME"/>
+		<result property="snsFilepath" 	column="SNS_FILEPATH"/>
+		<result property="snsDate" 	column="SNS_DATE"/>
+	</resultMap>
+	
+	<resultMap id="snsProfileResultMap" type="com.kh.spouting.sns.domain.SnsProfile">
+		<id 	property="userNo" 		column="USER_NO"/>
+		<result property="userNo" 		column="USER_NO"/>
+		<result property="snsContent" 		column="SNS_CONTENT"/>
+		<result property="snsFilename" 	column="SNS_FILENAME"/>		
+		<result property="snsFileRename" 	column="SNS_FILERENAME"/>
+	</resultMap>
+	
+	<insert id="insertPhoto">
+		INSERT INTO SNSPHOTO_TBL VALUES(SEQ_SNSPHOTO_NO.NEXTVAL, #{userNo}, #{snsContent}, #{snsFilename},#{snsFileRename}, #{snsFilepath}, DEFAULT)
+	</insert>
+	
+	<select id="selectOneSns" resultMap="snsResultMap">
+		SELECT * FROM SNS_TBL WHERE USER_NO = #{userNo}
+	</select>
+	
+</mapper>

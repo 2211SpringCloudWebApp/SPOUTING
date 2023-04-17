@@ -1,19 +1,22 @@
 package com.kh.spouting.sns.domain;
 
-public class Sns {
+public class SnsProfile {
 	
 	private int userNo;
+	private String userName;
 	private String profileFilename;
 	private String profileFilepath;
 	private String profileIntoduce;
 	
-	public Sns() {
+	public SnsProfile() {
 		// TODO Auto-generated constructor stub
 	}
 
-	public Sns(int userNo, String profileFilename, String profileFilepath, String profileIntoduce) {
+	public SnsProfile(int userNo, String userName, String profileFilename, String profileFilepath,
+			String profileIntoduce) {
 		super();
 		this.userNo = userNo;
+		this.userName = userName;
 		this.profileFilename = profileFilename;
 		this.profileFilepath = profileFilepath;
 		this.profileIntoduce = profileIntoduce;
@@ -25,6 +28,14 @@ public class Sns {
 
 	public void setUserNo(int userNo) {
 		this.userNo = userNo;
+	}
+
+	public String getUserName() {
+		return userName;
+	}
+
+	public void setUserName(String userName) {
+		this.userName = userName;
 	}
 
 	public String getProfileFilename() {
@@ -53,8 +64,8 @@ public class Sns {
 
 	@Override
 	public String toString() {
-		return "Sns [userNo=" + userNo + ", profileFilename=" + profileFilename + ", profileFilepath=" + profileFilepath
-				+ ", profileIntoduce=" + profileIntoduce + "]";
+		return "SnsProfile [userNo=" + userNo + ", userName=" + userName + ", profileFilename=" + profileFilename
+				+ ", profileFilepath=" + profileFilepath + ", profileIntoduce=" + profileIntoduce + "]";
 	}
 	
 	
