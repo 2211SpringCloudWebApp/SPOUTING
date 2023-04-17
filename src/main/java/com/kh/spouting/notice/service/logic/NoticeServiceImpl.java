@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.kh.spouting.common.PageInfo;
+import com.kh.spouting.common.Search;
 import com.kh.spouting.notice.domain.Notice;
 import com.kh.spouting.notice.domain.NoticeJoin;
 import com.kh.spouting.notice.service.NoticeService;
@@ -29,8 +30,8 @@ public class NoticeServiceImpl implements NoticeService{
 
 	// 공지사항 디테일 Service
 	@Override
-	public Notice selectOneNotice(int noticeNo) {
-		Notice notice = nStore.selectOneNotice(session, noticeNo);
+	public NoticeJoin selectOneNotice(int noticeNo) {
+		NoticeJoin notice = nStore.selectOneNotice(session, noticeNo);
 		return notice;
 	}
 
@@ -43,8 +44,36 @@ public class NoticeServiceImpl implements NoticeService{
 
 	// 페이징처리(총 공지사항 수)
 	@Override
-	public int getNoticeListCount() {
-		int result = nStore.getNoticeListCount(session);
+	public int getNoticeCount() {
+		int result = nStore.getNoticeCount(session);
+		return result;
+	}
+
+	// 페이징처리(검색한 공지사항 수)
+	@Override
+	public int getSearchNoticeCount(Search search) {
+		int result = nStore.getSearchNoticeCount(session, search);
+		return result;
+	}
+
+	// 공지사항 검색 Service
+	@Override
+	public List<NoticeJoin> searchNotice(Search search, PageInfo pi) {
+		List<NoticeJoin> nList = nStore.searchNotice(session, search, pi);
+		return nList;
+	}
+
+	// 공지사항 수정 Service
+	@Override
+	public int modifyNotice(Notice notice) {
+		int result = nStore.modifyNotice(session, notice);
+		return result;
+	}
+
+	// 공지사항 삭제 Service
+	@Override
+	public int deleteNotice(Integer noticeNo) {
+		int result = nStore.deleteNotice(session, noticeNo);
 		return result;
 	}
 

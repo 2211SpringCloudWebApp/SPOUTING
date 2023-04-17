@@ -15,11 +15,13 @@
 		<link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.css" rel="stylesheet">
 		<script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.js"></script>
 		
+<!-- 		css링크 -->
+		<link href="../../../resources/css/noticeCss/write.css" rel="stylesheet">
 	</head>
 	<body>
 		<jsp:include page="../common/header.jsp"></jsp:include>
 			
-		<div id="container">
+		<div class="main">
 				<h1>공지사항 작성</h1>
 			<form action="/notice/write" method="post" enctype="multipart/form-data">
 				<div id="titleArea">
@@ -36,6 +38,7 @@
 				</div>
 			</form>
 		</div>
+		
 		<jsp:include page="../common/footer.jsp"></jsp:include>
 	  <script>
 	  	console.log(${sessionScope.loginUser.userNo})

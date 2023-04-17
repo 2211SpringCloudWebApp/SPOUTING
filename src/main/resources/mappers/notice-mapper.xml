@@ -33,17 +33,45 @@
 	</select>
 	
 <!-- 	공지사항 디테일 -->
-	<select id="selectOneNotice" resultMap="noticeResultMap">
-		SELECT * FROM NOTICE_TBL WHERE NOTICE_NO = #{noticeNo}
+	<select id="selectOneNotice" resultMap="noticeJoinResultMap">
+		SELECT N.*, U.USER_ID FROM NOTICE_TBL N JOIN USER_TBL U ON N.USER_NO = U.USER_NO WHERE NOTICE_NO = #{noticeNo}
 	</select>
 	
 <!-- 	공지사항 등록 -->
 	<insert id="insertNotice">
-		INSERT INTO NOTICE_TBL VALUES(SEQ_NOTICE_NO.NEXTVAL, #{userNo}, #{noticeTitle}, #{noticeContent}, DEFAULT, DEFAULT, DEFAULT, #{noticeFilename}, #{noticeFilepath}, #{noticeFilerename})
+		INSERT INTO NOTICE_TBL VALUES(SEQ_NOTICE_NO.NEXTVAL, #{userNo}, #{noticeTitle}, #{noticeContent}, DEFAULT, NULL, DEFAULT, #{noticeFilename}, #{noticeFilepath}, #{noticeFilerename})
 	</insert>
 	
 <!-- 	페이징처리(공지사항 총 갯수) -->
-	<select id="getNoticeListCount" resultType="_int">
+	<select id="getNoticeCount" resultType="_int">
 		SELECT COUNT(*) FROM NOTICE_TBL
 	</select>
+	
+<!-- 	페이징처리(검색한 공지사항 갯수) -->
+	<select id="getSearchNoticeCount" resultType="_int">
+		SELECT COUNT(*) FROM NOTICE_TBL 
+		<where>
+			<if test="searchCondition == 'title'">NOTICE_TITLE LIKE '%' || #{searchValue} || '%'</if>
+			<if test="searchCondition == 'content'">NOTICE_CONTENT LIKE '%' || #{searchValue} || '%'</if>
+		</where>
+	</select>
+	
+<!-- 	공지사항 검색 -->
+	<select id="searchNotice" resultMap="noticeJoinResultMap">
+		SELECT * FROM NOTICE_TBL
+		<where>
+			<if test="searchCondition == 'title'">NOTICE_TITLE LIKE '%' || #{searchValue} || '%'</if>
+			<if test="searchCondition == 'content'">NOTICE_CONTENT LIKE '%' || #{searchValue} || '%'</if>
+		</where>
+	</select>
+	
+<!-- 	공지사항 수정 -->
+	<update id="modifyNotice">
+		UPDATE NOTICE_TBL SET NOTICE_TITLE = #{noticeTitle}, NOTICE_CONTENT = #{noticeContent}, N_UPDATE_DATE = DEFAULT, NOTICE_FILENAME = NULL, NOTICE_FILEPATH = #{noticeFilepath}, NOTICE_FILERENAME = #{noticeFilerename} WHERE NOTICE_NO = #{noticeNo} 
+	</update>
+	
+<!-- 	공지사항 삭제 -->
+	<delete id="deleteNotice">
+		DELETE FROM NOTICE_TBL WHERE NOTICE_NO = #{noticeNo}
+	</delete>
 </mapper>
