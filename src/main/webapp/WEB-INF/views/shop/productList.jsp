@@ -39,7 +39,7 @@
 				<tr>
 					<td>${row.productNo }</td>
 					<td>
-						<a href="/shop/product/detail/${row.productNo}">
+						<a href="/product/detail?productNo=${row.productNo}">
 							<img src="/resources/images/product/items/${row.productFilename}">
 						</a>
 					</td>
@@ -52,12 +52,18 @@
 		<!-- 게시글 페이징 처리 -->
 			<tr>
 				<td colspan="5" align="center" style="height : 50px; border-bottom:0px;">
+					<c:if test="${pi.currentPage > 0}">
+	       				<a href="/shop/productList?page=1" class="first-last-page"><< </a>
+	       			</c:if>
 					<c:forEach begin="${pi.startNavi }" end="${pi.endNavi }" var="p">
 							<c:url var="pageUrl" value="/shop/productList">
 								<c:param name="page" value="${p }"></c:param>
 							</c:url>
 							<a href="${pageUrl }">${p }</a>&nbsp;&nbsp;&nbsp;
 					</c:forEach>
+	       			<c:if test="${pi.currentPage < pi.maxPage}">
+	       				<a href="/shop/productList?page=${pi.maxPage}" class="first-last-page"> >></a>
+	       			</c:if>
 				</td>
 			</tr>
 		<!-- 게시글 조건부 검색 -->

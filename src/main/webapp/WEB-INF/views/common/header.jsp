@@ -12,7 +12,7 @@
 <div id="container">
         <header>
             <div id="logo">
-                <a href=""><img src="../../resources/images/homeImg/logo.png" alt="logo"></a>
+                <a href="/"><img src="../../resources/images/homeImg/logo.png" alt="logo"></a>
             </div>
             <div id="login">
                 <c:if test="${sessionScope.loginUser.userId eq null}">

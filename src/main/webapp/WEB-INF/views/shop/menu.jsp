@@ -68,22 +68,22 @@
 	<div id="navcontainer">
 		<ul id="nav-v2">
             <h3>카테고리</h3>
-			<li class="menu-v2"><a href="#">APPAREL</a>
+			<li class="menu-v2"><a href="/shop/catelist1?c=1,2">APPAREL</a>
 				<ul class="submenu">
-					<li><a href="#">CLOTHES</a></li>
-					<li><a href="#">BAG&POUCH</a></li>
+					<li><a href="/shop/catelist2?c=1">CLOTHES</a></li>
+					<li><a href="/shop/catelist2?c=2">BAGS</a></li>
 				</ul>
 			</li>
-			<li class="menu-v2"><a href="#">LIFE</a>
+			<li class="menu-v2"><a href="/shop/catelist1?c=3,4">LIFE</a>
 				<ul class="submenu">
-					<li><a href="#">TECH</a></li>
-					<li><a href="#">LIVING</a></li>
+					<li><a href="/shop/catelist2?c=3">TECH</a></li>
+					<li><a href="/shop/catelist2?c=4">LIVING</a></li>
 				</ul>
 			</li>
-			<li class="menu-v2"><a href="#">LEISURE</a>
+			<li class="menu-v2"><a href="/shop/catelist1?c=5,6">LEISURE</a>
 				<ul class="submenu">
-					<li><a href="#">SPORTS</a></li>
-					<li><a href="#">OFFICE</a></li>
+					<li><a href="/shop/catelist2?c=5">OFFICE</a></li>
+					<li><a href="/shop/catelist2?c=6">SPORTS</a></li>
 				</ul>
 			</li>
 		</ul>

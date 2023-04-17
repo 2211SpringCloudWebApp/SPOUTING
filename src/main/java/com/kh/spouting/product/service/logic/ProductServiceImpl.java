@@ -28,6 +28,12 @@ public class ProductServiceImpl implements ProductService {
 	}
 
 	@Override
+	public int getListCountByCate(int categoryNo) {
+		int result = pStore.getListCountByCate(session, categoryNo);
+		return result;
+	}
+
+	@Override
 	public int getListCount(Search search) {
 		int totalCount = pStore.getListCount(session, search);
 		return totalCount;
@@ -40,8 +46,27 @@ public class ProductServiceImpl implements ProductService {
 	}
 
 	@Override
+	public List<Product> selectCateProduct1(PageInfo pi, int[] categoryNos) {
+	    List<Product> cateList = pStore.selectCateProduct1(session, pi, categoryNos);
+	    return cateList;
+	}
+	
+	@Override
+	public List<Product> selectCateProduct2(int categoryNo) {
+		List<Product> cateList = pStore.selectCateProduct2(session, categoryNo);
+		return cateList;
+	}
+
+	@Override
 	public List<Product> selectListByKeyword(PageInfo pi, Search search) {
 		List<Product> searchList = pStore.selectListByKeyword(session, pi, search);
 		return searchList;
 	}
+
+	@Override
+	public Product selectOneByNo(int productNo) {
+		Product product = pStore.selectOneByNo(session, productNo);
+		return product;
+	}
+
 }

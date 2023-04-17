@@ -11,14 +11,28 @@ public interface ProductService {
 	// 게시글 전체 갯수
 	public int getListCount();
 
+	// 카테고리 별 게시글 갯수
+	public int getListCountByCate(int categoryNo);
+
 	// 검색 게시글 갯수
 	public int getListCount(Search search);
 	
 	// 전체 상품 목록 조회
 	public List<Product> selectAllProduct(PageInfo pi);
 
+	// 상품 1차 카테고리 목록 조회
+	public List<Product> selectCateProduct1(PageInfo pi, int[] categoryNos);
+	
+	// 상품 2차 카테고리 목록 조회
+	public List<Product> selectCateProduct2(int categoryNo);
+
 	// 검색 상품 목록 조회
 	public List<Product> selectListByKeyword(PageInfo pi, Search search);
+
+	// 상품 상세 조회
+	public Product selectOneByNo(int productNo);
+
+
 
 
 
