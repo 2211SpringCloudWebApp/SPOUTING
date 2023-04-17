@@ -41,9 +41,9 @@
                     </div>
 ​
                     <div class="item_part">
-                        <div class="item_name"><a href="">예약</a></div>
+                        <div class="item_name"><a href="/book/bookView">예약</a></div>
                         <div class="item_content">
-                            <li><a href="">예약하기</a></li>
+                            <li><a href="/book/bookView">예약하기</a></li>
                             <li><a href="">예약조회</a></li>
                         </div>
                     </div>
