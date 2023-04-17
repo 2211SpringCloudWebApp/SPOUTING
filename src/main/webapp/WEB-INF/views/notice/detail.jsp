@@ -67,6 +67,7 @@
 		<jsp:include page="../common/footer.jsp"></jsp:include>
 		
 		<script>
+		console.log(${notice.noticeNo})
 		  function deleteBtn() {
 			    if (confirm("공지사항을 삭제하시겠습니까?")) {
 			      document.getElementById('deleteForm').submit();

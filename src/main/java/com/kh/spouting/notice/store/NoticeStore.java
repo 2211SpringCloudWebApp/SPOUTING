@@ -27,4 +27,6 @@ public interface NoticeStore {
 
 	int deleteNotice(SqlSession session, Integer noticeNo);
 
+	void viewCOunt(SqlSession session, Integer noticeNo);
+
 }

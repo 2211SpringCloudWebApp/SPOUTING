@@ -74,6 +74,7 @@ public class NoticeController {
 			// 관리자 확인하기 위해
 			User user = (User) session.getAttribute("loginUser");
 			NoticeJoin notice = nService.selectOneNotice(noticeNo);
+			nService.viewCount(noticeNo);	//글 클릭 시 조회수 1 증가
 			mv.addObject("notice", notice).addObject("user", user).setViewName("notice/detail");
 			return mv;
 		} catch (Exception e) {
@@ -113,13 +114,14 @@ public class NoticeController {
 			User user = (User) session.getAttribute("loginUser");
 			// 작성자아이디 가져오기
 			int noticeWriter = user.getUserNo();
+			// 첨부파일이 있는 경우
 			if(multi.getSize() != 0 && !multi.getOriginalFilename().equals("")) {
 				fileInfo = fileUtil.saveFile(multi, request, "notice");
-				notice.setUserNo(noticeWriter);
 				notice.setNoticeFilename(fileInfo.get("original"));
 				notice.setNoticeFilerename(fileInfo.get("rename"));
 				notice.setNoticeFilepath(fileInfo.get("renameFilepath"));
 			}
+			notice.setUserNo(noticeWriter);
 			int result = nService.insertNotice(notice);
 			if(result > 0) {
 				mv.setViewName("redirect:/notice/list");

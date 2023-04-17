@@ -29,8 +29,9 @@
 				          <colgroup>
 				            <col style="width:10%">
 				            <col style="width:50%">
-				            <col style="width:20%">
-				            <col style="width:20%">
+				            <col style="width:15%">
+				            <col style="width:15%">
+				            <col style="width:10%">
 				          </colgroup>
 			        <thead>
 				          <tr>
@@ -38,6 +39,7 @@
 				              <th>제목</th>
 				              <th>작성자</th>
 				              <th>작성일</th>
+				              <th>조회수</th>
 				          </tr>
 			        </thead>
 			        <tbody class="table-group-divider" style="border-top-color : #1C3879;">
@@ -47,6 +49,7 @@
 				              <td><a href="detail?noticeNo=${notice.noticeNo }">${notice.noticeTitle }</a></td>
 				              <td>${notice.userId }</td>
 				              <td><fmt:formatDate value="${notice.nCreateDate }" pattern="yyyy-MM-dd" /></td>
+				              <td>${notice.noticeViews }</td>
 				          </tr>
 				        </c:forEach>
 			        </tbody>

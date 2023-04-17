@@ -41,7 +41,8 @@
 		
 		<jsp:include page="../common/footer.jsp"></jsp:include>
 	  <script>
-	  	console.log(${sessionScope.loginUser.userNo})
+// 	  	console.log(${sessionScope.loginUser.userNo})
+		console.log(${userNo})
 		// 1. 썸머노트설정
 // 		var setting = {
 // 	            height : 300,
