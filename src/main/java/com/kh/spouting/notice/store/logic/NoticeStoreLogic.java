@@ -28,8 +28,8 @@ public class NoticeStoreLogic implements NoticeStore{
 
 	// 공지사항 디테일 Store
 	@Override
-	public Notice selectOneNotice(SqlSession session, int noticeNo) {
-		Notice notice = session.selectOne("NoticeMapper.selectOneNotice", noticeNo);
+	public NoticeJoin selectOneNotice(SqlSession session, int noticeNo) {
+		NoticeJoin notice = session.selectOne("NoticeMapper.selectOneNotice", noticeNo);
 		return notice;
 	}
 
@@ -65,9 +65,17 @@ public class NoticeStoreLogic implements NoticeStore{
 		return nList;
 	}
 
+	// 공지사항 수정 Store
 	@Override
 	public int modifyNotice(SqlSession session, Notice notice) {
 		int result = session.update("NoticeMapper.modifyNotice", notice);
+		return result;
+	}
+
+	// 공지사항 삭제 Store
+	@Override
+	public int deleteNotice(SqlSession session, Integer noticeNo) {
+		int result = session.delete("NoticeMapper.deleteNotice", noticeNo);
 		return result;
 	}
 

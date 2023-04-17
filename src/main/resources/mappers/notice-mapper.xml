@@ -33,8 +33,8 @@
 	</select>
 	
 <!-- 	공지사항 디테일 -->
-	<select id="selectOneNotice" resultMap="noticeResultMap">
-		SELECT * FROM NOTICE_TBL WHERE NOTICE_NO = #{noticeNo}
+	<select id="selectOneNotice" resultMap="noticeJoinResultMap">
+		SELECT N.*, U.USER_ID FROM NOTICE_TBL N JOIN USER_TBL U ON N.USER_NO = U.USER_NO WHERE NOTICE_NO = #{noticeNo}
 	</select>
 	
 <!-- 	공지사항 등록 -->
@@ -66,7 +66,12 @@
 	</select>
 	
 <!-- 	공지사항 수정 -->
-<!-- 	<update id="modifyNotice"> -->
-<!-- 		UPDATE NOTICE_TBL SET NOTICE_TITLE = #{}, NOTICE_CONTENT = #{}, N_UPDATE_DATE = DEFAULT, NOTICE_FILERENAME = #{}, NOTICE_FILEPATH = #{} WHERE NOTICE_NO = #{}  -->
-<!-- 	</update> -->
+	<update id="modifyNotice">
+		UPDATE NOTICE_TBL SET NOTICE_TITLE = #{noticeTitle}, NOTICE_CONTENT = #{noticeContent}, N_UPDATE_DATE = DEFAULT, NOTICE_FILENAME = NULL, NOTICE_FILEPATH = #{noticeFilepath}, NOTICE_FILERENAME = #{noticeFilerename} WHERE NOTICE_NO = #{noticeNo} 
+	</update>
+	
+<!-- 	공지사항 삭제 -->
+	<delete id="deleteNotice">
+		DELETE FROM NOTICE_TBL WHERE NOTICE_NO = #{noticeNo}
+	</delete>
 </mapper>

@@ -11,7 +11,7 @@ public interface NoticeService {
 
 	List<NoticeJoin> selectAllNotice(PageInfo pi);
 
-	Notice selectOneNotice(int noticeNo);
+	NoticeJoin selectOneNotice(int noticeNo);
 
 	int insertNotice(Notice notice);
 
@@ -22,5 +22,7 @@ public interface NoticeService {
 	List<NoticeJoin> searchNotice(Search search, PageInfo pi);
 
 	int modifyNotice(Notice notice);
+
+	int deleteNotice(Integer noticeNo);
 
 }

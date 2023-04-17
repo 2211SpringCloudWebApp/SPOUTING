@@ -13,7 +13,7 @@ public interface NoticeStore {
 
 	List<NoticeJoin> selectAllNotice(SqlSession session, PageInfo pi);
 
-	Notice selectOneNotice(SqlSession session, int noticeNo);
+	NoticeJoin selectOneNotice(SqlSession session, int noticeNo);
 
 	int insertNotice(SqlSession session, Notice notice);
 
@@ -24,5 +24,7 @@ public interface NoticeStore {
 	List<NoticeJoin> searchNotice(SqlSession session, Search search, PageInfo pi);
 
 	int modifyNotice(SqlSession session, Notice notice);
+
+	int deleteNotice(SqlSession session, Integer noticeNo);
 
 }

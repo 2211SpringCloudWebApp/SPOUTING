@@ -30,8 +30,8 @@ public class NoticeServiceImpl implements NoticeService{
 
 	// 공지사항 디테일 Service
 	@Override
-	public Notice selectOneNotice(int noticeNo) {
-		Notice notice = nStore.selectOneNotice(session, noticeNo);
+	public NoticeJoin selectOneNotice(int noticeNo) {
+		NoticeJoin notice = nStore.selectOneNotice(session, noticeNo);
 		return notice;
 	}
 
@@ -67,6 +67,13 @@ public class NoticeServiceImpl implements NoticeService{
 	@Override
 	public int modifyNotice(Notice notice) {
 		int result = nStore.modifyNotice(session, notice);
+		return result;
+	}
+
+	// 공지사항 삭제 Service
+	@Override
+	public int deleteNotice(Integer noticeNo) {
+		int result = nStore.deleteNotice(session, noticeNo);
 		return result;
 	}
 

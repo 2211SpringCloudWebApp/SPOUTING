@@ -1,5 +1,6 @@
 package com.kh.spouting.notice.controller;
 
+import java.io.File;
 import java.util.List;
 import java.util.Map;
 
@@ -16,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.util.HtmlUtils;
 
 import com.kh.spouting.common.FileUtil;
 import com.kh.spouting.common.PageInfo;
@@ -69,8 +71,9 @@ public class NoticeController {
 	@RequestMapping(value="/detail", method=RequestMethod.GET)
 	public ModelAndView viewNoticeDetail(ModelAndView mv, @RequestParam Integer noticeNo, HttpSession session) {
 		try {
+			// 관리자 확인하기 위해
 			User user = (User) session.getAttribute("loginUser");
-			Notice notice = nService.selectOneNotice(noticeNo);
+			NoticeJoin notice = nService.selectOneNotice(noticeNo);
 			mv.addObject("notice", notice).addObject("user", user).setViewName("notice/detail");
 			return mv;
 		} catch (Exception e) {
@@ -184,13 +187,111 @@ public class NoticeController {
 	 * @param notice
 	 * @return mv
 	 */
-	@RequestMapping(value="/modify", method = RequestMethod.POST)
-	public ModelAndView modifyNotice(
+	@RequestMapping(value="/modifyView", method = RequestMethod.POST)
+	public ModelAndView modifyNoticeView(
 			ModelAndView mv,
 			@ModelAttribute Notice notice
 			) {
-		Notice noticeResult = nService.selectOneNotice(notice.getNoticeNo());
+		NoticeJoin noticeResult = nService.selectOneNotice(notice.getNoticeNo());
 		mv.addObject("notice", noticeResult).setViewName("notice/modify");
 		return mv;
+	}
+	
+	/**
+	 * 공지사항 수정 Controller
+	 * @param mv
+	 * @param reloadFile
+	 * @param notice
+	 * @param request
+	 * @return mv
+	 */
+	@RequestMapping(value="/modify", method=RequestMethod.POST)
+	public ModelAndView modifyNotice(
+			ModelAndView mv
+			, @RequestParam(value="reloadFile", required=false) MultipartFile reloadFile
+			, @ModelAttribute Notice notice
+			, HttpServletRequest request) {
+		Map<String, String> modifyFile = null;
+		try {
+			NoticeJoin originalNotice = nService.selectOneNotice(notice.getNoticeNo());
+			// 파일 재첨부 있는경우
+			
+			if(!reloadFile.isEmpty()) {
+				// 원래글에 파일이 있는 경우
+				if(originalNotice.getNoticeFilerename() != null) {
+					// 원래 파일 삭제(deleteFile메소드에 filename전달해줌)
+					this.deleteFile(request, originalNotice.getNoticeFilerename());
+				}
+				modifyFile = fileUtil.saveFile(reloadFile, request, "notice");
+				if(modifyFile != null) {
+					notice.setNoticeFilerename(modifyFile.get("rename"));
+					notice.setNoticeFilepath(modifyFile.get("renameFilepath"));
+				}
+			}else {
+				 // 원래글에 파일이 있는 경우
+	            if(originalNotice.getNoticeFilerename() != null) {
+	                // 파일명과 파일경로를 그대로 사용
+	                notice.setNoticeFilerename(originalNotice.getNoticeFilerename());
+	                notice.setNoticeFilepath(originalNotice.getNoticeFilepath());
+	            }
+			}
+			int result = nService.modifyNotice(notice);
+			if(result > 0) {
+				mv.setViewName("redirect:/notice/list");
+			}else {
+				mv.addObject("msg", "공지사항수정이 완료되지 않았습니다.").setViewName("common/error");
+			}
+		} catch (Exception e) {
+			mv.addObject("msg", e.getMessage()).setViewName("common/error");
+		}
+		return mv;
+	}
+	
+	/**
+	 * 공지사항 삭제 Controller
+	 * @param mv
+	 * @param noticeNo
+	 * @param request
+	 * @return mv
+	 */
+	@RequestMapping(value="/delete", method=RequestMethod.POST)
+	public ModelAndView deleteNotice(
+			ModelAndView mv
+			, @RequestParam Integer noticeNo
+			, HttpServletRequest request) {
+		try {
+			// 파일을 먼저 삭제하기위해
+			NoticeJoin notice = nService.selectOneNotice(noticeNo);
+			if(notice.getNoticeFilerename() != null) {
+				this.deleteFile(request, notice.getNoticeFilerename());
+			}
+			// 파일삭제 후 글 삭제
+			int result = nService.deleteNotice(noticeNo);
+			if(result > 0) {
+				mv.setViewName("redirect:/notice/list");
+			}else {
+				mv.addObject("msg", "공지사항이 삭제되지 않았습니다.").setViewName("common/error");
+			}
+		} catch (Exception e) {
+			mv.addObject("msg", e.getMessage()).setViewName("common/error");
+		}
+		return mv;
+		
+	}
+	
+	/**
+	 * 파일삭제
+	 * @param request
+	 * @param filename
+	 */
+	private void deleteFile(HttpServletRequest request, String filename) {
+		String root = request.getSession().getServletContext().getRealPath("resources");
+		String deletePath = root + "\\images\\notice";
+		String deleteFilepath = deletePath + "\\" + filename;
+		File deleteFile = new File(deleteFilepath);
+		// 삭제할 파일 존재하면
+		if(deleteFile.exists()) {
+			deleteFile.delete();
+		}
 	}
 }
