@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.SessionAttribute;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -45,38 +46,37 @@ public class CenterController {
 			, @RequestParam(value="uploadFile1", required=false) MultipartFile uploadFile1
 			, @RequestParam(value="uploadFile2", required=false) MultipartFile uploadFile2
 			, HttpServletRequest request
+			, HttpSession session
 			, Model model) {
 		try {
 			// 인코딩
 			request.setCharacterEncoding("UTF-8");
 			
 			// 첫번째 파일이 있을 경우
-			if(!uploadFile1.getOriginalFilename().equals("") || !uploadFile2.getOriginalFilename().equals("")) {
+			if(!uploadFile1.getOriginalFilename().equals("")) {
 				// 파일 복사(지정한 경로 업로드)
-				String filePath = saveFile(uploadFile1, uploadFile2, request);
+				String filePath = saveFile1(uploadFile1, request);
 				
-				if(filePath != null || filePath != null) {	// 파일경로가 존재하면
-					// - DB에 값 저장 가능(uploadFile)
+				if(filePath != null) {	// 파일경로가 존재하면
+					// - DB에 값 저장 가능(uploadFile1)
 					center.setCenterFilename1(uploadFile1.getOriginalFilename());
-					center.setCenterFilename2(uploadFile2.getOriginalFilename());
 					// 경로에 있는 파일 저장
 					center.setCenterFilepath1(filePath);
-					center.setCenterFilepath2(filePath);
 				}
 			}
 			
 			// 두번째 파일이 있을 경우
-//			if(!uploadFile2.getOriginalFilename().equals("")) {
-//				// 파일 복사(지정한 경로 업로드)
-//				String filePath = saveFile(uploadFile2, request);
-//				
-//				if(filePath != null) {	// 파일경로가 존재하면
-//					// - DB에 값 저장 가능(uploadFile)
-//					center.setCenterFilename2(uploadFile2.getOriginalFilename());
-//					// 경로에 있는 파일 저장
-//					center.setCenterFilepath2(filePath);
-//				}
-//			}
+			if(!uploadFile2.getOriginalFilename().equals("")) {
+				// 파일 복사(지정한 경로 업로드)
+				String filePath = saveFile2(uploadFile2, request);
+				
+				if(filePath != null) {	// 파일경로가 존재하면
+					// - DB에 값 저장 가능(uploadFile2)
+					center.setCenterFilename2(uploadFile2.getOriginalFilename());
+					// 경로에 있는 파일 저장
+					center.setCenterFilepath2(filePath);
+				}
+			}
 			
 			
 			int result = cService.insertCenter(center);
@@ -98,10 +98,10 @@ public class CenterController {
 
 	// 지점 경로로 파일 복사(파일업로드) : 첫번째 파일
 	// 파일복사에 필요한 업로드 파일과 servlet 생성
-	private String saveFile(MultipartFile uploadFile1, MultipartFile uploadFile2, HttpServletRequest request) {
+	private String saveFile1(MultipartFile uploadFile1, HttpServletRequest request) {
 		try {
 			// 원하는 저장 경로
-			String root = request.getSession().getServletContext().getRealPath("resources");
+			String root = request.getSession().getServletContext().getRealPath("resources/images");
 			String savePath = root + "\\centeruploadFiles";
 			
 			// 폴더가 없을 경우 자동 생성
@@ -123,29 +123,29 @@ public class CenterController {
 	}
 	
 	// 지점 경로로 파일 복사(파일업로드) : 두번째 파일
-//	private String saveFile(MultipartFile uploadFile2, HttpServletRequest request) {
-//		try {
-//			// 원하는 저장 경로
-//			String root = request.getSession().getServletContext().getRealPath("resources");
-//			String savePath = root + "\\centeruploadFiles";
-//			
-//			// 폴더가 없을 경우 자동 생성
-//			File folder = new File(savePath);
-//			if(!folder.exists()) {
-//				folder.mkdir();
-//			}
-//			
-//			// 실제 파일의 경로
-//			String filePath = savePath + "\\" + uploadFile2.getOriginalFilename();
-//			// 실제로 파일 저장
-//			File file = new File(filePath);
-//			uploadFile2.transferTo(file);
-//			return filePath;
-//		} catch (Exception e) {
-//			e.printStackTrace();
-//			return null;
-//		}
-//	}
+	private String saveFile2(MultipartFile uploadFile2, HttpServletRequest request) {
+		try {
+			// 원하는 저장 경로
+			String root = request.getSession().getServletContext().getRealPath("resources/images");
+			String savePath = root + "\\centeruploadFiles";
+			
+			// 폴더가 없을 경우 자동 생성
+			File folder = new File(savePath);
+			if(!folder.exists()) {
+				folder.mkdir();
+			}
+			
+			// 실제 파일의 경로
+			String filePath = savePath + "\\" + uploadFile2.getOriginalFilename();
+			// 실제로 파일 저장
+			File file = new File(filePath);
+			uploadFile2.transferTo(file);
+			return filePath;
+		} catch (Exception e) {
+			e.printStackTrace();
+			return null;
+		}
+	}
 	
 	
 
@@ -162,32 +162,6 @@ public class CenterController {
 		}
 		return mv;
 	}
-	
-	
-	// 파일 불러오기
-//	@RequestMapping(value="/center/loadImage")
-//	public void displayPhoto(
-//	    @RequestParam(value="centerNo") String centerNo,
-//	    HttpServletResponse response) throws Exception {
-//
-//	    // DB에서 저장된 파일 정보를 불러오기
-//	    Center center = cService.loadImage(centerNo);
-//	    String fileName = center.getCenterFilename1();
-//	    String filePath = center.getCenterFilepath1();
-//
-//	    response.setContentType("image/jpg");
-//	    ServletOutputStream bout = response.getOutputStream();
-//	    // 파일의 경로
-//	    String imgpath = filePath + File.separator + fileName;
-//	    FileInputStream f = new FileInputStream(imgpath);
-//	    int length;
-//	    byte[] buffer = new byte[10];
-//	    while ((length = f.read(buffer)) != -1) {
-//	        bout.write(buffer, 0, length);
-//	    }
-//	    f.close();
-//	}
-	
 	
 	
 	
@@ -238,26 +212,17 @@ public class CenterController {
 		}
 	}
 	
-	
-	
 	/* 지점정보 수정 */
 	@RequestMapping(value="/center/modify", method=RequestMethod.POST)
 	public String centerModify(
 		@ModelAttribute Center center,
-		@RequestParam("centerNo") int centerNo,
-		@RequestParam("centerName") String centerName,
-		@RequestParam("centerAddr") String centerAddr,
-		@RequestParam("centerTel") String centerTel,
-//		@RequestParam("centerFilename1") String centerFilename1,
-//		@RequestParam("centerFilename2") String centerFilename2,
-		
 	    @RequestParam(value="reloadFile1", required=false) MultipartFile reloadFile1,
 	    @RequestParam(value="reloadFile2", required=false) MultipartFile reloadFile2,
 	    Model model,
 	    HttpServletRequest request) {
 		try {
 			// 수정 시 새로 업로드된 파일 존재
-			if((reloadFile1 != null && !reloadFile1.isEmpty()) || (reloadFile2 != null && !reloadFile2.isEmpty())) {
+			if(reloadFile1 != null && !reloadFile1.isEmpty()) {
 				// 기존 업로드된 파일 체크 후
 				if(center.getCenterFilename1() != null) {
 					// 기존 파일 삭제
@@ -265,35 +230,33 @@ public class CenterController {
 					this.deleteFile2(center.getCenterFilename2(), request);
 				}
 				// saveFile() 사용하여 새로 업로드된 파일 복사
-				String modifyPath = this.saveFile(reloadFile1, reloadFile2, request);
+				String modifyPath = this.saveFile1(reloadFile1, request);
 				if(modifyPath != null) {
 					// center에 새로운 파일이름, 파일경로 set
 					center.setCenterFilename1(reloadFile1.getOriginalFilename());
-					center.setCenterFilename2(reloadFile2.getOriginalFilename());
 					center.setCenterFilepath1(modifyPath);
-					center.setCenterFilepath2(modifyPath);
 				}
 			}
 			
-//			if(reloadFile2 != null && !reloadFile2.isEmpty()) {
-//				// 기존 업로드된 파일 체크 후
-//				if(center.getCenterFilename2() != null) {
-//					// 기존 파일 삭제
-//					this.deleteFile2(center.getCenterFilename2(), request);
-//				}
-//				// saveFile() 사용하여 새로 업로드된 파일 복사
-//				String modifyPath2 = this.saveFile(reloadFile2, request);
-//				if(modifyPath2 != null) {
-//					// center에 새로운 파일이름, 파일경로 set
-//					center.setCenterFilename2(reloadFile2.getOriginalFilename());
-//					center.setCenterFilepath2(modifyPath2);
-//				}
-//			}
+			if(reloadFile2 != null && !reloadFile2.isEmpty()) {
+				// 기존 업로드된 파일 체크 후
+				if(center.getCenterFilename2() != null) {
+					// 기존 파일 삭제
+					this.deleteFile2(center.getCenterFilename2(), request);
+				}
+				// saveFile() 사용하여 새로 업로드된 파일 복사
+				String modifyPath2 = this.saveFile2(reloadFile2, request);
+				if(modifyPath2 != null) {
+					// center에 새로운 파일이름, 파일경로 set
+					center.setCenterFilename2(reloadFile2.getOriginalFilename());
+					center.setCenterFilepath2(modifyPath2);
+				}
+			}
 			
 			// DB에서 지점정보 수정
 			int result = cService.updateCenter(center);
 			if(result > 0) {
-				return "redirect:/center/modifyView?centerNo=" + center.getCenterNo();
+				return "redirect:/center/listView";
 			}else {
 				model.addAttribute("msg", "센터 정보수정이 완료되지 않았습니다.");
 				return "common/error";

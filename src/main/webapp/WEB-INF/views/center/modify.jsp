@@ -12,8 +12,8 @@
 		
 		<form action="/center/modify" method="post" enctype="multipart/form-data">
 			<input type="hidden" name="centerNo" value="${center.centerNo }">
-			<input type="hidden" name="uploadFilePath1" value="${center.centerFilepath1 }">
-			<input type="hidden" name="uploadFilePath2" value="${center.centerFilepath2 }">
+			<input type="hidden" name="centerFilepath1" value="${center.centerFilepath1 }">
+			<input type="hidden" name="centerFilepath2" value="${center.centerFilepath2 }">
 			<table>
 				<tr>
 					<th>센터명 * </th>
@@ -29,8 +29,8 @@
 				</tr>
 				<tr>
 					<th>센터사진</th>
-					<td><input type="file" name="uploadFile1">${center.centerFilename1 }</td>
-					<td><input type="file" name="uploadFile2">&nbsp;&nbsp; ${center.centerFilename2 }</td>
+					<td><input type="file" name="reloadFile1">${center.centerFilename1 }</td>
+					<td><input type="file" name="reloadFile2">&nbsp;&nbsp; ${center.centerFilename2 }</td>
 				</tr>
 			</table>
 <%-- 			<input type="hidden" name="centerNo" value="${center.centerNo }"> --%>

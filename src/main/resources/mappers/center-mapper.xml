@@ -24,11 +24,6 @@
 		SELECT * FROM CENTER_TBL WHERE CENTER_NO = #{centerNo }
 	</select>
 	
-	<!-- 이미지 불러오기 -->
-	<select id="selectImg" resultMap="centerResultMap">
-		SELECT * FROM CENTER_TBL WHERE CENTER_NO = #{centerNo }
-	</select>
-	
 	<!-- 지점목록 조회 -->
 	<select id="selectCenter" resultMap="centerResultMap">
 		SELECT * FROM CENTER_TBL
@@ -43,8 +38,8 @@
 	        CENTER_NAME = #{centerName}, 
 	        CENTER_ADDR = #{centerAddr}, 
 	        CENTER_TEL = #{centerTel}
-	        <if test="uploadFile1 != null">, CENTER_FILENAME1 = #{uploadFile1}</if>
-	        <if test="uploadFile2 != null">, CENTER_FILENAME2 = #{uploadFile2}</if>
+	        <if test="centerFilename1 != null">, CENTER_FILENAME1 = #{centerFilename1}</if>
+	        <if test="centerFilename2 != null">, CENTER_FILENAME2 = #{centerFilename2}</if>
 	    WHERE CENTER_NO = #{centerNo}
 	</update>
 	
