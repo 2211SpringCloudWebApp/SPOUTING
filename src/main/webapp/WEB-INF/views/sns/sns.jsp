@@ -90,7 +90,9 @@
 	<jsp:include page="../common/header.jsp"></jsp:include>
 	<br>
 	<div id="sns-main">
-	<button type="button" class="modify-btn">프로필 수정</button>
+	<div class="btn-box">
+		<button type="button" class="modify-btn">프로필 수정</button>
+	</div>
 		<!-- 프로필 영역 -->
         <div id="sns-profile">
 			<div id="img-box">
@@ -103,8 +105,13 @@
 <!-- 				업로드 영역 끝 -->
 			</div>
 			<div id="profile-box">
-				<h1>${oneSns.userName }</h1> <br>
-				<span>${oneSns.profileIntoduce }</span>
+				<div class="profile-name-box">
+					<h1 class="profile-name">${oneSns.userName }</h1>
+				</div> 
+				<br>
+				<div class="profile-intro-box">
+					<span class="profile-intro">${oneSns.profileIntoduce }dsd</span>
+				</div>
 			</div>
 		</div>
 
@@ -123,6 +130,28 @@
 	<jsp:include page="../common/footer.jsp"></jsp:include>
 	
 	<script>
+	var profileStatus = false;
+	
+		$(".modify-btn").click(function() {
+			if(!profileStatus) {
+				var str = "<textarea type='text' class='profile-intro-input' spellcheck='false'></textarea>";
+				var btn = "<button type='button' onclick='ajaxProfileModify();' value='저장' class='modify-submit-btn'>저장</button> <button type='button' onclick='modifyClose();' value='저장' class='modify-submit-btn' id='modify-close-btn'>취소</button>";
+				$(".btn-box").append(btn);
+				$(".profile-intro-box").append(str);
+				$(".profile-intro-input").val($(".profile-intro").html());
+				$(".profile-intro").remove();
+				profileStatus = true;
+			}
+		});
+		
+		
+		function ajaxProfileModify() {
+			
+		}
+		
+		function modifyClose() {
+			
+		}
 		
 	</script>
 	
