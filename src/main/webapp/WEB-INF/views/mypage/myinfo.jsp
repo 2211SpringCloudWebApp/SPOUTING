@@ -22,7 +22,7 @@
                     오늘도 Spouting!
                 </td>
                 <td>
-                    <button id="daily-btn" onclick="location.href='/diary/list'">🦾오늘의 일기</button>
+                    <button id="daily-btn" onclick="location.href='/diary/list'">🦾하루기록</button>
                 </td>              
             </tr>
         </table>

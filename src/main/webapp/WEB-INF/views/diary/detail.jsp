@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<!-- 날짜변환용 -->
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>  
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -17,7 +19,7 @@
             <input type="hidden" name="userNo" value="${diary.userNo}">
             <input type="hidden" name="diaryNo" value="${diary.diaryNo}">
             <div id="insert-title">
-                <span>${daily.diaryDate} SPOUTING</span>
+                <span><fmt:formatDate value="${diary.diaryDate}" pattern="📗yyyy년 MM월 dd일" /></span>
             </div>
             <table id="insert-detail">
                 <tr>

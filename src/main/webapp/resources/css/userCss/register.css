@@ -13,74 +13,116 @@
 }
 #regi-container {
     width: 100%;
-    height: 700px;
+    height: 900px;
     background-image: url(/resources/images/user/the-ball.jpg);
     background-size: cover;
-    padding-top: 10vh;
+    padding-top: 15vh;
 }
     #regi-box {
-        width: 30%;
-        height: 500px;
+        width: 700px;
         margin: 0 auto;
-        background-color: rgba(179, 179, 179, 0.548);  
+        background-color: rgba(218, 218, 218, 0.6);  
         line-height: 2.6; 
+        border-radius: 5px;
+        padding: 20px
     }
         #regi-msg {
             text-align: center;
+            color: #072364;
+            margin: 20px;
+            font-size: 28px;
+            font-weight: 800
         }
-            #regi-msg h3 {
-                color: #072364;
-                margin-top: 20px;
-            }
-            #regi-msg p {
-                font-size: 15px;
-                color: #ffffffe3;
-                margin-bottom: 20px;
-            }
         #regi-area table {
             width: 100%;
+            line-height: 3.5;
         }
         #regi-area th {
-            width: 30%;
+            width: 180px;
             color: #133383;
             text-align: right;
-            padding-right: 10px;
+            padding-right: 30px;
+            font-size: 17px;
         }
         #regi-area [type=text], [type=password] {
-            width: 50%;
-            height: 35px;
+            width: 300px;
+            height: 50px;
             border: none;
             border-radius: 5px;
+            font-size: 15px;
+            text-align: center;
+            background-color: #ffffffc4;
         }
         #regi-area [type=button] {
-            width: 80px;
-            height: 30px;
+            width: 120px;
+            height: 48px;
             border: 1.5px solid rgba(12, 51, 134, 0.685);
             border-radius: 5px;
             background-color: rgba(12, 51, 134, 0.685);
             color: #eeeeee;
+            margin-left: 10px;
         }
         #regi-area [type=button]:hover {
-            background-color: rgba(3, 165, 3, 0.664);
+            background-color: rgba(52, 131, 7, 0.664);
             border: none;
             color: #eeeeee;
             cursor: pointer;
+        }
+        #regi-area input:focus {
+            background-color: #00702b3f;
+            color: #02143d;
+            font-weight: 700;
+        }
+        #gender-box {
+            width: 300px;
+            display: flex;      
+            justify-content: space-evenly;
+            font-size: 18px;
+            color: rgb(71, 71, 71);
         }
     #join-btn {
         text-align: center;
     }    
         #join-btn [type=submit]{
-            width: 150px;
-            height: 40px;
+            width: 250px;
+            height: 50px;
             border: none;
             background-color: rgba(6, 129, 6, 0.904);
             border-radius: 5px;
             color: #eeeeee;
             margin: 15px;
             text-align: center;
+            font-size: 15.5px;
         }
         #join-btn [type=submit]:hover {
             background-color: rgba(5, 37, 107, 0.651);
             cursor: pointer;
         }
         
+
+/******************* 이용약관 모달창 *******************/
+#modal {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+    display: none;
+}
+#modal-content {
+    width: 400px;
+    margin: 0 auto;
+    padding: 30px;
+    background-color: #cccccca1;
+    border: 2px solid #133383;
+}
+#modal-layer {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: -1;
+}
+
+
