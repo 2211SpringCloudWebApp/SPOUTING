@@ -1,11 +1,11 @@
 package com.kh.spouting.book.controller;
 
 import java.sql.Timestamp;
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -52,18 +52,17 @@ public class BookController {
 	@RequestMapping(value="/confirm", method=RequestMethod.POST)
 	public String confirmBook(HttpServletRequest request, Model model
 							, @RequestParam("facilityNo") int facilityNo
-							//, @RequestParam("useDate") int useDate
 							, @RequestParam("bookPrice") int bookPrice
 							, @RequestParam("numPeople") int numPeople
 							) throws Exception {
 		Book book = null;
 		
-		//데이트타입으로 잘 받기
+		//사용일 데이트타입으로 잘 받기
 		String useDateParam = request.getParameter("useDate");
 		SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
 		Date useDate = format.parse(useDateParam);
 		
-		//데이트 타입 칼렌더 객체로 만들어서 년 월 일로 파싱하기
+		//데이트 타입 칼렌더 객체로 만들어서 년 월 일로 파싱하기(시작시간 종료시간에 같이 넣을 용도)
 		Calendar calUseDate = Calendar.getInstance();
 		calUseDate.setTime(useDate);
 		int year = calUseDate.get(Calendar.YEAR);
@@ -97,23 +96,51 @@ public class BookController {
 		book = new Book(facilityNo, userNo, useDate, startTime, endTime, bookPrice, numPeople);
 		
 		book.setBookNo(bService.getSequence());
-		
 		int result = bService.insertBooking(book);
+		int bookNo = book.getBookNo();
 		if(result>0) {
-			//북넘버 먼저 받아와서 저장하기
-			model.addAttribute("bookNo", book.getBookNo());
-			return "book/confirm?bookNo="+book.getBookNo();
+			
+			//북넘버로 가예약정보 불러와서 뿌리기
+			//a지점//시설이름//인원수//이용날짜//이용시간//총금액//포인트불러오기
+			//--//사용포인트입력//결제금액//api
+			Book bfbook = bService.selectBook(bookNo);
+			model.addAttribute("book", bfbook);		
+			return "book/confirm";
 			
 		}else {
 			model.addAttribute("msg", "예약내역을 몬넣었쪙");
 			return "common/error";
-		}
-		
+		}		
 	}
 	
-	@RequestMapping(value="/confirm", method=RequestMethod.GET)
-	public String confirmView(@RequestParam("bookNo") int bookNo){
-		return "/book/confirm?bookNo="+bookNo;
+	//예약확인->결제갈기기
+	@RequestMapping(value="/bookUp", method=RequestMethod.POST)
+	public String confirmView(@RequestParam("bookNo") int bookNo
+							 ,@RequestParam("pointChange") int pointChange 
+							 ,@RequestParam("userNo") int userNo
+							 , Model model){
+		//pay_time업뎃용
+		int result = bService.bookUp(bookNo);
+		if(result>0) {
+			//포인트쓴거 업뎃!
+			//Pdetail뭐시기 저장해야함
+			
+			
+		}else {
+			model.addAttribute("msg", "결제실패!!");
+			return "/common/error";
+		}
+		
+		
+		return "redirect:/book/bookView"; // 페이지 하나 만들고 예약확인됐슴다 애니메이션 해준담에 마이페이지 링크 달아주자
 	}
+	
+	
+	//풀캘린더(에이젝스
+//	@ResponseBody
+//	@RequestMapping(value= "/calendar", method=RequestMethod.GET, produces="application/json;charset=utf-8")
+//	public List<Map<String, Object>> showCalendarList() {
+//		List<Book> bList = bService.selectBookList
+//	}
 	
 }

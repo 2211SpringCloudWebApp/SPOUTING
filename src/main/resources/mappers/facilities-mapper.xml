@@ -7,12 +7,19 @@
 		<result property="facilityName"     column="FACILITY_NAME"/>
 		<result property="maxPeople" 	    column="MAX_PEOPLE"/>		
 		<result property="facilityPrice" 	column="FACILITY_PRICE"/>
+		<result property="timeNo"           column="TIME_NO"/>
+		<result property="useDate"           column="USE_DATE"/>
+		<result property="useDate"           column="USE_DATE"/>
+		<result property="startTime"           column="START_TIME"/>
+		<result property="endTime"           column="END_TIME"/>
+		<result property="currPeople"           column="CURR_PEOPLE"/>
+		
 	
 	</resultMap>
 	
 	<!-- select -->
 	<select id="selectAllFacil" resultMap="FacilResultMap">
-		SELECT * FROM FACILITIES_TBL
+		SELECT * FROM FACILITIES_TBL LEFT JOIN TIME_TBL USING(FACILITY_NO)
 	</select>
 
 	

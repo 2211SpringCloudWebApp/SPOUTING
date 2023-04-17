@@ -31,4 +31,20 @@ public interface BookStore {
 	 */
 	public int getSequence(SqlSession session);
 
+	/**
+	 * 결제 전 예약 정보 가져오기
+	 * @param session
+	 * @param bookNo
+	 * @return Book
+	 */
+	public Book selectBook(SqlSession session, int bookNo);
+
+	/**
+	 * 결제하기
+	 * @param session
+	 * @param bookNo
+	 * @return int
+	 */
+	public int updatePayTime(SqlSession session, int bookNo);
+
 }
