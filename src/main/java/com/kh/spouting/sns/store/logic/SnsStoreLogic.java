@@ -5,6 +5,7 @@ import org.springframework.stereotype.Repository;
 
 import com.kh.spouting.sns.domain.Sns;
 import com.kh.spouting.sns.domain.SnsPhoto;
+import com.kh.spouting.sns.domain.SnsProfile;
 import com.kh.spouting.sns.store.SnsStore;
 
 @Repository
@@ -17,9 +18,10 @@ public class SnsStoreLogic implements SnsStore {
 	}
 
 	@Override
-	public Sns selectOneById(SqlSession session, int userNo) {
+	public SnsProfile selectOneById(SqlSession session, int userNo) {
 		// TODO Auto-generated method stub
-		return session.selectOne("SnsMapper.selectOneSns",userNo);
+		return session.selectOne("SnsMapper.selectOneSns", userNo);
 	}
+
 
 }

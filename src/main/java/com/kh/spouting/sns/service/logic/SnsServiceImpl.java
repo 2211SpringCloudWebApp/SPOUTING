@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 
 import com.kh.spouting.sns.domain.Sns;
 import com.kh.spouting.sns.domain.SnsPhoto;
+import com.kh.spouting.sns.domain.SnsProfile;
 import com.kh.spouting.sns.service.SnsService;
 import com.kh.spouting.sns.store.SnsStore;
 
@@ -25,9 +26,10 @@ public class SnsServiceImpl implements SnsService {
 	}
 
 	@Override
-	public Sns selectOneById(int userNo) {
+	public SnsProfile selectOneById(int userNo) {
 		// TODO Auto-generated method stub
 		return snsStore.selectOneById(session, userNo);
 	}
+
 
 }
