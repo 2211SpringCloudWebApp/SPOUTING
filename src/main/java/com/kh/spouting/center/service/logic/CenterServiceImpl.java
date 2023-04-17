@@ -1,6 +1,7 @@
 package com.kh.spouting.center.service.logic;
 
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,6 +26,20 @@ public class CenterServiceImpl implements CenterService{
 		return result;
 	}
 
+	/* 지점 상세조회 ServiceImpl */
+	@Override
+	public Center seletOneCenter(Integer centerNo) {
+		Center center = cStore.selectOneCenter(session, centerNo);
+		return center;
+	}
+
+	/* 이미지 불러오기 ServiceImpl */
+	@Override
+	public Center loadImage(String centerNo) {
+		Center center = cStore.loadImage(session, centerNo);
+		return center;
+	}
+
 	/* 지점 목록 조회 SerivceImpl */
 	@Override
 	public List<Center> selectCenterList(Center center) {
@@ -39,9 +54,9 @@ public class CenterServiceImpl implements CenterService{
 		return result;
 	}
 
-	/* 지점정보 상세조회 ServiceImpl */
+	/* 지점정보 수정화면 페이지 ServiceImpl */
 	@Override
-	public Center selectOnById(Integer centerNo) {
+	public Center selectOneById(Integer centerNo) {
 		Center center = cStore.selectOneById(session, centerNo);
 		return center;
 	}

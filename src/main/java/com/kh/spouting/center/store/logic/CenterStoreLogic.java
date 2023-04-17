@@ -1,6 +1,7 @@
 package com.kh.spouting.center.store.logic;
 
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
@@ -19,6 +20,22 @@ public class CenterStoreLogic implements CenterStore{
 		return result;
 	}
 
+	/* 지점 상세조회 StoreLogic */
+	@Override
+	public Center selectOneCenter(SqlSession session, Integer centerNo) {
+		Center center = session.selectOne("CenterMapper.selectCenterOne", centerNo);
+		return center;
+	}
+
+	/* 이미지 불러오기 StoreLogic */
+	@Override
+	public Center loadImage(SqlSession session, String centerNo) {
+		Center center = session.selectOne("CenterMapper.selectImg", centerNo);
+//		return mapper.loadImage(centerNo);
+		return center;
+	}
+
+
 	/* 지점 목록 조회 StoreLogic */
 	@Override
 	public List<Center> selectCenterList(SqlSession session, Center center) {
@@ -33,7 +50,7 @@ public class CenterStoreLogic implements CenterStore{
 		return result;
 	}
 
-	/* 지점정보 상세조회 StoreLogic */
+	/* 지점정보 수정화면 페이지 StoreLogic */
 	@Override
 	public Center selectOneById(SqlSession session, Integer centerNo) {
 		Center center = session.selectOne("CenterMapper.selectOneById", centerNo);

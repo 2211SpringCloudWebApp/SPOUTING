@@ -1,6 +1,7 @@
 package com.kh.spouting.center.store;
 
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
 
@@ -15,6 +16,22 @@ public interface CenterStore {
 	 * @return int
 	 */
 	public int insertCenter(SqlSession session, Center center);
+
+	/**
+	 * 지점 상세조회 Store
+	 * @param session
+	 * @param centerNo
+	 * @return Center
+	 */
+	public Center selectOneCenter(SqlSession session, Integer centerNo);
+
+	/**
+	 * 이미지 불러오기 Store
+	 * @param session
+	 * @param centerNo
+	 * @return
+	 */
+	public Center loadImage(SqlSession session, String centerNo);
 
 	/**
 	 * 지점 목록 조회 Store
@@ -33,7 +50,7 @@ public interface CenterStore {
 	public int updateCenter(SqlSession session, Center center);
 
 	/**
-	 * 지점정보 상세 조회 Store
+	 * 지점정보 수정화면 페이지 Store
 	 * @param session
 	 * @param centerNo
 	 * @return Center
