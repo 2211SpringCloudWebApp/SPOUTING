@@ -38,7 +38,8 @@ public class CenterController {
 	@RequestMapping(value="/center/register", method=RequestMethod.POST)
 	public String centerRegister(
 			@ModelAttribute Center center
-			, @RequestParam(value="uploadFile", required=false) MultipartFile uploadFile
+			, @RequestParam(value="uploadFile1", required=false) MultipartFile uploadFile1
+			, @RequestParam(value="uploadFile2", required=false) MultipartFile uploadFile2
 			, HttpServletRequest request
 			, Model model) {
 		try {
@@ -46,26 +47,26 @@ public class CenterController {
 			request.setCharacterEncoding("UTF-8");
 			
 			// 첫번째 파일이 있을 경우
-			if(!uploadFile.getOriginalFilename().equals("")) {
+			if(!uploadFile1.getOriginalFilename().equals("")) {
 				// 파일 복사(지정한 경로 업로드)
-				String filePath = saveFile(uploadFile, request);
+				String filePath = saveFile(uploadFile1, request);
 				
 				if(filePath != null) {	// 파일경로가 존재하면
 					// - DB에 값 저장 가능(uploadFile)
-					center.setCenterFilename1(uploadFile.getOriginalFilename());
+					center.setCenterFilename1(uploadFile1.getOriginalFilename());
 					// 경로에 있는 파일 저장
 					center.setCenterFilepath1(filePath);
 				}
 			}
 			
 			// 두번째 파일이 있을 경우
-			if(!uploadFile.getOriginalFilename().equals("")) {
+			if(!uploadFile2.getOriginalFilename().equals("")) {
 				// 파일 복사(지정한 경로 업로드)
-				String filePath = saveFile(uploadFile, request);
+				String filePath = saveFile(uploadFile2, request);
 				
 				if(filePath != null) {	// 파일경로가 존재하면
 					// - DB에 값 저장 가능(uploadFile)
-					center.setCenterFilename2(uploadFile.getOriginalFilename());
+					center.setCenterFilename2(uploadFile2.getOriginalFilename());
 					// 경로에 있는 파일 저장
 					center.setCenterFilepath2(filePath);
 				}
@@ -151,7 +152,7 @@ public class CenterController {
 			Center center = cService.selectOnById(centerNo);
 			if(center != null) {
 				model.addAttribute("center", center);
-				return "/center/modify";
+				return "center/modify";
 			}else {
 				model.addAttribute("msg", "지점정보 수정에 실패하였습니다.");
 				return "common/error";
@@ -166,39 +167,39 @@ public class CenterController {
 	/* 지점정보 수정 */
 	@RequestMapping(value="/center/modify", method=RequestMethod.POST)
 	public String centerModify(
-	    @ModelAttribute Center center,
-	    @RequestParam(value="centerFilename1", required=false) MultipartFile centerFilename1,
-	    @RequestParam(value="centerFilename2", required=false) MultipartFile centerFilename2,
+		@ModelAttribute Center center,
+	    @RequestParam(value="reloadFile1", required=false) MultipartFile reloadFile1,
+	    @RequestParam(value="reloadFile2", required=false) MultipartFile reloadFile2,
 	    Model model,
 	    HttpServletRequest request) {
 		try {
 			// 수정 시 새로 업로드된 파일 존재
-			if(!centerFilename1.isEmpty()) {
+			if(!reloadFile1.isEmpty()) {
 				// 기존 업로드된 파일 체크 후
 				if(center.getCenterFilename1() != null) {
 					// 기존 파일 삭제
 					this.deleteFile1(center.getCenterFilename1(), request);
 				}
 				// saveFile() 사용하여 새로 업로드된 파일 복사
-				String modifyPath1 = this.saveFile(centerFilename1, request);
+				String modifyPath1 = this.saveFile(reloadFile1, request);
 				if(modifyPath1 != null) {
 					// center에 새로운 파일이름, 파일경로 set
-					center.setCenterFilename1(centerFilename1.getOriginalFilename());
+					center.setCenterFilename1(reloadFile1.getOriginalFilename());
 					center.setCenterFilepath1(modifyPath1);
 				}
 			}
 			
-			if(!centerFilename2.isEmpty()) {
+			if(!reloadFile2.isEmpty()) {
 				// 기존 업로드된 파일 체크 후
 				if(center.getCenterFilename2() != null) {
 					// 기존 파일 삭제
 					this.deleteFile2(center.getCenterFilename2(), request);
 				}
 				// saveFile() 사용하여 새로 업로드된 파일 복사
-				String modifyPath2 = this.saveFile(centerFilename2, request);
+				String modifyPath2 = this.saveFile(reloadFile2, request);
 				if(modifyPath2 != null) {
 					// center에 새로운 파일이름, 파일경로 set
-					center.setCenterFilename2(centerFilename2.getOriginalFilename());
+					center.setCenterFilename2(reloadFile2.getOriginalFilename());
 					center.setCenterFilepath2(modifyPath2);
 				}
 			}
@@ -230,16 +231,35 @@ public class CenterController {
 	}
 	
 	// 기존 파일 삭제 메소드 (두번째 사진)
-	private void deleteFile2(String centerFilename1, HttpServletRequest request) throws Exception {
+	private void deleteFile2(String centerFilename2, HttpServletRequest request) throws Exception {
 		String root2 = request.getSession().getServletContext().getRealPath("resources");
 		String delPath2 = root2 + "\\centeruploadFiles";
-		String delFilepath2 = delPath2 + "\\" + centerFilename1;
+		String delFilepath2 = delPath2 + "\\" + centerFilename2;
 		File delFile = new File(delFilepath2);
 		if(delFile.exists()) {
 			delFile.delete();
 		}
 	}
 	
+	
+	
+	/* 지점 삭제 */
+	@RequestMapping(value = "/center/remove", method=RequestMethod.GET)
+	public String centerRemove(@RequestParam("centerNo") int centerNo, Model model) {
+		try {
+			int result = cService.deleteCenter(centerNo);
+			if(result > 0) {
+				return "redirect:/center/listView";
+			}else {
+				model.addAttribute("msg", "센터 삭제가 완료되지 않았습니다.");
+				return "common/error";
+			}
+		} catch (Exception e) {
+			model.addAttribute("msg", e.getMessage());
+			return "common/error";
+		}
+		
+	}
 	
 	
 	

@@ -50,7 +50,8 @@
 							<td>${center.centerTel}</td>
 							<td>
 							<a href="/center/modifyView?centerNo=${center.centerNo}">지점수정</a>
-							<input type="submit" value="지점 삭제">
+<%-- 							<a href="/center/remove?centerNo=${center.centerNo}">지점삭제</a> --%>
+							<a href="javascript:void(0);" onclick="removeCheck(${center.centerNo});">지점삭제</a>
 							</td>
 						</tr>
 						</c:forEach>
@@ -59,7 +60,19 @@
 			</div>
 			
 			<button onclick="location.href='/center/registerView'">지점 추가하기</button>
+
+			<script>
+				function removeCheck(centerNo) {
+					if(confirm("정말 삭제하시겠습니까?")) {
+						location.href="/center/remove?centerNo=" + centerNo;					
+					}
+				}
+			</script>
 		</main>
+		
+		
+		
+		
 		
 		<!-- footer -->
 		<jsp:include page="../common/footer.jsp"></jsp:include>

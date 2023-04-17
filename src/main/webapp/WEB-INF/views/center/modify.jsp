@@ -4,7 +4,7 @@
 <html>
 	<head>
 		<meta charset="UTF-8">
-		<title>지점 등록</title>
+		<title>지점정보 수정</title>
 	</head>
 	<body>
 		<!-- header -->
@@ -12,23 +12,25 @@
 		
 		<form action="/center/modify" method="post" enctype="multipart/form-data">
 			<input type="hidden" name="centerNo" value="${center.centerNo }">
-			<input type="hidden" name="uploadFilePath" value="${center.centerFilepath1 }">
+			<input type="hidden" name="uploadFilePath1" value="${center.centerFilepath1 }">
+			<input type="hidden" name="uploadFilePath2" value="${center.centerFilepath2 }">
 			<table>
 				<tr>
-					<th>센터명*</th>
+					<th>센터명 * </th>
 					<td><input type="text" name="centerName" value="${center.centerName }"></td>
 				</tr>
 				<tr>
-					<th>주소*</th>
+					<th>주소 * </th>
 					<td><input type="text" name="centerAddr" value="${center.centerAddr }"></td>
 				</tr>
 				<tr>
-					<th>전화번호*</th>
+					<th>전화번호 * </th>
 					<td><input type="text" name="centerTel" value="${center.centerTel }"></td>
 				</tr>
 				<tr>
 					<th>센터사진</th>
-					<td><input type="file" name="uploadFile">&nbsp;&nbsp; ${center.centerFilename1 }</td>
+					<td><input type="file" name="reloadFile1">${center.centerFilename1 }</td>
+					<td><input type="file" name="reloadFile2">&nbsp;&nbsp; ${center.centerFilename2 }</td>
 				</tr>
 			</table>
 <%-- 			<input type="hidden" name="centerNo" value="${center.centerNo }"> --%>

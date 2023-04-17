@@ -34,4 +34,11 @@ public interface CenterService {
 	 */
 	public Center selectOnById(Integer centerNo);
 
+	/**
+	 * 지점 삭제 Service
+	 * @param centerNo
+	 * @return int
+	 */
+	public int deleteCenter(int centerNo);
+
 }
