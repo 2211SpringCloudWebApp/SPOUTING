@@ -18,6 +18,9 @@
 		<typeAlias type="com.kh.spouting.diary.domain.Diary" alias="Diary"/>
 		<typeAlias type="com.kh.spouting.sns.domain.Sns" alias="Sns"/>
 		<typeAlias type="com.kh.spouting.sns.domain.SnsProfile" alias="SnsProfile"/>
+		<typeAlias type="com.kh.spouting.point.domain.Point" alias="Point"/>
+		<typeAlias type="com.kh.spouting.inquiry.domain.Inquiry" alias="Inquiry"/>
+		
 	</typeAliases>
 	<mappers>
 		<mapper resource="mappers/user-mapper.xml"/>
@@ -29,5 +32,8 @@
 		<mapper resource="mappers/product-mapper.xml"/>
 		<mapper resource="mappers/diary-mapper.xml"/>
 		<mapper resource="mappers/sns-mapper.xml"/>
+		<mapper resource="mappers/point-mapper.xml"/>
+		<mapper resource="mappers/inquiry-mapper.xml"/>
+
 	</mappers>
 </configuration>
