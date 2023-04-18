@@ -28,8 +28,11 @@
 	</select>	
 	<!-- 예약정보저장하기 -->
 	<insert id="insertBook">
-		<!--예약 완료시 payTime 업뎃치기(결제될때 DEFAULT로들어가기) -->
+		<!--예약 완료시 payTime 업뎃치기(결제될때 SYSTIMESTAMP로들어가기) -->
 		INSERT INTO BOOK_TBL VALUES(#{bookNo}, #{facilityNo}, #{userNo}, #{useDate}, #{startTime}, #{endTime}, #{bookPrice}, #{numPeople}, NULL)
+	</insert>
+	<insert id="insertPDetail">
+		INSERT INTO P_DETAIL_TBL VALUES(SEQ_POINT_NO.NEXTVAL, #{userNo}, SYSTIMESTAMP, '시설예약차감', -#{pointChange})
 	</insert>
 	<update id="updatePayTime">
 		UPDATE BOOK_TBL SET PAY_TIME = SYSTIMESTAMP WHERE BOOK_NO = #{bookNo}

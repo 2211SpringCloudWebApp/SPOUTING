@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.kh.spouting.book.domain.Book;
 import com.kh.spouting.book.domain.Facilities;
+import com.kh.spouting.point.domain.PointDetail;
 
 public interface BookService {
 
@@ -39,5 +40,12 @@ public interface BookService {
 	 * @return int
 	 */
 	public int bookUp(int bookNo);
+
+	/**
+	 * 결제와 동시에 포인트디테일 테이블 인서트
+	 * @param pDetail
+	 * @return int
+	 */
+	public int insertPDtail(PointDetail pDetail);
 
 }

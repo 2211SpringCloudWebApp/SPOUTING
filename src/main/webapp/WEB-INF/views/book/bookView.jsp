@@ -18,142 +18,11 @@
         <script src='https://cdn.jsdelivr.net/npm/fullcalendar@5.8.0/main.min.js'></script>
         <!-- fullcalendar 언어 CDN -->
         <script src='https://cdn.jsdelivr.net/npm/fullcalendar@5.8.0/locales-all.min.js'></script>
+        <!-- css -->
+        <link rel="stylesheet" href="/resources/css/bookCss/bookView.css">
         <title>시설예약하기</title>
         <style>
-        @font-face {
-             font-family: 'Pretendard-Regular';
-             src: url('https://cdn.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Regular.woff') format('woff');
-             font-weight: 400;
-             font-style: normal;
-         }
-         @font-face {
-		    font-family: 'Chosunilbo_myungjo';
-		    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_one@1.0/Chosunilbo_myungjo.woff') format('woff');
-		    font-weight: normal;
-		    font-style: normal;
-		}
-		main{
-    --background-color: #1C3879;
-}
-/*상단포토슬라이드*/
-
-#image-wrapper{
-    background-color: #607EAA;
-    width: 100%;
-    height: 250px;
-    position: relative;
-}
-#image-wrapper img {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  opacity: 0;
-  transition: opacity 1s ease-in-out;
-}
-
-#image-wrapper .active {
-  opacity: 1;
-}
-
-#image-wrapper p{  
-  font-family: 'Chosunilbo_myungjo';
-  position: absolute;
-  top: 60%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  z-index: 2;
-  color: white;
-  font-size: 3em;
-  font-weight: 500;
-}
-
-/*예약폼*/
-#booking-info{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding-top: 70px;
-}
-
-#booking-info > div{ 
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
-.booking-option p{
-    text-align: center;
-    border: 1px solid black;
-  border-radius: 20px;
-  padding: 10px;
-  width: 140px;
-  margin-bottom: 0px;
-}
-
-/*인풋타입 스타일들*/
-#booking-info input[type="number"],
-#booking-info input[type="date"],
-#booking-info select {
-  
-  font-size: 1em;  
-  --margin-top: 10px;
-  margin-bottom: 20px;  
-  border: none;
-  border-bottom: 1px solid black;
-  --width: 120px;
-  text-align: center;
-  appearance: none;
-  -moz-appearance: none;
-  -webkit-appearance: none;
-  --background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6' viewBox='0 0 10 6'%3E%3Cpath fill='%23000000' d='M5 6L0 .5h10L5 6z'/%3E%3C/svg%3E");
-  background-repeat: no-repeat;
-  background-position-x: 95%;
-  background-position-y: center;
-}
-#time input{
-    width: 70px;
-}
-#time div{
-	float: left
-}
-#booking-info input[type="date"],
-#booking-info select,
-#num-people input {
-    width: 120px;
-}
-
-input:focus, select:focus {
-  outline: none;
-  border-bottom: 1px solid black;
-}
-
-#booking-info select::-ms-expand {
-  display: none;
-}
-
-#booking-info option {
-  color: black;
-  background-color: white;
-}
-
-
-#price, #payment-btn{
-    margin-top: 20px;
-}
-#timeInput{
-display: flex;
-flex-direction: row;
-}
-
-/* #calendar-container{ */
-/* width:400px; */
-/* --height: 600px; */
-/* --text-align: center; */
-/* } */
-/* .fc .fc-scroller-liquid-absolute{ */
-/* position: relative;  */
-/* } */
+    
         </style>
 	</head>
 	<body>
@@ -174,6 +43,8 @@ flex-direction: row;
 	<!-- !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!폼!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! -->
             
             <form action="/book/confirm" method="post">
+            <input type="hidden" name="userNo" value="21">
+            <!-- 왜 세션에 유저넘버가 없나요 난 어디서 데이터를 땡겨오나요 살려줘 -->
             <div id="booking-info">
                 <div class="booking-option" id="option-branch">
 <!-- 	${loginUser } -->
@@ -229,21 +100,22 @@ flex-direction: row;
 
                 <!--date 선택하면 time 란 보이기-->
                 <div class="booking-option" id="time" style="display:none;">
-                    <p>이용 시간</p><br>
-                   
+                    
+               		<p>이용 시간</p>
+                  
 <!--                     input type을 time으로 쓰면 분까지 선택하는게 필수인데 굳이 그렇게 넣어서 파싱할 이유도 없음 -->
 <!--                     예)오후 1시~3시까지 이용할 경우<br>13~15 입력<br> -->
-					<div>
+				
+				
                     <div id="timeInput">
 	                    <input type="number" id="startTime" placeholder="시작시간" min="0" name="startParam">~
 	                    <input type="number" id="endTime" placeholder="종료시간" onchange="showPrice()" min="1" name="endParam">
                     </div>
-                    </div>
+                   
                 </div>
                 <!--time까지 선택하면 요금란 보이기-->
                 <div class="booking-option" id="price" style="display:none;">
-                    요금: <!-- {facilities.price} x인원x시간 -->
-                    
+                    <!-- 요금 뿅 튀어나오는자리 -->                     
                 </div>
 		        <input type="hidden" id="chosenFacil" value="">
 		        <input type="hidden" id="facilNo" value="" name="facilityNo">
@@ -275,23 +147,30 @@ flex-direction: row;
             
             //슬라이드이미지
             const images = document.querySelectorAll('#image-wrapper img');
-            let index = 0;
-
-            function showImage() {
-            images[index].classList.add('active');
-            index++;
-            if (index >= images.length) {
-                index = 0;
-            }
-            setTimeout(hideImage, 4000);
-            }
-
-            function hideImage() {
-            	if(images.length>0){
-		            images[index - 1].classList.remove('active');    		
-            	}
-            showImage();
-            }
+			let index = 0;
+			
+			function showImage() {
+			    images[index].classList.add('active');
+			    index++;
+			    if (index >= images.length) {
+			        index = 0;
+			    }
+			    setTimeout(hideImage, 4000);
+			}
+			
+			function hideImage() {
+			    if (index > 0) {
+			        images[index - 1].classList.remove('active');
+			    } else {
+			        images[images.length - 1].classList.remove('active');
+			    }
+			    if (index >= images.length) {
+			        index = 0;
+			    }
+			    showImage();
+			}
+			
+			showImage();
 
            
 

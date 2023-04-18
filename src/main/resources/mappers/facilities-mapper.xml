@@ -17,7 +17,7 @@
 	
 	</resultMap>
 	
-	<!-- select -->
+	<!-- select bookView에 뿌려야함 -->
 	<select id="selectAllFacil" resultMap="FacilResultMap">
 		SELECT * FROM FACILITIES_TBL LEFT JOIN TIME_TBL USING(FACILITY_NO)
 	</select>
