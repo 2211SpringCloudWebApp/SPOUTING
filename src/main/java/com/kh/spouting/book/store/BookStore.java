@@ -6,6 +6,7 @@ import org.apache.ibatis.session.SqlSession;
 
 import com.kh.spouting.book.domain.Book;
 import com.kh.spouting.book.domain.Facilities;
+import com.kh.spouting.point.domain.PointDetail;
 
 public interface BookStore {
 
@@ -46,5 +47,13 @@ public interface BookStore {
 	 * @return int
 	 */
 	public int updatePayTime(SqlSession session, int bookNo);
+
+	/**
+	 * 결제와 동시에 포인트디테일 인서트
+	 * @param session
+	 * @param pDetail
+	 * @return int
+	 */
+	public int insertPDetail(SqlSession session, PointDetail pDetail);
 
 }

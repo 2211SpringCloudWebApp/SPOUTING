@@ -19,7 +19,7 @@ public class Book {
 	private String centerName; 
 	private String userName; //userNo로 받아올것.. 폰, 메일, ?? 폰이 없네...?
 	private String userEmail;
-	private int userPoint; //사용포인트 (얜 입력만 포인트상세테이블에 하기)	
+	private int userPoint; //가용포인트 
 	
 	public Book() {
 		super();

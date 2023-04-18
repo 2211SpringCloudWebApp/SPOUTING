@@ -8,6 +8,7 @@ import org.springframework.stereotype.Repository;
 import com.kh.spouting.book.domain.Book;
 import com.kh.spouting.book.domain.Facilities;
 import com.kh.spouting.book.store.BookStore;
+import com.kh.spouting.point.domain.PointDetail;
 @Repository
 public class BookStoreLogic implements BookStore{
 
@@ -40,6 +41,12 @@ public class BookStoreLogic implements BookStore{
 	@Override
 	public int updatePayTime(SqlSession session, int bookNo) {
 		int result = session.update("BookMapper.updatePayTime", bookNo);
+		return result;
+	}
+
+	@Override
+	public int insertPDetail(SqlSession session, PointDetail pDetail) {
+		int result = session.insert("BookMapper.insertPDetail", pDetail);
 		return result;
 	}
 

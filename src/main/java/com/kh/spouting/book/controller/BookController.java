@@ -21,6 +21,7 @@ import com.google.gson.Gson;
 import com.kh.spouting.book.domain.Book;
 import com.kh.spouting.book.domain.Facilities;
 import com.kh.spouting.book.service.BookService;
+import com.kh.spouting.point.domain.PointDetail;
 
 @RequestMapping(value="/book")
 @Controller
@@ -54,6 +55,7 @@ public class BookController {
 							, @RequestParam("facilityNo") int facilityNo
 							, @RequestParam("bookPrice") int bookPrice
 							, @RequestParam("numPeople") int numPeople
+							, @RequestParam("userNo") int userNo
 							) throws Exception {
 		Book book = null;
 		
@@ -88,11 +90,14 @@ public class BookController {
 		
 		Timestamp startTime = new Timestamp(calStart.getTimeInMillis());
 		Timestamp endTime = new Timestamp(calEnd.getTimeInMillis());
-		
-		//일단하드코딩(바꾸기)
-		int userNo = 21;
-		
-			
+		/* 이걸 서버단에서 하는게 나은지 프론트에서 하는게 나은지....,,, 아 쿼리 그만해...
+		int bookedPeople = bService.countBookedPpl(Timestamp startTime~ Timestamp endTime);
+		if(bookedPeople>=numPeople) {
+			//이 안에 요 밑에 내용들 저장ㅇㅇ
+		}else{
+			//이용가능인원초과
+		}
+		*/	
 		book = new Book(facilityNo, userNo, useDate, startTime, endTime, bookPrice, numPeople);
 		
 		book.setBookNo(bService.getSequence());
@@ -124,6 +129,18 @@ public class BookController {
 		if(result>0) {
 			//포인트쓴거 업뎃!
 			//Pdetail뭐시기 저장해야함
+			PointDetail pDetail = new PointDetail();
+								//=null 해놓으면 널포인트익셉션 남ㅎ
+			pDetail.setUserNo(userNo);
+			pDetail.setPointChange(pointChange);
+			 
+			int pResult = bService.insertPDtail(pDetail);
+			if(pResult>0) {
+				return "/book/bookView";   //예약완료되엇읍니다페이지 하나 만들어서 바까주기
+			}else {
+				model.addAttribute("msg", "포인트미사용오류!!");
+				return "/common/error";
+			}
 			
 			
 		}else {
@@ -131,8 +148,6 @@ public class BookController {
 			return "/common/error";
 		}
 		
-		
-		return "redirect:/book/bookView"; // 페이지 하나 만들고 예약확인됐슴다 애니메이션 해준담에 마이페이지 링크 달아주자
 	}
 	
 	

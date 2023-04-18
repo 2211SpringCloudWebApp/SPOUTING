@@ -100,7 +100,8 @@
           <!--            //a지점//시설이름//인원수//이용날짜//이용시간//총금액//포인트불러오기 -->
           <!-- 			//--//사용포인트입력//결제금액//api -->
           <div id="tableDiv">
-            <form action ="/book/bookUp" method="post">         
+            <form action ="/book/bookUp" method="post">   
+            ${book}      
 	            <input type="hidden" value="${book.bookNo }" name="bookNo">  
 	            <input type="hidden" value="${book.userNo }" name="userNo">  
 	            <table>
@@ -126,11 +127,12 @@
 	              </tr>
 	              <tr>
 	                <td>이용일</td>
-	                <td>${book.useDate }</td>
+	                <td><fmt:formatDate pattern="yyyy년 MM월 dd일" value="${book.useDate }"/></td>
 	              </tr>
 	              <tr>
 	                <td>이용시간</td>
-	                <td>${book.startTime }~${book.endTime }</td>
+	                <td><fmt:formatDate pattern="hh시" value="${book.startTime }"/>~
+	                	<fmt:formatDate pattern="hh시" value="${book.endTime }"/></td>
 	              </tr>
 	              <tr id="dotted-line1">
 	                <td>총이용금액</td>
