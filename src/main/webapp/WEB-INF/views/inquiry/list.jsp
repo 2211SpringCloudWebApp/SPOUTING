@@ -2,12 +2,12 @@
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!-- 날짜변환용 -->
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>   
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %> 
 <!DOCTYPE html>
 <html>
 	<head>
 		<meta charset="UTF-8">
-		<title>공지사항</title>
+		<title>문의사항</title>
 <!-- 		부트스트랩링크 -->
 		<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
 <!-- 		css링크 -->
@@ -22,8 +22,8 @@
 	    <div id="main">
 	    	<div class="mainHeader">
 		    	<div class="titleWrap">
-					<p>공지사항</p>
-					<p>스파우팅의 새로운 소식을 만나보세요!</p>
+					<p>문의사항</p>
+					<p>궁금한 사항을 문의해주세요!</p>
 		    	</div>
 	    	</div>
 	    	<div class="mainCenter">
@@ -63,18 +63,12 @@
 			       			<c:if test="${pi.currentPage > 1}">
 			       				<a href="/notice/list?page=1" class="first-last-page"><<</a>
 			       			</c:if>
-<%-- 			       			<c:if test="${pi.currentPage > 1}"> --%>
-<%-- 			       				<a href="/notice/list?page=${pi.currentPage - 1}" class="prev-next-page"><</a> --%>
-<%-- 			       			</c:if> --%>
 			       			<c:forEach begin="${pi.startNavi}" end="${pi.endNavi}" var="page">
 			       				<c:url var="pageUrl" value="/notice/list">
 			       					<c:param name="page" value="${page}" />
 			       				</c:url>
 			       				<a href="${pageUrl}" <c:if test="${pi.currentPage == page}"></c:if>>${page}</a>
 			       			</c:forEach>
-<%-- 			       			<c:if test="${pi.currentPage < pi.maxPage}"> --%>
-<%-- 			       				<a href="/notice/list?page=${pi.currentPage + 1}" class="prev-next-page">></a> --%>
-<%-- 			       			</c:if> --%>
 			       			<c:if test="${pi.currentPage < pi.maxPage}">
 			       				<a href="/notice/list?page=${pi.maxPage}" class="first-last-page">>></a>
 			       			</c:if>

@@ -4,7 +4,7 @@
 <html>
 	<head>
 		<meta charset="UTF-8">
-		<title>공지사항 작성</title>
+		<title>공지사항 작성✍</title>
 <!-- 		썸머노트API -->
 		<!-- include libraries(jQuery, bootstrap) -->
 		<link href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" rel="stylesheet">
@@ -20,24 +20,33 @@
 	</head>
 	<body>
 		<jsp:include page="../common/header.jsp"></jsp:include>
-			
+		
+		
 		<div class="main">
-				<h1>공지사항 작성</h1>
-			<form action="/notice/write" method="post" enctype="multipart/form-data">
-				<div id="titleArea">
-					<input placeholder="제목을 입력해주세요." name="noticeTitle">
-				</div>
-				<div id="contentArea">
-					<textarea rows="" cols="" id="summernote" name="noticeContent"></textarea>
-				</div>
-				<div id="test">
-					<input type="file" name="uploadFile">
-				</div>
-				<div id="buttonArea">
-					<button id="saveBtn">저장</button>
-				</div>
-			</form>
+	    	<div class="mainHeader">
+		    	<div class="titleWrap">
+					<p>공지사항 작성✍</p>
+					<p>스파우팅의 새로운 소식을 작성해주세요!</p>
+		    	</div>
+	    	</div>
+	    	<div class="mainCenter">
+				<form action="/notice/write" method="post" enctype="multipart/form-data">
+					<div id="titleArea">
+						<input placeholder="제목을 입력해주세요." name="noticeTitle">
+					</div>
+					<div id="contentArea">
+						<textarea rows="" cols="" id="summernote" name="noticeContent"></textarea>
+					</div>
+					<div id="test">
+						<input type="file" name="uploadFile">
+					</div>
+					<div id="buttonArea">
+						<button id="saveBtn">저장</button>
+					</div>
+				</form>
+			</div>
 		</div>
+		
 		
 		<jsp:include page="../common/footer.jsp"></jsp:include>
 	  <script>

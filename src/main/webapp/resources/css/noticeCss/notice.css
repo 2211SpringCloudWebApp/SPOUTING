@@ -27,6 +27,7 @@
 .titleWrap p:first-child{
 	font-size: 40px;
 	font-weight: 600;
+/* 	color: #1C3879; */
 }
 .titleWrap p:last-child{
 	font-size: 20px;
@@ -41,4 +42,20 @@
 }
 a{
 	color: black;
+}
+
+/* 버튼부분 */
+.buttonWrap{
+	display: flex;
+	flex-direction: row-reverse;
+}
+/*공지사항작성버튼*/
+.btn-primary{
+	background-color: #1C3879;
+	border-color: #1C3879;
+}
+/*검색버튼*/
+.btn-secondary{
+	background-color: #607EAA;
+	border-color: #607EAA;
 }

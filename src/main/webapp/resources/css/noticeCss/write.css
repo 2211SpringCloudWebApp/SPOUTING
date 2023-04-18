@@ -1,9 +1,33 @@
 @charset "UTF-8";
-.main{
+
+.mainCenter{
   width: 65%;
   margin: 0 auto;
   margin-top: 20px;
   margin-bottom: 50px;
+}
+.mainHeader{
+	width:65%;
+	height: 200px;
+	margin: 0 auto;
+	background-image: url(../../images/notice/pool.jpg);
+	background-position: center;
+	background-repeat: no-repeat;
+	display: flex;
+/* 	justify-content: center; */
+	align-items: center;
+	color:white;
+}
+.titleWrap{
+	width: 65%;
+	margin-left: 50px;
+}
+.titleWrap p:first-child{
+	font-size: 40px;
+	font-weight: 600;
+}
+.titleWrap p:last-child{
+	font-size: 20px;
 }
 #titleArea{
 	margin-top: 15px;
@@ -12,4 +36,8 @@
 .filename{
 	margin-top: 10px;
 	margin-bottom: 10px;
+}
+
+#buttonArea{
+	margin-top: 10px;	
 }

@@ -51,3 +51,22 @@ table td{
 #buttonTag button{
 	margin-left: 20px;
 }
+
+/* 모달창 글씨*/
+.modal-content{
+	color: #1C3879;
+}
+
+.btn-secondary{
+	background-color: #607EAA;
+	border-color: #607EAA;
+}
+.btn-primary{
+	background-color: #1C3879;
+	border-color: #1C3879;
+}
+.btn-outline-light{
+	--bs-btn-hover-bg: #EAE3D2;
+	border-color: #EAE3D2;
+	color: #cfbe98;
+}
