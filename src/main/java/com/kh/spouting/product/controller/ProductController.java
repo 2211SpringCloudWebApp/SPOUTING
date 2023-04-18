@@ -22,10 +22,29 @@ public class ProductController {
 	@Autowired
 	private ProductService pService;
 	
-	// 페이징 처리
-	private PageInfo getPageInfo(int currentPage, int totalCount) {
+	// 페이징 처리 (게시판형)
+	private PageInfo getPageInfoBo(int currentPage, int totalCount) {
 		PageInfo pi = null;
 		int boardLimit = 10;
+		int naviLimit = 5;
+		int maxPage;
+		int startNavi;
+		int endNavi;
+		
+		maxPage = (int) Math.ceil((double)totalCount / boardLimit);
+		startNavi = (((int)((double)currentPage / naviLimit + 0.9)) - 1) * naviLimit + 1 ;
+		endNavi = startNavi + naviLimit - 1;
+		if(endNavi > maxPage) {
+			endNavi = maxPage;
+		}
+		pi = new PageInfo(currentPage, boardLimit, naviLimit, startNavi, endNavi, totalCount, maxPage);
+		return pi;
+	}
+	
+	// 페이징 처리 (앨범형)
+	private PageInfo getPageInfoAl(int currentPage, int totalCount) {
+		PageInfo pi = null;
+		int boardLimit = 9;
 		int naviLimit = 5;
 		int maxPage;
 		int startNavi;
@@ -52,9 +71,9 @@ public class ProductController {
 	public ModelAndView list(ModelAndView mv, 
 			@RequestParam(value="page", required=false, defaultValue="1") Integer page) {
 		int totalCount = pService.getListCount();
-		PageInfo pi = this.getPageInfo(page, totalCount);
+		PageInfo pi = this.getPageInfoBo(page, totalCount);
 		List<Product> pList = pService.selectAllProduct(pi);
-		mv.addObject("pi", pi).addObject("pList", pList).setViewName("/shop/productList");
+		mv.addObject("pi", pi).addObject("pList", pList).setViewName("/shop/listProduct");
 	    return mv;
 	}
 	
@@ -62,12 +81,11 @@ public class ProductController {
 	@RequestMapping(value="/shop/catelist1", method=RequestMethod.GET)
 	public ModelAndView list(ModelAndView mv,
 	                         @RequestParam(value="page", required=false, defaultValue="1") Integer page,
-	                         @RequestParam(value="c", required=false) int[] categoryNos, // 카테고리 번호 배열로 변경
-	                         @RequestParam(value="categoryNo", required=false) int categoryNo
+	                         @RequestParam(value="c", required=false) int[] categoryNos // 카테고리 번호 배열로 변경
 							) {
 		try {
-			int totalCount = pService.getListCountByCate(categoryNo); // 카테고리 내 게시글 수 만큼만 전체 게시글 수 따오기
-			PageInfo pi = this.getPageInfo(page, totalCount);
+			int totalCount = pService.getListCountByCate(categoryNos); // 카테고리 내 게시글 수 만큼만 전체 게시글 수 따오기
+			PageInfo pi = this.getPageInfoAl(page, totalCount);
 			List<Product> cateList = pService.selectCateProduct1(pi, categoryNos); // 카테고리 번호 배열 전달
 			String strCategoryNo = ""; // 배열을 스트링으로 변환
 			for(int i=0; i < categoryNos.length; i++) {
@@ -77,7 +95,7 @@ public class ProductController {
 					strCategoryNo += categoryNos[i];
 				}
 			}
-			mv.addObject("pi", pi).addObject("cateList", cateList).addObject("c", strCategoryNo).setViewName("/shop/categoryList1");
+			mv.addObject("pi", pi).addObject("cateList", cateList).addObject("c", strCategoryNo).setViewName("/shop/listCategory1");
 		} catch (Exception e) {
 			mv.addObject("msg", "상위 카테고리 상품 조회에 실패했습니다.").setViewName("common/error");
 		}
@@ -87,11 +105,10 @@ public class ProductController {
 	// 상품 2차 카테고리 목록 조회
 	@RequestMapping(value="/shop/catelist2", method=RequestMethod.GET)
 	public ModelAndView list(ModelAndView mv,
-			@RequestParam("c") int categoryNo,
-			Model model) {
+			@RequestParam("c") int categoryNo) {
 		try {
 			List<Product> cateList = pService.selectCateProduct2(categoryNo);
-			mv.addObject("cateList", cateList).setViewName("/shop/categoryList2");
+			mv.addObject("cateList", cateList).setViewName("/shop/listCategory2");
 		} catch (Exception e) {
 			mv.addObject("msg", "하위 카테고리 상품 조회에 실패했습니다.").setViewName("common/error");
 		}
@@ -107,7 +124,7 @@ public class ProductController {
 		try {
 			System.out.println(search.toString());
 			int totalCount = pService.getListCount(search);
-			PageInfo pi = this.getPageInfo(currentPage, totalCount);
+			PageInfo pi = this.getPageInfoBo(currentPage, totalCount);
 			List<Product> searchList = pService.selectListByKeyword(pi, search);
 			if(!searchList.isEmpty()) {
 				model.addAttribute("search", search);

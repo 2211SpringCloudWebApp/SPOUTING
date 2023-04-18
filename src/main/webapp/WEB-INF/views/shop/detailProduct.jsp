@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -23,28 +24,57 @@
 		  height : 50vh;
 		}
 		#maincontainer {
-		    width: calc(100% - 200px);
-		    margin-left : 200px;
+		    width: 100%;
 		    height : 2000px;
 		    padding-top : 150px;
 		}
-		h1, p {
+		h1, h2, h3, p {
 			text-align : center;
 		}
 		img{
-			height : 100px;
+			height : 450px;
 		}
 	</style>
 </head>
 	<body>
 		<jsp:include page="../common/header.jsp"></jsp:include>
-	<div id="nav">
-		<jsp:include page="./menu.jsp"></jsp:include>
-	</div>
 	
 	<div id="maincontainer">
 		<h1>상품 상세 페이지</h1>
-		${product }
+		<p>자세한 상품 정보를 확인해 보세요 !</p>
+		<input type="hidden" id="prouct" name="prouct" value=${product.productNo }>
+		<table>
+			<tr>
+				<td>
+					<img src="/resources/images/product/items/${product.productFilename}">
+				</td>
+				<td>
+					<table border="1">
+						<tr>
+							<td>상품명</td>
+							<td>${product.productName }</td>
+						</tr>
+						<tr>
+							<td>상품가격</td>
+							<td>${product.productPrice }</td>
+						</tr>
+						<tr>
+							<td>상품설명</td>
+							<td>${product.productDescription }</td>
+						</tr>
+						<tr>
+							<td>
+								<form method="post" action="/shop/cart/insert">
+									<input type="hidden" name="productNo" value=${product.productNo }>
+								</form>
+							</td>
+						</tr>
+					</table>
+				</td>
+			</tr>
+		</table>
+				
+		
 	</div>
 	
 	<jsp:include page="../common/footer.jsp"></jsp:include>

@@ -28,8 +28,8 @@ public class ProductServiceImpl implements ProductService {
 	}
 
 	@Override
-	public int getListCountByCate(int categoryNo) {
-		int result = pStore.getListCountByCate(session, categoryNo);
+	public int getListCountByCate(int[] categoryNos) {
+		int result = pStore.getListCountByCate(session, categoryNos);
 		return result;
 	}
 

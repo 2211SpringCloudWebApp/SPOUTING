@@ -53,8 +53,8 @@
 			<tr>
 				<td colspan="5" align="center" style="height : 50px; border-bottom:0px;">
 					<c:if test="${pi.currentPage > 0}">
-	       				<a href="/shop/productList?page=1" class="first-last-page"><< </a>
-	       			</c:if>
+	       				<a href="/shop/productList?page=1" class="first-last-page">처음</a>
+	       			</c:if> 
 					<c:forEach begin="${pi.startNavi }" end="${pi.endNavi }" var="p">
 							<c:url var="pageUrl" value="/shop/productList">
 								<c:param name="page" value="${p }"></c:param>
@@ -62,7 +62,7 @@
 							<a href="${pageUrl }">${p }</a>&nbsp;&nbsp;&nbsp;
 					</c:forEach>
 	       			<c:if test="${pi.currentPage < pi.maxPage}">
-	       				<a href="/shop/productList?page=${pi.maxPage}" class="first-last-page"> >></a>
+	       				<a href="/shop/productList?page=${pi.maxPage}" class="first-last-page">마지막</a>
 	       			</c:if>
 				</td>
 			</tr>

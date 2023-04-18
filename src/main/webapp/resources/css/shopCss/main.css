@@ -11,8 +11,7 @@
 }
 
 #maincontainer {
-    width: calc(100% - 200px);
-    margin-left : 200px;
+    width: 100%;
     height : 2000px;
     padding-top : 150px;
 }

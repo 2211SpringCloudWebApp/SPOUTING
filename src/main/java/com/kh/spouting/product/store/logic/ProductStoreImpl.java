@@ -21,8 +21,8 @@ public class ProductStoreImpl implements ProductStore{
 	}
 
 	@Override
-	public int getListCountByCate(SqlSession session, int categoryNo) {
-		int result = session.selectOne("ProductMapper.getListCount");
+	public int getListCountByCate(SqlSession session, int[] categoryNos) {
+		int result = session.selectOne("ProductMapper.getListCountByCate", categoryNos);
 		return result;
 	}
 

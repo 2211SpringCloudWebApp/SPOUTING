@@ -12,7 +12,7 @@ public interface ProductStore {
 
 	int getListCount(SqlSession session);
 
-	int getListCountByCate(SqlSession session, int categoryNo);
+	int getListCountByCate(SqlSession session, int[] categoryNos);
 
 	int getListCount(SqlSession session, Search search);
 

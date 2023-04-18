@@ -12,7 +12,7 @@ public interface ProductService {
 	public int getListCount();
 
 	// 카테고리 별 게시글 갯수
-	public int getListCountByCate(int categoryNo);
+	public int getListCountByCate(int[] categoryNos);
 
 	// 검색 게시글 갯수
 	public int getListCount(Search search);

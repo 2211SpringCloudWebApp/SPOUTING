@@ -16,9 +16,6 @@
 </head>
 <body>
 	<jsp:include page="../common/header.jsp"></jsp:include>
-	<div id="nav">
-		<jsp:include page="./menu.jsp"></jsp:include>
-	</div>
 	<div id="maincontainer">
     	<h1 style="color:#1C3879">SPOUTING MARKET</h1>
     	<br>
