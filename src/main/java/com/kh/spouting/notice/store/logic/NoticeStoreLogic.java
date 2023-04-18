@@ -79,5 +79,11 @@ public class NoticeStoreLogic implements NoticeStore{
 		return result;
 	}
 
+	// 공지사항 조회수 Store
+	@Override
+	public void viewCOunt(SqlSession session, Integer noticeNo) {
+		session.update("NoticeMapper.viewCount", noticeNo);
+	}
+
 	
 }

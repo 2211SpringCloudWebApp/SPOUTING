@@ -25,4 +25,6 @@ public interface NoticeService {
 
 	int deleteNotice(Integer noticeNo);
 
+	void viewCount(Integer noticeNo);
+
 }
