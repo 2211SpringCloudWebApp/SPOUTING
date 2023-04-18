@@ -23,5 +23,12 @@ public class SnsStoreLogic implements SnsStore {
 		return session.selectOne("SnsMapper.selectOneSns", userNo);
 	}
 
+	@Override
+	public Sns updateUserProfile(SqlSession session, Sns userSns) {
+		// TODO Auto-generated method stub
+		session.update("SnsMapper.updateUserProfile", userSns);
+		return session.selectOne("SnsMapper.selectOnsProfile", userSns);
+	}
+
 
 }

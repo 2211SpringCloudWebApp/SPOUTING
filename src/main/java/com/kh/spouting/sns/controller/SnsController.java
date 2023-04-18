@@ -3,6 +3,7 @@ package com.kh.spouting.sns.controller;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -12,13 +13,19 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.SessionAttribute;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.kh.spouting.common.FileUtil;
+import com.kh.spouting.sns.domain.Sns;
 import com.kh.spouting.sns.domain.SnsPhoto;
 import com.kh.spouting.sns.domain.SnsProfile;
 import com.kh.spouting.sns.service.SnsService;
+import com.kh.spouting.user.domain.User;
 
 @Controller
 public class SnsController {
@@ -30,14 +37,18 @@ public class SnsController {
 	@Qualifier("fileUtil")
 	private FileUtil fileUtil;
 	
+	//개인 sns 페이지 화면
 	@RequestMapping(value="/sns", method=RequestMethod.GET)
-	public String snsPage(Model model, @RequestParam("userNo") int userNo) {
+	public String snsPage(Model model, @RequestParam("userNo") int userNo, @SessionAttribute("loginUser") User loginUser) {
 		try {
 			SnsProfile oneSns = snsService.selectOneById(userNo);
+			model.addAttribute("loginUser",loginUser);
 			if(oneSns != null) {
+				model.addAttribute("loginUser",loginUser);
 				model.addAttribute("oneSns", oneSns);
 				return "sns/sns";
 			} else {
+				model.addAttribute("loginUser",loginUser);
 				model.addAttribute("msg", "데이터가 존재하지 않습니다.");
 				return "common/error";
 			}
@@ -49,12 +60,14 @@ public class SnsController {
 	}
 	
 	
+	//사진 업로드 페이지
 	@RequestMapping(value="/sns/uploadPage", method=RequestMethod.GET)
 	public ModelAndView snsPhotoInsertPage(ModelAndView mv) {
 		mv.setViewName("/sns/sns-insert");
 		return mv;
 	}
 	
+	// 사진 업로드 기능
 	@RequestMapping(value="/sns/upload", method=RequestMethod.POST)
 	public ModelAndView snsPhotoInsert(
 						ModelAndView mv
@@ -74,6 +87,26 @@ public class SnsController {
 		}
 		mv.setViewName("redirect:/sns");
 		return mv;
+	}
+	
+	
+	// 프로필 수정하기
+	@ResponseBody
+	@RequestMapping(value="/ajaxProfileModify", method=RequestMethod.POST)
+	public String ajaxProfileModify(int userNo, String profileIntro, @SessionAttribute("loginUser") User loginUser, HttpSession session) {
+		Sns userSns = new Sns(userNo, null, null, profileIntro);
+		userSns = snsService.updateUserProfile(userSns);
+		ObjectMapper objectMapper = new ObjectMapper();
+        String jsonString = "";
+        
+        try {
+            jsonString = objectMapper.writeValueAsString(userSns);
+        } catch (JsonProcessingException e) {
+            e.printStackTrace();
+            return jsonString;
+        }
+        session.setAttribute("loginUser",loginUser);
+        return jsonString;
 	}
 	
 	

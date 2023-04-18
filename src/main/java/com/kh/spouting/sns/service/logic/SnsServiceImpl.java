@@ -31,5 +31,11 @@ public class SnsServiceImpl implements SnsService {
 		return snsStore.selectOneById(session, userNo);
 	}
 
+	@Override
+	public Sns updateUserProfile(Sns userSns) {
+		// TODO Auto-generated method stub
+		return snsStore.updateUserProfile(session, userSns);
+	}
+
 
 }

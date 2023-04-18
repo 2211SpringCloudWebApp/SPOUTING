@@ -34,10 +34,12 @@
 		}
 		
 		.meeting-img {
+			cursor: pointer;
 		    border-radius: 50%;
 		    border: solid 1px black;
 		    width: 110px;
 		    height: 110px;
+		    
 		}
 		
 		#meeting-content-box {

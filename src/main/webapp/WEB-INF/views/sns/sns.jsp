@@ -22,29 +22,25 @@
 		    font-family: 'Pretendard-Regular';
 		}
 		
-		.modify-btn {
-			--float: right;
-			cursor: pointer;
-		}
-		
 		#sns-main {
 			padding: 40px;
 			height: 700px;
 			width: 800px;
-			background-color: #f0f0f0;
+			background-color: #F3F3F3FF;
  			margin: 0 auto;
+ 			border: solid 1px black;
 		}
 
 		#sns-profile {
 			width: 700px;
 			height: 160px;
-			background-color:rgb(187, 187, 255);
+			--background-color:rgb(187, 187, 255);
 		}
 
 		#img-box {
 			height: inherit;
 			width: 200px;
-			background-color: beige;
+			--background-color: beige;
 			float: left;
 			display: flex;
 			justify-content: center;
@@ -54,7 +50,7 @@
 		#profile-box {
 			height: inherit;
 			width: 500px;
-			background-color: coral;
+			--background-color: coral;
 			float: left;
 			display: flex;
 			flex-direction: column;
@@ -80,7 +76,23 @@
 			justify-content: center;
 			align-items: center;
 				}
-
+				
+		.modify-btn {
+			--float: right;
+			cursor: pointer;
+		}
+		
+		.img-modify-btn {
+			cursor: pointer;
+		}
+			
+		.modify-submit-btn {
+			cursor: pointer;
+		}
+		
+		.modify-close-btn {
+			cursor: pointer;
+		}
 
     	
     </style>
@@ -90,9 +102,15 @@
 	<jsp:include page="../common/header.jsp"></jsp:include>
 	<br>
 	<div id="sns-main">
-	<div class="btn-box">
-		<button type="button" class="modify-btn">프로필 수정</button>
-	</div>
+	
+	<c:if test="${loginUser.userNo eq oneSns.userNo }">
+		<div class="btn-box">
+			<button type="button" class="img-modify-btn">사진 수정</button>
+			<button type="button" class="modify-btn">한줄소개 수정</button>
+		</div>
+	</c:if>
+	
+	
 		<!-- 프로필 영역 -->
         <div id="sns-profile">
 			<div id="img-box">
@@ -105,12 +123,13 @@
 <!-- 				업로드 영역 끝 -->
 			</div>
 			<div id="profile-box">
+				<input type="hidden" value="${oneSns.userNo }" id="userNo">
 				<div class="profile-name-box">
 					<h1 class="profile-name">${oneSns.userName }</h1>
 				</div> 
 				<br>
 				<div class="profile-intro-box">
-					<span class="profile-intro">${oneSns.profileIntoduce }dsd</span>
+					<span class="profile-intro">${oneSns.profileIntoduce }</span>
 				</div>
 			</div>
 		</div>
@@ -131,11 +150,12 @@
 	
 	<script>
 	var profileStatus = false;
+	var intro = $('.profile-intro').text();
 	
 		$(".modify-btn").click(function() {
 			if(!profileStatus) {
 				var str = "<textarea type='text' class='profile-intro-input' spellcheck='false'></textarea>";
-				var btn = "<button type='button' onclick='ajaxProfileModify();' value='저장' class='modify-submit-btn'>저장</button> <button type='button' onclick='modifyClose();' value='저장' class='modify-submit-btn' id='modify-close-btn'>취소</button>";
+				var btn = "<button type='button' onclick='ajaxProfileModify();' value='저장' class='modify-submit-btn'>저장</button><button type='button' onclick='modifyClose();' value='저장' class='modify-submit-btn' id='modify-close-btn'>취소</button>";
 				$(".btn-box").append(btn);
 				$(".profile-intro-box").append(str);
 				$(".profile-intro-input").val($(".profile-intro").html());
@@ -144,14 +164,75 @@
 			}
 		});
 		
+
+		function modifyClose() {
+			$(".profile-intro-input").remove();
+			$('.modify-submit-btn').remove();
+			$('.modify-close-btn').remove();
+			var str = "<span class='profile-intro'>" + intro + "</span>";
+			$(".profile-intro-box").append(str);
+			profileStatus = false;
+		}
+		
 		
 		function ajaxProfileModify() {
+			profileStatus = false;
+		    $.ajax({
+		        url: "/ajaxProfileModify",
+		        type: "post",
+		        dataType: "json",
+		        data: {
+		            "userNo": $('#userNo').val(),
+		            "profileIntro": $('.profile-intro-input').val()
+		        },
+		        success: function (data) {
+		            $('.modify-submit-btn').remove();
+		            $('.profile-intro-input').remove();
+// 		            str = "<h1 class='profile-name-h1'>" + data.userName + "</h1>";
+		            str = "<span class='profile-intro'>" + data.profileIntoduce + "</span>";
+// 		            $('.profile-name').append(str);
+		            $('.profile-intro-box').append(str);
+// 		            str3 = "<img src='../img/abstract-user-flat-3.svg' style='width: 30px; height: 30px; border-radius: 50%' />";
+// 		            $('#dropdownMenuButton1').text("  " + data.userName + "  ");
+// 		            $('#dropdownMenuButton1').prepend(str3);
+		        },
+		        error: function (request, status, error) {
+		            alert("code : " + request.status + "\n" + " message : " + request.responseText + "\n" + "error: " + error);
+		        }
+		    });
+		}
+		
+		
+		
+		$(".img-modify-btn").click(function() {
+			if(!profileStatus) {
+// 				var str = "<textarea type='text' class='profile-intro-input' spellcheck='false'></textarea>";
+				var btn = "<button type='button' onclick='imgModifyBtn();' value='저장' class='img-upload-btn'>사진 업로드</button><button type='button' onclick='imgModifyClose();' value='저장' class='img-close-btn' id='img-close-btn'>취소</button>";
+				$(".btn-box").append(btn);
+// 				$(".profile-intro-box").append(str);
+// 				$(".profile-intro-input").val($(".profile-intro").html());
+// 				$(".profile-intro").remove();
+				profileStatus = true;
+			}
+		});
+		
+		
+		
+		function imgModifyBtn() {
 			
 		}
 		
-		function modifyClose() {
-			
+		
+		function imgModifyClose() {
+// 			$(".profile-intro-input").remove();
+			$('.img-upload-btn').remove();
+			$('.img-close-btn').remove();
+// 			var str = "<span class='profile-intro'>" + intro + "</span>";
+// 			$(".profile-intro-box").append(str);
+			profileStatus = false;
 		}
+		
+		
 		
 	</script>
 	

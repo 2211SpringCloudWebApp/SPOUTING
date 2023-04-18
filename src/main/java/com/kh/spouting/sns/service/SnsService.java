@@ -10,5 +10,7 @@ public interface SnsService {
 
 	SnsProfile selectOneById(int userNo);
 
+	Sns updateUserProfile(Sns userSns);
+
 
 }
