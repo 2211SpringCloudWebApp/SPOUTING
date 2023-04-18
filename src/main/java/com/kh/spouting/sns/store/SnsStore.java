@@ -12,5 +12,7 @@ public interface SnsStore {
 
 	SnsProfile selectOneById(SqlSession session, int userNo);
 
+	Sns updateUserProfile(SqlSession session, Sns userSns);
+
 
 }

@@ -32,9 +32,17 @@
 	</insert>
 	
 	<select id="selectOneSns" resultMap="snsProfileResultMap">
-		SELECT U.USER_NAME, S.PROFILE_FILENAME, S.PROFILE_FILEPATH, S.PROFILE_INTRODUCE
+		SELECT S.USER_NO, U.USER_NAME, S.PROFILE_FILENAME, S.PROFILE_FILEPATH, S.PROFILE_INTRODUCE
 		FROM SNS_TBL S JOIN USER_TBL U ON S.USER_NO = U.USER_NO
 		WHERE U.USER_NO = #{userNo}
 	</select>
+	
+	<select id="selectOnsProfile" resultMap="snsResultMap">
+		SELECT PROFILE_FILENAME, PROFILE_FILEPATH, PROFILE_INTRODUCE FROM SNS_TBL WHERE USER_NO = #{userNo}
+	</select>
+	
+	<update id="updateUserProfile">
+		UPDATE SNS_TBL SET PROFILE_INTRODUCE = #{profileIntoduce} WHERE USER_NO = #{userNo}
+	</update>
 	
 </mapper>
