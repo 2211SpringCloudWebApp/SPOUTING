@@ -1,0 +1,62 @@
+@font-face {
+    font-family: 'Pretendard-Regular';
+    src: url('https://cdn.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Regular.woff') format('woff');
+    font-weight: 400;
+    font-style: normal;
+}
+
+* {
+    font-family: 'Pretendard-Regular'; 
+}
+#main {
+    width: 100%;
+    padding-bottom: 30px;
+}
+#list-title {
+    width: 100%;
+    height: 150px;
+    margin: 0 auto;
+    text-align: center;
+    padding: 10px;
+}
+    #list-title span {
+        font-size: 21px;
+        padding: 5px;
+        padding-left: 30px;
+        padding-right: 30px;
+        border-bottom: 2px solid #0645daab;
+    }
+    #diary-btn {
+        width: 250px;
+        height: 40px;
+        border: none;
+        background-color: #0645daab;
+        border-radius: 5px;
+        color: #fafafa;
+        margin: 30px;
+        font-size: 16px;
+    }
+        #diary-btn:hover {
+            color: #32529ec2;
+            background-color: #d8d8d885;
+            font-weight: 800;
+            cursor: pointer;
+        }
+#list-wrapper {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+    #point-list {
+        width: 800px;
+        height: 600px;
+        background-color: rosybrown;
+    }
+    #ad-box {
+    width: 200px;
+    height: 600px;
+       background-image: url(/resources/images/point/ad.png);
+       background-repeat: no-repeat;
+       background-size: 100%;
+
+    }

@@ -15,19 +15,21 @@
     <main>
         <div id="user-point">
             <span>
-                ${sessionScope.loginUser.userName} 님의 포인트 | 
-                ${userPoint} 
+                ${sessionScope.loginUser.userName}님의 현재 포인트 ✔ 
+                <b id="now-point">  ${userPoint}P </b>
             </span>
         </div>
-        <form id="main-box">
-            <div id="buy-select">
+        <form id="main-box" action="/point/charge" method="POST">
+            <div id="buy-select"><br>
                 <span>포인트 충전 금액</span>
-                <select name="point-buy" id="point-buy">
-                    <option value="10,000">10,000</option>
-                    <option value="30,000">30,000</option>
-                    <option value="50,000">50,000</option>
-                    <option value="100,000">100,000</option>
-                </select>
+                <select name="pointBuy" id="pointBuy" onchange="valChange()">
+                    <option value="10000" selected>10,000</option>
+                    <option value="30000">30,000</option>
+                    <option value="51500">50,000</option>
+                    <option value="107000">100,000</option>
+                </select><br>
+                <p id="after-info">충전 후 잔여 포인트 : <span id="after-char" style="font-size: 17px; padding: 10px;"></span></p>
+                <div class="balloon"></div>
             </div>
             <div id="buy-info">
                 <ul>
@@ -36,17 +38,17 @@
                     <li>회원 탈퇴 시 남은 포인트를 현금으로 환급받을 수 없습니다.</li>
                 </ul>
             </div>
-            <input type="submit" value="충전하기" id="buy-btn">
-            <div class="balloon_01"></div>
+            <input type="submit" value="충전하기" id="buy-btn" onclick="alertSucc();">
+
         </form>
         <div id="event-box">
             <div>
-                <h3>이달의 충전 이벤트</h3>
-                50,000P 충전 시 추가 5% 충전!
+                <h3>🏆이달의 충전 이벤트🏆</h3><br>
+                50,000P 충전 시 추가 3% 충전!
             </div>
             <div>
-                <h3>봄이라 운동해봄</h3>
-                따뜻한 날씨, 힘내서 Spouting 해요!<br>
+                <h3>🌺봄이라 운동해봄🌺</h3><br>
+                따뜻한 날씨, 힘내서 Spouting해요<br>
                 100,000P 충전 시 추가 7% 충전
             </div>
         </div>
@@ -54,7 +56,38 @@
     <jsp:include page="../common/footer.jsp"></jsp:include>
 
     <script>
-        
+        function valChange() {
+            const selectedVal = $("#pointBuy option:selected").val();
+            const balloon = $(".balloon");
+            const afterChar = $("#after-char");
+
+            if(selectedVal === "10000") {
+                balloon.attr('style','display:none;')
+                var calc = Number('${userPoint}')+Number(10000);
+                afterChar.html(calc + 'P');
+            }
+            if(selectedVal === "30000") {
+                balloon.attr('style','display:none;')
+                var calc = Number('${userPoint}')+Number(30000);
+                afterChar.html(calc + 'P');
+            }
+            if(selectedVal === "51500") {
+                balloon.attr('style','display:block;')
+                balloon.html('이달의 충전 이벤트!<br> >1,500P< 추가 충전😉')
+                var calc = Number('${userPoint}')+Number(51500);
+                afterChar.html(calc + 'P');
+            }
+            if(selectedVal === "107000") {
+                balloon.attr('style','display:block;')
+                balloon.html('봄이라 운동해봄<br> >>7,000P<< 추가 충전😎')
+                var calc = Number('${userPoint}')+Number(107000);
+                afterChar.html(calc + 'P');
+            }
+        }
+
+        function alertSucc() {
+            alert("충전 완료!")
+        }
     </script>
 </body>
 </html>
