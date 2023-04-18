@@ -11,8 +11,7 @@
 main {
     width: 60%;
     padding: 30px;
-    margin: 0 auto;
-    background-color: azure;
+    margin: 20px auto;
 }
 #user-point {
     width: 100%;
@@ -22,42 +21,54 @@ main {
     padding: 10px;
 }
     #user-point span {
-        font-size: 21px;
+        font-size: 22px;
         padding: 5px;
         padding-left: 30px;
         padding-right: 30px;
         border-bottom: 2px solid #0645daab;
+    }
+    #now-point {
+        color: rgb(255, 115, 0);
+        margin-left: 50px;
     }
 #main-box {
     text-align: center;
 }
     #buy-select {
         width: 400px;
-        margin: 50px auto;
+        margin: 70px auto;
     }
         #buy-select span {
-            font-size: 19px;
+            font-size: 20px;
             padding-right: 100px;
         }
-        #point-buy {
+        #pointBuy {
             width: 150px;
             height: 50px;
             text-align: center;
             font-size: 16px;
         }
-        #point-buy:focus {
+        #pointBuy:focus {
             background-color: #3e92e086;
-            color: whitesmoke;
+            color: white;
         }
-
+    #after-info {
+        font-size: 16px;
+        margin: 30px auto;
+    }
     #buy-info {
-        width: 500px;
+        width: 600px;
         margin: 0 auto;
-        padding: 20px;
-        background-color: aliceblue;
+        padding: 30px;
+        background-color: #e2e2e285;
         line-height: 2;
         text-align: left;
+        border-radius: 10px;
     }
+        #buy-info ul {
+            list-style-type: square;
+            padding-left: 50px;
+        }
     #buy-btn {
         width: 250px;
         height: 40px;
@@ -65,7 +76,7 @@ main {
         background-color: #0645daab;
         border-radius: 5px;
         color: #fafafa;
-        margin: 30px auto;
+        margin: 50px auto;
         font-size: 16px;
         }
             #buy-btn:hover {
@@ -75,25 +86,28 @@ main {
                 cursor: pointer;
             }
 
-    .balloon_01 {
+    .balloon {
         position:relative;
         margin: 0 auto;
-        margin-bottom: 50px;
-        width:400px;
-        height:50px;
-        background:pink;
+        margin-bottom: 70px;
+        width:380px;
+        height:80px;
+        background:aliceblue;
+        color: rgb(1, 1, 56);
         border-radius: 10px;
         display: none;
+        text-align: center;
+        padding: 20px;
         }
-        .balloon_01:after {
+        .balloon:after {
         border-top:0px solid transparent;
         border-left: 10px solid transparent;
         border-right: 10px solid transparent;
-        border-bottom: 10px solid pink;
+        border-bottom: 10px solid aliceblue;
         content:"";
         position:absolute;
         top:-10px;
-        left:200px;
+        left:50%;
         } 
             
             
@@ -102,10 +116,13 @@ main {
         height: 200px;
         display: flex;
         justify-content: space-evenly;
-        margin: 0 auto;
+        margin: 30px auto;
     }
     #event-box > div {
-        width: 250px;
+        width: 350px;
         height: 150px;
-        background-color: beige;
+        border: 2px solid #0646da80;
+        text-align: center;
+        padding: 30px;
+        border-radius: 7px;
     }
