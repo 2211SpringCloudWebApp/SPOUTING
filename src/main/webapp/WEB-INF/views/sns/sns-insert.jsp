@@ -1,52 +1,133 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-    pageEncoding="EUC-KR"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <!DOCTYPE html>
 <html>
-<head>
-<meta charset="EUC-KR">
-<title>sns ªÁ¡¯ æ˜∑ŒµÂ</title>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
-</head>
-<body>
-		<form action="/sns/upload" method="post" enctype="multipart/form-data" style="width:1000px; margin:0 auto;">
-			<table>
-				<tr>
-					<th>√∑∫Œ∆ƒ¿œ</th>
-					<td><input type="file" name="uploadFile" onchange="loadImg(this);"></td>
-				</tr>
-				<tr>
-					<th>¿ÃπÃ¡ˆ ∫∏±‚</th>
-					<td>
-						<div id="img-viewer">
-							<img id="img-view" width="350">
-						</div>
-					</td>
-				</tr>
-				<tr>
-					<th>≥ªøÎ</th>
-					<td><textarea rows="3" name="snsContent" style="width:100%;"></textarea></td>
-				</tr>
-				<tr>
-					<th style="text-align:center;" colspan="2">
-						<button type="submit">µÓ∑œ«œ±‚</button>
-					</th>
-				</tr>
-		</table>
-	</form>
+	<head>
+	    <meta charset="UTF-8">
+	    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+	    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+	    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
+	    <title>sns ÏÇ¨ÏßÑ ÏóÖÎ°úÎìú ÌéòÏù¥ÏßÄ</title>
+	    <style>
+	            @font-face {
+	                font-family: 'Pretendard-Regular';
+	                src: url('https://cdn.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Regular.woff') format('woff');
+	                font-weight: 400;
+	                font-style: normal;
+	                }
 	
-			<script>
-			function loadImg(obj) {
-				if(obj.files.length != 0 && obj.files[0] != 0) {
-					let reader = new FileReader();
-					reader.readAsDataURL(obj.files[0]);
-					reader.onload = function(e) {
-						document.querySelector("#img-view").setAttribute("src", e.target.result);
-					}
-				}else{
-// 					$("#img-view").attr("src", "");
-					document.querySelector("#img-view").setAttribute("src", "");
-				}
-			}
-		</script>
-</body>
+	            body {
+	                background-color: white;
+	                font-family: 'Pretendard-Regular';
+	            }
+	
+	        #sns-insert-main {
+	            padding: 20px;
+				height: 700px;
+				width: 800px;
+				background-color: #F3F3F3FF;
+	 			margin: 0 auto;
+	 			border: solid 1px black;
+	            text-align: center;
+	        }
+	        
+	        #header-block {
+	            padding: 0px;
+	        }
+	
+	        #uploadFile {
+	            float: right;
+	        }
+	
+	        #content-block {
+	            margin-top: 50px;
+	        }
+	
+	        #img-viewer {
+	            width: 600px;
+	            height: 350px;
+	            margin: 0 auto;
+	            border: solid 1px black;
+	            background-color: rgb(255, 255, 255);
+	            --display: flex;
+	
+	        }
+	
+	        #img-view {
+	            margin: 0 auto;
+	            align-items: center;
+	        }
+	
+	        #write-viewer{
+	            --width: 600px;
+	            height: 130px;
+	            --border: solid 1px black;
+	            --background-color: rgb(255, 255, 255);
+	            margin: 0 auto;
+	        }
+	
+	        #photoContent {
+	            margin: 0 auto;
+	            width: 600px;
+	            height: 70px;
+	        }
+	
+	        #upload-btn {
+	
+	        }
+	
+	    </style>
+	</head>
+	<body>
+	
+		<jsp:include page="../common/header.jsp"></jsp:include>
+		<br>
+	
+	    <form action="/sns/upload" method="post" enctype="multipart/form-data" style="width:1000px; margin:0 auto;">
+	
+	    <div id="sns-insert-main">
+	        <div id="header-block">
+	        	<br>
+	            <h1 id="sns-insert-header">ÏÇ¨ÏßÑ ÏóÖÎ°úÎìú</h1>
+	        </div>
+	
+	        <input type="file" id="uploadFile" name="uploadFile" onchange="loadImg(this);"> <br><br>
+	
+	        <div id="content-block">
+	            <div id="img-viewer">
+	                <img id="img-view" width="400">
+	            </div>
+	
+	            <br>
+	            <div id="write-viewer">
+	                <textarea id="photoContent" name="snsContent" placeholder="ÌÖçÏä§Ìä∏Î•º ÏûÖÎ†•ÌïòÏÑ∏Ïöî" style="resize: none;"></textarea>
+	            </div>
+	        </div>
+	
+	        <button type="submit" id="upload-btn">Îì±Î°ùÌïòÍ∏∞</button>
+	    </div>
+	
+	    </form>
+	    
+	    <br>
+	    <jsp:include page="../common/footer.jsp"></jsp:include>
+	
+	    <script>
+	        function loadImg(obj) {
+	            if(obj.files.length != 0 && obj.files[0] != 0) {
+	                let reader = new FileReader();
+	                reader.readAsDataURL(obj.files[0]);
+	                reader.onload = function(e) {
+	                    document.querySelector("#img-view").setAttribute("src", e.target.result);
+	                }
+	            }else{
+	// 					$("#img-view").attr("src", "");
+	                document.querySelector("#img-view").setAttribute("src", "");
+	            }
+	        }
+	    </script>
+	
+	</body>
 </html>
