@@ -58,11 +58,12 @@
 	
 <!-- 	공지사항 검색 -->
 	<select id="searchNotice" resultMap="noticeJoinResultMap">
-		SELECT * FROM NOTICE_TBL
+		SELECT N.*, U.USER_ID FROM NOTICE_TBL N JOIN USER_TBL U ON N.USER_NO = U.USER_NO
 		<where>
 			<if test="searchCondition == 'title'">NOTICE_TITLE LIKE '%' || #{searchValue} || '%'</if>
 			<if test="searchCondition == 'content'">NOTICE_CONTENT LIKE '%' || #{searchValue} || '%'</if>
 		</where>
+		ORDER BY N_CREATE_DATE DESC
 	</select>
 	
 <!-- 	공지사항 수정 -->

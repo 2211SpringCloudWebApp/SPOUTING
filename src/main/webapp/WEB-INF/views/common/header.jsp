@@ -36,7 +36,7 @@
                         <div class="item_name"><a href="">소개</a></div>
                         <div class="item_content">
                             <li><a href="">스파우팅 소개</a></li>
-                            <li><a href="">지점 소개</a></li>
+                            <li><a href="/center/search">지점 찾기</a></li>
                         </div>
                     </div>
 ​
@@ -64,7 +64,7 @@
                         <div class="item_name"><a href="/notice/list">게시판</a></div>
                         <div class="item_content">
                             <li><a href="/notice/list">공지사항</a></li>
-                            <li><a href="">문의사항</a></li>
+                            <li><a href="/inquiry/list">문의사항</a></li>
                         </div>
                     </div>
                     

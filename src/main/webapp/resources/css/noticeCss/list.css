@@ -1,0 +1,84 @@
+@charset "UTF-8";
+a{
+	color: black;
+}
+/* 메인테이블 */
+.mainCenter{
+  width: 65%;
+  margin: 0 auto;
+  margin-top: 20px;
+  margin-bottom: 50px;
+}
+	.table-hover>.table-group-divider>tr:hover{
+	  background-color: #afcfff;
+	}
+/* 헤더부분(공지사항) */
+.mainHeader{
+	width:65%;
+	height: 250px;
+	margin: 0 auto;
+	background-image: url(../../images/notice/pool.jpg);
+	background-position: center;
+	background-repeat: no-repeat;
+	display: flex;
+/* 	justify-content: center; */
+	align-items: center;
+	color:white;
+}
+/* 헤더부분(문의사항) */
+.mainHeaderI{
+	width:65%;
+	height: 250px;
+	margin: 0 auto;
+	background-image: url(../../images/notice/pool3.jpg);
+	background-position: center;
+	background-repeat: no-repeat;
+	display: flex;
+/* 	justify-content: center; */
+	align-items: center;
+	color:black;
+}
+	.titleWrap{
+		width: 65%;
+		margin-left: 50px;
+	}
+		.titleWrap p:first-child{
+			font-size: 40px;
+			font-weight: 600;
+		/* 	color: #1C3879; */
+		}
+		.titleWrap p:last-child{
+			font-size: 20px;
+		}
+/* 페이징부분 */
+.pageWrap{
+	display: flex;
+	justify-content: center;
+}
+/* 검색부분 */
+.searchWrap{
+	display: flex;
+	justify-content: center;
+}
+
+
+/* 버튼부분 */
+.buttonWrap{
+	display: flex;
+	flex-direction: row-reverse;
+}
+	/* 공지사항작성버튼 */
+	.btn-primary{
+		background-color: #1C3879;
+		border-color: #1C3879;
+	}
+	/* 검색버튼 */
+	.btn-secondary{
+		background-color: #607EAA;
+		border-color: #607EAA;
+	}
+
+/* 부트스트랩때문에 내비바 움직임 방지*/
+ol, ul {
+    padding-left: 0;
+}
