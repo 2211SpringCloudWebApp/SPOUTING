@@ -6,7 +6,10 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.kh.spouting.common.PageInfo;
+import com.kh.spouting.common.Search;
 import com.kh.spouting.inquiry.domain.Inquiry;
+import com.kh.spouting.inquiry.domain.InquiryJoin;
 import com.kh.spouting.inquiry.service.InquiryService;
 import com.kh.spouting.inquiry.store.InquiryStore;
 
@@ -19,9 +22,31 @@ public class InquiryServiceImpl implements InquiryService{
 	@Autowired
 	private SqlSession session;
 	
+	// 문의사항 리스트 Service
 	@Override
-	public List<Inquiry> selectAllInquiry() {
-		List<Inquiry> iList = iStore.selectAllInquiry(session); 
+	public List<InquiryJoin> selectAllInquiry(PageInfo pi) {
+		List<InquiryJoin> iList = iStore.selectAllInquiry(session, pi); 
+		return iList;
+	}
+
+	// 페이징처리 Service
+	@Override
+	public int getInquiryCount() {
+		int result = iStore.getInquiryCount(session);
+		return result;
+	}
+	
+	// 검색 페이징처리 Service
+	@Override
+	public int getSearchInquiryCount(Search search) {
+		int result = iStore.getSearchInquiryCount(session, search);
+		return result;
+	}
+
+	// 문의사항 검색 Service
+	@Override
+	public List<Inquiry> searchInquiry(Search search, PageInfo pi) {
+		List<Inquiry> iList = iStore.searchInquiry(session, search, pi);
 		return iList;
 	}
 

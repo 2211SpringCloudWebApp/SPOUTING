@@ -4,10 +4,19 @@ import java.util.List;
 
 import org.apache.ibatis.session.SqlSession;
 
+import com.kh.spouting.common.PageInfo;
+import com.kh.spouting.common.Search;
 import com.kh.spouting.inquiry.domain.Inquiry;
+import com.kh.spouting.inquiry.domain.InquiryJoin;
 
 public interface InquiryStore {
 
-	List<Inquiry> selectAllInquiry(SqlSession session);
+	List<InquiryJoin> selectAllInquiry(SqlSession session, PageInfo pi);
+
+	int getInquiryCount(SqlSession session);
+
+	int getSearchInquiryCount(SqlSession session, Search search);
+
+	List<Inquiry> searchInquiry(SqlSession session, Search search, PageInfo pi);
 
 }
