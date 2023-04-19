@@ -55,6 +55,12 @@ public class BookServiceImpl implements BookService{
 		return result;
 	}
 
+	@Override
+	public List<Book> getBListCal(int facilityNo) {
+		List<Book> bListCal = bStore.getBListCal(session, facilityNo);
+		return bListCal;
+	}
+
 	
 
 }
