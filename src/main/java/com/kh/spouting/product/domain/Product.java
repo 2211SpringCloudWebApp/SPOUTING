@@ -7,11 +7,12 @@ public class Product {
 	private String productName;
 	private String productPrice;
 	private String productDescription;
-	private String productFilename;
-	private String productFilerename;
-	private String productFilepath;
+	private String productFilename1;
+	private String productFilename2;
+	private String productFilepath1;
+	private String productFilepath2;
 	
-	
+
 	public int getProductNo() {
 		return productNo;
 	}
@@ -42,33 +43,40 @@ public class Product {
 	public void setProductDescription(String productDescription) {
 		this.productDescription = productDescription;
 	}
-	public String getProductFilename() {
-		return productFilename;
+	public String getProductFilename1() {
+		return productFilename1;
 	}
-	public void setProductFilename(String productFilename) {
-		this.productFilename = productFilename;
+	public void setProductFilename1(String productFilename1) {
+		this.productFilename1 = productFilename1;
 	}
-	public String getProductFilerename() {
-		return productFilerename;
+	public String getProductFilename2() {
+		return productFilename2;
 	}
-	public void setProductFilerename(String productFilerename) {
-		this.productFilerename = productFilerename;
+	public void setProductFilename2(String productFilename2) {
+		this.productFilename2 = productFilename2;
 	}
-	public String getProductFilepath() {
-		return productFilepath;
+	public String getProductFilepath1() {
+		return productFilepath1;
 	}
-	public void setProductFilepath(String productFilepath) {
-		this.productFilepath = productFilepath;
+	public void setProductFilepath1(String productFilepath1) {
+		this.productFilepath1 = productFilepath1;
+	}
+	public String getProductFilepath2() {
+		return productFilepath2;
+	}
+	public void setProductFilepath2(String productFilepath2) {
+		this.productFilepath2 = productFilepath2;
 	}
 	
 	
 	@Override
 	public String toString() {
 		return "Product [productNo=" + productNo + ", categoryNo=" + categoryNo + ", productName=" + productName
-				+ ", productPrice=" + productPrice + ", productDescription=" + productDescription + ", productFilename="
-				+ productFilename + ", productFilerename=" + productFilerename + ", productFilepath=" + productFilepath
-				+ "]";
+				+ ", productPrice=" + productPrice + ", productDescription=" + productDescription
+				+ ", productFilename1=" + productFilename1 + ", productFilename2=" + productFilename2
+				+ ", productFilepath1=" + productFilepath1 + ", productFilepath2=" + productFilepath2 + "]";
 	}
+	
 	
 	
 }

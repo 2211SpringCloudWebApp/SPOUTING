@@ -40,7 +40,7 @@
 					<td>${row.productNo }</td>
 					<td>
 						<a href="/shop/product/detail/${row.productNo}">
-							<img src="/resources/images/product/items/${row.productFilename}">
+							<img src="/resources/images/product/items/${row.productFilename1}">
 						</a>
 					</td>
 					<td>${row.productName }</td>

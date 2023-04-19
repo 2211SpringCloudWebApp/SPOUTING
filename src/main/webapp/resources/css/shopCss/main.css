@@ -24,7 +24,7 @@
 }
 .box1, .box2, .box3 {
     width: 33%;
-    height : 45vh;
+    height : 50vh;
     border: 0.5px solid black;
 	display : inline-block;
 	text-align : center;

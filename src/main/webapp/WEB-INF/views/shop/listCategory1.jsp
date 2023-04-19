@@ -38,7 +38,7 @@
 			<c:forEach items="${cateList}" var="product">
 				<div id="outterbox">
 					<div>
-						<img src="/resources/images/product/items/${product.productFilename}">
+						<img src="/resources/images/product/items/${product.productFilename1}">
 						<div id="inner">
 							<a href="/product/detail?productNo=${product.productNo}">${product.productName}</a>
 							<br>
