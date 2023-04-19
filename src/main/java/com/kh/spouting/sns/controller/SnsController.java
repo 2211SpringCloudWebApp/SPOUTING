@@ -39,16 +39,16 @@ public class SnsController {
 	
 	//개인 sns 페이지 화면
 	@RequestMapping(value="/sns", method=RequestMethod.GET)
-	public String snsPage(Model model, @RequestParam("userNo") int userNo, @SessionAttribute("loginUser") User loginUser) {
+	public String snsPage(Model model, @RequestParam("userNo") int userNo) {
 		try {
 			SnsProfile oneSns = snsService.selectOneById(userNo);
-			model.addAttribute("loginUser",loginUser);
+//			model.addAttribute("loginUser",loginUser);
 			if(oneSns != null) {
-				model.addAttribute("loginUser",loginUser);
+//				model.addAttribute("loginUser",loginUser);
 				model.addAttribute("oneSns", oneSns);
 				return "sns/sns";
 			} else {
-				model.addAttribute("loginUser",loginUser);
+//				model.addAttribute("loginUser",loginUser);
 				model.addAttribute("msg", "데이터가 존재하지 않습니다.");
 				return "common/error";
 			}
@@ -76,16 +76,30 @@ public class SnsController {
 						,@ModelAttribute SnsPhoto snsPhoto) {
 		Map<String, String> fileInfo = null;
 		try {
-			fileInfo = fileUtil.saveFile(multi, request, "sns/photo");
+			fileInfo = fileUtil.saveFile(multi, request, "sns");
+			
+			HttpSession session = request.getSession();
+			int userNo = ((User)session.getAttribute("loginUser")).getUserNo();
+			snsPhoto.setUserNo(userNo);
+			
+			String snsContent = request.getParameter("snsContent");
+			snsPhoto.setSnsContent(snsContent);
+			
 			snsPhoto.setSnsFilename(fileInfo.get("original"));
 			snsPhoto.setSnsFileRename(fileInfo.get("rename"));
 			snsPhoto.setSnsFilepath(fileInfo.get("renameFilepath"));
+			
 			int result = snsService.insertPhoto(snsPhoto);
+			if(result > 0) {
+				mv.setViewName("redirect:/sns?userNo="+userNo);
+			} else {
+				mv.addObject("msg","데이터가 삽입되지 않았습니다.").setViewName("common/error");
+			}
+			
 		} catch (Exception e) {
 			// TODO: handle exception
 			mv.addObject("msg", e.getMessage()).setViewName("common/error");
 		}
-		mv.setViewName("redirect:/sns");
 		return mv;
 	}
 	

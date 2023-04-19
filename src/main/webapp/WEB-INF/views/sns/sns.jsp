@@ -101,9 +101,19 @@
 <body>
 	<jsp:include page="../common/header.jsp"></jsp:include>
 	<br>
+	
+	<c:if test="${sessionScope.loginUser.userNo eq null }">
+		<script>
+			$(document).ready(function () {
+	            alert("로그인이 필요합니다.")
+	            window.location.replace("http://localhost:8999/user/login");
+        	});
+		</script>
+	</c:if>
+	
 	<div id="sns-main">
 	
-	<c:if test="${loginUser.userNo eq oneSns.userNo }">
+	<c:if test="${loginUser != null and loginUser.userNo eq oneSns.userNo }">
 		<div class="btn-box">
 			<button type="button" class="img-modify-btn">사진 수정</button>
 			<button type="button" class="modify-btn">한줄소개 수정</button>
@@ -151,8 +161,33 @@
 	<script>
 	var profileStatus = false;
 	var intro = $('.profile-intro').text();
+
+	//한줄 소개 수정버튼 닫기
+		function modifyClose() {
+			$(".profile-intro-input").remove();
+			$('.modify-submit-btn').remove();
+			$('.modify-close-btn').remove();
+			var str = "<span class='profile-intro'>" + intro + "</span>";
+			$(".profile-intro-box").append(str);
+			profileStatus = false;
+		}
+		
+	
+	//이미지 수정버튼 닫기
+		function imgModifyClose() {
+// 			$(".profile-intro-input").remove();
+			$('.img-upload-btn').remove();
+			$('.img-close-btn').remove();
+			$('.file-upload-btn').remove();
+// 			var str = "<span class='profile-intro'>" + intro + "</span>";
+// 			$(".profile-intro-box").append(str);
+			profileStatus = false;
+		}
+		
+		
 	
 		$(".modify-btn").click(function() {
+			imgModifyClose();
 			if(!profileStatus) {
 				var str = "<textarea type='text' class='profile-intro-input' spellcheck='false'></textarea>";
 				var btn = "<button type='button' onclick='ajaxProfileModify();' value='저장' class='modify-submit-btn'>저장</button><button type='button' onclick='modifyClose();' value='저장' class='modify-submit-btn' id='modify-close-btn'>취소</button>";
@@ -163,16 +198,6 @@
 				profileStatus = true;
 			}
 		});
-		
-
-		function modifyClose() {
-			$(".profile-intro-input").remove();
-			$('.modify-submit-btn').remove();
-			$('.modify-close-btn').remove();
-			var str = "<span class='profile-intro'>" + intro + "</span>";
-			$(".profile-intro-box").append(str);
-			profileStatus = false;
-		}
 		
 		
 		function ajaxProfileModify() {
@@ -205,9 +230,10 @@
 		
 		
 		$(".img-modify-btn").click(function() {
+			modifyClose();
 			if(!profileStatus) {
 // 				var str = "<textarea type='text' class='profile-intro-input' spellcheck='false'></textarea>";
-				var btn = "<button type='button' onclick='imgModifyBtn();' value='저장' class='img-upload-btn'>사진 업로드</button><button type='button' onclick='imgModifyClose();' value='저장' class='img-close-btn' id='img-close-btn'>취소</button>";
+				var btn = "<input type='file' onclick='imgModifyBtn();' value='저장' class='file-upload-btn'> <button type='button' onclick='' value='저장' class='img-upload-btn' id='img-upload-btn'>등록</button> <button type='button' onclick='imgModifyClose();' value='저장' class='img-close-btn' id='img-close-btn'>취소</button>";
 				$(".btn-box").append(btn);
 // 				$(".profile-intro-box").append(str);
 // 				$(".profile-intro-input").val($(".profile-intro").html());
@@ -223,15 +249,7 @@
 		}
 		
 		
-		function imgModifyClose() {
-// 			$(".profile-intro-input").remove();
-			$('.img-upload-btn').remove();
-			$('.img-close-btn').remove();
-// 			var str = "<span class='profile-intro'>" + intro + "</span>";
-// 			$(".profile-intro-box").append(str);
-			profileStatus = false;
-		}
-		
+
 		
 		
 	</script>
