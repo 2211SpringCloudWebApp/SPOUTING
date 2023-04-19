@@ -50,5 +50,11 @@ public class BookStoreLogic implements BookStore{
 		return result;
 	}
 
+	@Override
+	public List<Book> getBListCal(SqlSession session, int facilityNo) {
+		List<Book> bListCal = session.selectList("BookMapper.selectBListCal", facilityNo);
+		return bListCal;
+	}
+
 
 }

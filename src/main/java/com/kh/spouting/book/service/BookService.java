@@ -48,4 +48,10 @@ public interface BookService {
 	 */
 	public int insertPDtail(PointDetail pDetail);
 
+	/**
+	 * 캘린더용
+	 * @return List<Book>
+	 */
+	public List<Book> getBListCal(int facilityNo);
+
 }

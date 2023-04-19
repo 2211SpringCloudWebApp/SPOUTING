@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.google.gson.Gson;
 import com.kh.spouting.book.domain.Book;
@@ -151,11 +152,27 @@ public class BookController {
 	}
 	
 	
-	//풀캘린더(에이젝스
-//	@ResponseBody
-//	@RequestMapping(value= "/calendar", method=RequestMethod.GET, produces="application/json;charset=utf-8")
-//	public List<Map<String, Object>> showCalendarList() {
-//		List<Book> bList = bService.selectBookList
-//	}
+	
+	
+	
+
+	//풀캘린더(에이젝스 , produces="application/json;charset=utf-8"
+	//@ResponseBody
+	@RequestMapping(value= "/calendar", method=RequestMethod.GET)
+	public ModelAndView showCalendarList(ModelAndView mv, HttpServletRequest request) {
+		List<Book> bListCal = null; 
+		int facilityNo= 38; //일단하드코딩!!
+		try {
+			bListCal = bService.getBListCal(facilityNo);
+			request.setAttribute("calendarList", bListCal);
+			
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		String viewPage = "/book/calendar";
+		mv.setViewName(viewPage);
+		return mv;
+	}
 	
 }

@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <%@page import="java.util.List" %>
+    <%@page import="com.kh.spouting.book.domain.Book" %>
 <!DOCTYPE html>
 <html>
 	<head>
@@ -17,41 +19,49 @@
 <!-- 		https://dodokong.tistory.com/41 -->
 	</head>
 	<body>
-		 아 어차피 빼면 인클루드 해도 데이터 안불러와지자너... 시험용
-		 
+		 <div id="calendar"></div>
 		 
 		 
 		 <script>
-		 	document.addEventListener('DOMContentLoaded', function(){
-		 		$(function(){
-		 			var request = $.ajax({
-		 				url: "/book/calendar",
-		 				method: "GET",
-		 				dataType: "json"
-		 			});
-		 			request.done(function (data){
-		 				console.log(data);
-		 				
-		 				var calendarEl = document.getElementById('calendar');
-		 				var calendar = new FullCalendar.Calendar(calendarEl, {
-		 					initialDate: '2023-04-14',
-		 					initialView: 'timeGridWeek',
-		 					headerToolbar:{
-		 						left: 'prev, next today',
-		 						center: 'title',
-		 						right: 'dayGridMonth, timeGridWeek, timeGridDay,listWeek'
-		 					},
-		 					editable: false,
-		 					droppable: false,
-		 					events: data;
-		 				});
-		 				calendar.render();
-		 			})
-		 			request.fail(function(jqXHR, textStatus){
-		 				alert(textStatus);
-		 			})
-		 		})
-		 	})
+		 document.addEventListener('DOMContentLoaded', function() {
+				var calendarEl = document.getElementById('calendar');
+				var calendar = new FullCalendar.Calendar(calendarEl, {
+					initialView : 'dayGridMonth',
+					locale : 'ko', // 한국어 설정
+					headerToolbar : {
+			        	start : "prev next today",
+			            center : "title",
+			            end : 'dayGridMonth,dayGridWeek,dayGridDay'
+			            },
+				selectable : true,
+				
+				
+				//events프로퍼티: 읽기전용.
+				events : [ 
+			    	    <%List<Book> calendarList = (List<Book>) request.getAttribute("calendarList");%>
+			            <%if (calendarList != null) {%>
+			            <%for (Book vo : calendarList) {%>
+			            {
+			            	title : '<%=vo.getNumPeople()%>',
+			                start : '<%=vo.getStartTime()%>',
+			                end : '<%=vo.getEndTime()%>',
+			                color : '#' + Math.round(Math.random() * 0xffffff).toString(16)
+			             },
+							<%}
+						}%>
+						],
+						//날짜클릭이벤트핸들러
+						dateClick: function(info){
+							//클릭한날짜의 정보 가져오기
+							var date = info.dateStr;
+							
+							//타임그리드보여주기
+							calendar.changeView('timeGridWeek', date); // 기준 날짜를 기준으로 주간 보기로 변경
+							calendar.gotoDate(date); // 기준 날짜로 이동
+						}
+						});
+						calendar.render();
+					});
 		 
 		 
 		 

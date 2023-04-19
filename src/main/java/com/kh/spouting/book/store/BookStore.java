@@ -56,4 +56,11 @@ public interface BookStore {
 	 */
 	public int insertPDetail(SqlSession session, PointDetail pDetail);
 
+	/**
+	 * 캘린더용
+	 * @param session
+	 * @return List<Book>
+	 */
+	public List<Book> getBListCal(SqlSession session, int facilityNo);
+
 }
