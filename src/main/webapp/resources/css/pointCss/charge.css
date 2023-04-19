@@ -8,10 +8,18 @@
 * {
     font-family: 'Pretendard-Regular'; 
 }
+section {
+    width: 100%;
+    background-image: url(/resources/images/point/poolB.jpg);
+    background-repeat: no-repeat;
+    padding: 50px;
+}
 main {
-    width: 60%;
-    padding: 30px;
-    margin: 20px auto;
+    width: 55%;
+    padding: 50px;
+    margin: 0 auto;
+    background-color: rgba(230, 230, 230, 0.692);
+
 }
 #user-point {
     width: 100%;
@@ -25,7 +33,7 @@ main {
         padding: 5px;
         padding-left: 30px;
         padding-right: 30px;
-        border-bottom: 2px solid #0645daab;
+        border-bottom: 2px solid rgba(8, 80, 143, 0.767);
     }
     #now-point {
         color: rgb(255, 115, 0);
@@ -36,7 +44,7 @@ main {
 }
     #buy-select {
         width: 400px;
-        margin: 70px auto;
+        margin: 50px auto;
     }
         #buy-select span {
             font-size: 20px;
@@ -49,18 +57,18 @@ main {
             font-size: 16px;
         }
         #pointBuy:focus {
-            background-color: #3e92e086;
+            background-color: #1680e4c4;
             color: white;
         }
     #after-info {
         font-size: 16px;
-        margin: 30px auto;
+        margin: 5px auto;
     }
     #buy-info {
         width: 600px;
         margin: 0 auto;
         padding: 30px;
-        background-color: #e2e2e285;
+        background-color: #ffffffc4;
         line-height: 2;
         text-align: left;
         border-radius: 10px;
@@ -80,8 +88,8 @@ main {
         font-size: 16px;
         }
             #buy-btn:hover {
-                color: #32529ec2;
-                background-color: #d8d8d885;
+                color: #fafafa;
+                background-color: rgba(255, 115, 0, 0.774);
                 font-weight: 800;
                 cursor: pointer;
             }
@@ -92,8 +100,8 @@ main {
         margin-bottom: 70px;
         width:380px;
         height:80px;
-        background:aliceblue;
-        color: rgb(1, 1, 56);
+        background:rgba(8, 80, 143, 0.548);
+        color: rgb(245, 245, 245);
         border-radius: 10px;
         display: none;
         text-align: center;
@@ -103,7 +111,7 @@ main {
         border-top:0px solid transparent;
         border-left: 10px solid transparent;
         border-right: 10px solid transparent;
-        border-bottom: 10px solid aliceblue;
+        border-bottom: 10px solid rgba(8, 80, 143, 0.548);
         content:"";
         position:absolute;
         top:-10px;
@@ -113,15 +121,15 @@ main {
             
     #event-box {
         width: 100%;
-        height: 200px;
+        height: 160px;
         display: flex;
         justify-content: space-evenly;
-        margin: 30px auto;
+        margin: 10px auto;
     }
     #event-box > div {
         width: 350px;
         height: 150px;
-        border: 2px solid #0646da80;
+        border: 3px solid #0646da69;
         text-align: center;
         padding: 30px;
         border-radius: 7px;

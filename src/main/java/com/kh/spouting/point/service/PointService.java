@@ -2,6 +2,7 @@ package com.kh.spouting.point.service;
 
 import java.util.List;
 
+import com.kh.spouting.common.PageInfo;
 import com.kh.spouting.point.domain.Point;
 
 public interface PointService {
@@ -11,7 +12,7 @@ public interface PointService {
 	 * @param userNo
 	 * @return int
 	 */
-	public int getUserPoint(int userNo);
+	public Integer getUserPoint(int userNo);
 
 	/**
 	 * 포인트 충전 Service
@@ -25,6 +26,13 @@ public interface PointService {
 	 * @param userNo
 	 * @return List<Point>
 	 */
-	public List<Point> selectPointDetail(int userNo);
+	public List<Point> selectPointDetail(int userNo, PageInfo pi);
+
+	/**
+	 * 회원 별 포인트내역 개수 Service
+	 * @param userNo
+	 * @return int
+	 */
+	public int getPointCount(int userNo);
 
 }

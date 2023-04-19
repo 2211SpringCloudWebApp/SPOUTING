@@ -22,7 +22,10 @@
 	<select id="selectUserPoint" resultType="_int" >
 		SELECT USER_POINT FROM POINT_TBL WHERE USER_NO = #{userNo}
 	</select>
-	<select id="selectPointDetail">
-	
+	<select id="selectPointDetail" resultMap="pointResultMap">
+		SELECT * FROM P_DETAIL_TBL WHERE USER_NO = #{userNo} ORDER BY 1 DESC
+	</select>
+	<select id="getPointCount" resultType="_int" >
+		SELECT COUNT(*) FROM P_DETAIL_TBL WHERE USER_NO = #{userNo}
 	</select>
 </mapper>

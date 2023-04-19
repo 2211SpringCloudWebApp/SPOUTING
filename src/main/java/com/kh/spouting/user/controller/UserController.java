@@ -222,7 +222,7 @@ public class UserController {
 		} catch (Exception e) {
 			e.printStackTrace();
 			model.addAttribute("msg", e.getMessage());
-			return "member/modify";
+			return "common/error";
 		}
 	}
 	

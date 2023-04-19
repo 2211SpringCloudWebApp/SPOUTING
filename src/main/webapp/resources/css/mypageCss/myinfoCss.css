@@ -10,15 +10,15 @@
 }
 #main-box {
     width: calc(100% - 200px);
-    height: 352px;
-    float: left;
+    height: 400px;
     border-top: 1px solid rgb(242, 242, 242);
+    margin: 0 auto;
 
 }
 #check-box {
     width: 400px;
     height: 300px;
-    margin: 0 auto;
+    margin: 20px auto;
     text-align: center;  
 }
     #logo-main {
