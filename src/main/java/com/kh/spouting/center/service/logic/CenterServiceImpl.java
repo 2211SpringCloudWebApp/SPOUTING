@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.kh.spouting.center.domain.Center;
+import com.kh.spouting.center.domain.Search;
 import com.kh.spouting.center.service.CenterService;
 import com.kh.spouting.center.store.CenterStore;
 
@@ -19,6 +20,10 @@ public class CenterServiceImpl implements CenterService{
 	@Autowired
 	private CenterStore cStore;
 
+	
+	
+	/************** 관리자 *****************/
+	
 	/* 지점 등록 ServiceImpl */
 	@Override
 	public int insertCenter(Center center) {
@@ -60,6 +65,27 @@ public class CenterServiceImpl implements CenterService{
 	public int deleteCenter(int centerNo) {
 		int result = cStore.deleteCenter(session, centerNo);
 		return result;
+	}
+
+	
+	
+	
+
+	/************ 회원 *****************/
+	
+	/* 지점 목록 ServiceImpl */
+	@Override
+	public List<Search> selectCenterList(Search search) {
+		List<Search> sList = cStore.selectCenterList(session, search);
+		return sList;
+	}
+	
+	
+	/* 지점 검색 ServiceImple */
+	@Override
+	public List<Search> selectSearch(Search search) {
+		List<Search> searchResult = cStore.selectSearch(session, search);
+		return searchResult;
 	}
 
 

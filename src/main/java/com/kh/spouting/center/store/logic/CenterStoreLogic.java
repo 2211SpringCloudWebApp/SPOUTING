@@ -7,12 +7,15 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
 
 import com.kh.spouting.center.domain.Center;
+import com.kh.spouting.center.domain.Search;
 import com.kh.spouting.center.store.CenterStore;
 
 
 @Repository
 public class CenterStoreLogic implements CenterStore{
 
+	/************** 관리자 ******************/
+	
 	/* 지점등록 StoreLogic */
 	@Override
 	public int insertCenter(SqlSession session, Center center) {
@@ -54,6 +57,27 @@ public class CenterStoreLogic implements CenterStore{
 		int result = session.delete("CenterMapper.deleteCenter", centerNo);
 		return result;
 	}
+
+	
+	
+	
+	/************** 회원 ********************/
+	/* 지점 목록 StoreLogic */
+	@Override
+	public List<Search> selectCenterList(SqlSession session, Search search) {
+		List<Search> sList = session.selectList("CenterMapper.selectCenter", search);
+		return sList;
+	}
+
+	
+	/* 지점 검색 StoreLogic */
+	@Override
+	public List<Search> selectSearch(SqlSession session, Search search) {
+		List<Search> searchResult = session.selectList("CenterMapper.selectSearch", search);
+		return searchResult;
+	}
+	
+	
 
 
 }

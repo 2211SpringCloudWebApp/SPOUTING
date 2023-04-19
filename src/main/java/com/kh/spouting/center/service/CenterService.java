@@ -4,9 +4,12 @@ import java.util.List;
 import java.util.Map;
 
 import com.kh.spouting.center.domain.Center;
+import com.kh.spouting.center.domain.Search;
 
 public interface CenterService {
 
+	/**************** 관리자 ***********************/
+	
 	/**
 	 * 지점 등록 Service
 	 * @param center
@@ -52,4 +55,23 @@ public interface CenterService {
 	public int deleteCenter(int centerNo);
 
 
+
+	
+	/*************** 회원 *****************/
+	
+	/**
+	 * 지점 목록(회원) Service
+	 * @param search
+	 * @return
+	 */
+	public List<Search> selectCenterList(Search search);
+
+	/**
+	 * 지점 검색 Service
+	 * @param search
+	 * @return List<Center>
+	 */
+	public List<Search> selectSearch(Search search);
+	
+	
 }
