@@ -6,9 +6,12 @@ import java.util.Map;
 import org.apache.ibatis.session.SqlSession;
 
 import com.kh.spouting.center.domain.Center;
+import com.kh.spouting.center.domain.Search;
 
 public interface CenterStore {
 
+	/**************** 관리자 *****************/
+	
 	/**
 	 * 지점 등록 Store
 	 * @param session
@@ -57,5 +60,25 @@ public interface CenterStore {
 	 * @return int
 	 */
 	public int deleteCenter(SqlSession session, int centerNo);
+
+	
+	
+	/************* 회원 ******************/
+	
+	/**
+	 * 지점 목록 Store
+	 * @param session
+	 * @param search
+	 * @return List<Search>
+	 */
+	public List<Search> selectCenterList(SqlSession session, Search search);
+
+	/**
+	 * 지점 검색(회원) Store
+	 * @param session
+	 * @param center
+	 * @return
+	 */
+	public List<Search> selectSearch(SqlSession session, Search search);
 
 }

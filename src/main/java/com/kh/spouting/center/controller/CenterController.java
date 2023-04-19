@@ -22,6 +22,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.kh.spouting.center.domain.Center;
+import com.kh.spouting.center.domain.Search;
 import com.kh.spouting.center.service.CenterService;
 import com.kh.spouting.user.domain.User;
 
@@ -31,6 +32,10 @@ public class CenterController {
 	@Autowired
 	private CenterService cService;
 	
+	/**
+	 * 관리자 서비스
+	 * @return
+	 */
 	
 	/* 지점 등록 화면 */
 	@RequestMapping(value="/center/registerView", method=RequestMethod.GET)
@@ -148,8 +153,7 @@ public class CenterController {
 	}
 	
 	
-
-
+	
 	/* 지점 상세조회 */
 	@RequestMapping(value="/center/detail/{centerNo}", method = RequestMethod.GET)
 	public ModelAndView viewCenterDetail(ModelAndView mv, @PathVariable Integer centerNo) {
@@ -162,9 +166,6 @@ public class CenterController {
 		}
 		return mv;
 	}
-	
-	
-	
 	
 	
 	
@@ -191,6 +192,9 @@ public class CenterController {
 		}
 		
 	}
+	
+	
+	
 	
 	
 	/* 지점정보 수정화면 */
@@ -308,6 +312,60 @@ public class CenterController {
 			return "common/error";
 		}
 		
+	}
+
+	
+	
+	
+	
+	/***************************************************/
+
+	/**
+	 * 회원 서비스
+	 * @return
+	 */
+	/* 지점 목록 조회 */
+	@RequestMapping(value="/center/userCenterList", method=RequestMethod.GET)
+	public String userCenterList(
+			HttpSession session
+			, @ModelAttribute Search search
+			, Model model) {
+		
+		
+		List<Search> cList = cService.selectCenterList(search);
+		if(cList != null) {
+			model.addAttribute("cList", cList);
+			return "center/list";
+		}else {
+			model.addAttribute("msg", "지점 내역이 존재하지 않습니다.");
+			return "common/error";
+		}
+	}
+	
+	
+	
+	
+	
+	/* 지점 검색 */
+	@RequestMapping(value="/center/search", method=RequestMethod.GET)
+	public String centerSearch(
+			HttpSession session
+			, @ModelAttribute Search search
+			, Model model) {
+		try {
+			List<Search> searchResult = cService.selectSearch(search);
+			if(!searchResult.isEmpty()) {
+				model.addAttribute("center", search);
+				model.addAttribute("searchResult", searchResult);
+				return "/center/centerApi";
+			}else {
+				model.addAttribute("msg", "스파우팅 조회에 실패하였습니다.");
+				return "common/error";
+			}
+		} catch (Exception e) {
+			model.addAttribute("msg", e.getMessage());
+			return "common/error";
+		}
 	}
 	
 	

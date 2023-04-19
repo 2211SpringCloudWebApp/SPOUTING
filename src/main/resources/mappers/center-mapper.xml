@@ -13,6 +13,13 @@
 		<result property="centerFilename2" column="CENTER_FILENAME2"/>
 		<result property="centerFilepath2" column="CENTER_FILEPATH2"/>
 	</resultMap>
+	
+	<resultMap type="Search" id="searchResultMap">
+		<result property="centerName" column="CENTER_NAME"></result>
+		<result property="centerAddr" column="CENTER_ADDR"></result>
+		<result property="centerTel" column="CENTER_TEL"></result>
+	</resultMap>
+
 
 	<!-- 지점 등록 -->
 	<insert id="insertCenter">
@@ -52,4 +59,16 @@
 	<delete id="deleteCenter">
 		DELETE FROM CENTER_TBL WHERE CENTER_NO = #{centerNo}
 	</delete>
+	
+	
+	
+	
+	
+	<!-- 지점 목록(회원) -->
+	<select id=""></select>
+	
+	<!-- 지점 검색 -->
+	<select id="selectSearch" resultMap="searchResultMap">
+		SELECT * FROM CENTER_TBL WHERE CENTER_NAME LIKE '%' || #{centerName} || '%'
+	</select>
 </mapper>
