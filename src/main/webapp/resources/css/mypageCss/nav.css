@@ -33,11 +33,17 @@
         font-size: 16px;
         font-weight: 700;
     }
+    #daily-btn:hover {
+        cursor: pointer;
+        background-color: aliceblue;
+        font-size: 17px;
+    }
 #left-nav {
     width: 200px;
     list-style: none;
     border: 1px solid rgb(242, 242, 242);
     float: left;
+    position: fixed;
 }
     #left-nav li {
         height: 50px;

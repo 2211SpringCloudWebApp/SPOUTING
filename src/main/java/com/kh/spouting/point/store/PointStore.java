@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.apache.ibatis.session.SqlSession;
 
+import com.kh.spouting.common.PageInfo;
 import com.kh.spouting.point.domain.Point;
 
 public interface PointStore {
@@ -14,7 +15,7 @@ public interface PointStore {
 	 * @param userNo
 	 * @return int
 	 */
-	public int getUserPoint(SqlSession session, int userNo);
+	public Integer getUserPoint(SqlSession session, int userNo);
 
 	/**
 	 * 포인트 충전 Store
@@ -25,11 +26,19 @@ public interface PointStore {
 	public int insertPoint(SqlSession session, Point point);
 
 	/**
-	 * 포인트 목록
+	 * 포인트 목록 Store
 	 * @param session
 	 * @param userNo
 	 * @return List<Point>
 	 */
-	public List<Point> selectPointDetail(SqlSession session, int userNo);
+	public List<Point> selectPointDetail(SqlSession session, int userNo, PageInfo pi);
+
+	/**
+	 * 회원별 포인트내역 개수 Store
+	 * @param session
+	 * @param userNo
+	 * @return int
+	 */
+	public int getPointCount(SqlSession session, int userNo);
 
 }

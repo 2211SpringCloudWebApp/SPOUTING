@@ -34,7 +34,7 @@
         <li><a href="">나의 커뮤니티</a></li>
         <li><a href="">나의 문의</a></li>
         <li><a href="/point/detail">포인트 관리</a></li>
-        <li class="selected"><a href="/user/detail">개인정보 수정</a></li>
+        <li class="selected"><a href="/mypage/myinfo">개인정보 수정</a></li>
     </ul>
 
     <div id="main-box">
