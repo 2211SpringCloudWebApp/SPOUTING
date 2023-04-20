@@ -1,5 +1,8 @@
 package com.kh.spouting.sns.store.logic;
 
+import java.util.List;
+
+import org.apache.ibatis.session.RowBounds;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
 
@@ -28,6 +31,15 @@ public class SnsStoreLogic implements SnsStore {
 		// TODO Auto-generated method stub
 		session.update("SnsMapper.updateUserProfile", userSns);
 		return session.selectOne("SnsMapper.selectOnsProfile", userSns);
+	}
+
+	@Override
+	public List<SnsPhoto> morePhoto(SqlSession session, Integer start, int userNo) {
+		// TODO Auto-generated method stub
+		int limit = 3;
+		int offset = (start - 1) * limit;
+		RowBounds rowBounds = new RowBounds(offset, limit);
+		return session.selectList("SnsMapper.morePhotoList", userNo, rowBounds);
 	}
 
 

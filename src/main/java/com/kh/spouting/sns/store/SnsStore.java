@@ -1,5 +1,7 @@
 package com.kh.spouting.sns.store;
 
+import java.util.List;
+
 import org.apache.ibatis.session.SqlSession;
 
 import com.kh.spouting.sns.domain.Sns;
@@ -13,6 +15,8 @@ public interface SnsStore {
 	SnsProfile selectOneById(SqlSession session, int userNo);
 
 	Sns updateUserProfile(SqlSession session, Sns userSns);
+
+	List<SnsPhoto> morePhoto(SqlSession session, Integer start, int userNo);
 
 
 }

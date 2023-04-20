@@ -1,5 +1,6 @@
 package com.kh.spouting.sns.controller;
 
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
@@ -20,6 +21,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.google.gson.Gson;
 import com.kh.spouting.common.FileUtil;
 import com.kh.spouting.sns.domain.Sns;
 import com.kh.spouting.sns.domain.SnsPhoto;
@@ -40,6 +42,7 @@ public class SnsController {
 	//개인 sns 페이지 화면
 	@RequestMapping(value="/sns", method=RequestMethod.GET)
 	public String snsPage(Model model, @RequestParam("userNo") int userNo) {
+//		int totalCount = snsService.getTotalCount(userNo);
 		try {
 			SnsProfile oneSns = snsService.selectOneById(userNo);
 //			model.addAttribute("loginUser",loginUser);
@@ -78,10 +81,12 @@ public class SnsController {
 		try {
 			fileInfo = fileUtil.saveFile(multi, request, "sns");
 			
+			//작성자 userNo 가져오기
 			HttpSession session = request.getSession();
 			int userNo = ((User)session.getAttribute("loginUser")).getUserNo();
 			snsPhoto.setUserNo(userNo);
 			
+			//작성한 글 데이터 넘겨주기
 			String snsContent = request.getParameter("snsContent");
 			snsPhoto.setSnsContent(snsContent);
 			
@@ -122,6 +127,16 @@ public class SnsController {
         session.setAttribute("loginUser",loginUser);
         return jsonString;
 	}
+	
+	
+	//업로드한 사진 불러오기
+	@ResponseBody
+	@RequestMapping(value="/sns", method=RequestMethod.POST, produces="application/json;charset=utf-8")
+	public String viewPhotoList(Integer userNo, Integer start) {
+//		int userNo = request.getParameter("userNo");
+		List<SnsPhoto> pList = snsService.morePhoto(start, userNo);
+		return new Gson().toJson(pList);
+		}
 	
 	
 

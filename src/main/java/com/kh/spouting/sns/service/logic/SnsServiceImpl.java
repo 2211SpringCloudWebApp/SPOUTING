@@ -1,5 +1,7 @@
 package com.kh.spouting.sns.service.logic;
 
+import java.util.List;
+
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -35,6 +37,12 @@ public class SnsServiceImpl implements SnsService {
 	public Sns updateUserProfile(Sns userSns) {
 		// TODO Auto-generated method stub
 		return snsStore.updateUserProfile(session, userSns);
+	}
+
+	@Override
+	public List<SnsPhoto> morePhoto(Integer start, int userNo) {
+		// TODO Auto-generated method stub
+		return snsStore.morePhoto(session, start, userNo);
 	}
 
 

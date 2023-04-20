@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <html>
 <head>
     <meta charset="UTF-8">
@@ -26,6 +27,18 @@
     </style>
 </head>
 <body>
+	<jsp:include page="../common/header.jsp"></jsp:include>
+	<br>
+
+	<c:if test="${sessionScope.loginUser.userNo eq null }">
+		<script>
+			$(document).ready(function () {
+	            alert("로그인이 필요합니다.")
+	            window.location.replace("http://localhost:8999/user/login");
+        	});
+		</script>
+	</c:if>
+	
     <h1>소셜링 오픈하기</h1>
 
     <form action="/meetingOpen" method="POST" id="meetingForm">
@@ -44,6 +57,9 @@
         <input type="submit" value="등록">
 <!--         <input type="button" value="닫기" onclick="self.close()"> -->
     </form>
+    
+    <br>
+	<jsp:include page="../common/footer.jsp"></jsp:include>
     
     
 	<script>
