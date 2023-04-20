@@ -1,17 +1,22 @@
 package com.kh.spouting.inquiry.controller;
 
 import java.util.List;
+import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.kh.spouting.common.FileUtil;
 import com.kh.spouting.common.PageInfo;
 import com.kh.spouting.common.Search;
 import com.kh.spouting.inquiry.domain.Inquiry;
@@ -25,6 +30,10 @@ public class InquiryController {
 
 	@Autowired
 	private InquiryService iService;
+	
+	@Autowired
+	@Qualifier("fileUtil")
+	private FileUtil fileUtil;
 	
 	/**
 	 * 문의사항 리스트 Controller
@@ -92,5 +101,51 @@ public class InquiryController {
 		}
 		pi = new PageInfo(currentPage, boardLimit, naviLimit, startNavi, endNavi, totalCount, maxPage);
 		return pi;
+	}
+	
+	/**
+	 * 문의사항 등록 View Controller
+	 * @param mv
+	 * @return mv
+	 */
+	@RequestMapping(value="/write", method=RequestMethod.GET)
+	public ModelAndView viewInquiryWrite(ModelAndView mv) {
+		mv.setViewName("inquiry/write");
+		return mv;
+	}
+	
+	@RequestMapping(value="/write", method=RequestMethod.POST)
+	public ModelAndView writeInquiry(
+			ModelAndView mv
+			, HttpSession session
+			, HttpServletRequest request
+			, @ModelAttribute Inquiry inquiry
+			, @RequestParam(value="uploadFile", required=false) MultipartFile multi) {
+		// 파일전송
+		Map<String, String> fileInfo = null;
+		try {
+			// 로그인한 정보 가져와서 작성자로 넣기
+			User user = (User) session.getAttribute("loginUser"); 
+			int inquiryWriterNo = user.getUserNo();
+			
+			// 첨부파일이 있는 경우
+			if(multi.getSize() != 0 && !multi.getOriginalFilename().equals("")) {
+				fileInfo = fileUtil.saveFile(multi, request, "inquiry");
+				inquiry.setInquiriesFilename(fileInfo.get("original"));
+				inquiry.setInquiriesFilerename(fileInfo.get("rename"));
+				inquiry.setInquiriesFilepath(fileInfo.get("renameFilepath"));
+			}
+			inquiry.setUserNo(inquiryWriterNo);
+			int result = iService.insertInquiry(inquiry);
+			if(result > 0) {
+				mv.addObject("msg", "문의사항이 등록완료되었습니다!😎").setViewName("notice/success");
+			}else {
+				mv.addObject("msg", "문의사항이 등록되지 않았습니다.").setViewName("common/error");
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			mv.addObject("msg", e.getMessage()).setViewName("common/error");
+		}
+		return mv;
 	}
 }

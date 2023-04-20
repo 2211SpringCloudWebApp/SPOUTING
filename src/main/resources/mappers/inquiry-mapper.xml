@@ -64,4 +64,9 @@
 		</where>
 		ORDER BY Q_CREATE_DATE DESC
 	</select>
+	
+<!-- 	문의사항 등록 -->
+	<insert id="insertInquiry">
+		INSERT INTO INQUIRIES_TBL VALUES(SEQ_INQUIRIES_NO.NEXTVAL, NULL, #{userNo}, #{inquiriesCategory}, #{inquiriesTitle}, #{inquiriesContent}, DEFAULT, NULL, DEFAULT, #{inquiriesFilename}, #{inquiriesFilepath}, #{inquiriesFilerename}, #{inquiriesSecret}, DEFAULT, #{secretNo})
+	</insert>
 </mapper>

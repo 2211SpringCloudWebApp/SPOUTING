@@ -17,4 +17,6 @@ public interface InquiryService {
 
 	List<Inquiry> searchInquiry(Search search, PageInfo pi);
 
+	int insertInquiry(Inquiry inquiry);
+
 }

@@ -50,4 +50,11 @@ public class InquiryServiceImpl implements InquiryService{
 		return iList;
 	}
 
+	// 문의사항 등록 Service
+	@Override
+	public int insertInquiry(Inquiry inquiry) {
+		int result = iStore.insertInquiry(session, inquiry);
+		return result;
+	}
+
 }

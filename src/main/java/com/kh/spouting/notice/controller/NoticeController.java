@@ -109,6 +109,7 @@ public class NoticeController {
 			, @RequestParam(value="uploadFile", required = false) MultipartFile multi
 			, HttpServletRequest request
 			, HttpSession session) {
+		// 파일전송
 		Map<String, String> fileInfo = null;
 		try {
 			User user = (User) session.getAttribute("loginUser");

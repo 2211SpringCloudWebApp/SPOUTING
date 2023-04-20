@@ -19,4 +19,6 @@ public interface InquiryStore {
 
 	List<Inquiry> searchInquiry(SqlSession session, Search search, PageInfo pi);
 
+	int insertInquiry(SqlSession session, Inquiry inquiry);
+
 }

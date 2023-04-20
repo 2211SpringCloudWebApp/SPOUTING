@@ -18,6 +18,8 @@ public class Inquiry {
 	private String inquiriesFilerename;
 	private String inquiriesSecret;
 	private int inquiriesLikes;
+	private int secretNo;
+	
 	
 	public Inquiry() {}
 
@@ -132,6 +134,14 @@ public class Inquiry {
 	public void setInquiriesLikes(int inquiriesLikes) {
 		this.inquiriesLikes = inquiriesLikes;
 	}
+	
+	public int getSecretNo() {
+		return secretNo;
+	}
+
+	public void setSecretNo(int secretNo) {
+		this.secretNo = secretNo;
+	}
 
 	@Override
 	public String toString() {
@@ -140,7 +150,7 @@ public class Inquiry {
 				+ ", inquiriesContent=" + inquiriesContent + ", qCreateDate=" + qCreateDate + ", qUpdateDate="
 				+ qUpdateDate + ", inquiriesViews=" + inquiriesViews + ", inquiriesFilename=" + inquiriesFilename
 				+ ", inquiriesFilepath=" + inquiriesFilepath + ", inquiriesFilerename=" + inquiriesFilerename
-				+ ", inquiriesSecret=" + inquiriesSecret + ", inquiriesLikes=" + inquiriesLikes + "]";
+				+ ", inquiriesSecret=" + inquiriesSecret + ", inquiriesLikes=" + inquiriesLikes + ", secretNo=" + secretNo + "]";
 	}
 	
 }

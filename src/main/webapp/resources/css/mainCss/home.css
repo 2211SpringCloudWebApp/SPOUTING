@@ -107,3 +107,8 @@ body {
     background-size: cover;
 }
 
+/* 마우스커서  */
+body {
+  cursor: url(../../images/homeImg/cursorIcon.png), auto;
+}
+
