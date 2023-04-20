@@ -1,11 +1,12 @@
 @charset "UTF-8";
-
+/* 메인부분 */
 .mainCenter{
   width: 65%;
   margin: 0 auto;
   margin-top: 20px;
   margin-bottom: 50px;
 }
+/* 헤더부분(공지사항) */
 .mainHeader{
 	width:65%;
 	height: 200px;
@@ -18,26 +19,41 @@
 	align-items: center;
 	color:white;
 }
-.titleWrap{
-	width: 65%;
-	margin-left: 50px;
+/* 메인헤더(문의사항) */
+.mainHeaderI{
+	width:65%;
+	height: 200px;
+	margin: 0 auto;
+	background-image: url(../../images/notice/pool3.jpg);
+	background-position: center;
+	background-repeat: no-repeat;
+	display: flex;
+/* 	justify-content: center; */
+	align-items: center;
+	color:black;
 }
-.titleWrap p:first-child{
-	font-size: 40px;
-	font-weight: 600;
-}
-.titleWrap p:last-child{
-	font-size: 20px;
-}
-#titleArea{
-	margin-top: 15px;
-	margin-bottom: 15px;
-}
-.filename{
-	margin-top: 10px;
-	margin-bottom: 10px;
-}
-
-#buttonArea{
-	margin-top: 10px;	
-}
+	.titleWrap{
+		width: 65%;
+		margin-left: 50px;
+	}
+		.titleWrap p:first-child{
+			font-size: 40px;
+			font-weight: 600;
+		}
+		.titleWrap p:last-child{
+			font-size: 20px;
+		}
+	/* 제목부분 */
+	#titleArea{
+		margin-top: 15px;
+		margin-bottom: 15px;
+	}
+	/* 등록된파일명(문의사항-수정) */
+	.filename{
+		margin-top: 10px;
+		margin-bottom: 10px;
+	}
+	/* 버튼부분 */
+	#buttonArea{
+		margin-top: 10px;	
+	}

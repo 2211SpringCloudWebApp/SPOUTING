@@ -122,6 +122,7 @@ nav {
 
     .drop_nav .item_part {
         display: inline-block;
+        z-index: 10;
     }
 
     .item_name {
@@ -164,7 +165,3 @@ nav {
         position: fixed;
     }
 
-/* 마우스커서  */
-body {
-  cursor: url(../../images/homeImg/cursorIcon.png), auto;
-}

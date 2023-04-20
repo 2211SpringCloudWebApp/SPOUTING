@@ -51,4 +51,11 @@ public class InquiryStoreLogic implements InquiryStore{
 		return iList;
 	}
 
+	// 문의사항 등록 Store
+	@Override
+	public int insertInquiry(SqlSession session, Inquiry inquiry) {
+		int result = session.insert("InquiryMapper.insertInquiry", inquiry);
+		return result;
+	}
+
 }
