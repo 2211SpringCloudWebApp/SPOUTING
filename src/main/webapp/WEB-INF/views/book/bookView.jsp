@@ -41,105 +41,105 @@
               <div id='calendar'></div>
             </div>
 	<!-- !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!폼!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! -->
-            
-            <form action="/book/confirm" method="post">
-            <input type="hidden" name="userNo" value="21">
-            <!-- 왜 세션에 유저넘버가 없나요 난 어디서 데이터를 땡겨오나요 살려줘 -->
-            <div id="booking-info">
-                <div class="booking-option" id="option-branch">
-<!-- 	${loginUser } -->
-                  <p>지점 선택</p><br>
-                    <select id="select-branch" >
-                        <option value="" selected>선택</option>
-                        <option value="a">a 지점</option>
-                        <option value="b">b 지점</option>
-                        
-                        
-                    </select>
-                </div>
-                <!--지점선택하면 시설선택 selectbox 보이기-->    
-                <div class="booking-option" id="branch-a" style="display: none;">
-                   <p>a-지점 시설 선택</p><br>
-                    <select class="facilBox" id="facilities-a"  name= "facilityName">
-                        <option value="" selected>선택</option>
-                        <option value="a-1">클라이밍센터</option>
-                        <option value="a-2">잠수풀</option>
-                    </select>
-                </div>
-            
-                <div class="booking-option" id="branch-b" style="display: none;">
-                   <p>b-지점 시설 선택</p><br>
-                    <select class="facilBox" id="facilities-b" name= "facilityName">
-                        <option value="" selected>선택</option>
-                        <option value="b-1">테니스코트</option>
-                        <option value="b-2">농구코트</option>
-                    </select>
-                    <div id="infoNumBasket" style="color:red; margin-bottom:20px;"></div>
-                </div>
-                
-                <!--시설선택하면 input type number 보이기-->
-
-                <div class="booking-option" id="num-people" style="display:none;">
-                    <p>인원 수 입력</p><br>
-                    <input type="number" id="numOfPpl" onchange="showDateInput()" min="1" id="numPpl" name="numPeople">
-                </div>    
-
-                <!--인원 입력하고 입력란에서 빠져나오면 date 선택란 보이기-->
-                <div class="booking-option" id="date" style="display:none;">
-                    <p>이용 날짜</p><br>
-                    <input type="date" onchange="showTimeInput()" name="useDate">
-                </div>
-                <!--날짜 선택하면 풀캘린더 API 등장 ㅜㅜ 우얄꼬-->
-                <div id="calendar" >
-                <div id="calendar-container" >
-                </div>
-                
-                
-                
-                
-
-                <!--date 선택하면 time 란 보이기-->
-                <div class="booking-option" id="time" style="display:none;">
-                    
-               		<p>이용 시간</p>
-                  
-<!--                     input type을 time으로 쓰면 분까지 선택하는게 필수인데 굳이 그렇게 넣어서 파싱할 이유도 없음 -->
-<!--                     예)오후 1시~3시까지 이용할 경우<br>13~15 입력<br> -->
-				
-				
-                    <div id="timeInput">
-	                    <input type="number" id="startTime" placeholder="시작시간" min="0" name="startParam">~
-	                    <input type="number" id="endTime" placeholder="종료시간" onchange="showPrice()" min="1" name="endParam">
-                    </div>
-                   
-                </div>
-                <!--time까지 선택하면 요금란 보이기-->
-                <div class="booking-option" id="price" style="display:none;">
-                    <!-- 요금 뿅 튀어나오는자리 -->                     
-                </div>
-		        <input type="hidden" id="chosenFacil" value="">
-		        <input type="hidden" id="facilNo" value="" name="facilityNo">
-		        <input type="hidden" id="bookPrice" value="" name="bookPrice">
-                <!--요금 보이고 2초 후에 결제 버튼 보이기-->
-                <button id="payment-btn" style="display:none;">이 정보로 예약하기</button>
-            </div>
-        </form>
+           <c:if test="${sessionScope.loginUser.userNo eq null }">
+           		<div id="loginPlz">
+           			로그인 후 이용해 주세요.
+           		</div>
+           </c:if>
+           <c:if test="${sessionScope.loginUser.userNo ne null }">
+	            <form action="/book/confirm" method="post">
+		            <input type="hidden" name="userNo" value="${sessionScope.loginUser.userNo }">
+		            
+		            <div id="booking-info">
+		                <div class="booking-option" id="option-branch">
+		
+		                  <p>지점 선택</p><br>
+		                    <select id="select-branch" >
+		                        <option value="" selected>선택</option>
+		                        <option value="a">a 지점</option>
+		                        <option value="b">b 지점</option>
+		                        
+		                        
+		                    </select>
+		                </div>
+		                <!--지점선택하면 시설선택 selectbox 보이기-->    
+		                <div class="booking-option" id="branch-a" style="display: none;">
+		                   <p>a-지점 시설 선택</p><br>
+		                    <select class="facilBox" id="facilities-a"  name= "facilityName">
+		                        <option value="" selected>선택</option>
+		                        <option value="a-1">클라이밍센터</option>
+		                        <option value="a-2">잠수풀</option>
+		                    </select>
+		                </div>
+		            
+		                <div class="booking-option" id="branch-b" style="display: none;">
+		                   <p>b-지점 시설 선택</p><br>
+		                    <select class="facilBox" id="facilities-b" name= "facilityName">
+		                        <option value="" selected>선택</option>
+		                        <option value="b-1">테니스코트</option>
+		                        <option value="b-2">농구코트</option>
+		                    </select>
+		                    <div id="infoNumBasket" style="color:red; margin-bottom:20px;"></div>
+		                </div>
+		                
+		                <!--시설선택하면 input type number 보이기-->
+		
+		                <div class="booking-option" id="num-people" style="display:none;">
+		                    <p>인원 수 입력</p><br>
+		                    <input type="number" id="numOfPpl" onchange="showDateInput()" min="1" id="numPpl" name="numPeople">
+		                </div>    
+		
+		                <!--인원 입력하고 입력란에서 빠져나오면 date 선택란 보이기-->
+		                <div class="booking-option" id="date" style="display:none;">
+		                    <p>이용 날짜</p><br>
+		                    <input type="date" onchange="showTimeInput()" name="useDate">
+		                </div>
+		                <!--날짜 선택하면 풀캘린더 API 등장 ㅜㅜ 우얄꼬-->
+		                <div id="calendar" ></div>
+		                <div id="calendar-container" >
+		                </div>
+		                
+		                
+		                
+		                
+		
+		                <!--date 선택하면 time 란 보이기-->
+		                <div class="booking-option" id="time" style="display:none;">
+		                    
+		               		<p>이용 시간</p>
+		                  
+		<!--                     input type을 time으로 쓰면 분까지 선택하는게 필수인데 굳이 그렇게 넣어서 파싱할 이유도 없음 -->
+		<!--                     예)오후 1시~3시까지 이용할 경우<br>13~15 입력<br> -->
+						
+						
+		                    <div id="timeInput">
+			                    <input type="number" id="startTime" placeholder="시작시간" min="10" name="startParam">~
+			                    <input type="number" id="endTime" placeholder="종료시간" onchange="showPrice()" min="11" max="18" name="endParam">
+			                    
+		                    </div>
+		                   
+		                </div>
+		                <!--time까지 선택하면 요금란 보이기-->
+		                <div class="booking-option" id="price" style="display:none;">
+		                    <!-- 요금 뿅 튀어나오는자리 -->                     
+		                </div>
+				        <input type="hidden" id="chosenFacil" value="">
+				        <input type="hidden" id="facilNo" value="" name="facilityNo">
+				        <input type="hidden" id="bookPrice" value="" name="bookPrice">
+		                <!--요금 보이고 2초 후에 결제 버튼 보이기-->
+		                <button id="payment-btn" style="display:none;">이 정보로 예약하기</button>
+		        	</div>
+	   
+       		 	</form>
+	        </c:if>    
         </main>   
-        <br><br><br><br><br><br><br><br><br><br><br><br>
+        <br><br><br><br><br><br><br><br><br>
         
         
         <script>
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////스크립트영역 
             //지도와의 사투
          
-
-//       document.addEventListener('DOMContentLoaded', function() {
-//         var calendarEl = document.getElementById('calendar');
-//         var calendar = new FullCalendar.Calendar(calendarEl, {
-//           initialView: 'dayGridMonth'
-//         });
-//         calendar.render();
-//       });
 
 
             

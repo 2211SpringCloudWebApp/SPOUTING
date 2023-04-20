@@ -61,6 +61,12 @@ public class BookServiceImpl implements BookService{
 		return bListCal;
 	}
 
+	@Override
+	public List<Book> getMyBooking(int userNo) {
+		List<Book> myBList = bStore.getMyBooking(session, userNo);
+		return myBList;
+	}
+
 	
 
 }

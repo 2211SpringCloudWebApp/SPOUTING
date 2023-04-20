@@ -19,7 +19,7 @@
                     <a href="/user/register"> JOIN</a>
                 </c:if>
                 <c:if test="${sessionScope.loginUser.userId ne null}">
-                    <input type="hidden" id="userId" value="${sessionScope.loginUser.userId}">
+                    <input type="hidden" id="userId" value="${sessionScope.loginUser.userId}">                                
                     <div id="user-drop">
                         <span id="user-box">${sessionScope.loginUser.userName} SPOUTER🏆</span>
                         <ul id="user-menu">
@@ -44,7 +44,9 @@
                         <div class="item_name"><a href="/book/bookView">예약</a></div>
                         <div class="item_content">
                             <li><a href="/book/bookView">예약하기</a></li>
-                            <li><a href="">예약조회</a></li>
+                             <c:if test="${sessionScope.loginUser.userId ne null}">
+                            	<li><a href="/book/myBooking?userNo=${sessionScope.loginUser.userNo}">예약조회</a></li>
+                             </c:if>
                         </div>
                     </div>
 ​

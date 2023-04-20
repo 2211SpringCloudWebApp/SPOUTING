@@ -42,7 +42,7 @@
 			            <%if (calendarList != null) {%>
 			            <%for (Book vo : calendarList) {%>
 			            {
-			            	title : '<%=vo.getNumPeople()%>',
+			            	title : '<%=vo.getNumPeople()%>명',
 			                start : '<%=vo.getStartTime()%>',
 			                end : '<%=vo.getEndTime()%>',
 			                color : '#' + Math.round(Math.random() * 0xffffff).toString(16)

@@ -13,11 +13,15 @@
 		<result property="payTime" 			column="PAY_TIME"/>
 		<result property="facilityName" 	column="FACILITY_NAME"/>
 		<result property="centerName" 		column="CENTER_NAME"/>
+		<result property="centerFilepath1" 	column="CENTER_FILEPATH1"/>
 		<result property="userName" 		column="USER_NAME"/>
 		<result property="userEmail" 		column="USER_EMAIL"/>
 		<result property="userPoint" 		column="USER_POINT"/>
 	
 	</resultMap>
+	<select id ="selectMyBList" resultMap="BookResultMap">
+		SELECT BOOK_NO, USER_NO, USE_DATE, START_TIME, END_TIME, NUM_PEOPLE, FACILITY_NAME, CENTER_NAME, CENTER_FILEPATH1 FROM BOOK_TBL JOIN FACILITIES_TBL USING(FACILITY_NO) JOIN CENTER_TBL USING(CENTER_NO) WHERE USER_NO = #{userNo} AND START_TIME >= SYSDATE AND PAY_TIME IS NOT NULL ORDER BY START_TIME ASC
+	</select>
 	<!-- 캘린더용 -->
 	<select id="selectBListCal" resultMap="BookResultMap">
 		SELECT USE_DATE ,START_TIME ,END_TIME ,NUM_PEOPLE FROM BOOK_TBL WHERE FACILITY_NO=#{facilityNo} AND PAY_TIME IS NOT NULL

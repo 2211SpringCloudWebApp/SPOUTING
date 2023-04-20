@@ -63,4 +63,12 @@ public interface BookStore {
 	 */
 	public List<Book> getBListCal(SqlSession session, int facilityNo);
 
+	/**
+	 * 나의 시설예약 내역조회
+	 * @param session
+	 * @param userNo
+	 * @return List<Book>
+	 */
+	public List<Book> getMyBooking(SqlSession session, int userNo);
+
 }

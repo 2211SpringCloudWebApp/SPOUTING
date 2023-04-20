@@ -54,4 +54,11 @@ public interface BookService {
 	 */
 	public List<Book> getBListCal(int facilityNo);
 
+	/**
+	 * 나의 결제내역 조회
+	 * @param userNo
+	 * @return List<Book>
+	 */
+	public List<Book> getMyBooking(int userNo);
+
 }
