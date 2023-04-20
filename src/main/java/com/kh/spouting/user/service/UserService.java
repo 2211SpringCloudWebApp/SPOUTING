@@ -1,5 +1,9 @@
 package com.kh.spouting.user.service;
 
+import java.util.List;
+
+import com.kh.spouting.common.PageInfo;
+import com.kh.spouting.common.Search;
 import com.kh.spouting.user.domain.User;
 
 public interface UserService {
@@ -52,6 +56,37 @@ public interface UserService {
 	 * @return int
 	 */
 	public int deleteUser(String userId);
+
+	
+/* **************** 관리자 **************** */
+	
+	/**
+	 * 전체 회원 수 Service
+	 * @return int
+	 */
+	public int getUserCount();
+
+	/**
+	 * 전체 회원 목록 Service
+	 * @param pi
+	 * @return List<User>
+	 */
+	public List<User> selectAllUser(PageInfo pi);
+
+	/**
+	 * 검색된 회원 수 Service
+	 * @param search
+	 * @return int
+	 */
+	public int getUserCount(Search search);
+
+	/**
+	 * 회원 검색 Service
+	 * @param pi
+	 * @param search
+	 * @return List<User>
+	 */
+	public List<User> selectByKeyWord(PageInfo pi, Search search);
 
 	
 

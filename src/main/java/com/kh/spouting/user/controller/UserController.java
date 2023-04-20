@@ -1,5 +1,7 @@
 package com.kh.spouting.user.controller;
 
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
@@ -15,6 +17,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.kh.spouting.common.MailSendService;
+import com.kh.spouting.common.PageInfo;
+import com.kh.spouting.common.Search;
 import com.kh.spouting.user.domain.User;
 import com.kh.spouting.user.service.UserService;
 
@@ -158,8 +162,9 @@ public class UserController {
 	//이메일 인증 ajax
 	@GetMapping("/user/register/mailCheck")
 	@ResponseBody
-	public String mailCheckLogic(String email) {
-		String code = mailService.registerEmail(email);
+	public String mailCheckLogic(String userEmail) {
+		System.out.println(userEmail);
+		String code = mailService.registerEmail(userEmail);
 		return code;
 	}
 
@@ -206,7 +211,7 @@ public class UserController {
 	}
 	
 	//회원 탈퇴
-	@GetMapping("/user/delete") //회원탈퇴
+	@GetMapping("/user/delete")
 	public String removeUser(
 			@RequestParam("userId") String userId
 			,Model model) {
@@ -227,9 +232,101 @@ public class UserController {
 	}
 	
 	
+	/*===================================================
+	 * 관리자 기능
+	 *===================================================*/	
+	
+	//회원 목록 View
+	@GetMapping("/admin/user")
+	public String userListView(
+			@RequestParam(value = "page", required = false, defaultValue = "1") Integer page
+			, Model model) {
+		int totalCount = uService.getUserCount();
+		PageInfo pi = getPageInfo(page, totalCount);
+		List<User> uList = uService.selectAllUser(pi);
+		if(!uList.isEmpty()) {
+			model.addAttribute("uList", uList);
+			model.addAttribute("pi", pi);
+			return "admin/user";
+		} else {
+			model.addAttribute("msg", "회원 없음");
+			return "common/error";
+		}
+	}
+	
+	//회원 탈퇴
+	@GetMapping("/admin/delete")
+	public String dropUser(
+			@RequestParam("userId") String userId
+			,Model model) {
+		try {
+			model.addAttribute("user", userId);
+			int result = uService.deleteUser(userId);
+			if(result > 0) {
+				return "redirect:/admin/user";
+			}else {
+				model.addAttribute("msg", "탈퇴가 완료되지 않았습니다.");
+				return "common/error";
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			model.addAttribute("msg", e.getMessage());
+			return "common/error";
+		}
+	}
+	
+	//회원 검색
+	@GetMapping("/admin/userSearch")
+	public String userSearchView(
+			@ModelAttribute Search search
+			, @RequestParam(value = "page", required = false, defaultValue = "1") Integer currentPage
+			, Model model ) {
+		try {
+			int totalCount = uService.getUserCount(search);
+			PageInfo pi = this.getPageInfo(currentPage, totalCount);
+			List<User> uList = uService.selectByKeyWord(pi, search);
+			if(!uList.isEmpty()) {
+				model.addAttribute("search", search);
+				model.addAttribute("pi", pi);
+				model.addAttribute("uList", uList);
+				return "admin/userSearch";
+			} else {
+				model.addAttribute("uList", null);
+				return "admin/userSearch";
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			model.addAttribute("msg", e.getMessage());
+			return "common/error";
+		}
+	}
+		
 	
 	
 	
+	
+	
+	
+	/*===================================================
+	 * 페이징
+	 *===================================================*/
+	private PageInfo getPageInfo(int currentPage, int totalCount) {
+		PageInfo pi = null;
+		int boardLimit = 10;
+		int naviLimit = 5;
+		int maxPage;
+		int startNavi;
+		int endNavi;
+		
+		maxPage = (int)((double)totalCount/boardLimit+0.9);
+		startNavi = (((int)((double)currentPage/naviLimit+0.9))-1)*naviLimit+1;
+		endNavi = startNavi + naviLimit - 1;
+		if(endNavi > maxPage) {
+			endNavi = maxPage;
+		}
+		pi = new PageInfo(currentPage, boardLimit, naviLimit, startNavi, endNavi, totalCount, maxPage);
+		return pi;
+	}
 	
 	
 	

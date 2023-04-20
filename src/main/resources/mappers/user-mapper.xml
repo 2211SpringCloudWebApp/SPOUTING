@@ -25,6 +25,38 @@
 	<select id="findPw" resultMap="UserResultMap">
 		SELECT * FROM USER_TBL WHERE USER_ID = #{userId} AND USER_EMAIL = #{userEmail}
 	</select>
+	<select id="getUserCount" resultType="_int" >
+		SELECT COUNT(*) FROM USER_TBL
+	</select>
+	<select id="selectAllUser" resultMap="UserResultMap">
+		SELECT * FROM USER_TBL ORDER BY 1 DESC
+	</select>
+	
+	<select id="countBySearch" resultType="_int" >
+		SELECT COUNT(*) FROM USER_TBL
+		<where>
+			<if test="searchCondition == 'userId'">
+				USER_ID LIKE '%' || #{searchValue} || '%'
+			</if>
+			<if test="searchCondition == 'userName'">
+				USER_NAME LIKE '%' || #{searchValue} || '%'
+			</if>
+		</where>
+	</select>
+	
+	<select id="selectByKeyWord" resultMap="UserResultMap">
+		SELECT * FROM USER_TBL
+		<where>
+			<if test="searchCondition == 'userId'">
+				USER_ID LIKE '%' || #{searchValue} || '%'
+			</if>
+			<if test="searchCondition == 'userName'">
+				USER_NAME LIKE '%' || #{searchValue} || '%'
+			</if>
+		</where>
+	</select>
+	
+	
 	
 	<!-- insert -->
 	<insert id="insertUser">
