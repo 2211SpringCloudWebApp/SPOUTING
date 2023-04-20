@@ -14,7 +14,8 @@ import com.kh.spouting.center.store.CenterStore;
 @Repository
 public class CenterStoreLogic implements CenterStore{
 
-	/************** 관리자 ******************/
+	
+	/************************* 관리자 서비스 **************************/
 	
 	/* 지점등록 StoreLogic */
 	@Override
@@ -61,11 +62,12 @@ public class CenterStoreLogic implements CenterStore{
 	
 	
 	
-	/************** 회원 ********************/
+	/************************* 회원 서비스 **************************/
+	
 	/* 지점 목록 StoreLogic */
 	@Override
-	public List<Search> selectCenterList(SqlSession session, Search search) {
-		List<Search> sList = session.selectList("CenterMapper.selectCenter", search);
+	public List<Center> selectCenterList(SqlSession session, Search search) {
+		List<Center> sList = session.selectList("CenterMapper.selectuserCenter", search);
 		return sList;
 	}
 

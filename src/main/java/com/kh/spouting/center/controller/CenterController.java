@@ -32,10 +32,8 @@ public class CenterController {
 	@Autowired
 	private CenterService cService;
 	
-	/**
-	 * 관리자 서비스
-	 * @return
-	 */
+	
+	/************************* 관리자 서비스 **************************/
 	
 	/* 지점 등록 화면 */
 	@RequestMapping(value="/center/registerView", method=RequestMethod.GET)
@@ -43,7 +41,6 @@ public class CenterController {
 		return "center/register";
 	}
 
-	
 	/* 지점 등록 */
 	@RequestMapping(value="/center/register", method=RequestMethod.POST)
 	public String centerRegister(
@@ -154,6 +151,7 @@ public class CenterController {
 	
 	
 	
+	
 	/* 지점 상세조회 */
 	@RequestMapping(value="/center/detail/{centerNo}", method = RequestMethod.GET)
 	public ModelAndView viewCenterDetail(ModelAndView mv, @PathVariable Integer centerNo) {
@@ -166,6 +164,7 @@ public class CenterController {
 		}
 		return mv;
 	}
+	
 	
 	
 	
@@ -190,9 +189,7 @@ public class CenterController {
 			model.addAttribute("msg", "지점 내역이 존재하지 않습니다.");
 			return "common/error";
 		}
-		
 	}
-	
 	
 	
 	
@@ -296,6 +293,7 @@ public class CenterController {
 	
 	
 	
+	
 	/* 지점 삭제 */
 	@RequestMapping(value = "/center/remove", method=RequestMethod.GET)
 	public String centerRemove(@RequestParam("centerNo") int centerNo, Model model) {
@@ -318,12 +316,8 @@ public class CenterController {
 	
 	
 	
-	/***************************************************/
+	/************************* 회원 서비스 **************************/
 
-	/**
-	 * 회원 서비스
-	 * @return
-	 */
 	/* 지점 목록 조회 */
 	@RequestMapping(value="/center/userCenterList", method=RequestMethod.GET)
 	public String userCenterList(
@@ -331,18 +325,13 @@ public class CenterController {
 			, @ModelAttribute Search search
 			, Model model) {
 		
-		
-		List<Search> cList = cService.selectCenterList(search);
-		if(cList != null) {
-			model.addAttribute("cList", cList);
-			return "center/list";
-		}else {
-			model.addAttribute("msg", "지점 내역이 존재하지 않습니다.");
-			return "common/error";
+		if(search.getCenterName() != null) {
+			List<Center> sList = cService.selectCenterList(search);
+			model.addAttribute("sList", sList);
 		}
+		return "common/error";
+		
 	}
-	
-	
 	
 	
 	
@@ -353,14 +342,17 @@ public class CenterController {
 			, @ModelAttribute Search search
 			, Model model) {
 		try {
+			System.out.println(search.toString());
+			
 			List<Search> searchResult = cService.selectSearch(search);
+			
 			if(!searchResult.isEmpty()) {
-				model.addAttribute("center", search);
+				model.addAttribute("search", search);
 				model.addAttribute("searchResult", searchResult);
 				return "/center/centerApi";
 			}else {
 				model.addAttribute("msg", "스파우팅 조회에 실패하였습니다.");
-				return "common/error";
+				return "/center/centerApi";
 			}
 		} catch (Exception e) {
 			model.addAttribute("msg", e.getMessage());

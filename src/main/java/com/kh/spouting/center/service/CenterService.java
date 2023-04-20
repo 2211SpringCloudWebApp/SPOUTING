@@ -8,7 +8,7 @@ import com.kh.spouting.center.domain.Search;
 
 public interface CenterService {
 
-	/**************** 관리자 ***********************/
+	/************************* 관리자 서비스 **************************/
 	
 	/**
 	 * 지점 등록 Service
@@ -25,28 +25,27 @@ public interface CenterService {
 	 */
 	public Center seletOneCenter(Integer centerNo);
 
-
 	/**
 	 * 지점 목록 조회 Service
 	 * @param center 
 	 * @return List<Center>
 	 */
 	public List<Center> selectCenterList(Center center);
-
+	
 	/**
 	 * 지점정보 수정 Service
 	 * @param center
 	 * @return int
 	 */
 	public int updateCenter(Center center);
-
+	
 	/**
 	 * 지점정보 수정화면 페이지 Service
 	 * @param centerNo
 	 * @return Center
 	 */
 	public Center selectOneById(Integer centerNo);
-
+	
 	/**
 	 * 지점 삭제 Service
 	 * @param centerNo
@@ -57,14 +56,14 @@ public interface CenterService {
 
 
 	
-	/*************** 회원 *****************/
+	/************************* 회원 서비스 **************************/
 	
 	/**
 	 * 지점 목록(회원) Service
 	 * @param search
 	 * @return
 	 */
-	public List<Search> selectCenterList(Search search);
+	public List<Center> selectCenterList(Search search);
 
 	/**
 	 * 지점 검색 Service
