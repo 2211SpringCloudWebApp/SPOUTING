@@ -45,4 +45,8 @@
 		UPDATE SNS_TBL SET PROFILE_INTRODUCE = #{profileIntoduce} WHERE USER_NO = #{userNo}
 	</update>
 	
+	<select id="morePhotoList" resultMap="snsPhotoResultMap">
+		SELECT * FROM SNSPHOTO_TBL WHERE USER_NO = #{userNo}
+	</select>
+	
 </mapper>

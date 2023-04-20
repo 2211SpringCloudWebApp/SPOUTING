@@ -133,7 +133,7 @@
 <!-- 				업로드 영역 끝 -->
 			</div>
 			<div id="profile-box">
-				<input type="hidden" value="${oneSns.userNo }" id="userNo">
+				<input type="hidden" value="${oneSns.userNo }" id="userNo" name="userNo">
 				<div class="profile-name-box">
 					<h1 class="profile-name">${oneSns.userName }</h1>
 				</div> 
@@ -146,10 +146,13 @@
 
 		<br>
 		<!-- sns 사진 영역 -->
+		<c:if test="${loginUser != null and loginUser.userNo eq oneSns.userNo }">
+			<input type="button" onclick="location.href='/sns/uploadPage'" value="sns사진 등록">
+		</c:if>
+		
 		<div id="sns-content">
 			<div id="photo-box">
-				sns 사진 영역
-				<input type="button" onclick="location.href='/sns/uploadPage'" value="sns사진 등록">
+				<input type="hidden" id="more-var" totalCount="2" currentSum="0" currentCount="0">
 			</div>
 		</div>
 
@@ -161,6 +164,11 @@
 	<script>
 	var profileStatus = false;
 	var intro = $('.profile-intro').text();
+	var userNo = $("#userNo").val();
+	const snsContent = $("#sns-content");
+	const moreVar = $("#more-var");
+	photoMoreAjax(1,userNo);
+
 
 	//한줄 소개 수정버튼 닫기
 		function modifyClose() {
@@ -185,7 +193,7 @@
 		}
 		
 		
-	
+	//한줄소개 수정 버튼
 		$(".modify-btn").click(function() {
 			imgModifyClose();
 			if(!profileStatus) {
@@ -200,6 +208,7 @@
 		});
 		
 		
+	//에이잭스 한줄소개 코드
 		function ajaxProfileModify() {
 			profileStatus = false;
 		    $.ajax({
@@ -228,7 +237,7 @@
 		}
 		
 		
-		
+		//프로필사진 수정버튼
 		$(".img-modify-btn").click(function() {
 			modifyClose();
 			if(!profileStatus) {
@@ -243,14 +252,56 @@
 		});
 		
 		
-		
+		//프로필사진 수정 버튼 구현하는 부분ㅋㅎㅋㅎ
 		function imgModifyBtn() {
 			
 		}
 		
 		
-
+		//업로드한 사진 불러오기
+		function photoMoreAjax(start, userNo) {
+			$.ajax({
+				url:"/sns",
+				data: {
+					"userNo" : userNo,
+					"start" : start
+				},
+				type: "post",
+				success : function(result) {
+					let html = "";
+					for(let i = 0; i< result.length; i++) {
+						html += "<div>";
+						html += "<a href='/sns/detail?snsPhotoNo="+result[i].snsPhotoNo+"'>"
+						html +=		"<img src='/resources/images/photo/"+result[i].snsFileRename+"' width='50%'>";
+// 						html +=		"<p class='caption'>"+result[i].snsContent+"</p>";
+						html += "</div>";
+					}
+					moreVar.val(Number(start)+1);
+					moreVar.attr("currentSum", Number(moreVar.attr("currentSum"))+result.length); //지금까지 쿼리한 갯수
+					moreVar.attr("currentCount",0);
+					snsContent.append(html);
+				},
+				error : function() {
+					alert("ajax 처리 실패");
+				}
+			});
+			
+		}
 		
+		$(window).scroll(function() {
+			let scrollTop = $(window).scrollTop();
+			let innerHeight = $(window).innerHeight();
+			let scrollHeight = $("body").prop("scrollHeight");
+			
+			if(scrollTop + innerHeight >= scrollHeight) {
+				console.log("bottom end!");
+				if(moreVar.attr("totalCount") != moreVar.attr("currentSum")) {
+					photoMoreAjax(moreVar.val());
+				}
+			}
+		});
+		
+	
 		
 	</script>
 	

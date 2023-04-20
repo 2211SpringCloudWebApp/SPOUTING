@@ -47,8 +47,9 @@ public class MeetingController {
 	
 	//커뮤니티 주최 페이지
 	@RequestMapping(value="/meetingOpenPage", method=RequestMethod.GET)
-	public String meetingOpenPage(Model model, @SessionAttribute("loginUser") User loginUser) {
-		model.addAttribute("loginUser",loginUser);
+	public String meetingOpenPage(Model model) {
+//		, @SessionAttribute("loginUser") User loginUser 이부분 지움~!~! 나중에 복기용으로 남겨두기
+//		model.addAttribute("loginUser",loginUser);
 		return "meeting/meeting-open";
 	}
 	
