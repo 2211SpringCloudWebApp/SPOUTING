@@ -64,10 +64,12 @@
 	
 	
 	
-	<!-- 지점 목록(회원) -->
-	<select id=""></select>
+	<!-- 지점 목록(회원서비스) -->
+	<select id="selectuserCenter" resultMap="searchResultMap">
+		SELECT * FROM CENTER_TBL WHERE CENTER_NAME LIKE '%' || #{centerName} || '%' ORDER BY 1 ASC
+	</select>
 	
-	<!-- 지점 검색 -->
+	<!-- 지점 검색(회원서비스) -->
 	<select id="selectSearch" resultMap="searchResultMap">
 		SELECT * FROM CENTER_TBL WHERE CENTER_NAME LIKE '%' || #{centerName} || '%'
 	</select>

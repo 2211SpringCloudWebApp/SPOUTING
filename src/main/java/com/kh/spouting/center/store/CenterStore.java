@@ -10,7 +10,9 @@ import com.kh.spouting.center.domain.Search;
 
 public interface CenterStore {
 
-	/**************** 관리자 *****************/
+	
+	
+	/************************* 관리자 서비스 **************************/
 	
 	/**
 	 * 지점 등록 Store
@@ -63,7 +65,8 @@ public interface CenterStore {
 
 	
 	
-	/************* 회원 ******************/
+	
+	/************************* 회원 서비스 **************************/
 	
 	/**
 	 * 지점 목록 Store
@@ -71,13 +74,13 @@ public interface CenterStore {
 	 * @param search
 	 * @return List<Search>
 	 */
-	public List<Search> selectCenterList(SqlSession session, Search search);
+	public List<Center> selectCenterList(SqlSession session, Search search);
 
 	/**
 	 * 지점 검색(회원) Store
 	 * @param session
 	 * @param center
-	 * @return
+	 * @return List<Search>
 	 */
 	public List<Search> selectSearch(SqlSession session, Search search);
 

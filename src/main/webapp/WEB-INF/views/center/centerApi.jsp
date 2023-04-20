@@ -4,12 +4,53 @@
 <!DOCTYPE html>
 <html>
 	<head>
-<!-- 		<script type="text/javascript" src="https://openapi.map.naver.com/openapi/v3/maps.js?ncpClientId=wzop7hd7a1"></script> -->
 		<script type="text/javascript" src="https://openapi.map.naver.com/openapi/v3/maps.js?ncpClientId=wzop7hd7a1&submodules=geocoder"></script>
 		<script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
 		<script  src="http://code.jquery.com/jquery-latest.min.js"></script>
 		<script type="text/javascript" src="http://code.jquery.com/jquery-2.2.4.min.js"></script>
 		<title>지점 위치 확인</title>
+		
+		
+		<style>
+		/* COMMON */
+			@font-face {
+			    font-family: 'Pretendard-Regular';
+			    src: url('https://cdn.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Regular.woff') format('woff');
+			    font-weight: 400;
+			    font-style: normal;
+			}
+			* {
+			    font-family: 'Pretendard-Regular'; 
+			    margin: 0;
+			    padding: 0;
+			    box-sizing: border-box;
+			}
+			
+			
+		/* MAIN */
+			#map{
+				width:100%;
+				height:75vh;
+				position:absolute;
+ 				overflow:hidden;
+				margin: 0 auto;
+			}
+			.menu_warp {
+				position: absolute;
+				z-index: 1;
+			}
+			
+			.search_tbl {
+				background-color: white;
+				margin : 20px;
+				padding : 20px;
+			}
+			
+			.cLocal {
+				padding: 10px;
+				margin-bottom: 15px;
+			}
+		</style>
 	
 	</head>
 	
@@ -17,32 +58,43 @@
 	<body>
 		<jsp:include page="../../../WEB-INF/views/common/header.jsp"></jsp:include>
 		
+		<!-- 지도포함 -->
+		<div class="main_warp">
 		
-		<div class="map_wrap">
-			<!-- 검색창 출력 -->
+			<!-- 검색창 및 테이블 -->
 			<div class="menu_warp">
-				<div>
-					<div class="searchList">
-						<form action="/center/search" onsubmit="searchPlaces(); return false;" method="GET">
-							키워드 : <input type="text" id="keyword" size="15">
-							<button type="submit" id="searchBTN">검색하기</button>
-						</form>
+				<form action="/center/search" onsubmit="searchPlaces(); return false;" method="GET">
+					<div class="search_tbl">
 						<table>
-							<c:forEach items="${cList }" var="center">
-								<tr><td>${center.centerName }</td></tr>
-								<tr><td>${center.centerAddr }</td></tr>
-								<tr><td>${center.centerTel }</td></tr>
-							</c:forEach>
+							<tbody>
+								<tr>
+									<td class="al">
+										<label for="searchKeyword"></label>
+										<input type="text" name="centerName" id="searchKeyword" value="${center.centerName }" class="cLocal" placeholder="지점명을 검색해보세요">
+										 <input type="submit" class="cLocal" value="검색" >
+									 </td>
+								</tr>
+								<c:if test="${empty searchResult }">
+									<tr><td>해당 지점이 존재하지 않습니다.</td></tr>
+								</c:if>
+								<c:if test="${!empty searchResult }">
+									<c:forEach items="${searchResult }" var="center">
+										<tr><td>${center.centerName }</td></tr>
+										<tr><td>${center.centerAddr }</td></tr>
+										<tr><td>${center.centerTel }</td></tr>
+										<tr><td><hr></td></tr>
+									</c:forEach>
+								</c:if>
+							</tbody>
 							 
 						</table>
 					</div>
-				</div>
-				<hr>
-				<ul id="centerList"></ul>
+				</form>
 			</div>
 			
 			<!-- 네이버 지도 출력 -->
-			<div style="width:100%;height:75vh; position:relative; overflow:hidden; margin: 0 auto;" id="map"></div>
+			<div id="map"></div>
+			
 		</div>
 		
 		
@@ -51,12 +103,6 @@
 	
 	
 	<script type="text/javascript">
-	
-	/* 검색버튼 클릭 시 동작 */
-	const searchButton = document.getElementById("searchBTN"); // 버튼 요소 가져오기
-	searchButton.addEventListener("click", function() { // 클릭 이벤트 리스너 등록
-	  console.log("TEST"); // 콘솔에 "TEST" 출력
-	});
 	
 	$(function() {
 		
@@ -85,11 +131,9 @@
 		
 		/* 지도를 그려주는 함수 */
 		var map = new naver.maps.Map('map', {
-	        center: new naver.maps.LatLng(37.542898, 126.976962), //지도 시작 지점
+	        center: new naver.maps.LatLng(37.530235, 126.952262), //지도 시작 지점
 	        zoom: 13
 	    });
-		
-		
 		
 		
 		// 지점을 담은 배열의 길이만큼 for문으로 마커와 정보창의 정보를 반복
@@ -156,7 +200,7 @@
 	                    infoWindow.open(map, marker); // 표출
 	                }
 	    		}
-	    	}
+    	}
 	    
 	    for (var i=0, ii=markers.length; i<ii; i++) {
 	    	console.log(markers[i] , getClickHandler(i));
@@ -165,18 +209,18 @@
 	}
 	
 	<!-- 지도를 움직이게 해주는 함수 -->
-	function moveMap(len, lat) {
-		var mapOptions = {
-		    center: new naver.maps.LatLng(len, lat),
-		    zoom: 15,
-		    mapTypeControl: true
-		};
-		var map = new naver.maps.Map('map', mapOptions);
-		var marker = new naver.maps.Marker({
-		    position: new naver.maps.LatLng(len, lat),
-		    map: map
-		});
-	}
+// 	function moveMap(len, lat) {
+// 		var mapOptions = {
+// 			    center: new naver.maps.LatLng(len, lat),
+// 			    zoom: 15,
+// 			    mapTypeControl: true
+// 			};
+// 	    var map = new naver.maps.Map('map', mapOptions);
+// 	    var marker = new naver.maps.Marker({
+// 	        position: new naver.maps.LatLng(len, lat),
+// 	        map: map
+// 	    });
+// 	}
 	
 	
 	</script>

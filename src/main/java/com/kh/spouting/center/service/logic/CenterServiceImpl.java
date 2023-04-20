@@ -22,7 +22,7 @@ public class CenterServiceImpl implements CenterService{
 
 	
 	
-	/************** 관리자 *****************/
+	/************************* 관리자 서비스 **************************/
 	
 	/* 지점 등록 ServiceImpl */
 	@Override
@@ -71,12 +71,12 @@ public class CenterServiceImpl implements CenterService{
 	
 	
 
-	/************ 회원 *****************/
+	/************************* 회원 서비스 **************************/
 	
 	/* 지점 목록 ServiceImpl */
 	@Override
-	public List<Search> selectCenterList(Search search) {
-		List<Search> sList = cStore.selectCenterList(session, search);
+	public List<Center> selectCenterList(Search search) {
+		List<Center> sList = cStore.selectCenterList(session, search);
 		return sList;
 	}
 	
