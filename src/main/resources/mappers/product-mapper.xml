@@ -14,7 +14,7 @@
 		<result property="productFilepath1" column="PRODUCT_FILEPATH1"/>
 		<result property="productFilepath2" column="PRODUCT_FILEPATH2"/>
 	</resultMap>
-		<resultMap type="Category" id="categoryResultMap">
+	<resultMap type="Category" id="categoryResultMap">
 		<id property="categoryNo" column="CATEGORY_NO"/>
 		<result property="categoryName" column="CATEGORY_NAME"/>
 	</resultMap>

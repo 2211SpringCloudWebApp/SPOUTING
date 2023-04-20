@@ -6,103 +6,8 @@
 <head>
 	<meta charset="UTF-8">
 	<title>상품 상세</title>
-	<style>
-		@font-face {
-		    font-family: 'Pretendard-Regular';
-		    src: url('https://cdn.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Regular.woff') format('woff');
-		    font-weight: 400;
-		    font-style: normal;
-		}
-		
-		* {
-		    font-family: 'Pretendard-Regular'; 
-		    box-sizing: border-box;
-		}
-		#nav {
-		  float: left;
-		  width: 200px;
-		  height : 50vh;
-		}
-		#maincontainer {
-		    width: 100%;
-		    height : 2900px;
-		    padding-top : 150px;
-		}
-		h1, h2, h3, p, a {
-			text-align : center;
-		}
-		img{
-			height : 400px;
-		}
-		#desimg {
-			height : 40%;
-		}
-		#tablebox {
-			height : 500px;
-			width : 100%;
-		}
-		#box1 {
-			height : 50px;
-			text-align : center;
-			margin : 0 auto;
-		}
-		a:visited {
-			color : gray; 
-		}
-		#box2 {
-			height : 1000px;
-			margin : 0 auto;
-			text-align : center;
-			line-height : 100px;
-		}		
-		#box3 {
-			height : 900px;
-			line-height : 50px;
-		}
-		table {
-			width : 80%;
-			border-collapse : collapse;
-			text-align : center;
-			border-top : 1px solid #ccc;
-			border-bottom : 1px solid #ccc;
-			border-left : 3px solid #1C3879;
-			margin : 0 auto;
-		}
-		#table1 {
-			border : 0;
-		}
-		#table2 {
-			margin : 0;
-			padding : 0;
-		}
-		#table1 tr { width : 40%;}
-		
-		#table2 td {
-		margin : 0;
-		padding : 0;
-		height : 60px;
-		border-bottom : 1px solid #ccc;
-		}
-		#table3 {
-		 	width : 60%;
-		 	height : 500px;
-		}
-		#table3 td{
-			margin : 0;
-			padding : 0;
-			height : 5px;
-			border-bottom : 1px solid #ccc;
-		}
-		table td {
-			width : 20%;
-		}
-		table tr {
-			width : 80%;
-		}
-		select {
-			width : 90px;
-		}
-	</style>
+	<link rel="stylesheet" href="../../../resources/css/shopCss/detailProduct.css">
+	<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 </head>
 	<body>
 		<jsp:include page="../common/header.jsp"></jsp:include>
@@ -134,40 +39,51 @@
 								<td>${product.productDescription }</td>
 							</tr>
 							<tr>
-								<td>수량</td>
-								<td>
-									<form method="post" action="/shop/cart/insert">
-										<input type="hidden" name="productNo" value=${product.productNo }>
-										<select name="amount">
-											<c:forEach begin="1" end="5" var="i">
-												<option value="${i}">${i}</option>
-											</c:forEach>
-										</select>
-									</form>
-								</td>
-							</tr>
-							<tr>
-							    <td>옵션</td>
-							    <td>
-							        <c:if test="${product.categoryNo == 1 }">
-							            <select>
-							                <option value="S">S</option>
-							                <option value="M">M</option>
-							                <option value="L">L</option>
-							            </select>
-							        </c:if>
-							        <c:if test="${product.categoryNo == 2 }">
-							            <select>
-							                <option value="W">화이트</option>
-							                <option value="B">블랙</option>
-							            </select>
-							        </c:if>
-							    </td>
-							</tr>
+  <td>수량</td>
+  <td>
+    <select name="quantity" id="quantity">
+      <c:forEach begin="1" end="5" var="i">
+        <option class="quantity_input" value="${i}">${i}</option>
+      </c:forEach>
+    </select>
+  </td>
+</tr>
+<tr>
+  <c:if test="${product.categoryNo == 1 }">
+    <td>옵션</td>
+    <td>
+      <select name="option" id="option">
+        <option value="S">S</option>
+        <option value="M">M</option>
+        <option value="L">L</option>
+      </select>
+    </td>
+  </c:if>
+  <c:if test="${product.categoryNo == 2 }">
+    <td>옵션</td>
+    <td>
+      <select name="option" id="option">
+        <option value="W">화이트</option>
+        <option value="B">블랙</option>
+      </select>
+    </td>
+  </c:if>
+</tr>
+
 						</table>
 					</td>
 				</tr>
 			</table>
+			<!-- 주문 form -->
+			<form action="/order/${user.userId }" method="get" class="order_form">
+				<input type="hidden" name="orders[0].productNo" value="${product.productNo }">
+				<input type="hidden" name="orders[0].cartQuantity" value="">
+			</form>
+			<div id="buttonbox">
+				<button class="btn btn_buy">주문하기</button>
+				<button class="btn btn-cart">장바구니 담기</button>
+				<button class="btn btn-wishlist">위시리스트</button>
+			</div>
 		</div>
 		<div id="box1">
 			<a href="/shop/catelist2?c=${product.categoryNo }">카테고리로 이동</a>
@@ -242,6 +158,46 @@
                     </p>
 		</div>
 		
+		<script>
+			$(document).ready(function(){ // 사용자가 바로 데이터를 볼 수 있도록 하는 메소드
+				
+				const form = {
+						userId : '${user.userId}',
+						productNo : '${product.productNo}',
+						cartQuantity : ''
+				}
+				
+				// 장바구니 추가 버튼
+				${".btn-cart"}.on("click", function(e){
+					form.bookCount = ${".quantity_input"}.val();
+					$.ajax({
+						url: '/cart/add',
+						type: 'POST',
+						data: form,
+						success: function(result){
+							cartAlert(result);
+						}
+					})
+				});
+				
+				
+			});
+// 			$(".btn_buy").click(function() {
+// 				location.assign("/order/insert");
+// 			});
+			
+// 			$(".btn-cart").click(function() {
+// 				var check = confirm("상품이 장바구니에 담겼습니다. 확인하시겠습니까?");
+// 				if(check) {
+// 					location.assign("/order/cart");
+// 				}
+// 			});
+			
+			$(".btn-wishlist").click(function() {
+				alert("상품을 위시리스트에 추가했습니다.");
+			});
+			
+		</script>
 	</div>
 	
 	<jsp:include page="../common/footer.jsp"></jsp:include>
