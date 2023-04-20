@@ -17,6 +17,7 @@ public class Book {
 	//여기서부턴 예약확인페이지에서 보일것
 	private String facilityName; 
 	private String centerName; 
+	private String centerFilepath1;
 	private String userName; //userNo로 받아올것.. 폰, 메일, ?? 폰이 없네...?
 	private String userEmail;
 	private int userPoint; //가용포인트 
@@ -129,19 +130,32 @@ public class Book {
 		this.centerName = centerName;
 	}
 	
-	@Override
-	public String toString() {
-		return "Book [bookNo=" + bookNo + ", facilityNo=" + facilityNo + ", userNo=" + userNo + ", useDate=" + useDate
-				+ ", startTime=" + startTime + ", endTime=" + endTime + ", bookPrice=" + bookPrice + ", numPeople="
-				+ numPeople + ", payTime=" + payTime + ", facilityName=" + facilityName + ", userName=" + userName
-				+ ", userEmail=" + userEmail + ", userPoint=" + userPoint + "]";
+	
+	
+	public String getCenterFilepath1() {
+		return centerFilepath1;
 	}
 
 
 
 
-	
-	
+	public void setCenterFilepath1(String centerFilepath1) {
+		this.centerFilepath1 = centerFilepath1;
+	}
+
+
+
+
+	@Override
+	public String toString() {
+		return "Book [bookNo=" + bookNo + ", facilityNo=" + facilityNo + ", userNo=" + userNo + ", useDate=" + useDate
+				+ ", startTime=" + startTime + ", endTime=" + endTime + ", bookPrice=" + bookPrice + ", numPeople="
+				+ numPeople + ", payTime=" + payTime + ", facilityName=" + facilityName + ", centerName=" + centerName
+				+ ", centerFilepath1=" + centerFilepath1 + ", userName=" + userName + ", userEmail=" + userEmail
+				+ ", userPoint=" + userPoint + "]";
+	}
+
+
 	
 	
 	

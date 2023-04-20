@@ -38,6 +38,10 @@
 		main{
     --background-color: #1C3879;
 		}
+		/* 마우스커서  */
+body {
+  cursor: default !important;
+}
 		#invoice{
     background-color: #1C3879;
     color: #F9F5EB;
@@ -101,7 +105,7 @@
           <!-- 			//--//사용포인트입력//결제금액//api -->
           <div id="tableDiv">
             <form action ="/book/bookUp" method="post">   
-            ${book}      
+                  
 	            <input type="hidden" value="${book.bookNo }" name="bookNo">  
 	            <input type="hidden" value="${book.userNo }" name="userNo">  
 	            <table>
@@ -167,6 +171,15 @@
        	</main>
        	
        	<script>
+       	
+//        	document.querySelector('button').addEventListener('click', function() {
+//        	    let pointToUse = document.querySelector('input[type="text"]').value;
+//        	    if (!pointToUse || isNaN(parseInt(pointToUse))) {
+//        	        pointToUse = 0;
+//        	    }
+//        	 	document.querySelector('input[name="pointChange"]').value = pointToUse;
+//           });
+       	
           document.querySelector('input[type="text"]').addEventListener('keyup', function() {
             let totalPoint = Number(document.querySelector("#totalPoint").innerHTML);
             let bookPrice = Number(document.querySelector("#bookPrice").innerHTML);
@@ -174,16 +187,23 @@
                 console.log(totalPoint);
                 console.log(bookPrice);
                 console.log(pointToUse);
-            let priceToPay;    
-            if(totalPoint >= pointToUse) {
-              priceToPay = bookPrice - pointToUse;
-              console.log(priceToPay);
-            }else {
-              priceToPay = bookPrice; // 포인트가 부족한 경우에는 가격을 그대로 사용. 유효성검사로 고치자...나중에...
-            }
-            document.querySelector("#priceToPay").innerHTML = priceToPay;
-          });
-          
+            let priceToPay;   
+            
+	            //let pointToUse = document.querySelector('input[type="text"]').value;
+	       	    if (!pointToUse || isNaN(parseInt(pointToUse))) {
+	       	        pointToUse = 0;
+	       	    }
+	       	 	document.querySelector('input[name="pointChange"]').value = pointToUse;
+	       	 	
+	            if(totalPoint >= pointToUse) {
+	              priceToPay = bookPrice - pointToUse;
+	              console.log(priceToPay);
+	            }else {
+	              priceToPay = bookPrice; // 포인트가 부족한 경우에는 가격을 그대로 사용. 유효성검사로 고치자...나중에...
+	            }
+	            document.querySelector("#priceToPay").innerHTML = priceToPay;
+	            
+          	});
           
 //           //결제시도!!!
 //           var IMP = window.IMP;  
@@ -211,9 +231,9 @@
 //         	    });
 //         	  }
           
-          
-          
-        </script>
+  </script>
+        
+        
 		<jsp:include page="../common/footer.jsp"></jsp:include>
 	</body>
 </html>

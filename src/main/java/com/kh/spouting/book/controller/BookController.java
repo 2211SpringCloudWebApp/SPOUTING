@@ -5,7 +5,7 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
-import java.util.Map;
+
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -38,6 +38,15 @@ public class BookController {
 		model.addAttribute("fList", fList);
 		return "book/bookView";
 	}
+	
+	//예약내역페이지 보이기
+	@RequestMapping(value="/myBooking", method=RequestMethod.GET)
+	public String showMyBooking(@RequestParam("userNo") int userNo, Model model) {
+		List<Book> myBookList = bService.getMyBooking(userNo);
+		model.addAttribute("bList", myBookList);
+		return "book/myBooking";
+	}
+	
 	
 	//시설 리스트 예약페이지로 불러오기(에이젝스)
 	@ResponseBody
@@ -122,29 +131,38 @@ public class BookController {
 	//예약확인->결제갈기기
 	@RequestMapping(value="/bookUp", method=RequestMethod.POST)
 	public String confirmView(@RequestParam("bookNo") int bookNo
-							 ,@RequestParam("pointChange") int pointChange 
+							 ,@RequestParam(value="pointChange", defaultValue = "0") int pointChange 
 							 ,@RequestParam("userNo") int userNo
 							 , Model model){
+		
+		
+		
 		//pay_time업뎃용
 		int result = bService.bookUp(bookNo);
 		if(result>0) {
-			//포인트쓴거 업뎃!
-			//Pdetail뭐시기 저장해야함
-			PointDetail pDetail = new PointDetail();
-								//=null 해놓으면 널포인트익셉션 남ㅎ
-			pDetail.setUserNo(userNo);
-			pDetail.setPointChange(pointChange);
-			 
-			int pResult = bService.insertPDtail(pDetail);
-			if(pResult>0) {
-				return "/book/bookView";   //예약완료되엇읍니다페이지 하나 만들어서 바까주기
+			//결제 완료(페이타임업데이트)가 됐을때
+			
+			if(pointChange != 0) {
+			//쓴 포인트가 있을때는 pDetailTbl에 업데이트해줘야함
+				PointDetail pDetail = new PointDetail();
+				//=null 해놓으면 널포인트익셉션 남ㅎ
+				pDetail.setUserNo(userNo);
+				pDetail.setPointChange(pointChange);
+				
+				int pResult = bService.insertPDtail(pDetail);
+				if(pResult>0) {
+					return "/book/bookView";   //예약완료되엇읍니다페이지 하나 만들어서 바까주기
+				}else {
+					model.addAttribute("msg", "포인트가 제대로 사용되지 않았어요!!");
+					return "/common/error";
+				}
 			}else {
-				model.addAttribute("msg", "포인트미사용오류!!");
-				return "/common/error";
+				//쓴포인트가 없을때
+				return "/book/bookView";   //예약완료되엇읍니다페이지 하나 만들어서 바까주기(그페이지에서 /book/myBooking링크걸기
 			}
 			
 			
-		}else {
+		}else { //페이타임업데이트가 제대로 안됐을때
 			model.addAttribute("msg", "결제실패!!");
 			return "/common/error";
 		}

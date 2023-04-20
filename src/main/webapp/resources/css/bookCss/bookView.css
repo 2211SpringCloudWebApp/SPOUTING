@@ -16,6 +16,11 @@
 main{
     --background-color: #1C3879;
 }
+
+/* 마우스커서  */
+body {
+  cursor: default !important;
+}
 /*상단포토슬라이드*/
 
 #image-wrapper{
@@ -41,13 +46,19 @@ main{
 #image-wrapper p{  
   font-family: 'Chosunilbo_myungjo';
   position: absolute;
-  top: 60%;
+  top: 75%;
   left: 50%;
   transform: translate(-50%, -50%);
   z-index: 2;
   color: white;
   font-size: 3em;
   font-weight: 500;
+}
+
+/*로그인해주셈*/
+#loginPlz{
+	margin-top: 70px;
+	text-align:center;
 }
 
 /*예약폼*/
