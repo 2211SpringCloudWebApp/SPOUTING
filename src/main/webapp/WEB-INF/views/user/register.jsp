@@ -56,7 +56,7 @@
                                 <input type="text" name="userEmail" id="userEmail">
                                 <input type="button" id="check-send" value="이메일 인증">
                                 <input type="hidden" id="check-code" placeholder="인증번호 입력">
-                                <input type="hidden" id="check-btn" value="확인">
+                                <input type="hidden" id="check-btn" value="확인"><br>
                                 <span id="check-msg"></span>
                             </td>
                         </tr>
@@ -131,6 +131,7 @@
 	<jsp:include page="../common/footer.jsp"></jsp:include>
 
     <script>
+
         //아이디 중복확인 ajax
         $("#idCheck").click(function() {
             const userId = $("#userId").val();
@@ -154,39 +155,68 @@
                 }
             });
         });
+
         //이메일 인증 ajax
         $('#check-send').click(function() {
-            const email = $("#userEmail").val();
+            const userEmail = $("#userEmail").val();
+            const userEmailReg = /^[A-Za-z0-9\_\.\-]+@[a-z0-9\-\_]+\.[a-z]+$/;
+
+            //이메일 공백여부 체크
+            if(userEmail === "") {
+                alert("이메일을 입력해주세요.");
+                $("#userEmail").focus();
+                return false;
+            }      
+            //이메일 유효성체크
+            if(!userEmailReg.test(userEmail)) {
+                alert("이메일 형식이 올바르지 않습니다.");
+                $("#userEmail").focus();
+                return false;
+            } 
+
             //hidden 상태의 input 태그 활성화
             $('#check-code').attr("type", "text");
             $('#check-btn').attr("type", "button");
             $('#check-code').focus();
 
+            //이메일 인증 ajax
             $.ajax({
             type : "get",
-            url : "",
-            success : function(data) {
-
-            }
+            url : "/user/register/mailCheck?userEmail="+userEmail,
+                success : function(data) {
+                    code = data;
+                    alert("인증번호가 발송되었습니다\n이메일을 확인해주세요✅")
+                }
             });
         });
 
+        //이메일 인증번호 확인
+        $("#check-btn").click(function() {
+            const inputCode = $("#check-code").val();
+            if(inputCode === code) {
+                $("#check-msg").html("인증번호가 일치합니다.");
+                $("#check-msg").css("color", "green");
+                $("#userEmail").attr("readonly", true);
+                $("#userEmail").css("backgroundColor", "rgba(52, 131, 7, 0.664)");
+            } else {
+                $("#check-msg").html("인증번호가 일치하지 않습니다.");
+                $("#check-msg").css("color", "red");
+            }
+        })
 
 
-
-
+        //가입버튼 클릭 시 공백, 유효성 체크
         var ckeckRegi = () => {
             const userId = $("#userId").val();
             const userPw = $("#userPw").val();
             const userPw2 = $("#userPw2").val();
             const userName = $("#userName").val();
             const userEmail = $("#userEmail").val();
-            
+              
             /*********** 유효성검사 ***********/
             const userIdReg = /^[a-z0-9]{4,12}$/;
             const userPwReg = /^[a-zA-Z0-9]{6,15}$/;
             const userNameReg = /^[가-힣]{2,6}$/;
-            const userEmailReg = /^[A-Za-z0-9\_\.\-]+@[a-z0-9\-\_]+\.[a-z]+$/;
             
             //아이디 공백 여부 체크
             if(userId === "") {
@@ -236,24 +266,18 @@
                 $("#userName").focus();
                 return false;
             }   
-            //이메일 공백여부 체크
-            if(userEmail === "") {
-                alert("이메일을 입력해주세요.");
-                $("#userEmail").focus();
+                         
+            //이메일인증 했는지 체크
+            if($("#check-msg").text() === "") {
+                alert("이메일 인증을 해주세요.");
                 return false;
-            }      
-            //이메일 유효성체크
-            if(!userEmailReg.test(userEmail)) {
-                alert("이메일 형식이 올바르지 않습니다.");
-                $("#userEmail").focus();
+            } 
+            //이메일인증 성공 여부 체크
+            if($("#check-msg").text() !== "인증번호가 일치합니다.") {
+                $("#check-code").focus();
+                alert("이메일 인증번호가 일치하지 않습니다.")
                 return false;
-            }              
-            //이메일 인증 했는지 체크
-
-            
-
-
-
+            }  
 
             //성별 선택여부 체크
             if(!$('input:radio[name=userGender]').is(':checked')) {

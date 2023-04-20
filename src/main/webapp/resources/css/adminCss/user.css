@@ -1,0 +1,134 @@
+@font-face {
+    font-family: 'Pretendard-Regular';
+    src: url('https://cdn.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Regular.woff') format('woff');
+    font-weight: 400;
+    font-style: normal;
+}
+* {
+    font-family: 'Pretendard-Regular'; 
+}
+#main-box {
+    margin: 0 auto;
+    padding: 0;
+}
+
+#user-title {
+    margin: 50px auto;
+    width: 400px;
+    height: 30px;
+    text-align: center;
+    font-size: 25px;
+    border-bottom: 2px solid #ccc;
+}
+#user-list {
+    width: 850px;
+    margin: 0 auto;
+    text-align: center;
+    line-height: 3.3;
+    border-collapse: collapse
+}
+    #user-list tr {
+        border-bottom: 1px solid #ccc;
+    }
+    #user-list tr:first-child {
+        border-bottom: 2px double #2d4680;
+    }
+    #no-one {
+        width: 500px;
+        margin: 30px auto;
+        text-align: center;
+        font-size: 18px;
+        line-height: 3;
+    }
+        #no-one a {
+            color: #2d4680;
+            background-color: rgb(216, 216, 216);
+        }
+#remo-btn {
+    border: 2px solid #2d4680;
+    padding: 5px;
+    border-radius: 50%;
+    background-color: white;
+}
+    #remo-btn:hover {
+        background-color: #2d4680;
+        color: white;
+        padding: 7px;
+        cursor: pointer;
+    }
+
+
+
+/*페이징///////////////////////////////////////*/
+#navi-box {
+    width: 800px;
+    height: 150px;
+    margin: 0 auto;
+    margin-bottom: 50px;
+    text-align: center;
+    padding-top: 30px;
+}
+    #navi-box a{
+        text-decoration: none;
+        color: rgb(81, 79, 79);
+    }
+        #navi-box a:link{
+            color: rgb(81, 79, 79);
+        }
+        #navi-box a:visited{
+            color: rgb(81, 79, 79);
+        }
+    #navi-btn1{
+        border: 1px solid #cdcccc;
+        padding: 8px;
+    }
+    #navi-btn2{
+        border: 1px solid #cdcccc;
+        padding: 8px;
+        margin-right: 20px;
+    }
+    .navi-btn3{
+        border: 1px solid #cdcccc;
+        padding: 8px;
+        padding-left: 15px;
+        padding-right: 15px;
+    }
+    .navi-btn3:hover {
+        background-color: #cdcccc;
+    }
+    #navi-btn4{
+        border: 1px solid #cdcccc;
+        padding: 8px;
+        margin-left: 20px;
+    }  
+    #navi-btn5{
+        border: 1px solid #cdcccc;
+        padding: 8px;
+    }
+
+ /*검색///////////////////////////////////////*/   
+#search-box {
+    border: 1px solid #cdcccc;
+    height: 38px;
+    width: 200px;
+}
+#search-btn {
+    color: rgb(83, 83, 83);
+    border:1px solid #cdcccc;
+    border-radius: 5px;
+    background-color: white;
+    height: 40px;
+    width: 80px;
+}
+#search-select {
+    color: rgb(83, 83, 83);
+    border:1px solid #cdcccc;
+    height: 40px;
+}
+#search-btn:hover {
+    background-color: #2d4680;
+    color: white;
+}
+#search-select:focus, #search-box:focus {
+    background-color: #62bcd32a;
+}

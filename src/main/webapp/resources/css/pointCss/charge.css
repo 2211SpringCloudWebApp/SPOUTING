@@ -19,7 +19,7 @@ main {
     padding: 50px;
     margin: 0 auto;
     background-color: rgba(230, 230, 230, 0.692);
-
+border-radius: ;
 }
 #user-point {
     width: 100%;
@@ -55,6 +55,7 @@ main {
             height: 50px;
             text-align: center;
             font-size: 16px;
+            border-radius: 10px;
         }
         #pointBuy:focus {
             background-color: #1680e4c4;
@@ -62,7 +63,7 @@ main {
         }
     #after-info {
         font-size: 16px;
-        margin: 5px auto;
+        margin: 20px auto;
     }
     #buy-info {
         width: 600px;
@@ -100,7 +101,7 @@ main {
         margin-bottom: 70px;
         width:380px;
         height:80px;
-        background:rgba(8, 80, 143, 0.548);
+        background:rgba(255, 180, 17, 0.658);
         color: rgb(245, 245, 245);
         border-radius: 10px;
         display: none;
@@ -111,7 +112,7 @@ main {
         border-top:0px solid transparent;
         border-left: 10px solid transparent;
         border-right: 10px solid transparent;
-        border-bottom: 10px solid rgba(8, 80, 143, 0.548);
+        border-bottom: 10px solid rgba(255, 180, 17, 0.658);
         content:"";
         position:absolute;
         top:-10px;

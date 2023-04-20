@@ -1,7 +1,11 @@
 package com.kh.spouting.user.store;
 
+import java.util.List;
+
 import org.apache.ibatis.session.SqlSession;
 
+import com.kh.spouting.common.PageInfo;
+import com.kh.spouting.common.Search;
 import com.kh.spouting.user.domain.User;
 
 public interface UserStore {
@@ -63,5 +67,39 @@ public interface UserStore {
 	 */
 	public int deleteUser(SqlSession session, String userId);
 
+
 	
+/* **************** 관리자 **************** */
+	
+	/**
+	 * 전체 회원 수 Store
+	 * @param session
+	 * @return int
+	 */
+	public int getUserCount(SqlSession session);
+	
+	/**
+	 * 전체 회원 목록 Store
+	 * @param session
+	 * @param pi
+	 * @return List<User>
+	 */
+	public List<User> selectAllUser(SqlSession session, PageInfo pi);
+
+	/**
+	 * 검색된 회원 수 Store
+	 * @param session
+	 * @param search
+	 * @return
+	 */
+	public int getUserCount(SqlSession session, Search search);
+
+	/**
+	 * 회원 검색 Store
+	 * @param session
+	 * @param pi
+	 * @param search
+	 * @return List<User>
+	 */
+	public List<User> selectByKeyWord(SqlSession session, PageInfo pi, Search search);
 }
