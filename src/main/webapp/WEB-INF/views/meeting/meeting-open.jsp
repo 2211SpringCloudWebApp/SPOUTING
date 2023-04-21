@@ -28,7 +28,6 @@
 </head>
 <body>
 	<jsp:include page="../common/header.jsp"></jsp:include>
-	<br>
 
 	<c:if test="${sessionScope.loginUser.userNo eq null }">
 		<script>
@@ -39,7 +38,9 @@
 		</script>
 	</c:if>
 	
-    <h1>소셜링 오픈하기</h1>
+	<br><br>
+	
+    <h1>🙌 SOCIALRING OPEN</h1>
 
     <form action="/meetingOpen" method="POST" id="meetingForm">
     <input type="hidden" id="readerNo" name="readerNo" value=${loginUser.userNo }>

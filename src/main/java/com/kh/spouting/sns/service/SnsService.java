@@ -16,5 +16,9 @@ public interface SnsService {
 
 	List<SnsPhoto> morePhoto(Integer start, int userNo);
 
+	int getTotalCount(int userNo);
+
+	int insertPhoto(Sns sns);
+
 
 }

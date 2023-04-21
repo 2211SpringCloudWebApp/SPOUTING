@@ -6,17 +6,20 @@ public class Sns {
 	private String profileFilename;
 	private String profileFilepath;
 	private String profileIntoduce;
+	private String profileFileRename;
 	
 	public Sns() {
 		// TODO Auto-generated constructor stub
 	}
 
-	public Sns(int userNo, String profileFilename, String profileFilepath, String profileIntoduce) {
+	public Sns(int userNo, String profileFilename, String profileFilepath, String profileIntoduce,
+			String profileFileRename) {
 		super();
 		this.userNo = userNo;
 		this.profileFilename = profileFilename;
 		this.profileFilepath = profileFilepath;
 		this.profileIntoduce = profileIntoduce;
+		this.profileFileRename = profileFileRename;
 	}
 
 	public int getUserNo() {
@@ -51,12 +54,19 @@ public class Sns {
 		this.profileIntoduce = profileIntoduce;
 	}
 
+	public String getProfileFileRename() {
+		return profileFileRename;
+	}
+
+	public void setProfileFileRename(String profileFileRename) {
+		this.profileFileRename = profileFileRename;
+	}
+
 	@Override
 	public String toString() {
 		return "Sns [userNo=" + userNo + ", profileFilename=" + profileFilename + ", profileFilepath=" + profileFilepath
-				+ ", profileIntoduce=" + profileIntoduce + "]";
+				+ ", profileIntoduce=" + profileIntoduce + ", profileFileRename=" + profileFileRename + "]";
 	}
-	
 	
 
 }

@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="SnsMapper">
 
-<resultMap id="snsResultMap" type="com.kh.spouting.sns.domain.Sns">
+	<resultMap id="snsResultMap" type="com.kh.spouting.sns.domain.Sns">
 		<id 	property="userNo" 		column="USER_NO"/>
 		<result property="profileFilename" 		column="PROFILE_FILENAME"/>
 		<result property="profileFilepath" 		column="PROFILE_FILEPATH"/>
@@ -25,6 +25,7 @@
 		<result property="profileFilename" 		column="PROFILE_FILENAME"/>
 		<result property="profileFilepath" 	column="PROFILE_FILEPATH"/>		
 		<result property="profileIntoduce" 	column="PROFILE_INTRODUCE"/>
+		<result property="profileFileRename" 	column="PROFILE_FILERENAME"/>
 	</resultMap>
 	
 	<insert id="insertPhoto">
@@ -32,13 +33,13 @@
 	</insert>
 	
 	<select id="selectOneSns" resultMap="snsProfileResultMap">
-		SELECT S.USER_NO, U.USER_NAME, S.PROFILE_FILENAME, S.PROFILE_FILEPATH, S.PROFILE_INTRODUCE
+		SELECT S.USER_NO, U.USER_NAME, S.PROFILE_FILENAME, S.PROFILE_FILEPATH, S.PROFILE_INTRODUCE, S.PROFILE_FILERENAME
 		FROM SNS_TBL S JOIN USER_TBL U ON S.USER_NO = U.USER_NO
 		WHERE U.USER_NO = #{userNo}
 	</select>
 	
 	<select id="selectOnsProfile" resultMap="snsResultMap">
-		SELECT PROFILE_FILENAME, PROFILE_FILEPATH, PROFILE_INTRODUCE FROM SNS_TBL WHERE USER_NO = #{userNo}
+		SELECT PROFILE_FILENAME, PROFILE_FILEPATH, PROFILE_INTRODUCE, PROFILE_FILERENAME FROM SNS_TBL WHERE USER_NO = #{userNo}
 	</select>
 	
 	<update id="updateUserProfile">
@@ -46,7 +47,16 @@
 	</update>
 	
 	<select id="morePhotoList" resultMap="snsPhotoResultMap">
-		SELECT * FROM SNSPHOTO_TBL WHERE USER_NO = #{userNo}
+		SELECT * FROM SNSPHOTO_TBL WHERE USER_NO = #{userNo} ORDER BY SNSPHOTO_NO DESC
 	</select>
+	
+	
+	<select id="getTotalCount" resultType="_int">
+		SELECT COUNT(*) FROM SNSPHOTO_TBL WHERE USER_NO = #{userNo}
+	</select>
+	
+	<update id="updateProfilePhoto">
+		UPDATE SNS_TBL SET PROFILE_FILENAME = #{profileFilename}, PROFILE_FILEPATH = #{profileFilepath}, PROFILE_FILERENAME = #{profileFileRename} WHERE USER_NO = #{userNo}
+	</update>
 	
 </mapper>

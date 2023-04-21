@@ -42,5 +42,17 @@ public class SnsStoreLogic implements SnsStore {
 		return session.selectList("SnsMapper.morePhotoList", userNo, rowBounds);
 	}
 
+	@Override
+	public int getTotalCount(SqlSession session, int userNo) {
+		// TODO Auto-generated method stub
+		return session.selectOne("SnsMapper.getTotalCount", userNo);
+	}
+
+	@Override
+	public int updateProfilePhoto(SqlSession session, Sns sns) {
+		// TODO Auto-generated method stub
+		return session.update("SnsMapper.updateProfilePhoto", sns);
+	}
+
 
 }

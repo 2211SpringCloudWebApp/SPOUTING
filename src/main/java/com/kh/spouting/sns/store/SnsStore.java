@@ -18,5 +18,9 @@ public interface SnsStore {
 
 	List<SnsPhoto> morePhoto(SqlSession session, Integer start, int userNo);
 
+	int getTotalCount(SqlSession session, int userNo);
+
+	int updateProfilePhoto(SqlSession session, Sns sns);
+
 
 }

@@ -45,5 +45,17 @@ public class SnsServiceImpl implements SnsService {
 		return snsStore.morePhoto(session, start, userNo);
 	}
 
+	@Override
+	public int getTotalCount(int userNo) {
+		// TODO Auto-generated method stub
+		return snsStore.getTotalCount(session, userNo);
+	}
+
+	@Override
+	public int insertPhoto(Sns sns) {
+		// TODO Auto-generated method stub
+		return snsStore.updateProfilePhoto(session, sns);
+	}
+
 
 }

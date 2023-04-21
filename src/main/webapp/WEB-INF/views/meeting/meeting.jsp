@@ -13,7 +13,7 @@
 	<jsp:include page="../common/header.jsp"></jsp:include>
 	
 	<div id="meeting-main">
-	    <h1 id="meeting-header">🎯 모집 중인 소셜링</h1>
+	    <h1 id="meeting-header">🎯 SOCIALRING</h1>
 	
 	    <br>
 	    <div id="meeting-startBtn" onclick="location.href='/meetingOpenPage'"><b>소셜링 주최하기👆</b></div>
