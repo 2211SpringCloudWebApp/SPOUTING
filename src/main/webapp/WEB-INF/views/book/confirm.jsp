@@ -105,7 +105,7 @@ body {
           <!-- 			//--//사용포인트입력//결제금액//api -->
           <div id="tableDiv">
             <form action ="/book/bookUp" method="post">   
-                  
+                <input type="hidden" id="paidPrice" name="paidPrice">
 	            <input type="hidden" value="${book.bookNo }" name="bookNo">  
 	            <input type="hidden" value="${book.userNo }" name="userNo">  
 	            <table>
@@ -179,7 +179,7 @@ body {
 //        	    }
 //        	 	document.querySelector('input[name="pointChange"]').value = pointToUse;
 //           });
-       	
+       	document.addEventListener('DOMContentLoaded', function() {
           document.querySelector('input[type="text"]').addEventListener('keyup', function() {
             let totalPoint = Number(document.querySelector("#totalPoint").innerHTML);
             let bookPrice = Number(document.querySelector("#bookPrice").innerHTML);
@@ -199,11 +199,13 @@ body {
 	              priceToPay = bookPrice - pointToUse;
 	              console.log(priceToPay);
 	            }else {
-	              priceToPay = bookPrice; // 포인트가 부족한 경우에는 가격을 그대로 사용. 유효성검사로 고치자...나중에...
+	              priceToPay = bookPrice; // 포인트가 부족한 경우에는 가격을 그대로 사용. 유효성검사로 고치자...으...으으...
 	            }
 	            document.querySelector("#priceToPay").innerHTML = priceToPay;
+	            document.querySelector("#paidPrice").value = priceToPay;
 	            
           	});
+       	});
           
 //           //결제시도!!!
 //           var IMP = window.IMP;  

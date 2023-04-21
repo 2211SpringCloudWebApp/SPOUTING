@@ -44,8 +44,8 @@ public class BookServiceImpl implements BookService{
 	}
 
 	@Override
-	public int bookUp(int bookNo) {
-		int result = bStore.updatePayTime(session, bookNo);
+	public int bookUp(Book book) {
+		int result = bStore.updatePayTime(session, book);
 		return result;
 	}
 

@@ -39,11 +39,19 @@ public class BookController {
 		return "book/bookView";
 	}
 	
-	//예약내역페이지 보이기
+	//예약내역페이지(이용전) 보이기
 	@RequestMapping(value="/myBooking", method=RequestMethod.GET)
 	public String showMyBooking(@RequestParam("userNo") int userNo, Model model) {
 		List<Book> myBookList = bService.getMyBooking(userNo);
 		model.addAttribute("bList", myBookList);
+		return "book/myBooking";
+	}
+	
+	//기간만료 내역 보이기
+	@RequestMapping(value="/myPassedBooking", method=RequestMethod.GET)
+	public String showMyPassedBooking(@RequestParam("userNo") int userNo, Model model) {
+		List<Book> myPassedBookList = bService.getMyBooking(userNo); //스토어만 바꾸면...되지않을까...?
+		model.addAttribute("pList", myPassedBookList);
 		return "book/myBooking";
 	}
 	
@@ -133,12 +141,15 @@ public class BookController {
 	public String confirmView(@RequestParam("bookNo") int bookNo
 							 ,@RequestParam(value="pointChange", defaultValue = "0") int pointChange 
 							 ,@RequestParam("userNo") int userNo
+							 ,@RequestParam("paidPrice") int paidPrice
 							 , Model model){
 		
 		
 		
 		//pay_time업뎃용
-		int result = bService.bookUp(bookNo);
+		Book book = new Book(bookNo, paidPrice);
+		
+		int result = bService.bookUp(book);
 		if(result>0) {
 			//결제 완료(페이타임업데이트)가 됐을때
 			
@@ -169,7 +180,22 @@ public class BookController {
 		
 	}
 	
-	
+//	@RequestMapping(value="/cancelBooking")
+//	public String cancelBooking(@RequestParam("bookNo") int bookNo, Model model) {
+//		int result = bService.deleteBook(bookNo);
+//		if(result>0) {
+//			//삭제성공gkaus->포인
+//			
+//			
+//			
+//			return "/book/myBooking?userNo=";
+//		}else {
+//			//예약취소실패
+//			model.addAttribute("msg", "예약취소실패!!");
+//			return "/common/error";
+//		}
+//		
+//	}
 	
 	
 	

@@ -39,8 +39,8 @@ public class BookStoreLogic implements BookStore{
 	}
 
 	@Override
-	public int updatePayTime(SqlSession session, int bookNo) {
-		int result = session.update("BookMapper.updatePayTime", bookNo);
+	public int updatePayTime(SqlSession session, Book book) {
+		int result = session.update("BookMapper.updatePayTime", book);
 		return result;
 	}
 

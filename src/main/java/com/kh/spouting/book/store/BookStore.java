@@ -43,10 +43,10 @@ public interface BookStore {
 	/**
 	 * 결제하기
 	 * @param session
-	 * @param bookNo
+	 * @param book
 	 * @return int
 	 */
-	public int updatePayTime(SqlSession session, int bookNo);
+	public int updatePayTime(SqlSession session, Book book);
 
 	/**
 	 * 결제와 동시에 포인트디테일 인서트

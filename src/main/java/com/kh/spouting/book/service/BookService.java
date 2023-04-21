@@ -36,10 +36,10 @@ public interface BookService {
 
 	/**
 	 * 결제하기(payTime업뎃)
-	 * @param bookNo
+	 * @param book
 	 * @return int
 	 */
-	public int bookUp(int bookNo);
+	public int bookUp(Book book);
 
 	/**
 	 * 결제와 동시에 포인트디테일 테이블 인서트
