@@ -70,7 +70,7 @@
 								<tr>
 									<td class="al">
 										<label for="searchKeyword"></label>
-										<input type="text" name="centerName" id="searchKeyword" value="${center.centerName }" class="cLocal" placeholder="지점명을 검색해보세요">
+										<input type="text" name="centerName" required value="${center.centerName }" id="searchKeyword" class="cLocal" placeholder="지점명을 검색해보세요">
 										 <input type="submit" class="cLocal" value="검색" >
 									 </td>
 								</tr>
@@ -103,6 +103,28 @@
 	
 	
 	<script type="text/javascript">
+	
+	document.querySelector("#searchKeyword").addEventListener("submit", function(e) {
+		e.preventDefault();	// submit 이벤트를 취소합니다.
+		
+// 		var input = e.target.querySelector("input[type=text]");
+		var input = e.target.querySelector("${centerName }");
+		var searchValue = input.value;
+		console.log(searchValue);
+// 		location.href="/center/search?centerName=" + searchValue;
+		
+// 		input.value = searchValue;	// 검색창의 값을 유지
+
+		
+		
+		
+// 		var opt = e.target.options[e.target.selectedIndex];
+// 		console.log(opt.value);
+// 		location.href="center/search?centerName="+opt.value;
+
+// 		e.target.value = opt.value;
+	});
+	
 	
 	$(function() {
 		
@@ -169,7 +191,7 @@
 		    /* 정보창 */
 			 var infoWindow = new naver.maps.InfoWindow({
 				 // HTML 작성 - 클릭 시 정보창에 띄울 정보 작성
-			     content: '<div style="width:200px;text-align:center;padding:10px;">' + areaArr[i].photo + '<br /><b>' + areaArr[i].location + '</b><br>' + areaArr[i].addr + '<br><b>☎ ' + areaArr[i].tel + '</b></div>',
+			     content: '<div style="width:200px;text-align:center;padding:10px;">' + areaArr[i].photo + '<br><b>' + areaArr[i].location + '</b><br>' + areaArr[i].addr + '<br><b>☎ ' + areaArr[i].tel + '</b></div><div style="width:200px;text-align:center;padding-bottom:10px;"><a href="/book/bookView">예약하기</a><a href="/center/detail?centerNo=${center.centerNo}">자세히보기</a></div>',
 			     // CSS 작성 - 정보창의 디자인 작성
 			     maxWidth: 250,
 				 backgroundColor: "#fff",
@@ -207,6 +229,8 @@
 	        naver.maps.Event.addListener(markers[i], 'click', getClickHandler(i)); // 클릭한 마커 핸들러
 	    }
 	}
+	
+	
 	
 	<!-- 지도를 움직이게 해주는 함수 -->
 // 	function moveMap(len, lat) {
