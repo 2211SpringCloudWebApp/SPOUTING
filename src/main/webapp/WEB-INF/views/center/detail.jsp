@@ -27,7 +27,9 @@
 			</div>
 	
 			<h3 class="hTag">스파우팅 ${center.centerName}</h3>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-			<h3 class="hTag">☎ ${center.centerTel}</h3>
+			<h3 class="hTag">☎ ${center.centerTel}</h3><br>
+			
+			<button class="button" onclick="location.href='/center/listView'">목록</button>
 		</main>
 		
 			
