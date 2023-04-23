@@ -53,7 +53,7 @@
 						<input type="file" name="uploadFile">
 					</div>
 					<div id="secretArea">
-						<input type="radio" name="inquiriesSecret" value="N" />일반글<input type="radio" name="inquiriesSecret" value="Y" />비밀글
+						<input type="radio" name="inquiriesSecret" value="N" checked="checked" />일반글<input type="radio" name="inquiriesSecret" value="Y" />비밀글
 						<div id="secretNo" style="display:none;">
 							<span>비밀번호</span>
 <!-- 							<input name="secretNo" placeholder="4자리 숫자"> -->
@@ -93,21 +93,28 @@
 		});
 			
 		// 비밀글 체크 시 비밀번호 입력할 수 있게 해주는 함수
-		$(document).ready(function(){
-			$("#secretNo").hide();	// 초기값 설정
+		
+
+			$(document).ready(function(){
+			$("#secretNo").hide();  // 초기값 설정
 			
 			$("input[name='inquiriesSecret']").change(function(){
 				// 일반글 선택 시
 				if($("input[name='inquiriesSecret']:checked").val() === 'N'){
-					$("#secretNo").hide();
+				$("#secretNo").hide();
 				}
 				// 비밀글 선택 시
 				else if($("input[name='inquiriesSecret']:checked").val() === 'Y'){
-					$("#secretNo").show();
+				// input태그가 이미 생성되어 있는지 체크
+				if ($("#secretNo").find("input[name='secretNo']").length === 0) {
+					// input태그가 생성되어 있지 않은 경우에만 생성
 					$("#secretNo").children().append("<input name='secretNo' placeholder='4자리 숫자'>");
 				}
-			})
-		})
+				$("#secretNo").show();
+				}
+			});
+			});
+
 
 	
 	    </script>		

@@ -19,4 +19,6 @@ public interface InquiryService {
 
 	int insertInquiry(Inquiry inquiry);
 
+	InquiryJoin detailInquiry(Integer inquiriesNo);
+
 }

@@ -58,4 +58,11 @@ public class InquiryStoreLogic implements InquiryStore{
 		return result;
 	}
 
+	// 문의사항 디테일 Store
+	@Override
+	public InquiryJoin detailInquiry(SqlSession session, Integer inquiriesNo) {
+		InquiryJoin inquiry = session.selectOne("InquiryMapper.detailInquiry", inquiriesNo);
+		return inquiry;
+	}
+
 }

@@ -60,8 +60,10 @@
 				              <c:if test="${inquiry.inquiriesCategory eq 'P' }">
 				              	<td>결제취소문의</td>
 				              </c:if>
-				              <td>${inquiry.inquiriesCategory }</td>
-				              <td>${inquiry.inquiriesSecret }</td>
+							  <c:if test="${inquiry.inquiriesSecret eq 'N'}">
+								<td><img alt="" src="../../../resources/images/notice/lockIcon.png" style="width:30px; height:30px;"></td>
+							  </c:if>
+							  <c:if test="${inquiry.inquiriesSecret eq 'N'}"></c:if>
 				              <td><a href="detail?inquiriesNo=${inquiry.inquiriesNo }">${inquiry.inquiriesTitle }</a></td>
 				              <td>${inquiry.userNo }</td>
 				              <td><fmt:formatDate value="${inquiry.qCreateDate }" pattern="yyyy-MM-dd" /></td>

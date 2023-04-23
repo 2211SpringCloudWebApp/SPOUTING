@@ -15,9 +15,9 @@
 	    <link href="../../../resources/css/noticeCss/list.css" rel="stylesheet">
 <!-- 	    jQuery -->
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
-<!-- 		마우스커서 -->
+<!-- 		모달테스트 -->
 		<style type="text/css">
-			body{ cursor:url("../../../resources/images/notice/cursor.png"), auto;}
+			
 		</style>
 	</head>
 	<body>
@@ -56,6 +56,7 @@
 				        <c:forEach items="${iList }" var="inquiry" varStatus="i">
 				          <tr>
 				              <td>${num }</td>
+							  <!-- 카테고리부분 -->
 				              <c:if test="${inquiry.inquiriesCategory eq 'N'}">
 					              <td>일반문의</td>
 				              </c:if>
@@ -65,13 +66,30 @@
 				              <c:if test="${inquiry.inquiriesCategory eq 'P'}">
 					              <td>결제취소문의</td>
 				              </c:if>
+							  <!-- 비밀글여부 -->
 				              <c:if test="${inquiry.inquiriesSecret eq 'Y' }">
 				              	<td><img alt="" src="../../../resources/images/notice/lockIcon.png" style="width:30px; height:30px;"></td>
 				              </c:if>
 				              <c:if test="${inquiry.inquiriesSecret eq 'N' }">
 				              	<td></td>
 				              </c:if>
-				              <td><a href="detail?inquiriesNo=${inquiry.inquiriesNo }">${inquiry.inquiriesTitle }</a></td>
+							  <!--비회원일경우 디테일제한-->
+							  <c:choose>
+							  	<c:when test="${user.userNo ne null}">
+									<!-- 회원이면서 비밀번호여부 -->
+									<c:choose>
+										<c:when test="${inquiry.inquiriesSecret eq 'N'}">
+											<td><a href="detail?inquiriesNo=${inquiry.inquiriesNo }">${inquiry.inquiriesTitle }</a></td>
+										</c:when>
+										<c:otherwise>
+											<td><a href="detail?inquiriesNo=${inquiry.inquiriesNo }" id="click">${inquiry.inquiriesTitle }</a></td>
+										</c:otherwise>
+									</c:choose>
+								</c:when>
+								<c:otherwise>
+									<td><a href="detail?inquiriesNo=${inquiry.inquiriesNo }" data-bs-toggle="modal" data-bs-target="#exampleModal">${inquiry.inquiriesTitle }</a></td>
+								</c:otherwise>
+							  </c:choose>
 				              <td>${inquiry.userName }</td>
 				              <td><fmt:formatDate value="${inquiry.qCreateDate }" pattern="yyyy-MM-dd" /></td>
 				          </tr>
@@ -111,14 +129,51 @@
 			      	</c:if>		     
 			      </div>
 			    </div>
+				<!-- <button id="click">모달테스트</button> -->
 	    </div>
 	    
+		<!-- Modal -->
+		<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+			<div class="modal-dialog">
+			  <div class="modal-content">
+				<div class="modal-header">
+				  <h1 class="modal-title fs-5" id="exampleModalLabel">회원가입 후 이용가능합니다.</h1>
+				  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+				</div>
+				<div class="modal-footer">
+				  <form action="/user/register" method="get">
+					  <button type="submit" class="btn btn-primary">확인</button>
+				  </form>
+				</div>
+			  </div>
+			</div>
+		  </div>
+
+
+		<!-- 모달테스트 -->
+		<div class="Modaltest">
+			<form action="/inquiry/detail" method="post">
+			<div class="Modal-content" title="클릭하면 창이 닫힌다.">
+				비밀글입니다.<br>
+				비밀번호를 입력해주세요.<br>
+				<input type="text" name="secretNo">
+				<button id="OK">확인</button>
+			</div>
+			</form>
+		</div>
 	    <jsp:include page="../common/footer.jsp"></jsp:include>
 	    
 		
 	    <script type="text/javascript">
-	    
-	    	console.log(${pi.totalCount})
+	    	console.log(${user.userNo})
+			$(function(){
+				$("#click").click(function(){
+					$(".Modaltest").fadeIn();
+				});
+				$("#OK").click(function(){
+					$(".Modaltest").fadeOut();
+				});
+			})
 	    </script>
 	</body>
 </html>

@@ -57,4 +57,11 @@ public class InquiryServiceImpl implements InquiryService{
 		return result;
 	}
 
+	// 문의사항 디테일 Service
+	@Override
+	public InquiryJoin detailInquiry(Integer inquiriesNo) {
+		InquiryJoin inquiry = iStore.detailInquiry(session, inquiriesNo);
+		return inquiry;
+	}
+
 }

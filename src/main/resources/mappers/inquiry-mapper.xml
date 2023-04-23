@@ -69,4 +69,9 @@
 	<insert id="insertInquiry">
 		INSERT INTO INQUIRIES_TBL VALUES(SEQ_INQUIRIES_NO.NEXTVAL, NULL, #{userNo}, #{inquiriesCategory}, #{inquiriesTitle}, #{inquiriesContent}, DEFAULT, NULL, DEFAULT, #{inquiriesFilename}, #{inquiriesFilepath}, #{inquiriesFilerename}, #{inquiriesSecret}, DEFAULT, #{secretNo})
 	</insert>
+	
+<!--	문의사항 디테일-->
+	<select id="detailInquiry" resultMap="inquiryJoinResultMap">
+		SELECT I.*, U.USER_NAME FROM INQUIRIES_TBL I JOIN USER_TBL U ON I.USER_NO = U.USER_NO WHERE INQUIRIES_NO = #{inquiriesNo}
+	</select>
 </mapper>
