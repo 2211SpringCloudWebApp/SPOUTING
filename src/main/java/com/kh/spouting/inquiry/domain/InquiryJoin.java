@@ -19,8 +19,18 @@ public class InquiryJoin {
 	private String inquiriesSecret;
 	private int inquiriesLikes;
 	private String userName;
+	private int secretNo;
 	
 	public InquiryJoin() {}
+	
+	
+	public InquiryJoin(int inquiriesNo, int secretNo) {
+		super();
+		this.inquiriesNo = inquiriesNo;
+		this.secretNo = secretNo;
+	}
+
+
 
 	public int getInquiriesNo() {
 		return inquiriesNo;
@@ -140,6 +150,14 @@ public class InquiryJoin {
 
 	public void setUserName(String userName) {
 		this.userName = userName;
+	}
+	
+	public int getSecretNo() {
+		return secretNo;
+	}
+
+	public void setSecretNo(int secretNo) {
+		this.secretNo = secretNo;
 	}
 
 	@Override

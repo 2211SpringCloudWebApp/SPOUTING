@@ -23,4 +23,6 @@ public interface InquiryStore {
 
 	InquiryJoin detailInquiry(SqlSession session, Integer inquiriesNo);
 
+	InquiryJoin checkSecretNo(SqlSession session, InquiryJoin iParam);
+
 }

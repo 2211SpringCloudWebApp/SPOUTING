@@ -21,4 +21,6 @@ public interface InquiryService {
 
 	InquiryJoin detailInquiry(Integer inquiriesNo);
 
+	InquiryJoin checkSecretNo(InquiryJoin iParam);
+
 }

@@ -64,4 +64,11 @@ public class InquiryServiceImpl implements InquiryService{
 		return inquiry;
 	}
 
+	// 문의사항 비밀번호체크 Service
+	@Override
+	public InquiryJoin checkSecretNo(InquiryJoin iParam) {
+		InquiryJoin inquiry = iStore.checkSecretNo(session, iParam);
+		return inquiry;
+	}
+
 }

@@ -45,6 +45,7 @@ public class FileUtil {
 			
 			multi.transferTo(new File(reFilepath));
 		
+			result.put("original", originName);
 			result.put("rename", reFilename);
 			result.put("renameFilepath", reFilepath);
 		}

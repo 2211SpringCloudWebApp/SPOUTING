@@ -12,6 +12,29 @@ a{
 	.table-hover>.table-group-divider>tr:hover{
 	  background-color: #afcfff;
 	}
+	
+	/* 비밀번호체크페이지 */
+	.mainCenter #imageTag{
+		text-align: center;
+	}
+	.mainCenter #contentTag{
+		display: flex;
+		justify-content: center;
+		text-align: center;
+	}
+	.mainCenter #contentTag p:first-child{
+		font-size: 40px;
+		margin-top: 20px;
+		margin-bottom: 20px;
+	}
+	.mainCenter #contentTag p:nth-child(2n){
+		font-size: 20px;
+		margin-top: 20px;
+		margin-bottom: 20px;
+	}
+	.mainCenter #contentTag span{
+		color: #95b5ff;
+	}
 /* 헤더부분(공지사항) */
 .mainHeader{
 	width:65%;
