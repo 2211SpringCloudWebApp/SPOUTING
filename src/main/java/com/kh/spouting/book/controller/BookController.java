@@ -47,12 +47,13 @@ public class BookController {
 		return "book/myBooking";
 	}
 	
-	//기간만료 내역 보이기
-	@RequestMapping(value="/myPassedBooking", method=RequestMethod.GET)
-	public String showMyPassedBooking(@RequestParam("userNo") int userNo, Model model) {
-		List<Book> myPassedBookList = bService.getMyBooking(userNo); //스토어만 바꾸면...되지않을까...?
-		model.addAttribute("pList", myPassedBookList);
-		return "book/myBooking";
+	//기간만료 내역 보이기(에이젝스)
+	@ResponseBody
+	@RequestMapping(value="/myPastBooking", method=RequestMethod.GET, produces="application/json;charset=utf-8")
+	public String showMyPassedBooking(@RequestParam("userNo") int userNo) {
+		List<Book> myPastBookList = bService.getMyPBooking(userNo); 
+		//model.addAttribute("pList", myPastBookList);
+		return new Gson().toJson(myPastBookList);
 	}
 	
 	
@@ -67,7 +68,7 @@ public class BookController {
 	
 
 	
-	//예약정보 저장하기(paytime=null상태)
+	//예약정보 저장하기(paytime/paidPrice =null 상태)
 	@RequestMapping(value="/confirm", method=RequestMethod.POST)
 	public String confirmBook(HttpServletRequest request, Model model
 							, @RequestParam("facilityNo") int facilityNo
@@ -146,7 +147,7 @@ public class BookController {
 		
 		
 		
-		//pay_time업뎃용
+		//payTime paidPrice업뎃용
 		Book book = new Book(bookNo, paidPrice);
 		
 		int result = bService.bookUp(book);
@@ -162,40 +163,64 @@ public class BookController {
 				
 				int pResult = bService.insertPDtail(pDetail);
 				if(pResult>0) {
-					return "/book/bookView";   //예약완료되엇읍니다페이지 하나 만들어서 바까주기
+					return "book/bookView";   //예약완료되엇읍니다페이지 하나 만들어서 바까주기
 				}else {
 					model.addAttribute("msg", "포인트가 제대로 사용되지 않았어요!!");
-					return "/common/error";
+					return "common/error";
 				}
 			}else {
 				//쓴포인트가 없을때
-				return "/book/bookView";   //예약완료되엇읍니다페이지 하나 만들어서 바까주기(그페이지에서 /book/myBooking링크걸기
+				return "book/bookView";   //예약완료되엇읍니다페이지 하나 만들어서 바까주기(그페이지에서 /book/myBooking링크걸기
 			}
 			
 			
 		}else { //페이타임업데이트가 제대로 안됐을때
 			model.addAttribute("msg", "결제실패!!");
-			return "/common/error";
+			return "common/error";
 		}
 		
 	}
 	
-//	@RequestMapping(value="/cancelBooking")
-//	public String cancelBooking(@RequestParam("bookNo") int bookNo, Model model) {
-//		int result = bService.deleteBook(bookNo);
-//		if(result>0) {
-//			//삭제성공gkaus->포인
-//			
-//			
-//			
-//			return "/book/myBooking?userNo=";
-//		}else {
-//			//예약취소실패
-//			model.addAttribute("msg", "예약취소실패!!");
-//			return "/common/error";
-//		}
-//		
-//	}
+
+	
+	@RequestMapping(value="/cancelBooking", method=RequestMethod.POST)
+	public String cancelBooking(@RequestParam("bookNo") int bookNo
+							   ,@RequestParam("bookPrice") int bookPrice
+							   ,@RequestParam("paidPrice") int paidPrice
+							   ,@RequestParam("userNo") int userNo
+							   ,Model model) {
+				
+		int result = bService.deleteBook(bookNo);
+		if(result>0) {
+			//삭제성공하면->포인트사용취소(인서트)
+			int pointChange = bookPrice - paidPrice; //사용한포인트
+			if(pointChange>0) {
+				PointDetail pDetail = new PointDetail();
+				pDetail.setPointChange(pointChange);
+				pDetail.setUserNo(userNo);
+				int pResult = bService.cancelUsedPoint(pDetail);
+				if(pResult>0) {
+					//포인트 캔슬 성공하면
+					System.out.println("포인트 환급 완료");
+					return "redirect:/book/myBooking?userNo="+userNo;
+				}else {
+					//포인트캔슬 실패하면 
+					model.addAttribute("msg", "포인트 사용 취소 미반영 오류!!");
+					return "common/error";
+				}
+			}else {
+				//포인트 쓴거 없으면 바로 취소 완료
+				System.out.println("사용포인트 0 / 환급 0");
+				return "redirect:/book/myBooking?userNo="+userNo;
+			}
+			
+		}else {
+			//예약취소실패
+			model.addAttribute("msg", "예약 취소 실패!!");
+			return "common/error";
+		}
+		
+	}
 	
 	
 	

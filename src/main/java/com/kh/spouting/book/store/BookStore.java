@@ -70,5 +70,29 @@ public interface BookStore {
 	 * @return List<Book>
 	 */
 	public List<Book> getMyBooking(SqlSession session, int userNo);
+	
+	/**
+	 * 나의 만료된 옉약 내역 조회
+	 * @param session
+	 * @param userNo
+	 * @return List<Book>
+	 */
+	public List<Book> getMyPBooking(SqlSession session, int userNo);
+
+	/**
+	 * 예약취소
+	 * @param session
+	 * @param bookNo
+	 * @return result 
+	 */
+	public int deleteBook(SqlSession session, int bookNo);
+
+	/**
+	 * 예약취소시 포인트 환급
+	 * @param session
+	 * @param pDetail
+	 * @return
+	 */
+	public int returnPoint(SqlSession session, PointDetail pDetail);
 
 }

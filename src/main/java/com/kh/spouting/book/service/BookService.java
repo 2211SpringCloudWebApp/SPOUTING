@@ -60,5 +60,26 @@ public interface BookService {
 	 * @return List<Book>
 	 */
 	public List<Book> getMyBooking(int userNo);
+	
+	/**
+	 * 나의 이용만료 결제내역 조회
+	 * @param userNo
+	 * @return List<Book>
+	 */
+	public List<Book> getMyPBooking(int userNo);
+
+	/**
+	 * 예약 취소
+	 * @param bookNo
+	 * @return int
+	 */
+	public int deleteBook(int bookNo);
+
+	/**
+	 * 예약취소 시 포인트 환급
+	 * @param pDetail
+	 * @return
+	 */
+	public int cancelUsedPoint(PointDetail pDetail);
 
 }

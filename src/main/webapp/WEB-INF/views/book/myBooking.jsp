@@ -6,6 +6,10 @@
 <html>
 	<head>
 		<meta charset="UTF-8">
+		<!-- ajax CDN -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
+        <!-- jquery CDN -->
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 		<title>결 제 내 역 조 회</title>
 		 <style>
 		 @font-face {
@@ -59,10 +63,12 @@
         line-height: 150%;
         padding-bottom: 10px;
         }
-        .cancelDiv{
+        form{
         	border-top: 1px solid #607EAA;
         	padding-top: 10px;
         	
+        }
+        .cancelDiv{
         	
         }
         .cancelLink{
@@ -72,14 +78,21 @@
         	margin-left: 180px;
         	 
         }
-        #passedBooking{
-        	text-align: center;
+        #pastBookingDiv{
+        	border-top: 1px dotted #607EAA;
+        	--margin-top: 30px;
+        	padding-top: 30px;
+        	opacity: 70%;
         }
-        button{
-        	
-		    margin-top: 32px;
-		    margin-bottom: 80px;
-		    margin-right: 30px;
+       
+        #btnDiv{
+        	text-align: center;
+        	opacity: 100%;
+        }
+        #pastBookingBtn{
+		    margin-top: 30px;
+		    margin-bottom: 30px;
+		    
 		    position: relative;
 		    border: 0;
 		    border-radius: 5px;
@@ -88,7 +101,54 @@
 		    text-align: center;
 		    color: white;
 		    background-color: #1C3879;
-    }
+   		 }
+   		 .expiredDiv{
+   			border-top: 1px solid #607EAA;
+        	padding-top: 10px;
+   		 	color: red;
+   		 	
+   		 }
+    /* 모달 창 스타일 */
+     .modal {
+    position: fixed;
+    top: 50%;
+    left: 30%;
+    right: 30%;
+    bottom: 0;
+    --background-color: rgba(0, 0, 0, 0.5); /* 배경 투명도 조절 가능 */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .modal-content {
+    background-color: white;
+    border: 1px solid #1C3879;
+    --padding: 20px;
+    border-radius: 5px;
+    text-align: center;
+    margin: auto;
+  }
+  .modal-content p {
+    --margin: 0;
+    --padding: 0;
+    padding-top: 30px;
+  }
+  .modal-content button {
+    margin-top: 10px;
+   
+	margin-bottom: 30px;
+	
+	position: relative;
+	border: 0;
+	border-radius: 5px;
+	padding: 15px 25px;
+	display: inline-block;
+	text-align: center;
+	margin-left: 10px;
+	margin-right: 10px;
+	color: white;
+	background-color: #1C3879;
+  }
 
     </style>
 	</head>
@@ -98,6 +158,7 @@
 		<!-- c:forEach이거 쓰면되겟다
 		회원 예약내역 가져오기(사용일/시, 사용인원, 센터명-시설명 -->
 		<!--${bList }-->
+	        <input type="hidden" id="hiddenUserNo" value="${loginUser.userNo }" name="userNo">
 			<c:forEach items="${bList }" var="book">
 				<div class="bookingEachDiv">
 		            <div class="branchPhotoDiv">
@@ -112,34 +173,119 @@
 		                <fmt:formatDate pattern="hh시" value="${book.endTime}"/><br>
 		                ${book.numPeople}인 이용 예정<br></p><br>
 		                
-		                <span class="cancelDiv"><a class="cancelLink" href="/book/cancelBooking?bookNo=${book.bookNo}">예약취소</a></span>
-		            </div> 
-		        </div>
-	        </c:forEach>
-	        <div id="passedBooking"> 
-	        	<button>지난이용내역보기</button> 
-	        	<c:forEach items="${pList }" var="pbook">
-				<div class="bookingEachDiv">
-		            <div class="branchPhotoDiv">
-		               <img src="${pbook.centerFilepath1}" alt="branchPhoto">
-	<!-- 	                <img src="./images/logo.png"> -->
+		                <span class="cancelDiv">
+		               		<form id="cancelForm" action="/book/cancelBooking" method="post">
+		               			<input type="hidden" name="userNo" value="${book.userNo }">
+							    <input type="hidden" name="bookNo" value="${book.bookNo}">
+							    <input type="hidden" name="paidPrice" value="${book.paidPrice}">
+							    <input type="hidden" name="bookPrice" value="${book.bookPrice}">
+							    <a class="cancelLink" href="javascript:void(0);" onclick="cancelBooking();">예약취소</a>
+							
+
+							</form>
+		                </span>
 		            </div>
-		            <div class="bookingInfoDiv">
-		                <span class="dateDiv"><fmt:formatDate pattern="MM/dd" value="${pbook.useDate}"/></span>
-		                <p>${pbook.centerName} <br>
-		                ${pbook.facilityName}<br>
-		                <fmt:formatDate pattern="hh시" value="${pbook.startTime}"/>~
-		                <fmt:formatDate pattern="hh시" value="${pbook.endTime}"/><br>
-		                ${pbook.numPeople}인 이용 예정<br></p><br>
-		                
-		                <span class="cancelDiv">이용완료</span>
-		            </div> 
 		        </div>
 	        </c:forEach>
-	        
-	        
+        	<div id="btnDiv">
+        		<button id="pastBookingBtn">지난이용내역보기</button> 
+        	</div>
+	        <div id="pastBookingDiv"> 
+				<!-- Ajax로 데이터 꽂기 -->
 	        </div>
 		</main>
+		
+		<script>
+			let pastBookingVisible = false; //일단 데이터 안보임			
+			
+			//버튼 클릭시 지난 예약정보 불러오기 Ajax
+			document.querySelector("#pastBookingBtn").addEventListener("click", function(){
+				let userNo = document.querySelector("#hiddenUserNo").value;
+				$.ajax({
+					url: "/book/myPastBooking",
+					data: {"userNo": userNo},
+					type: "get",
+					success: function(pList){
+						var bookingHtml="";
+						for( var i=0; i<pList.length; i++){
+							var pbook = pList[i];
+							bookingHtml += 
+								'<div class="bookingEachDiv">'+
+								'<div class="branchPhotoDiv">' +
+								'<img src="'+pbook.centerFilepath1+'" alt="branchPhoto">' +
+								'</div>' +
+								'<div class="bookingInfoDiv">' +
+								'<span class="dateDiv">' + new Intl.DateTimeFormat('ko-KR', {month: '2-digit', day: '2-digit'}).format(new Date(pbook.useDate)).replace('.','/').replace(' ','').replace('.','') + '</span>' +
+		                        '<p>' + pbook.centerName + '<br>' +
+		                        pbook.facilityName + '<br>' +
+		                        new Intl.DateTimeFormat('ko-KR', {hour: '2-digit'}).format(new Date(pbook.startTime)) + '~' +
+		                        new Intl.DateTimeFormat('ko-KR', {hour: '2-digit'}).format(new Date(pbook.endTime)) + '<br>' +
+		                        pbook.numPeople + '인<br></p><br>' +
+		                        '<span class="expiredDiv">이용만료</span>' +
+		                        '</div>' +
+		                        '</div>';
+		                }
+		                
+		                // 예약 정보를 화면에 업데이트
+		                document.querySelector("#pastBookingDiv").innerHTML = bookingHtml;
+		             	// 버튼의 상태에 따라 데이터를 보여주거나 숨김
+						if (pastBookingVisible) {
+							document.querySelector("#pastBookingBtn").innerHTML="지난이용내역보기";
+							document.querySelector("#pastBookingDiv").style.display = "none";
+							pastBookingVisible = false;
+						} else {
+							document.querySelector("#pastBookingBtn").innerHTML="지난이용내역닫기";
+							document.querySelector("#pastBookingDiv").style.display = "block";
+							pastBookingVisible = true;
+						}
+						
+					},
+		            
+					error: function(){
+						console.log("ajax 처리시리패패패래필failfial");
+					}
+				});
+			})
+			
+			//게시글 삭제하기 버튼 눌렀을때 확인 거치기
+        	function cancelBooking() {
+			    showModal("정말 취소하시겠어요?", function(result) {
+			        if (result) {
+			            document.getElementById('cancelForm').submit();
+			        }
+			    });
+			}
+			
+			function showModal(msg, callback) {
+			    // 모달 창 요소 생성
+			    var modal = document.createElement("div");
+			    modal.className = "modal";
+			    modal.innerHTML =
+			        '<div class="modal-content">' +
+			        '<p>' + msg + '</p>' +
+			        '<button onclick="modalResult(true, ' + callback + ')">확인</button>' +
+			        '<button onclick="modalResult(false, ' + callback + ')">취소</button>' +
+			        '</div>';
+			    document.body.appendChild(modal);
+			
+			    // 모달 창 표시 로직 추가
+			    modal.style.display = "block";
+			}
+			
+			function modalResult(result, callback) {
+			    callback(result);
+			    closeModal();
+			}
+			
+			function closeModal() {
+			    var modal = document.querySelector(".modal");
+			    modal.parentNode.removeChild(modal);
+			}
+			
+			
+			
+			
+		</script>
 		
 		<jsp:include page="../common/footer.jsp"></jsp:include>
 	</body>
