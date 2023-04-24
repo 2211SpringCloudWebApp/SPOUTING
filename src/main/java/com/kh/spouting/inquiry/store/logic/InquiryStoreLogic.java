@@ -65,4 +65,11 @@ public class InquiryStoreLogic implements InquiryStore{
 		return inquiry;
 	}
 
+	// 문의사항 비밀번호체크 Store
+	@Override
+	public InquiryJoin checkSecretNo(SqlSession session, InquiryJoin iParam) {
+		InquiryJoin inquiry = session.selectOne("InquiryMapper.checkSecretNo", iParam);
+		return inquiry;
+	}
+
 }

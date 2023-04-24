@@ -68,7 +68,7 @@
 				              </c:if>
 							  <!-- 비밀글여부 -->
 				              <c:if test="${inquiry.inquiriesSecret eq 'Y' }">
-				              	<td><img alt="" src="../../../resources/images/notice/lockIcon.png" style="width:30px; height:30px;"></td>
+				              	<td><img alt="" src="../../../resources/images/notice/padlock.png" style="width:30px; height:30px;"></td>
 				              </c:if>
 				              <c:if test="${inquiry.inquiriesSecret eq 'N' }">
 				              	<td></td>
@@ -82,7 +82,7 @@
 											<td><a href="detail?inquiriesNo=${inquiry.inquiriesNo }">${inquiry.inquiriesTitle }</a></td>
 										</c:when>
 										<c:otherwise>
-											<td><a href="detail?inquiriesNo=${inquiry.inquiriesNo }" id="click">${inquiry.inquiriesTitle }</a></td>
+											<td><a href="checkSecretNo?inquiriesNo=${inquiry.inquiriesNo }" id="click">${inquiry.inquiriesTitle }</a></td>
 										</c:otherwise>
 									</c:choose>
 								</c:when>
@@ -151,29 +151,65 @@
 
 
 		<!-- 모달테스트 -->
-		<div class="Modaltest">
-			<form action="/inquiry/detail" method="post">
-			<div class="Modal-content" title="클릭하면 창이 닫힌다.">
+		<div class="pModal">
+<!-- 			<form action="/inquiry/detail" method="post"> -->
+			<div class="pModal-content" title="클릭하면 창이 닫힌다.">
 				비밀글입니다.<br>
 				비밀번호를 입력해주세요.<br>
-				<input type="text" name="secretNo">
-				<button id="OK">확인</button>
+				<input type="password" name="secretNo">
+				<button type="submit" id="OK">확인</button>
 			</div>
-			</form>
+<!-- 			</form> -->
 		</div>
 	    <jsp:include page="../common/footer.jsp"></jsp:include>
 	    
 		
 	    <script type="text/javascript">
 	    	console.log(${user.userNo})
-			$(function(){
-				$("#click").click(function(){
-					$(".Modaltest").fadeIn();
-				});
-				$("#OK").click(function(){
-					$(".Modaltest").fadeOut();
-				});
-			})
+// 	    	모달창
+// 			$(function(){
+// 				$("#click").click(function(){
+// 					$(".pModal").fadeIn();
+// 				});
+// 				$("#OK").click(function(){
+// 					$(".pModal").fadeOut();
+// 				});
+// 			})
+			// 비밀번호 확인로직
+// 			$(document).ready(function(){
+// 				$(function(){
+// 					$("#click").click(function(){
+// 						$(".pModal").fadeIn();
+// 					})
+// 				})
+				
+// 				$(".pModal-content").submit(function(event){
+// 					event.preventDefault();
+// 					// 비밀번호 가져오기
+// 					var password = $("input[type='password']").val();
+					
+// 					$.ajax({
+// 						url : "/inquiry/check-password",
+// 						data : {"password" : password},
+// 						type : "post",
+// 						success : function(data){
+// 							if(data.result === 'suceess'){
+// 								// 비밀번호 일치 시 디테일페이지로 이동
+// 								window.location.href = event.target.href;
+// 							}else{
+// 								// 비밀번호 불일치 시 오류메시지 출력
+// 								alert("비밀번호 불일치");
+// 							}
+// 						},
+// 						error : function(data){
+// 							console.log("오류발생");
+// 						}
+// 					})
+// 				})
+				
+// 			})
+			
+			
 	    </script>
 	</body>
 </html>

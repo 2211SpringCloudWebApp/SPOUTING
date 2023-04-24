@@ -40,6 +40,10 @@
 						<th>작성일</th>
 						<td><fmt:formatDate value="${inquiry.qCreateDate }" pattern="yyyy-MM-dd" /></td>
 					</tr>
+					<tr>
+						<th>비밀번호</th>
+						<td>${inquiry.secretNo }</td>
+					</tr>
 				</table>
 				<div id="content">
 					${inquiry.inquiriesContent }

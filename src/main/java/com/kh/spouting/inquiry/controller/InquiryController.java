@@ -185,4 +185,40 @@ public class InquiryController {
 		}
 		return mv;
 	}
+	
+	/**
+	 * 문의사항 비밀번호체크 View Controller
+	 * @param mv
+	 * @param inquiriesNo
+	 * @return mv
+	 */
+	@RequestMapping(value="/checkSecretNo", method=RequestMethod.GET)
+	public ModelAndView viewCheckSecretNo(ModelAndView mv, @RequestParam Integer inquiriesNo) {
+		InquiryJoin inquiry = iService.detailInquiry(inquiriesNo);
+		mv.addObject("inquiry", inquiry).setViewName("inquiry/checkSecretNo");
+		return mv;
+	}
+	
+	/**
+	 * 문의사항 비밀번호체크 Controller
+	 * @param mv
+	 * @param inquiriesNo
+	 * @param secretNo
+	 * @return mv
+	 */
+	@RequestMapping(value="/checkSecretNo", method=RequestMethod.POST)
+	public ModelAndView checkSecretNo(ModelAndView mv, int inquiriesNo, int secretNo) {
+		try {
+			InquiryJoin iParam = new InquiryJoin(inquiriesNo, secretNo);
+			InquiryJoin inquiry = iService.checkSecretNo(iParam);
+			if(inquiry != null) {
+				mv.addObject("inquiry", inquiry).setViewName("redirect:/inquiry/detail?inquiriesNo=" + inquiriesNo);
+			}else {
+				mv.addObject("msg", "비밀번호틀림").setViewName("common/error");
+			}
+		} catch (Exception e) {
+			mv.addObject("msg", e.getMessage()).setViewName("common/error");
+		}
+		return mv;
+	}
 }
