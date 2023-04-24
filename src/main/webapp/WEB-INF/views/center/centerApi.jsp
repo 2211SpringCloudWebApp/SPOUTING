@@ -79,7 +79,10 @@
 								</c:if>
 								<c:if test="${!empty searchResult }">
 									<c:forEach items="${searchResult }" var="center">
-										<tr><td>${center.centerName }</td></tr>
+										<input type="hidden" id="centerNo" value="${center.centerNo }">
+										<tr onclick="selectMarker(marker, infoWindow)">
+										    <td>${center.centerName }</td>
+									    </tr>
 										<tr><td>${center.centerAddr }</td></tr>
 										<tr><td>${center.centerTel }</td></tr>
 										<tr><td><hr></td></tr>
@@ -189,9 +192,10 @@
 			
 		    
 		    /* 정보창 */
+			 const centerNo = document.querySelector("#centerNo").value;
 			 var infoWindow = new naver.maps.InfoWindow({
 				 // HTML 작성 - 클릭 시 정보창에 띄울 정보 작성
-			     content: '<div style="width:200px;text-align:center;padding:10px;">' + areaArr[i].photo + '<br><b>' + areaArr[i].location + '</b><br>' + areaArr[i].addr + '<br><b>☎ ' + areaArr[i].tel + '</b></div><div style="width:200px;text-align:center;padding-bottom:10px;"><a href="/book/bookView">예약하기</a><a href="/center/detail?centerNo=${center.centerNo}">자세히보기</a></div>',
+			     content: '<div style="width:200px;text-align:center;padding:10px;">' + areaArr[i].photo + '<br><b>' + areaArr[i].location + '</b><br>' + areaArr[i].addr + '<br><b>☎ ' + areaArr[i].tel + '</b></div><div style="width:200px;text-align:center;padding-bottom:10px;"><a href="/book/bookView">예약하기</a><a href="/center/detail/'+ centerNo +'">자세히보기</a></div>',
 			     // CSS 작성 - 정보창의 디자인 작성
 			     maxWidth: 250,
 				 backgroundColor: "#fff",
@@ -202,13 +206,18 @@
 				 anchorColor: "#fff",
 				 pixelOffset: new naver.maps.Point(20, -20)
 			 });
-		    
-			 
 			 
 			 markers.push(marker); // 생성한 마커를 배열에 담는다
 			 infoWindows.push(infoWindow); // 생성한 정보창을 배열에 담는다
+			 
 		}
-	    
+		
+		
+		
+		
+		function selectMarker() {
+			console.log("test");
+		}
 		 
 	    function getClickHandler(seq) {
 			
@@ -228,6 +237,12 @@
 	    	console.log(markers[i] , getClickHandler(i));
 	        naver.maps.Event.addListener(markers[i], 'click', getClickHandler(i)); // 클릭한 마커 핸들러
 	    }
+	    
+	    
+	    
+	    
+	    
+	    
 	}
 	
 	

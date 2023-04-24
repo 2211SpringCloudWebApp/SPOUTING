@@ -51,16 +51,15 @@ public class CenterController {
 			, HttpSession session
 			, Model model) {
 		
-		// 로그인 여부 확인
-		User loginUser = (User)session.getAttribute("loginUser");	
-		if(loginUser == null ) {
-			return "redirect:/user/login";
-		}else {
 		
-			try {
-				// 인코딩
-				request.setCharacterEncoding("UTF-8");
-				
+		try {
+			// 인코딩
+			request.setCharacterEncoding("UTF-8");
+			
+			// 관리자 로그인 여부 확인
+			User loginUser = (User)request.getSession().getAttribute("loginUser");
+			if(loginUser != null ) {
+			
 				// 첫번째 파일이 있을 경우
 				if(!uploadFile1.getOriginalFilename().equals("")) {
 					// 파일 복사(지정한 경로 업로드)
@@ -97,14 +96,19 @@ public class CenterController {
 					model.addAttribute("msg", "지점등록이 완료되지 않았습니다. 관리자에게 문의해주세요");
 					return "common/error";
 				}
-			
-				
-			}catch (Exception e) {
-				e.printStackTrace();
-				model.addAttribute("msg", "모든 정보를 입력해주세요");
+			}else {
+				request.setAttribute("msg", "관리자 로그인 후 이용가능합니다.");
+				request.setAttribute("url", "/center/registerView");
 				return "common/error";
 			}
+		
+			
+		}catch (Exception e) {
+			e.printStackTrace();
+			model.addAttribute("msg", "모든 정보를 입력해주세요");
+			return "common/error";
 		}
+
 		
 	}
 
@@ -184,20 +188,20 @@ public class CenterController {
 			HttpSession session,
 			@ModelAttribute Center center
 			, Model model) {
+		
+		// 관리자 로그인 여부 확인
 		User loginUser = (User)session.getAttribute("loginUser");
 		if (loginUser != null) {
-			List<Center> cList = cService.selectCenterList(center);
-			if(cList != null) {
-				model.addAttribute("cList", cList);
-				return "center/list";
-			}else {
-				model.addAttribute("msg", "지점 내역이 존재하지 않습니다.");
-				return "common/error";
-			}
-
+				List<Center> cList = cService.selectCenterList(center);
+				if(cList != null) {
+					model.addAttribute("cList", cList);
+					return "center/list";
+				}else {
+					model.addAttribute("msg", "지점 내역이 존재하지 않습니다.");
+					return "common/error";
+				}
 		}else {
 			model.addAttribute("msg", "관리자 로그인 후 이용해주세요");
-//			model.addAttribute("url", "/user/login");
 			return "common/error";
 			
 		}
@@ -210,6 +214,7 @@ public class CenterController {
 	@RequestMapping(value="/center/modifyView", method=RequestMethod.GET)
 	public String centerModifyView(@RequestParam("centerNo") Integer centerNo, Model model) {
 		try {
+			
 			Center center = cService.selectOneById(centerNo);
 			if(center != null) {
 				model.addAttribute("center", center);
@@ -234,6 +239,7 @@ public class CenterController {
 	    Model model,
 	    HttpServletRequest request) {
 		try {
+			
 			// 수정 시 새로 업로드된 파일 존재
 			if(reloadFile1 != null && !reloadFile1.isEmpty()) {
 				// 기존 업로드된 파일 체크 후
@@ -274,6 +280,7 @@ public class CenterController {
 				model.addAttribute("msg", "센터 정보수정이 완료되지 않았습니다.");
 				return "common/error";
 			}
+				
 		} catch (Exception e) {
 			e.printStackTrace();
 			model.addAttribute("msg", e.getMessage());

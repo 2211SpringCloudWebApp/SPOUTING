@@ -70,7 +70,7 @@
 	</select>
 	
 	<!-- 지점 검색(회원서비스) -->
-	<select id="selectSearch" resultMap="searchResultMap">
+	<select id="selectSearch" resultMap="centerResultMap">
 		SELECT * FROM CENTER_TBL WHERE CENTER_NAME LIKE '%' || #{centerName} || '%'
 	</select>
 </mapper>
