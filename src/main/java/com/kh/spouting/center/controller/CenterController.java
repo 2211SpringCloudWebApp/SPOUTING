@@ -50,50 +50,60 @@ public class CenterController {
 			, HttpServletRequest request
 			, HttpSession session
 			, Model model) {
-		try {
-			// 인코딩
-			request.setCharacterEncoding("UTF-8");
-			
-			// 첫번째 파일이 있을 경우
-			if(!uploadFile1.getOriginalFilename().equals("")) {
-				// 파일 복사(지정한 경로 업로드)
-				String filePath = saveFile1(uploadFile1, request);
+		
+		// 로그인 여부 확인
+		User loginUser = (User)session.getAttribute("loginUser");	
+		if(loginUser == null ) {
+			return "redirect:/user/login";
+		}else {
+		
+			try {
+				// 인코딩
+				request.setCharacterEncoding("UTF-8");
 				
-				if(filePath != null) {	// 파일경로가 존재하면
-					// - DB에 값 저장 가능(uploadFile1)
-					center.setCenterFilename1(uploadFile1.getOriginalFilename());
-					// 경로에 있는 파일 저장
-					center.setCenterFilepath1(filePath);
+				// 첫번째 파일이 있을 경우
+				if(!uploadFile1.getOriginalFilename().equals("")) {
+					// 파일 복사(지정한 경로 업로드)
+					String filePath = saveFile1(uploadFile1, request);
+					
+					if(filePath != null) {	// 파일경로가 존재하면
+						// - DB에 값 저장 가능(uploadFile1)
+						center.setCenterFilename1(uploadFile1.getOriginalFilename());
+						// 경로에 있는 파일 저장
+						center.setCenterFilepath1(filePath);
+					}
 				}
-			}
-			
-			// 두번째 파일이 있을 경우
-			if(!uploadFile2.getOriginalFilename().equals("")) {
-				// 파일 복사(지정한 경로 업로드)
-				String filePath = saveFile2(uploadFile2, request);
 				
-				if(filePath != null) {	// 파일경로가 존재하면
-					// - DB에 값 저장 가능(uploadFile2)
-					center.setCenterFilename2(uploadFile2.getOriginalFilename());
-					// 경로에 있는 파일 저장
-					center.setCenterFilepath2(filePath);
+				// 두번째 파일이 있을 경우
+				if(!uploadFile2.getOriginalFilename().equals("")) {
+					// 파일 복사(지정한 경로 업로드)
+					String filePath = saveFile2(uploadFile2, request);
+					
+					if(filePath != null) {	// 파일경로가 존재하면
+						// - DB에 값 저장 가능(uploadFile2)
+						center.setCenterFilename2(uploadFile2.getOriginalFilename());
+						// 경로에 있는 파일 저장
+						center.setCenterFilepath2(filePath);
+					}
 				}
-			}
+				
+				
+				int result = cService.insertCenter(center);
+				if(result > 0) {
+					// 지점등록 성공 시 지점목록 페이지로 이동
+					return "redirect:/center/listView";
+				}else {
+					// 지점등록 실패 시 에러페이지로 이동
+					model.addAttribute("msg", "지점등록이 완료되지 않았습니다. 관리자에게 문의해주세요");
+					return "common/error";
+				}
 			
-			
-			int result = cService.insertCenter(center);
-			if(result > 0) {
-				// 지점등록 성공 시 지점목록 페이지로 이동
-				return "redirect:/center/listView";
-			}else {
-				// 지점등록 실패 시 에러페이지로 이동
-				model.addAttribute("msg", "지점등록이 완료되지 않았습니다. 관리자에게 문의해주세요");
+				
+			}catch (Exception e) {
+				e.printStackTrace();
+				model.addAttribute("msg", "모든 정보를 입력해주세요");
 				return "common/error";
 			}
-		} catch (Exception e) {
-			e.printStackTrace();
-			model.addAttribute("msg", "모든 정보를 입력해주세요");
-			return "common/error";
 		}
 		
 	}
@@ -174,20 +184,22 @@ public class CenterController {
 			HttpSession session,
 			@ModelAttribute Center center
 			, Model model) {
-//		User user = (User)session.getAttribute("loginUser");
-//		if (user == null) {
-//			model.addAttribute("msg", "관리자 로그인 후 이용해주세요");
-//			model.addAttribute("url", "/user/login");
-//			//return "commnon/alert";
-//
-//		}
-		List<Center> cList = cService.selectCenterList(center);
-		if(cList != null) {
-			model.addAttribute("cList", cList);
-			return "center/list";
+		User loginUser = (User)session.getAttribute("loginUser");
+		if (loginUser != null) {
+			List<Center> cList = cService.selectCenterList(center);
+			if(cList != null) {
+				model.addAttribute("cList", cList);
+				return "center/list";
+			}else {
+				model.addAttribute("msg", "지점 내역이 존재하지 않습니다.");
+				return "common/error";
+			}
+
 		}else {
-			model.addAttribute("msg", "지점 내역이 존재하지 않습니다.");
+			model.addAttribute("msg", "관리자 로그인 후 이용해주세요");
+//			model.addAttribute("url", "/user/login");
 			return "common/error";
+			
 		}
 	}
 	
