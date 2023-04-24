@@ -42,7 +42,8 @@ public class SnsController {
 	//개인 sns 페이지 화면
 	@RequestMapping(value="/sns", method=RequestMethod.GET)
 	public String snsPage(Model model, @RequestParam("userNo") int userNo) {
-//		int totalCount = snsService.getTotalCount(userNo);
+		int totalCount = snsService.getTotalCount(userNo);
+		model.addAttribute("totalCount", totalCount);
 		try {
 			SnsProfile oneSns = snsService.selectOneById(userNo);
 //			model.addAttribute("loginUser",loginUser);
@@ -109,11 +110,49 @@ public class SnsController {
 	}
 	
 	
+	//프로필 사진 업로드
+	@ResponseBody
+	@RequestMapping(value="/sns/profileImgUpload", method=RequestMethod.POST)
+	public ModelAndView profileImgUpload(
+						ModelAndView mv
+						,@RequestParam(value="uploadFile", required=false) MultipartFile multi
+						,HttpServletRequest request
+						,@ModelAttribute Sns sns) {
+		Map<String, String> fileInfo = null;
+		try {
+			fileInfo = fileUtil.saveFile(multi, request, "profile");
+			
+			//작성자 userNo 가져오기
+			HttpSession session = request.getSession();
+			int userNo = ((User)session.getAttribute("loginUser")).getUserNo();
+			sns.setUserNo(userNo);
+	
+			sns.setProfileFilename(fileInfo.get("original"));
+			sns.setProfileFileRename(fileInfo.get("rename"));
+			sns.setProfileFilepath(fileInfo.get("renameFilepath"));
+			
+			int result = snsService.insertPhoto(sns);
+			
+			if(result > 0) {
+				mv.setViewName("redirect:/sns?userNo="+userNo);
+			} else {
+				mv.addObject("msg","프로필 사진 변경에 실패했습니다..").setViewName("common/error");
+			}
+			
+		} catch (Exception e) {
+			// TODO: handle exception
+			mv.addObject("msg", e.getMessage()).setViewName("common/error");
+		}
+		return mv;
+	}
+	
+	
+	
 	// 프로필 수정하기
 	@ResponseBody
 	@RequestMapping(value="/ajaxProfileModify", method=RequestMethod.POST)
 	public String ajaxProfileModify(int userNo, String profileIntro, @SessionAttribute("loginUser") User loginUser, HttpSession session) {
-		Sns userSns = new Sns(userNo, null, null, profileIntro);
+		Sns userSns = new Sns(userNo, null, null, profileIntro, null);
 		userSns = snsService.updateUserProfile(userSns);
 		ObjectMapper objectMapper = new ObjectMapper();
         String jsonString = "";

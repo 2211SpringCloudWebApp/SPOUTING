@@ -15,7 +15,8 @@ body {
 }
 
 #meeting-header {
-    float: left;
+    --float: left;
+    text-align: center;
 }
 
 #meeting-startBtn {

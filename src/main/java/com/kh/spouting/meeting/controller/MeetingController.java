@@ -100,6 +100,7 @@ public class MeetingController {
 		return "meeting/meeting-detail";
 	}
 	
+	//소셜링 참여
 	@RequestMapping(value="/joinMeeting", method=RequestMethod.GET)
 	public String meetingJoin(@RequestParam("meetingNo") int meetingNo,
 							@SessionAttribute("loginUser") User loginUser
@@ -115,7 +116,7 @@ public class MeetingController {
 			}			
 		} catch (Exception e) {
 			// TODO: handle exception
-			e.printStackTrace();
+			model.addAttribute("msg","이미 참여신청한 소셜링입니다.");
 			return "common/error";
 		}
 	}

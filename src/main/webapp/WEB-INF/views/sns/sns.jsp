@@ -23,7 +23,7 @@
 		}
 		
 		#sns-main {
-			padding: 40px;
+			padding: 25px;
 			height: 700px;
 			width: 800px;
 			background-color: #F3F3F3FF;
@@ -61,9 +61,23 @@
 		#sns-content {
 			--width: inherit;
 			height: 430px;
-			background-color: aqua;
-			--overflow: scroll;
+			--background-color: aqua;
+			--overflow: auto;
 			margin-top: 20px;
+			--position: relative;
+		    width: 200px;
+		    height: 200px;
+		}
+		
+		#sns-content img {
+			--position: absolute;
+		    top: 0;
+		    left: 0;
+		    transform: translate(50, 50);
+		    width: 100%;
+		    height: 100%;
+		    object-fit: cover;
+		    margin: auto;
 		}
 
 
@@ -112,6 +126,10 @@
 	</c:if>
 	
 	<div id="sns-main">
+			
+		<c:if test="${loginUser != null and loginUser.userNo eq oneSns.userNo }">
+			<input type="button" onclick="location.href='/sns/uploadPage'" value="sns사진 등록" style="float: right; cursor: pointer;">
+		</c:if>
 	
 	<c:if test="${loginUser != null and loginUser.userNo eq oneSns.userNo }">
 		<div class="btn-box">
@@ -124,13 +142,7 @@
 		<!-- 프로필 영역 -->
         <div id="sns-profile">
 			<div id="img-box">
-				<img id="sns-profile-img" src="/resources/images/meeting/image1.jpg" alt="">
-<!-- 				이미지 업로드 영역 -->
-<!-- 				<input type='file' name='uploadFile'><br/> -->
-
-<!-- 				<button id='uploadBtn'>Upload</button> -->
-<!-- 				<button id='removeBtn'>Remove</button> -->
-<!-- 				업로드 영역 끝 -->
+				<img id="sns-profile-img" src="/resources/images/profile/${oneSns.profileFileRename }" alt="">
 			</div>
 			<div id="profile-box">
 				<input type="hidden" value="${oneSns.userNo }" id="userNo" name="userNo">
@@ -144,15 +156,14 @@
 			</div>
 		</div>
 
-		<br>
 		<!-- sns 사진 영역 -->
-		<c:if test="${loginUser != null and loginUser.userNo eq oneSns.userNo }">
-			<input type="button" onclick="location.href='/sns/uploadPage'" value="sns사진 등록">
-		</c:if>
+<%-- 		<c:if test="${loginUser != null and loginUser.userNo eq oneSns.userNo }"> --%>
+<!-- 			<input type="button" onclick="location.href='/sns/uploadPage'" value="sns사진 등록"> -->
+<%-- 		</c:if> --%>
 		
+		<div id="photo-box">
 		<div id="sns-content">
-			<div id="photo-box">
-				<input type="hidden" id="more-var" totalCount="2" currentSum="0" currentCount="0">
+				<input type="hidden" id="more-var" totalCount="${totalCount}" currentSum="0" currentCount="0" value="1">
 			</div>
 		</div>
 
@@ -197,7 +208,7 @@
 		$(".modify-btn").click(function() {
 			imgModifyClose();
 			if(!profileStatus) {
-				var str = "<textarea type='text' class='profile-intro-input' spellcheck='false'></textarea>";
+				var str = "<textarea type='text' class='profile-intro-input' spellcheck='false' style='resize: none; width: 300px;'></textarea>";
 				var btn = "<button type='button' onclick='ajaxProfileModify();' value='저장' class='modify-submit-btn'>저장</button><button type='button' onclick='modifyClose();' value='저장' class='modify-submit-btn' id='modify-close-btn'>취소</button>";
 				$(".btn-box").append(btn);
 				$(".profile-intro-box").append(str);
@@ -239,10 +250,12 @@
 		
 		//프로필사진 수정버튼
 		$(".img-modify-btn").click(function() {
-			modifyClose();
+			$(".profile-intro-input").remove();
+			$('.modify-submit-btn').remove();
+			$('.modify-close-btn').remove();
 			if(!profileStatus) {
 // 				var str = "<textarea type='text' class='profile-intro-input' spellcheck='false'></textarea>";
-				var btn = "<input type='file' onclick='imgModifyBtn();' value='저장' class='file-upload-btn'> <button type='button' onclick='' value='저장' class='img-upload-btn' id='img-upload-btn'>등록</button> <button type='button' onclick='imgModifyClose();' value='저장' class='img-close-btn' id='img-close-btn'>취소</button>";
+				var btn = "<input type='file' onclick='' value='저장' class='file-upload-btn'> <button type='button' onclick='fn_submit();' value='저장' class='img-upload-btn' id='img-upload-btn'>등록</button> <button type='button' onclick='imgModifyClose();' value='저장' class='img-close-btn' id='img-close-btn'>취소</button>";
 				$(".btn-box").append(btn);
 // 				$(".profile-intro-box").append(str);
 // 				$(".profile-intro-input").val($(".profile-intro").html());
@@ -258,6 +271,30 @@
 		}
 		
 		
+// 		프사 업로드
+		function fn_submit(){
+        
+	        var form = new FormData();
+	        form.append( "uploadFile", $(".file-upload-btn")[0].files[0] );
+	        
+	         $.ajax({
+	             url : "/sns/profileImgUpload"
+	           , type : "POST"
+	           , processData : false
+	           , contentType : false
+	           , data : form
+	           , success:function(response) {
+	               alert("프로필 사진이 변경되었습니다.");
+	               console.log(response);
+	           }
+	           ,error: function (jqXHR) 
+	           { 
+	               alert(jqXHR.responseText); 
+	           }
+	       });
+		}
+
+		
 		//업로드한 사진 불러오기
 		function photoMoreAjax(start, userNo) {
 			$.ajax({
@@ -270,11 +307,12 @@
 				success : function(result) {
 					let html = "";
 					for(let i = 0; i< result.length; i++) {
-						html += "<div>";
+// 						html += "<div>";
 						html += "<a href='/sns/detail?snsPhotoNo="+result[i].snsPhotoNo+"'>"
-						html +=		"<img src='/resources/images/photo/"+result[i].snsFileRename+"' width='50%'>";
+						html +=		"<img src='/resources/images/sns/"+result[i].snsFileRename+"'>";
+						html += "</a>";
 // 						html +=		"<p class='caption'>"+result[i].snsContent+"</p>";
-						html += "</div>";
+// 						html += "</div>";
 					}
 					moreVar.val(Number(start)+1);
 					moreVar.attr("currentSum", Number(moreVar.attr("currentSum"))+result.length); //지금까지 쿼리한 갯수
@@ -287,19 +325,18 @@
 			});
 			
 		}
-		
-		$(window).scroll(function() {
-			let scrollTop = $(window).scrollTop();
-			let innerHeight = $(window).innerHeight();
-			let scrollHeight = $("body").prop("scrollHeight");
+// 		$(window).scroll(function() {
+// 			let scrollTop = $(window).scrollTop();
+// 			let innerHeight = $(window).innerHeight();
+// 			let scrollHeight = $("body").prop("scrollHeight");
 			
-			if(scrollTop + innerHeight >= scrollHeight) {
-				console.log("bottom end!");
-				if(moreVar.attr("totalCount") != moreVar.attr("currentSum")) {
-					photoMoreAjax(moreVar.val());
-				}
-			}
-		});
+// 			if(scrollTop + innerHeight >= scrollHeight) {
+// 				console.log("bottom end!");
+// 				if(moreVar.attr("totalCount") != moreVar.attr("currentSum")) {
+// 					photoMoreAjax(moreVar.val());
+// 				}
+// 			}
+// 		});
 		
 	
 		
