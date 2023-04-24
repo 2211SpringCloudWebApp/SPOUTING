@@ -36,7 +36,7 @@
                 </div>
 
                 <div class="meeting-people">
-                    <span>${meeting.meetingPeople }</span>
+                    <span>👤${lineupCount} / ${meeting.meetingPeople }</span>
                 </div>
             </div>
 

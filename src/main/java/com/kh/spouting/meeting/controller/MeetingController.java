@@ -32,6 +32,7 @@ public class MeetingController {
 	public String meetingPage(Model model) {
 		try {
 			List<Meeting> meetingList = meetingService.selectMeeting();
+			
 			if(!meetingList.isEmpty()) {
 				model.addAttribute("meetingList", meetingList);
 				return "meeting/meeting";
@@ -96,7 +97,9 @@ public class MeetingController {
 	@RequestMapping(value="/meetingDetailPage", method=RequestMethod.GET)
 	public String meetingDetailPage(@RequestParam("meetingNo") int meetingNo, Model model) {
 		Meeting meeting = meetingService.selectOneByNumber(meetingNo);
+		int lineupCount = meetingService.getLineupCount(meetingNo);
 		model.addAttribute("meeting", meeting);
+		model.addAttribute("lineupCount", lineupCount);
 		return "meeting/meeting-detail";
 	}
 	

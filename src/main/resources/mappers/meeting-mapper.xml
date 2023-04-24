@@ -28,4 +28,8 @@
 		INSERT INTO LINEUP_TBL VALUES(#{meetingNo}, #{userNo})
 	</insert>
 	
+	<select id="getLineupCount" resultType="_int">
+		SELECT COUNT(*) FROM LINEUP_TBL WHERE MEETING_NO = #{userNo}
+	</select>
+	
 </mapper>

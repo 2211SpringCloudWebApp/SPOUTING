@@ -14,5 +14,7 @@ public interface MeetingService {
 	Meeting selectOneByNumber(int meetingNo);
 
 	int joinMeeting(Lineup joinMember);
+
+	int getLineupCount(int meetingNo);
 	
 }

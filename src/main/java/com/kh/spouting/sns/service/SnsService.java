@@ -20,5 +20,7 @@ public interface SnsService {
 
 	int insertPhoto(Sns sns);
 
+	SnsPhoto snsDetailPage(int snsPhotoNo);
+
 
 }

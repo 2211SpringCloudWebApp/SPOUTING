@@ -48,4 +48,11 @@ public class MeetingServiceImpl implements MeetingService {
 		return meetingStore.joinMeeting(session, joinMember);
 	}
 
+
+	@Override
+	public int getLineupCount(int meetingNo) {
+		// TODO Auto-generated method stub
+		return meetingStore.getLineupCount(session, meetingNo);
+	}
+
 }

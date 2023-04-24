@@ -22,5 +22,7 @@ public interface SnsStore {
 
 	int updateProfilePhoto(SqlSession session, Sns sns);
 
+	SnsPhoto selectDetailPage(SqlSession session, int snsPhotoNo);
+
 
 }
