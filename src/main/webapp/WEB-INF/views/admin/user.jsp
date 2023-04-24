@@ -28,6 +28,7 @@
                 <th>GENDER</th>
                 <th>REGI_DATE</th>
                 <th>DROP</th>
+                <th>POINT</th>
             </tr>
             
             <c:forEach items="${uList}" var="user" varStatus="i">
@@ -43,7 +44,14 @@
                 </c:if>
                 <c:if test="${user.userType == '1'}">
                     <td style="color: rgb(255, 136, 0);">관리자</td>
-                </c:if>   
+                </c:if>
+                <c:if test="${user.userType != '1'}">
+                    <td><input type="button" id="remo-btn" value="조회" onclick="location.href='/admin/point?userNo=${user.userNo}'"></td>
+                </c:if>
+                <c:if test="${user.userType == '1'}">
+                    <td style="color: rgb(255, 136, 0);">관리자</td>
+                </c:if>      
+                
             </tr>
             </c:forEach>
         </table>

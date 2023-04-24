@@ -90,5 +90,11 @@ public class UserServiceImpl implements UserService{
 		List<User> uList = uStore.selectByKeyWord(session, pi, search);
 		return uList;
 	}
+
+	@Override //번호로 이름 찾기
+	public User selectName(int userNo) {
+		User user = uStore.selectName(session, userNo);
+		return user;
+	}
 	
 }

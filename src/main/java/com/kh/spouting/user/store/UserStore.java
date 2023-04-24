@@ -102,4 +102,12 @@ public interface UserStore {
 	 * @return List<User>
 	 */
 	public List<User> selectByKeyWord(SqlSession session, PageInfo pi, Search search);
+
+	/**
+	 * 번호로 이름 찾기
+	 * @param session
+	 * @param userNo
+	 * @return User
+	 */
+	public User selectName(SqlSession session, int userNo);
 }

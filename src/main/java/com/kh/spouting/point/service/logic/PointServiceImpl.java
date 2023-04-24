@@ -39,4 +39,10 @@ public class PointServiceImpl implements PointService{
 		return pStore.getPointCount(session, userNo);
 	}
 
+	@Override //관리자 포인트 조정
+	public int adminPoint(Point point) {	
+		return pStore.adminPoint(session, point);
+	}
+
+
 }

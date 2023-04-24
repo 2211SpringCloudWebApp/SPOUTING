@@ -37,6 +37,7 @@
                 <th>GENDER</th>
                 <th>REGI_DATE</th>
                 <th>DROP</th>
+                <th>POINT</th>
             </tr>
             
             <c:forEach items="${uList}" var="user" varStatus="i">
@@ -53,6 +54,7 @@
                 <c:if test="${user.userType == '1'}">
                     <td style="color: rgb(255, 123, 0);">관리자</td>
                 </c:if>   
+                <td><input type="button" id="remo-btn" value="조회" onclick="location.href='/admin/point?userNo=${user.userNo}'"></td>
             </tr>
             </c:forEach>
         </table>
@@ -68,7 +70,9 @@
                     
                     <c:forEach begin="${pi.startNavi}" end="${pi.endNavi}" var="p">
                         <c:url var="pageUrl" value="/admin/userSearch">
-                            <c:param name="page" value="${p } "></c:param>
+                            <c:param name="page" value="${p }"></c:param>
+                            <c:param name="searchValue" value="${search.searchValue }"></c:param>
+							<c:param name="searchCondition" value="${search.searchCondition }"></c:param>
                         </c:url>
                         <a href="${pageUrl }" class="navi-btn3">${p }</a>&nbsp;
                     </c:forEach>
@@ -89,7 +93,7 @@
                             <option value="userId">ID</option>
                             <option value="userName">NAME</option>
                         </select>
-                        <input type="text" id="search-box" name="searchValue" placeholder="검색어를 입력하세요.">
+                        <input type="text" id="search-box" name="searchValue" value="${search.searchValue}">
                         <input type="submit" id="search-btn" value="검색">
                     </form>
                 </td>                       

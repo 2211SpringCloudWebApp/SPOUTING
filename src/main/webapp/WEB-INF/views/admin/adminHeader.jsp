@@ -12,12 +12,8 @@
         <ul id="admin-nav">
             <li class="main-nav"><a href="">지점</a></li>
             
-            <li class="main-nav"><a href="/admin/user">회원</a>
-                <ul class="drop-nav">
-                    <li><a href="/admin/user">회원정보</a></li>
-                    <li><a href="/admin/point">포인트</a></li>
-                </ul>
-            </li>
+            <li class="main-nav"><a href="/admin/user">회원</a></li>
+
             <li class="main-nav"><a href="">예약</a></li>
 
             <li class="main-nav"><a href="/shop/adminProductList">쇼핑몰</a>

@@ -63,13 +63,14 @@
     width:130px;
     display:none;
     position: absolute;
-    font-size:16px;      
+    font-size:16px;     
+    background-color: #cccccc73;    
 }
     .drop-nav li a {
         display: block;
         font-size: 15px;
         color: black;
-        border-bottom: 1px solid #ccc;
+        border-bottom: 1.5px solid #858585cb;   
     }
     .drop-nav li a:hover {
         font-size: 16px;

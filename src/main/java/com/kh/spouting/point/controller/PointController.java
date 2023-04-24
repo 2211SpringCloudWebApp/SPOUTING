@@ -17,12 +17,15 @@ import com.kh.spouting.common.PageInfo;
 import com.kh.spouting.point.domain.Point;
 import com.kh.spouting.point.service.PointService;
 import com.kh.spouting.user.domain.User;
+import com.kh.spouting.user.service.UserService;
 
 @Controller
 public class PointController {
 
 	@Autowired
 	private PointService pService;
+	@Autowired
+	private UserService uService;
 	
 	@GetMapping("/point/charge") //포인트 충전 View
 	public String pointChargeView(
@@ -85,28 +88,77 @@ public class PointController {
 		}
 	}
 	
-	
+	/*===================================================
+	 * 관리자
+	 *===================================================*/
+	@GetMapping("/admin/point") //포인트조회 View
+	public String adminPointView(
+			@RequestParam(value="page", required=false, defaultValue="1") Integer page
+			, @RequestParam int userNo
+			, Model model) {		
+		model.addAttribute("userNo", userNo);
 		
-		/*===================================================
-		 * 페이징
-		 *===================================================*/
-		private PageInfo getPageInfo(int currentPage, int totalCount) {
-			PageInfo pi = null;
-			int boardLimit = 8;
-			int naviLimit = 5;
-			int maxPage;
-			int startNavi;
-			int endNavi;
-			
-			maxPage = (int)((double)totalCount/boardLimit+0.9);
-			startNavi = (((int)((double)currentPage/naviLimit+0.9))-1)*naviLimit+1;
-			endNavi = startNavi + naviLimit - 1;
-			if(endNavi > maxPage) {
-				endNavi = maxPage;
-			}
-			pi = new PageInfo(currentPage, boardLimit, naviLimit, startNavi, endNavi, totalCount, maxPage);
-			return pi;
+		User user = uService.selectName(userNo);
+		String userName = user.getUserName();
+		model.addAttribute("userName", userName);
+		
+		Integer userPoint = pService.getUserPoint(userNo);
+		if(userPoint == null) {
+			model.addAttribute("userPoint", 0);
+		} else {
+			model.addAttribute("userPoint", userPoint);
 		}
+		int totalCount = pService.getPointCount(userNo);
+		PageInfo pi = getPageInfo(page, totalCount);
+		
+		List<Point> pList = pService.selectPointDetail(userNo, pi);
+		if(!pList.isEmpty()) {
+			model.addAttribute("pList", pList);
+			model.addAttribute("pi", pi);
+			return "admin/point";
+		} else {
+			model.addAttribute("pList", null);
+			return "admin/point";
+		}	
+	}
+	
+	@PostMapping("/admin/managePoint")
+	public String adminPointChange( //관리자 포인트 조정 Logic
+			Model model
+			, @RequestParam int pointChange
+			, @RequestParam int userNo
+			, Point point) {
+		point.setPointChange(pointChange);
+		point.setUserNo(userNo);
+		int result = pService.adminPoint(point);
+		if(result > 0) {
+			return "redirect:/admin/point?userNo="+userNo;
+		} else {
+			model.addAttribute("msg", "포인트 충전 오류입니다.");
+			return "common/error";
+		}
+	}
+		
+	/*===================================================
+	 * 페이징
+	 *===================================================*/
+	private PageInfo getPageInfo(int currentPage, int totalCount) {
+		PageInfo pi = null;
+		int boardLimit = 8;
+		int naviLimit = 5;
+		int maxPage;
+		int startNavi;
+		int endNavi;
+		
+		maxPage = (int)((double)totalCount/boardLimit+0.9);
+		startNavi = (((int)((double)currentPage/naviLimit+0.9))-1)*naviLimit+1;
+		endNavi = startNavi + naviLimit - 1;
+		if(endNavi > maxPage) {
+			endNavi = maxPage;
+		}
+		pi = new PageInfo(currentPage, boardLimit, naviLimit, startNavi, endNavi, totalCount, maxPage);
+		return pi;
+	}
 		
 	
 	

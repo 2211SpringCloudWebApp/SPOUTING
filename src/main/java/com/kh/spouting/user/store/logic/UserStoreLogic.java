@@ -91,5 +91,11 @@ public class UserStoreLogic implements UserStore {
 		List<User> uList = session.selectList("UserMapper.selectByKeyWord", search, rowBounds);
 		return uList;
 	}
+
+	@Override //번호로 이름 찾기
+	public User selectName(SqlSession session, int userNo) {
+		User result = session.selectOne("UserMapper.selectName", userNo);
+		return result;
+	}
 }
 	

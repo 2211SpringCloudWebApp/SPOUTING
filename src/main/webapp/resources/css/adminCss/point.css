@@ -1,0 +1,181 @@
+@font-face {
+    font-family: 'Pretendard-Regular';
+    src: url('https://cdn.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Regular.woff') format('woff');
+    font-weight: 400;
+    font-style: normal;
+}
+
+* {
+    font-family: 'Pretendard-Regular'; 
+}
+
+#list-main {
+    width: calc(100% - 200px);
+    height: 1000px;
+    border-top: 1px solid rgb(242, 242, 242);
+    padding-bottom: 50px;
+    padding-left: 20px;
+    margin: 0 auto;
+}
+#list-title {
+    width: 600px;
+    margin: 20px auto;
+    text-align: center;
+    padding: 20px;
+    font-size: 18px;
+    color: #555555;
+}
+#list-wrapper {
+    width: 900px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+}
+    #point-list {
+        width: 600px;
+        display: block;
+        margin: 0 auto;
+        line-height: 3;
+        text-align: center;
+    }
+        .table-line {
+            width: 600px;
+            border-bottom: 1px solid #ccc;
+            display: table;
+            padding-right: 10px;
+            padding-left: 10px;
+        }
+        .table-line img {
+            width: 30px;
+            height: 30px;
+            margin-top: 20px;
+            
+        }
+        #point-list:first-child {
+            border-top: 1px solid #ccc;
+        }
+    .point-btn{
+        width: 200px;
+        height: 50px;
+        border: none;
+        background-color: rgba(122, 136, 141, 0.904);
+        border-radius: 5px;
+        color: #eeeeee;
+        margin: 30px;
+        text-align: center;
+        font-size: 15.5px;
+    }
+    .point-btn:hover {
+        background-color: #15295cda;
+        cursor: pointer;
+    }
+
+
+
+/*페이징///////////////////////////////////////*/
+#navi-box {
+    width: 800px;
+    height: 120px;
+    margin: 0 auto;
+    margin-bottom: 50px;
+    text-align: center;
+    padding-top: 30px;
+}
+    #navi-box a{
+        text-decoration: none;
+        color: #1b5dff;
+    }
+        #navi-box a:link{
+            color: #1b5dff;
+        }
+        #navi-box a:visited{
+            color: #1b5dff;
+        }
+    #navi-btn1{
+        padding: 8px;
+        border-radius: 10px;
+        font-weight: 900;
+    }
+    #navi-btn2{
+        padding: 8px;
+        margin-right: 20px;
+        border-radius: 10px;
+        font-weight: 900;
+    }
+    .navi-btn3{
+        font-size: 13px;
+        padding: 7px;
+        padding-left: 10px;
+        padding-right: 10px;
+        border-radius: 10px;
+    }
+        .navi-btn3:hover{
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: 800;
+            background-color: #ebebeb;
+        }
+    #navi-btn4{
+        padding: 8px;
+        margin-left: 20px;
+        border-radius: 10px;
+        font-weight: 900;
+    }  
+    #navi-btn5{
+        padding: 8px;
+        border-radius: 10px;
+        font-weight: 900;
+    }
+
+     
+
+/******************* 이용약관 모달창 *******************/
+#modal {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+    display: none;
+}
+#modal-content {
+    position: absolute;
+    top: 40%;
+    left: calc(50% - 250px);
+    width: 400px;
+    height: 100px;
+    margin: 0 auto;
+    padding: 60px;
+    background-color: #e2e2e2cb;
+    text-align: center;
+    line-height: 2.5;
+}
+#modal-layer {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.349);
+    z-index: -1;
+}
+#modal-content [type=text] {
+    width: 200px;
+    height: 40px;
+    border: 1px solid #ccc;
+    text-align: center;
+}
+.modal-btn {
+    width: 80px;
+    height: 40px;
+    border: none;
+    background-color: #133383;
+    border-radius: 5px;
+    color: white;
+}
+.modal-btn:hover {
+    background-color: #808080;
+    cursor: pointer;
+}
+

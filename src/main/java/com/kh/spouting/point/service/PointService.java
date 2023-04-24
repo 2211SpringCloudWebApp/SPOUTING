@@ -28,11 +28,20 @@ public interface PointService {
 	 */
 	public List<Point> selectPointDetail(int userNo, PageInfo pi);
 
+	
 	/**
 	 * 회원 별 포인트내역 개수 Service
 	 * @param userNo
 	 * @return int
 	 */
 	public int getPointCount(int userNo);
+
+	/**
+	 * 관리자 포인트 조정
+	 * @param pointChange
+	 * @return int
+	 */
+	public int adminPoint(Point point);
+
 
 }
