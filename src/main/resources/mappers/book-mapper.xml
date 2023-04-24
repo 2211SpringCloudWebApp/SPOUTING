@@ -11,6 +11,7 @@
 		<result property="bookPrice" 		column="BOOK_PRICE"/>
 		<result property="numPeople" 		column="NUM_PEOPLE"/>
 		<result property="payTime" 			column="PAY_TIME"/>
+		<result property="paidPrice"		column="PAID_PRICE"/>
 		<result property="facilityName" 	column="FACILITY_NAME"/>
 		<result property="centerName" 		column="CENTER_NAME"/>
 		<result property="centerFilepath1" 	column="CENTER_FILEPATH1"/>
@@ -19,8 +20,13 @@
 		<result property="userPoint" 		column="USER_POINT"/>
 	
 	</resultMap>
+	<!-- 내 이용전 내역 조회 -->
 	<select id ="selectMyBList" resultMap="BookResultMap">
-		SELECT BOOK_NO, USER_NO, USE_DATE, START_TIME, END_TIME, NUM_PEOPLE, FACILITY_NAME, CENTER_NAME, CENTER_FILEPATH1 FROM BOOK_TBL JOIN FACILITIES_TBL USING(FACILITY_NO) JOIN CENTER_TBL USING(CENTER_NO) WHERE USER_NO = #{userNo} AND START_TIME >= SYSDATE AND PAY_TIME IS NOT NULL ORDER BY START_TIME ASC
+		SELECT BOOK_NO, USER_NO, USE_DATE, START_TIME, END_TIME, NUM_PEOPLE, PAID_PRICE, BOOK_PRICE, FACILITY_NAME, CENTER_NAME, CENTER_FILEPATH1 FROM BOOK_TBL JOIN FACILITIES_TBL USING(FACILITY_NO) JOIN CENTER_TBL USING(CENTER_NO) WHERE USER_NO = #{userNo} AND START_TIME >= SYSDATE AND PAY_TIME IS NOT NULL ORDER BY START_TIME ASC
+	</select>
+	<!-- 내 이용만료 내역 조회 -->
+	<select id ="selectMyPBList" resultMap="BookResultMap">
+		<![CDATA[SELECT BOOK_NO, USER_NO, USE_DATE, START_TIME, END_TIME, NUM_PEOPLE, FACILITY_NAME, CENTER_NAME, CENTER_FILEPATH1 FROM BOOK_TBL JOIN FACILITIES_TBL USING(FACILITY_NO) JOIN CENTER_TBL USING(CENTER_NO) WHERE USER_NO = #{userNo} AND START_TIME <= SYSDATE AND PAY_TIME IS NOT NULL ORDER BY START_TIME DESC]]>
 	</select>
 	<!-- 캘린더용 -->
 	<select id="selectBListCal" resultMap="BookResultMap">
@@ -34,15 +40,24 @@
 	<select id="selectBook" resultMap="BookResultMap">
 	SELECT * FROM BOOK_TBL RIGHT JOIN USER_TBL USING(USER_NO) RIGHT JOIN POINT_TBL USING(USER_NO) LEFT JOIN FACILITIES_TBL USING(FACILITY_NO) LEFT JOIN CENTER_TBL USING(CENTER_NO) WHERE BOOK_NO=#{bookNo}
 	</select>	
-	<!-- 예약정보저장하기 -->
+	<!-- 가예약정보저장하기 -->
 	<insert id="insertBook">
-		<!--예약 완료시 payTime 업뎃치기(결제될때 SYSTIMESTAMP로들어가기) -->
-		INSERT INTO BOOK_TBL VALUES(#{bookNo}, #{facilityNo}, #{userNo}, #{useDate}, #{startTime}, #{endTime}, #{bookPrice}, #{numPeople}, NULL)
+		INSERT INTO BOOK_TBL VALUES(#{bookNo}, #{facilityNo}, #{userNo}, #{useDate}, #{startTime}, #{endTime}, #{bookPrice}, #{numPeople}, NULL, NULL)
 	</insert>
+	<!-- 예약 시 포인트 사용할 경우 -->
 	<insert id="insertPDetail">
-		INSERT INTO P_DETAIL_TBL VALUES(SEQ_POINT_NO.NEXTVAL, #{userNo}, SYSTIMESTAMP, '시설예약차감', -#{pointChange})
+		INSERT INTO P_DETAIL_TBL VALUES(SEQ_POINT_NO.NEXTVAL, #{userNo}, SYSTIMESTAMP, '시설예약차감', #-{pointChange})
 	</insert>
+	<!-- 예약 취소 시 포인트 환급 -->
+	<insert id="returnPoint">
+		INSERT INTO P_DETAIL_TBL VALUES(SEQ_POINT_NO.NEXTVAL, #{userNo}, SYSTIMESTAMP, '예약취소환급', #{pointChange})
+	</insert>
+	<!--예약 완료시 payTime, paidPrice 업뎃치기(결제될때 SYSTIMESTAMP로들어가기) -->
 	<update id="updatePayTime">
-		UPDATE BOOK_TBL SET PAY_TIME = SYSTIMESTAMP WHERE BOOK_NO = #{bookNo}
+		UPDATE BOOK_TBL SET PAY_TIME=SYSTIMESTAMP, PAID_PRICE=#{paidPrice} WHERE BOOK_NO = #{bookNo}
 	</update>
+	<!-- 예약취소 -->
+	<delete id="deleteBook">
+		DELETE FROM BOOK_TBL WHERE BOOK_NO=#{bookNo}
+	</delete>
 </mapper>

@@ -44,8 +44,8 @@ public class BookServiceImpl implements BookService{
 	}
 
 	@Override
-	public int bookUp(int bookNo) {
-		int result = bStore.updatePayTime(session, bookNo);
+	public int bookUp(Book book) {
+		int result = bStore.updatePayTime(session, book);
 		return result;
 	}
 
@@ -67,6 +67,22 @@ public class BookServiceImpl implements BookService{
 		return myBList;
 	}
 
-	
+	@Override
+	public List<Book> getMyPBooking(int userNo) {
+		List<Book> myPBList = bStore.getMyPBooking(session, userNo);
+		return myPBList;
+	}
+
+	@Override
+	public int deleteBook(int bookNo) {
+		int result = bStore.deleteBook(session, bookNo);
+		return result;
+	}
+
+	@Override
+	public int cancelUsedPoint(PointDetail pDetail) {
+		int result = bStore.returnPoint(session, pDetail);
+		return result;
+	}
 
 }

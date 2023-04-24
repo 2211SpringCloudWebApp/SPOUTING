@@ -105,7 +105,7 @@ body {
           <!-- 			//--//사용포인트입력//결제금액//api -->
           <div id="tableDiv">
             <form action ="/book/bookUp" method="post">   
-                  
+                <input type="hidden" id="paidPrice" name="paidPrice">
 	            <input type="hidden" value="${book.bookNo }" name="bookNo">  
 	            <input type="hidden" value="${book.userNo }" name="userNo">  
 	            <table>
@@ -148,7 +148,7 @@ body {
 	              </tr>
 	              <tr id="dotted-line2">
 	                <td>사용포인트 입력</td>
-	                <td><input type="text" name="pointChange" ></td>
+	                <td><input type="text" name="pointChange" value="0"></td>
 	              </tr>
 	              <tr>
 	                <td>결제금액</td>
@@ -156,7 +156,7 @@ body {
 	              </tr>
 	              <tr>
 	                <td></td>
-	                <td><button>가짜결제갈겨</button></td>
+	                <td><button id="fakePay">가짜결제갈겨</button></td>
 	               
 	                <!-- <td><button onclick="requestPay()">결제갈겨:포트원 이걸로 바꿔야함</button></td> -->
 	              </tr>
@@ -172,38 +172,43 @@ body {
        	
        	<script>
        	
-//        	document.querySelector('button').addEventListener('click', function() {
-//        	    let pointToUse = document.querySelector('input[type="text"]').value;
-//        	    if (!pointToUse || isNaN(parseInt(pointToUse))) {
-//        	        pointToUse = 0;
-//        	    }
-//        	 	document.querySelector('input[name="pointChange"]').value = pointToUse;
-//           });
-       	
-          document.querySelector('input[type="text"]').addEventListener('keyup', function() {
-            let totalPoint = Number(document.querySelector("#totalPoint").innerHTML);
-            let bookPrice = Number(document.querySelector("#bookPrice").innerHTML);
-            let pointToUse = Number(document.querySelector('input[type="text"]').value);
-                console.log(totalPoint);
-                console.log(bookPrice);
-                console.log(pointToUse);
-            let priceToPay;   
-            
-	            //let pointToUse = document.querySelector('input[type="text"]').value;
-	       	    if (!pointToUse || isNaN(parseInt(pointToUse))) {
+       	document.addEventListener('DOMContentLoaded', function() {
+          	document.querySelector('input[type="text"]').addEventListener('keyup', function() {
+        	  updatePrice();
+          	});
+         	document.querySelector('#fakePay').addEventListener('click', function() {
+        	   updatePrice();
+          	});	  
+         	updatePrice();
+        	  
+	       	function updatePrice(){
+	            let totalPoint = Number(document.querySelector("#totalPoint").innerHTML);
+	            let bookPrice = Number(document.querySelector("#bookPrice").innerHTML);
+	            let pointToUse = Number(document.querySelector('input[type="text"]').value);
+	                console.log(totalPoint);
+	                console.log(bookPrice);
+	                console.log(pointToUse);
+	            let priceToPay;   
+	            
+		            //let pointToUse = document.querySelector('input[type="text"]').value;
+	       	    if (!pointToUse || isNaN(pointToUse)) {
 	       	        pointToUse = 0;
 	       	    }
 	       	 	document.querySelector('input[name="pointChange"]').value = pointToUse;
-	       	 	
+		       	 	
 	            if(totalPoint >= pointToUse) {
 	              priceToPay = bookPrice - pointToUse;
 	              console.log(priceToPay);
 	            }else {
-	              priceToPay = bookPrice; // 포인트가 부족한 경우에는 가격을 그대로 사용. 유효성검사로 고치자...나중에...
+	              priceToPay = bookPrice; // 포인트가 부족한 경우에는 가격을 그대로 사용. 유효성검사로 고치자...으...으으...
 	            }
 	            document.querySelector("#priceToPay").innerHTML = priceToPay;
+	            document.querySelector("#paidPrice").value = priceToPay;
+	       		
+	       	}  
 	            
-          	});
+          	
+       	});
           
 //           //결제시도!!!
 //           var IMP = window.IMP;  

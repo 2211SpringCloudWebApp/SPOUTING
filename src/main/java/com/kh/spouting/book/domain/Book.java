@@ -14,6 +14,7 @@ public class Book {
 	private int bookPrice; 
 	private int numPeople; 
 	private Timestamp payTime; 
+	private int paidPrice;
 	//여기서부턴 예약확인페이지에서 보일것
 	private String facilityName; 
 	private String centerName; 
@@ -29,6 +30,15 @@ public class Book {
 	
 	
 	
+	public Book(int bookNo, int paidPrice) {
+		super();
+		this.bookNo = bookNo;
+		this.paidPrice = paidPrice;
+	}
+
+
+
+
 	public Book(int facilityNo, int userNo, Date useDate, Timestamp startTime, Timestamp endTime, int bookPrice,
 			int numPeople) {
 		super();
@@ -146,14 +156,30 @@ public class Book {
 
 
 
+	public int getPaidPrice() {
+		return paidPrice;
+	}
+
+
+
+
+	public void setPaidPrice(int paidPrice) {
+		this.paidPrice = paidPrice;
+	}
+
+
+
+
 	@Override
 	public String toString() {
 		return "Book [bookNo=" + bookNo + ", facilityNo=" + facilityNo + ", userNo=" + userNo + ", useDate=" + useDate
 				+ ", startTime=" + startTime + ", endTime=" + endTime + ", bookPrice=" + bookPrice + ", numPeople="
-				+ numPeople + ", payTime=" + payTime + ", facilityName=" + facilityName + ", centerName=" + centerName
-				+ ", centerFilepath1=" + centerFilepath1 + ", userName=" + userName + ", userEmail=" + userEmail
-				+ ", userPoint=" + userPoint + "]";
+				+ numPeople + ", payTime=" + payTime + ", paidPrice=" + paidPrice + ", facilityName=" + facilityName
+				+ ", centerName=" + centerName + ", centerFilepath1=" + centerFilepath1 + ", userName=" + userName
+				+ ", userEmail=" + userEmail + ", userPoint=" + userPoint + "]";
 	}
+
+
 
 
 	

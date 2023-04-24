@@ -39,8 +39,8 @@ public class BookStoreLogic implements BookStore{
 	}
 
 	@Override
-	public int updatePayTime(SqlSession session, int bookNo) {
-		int result = session.update("BookMapper.updatePayTime", bookNo);
+	public int updatePayTime(SqlSession session, Book book) {
+		int result = session.update("BookMapper.updatePayTime", book);
 		return result;
 	}
 
@@ -62,5 +62,22 @@ public class BookStoreLogic implements BookStore{
 		return myBList;
 	}
 
+	@Override
+	public List<Book> getMyPBooking(SqlSession session, int userNo) {
+		List<Book> myPBList = session.selectList("BookMapper.selectMyPBList", userNo);
+		return myPBList;
+	}
+
+	@Override
+	public int deleteBook(SqlSession session, int bookNo) {
+		int result = session.delete("BookMapper.deleteBook", bookNo);
+		return result;
+	}
+
+	@Override
+	public int returnPoint(SqlSession session, PointDetail pDetail) {
+		int result = session.insert("BookMapper.returnPoint", pDetail);
+		return result;
+	}
 
 }
