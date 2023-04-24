@@ -17,6 +17,7 @@
 		<main>
 			<h1>SPOUTING</h1>
 			<div class="title">
+<%-- 				<input type="hidden" value="${center.centerName }"> --%>
 				<h3>${center.centerName }</h3>
 				<div class="division-line"></div>
 				<h3>${center.centerAddr}</h3>
