@@ -17,5 +17,7 @@ public interface MeetingStore {
 
 	int joinMeeting(SqlSession session, Lineup joinMember);
 
+	int getLineupCount(SqlSession session, int meetingNo);
+
 
 }

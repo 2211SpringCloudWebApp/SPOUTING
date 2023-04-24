@@ -57,5 +57,11 @@ public class SnsServiceImpl implements SnsService {
 		return snsStore.updateProfilePhoto(session, sns);
 	}
 
+	@Override
+	public SnsPhoto snsDetailPage(int snsPhotoNo) {
+		// TODO Auto-generated method stub
+		return snsStore.selectDetailPage(session, snsPhotoNo);
+	}
+
 
 }

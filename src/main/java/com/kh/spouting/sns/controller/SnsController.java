@@ -24,6 +24,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.gson.Gson;
 import com.kh.spouting.common.FileUtil;
 import com.kh.spouting.sns.domain.Sns;
+import com.kh.spouting.sns.domain.SnsComment;
 import com.kh.spouting.sns.domain.SnsPhoto;
 import com.kh.spouting.sns.domain.SnsProfile;
 import com.kh.spouting.sns.service.SnsService;
@@ -176,6 +177,38 @@ public class SnsController {
 		List<SnsPhoto> pList = snsService.morePhoto(start, userNo);
 		return new Gson().toJson(pList);
 		}
+	
+	
+	//sns상세 페이지
+	@RequestMapping(value="/sns/detail", method=RequestMethod.GET)
+	public String snsDetailPage(@RequestParam("snsPhotoNo") int snsPhotoNo, Model model) {
+		SnsPhoto snsDetail = snsService.snsDetailPage(snsPhotoNo);
+		SnsProfile oneSns = snsService.selectOneById(snsDetail.getUserNo());
+		model.addAttribute("snsDetail", snsDetail);
+		model.addAttribute("oneSns", oneSns);
+		return "sns/detail";
+	}
+	
+	
+	//sns 댓글 등록
+	@ResponseBody
+	@RequestMapping(value="/comment/register", method=RequestMethod.POST)
+		public void registerComment(@ModelAttribute SnsComment snsComment) {
+
+//		try {
+//			int result = snsService.insertComment(snsComment);
+//			if(result > 0) {
+//				return "1";
+//			} else {
+//				return "0";
+//			}
+//			
+//		} catch (Exception e) {
+//			// TODO: handle exception
+//			return e.getMessage();
+//		}
+		
+	}
 	
 	
 

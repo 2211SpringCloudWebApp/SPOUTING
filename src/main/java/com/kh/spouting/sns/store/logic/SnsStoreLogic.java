@@ -54,5 +54,11 @@ public class SnsStoreLogic implements SnsStore {
 		return session.update("SnsMapper.updateProfilePhoto", sns);
 	}
 
+	@Override
+	public SnsPhoto selectDetailPage(SqlSession session, int snsPhotoNo) {
+		// TODO Auto-generated method stub
+		return session.selectOne("SnsMapper.selectDetailPage", snsPhotoNo);
+	}
+
 
 }

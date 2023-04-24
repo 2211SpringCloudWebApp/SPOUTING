@@ -65,8 +65,9 @@
 			--overflow: auto;
 			margin-top: 20px;
 			--position: relative;
-		    width: 200px;
+		    --width: 200px;
 		    height: 200px;
+		    display: flex;
 		}
 		
 		#sns-content img {
@@ -161,13 +162,13 @@
 <!-- 			<input type="button" onclick="location.href='/sns/uploadPage'" value="sns사진 등록"> -->
 <%-- 		</c:if> --%>
 		
-		<div id="photo-box">
+<!-- 		<div id="photo-box"> -->
 		<div id="sns-content">
 				<input type="hidden" id="more-var" totalCount="${totalCount}" currentSum="0" currentCount="0" value="1">
 			</div>
 		</div>
 
-    </div>
+<!--     </div> -->
     
     <br>
 	<jsp:include page="../common/footer.jsp"></jsp:include>

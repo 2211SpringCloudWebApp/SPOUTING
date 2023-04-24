@@ -36,4 +36,10 @@ public class MeetingStoreLogic implements MeetingStore {
 		return session.insert("MeetingMapper.joinMeeting", joinMember);
 	}
 
+	@Override
+	public int getLineupCount(SqlSession session, int meetingNo) {
+		// TODO Auto-generated method stub
+		return session.selectOne("MeetingMapper.getLineupCount", meetingNo);
+	}
+
 }

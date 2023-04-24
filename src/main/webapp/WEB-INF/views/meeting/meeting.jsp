@@ -67,7 +67,7 @@
 	                </div>
 	
 	                <div class="meeting-people">
-	                    <span>${meeting.meetingPeople }</span>
+	                    <span>인원 : ${meeting.meetingPeople }명</span>
 	                </div>
 	            </div>
 	
