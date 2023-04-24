@@ -60,6 +60,10 @@
 ​
                     <div class="item_part">
                         <div class="item_name"><a href="/meeting">커뮤니티</a></div>
+                        <div class="item_content">
+                            <li><a href="">소셜링</a></li>
+                            <li><a href="">문의사항</a></li>
+                        </div>
                     </div>
 ​
                     <div class="item_part">

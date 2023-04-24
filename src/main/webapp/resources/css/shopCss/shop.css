@@ -44,5 +44,19 @@ td {
 img {
 	height : 100px;
 }
-
+#buttonbox {
+	text-align : center;
+	height : 100px;
+	display : flex;
+	align-items : center;
+	justify-content : center;
+}
+.btn {
+	width : 100px;
+	height : 30px;
+	background-color : #1C3879;
+	border : none;
+	margin : 20px;
+	color : white;
+}
 

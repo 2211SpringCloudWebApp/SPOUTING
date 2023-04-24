@@ -26,4 +26,15 @@ public interface ProductStore {
 
 	Product selectOneByNo(SqlSession session, int productNo);
 
+	int insertProduct(SqlSession session, Product product);
+
+	int updateProduct(SqlSession session, Product product);
+
+	Product selectOneById(SqlSession session, int productNo);
+
+	int deleteProduct(SqlSession session, int productNo);
+
+	// 장바구니용 상퓸 상세 조회 스토어
+	public Product selectOneProduct(SqlSession session, Product product);
+
 }

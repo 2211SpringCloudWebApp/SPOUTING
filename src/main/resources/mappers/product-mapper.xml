@@ -105,4 +105,34 @@
 	<select id="selectOneByNo" resultMap="productResultMap">
 		SELECT * FROM PRODUCT_TBL WHERE PRODUCT_NO = #{productNo}
 	</select>
+	
+	<!-- 장바구니용 상품 상세 조회-->
+	<select id="selectOneProduct" resultMap="productResultMap">
+		SELECT * FROM PRODUCT_TBL WHERE PRODUCT_NO = #{productNo}
+	</select>
+	
+	<!-- 관리자 상품 등록-->
+	<insert id="insertProduct">
+		INSERT INTO PRODUCT_TBL PRODUCT_TBL 
+		VALUES(SEQ_PRODUCT_NO.NEXTVAL, #{categoryNo}, #{productName}, #{productPrice}, #{productDescription}, #{productFilename1}, #{productFilename2}, #{productFilepath1}, #{productFilepath2})
+	</insert>
+	
+	<!-- 관리자 상품 수정 페이지 -->
+	<select id="selectOneById" resultMap="productResultMap">
+		SELECT * FROM PRODUCT_TBL WHERE PRODUCT_NO = #{productNo }
+	</select>
+	
+	<!-- 관리자 상품 수정-->
+	<update id="updateProduct" parameterType="product">
+		UPDATE PRODUCT_TBL SET
+			CATEGORY_NO = #{categoryNo}, PRODUCT_NAME=#{productName}, PRODUCT_PRICE=#{productPrice}, PRODUCT_DESCRIPTION=#{productDescription}
+			<if test=" productFilename1!= null">, PRODUCT_FILENAME1 = #{centerFilename1}</if>
+	        <if test=" productFilename2!= null">, PRODUCT_FILENAME1 = #{centerFilename2}</if>
+	    WHERE PRODUCT_NO = #{productNo}
+	</update>
+
+	<!-- 관리자 상품 삭제  -->
+	<delete id="deleteProduct">
+		DELETE FROM PRODUCT_TBL WHERE PRODUCT_NO = #{productNo}
+	</delete>
 </mapper>

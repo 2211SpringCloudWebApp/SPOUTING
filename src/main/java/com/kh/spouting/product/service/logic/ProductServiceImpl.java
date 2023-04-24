@@ -69,4 +69,28 @@ public class ProductServiceImpl implements ProductService {
 		return product;
 	}
 
+	@Override
+	public int insertProduct(Product product) {
+		int result = pStore.insertProduct(session, product);
+		return result;
+	}
+
+	@Override
+	public int updateProduct(Product product) {
+		int result = pStore.updateProduct(session, product);
+		return result;
+	}
+
+	@Override
+	public Product selectOneById(int productNo) {
+		Product product = pStore.selectOneById(session, productNo);
+		return product;
+	}
+
+	@Override
+	public int deleteProduct(int productNo) {
+		int result = pStore.deleteProduct(session, productNo);
+		return result;
+	}
+
 }
