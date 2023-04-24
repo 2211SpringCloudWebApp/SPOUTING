@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="ProductMapper">
+<mapper namespace="CartMapper">
 	<resultMap type="Cart" id="cartResultMap">
 		<id property="cartNo" column="CART_NO"/>
 		<result property="userId" column="USER_ID"/>
 		<result property="cartQuantity" column="CART_QUANTITY"/>
-		<result property="cartPrice" column="CART_PRICE"/>
 		<result property="productNo" column="PRODUCT_NO"/>
+		<result property="cartCheck" column="CART_CHECK"/>
 	</resultMap>
 	<resultMap type="Product" id="productResultMap">
 		<id property="productNo" column="PRODUCT_NO"/>
@@ -21,4 +21,25 @@
 		<result property="productFilepath2" column="PRODUCT_FILEPATH2"/>
 	</resultMap>
 
+	<!-- 장바구니 추가 -->	
+	<insert id="insertCart">
+		INSERT INTO CART_TBL VALUES(SEQ_CART_NO.NEXTVAL, #{userId}, #{cartQuantity}, #{productNo}, DEFAULT)
+	</insert>
+
+	<!-- 기존 장바구니 수량 추가 -->	
+	<update id="updateQtyCart">
+		UPDATE CART_TBL SET CART_QUANTITY = CART_QUANTITY + #{cartQuantity}
+		WHERE USER_ID = #{userId} AND PRODUCT_NO = #{productNo}
+	</update>
+
+	<!-- 기존 장바구니 체크 -->	
+	<select id="selectCheckCart" resultType="_int">
+		SELECT COUNT(*) FROM CART_TBL
+		WHERE USER_ID = #{userId} AND PRODUCT_NO = #{productNo}
+	</select>
+	
+	<!-- 장바구니 목록 반환 -->	
+	<select id="selectCart" resultMap="cartResultMap">
+		SELECT * FROM CART_TBL WHERE USER_ID = #{userId}
+	</select>
 </mapper>

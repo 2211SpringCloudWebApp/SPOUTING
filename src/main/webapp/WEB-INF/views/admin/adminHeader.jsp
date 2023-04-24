@@ -20,10 +20,10 @@
             </li>
             <li class="main-nav"><a href="">예약</a></li>
 
-            <li class="main-nav"><a href="">쇼핑몰</a>
+            <li class="main-nav"><a href="/shop/adminProductList">쇼핑몰</a>
                 <ul class="drop-nav">
                     <li><a href="">상품관리</a></li>
-                    <li><a href="">주문</a></li>
+                    <li><a href="">주문관리</a></li>
                     <li><a href="">리뷰관리</a></li>
                 </ul>
             </li>

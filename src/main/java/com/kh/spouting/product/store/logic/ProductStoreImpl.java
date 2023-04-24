@@ -74,4 +74,34 @@ public class ProductStoreImpl implements ProductStore{
 		return product;
 	}
 
+	@Override
+	public int insertProduct(SqlSession session, Product product) {
+		int result = session.insert("ProductMapper.insertProduct", product);
+		return result;
+	}
+
+	@Override
+	public int updateProduct(SqlSession session, Product product) {
+		int result = session.update("ProductMapper.updateProduct", product);
+		return result;
+	}
+
+	@Override
+	public Product selectOneById(SqlSession session, int productNo) {
+		Product product = session.selectOne("ProductMapper.selectOneById", productNo);
+		return product;
+	}
+
+	@Override
+	public int deleteProduct(SqlSession session, int productNo) {
+		int result = session.delete("ProductMapper.deleteProduct", productNo);
+		return result;
+	}
+	
+	// 장바구니용 상품 조회 스토어
+	@Override
+	public Product selectOneProduct(SqlSession session, Product product) {
+		return session.selectOne("ProductMapper.selectOneProduct", product);
+	}
+
 }

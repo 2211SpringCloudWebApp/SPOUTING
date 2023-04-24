@@ -8,6 +8,8 @@ import com.kh.spouting.product.domain.Product;
 
 public interface ProductService {
 
+	// ********** 사용자 기능 **********
+	
 	// 게시글 전체 갯수
 	public int getListCount();
 
@@ -31,6 +33,20 @@ public interface ProductService {
 
 	// 상품 상세 조회
 	public Product selectOneByNo(int productNo);
+
+	
+	// ********** 관리자 기능 **********
+	
+	// 상품 등록
+	public int insertProduct(Product product);
+
+	// 상품 수정
+	public int updateProduct(Product product);
+
+	// 상품 수정 페이지
+	public Product selectOneById(int productNo);
+
+	public int deleteProduct(int productNo);
 
 
 

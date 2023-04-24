@@ -63,6 +63,8 @@
     	</div>
 
 	<jsp:include page="../common/footer.jsp"></jsp:include>
+	
+	
     <script>
         let pages = 0;//현재 인덱스 번호
         let positionValue = 0;//images 위치값

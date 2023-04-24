@@ -14,8 +14,9 @@
 		<typeAlias type="com.kh.spouting.notice.domain.Notice" alias="Notice"/>
 		<typeAlias type="com.kh.spouting.notice.domain.NoticeJoin" alias="NoticeJoin"/>
 		<typeAlias type="com.kh.spouting.product.domain.Product" alias="Product"/>
-<!-- 		<typeAlias type="com.kh.spouting.product.domain.Cart" alias="Cart"/> -->
 		<typeAlias type="com.kh.spouting.product.domain.Category" alias="Category"/>
+		<typeAlias type="com.kh.spouting.cart.domain.Cart" alias="Cart"/>
+		<typeAlias type="com.kh.spouting.cart.domain.Order" alias="Order"/>
 		<typeAlias type="com.kh.spouting.diary.domain.Diary" alias="Diary"/>
 		<typeAlias type="com.kh.spouting.sns.domain.Sns" alias="Sns"/>
 		<typeAlias type="com.kh.spouting.sns.domain.SnsProfile" alias="SnsProfile"/>
@@ -33,7 +34,7 @@
 		<mapper resource="mappers/meeting-mapper.xml"/>
 		<mapper resource="mappers/notice-mapper.xml"/>
 		<mapper resource="mappers/product-mapper.xml"/>
-<!-- 		<mapper resource="mappers/cart-mapper.xml"/> -->
+		<mapper resource="mappers/cart-mapper.xml"/>
 		<mapper resource="mappers/diary-mapper.xml"/>
 		<mapper resource="mappers/sns-mapper.xml"/>
 		<mapper resource="mappers/point-mapper.xml"/>

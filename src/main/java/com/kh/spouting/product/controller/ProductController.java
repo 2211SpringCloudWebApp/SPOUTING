@@ -1,6 +1,10 @@
 package com.kh.spouting.product.controller;
 
+import java.io.File;
 import java.util.List;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -9,8 +13,11 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.kh.spouting.center.domain.Center;
+import com.kh.spouting.common.Alert;
 import com.kh.spouting.common.PageInfo;
 import com.kh.spouting.common.Search;
 import com.kh.spouting.product.domain.Product;
@@ -21,6 +28,8 @@ public class ProductController {
 	
 	@Autowired
 	private ProductService pService;
+	
+	// ******************** 이용자 기능 ********************
 	
 	// 페이징 처리 (게시판형)
 	private PageInfo getPageInfoBo(int currentPage, int totalCount) {
@@ -154,6 +163,267 @@ public class ProductController {
 			return "common/error";
 		}
 	}
+	
+	
+	// ******************** 관리자 기능 ********************
+	
+	// 상품 등록 화면
+	@RequestMapping(value="/product/registserProductView", method=RequestMethod.GET)
+	public String productRegisterView() {
+		return "shop/adminRegisterProduct";
+	}
+	
+	// 상품 등록
+	@RequestMapping(value="/product/register", method=RequestMethod.POST)
+	public String productRegister(
+			@ModelAttribute Product product,
+			@RequestParam(value="uploadFile1", required=false) MultipartFile uploadFile1,
+			@RequestParam(value="uploadFile2", required=false) MultipartFile uploadFile2,
+			HttpServletRequest request,
+			HttpSession session,
+			Model model) {
+		try {
+			request.setCharacterEncoding("UTF-8");
+			if(!uploadFile1.getOriginalFilename().equals("")) {
+				String filePath = saveFile1(uploadFile1, request);
+				if(filePath != null) {	
+					product.setProductFilename1(uploadFile1.getOriginalFilename());
+					product.setProductFilename1(filePath);
+				}
+			}
+			if(!uploadFile2.getOriginalFilename().equals("")) {
+				String filePath = saveFile2(uploadFile2, request);
+				if(filePath != null) {	
+					product.setProductFilename2(uploadFile2.getOriginalFilename());
+					product.setProductFilename2(filePath);
+				}
+			}
+			int result = pService.insertProduct(product);
+			if(result > 0) {
+				Alert alert = new Alert("/shop/adminProductList", "상품 등록이 완료되었습니다.");
+				model.addAttribute("alert", alert);
+				return "common/alert";
+			}else {
+				model.addAttribute("msg", "상품 등록이 완료되지 않았습니다. 관리자에게 문의해주세요");
+				return "common/error";
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			model.addAttribute("msg", "모든 정보를 입력해주세요");
+			return "common/error";
+		}
+	}
+	
+	// 지점 경로로 파일 복사(파일업로드) : 첫번째 파일
+	private String saveFile1(MultipartFile uploadFile1, HttpServletRequest request) {
+		try {
+			String root = request.getSession().getServletContext().getRealPath("resources/images");
+			// 운영체제에 따라 경로가 다름, 윈도우는 \ 맥은 /
+			String savePath = root + "/product/items";
+			// 폴더가 없을 경우 자동 생성
+			File folder = new File(savePath);
+			if(!folder.exists()) {
+				folder.mkdir();
+			}
+			// 실제 파일의 경로
+			String filePath = savePath + "/" + uploadFile1.getOriginalFilename();
+			// 실제로 파일 저장
+			File file = new File(filePath);
+			uploadFile1.transferTo(file);
+			return filePath;
+		} catch (Exception e) {
+			e.printStackTrace();
+			return null;
+		}
+	}
+	
+	// 지점 경로로 파일 복사(파일업로드) : 두번째 파일
+	private String saveFile2(MultipartFile uploadFile2, HttpServletRequest request) {
+		try {
+			// 원하는 저장 경로
+			String root = request.getSession().getServletContext().getRealPath("resources/images");
+			String savePath = root + "/product/description";
+			// 폴더가 없을 경우 자동 생성
+			File folder = new File(savePath);
+			if(!folder.exists()) {
+				folder.mkdir();
+			}
+			// 실제 파일의 경로
+			String filePath = savePath + "/" + uploadFile2.getOriginalFilename();
+			// 실제로 파일 저장
+			File file = new File(filePath);
+			uploadFile2.transferTo(file);
+			return filePath;
+		} catch (Exception e) {
+			e.printStackTrace();
+			return null;
+		}
+	}
+	
+	// 조건부 검색
+		@RequestMapping(value="/product/adminSearch", method=RequestMethod.GET)
+		public String productSearchAdmin(
+				@ModelAttribute Search search
+				, @RequestParam(value="page", required=false, defaultValue="1") Integer currentPage
+				, Model model) {
+			try {
+				System.out.println(search.toString());
+				int totalCount = pService.getListCount(search);
+				PageInfo pi = this.getPageInfoBo(currentPage, totalCount);
+				List<Product> searchList = pService.selectListByKeyword(pi, search);
+				if(!searchList.isEmpty()) {
+					model.addAttribute("search", search);
+					model.addAttribute("pi", pi);
+					model.addAttribute("sList", searchList);
+					return "shop/adminSearch";
+				} else {
+					model.addAttribute("msg", "데이터 조회에 실패했습니다.");
+					return "common/error";
+				}
+			} catch (Exception e) {
+				model.addAttribute("msg", e.getMessage());
+				return "common/error";
+			}
+		}
+	
+	// 상품 목록 조회
+	@RequestMapping(value="/shop/adminProductList", method=RequestMethod.GET)
+	public ModelAndView listAdmin(ModelAndView mv, 
+			@RequestParam(value="page", required=false, defaultValue="1") Integer page) {
+		int totalCount = pService.getListCount();
+		PageInfo pi = this.getPageInfoBo(page, totalCount);
+		List<Product> pList = pService.selectAllProduct(pi);
+		mv.addObject("pi", pi).addObject("pList", pList).setViewName("/shop/adminListProduct");
+	    return mv;
+	}
+
+	// 상품 상세페이지 이동
+	@RequestMapping(value="/product/adminDetailProduct", method=RequestMethod.GET)
+	public String detailProductAdmin(@RequestParam("productNo") int productNo, Model model) {
+		try {
+			Product product = pService.selectOneByNo(productNo);
+			model.addAttribute("product", product);
+			return "shop/adminDetailProduct";
+		} catch (Exception e) {
+			e.printStackTrace();
+			model.addAttribute("msg", e.getMessage());
+			return "common/error";
+		}
+	}
+	
+	// 상품 수정화면
+	@RequestMapping(value="/product/modifyView", method=RequestMethod.GET)
+	public String productModifyView(@RequestParam("productNo") int productNo, Model model) {
+		try {
+			Product product = pService.selectOneById(productNo);
+			if(product != null) {
+				model.addAttribute("product", product);
+				return "shop/adminModifyProduct";
+			}else {
+				model.addAttribute("msg", "상품 정보 수정에 실패하였습니다.");
+				return "common/error";
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			model.addAttribute("msg", e.getMessage());
+			return "common/error";
+		}
+	}
+	
+	// 상품 수정
+	@RequestMapping(value="/product/modify", method= {RequestMethod.GET, RequestMethod.POST})
+	public String productModify(
+		@ModelAttribute Product product,
+	    @RequestParam(value="reloadFile1", required=false) MultipartFile reloadFile1,
+	    @RequestParam(value="reloadFile2", required=false) MultipartFile reloadFile2,
+	    Model model,
+	    HttpServletRequest request) {
+		try {
+			if(reloadFile1 != null && !reloadFile1.isEmpty()) {
+				if(product.getProductFilename1() != null) {
+					this.deleteFile1(product.getProductFilename1(), request);
+					this.deleteFile2(product.getProductFilename2(), request);
+				}
+				String modifyPath = this.saveFile1(reloadFile1, request);
+				if(modifyPath != null) {
+					product.setProductFilename1(reloadFile1.getOriginalFilename());
+					product.setProductFilename2(modifyPath);
+				}
+			}
+			if(reloadFile2 != null && !reloadFile2.isEmpty()) {
+				if(product.getProductFilename2() != null) {
+					this.deleteFile2(product.getProductFilename2(), request);
+				}
+				String modifyPath2 = this.saveFile2(reloadFile2, request);
+				if(modifyPath2 != null) {
+					product.setProductFilename1(reloadFile2.getOriginalFilename());
+					product.setProductFilename2(modifyPath2);
+				}
+			}
+			// DB에서 지점정보 수정
+			int result = pService.updateProduct(product);
+			if(result > 0) {
+				Alert alert = new Alert("/shop/adminProductList", "상품 수정이 완료되었습니다.");
+				model.addAttribute("alert", alert);
+				return "common/alert";
+			}else {
+				model.addAttribute("msg", "상품 정보수정이 완료되지 않았습니다.");
+				return "common/error";
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			model.addAttribute("msg", e.getMessage());
+			return "common/error";
+		}
+	}
+	
+	// 기존 파일 삭제 메소드 (첫번째 사진)
+	private void deleteFile1(String productFilename1, HttpServletRequest request) throws Exception {
+		String root1 = request.getSession().getServletContext().getRealPath("resources");
+		String delPath1 = root1 + "/product/items";
+		String delFilepath1 = delPath1 + "/" + productFilename1;
+		File delFile = new File(delFilepath1);
+		if(delFile.exists()) {
+			delFile.delete();
+		}
+	}
+	
+	// 기존 파일 삭제 메소드 (두번째 사진)
+	private void deleteFile2(String productFilename2, HttpServletRequest request) throws Exception {
+		String root2 = request.getSession().getServletContext().getRealPath("resources");
+		String delPath2 = root2 + "/product/items";
+		String delFilepath2 = delPath2 + "/" + productFilename2;
+		File delFile = new File(delFilepath2);
+		if(delFile.exists()) {
+			delFile.delete();
+		}
+	}
+	
+	// 상품 삭제
+	@RequestMapping(value = "/product/remove", method=RequestMethod.GET)
+	public String productRemove(@RequestParam("productNo") int productNo, Model model) {
+		try {
+			int result = pService.deleteProduct(productNo);
+			if(result > 0) {
+				Alert alert = new Alert("/shop/adminProductList", "상품이 삭제되었습니다.");
+				model.addAttribute("alert", alert);
+				return "common/alert";
+			}else {
+				model.addAttribute("msg", "상품 삭제가 완료되지 않았습니다.");
+				return "common/error";
+			}
+		} catch (Exception e) {
+			model.addAttribute("msg", e.getMessage());
+			return "common/error";
+		}
+	}
+	
+	
+	
+	
+	
+	
+	
 	
 	
 }
