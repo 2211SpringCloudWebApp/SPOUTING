@@ -37,7 +37,7 @@
 				<div id="test">
 					<input type="file" name="reloadFile">
 					<c:if test="${! empty notice.noticeFilerename }">
-						<div class="filename">${notice.noticeFilerename }</div>
+						<div class="filename">${notice.noticeFilename }</div>
 					</c:if>
 					<c:if test="${empty notice.noticeFilerename }">
 						<div class="filename">첨부된 파일이 없습니다.</div>

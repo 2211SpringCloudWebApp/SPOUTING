@@ -84,7 +84,7 @@
 		        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">취소</button>
 				<form action="/notice/delete" method="post">
 					<input type="hidden" name="noticeNo" value="${notice.noticeNo }">
-		        	<button type="submit" onclick="deleteBtn();" class="btn btn-primary">삭제</button>
+		        	<button type="submit" class="btn btn-primary">삭제</button>
 		        </form>
 		      </div>
 		    </div>

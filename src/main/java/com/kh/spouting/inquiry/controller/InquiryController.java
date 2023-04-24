@@ -61,7 +61,13 @@ public class InquiryController {
 		return mv;
 	}
 	
-	// 문의사항 검색
+	/**
+	 * 문의사항 검색 Controller
+	 * @param mv
+	 * @param search
+	 * @param page
+	 * @return mv
+	 */
 	@RequestMapping(value="/search", method=RequestMethod.GET)
 	public ModelAndView searchInquiry(
 			ModelAndView mv
@@ -114,6 +120,15 @@ public class InquiryController {
 		return mv;
 	}
 	
+	/**
+	 * 문의사항 등록 Controller
+	 * @param mv
+	 * @param session
+	 * @param request
+	 * @param inquiry
+	 * @param multi
+	 * @return mv
+	 */
 	@RequestMapping(value="/write", method=RequestMethod.POST)
 	public ModelAndView writeInquiry(
 			ModelAndView mv
@@ -145,6 +160,28 @@ public class InquiryController {
 		} catch (Exception e) {
 			e.printStackTrace();
 			mv.addObject("msg", e.getMessage()).setViewName("common/error");
+		}
+		return mv;
+	}
+	
+	/**
+	 * 문의사항 디테일 Controller
+	 * @param mv
+	 * @param inquiriesNo
+	 * @param session
+	 * @return mv
+	 */
+	@RequestMapping(value="/detail", method=RequestMethod.GET)
+	public ModelAndView detailInquiry(
+			ModelAndView mv, @RequestParam Integer inquiriesNo
+			, HttpSession session) {
+		try {
+			//글 작성자 확인
+			User user = (User) session.getAttribute("loginUser");
+			InquiryJoin inquiry = iService.detailInquiry(inquiriesNo);
+			mv.addObject("user", user).addObject("inquiry", inquiry).setViewName("inquiry/detail");
+		} catch (Exception e) {
+			mv.addObject("msg", "해당 문의사항이 존재하지 않습니다.").setViewName("common/error");
 		}
 		return mv;
 	}

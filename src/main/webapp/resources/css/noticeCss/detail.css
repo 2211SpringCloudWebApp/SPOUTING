@@ -1,14 +1,10 @@
 @charset "UTF-8";
+/* 메인 */
 table{
 	border-top: 1px solid black;
 	border-bottom: 1px solid black;
 }
-.mainCenter{
-  width: 65%;
-  margin: 0 auto;
-  margin-top: 20px;
-  margin-bottom: 50px;
-}
+/* 헤더부분(공지사항) */
 .mainHeader{
 	width:65%;
 	height: 200px;
@@ -21,41 +17,56 @@ table{
 	align-items: center;
 	color:white;
 }
-.titleWrap{
-	width: 65%;
-	margin-left: 50px;
+/* 헤더부분(문의사항) */
+.mainHeaderI{
+	width:65%;
+	height: 200px;
+	margin: 0 auto;
+	background-image: url(../../images/notice/court2.jpg);
+	background-position: right;
+	background-repeat: no-repeat;
+	display: flex;
+/* 	justify-content: center; */
+	align-items: center;
+	color:white;
 }
-.titleWrap p:first-child{
-	font-size: 40px;
-	font-weight: 600;
+/* 메인테이블 */
+.mainCenter{
+  width: 65%;
+  margin: 0 auto;
+  margin-top: 20px;
+  margin-bottom: 50px;
 }
-.titleWrap p:last-child{
-	font-size: 20px;
-}
+	.titleWrap{
+		width: 65%;
+		margin-left: 50px;
+	}
+		.titleWrap p:first-child{
+			font-size: 40px;
+			font-weight: 600;
+		}
+		.titleWrap p:last-child{
+			font-size: 20px;
+		}
 table th{
 	width: 20%;
 }
 table td{
 	width: 80%;
 }
-
+/* 버튼부분 */
 .mainFooter{
   width: 65%;
   margin: 0 auto;
   margin-top: 20px;
   margin-bottom: 50px;
 }
-#buttonTag{
-	display: flex;
-}
-#buttonTag button{
-	margin-left: 20px;
-}
-
-/* 모달창 글씨*/
-.modal-content{
-	color: #1C3879;
-}
+	#buttonTag{
+		display: flex;
+	}
+		#buttonTag button{
+			margin-left: 20px;
+		}
 
 .btn-secondary{
 	background-color: #607EAA;
@@ -69,4 +80,8 @@ table td{
 	--bs-btn-hover-bg: #EAE3D2;
 	border-color: #EAE3D2;
 	color: #cfbe98;
+}
+/* 모달창 글씨*/
+.modal-content{
+	color: #1C3879;
 }

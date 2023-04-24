@@ -21,4 +21,6 @@ public interface InquiryStore {
 
 	int insertInquiry(SqlSession session, Inquiry inquiry);
 
+	InquiryJoin detailInquiry(SqlSession session, Integer inquiriesNo);
+
 }
