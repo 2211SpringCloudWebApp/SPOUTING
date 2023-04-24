@@ -41,4 +41,12 @@ public interface PointStore {
 	 */
 	public int getPointCount(SqlSession session, int userNo);
 
+	/**
+	 * 관리자 포인트 조정 Store
+	 * @param session
+	 * @param point
+	 * @return int
+	 */
+	public int adminPoint(SqlSession session, Point point);
+
 }

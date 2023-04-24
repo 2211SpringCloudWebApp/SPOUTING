@@ -88,6 +88,13 @@ public interface UserService {
 	 */
 	public List<User> selectByKeyWord(PageInfo pi, Search search);
 
+	/**
+	 * 번호로 이름 찾기
+	 * @param userNo
+	 * @return User
+	 */
+	public User selectName(int userNo);
+
 	
 
 }

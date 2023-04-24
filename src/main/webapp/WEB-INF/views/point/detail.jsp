@@ -67,7 +67,7 @@
             <a href="/point/charge"><div id="ad-box"></div></a> 
         </div>
 
-        <!-- 페이지징 -->
+        <!-- 페이징 -->
         <table id="navi-box">
             <tr>
                 <td>

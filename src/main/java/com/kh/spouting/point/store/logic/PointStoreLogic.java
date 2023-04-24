@@ -41,4 +41,10 @@ public class PointStoreLogic implements PointStore{
 		return result;
 	}
 
+	@Override //관리자 포인트 조정
+	public int adminPoint(SqlSession session, Point point) {
+		int result = session.insert("PointMapper.adminPoint", point);
+		return result;
+	}
+
 }

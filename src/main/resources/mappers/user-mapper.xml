@@ -31,15 +31,18 @@
 	<select id="selectAllUser" resultMap="UserResultMap">
 		SELECT * FROM USER_TBL ORDER BY 1 DESC
 	</select>
+	<select id="selectName" resultMap="UserResultMap">
+		SELECT * FROM USER_TBL WHERE USER_NO = #{userNo}
+	</select>
 	
 	<select id="countBySearch" resultType="_int" >
 		SELECT COUNT(*) FROM USER_TBL
 		<where>
 			<if test="searchCondition == 'userId'">
-				USER_ID LIKE '%' || #{searchValue} || '%'
+				USER_ID LIKE '%' || #{searchValue} || '%' ORDER BY 1 DESC
 			</if>
 			<if test="searchCondition == 'userName'">
-				USER_NAME LIKE '%' || #{searchValue} || '%'
+				USER_NAME LIKE '%' || #{searchValue} || '%' ORDER BY 1 DESC
 			</if>
 		</where>
 	</select>
@@ -48,11 +51,11 @@
 		SELECT * FROM USER_TBL
 		<where>
 			<if test="searchCondition == 'userId'">
-				USER_ID LIKE '%' || #{searchValue} || '%'
+				USER_ID LIKE '%' || #{searchValue} || '%' ORDER BY 1 DESC
 			</if>
 			<if test="searchCondition == 'userName'">
-				USER_NAME LIKE '%' || #{searchValue} || '%'
-			</if>
+				USER_NAME LIKE '%' || #{searchValue} || '%' ORDER BY 1 DESC
+			</if> 
 		</where>
 	</select>
 	
