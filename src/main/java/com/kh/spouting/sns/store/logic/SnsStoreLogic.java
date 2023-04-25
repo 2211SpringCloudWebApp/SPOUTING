@@ -7,6 +7,7 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
 
 import com.kh.spouting.sns.domain.Sns;
+import com.kh.spouting.sns.domain.SnsComment;
 import com.kh.spouting.sns.domain.SnsPhoto;
 import com.kh.spouting.sns.domain.SnsProfile;
 import com.kh.spouting.sns.store.SnsStore;
@@ -58,6 +59,12 @@ public class SnsStoreLogic implements SnsStore {
 	public SnsPhoto selectDetailPage(SqlSession session, int snsPhotoNo) {
 		// TODO Auto-generated method stub
 		return session.selectOne("SnsMapper.selectDetailPage", snsPhotoNo);
+	}
+
+	@Override
+	public int insertComment(SqlSession session, SnsComment snsComment) {
+		// TODO Auto-generated method stub
+		return session.insert("SnsMapper.insertComment", snsComment);
 	}
 
 
