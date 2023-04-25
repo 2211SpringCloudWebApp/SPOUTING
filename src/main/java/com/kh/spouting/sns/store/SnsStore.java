@@ -5,6 +5,7 @@ import java.util.List;
 import org.apache.ibatis.session.SqlSession;
 
 import com.kh.spouting.sns.domain.Sns;
+import com.kh.spouting.sns.domain.SnsComment;
 import com.kh.spouting.sns.domain.SnsPhoto;
 import com.kh.spouting.sns.domain.SnsProfile;
 
@@ -23,6 +24,8 @@ public interface SnsStore {
 	int updateProfilePhoto(SqlSession session, Sns sns);
 
 	SnsPhoto selectDetailPage(SqlSession session, int snsPhotoNo);
+
+	int insertComment(SqlSession session, SnsComment snsComment);
 
 
 }

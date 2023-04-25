@@ -63,4 +63,8 @@
 		SELECT * FROM SNSPHOTO_TBL WHERE SNSPHOTO_NO = #{snsPhotoNo}
 	</select>
 	
+	<insert id="insertComment">
+		INSERT INTO SNSCOMMENT_TBL VALUES (SEQ_SNSCOMMENT_NO.NEXTVAL, #{snsPhotoNo}, #{userNo}, #{snsComment})
+	</insert>
+	
 </mapper>

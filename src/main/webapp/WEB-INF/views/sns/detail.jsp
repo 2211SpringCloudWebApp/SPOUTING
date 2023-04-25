@@ -116,6 +116,15 @@
 			cursor: pointer;
 		}
 		
+		table {
+			--border: solid 1px;
+		}
+		
+		th, td {
+			border-bottom: 1px solid;
+			padding: 10px;
+		}
+		
     </style>
 
 </head>
@@ -157,7 +166,27 @@
 		</div>
 		<div id="sns-reply"> <b>댓글</b>
 			<div id="sns-reply-list">
-				
+				<!-- 댓글 목록 -->
+				<table align="center" width="700" id="replyTable">
+<!-- 					<thead> -->
+<!-- 						<tr> -->
+<!-- 							댓글 갯수 -->
+<!-- 							<td colspan="4"><b id="replyCount"></b></td> -->
+<!-- 						</tr> -->
+<!-- 					</thead> -->
+					<tbody>
+						<tr>
+							<td width= 70px;>프사</td>
+							<td width= 100px;>닉네임</td>
+							<td>안녕하세요 댓글 영역 테스트입니다.</td>
+						</tr>
+						<tr>
+							<td>프사</td>
+							<td>닉넴</td>
+							<td>ㅎㅇㅎㅇㅎㅇㅎㅇ</td>
+						</tr>
+					</tbody>
+				</table>
 			</div>
 			
 			<div id="sns-reply-write">
@@ -180,16 +209,15 @@
 			$.ajax({
 				url:"/comment/register",
 				data: {
-					"refBoardNo" : boardNo, 
-					"replyWriter" : boardWriter, 
-					"replyContents" : rContents, 
+					"snsPhotoNo" : snsPhotoNo, 
+					"userNo" : userNo, 
+					"snsComment" : snsComment, 
 					},
 				type: "post",
 				success : function(result) {
 					if(result == '1') {
 						alert("댓글 등록 성공");
-						$("#rWriter").val("");
-						$("#rContents").val("");
+						$("#reply-content").val("");
 	//						location.href="";
 					} else {
 						alert("[에러 발생] 로그 확인 필요");
