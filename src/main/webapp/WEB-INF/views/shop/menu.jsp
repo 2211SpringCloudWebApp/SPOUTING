@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -66,28 +67,56 @@
 </head>
 <body>
 	<div id="navcontainer">
-		<ul id="nav-v2">
-            <h3>카테고리</h3>
-			<li class="menu-v2"><a href="/shop/catelist1?c=1,2">APPAREL</a>
-				<ul class="submenu">
-					<li><a href="/shop/catelist2?c=1">CLOTHES</a></li>
-					<li><a href="/shop/catelist2?c=2">BAGS</a></li>
-				</ul>
-			</li>
-			<li class="menu-v2"><a href="/shop/catelist1?c=3,4">LIFE</a>
-				<ul class="submenu">
-					<li><a href="/shop/catelist2?c=3">TECH</a></li>
-					<li><a href="/shop/catelist2?c=4">LIVING</a></li>
-				</ul>
-			</li>
-			<li class="menu-v2"><a href="/shop/catelist1?c=5,6">LEISURE</a>
-				<ul class="submenu">
-					<li><a href="/shop/catelist2?c=5">OFFICE</a></li>
-					<li><a href="/shop/catelist2?c=6">SPORTS</a></li>
-				</ul>
-			</li>
-		</ul>
-            
+		<c:if test="${sessionScope.loginUser.userId eq null}">
+			<input type="hidden" id="userId" value="${sessionScope.loginUser.userId}"> 
+			<ul id="nav-v2">
+	            <h3>카테고리</h3>
+				<li class="menu-v2"><a href="/shop/catelist1?c=1,2">APPAREL</a>
+					<ul class="submenu">
+						<li><a href="/shop/catelist2?c=1">CLOTHES</a></li>
+						<li><a href="/shop/catelist2?c=2">BAGS</a></li>
+					</ul>
+				</li>
+				<li class="menu-v2"><a href="/shop/catelist1?c=3,4">LIFE</a>
+					<ul class="submenu">
+						<li><a href="/shop/catelist2?c=3">TECH</a></li>
+						<li><a href="/shop/catelist2?c=4">LIVING</a></li>
+					</ul>
+				</li>
+				<li class="menu-v2"><a href="/shop/catelist1?c=5,6">LEISURE</a>
+					<ul class="submenu">
+						<li><a href="/shop/catelist2?c=5">OFFICE</a></li>
+						<li><a href="/shop/catelist2?c=6">SPORTS</a></li>
+					</ul>
+				</li>
+			</ul>
+		</c:if>
+		
+		<c:if test="${sessionScope.loginUser.userId ne null}">
+			<input type="hidden" id="userId" value="${sessionScope.loginUser.userId}"> 
+	        <ul id="nav-v2">
+	            <h3>카테고리</h3>
+				<li class="menu-v2"><a href="/shop/catelist1?c=1,2">APPAREL</a>
+					<ul class="submenu">
+						<li><a href="/shop/catelist2?c=1">CLOTHES</a></li>
+						<li><a href="/shop/catelist2?c=2">BAGS</a></li>
+					</ul>
+				</li>
+				<li class="menu-v2"><a href="/shop/catelist1?c=3,4">LIFE</a>
+					<ul class="submenu">
+						<li><a href="/shop/catelist2?c=3">TECH</a></li>
+						<li><a href="/shop/catelist2?c=4">LIVING</a></li>
+					</ul>
+				</li>
+				<li class="menu-v2"><a href="/shop/catelist1?c=5,6">LEISURE</a>
+					<ul class="submenu">
+						<li><a href="/shop/catelist2?c=5">OFFICE</a></li>
+						<li><a href="/shop/catelist2?c=6">SPORTS</a></li>
+					</ul>
+				</li>
+				<li class="menu-v2"><a href="/shop/cartView">Cart</a>
+			</ul>
+        </c:if>
 
     </div>
 

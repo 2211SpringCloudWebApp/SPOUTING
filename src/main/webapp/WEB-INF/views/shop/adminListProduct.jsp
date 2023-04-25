@@ -26,7 +26,7 @@
 	<br><br>
 	<div id="buttonbox">
 	  <button class="btn" onclick="location.href='/shop/main';">스파우팅 마켓</button>
-	  <button class="btn" onclick="location.href='/product/adminProductModify';">상품 등록</button>
+	  <button class="btn" onclick="location.href='/product/registserProductView';">상품 등록</button>
 	</div>
 	<table>
 		<thead>

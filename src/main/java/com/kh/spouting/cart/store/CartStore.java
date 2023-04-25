@@ -20,4 +20,19 @@ public interface CartStore {
 	// 장바구니 목록 반환
 	List<Cart> selectCart(SqlSession session, Cart cart);
 
+	// 선택 상품 장바구니 목록
+	List<Cart> selectCheckedCart(SqlSession session, String userId);
+
+	// 장바구니 삭제
+	int deleteCart(SqlSession session, Cart cart);
+
+	// 장바구니 체크 상태 변경
+	int modifyCheckCart(SqlSession session, Cart cart);
+
+	// 장바구니 체크 상태 일괄 변경
+	int modifyAllCheckCart(SqlSession session, Cart cart);
+
+	// 장바구니 상태 마크
+	int getCountCart(SqlSession session, String userId);
+
 }

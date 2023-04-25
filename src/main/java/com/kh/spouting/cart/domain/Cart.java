@@ -11,9 +11,8 @@ public class Cart {
 	private int productNo;
 	private String cartCheck;
 	
-	public Cart() {
-		
-	}
+	public Cart() {}
+	
 	
 	public Cart(Product product, int productNo, int cartQuantity) {
 		super();

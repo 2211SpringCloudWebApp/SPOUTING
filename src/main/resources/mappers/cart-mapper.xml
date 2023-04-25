@@ -38,8 +38,47 @@
 		WHERE USER_ID = #{userId} AND PRODUCT_NO = #{productNo}
 	</select>
 	
-	<!-- 장바구니 목록 반환 -->	
+	<!-- 장바구니 목록 -->	
 	<select id="selectCart" resultMap="cartResultMap">
 		SELECT * FROM CART_TBL WHERE USER_ID = #{userId}
+	</select>
+	
+	<!-- 선택 상품 장바구니 목록 -->	
+	<select id="selectCheckedCart" resultMap="cartResultMap">
+		SELECT * FROM CART_TBL WHERE USER_ID = #{userId} AND CART_CHECK = 'Y'
+	</select>
+	
+	<!-- 장바구니 삭제 -->	
+	<delete id="deleteCart">
+		DELETE FROM CART_TBL WHERE USER_ID = #{userId} AND PRODUCT_NO = #{productNo}
+	</delete>
+	
+	<!-- 장바구니 체크 상태 변경 -->
+	<update id="modifyCheckCart">
+		UPDATE CART_TBL 
+			<if test='cartCheck == "Y"'>
+			SET CART_CHECK = 'Y'
+			</if>
+			<if test='cartCheck == "N"'>
+			SET CART_CHECK = 'N'
+			</if>
+		WHERE USER_ID = #{userId} AND PRODUCT_NO = #{productNo}
+	</update>
+	
+	<!-- 장바구니 체크 상태 일괄 변경 -->
+	<update id="modifyAllCheckCart">
+		UPDATE CART_TBL 
+			<if test='cartCheck == "Y"'>
+			SET CART_CHECK = 'Y'
+			</if>
+			<if test='cartCheck == "N"'>
+			SET CART_CHECK = 'N'
+		</if>
+		WHERE USER_ID = #{userId}
+	</update>
+	
+	<!-- 장바구니 상태 마크 -->
+	<select id="getCountCart" resultMap="cartResultMap">
+		SELECT * FROM CART_TBL WHERE USER_ID = #{userId} AND CART_CHECK = 'Y'
 	</select>
 </mapper>

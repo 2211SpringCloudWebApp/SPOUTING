@@ -159,8 +159,8 @@
 				    totalPriceTag.innerHTML = "<span> " + totalPrice.toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, ",") + "</span><span id='wonSymbol'>원</span>";
 				}
 			
-				//장바구니
-				function addCart(userId,productNo,cartQuantity){
+				//장바구니 추가
+				function addCart(userId, productNo, cartQuantity){
 					$.ajax({
 						url:"/cart/register",
 						data:{
@@ -172,17 +172,13 @@
 						success:function(result){
 							if(result == "success"){
 								alert("상품이 장바구니에 추가되었습니다.");
-								markCart();
 							}else{
-								
+								alert("상품이 추가되지 않았습니다.");
 							}
 						},
 						error:function(){}
 					});
 				}
-
-
-				
 				
 				// 위시리스트 추가 알람창
 				$(".btn-wishlist").click(function() {
