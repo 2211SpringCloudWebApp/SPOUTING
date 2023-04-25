@@ -125,7 +125,7 @@ public class NoticeController {
 			notice.setUserNo(noticeWriter);
 			int result = nService.insertNotice(notice);
 			if(result > 0) {
-				mv.setViewName("redirect:/notice/list");
+				mv.addObject("msg", "공지사항 등록완료!").setViewName("notice/success");
 			}else {
 				mv.addObject("msg", "공지사항이 등록되지 않았습니다.").setViewName("common/error");
 			}
@@ -217,8 +217,8 @@ public class NoticeController {
 		Map<String, String> modifyFile = null;
 		try {
 			NoticeJoin originalNotice = nService.selectOneNotice(notice.getNoticeNo());
-			// 파일 재첨부 있는경우
 			
+			// 파일 재첨부 있는 경우
 			if(!reloadFile.isEmpty()) {
 				// 원래글에 파일이 있는 경우
 				if(originalNotice.getNoticeFilerename() != null) {
@@ -230,7 +230,9 @@ public class NoticeController {
 					notice.setNoticeFilerename(modifyFile.get("rename"));
 					notice.setNoticeFilepath(modifyFile.get("renameFilepath"));
 				}
-			}else {
+			}
+			// 파일 재첨부가 없는 경우
+			else {
 				 // 원래글에 파일이 있는 경우
 	            if(originalNotice.getNoticeFilerename() != null) {
 	                // 파일명과 파일경로를 그대로 사용
@@ -271,7 +273,7 @@ public class NoticeController {
 			// 파일삭제 후 글 삭제
 			int result = nService.deleteNotice(noticeNo);
 			if(result > 0) {
-				mv.setViewName("redirect:/notice/list");
+				mv.addObject("msg", "공지사항 삭제 완료").setViewName("notice/success");
 			}else {
 				mv.addObject("msg", "공지사항이 삭제되지 않았습니다.").setViewName("common/error");
 			}

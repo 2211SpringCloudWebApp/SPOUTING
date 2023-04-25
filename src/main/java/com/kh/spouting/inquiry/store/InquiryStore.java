@@ -25,4 +25,8 @@ public interface InquiryStore {
 
 	InquiryJoin checkSecretNo(SqlSession session, InquiryJoin iParam);
 
+	int modifyInquiry(SqlSession session, Inquiry inquiry);
+
+	int deleteInquiry(SqlSession session, int inquiriesNo);
+
 }
