@@ -17,6 +17,7 @@
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
 <!-- 		모달테스트 -->
 		<style type="text/css">
+		
 			
 		</style>
 	</head>
@@ -134,7 +135,7 @@
 	    
 		<!-- Modal -->
 		<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-			<div class="modal-dialog">
+			<div class="modal-dialog modal-dialog-centered">
 			  <div class="modal-content">
 				<div class="modal-header">
 				  <h1 class="modal-title fs-5" id="exampleModalLabel">회원가입 후 이용가능합니다.</h1>
@@ -150,7 +151,7 @@
 		  </div>
 
 
-		<!-- 모달테스트 -->
+		<!-- 비밀글모달 -->
 		<div class="pModal">
 <!-- 			<form action="/inquiry/detail" method="post"> -->
 			<div class="pModal-content" title="클릭하면 창이 닫힌다.">

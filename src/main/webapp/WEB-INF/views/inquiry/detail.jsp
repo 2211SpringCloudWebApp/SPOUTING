@@ -40,10 +40,6 @@
 						<th>작성일</th>
 						<td><fmt:formatDate value="${inquiry.qCreateDate }" pattern="yyyy-MM-dd" /></td>
 					</tr>
-					<tr>
-						<th>비밀번호</th>
-						<td>${inquiry.secretNo }</td>
-					</tr>
 				</table>
 				<div id="content">
 					${inquiry.inquiriesContent }
@@ -54,7 +50,8 @@
 			</div>
 			<div class="mainFooter">
 				<div id="buttonTag">
-					<c:if test="${user.userType eq 1 }">
+<!-- 					글작성자와 로그인한사람 같으면 버튼생기게 -->
+					<c:if test="${inquiry.userNo == sessionScope.loginUser.userNo }">
 						<form action="/inquiry/modifyView" method="post">
 							<input type="hidden" name="inquiriesNo" value="${inquiry.inquiriesNo }">
 							<button type="submit" class="btn btn-secondary">수정</button>
@@ -86,8 +83,8 @@
 		      </div>
 		      <div class="modal-footer">
 		        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">취소</button>
-				<form action="/notice/delete" method="post">
-					<input type="hidden" name="noticeNo" value="${notice.noticeNo }">
+				<form action="/inquiry/delete" method="post">
+					<input type="hidden" name="inquiriesNo" value="${inquiry.inquiriesNo }">
 		        	<button type="submit" onclick="deleteBtn();" class="btn btn-primary">삭제</button>
 		        </form>
 		      </div>

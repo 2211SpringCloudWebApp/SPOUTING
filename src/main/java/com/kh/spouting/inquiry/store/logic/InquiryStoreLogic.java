@@ -72,4 +72,18 @@ public class InquiryStoreLogic implements InquiryStore{
 		return inquiry;
 	}
 
+	// 문의사항 수정 Store
+	@Override
+	public int modifyInquiry(SqlSession session, Inquiry inquiry) {
+		int result = session.update("InquiryMapper.modifyInquiry", inquiry);
+		return result;
+	}
+
+	// 문의사항 삭제 Store
+	@Override
+	public int deleteInquiry(SqlSession session, int inquiriesNo) {
+		int result = session.delete("InquiryMapper.deleteInquiry", inquiriesNo);
+		return result;
+	}
+
 }

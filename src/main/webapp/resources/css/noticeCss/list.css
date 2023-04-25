@@ -107,11 +107,11 @@ ol, ul {
 }
 
 /* 모달테스트용 */
-.Modaltest{ 
+.pModal{ 
 	position:absolute; width:100%; height:100%; background: rgba(0,0,0,0.8); top:0; left:0; display:none;
   }
   
-  .Modal-content{
+  .pModal-content{
 	width:400px; height:200px;
 	background:#fff; border-radius:10px;
 	position:relative; top:50%; left:50%;

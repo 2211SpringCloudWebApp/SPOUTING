@@ -24,13 +24,13 @@
 	width:65%;
 	height: 200px;
 	margin: 0 auto;
-	background-image: url(../../images/notice/pool3.jpg);
+	background-image: url(../../images/notice/court2.jpg);
 	background-position: center;
 	background-repeat: no-repeat;
 	display: flex;
 /* 	justify-content: center; */
 	align-items: center;
-	color:black;
+	color: white;
 }
 	.titleWrap{
 		width: 65%;

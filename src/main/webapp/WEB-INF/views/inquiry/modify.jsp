@@ -5,7 +5,7 @@
 <html>
 	<head>
 		<meta charset="UTF-8">
-		<title>문의사항 작성✍</title>
+		<title>문의사항 수정✍</title>
 <!-- 		썸머노트API -->
 		<!-- include libraries(jQuery, bootstrap) -->
 		<link href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" rel="stylesheet">
@@ -26,13 +26,15 @@
 		<div class="main">
 	    	<div class="mainHeaderI">
 		    	<div class="titleWrap">
-					<p>문의사항 작성✍</p>
+					<p>문의사항 수정✍</p>
 					<p>궁금한 사항을 문의해주세요!</p>
 		    	</div>
 	    	</div>
 	    	<div class="mainCenter">
-				<form action="/inquiry/write" method="post" enctype="multipart/form-data">
+				<form action="/inquiry/modify" method="post" enctype="multipart/form-data">
+					<input type="hidden" name="inquiriesNo" value="${inquiry.inquiriesNo }">
 					<div id="selectArea">
+						테스트 : ${inquiry.inquiriesNo }
 						<span>카테고리</span>
 						<select name="inquiriesCategory">
 							<option value="N">일반문의</option>
@@ -42,15 +44,23 @@
 					</div>
 					<div id="titleArea">
 						<span>제목</span>
-						<input placeholder="제목을 입력해주세요." name="inquiriesTitle">
+						<input name="inquiriesTitle" value=${inquiry.inquiriesTitle }>
 					</div>
 					<div id="contentArea">
 						<span>내용</span>
-						<textarea rows="" cols="" id="summernote" name="inquiriesContent"></textarea>
+						<textarea rows="" cols="" id="summernote" name="inquiriesContent">
+							${inquiry.inquiriesContent }
+						</textarea>
 					</div>
+<!-- 					첨부파일여부에따라다르게 -->
 					<div id="test">
-						<span>파일첨부</span>
-						<input type="file" name="uploadFile">
+						<input type="file" name="reloadFile">
+						<c:if test="${! empty notice.noticeFilerename }">
+							<div class="filename">${notice.noticeFilename }</div>
+						</c:if>
+						<c:if test="${empty notice.noticeFilerename }">
+							<div class="filename">첨부된 파일이 없습니다.</div>
+						</c:if>
 					</div>
 					<div id="secretArea">
 						<input type="radio" name="inquiriesSecret" value="N" checked="checked" />일반글<input type="radio" name="inquiriesSecret" value="Y" />비밀글
@@ -93,27 +103,27 @@
 		});
 			
 		// 비밀글 체크 시 비밀번호 입력할 수 있게 해주는 함수
+		
+
 			$(document).ready(function(){
-			$("#secretNo").hide();  // 초기값 설정
-			
-			$("input[name='inquiriesSecret']").change(function(){
-				// 일반글 선택 시
-				if($("input[name='inquiriesSecret']:checked").val() === 'N'){
-					$("#secretNo").hide();
-				}
-				// 비밀글 선택 시
-				else if($("input[name='inquiriesSecret']:checked").val() === 'Y'){
-					// input태그가 이미 생성되어 있는지 체크
-					if ($("#secretNo").find("input[name='secretNo']").length === 0) {
-						// input태그가 생성되어 있지 않은 경우에만 생성
-						$("#secretNo").children().append("<input name='secretNo' placeholder='4자리 숫자'>");
+				$("#secretNo").hide();  // 초기값 설정
+				
+				$("input[name='inquiriesSecret']").change(function(){
+					// 일반글 선택 시
+					if($("input[name='inquiriesSecret']:checked").val() === 'N'){
+						$("#secretNo").hide();
 					}
-					$("#secretNo").show();
-				}
+					// 비밀글 선택 시
+					else if($("input[name='inquiriesSecret']:checked").val() === 'Y'){
+						// input태그가 이미 생성되어 있는지 체크
+						if ($("#secretNo").find("input[name='secretNo']").length === 0) {
+							// input태그가 생성되어 있지 않은 경우에만 생성
+							$("#secretNo").children().append("<input name='secretNo' placeholder='4자리 숫자'>");
+						}
+						$("#secretNo").show();
+					}
+				});
 			});
-			});
-
-
 
 
 	

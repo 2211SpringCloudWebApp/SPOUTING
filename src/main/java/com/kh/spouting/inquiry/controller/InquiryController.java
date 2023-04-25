@@ -1,5 +1,6 @@
 package com.kh.spouting.inquiry.controller;
 
+import java.io.File;
 import java.util.List;
 import java.util.Map;
 
@@ -220,5 +221,107 @@ public class InquiryController {
 			mv.addObject("msg", e.getMessage()).setViewName("common/error");
 		}
 		return mv;
+	}
+	
+	/**
+	 * 문의사항 수정 View Controller
+	 * @param mv
+	 * @param inquiry
+	 * @return mv
+	 */
+	@RequestMapping(value="/modifyView", method=RequestMethod.POST)
+	public ModelAndView viewModifyInquiry(ModelAndView mv, @ModelAttribute Inquiry inquiry) {
+		InquiryJoin inquiryResult = iService.detailInquiry(inquiry.getInquiriesNo());
+		mv.addObject("inquiry", inquiryResult).setViewName("inquiry/modify");
+		return mv;
+	}
+	
+	/**
+	 * 문의사항 수정 Controller
+	 * @param mv
+	 * @param inquiry
+	 * @param reloadFile
+	 * @param request
+	 * @return mv
+	 */
+	@RequestMapping(value="/modify", method=RequestMethod.POST)
+	public ModelAndView modifyInquiry(ModelAndView mv, @ModelAttribute Inquiry inquiry
+			, @RequestParam(value="reloadFile", required=false) MultipartFile reloadFile
+			, HttpServletRequest request) {
+		Map<String, String> modifyFile = null;
+		try {
+			InquiryJoin originalInquiry = iService.detailInquiry(inquiry.getInquiriesNo());
+			
+			// 파일 재첨부가 있는 경우
+			if(!reloadFile.isEmpty()) {
+				// 원래글에 파일이 있는 경우
+				if(originalInquiry.getInquiriesFilerename() != null) {
+					// 원래 파일 삭제
+					this.deleteFile(request, originalInquiry.getInquiriesFilerename());
+				}
+				modifyFile = fileUtil.saveFile(reloadFile, request, "inquiry");
+				if(modifyFile != null) {
+					inquiry.setInquiriesFilepath(modifyFile.get("renameFilepath"));
+					inquiry.setInquiriesFilerename(modifyFile.get("rename"));
+				}
+			}
+			// 파일 재첨부가 없는 경우
+			else {
+				// 원래글에 파일이 있는 경우
+				if(originalInquiry.getInquiriesFilerename() != null) {
+					// 파일명과 파일경로를 그대로 사용
+					inquiry.setInquiriesFilepath(originalInquiry.getInquiriesFilepath());
+					inquiry.setInquiriesFilerename(originalInquiry.getInquiriesFilerename());
+				}
+			}
+			int result = iService.modifyInquiry(inquiry);
+			if(result > 0) {
+				mv.addObject("msg", "문의사항수정이 완료되었습니다.").setViewName("notice/success");
+			}else {
+				mv.addObject("msg", "문의사항수정이 완료되지 않았습니다.").setViewName("common/error");
+			}
+		} catch (Exception e) {
+			mv.addObject("msg", e.getMessage()).setViewName("common/error");
+		}
+		return mv;
+	}
+	
+	// 삭제
+	@RequestMapping(value="/delete", method=RequestMethod.POST)
+	public ModelAndView deleteInquiry(ModelAndView mv, @ModelAttribute Inquiry inquiry
+			, HttpServletRequest request) {
+		try {
+			// 파일먼저 삭제해주기
+			InquiryJoin rmInquiry = iService.detailInquiry(inquiry.getInquiriesNo());
+			if(rmInquiry.getInquiriesFilerename() != null) {
+				this.deleteFile(request, rmInquiry.getInquiriesFilerename());
+			}
+			// 파일삭제 후 글 삭제
+			int result = iService.deleteInquiry(inquiry.getInquiriesNo());
+			if(result > 0) {
+				mv.addObject("msg", "문의사항 삭제 완료").setViewName("notice/success");
+			}else {
+				mv.addObject("msg", "문의사항이 삭제되지 않았습니다.").setViewName("common/error");
+			}
+		} catch (Exception e) {
+			mv.addObject("msg", e.getMessage()).setViewName("common/error");
+		}
+		return mv;
+	}
+	
+	/**
+	 * 파일삭제
+	 * @param request
+	 * @param filename
+	 */
+	private void deleteFile(HttpServletRequest request, String filename) {
+		String root = request.getSession().getServletContext().getRealPath("resources");
+		String deletePath = root + "\\images\\notice";
+		String deleteFilepath = deletePath + "\\" + filename;
+		File deleteFile = new File(deleteFilepath);
+		// 삭제할 파일 존재하면
+		if(deleteFile.exists()) {
+			deleteFile.delete();
+		}
 	}
 }
