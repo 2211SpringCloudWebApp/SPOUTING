@@ -37,10 +37,10 @@ public class CartServiceImpl implements CartService{
 		}
 	}
 
-	// 장바구니 목록 반환
+	// 장바구니 목록
 	@Override
 	public List<Cart> printCart(Cart cart) {
-		List<Cart> cList = cStore.selectCart(session, cart);
+		List<Cart> cList = cStore.selectCart(session, cart); // 카트 안에 상품을 넣어야 하기 때문에 select 메소드 호출
 		cList.stream().forEach(c->{
 			Product product = new Product();
 			product.setProductNo(c.getProductNo());
@@ -48,5 +48,42 @@ public class CartServiceImpl implements CartService{
 		});
 		return cList;
 	}
+	
+	// 선택 상품 장바구니 목록
+	@Override
+	public List<Cart> printCheckedCart(String userId) {
+		return cStore.selectCheckedCart(session, userId);
+	}
+
+	// 장바구니 수량 변경
+	@Override
+	public int modiftQtyCart(Cart cart) {
+		return cStore.updateQtyCart(session, cart);
+	}
+	
+	// 장바구니 삭제
+	@Override
+	public int removeCart(Cart cart) {
+		return cStore.deleteCart(session, cart);
+	}
+
+	// 장바구니 체크 상태 변경
+	@Override
+	public int modifyCheckCart(Cart cart) {
+		return cStore.modifyCheckCart(session, cart);
+	}
+
+	// 장바구니 체크 상태 일괄 변경
+	@Override
+	public int modifyAllCheckCart(Cart cart) {
+		return cStore.modifyAllCheckCart(session, cart);
+	}
+
+	// 장바구니 상태 마크
+	@Override
+	public int getCountCart(String userId) {
+		return cStore.getCountCart(session, userId);
+	}
+
 
 }

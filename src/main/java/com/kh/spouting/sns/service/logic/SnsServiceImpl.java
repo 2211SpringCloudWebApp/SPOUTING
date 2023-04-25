@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.kh.spouting.sns.domain.Sns;
+import com.kh.spouting.sns.domain.SnsComment;
 import com.kh.spouting.sns.domain.SnsPhoto;
 import com.kh.spouting.sns.domain.SnsProfile;
 import com.kh.spouting.sns.service.SnsService;
@@ -61,6 +62,12 @@ public class SnsServiceImpl implements SnsService {
 	public SnsPhoto snsDetailPage(int snsPhotoNo) {
 		// TODO Auto-generated method stub
 		return snsStore.selectDetailPage(session, snsPhotoNo);
+	}
+
+	@Override
+	public int insertComment(SnsComment snsComment) {
+		// TODO Auto-generated method stub
+		return snsStore.insertComment(session, snsComment);
 	}
 
 

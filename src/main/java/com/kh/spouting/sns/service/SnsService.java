@@ -3,6 +3,7 @@ package com.kh.spouting.sns.service;
 import java.util.List;
 
 import com.kh.spouting.sns.domain.Sns;
+import com.kh.spouting.sns.domain.SnsComment;
 import com.kh.spouting.sns.domain.SnsPhoto;
 import com.kh.spouting.sns.domain.SnsProfile;
 
@@ -21,6 +22,8 @@ public interface SnsService {
 	int insertPhoto(Sns sns);
 
 	SnsPhoto snsDetailPage(int snsPhotoNo);
+
+	int insertComment(SnsComment snsComment);
 
 
 }

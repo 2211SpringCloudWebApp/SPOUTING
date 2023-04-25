@@ -9,6 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.kh.spouting.cart.domain.Cart;
@@ -34,7 +35,22 @@ public class CartController {
 		return mv;
 	}
 	
-	// 장바구니 추가
+	// 장바구니 상태 마크
+	public String markCart(HttpSession session) {
+		User loginUser = (User)session.getAttribute("loginUser");
+		if(loginUser != null) {
+			int countCart = cService.getCountCart(loginUser.getUserId());
+			if(countCart > 0) {
+				return countCart + "";
+			} else {
+				return "";
+			}
+		} else {
+			return "";
+		}
+	}
+	
+	// 장바구니 추가 : 장바국니에 해당 상품이 없을 경우 insert, 있을 경우 update
 	@RequestMapping(value="/cart/register", method=RequestMethod.POST)
 	public String registerCart(@ModelAttribute Cart cart) {
 		if(cService.registerCart(cart)>0) {
@@ -44,8 +60,44 @@ public class CartController {
 		}
 	}
 	
+	// 장바구니 수량 변경 ajax
+	@RequestMapping(value="/cart/modify", method=RequestMethod.GET)
+	public String modiftQtyCart(@ModelAttribute Cart cart) {
+		if(cService.modiftQtyCart(cart)>0) {
+			return "success";
+		} else {
+			return "fail";
+		}
+	}
 	
+	// 장바구니 상품별 체크상태 변경
+	@RequestMapping(value="/cart/modifyCheck", method=RequestMethod.GET)
+	public String modifyCheckCart(@ModelAttribute Cart cart) {
+		if(cService.modifyCheckCart(cart) > 0) {
+			return "success";
+		} else {
+			return "fail";
+		}
+	}
 	
+	// 장바구니 상품 일괄 체크상태 변경
+	public String modifyAllCheckCart(@ModelAttribute Cart cart) {
+		if(cService.modifyAllCheckCart(cart) > 0) {
+			return "success";
+		} else {
+			return "fail";
+		}
+	}
 	
+	// 장바구니 삭제 ajax
+	@ResponseBody
+	@RequestMapping(value="/cart/remove", method=RequestMethod.GET)
+	public String removeCart(@ModelAttribute Cart cart) {
+		if(cService.removeCart(cart)>0) {
+			return "success";
+		} else {
+			return "fail";
+		}
+	}
 	
 }

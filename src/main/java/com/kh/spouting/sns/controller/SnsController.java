@@ -193,20 +193,20 @@ public class SnsController {
 	//sns 댓글 등록
 	@ResponseBody
 	@RequestMapping(value="/comment/register", method=RequestMethod.POST)
-		public void registerComment(@ModelAttribute SnsComment snsComment) {
+		public String registerComment(@ModelAttribute SnsComment snsComment) {
 
-//		try {
-//			int result = snsService.insertComment(snsComment);
-//			if(result > 0) {
-//				return "1";
-//			} else {
-//				return "0";
-//			}
-//			
-//		} catch (Exception e) {
-//			// TODO: handle exception
-//			return e.getMessage();
-//		}
+		try {
+			int result = snsService.insertComment(snsComment);
+			if(result > 0) {
+				return "1";
+			} else {
+				return "0";
+			}
+			
+		} catch (Exception e) {
+			// TODO: handle exception
+			return e.getMessage();
+		}
 		
 	}
 	

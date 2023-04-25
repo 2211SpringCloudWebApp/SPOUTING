@@ -23,4 +23,8 @@ public interface InquiryService {
 
 	InquiryJoin checkSecretNo(InquiryJoin iParam);
 
+	int modifyInquiry(Inquiry inquiry);
+
+	int deleteInquiry(int inquiriesNo);
+
 }

@@ -81,4 +81,14 @@
 	<select id="checkSecretNo" resultMap="inquiryJoinResultMap">
 		SELECT I.*, U.USER_NAME FROM INQUIRIES_TBL I JOIN USER_TBL U ON I.USER_NO = U.USER_NO WHERE INQUIRIES_NO = #{inquiriesNo} AND SECRET_NO = #{secretNo}
 	</select>
+	
+<!-- 	문의사항 수정 -->
+	<update id="modifyInquiry">
+		UPDATE INQUIRIES_TBL SET INQUIRIES_CATEGORY = #{inquiriesCategory}, INQUIRIES_TITLE = #{inquiriesTitle}, INQUIRIES_CONTENT = #{inquiriesContent}, Q_UPDATE_DATE = DEFAULT, INQUIRIES_FILENAME = NULL, INQUIRIES_FILEPATH = #{inquiriesFilepath}, INQUIRIES_FILERENAME = #{inquiriesFilerename}, SECRET_NO = #{secretNo} WHERE INQUIRIES_NO = #{inquiriesNo}
+	</update>
+	
+<!-- 	문의사항 삭제 -->
+	<delete id="deleteInquiry">
+		DELETE FROM INQUIRIES_TBL WHERE INQUIRIES_NO = #{inquiriesNo}
+	</delete>
 </mapper>
