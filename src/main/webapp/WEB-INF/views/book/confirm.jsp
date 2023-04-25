@@ -6,20 +6,16 @@
 <html>
 	<head>
 		<meta charset="UTF-8">
-		<title>예 약 확 인</title>
-		<meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <!-- 부트스트랩 -->
+		<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" />
         <!-- ajax CDN -->
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
         <!-- jquery CDN -->
         <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-        <!-- fullcalendar CDN -->
-        <link href='https://cdn.jsdelivr.net/npm/fullcalendar@5.8.0/main.min.css' rel='stylesheet' />
-        <script src='https://cdn.jsdelivr.net/npm/fullcalendar@5.8.0/main.min.js'></script>
-        <!-- fullcalendar 언어 CDN -->
-        <script src='https://cdn.jsdelivr.net/npm/fullcalendar@5.8.0/locales-all.min.js'></script>
-        <!-- 포트원(결제api)라이브러리 -->
+       
+        <!-- 포트원 아임포트(결제api)라이브러리 -->
         <script src="https://cdn.iamport.kr/v1/iamport.js"></script>
         <title>시설예약하기</title>
         <style>
@@ -104,7 +100,7 @@ body {
           <!--            //a지점//시설이름//인원수//이용날짜//이용시간//총금액//포인트불러오기 -->
           <!-- 			//--//사용포인트입력//결제금액//api -->
           <div id="tableDiv">
-            <form action ="/book/bookUp" method="post">   
+            <form id="paymentForm" action ="/book/bookUp" method="post">   
                 <input type="hidden" id="paidPrice" name="paidPrice">
 	            <input type="hidden" value="${book.bookNo }" name="bookNo">  
 	            <input type="hidden" value="${book.userNo }" name="userNo">  
@@ -156,22 +152,131 @@ body {
 	              </tr>
 	              <tr>
 	                <td></td>
-	                <td><button id="fakePay">가짜결제갈겨</button></td>
+	                <td><button type="button" id="fakePay">가짜결제갈겨</button></td>
 	               
 	                <!-- <td><button onclick="requestPay()">결제갈겨:포트원 이걸로 바꿔야함</button></td> -->
 	              </tr>
 	            </table>
-            <!--    -업데이트(페이시간, 남은포인트(원래남은포인트-입력한포인트).
-            		-포인트상세테이블에 인서트
-            	"수정내역이 있다면 뒤로가기눌러주셈"   -->
-            <!--            -api쓰기    -->
+            <!--              	"수정내역이 있다면 뒤로가기눌러주셈"   -->
+          
             </form>
           </div>
            
        	</main>
        	
        	<script>
+          
+       	$(document).ready(function() {
+            // 결제요청 버튼 클릭 시 호출되는 함수
+            $("#fakePay").on("click", function() {
+            	
+                // 결제금액을 가져옵니다.
+                var paidPrice = $("#bookPrice").text();
+                // 사용포인트를 가져옵니다.
+                var pointChange = $("#pointChange").val();
+                // 결제요청을 위한 데이터를 생성합니다.
+				var bookNo = "${book.bookNo }";
+		        var userNo = "${book.userNo }";
+		        var centerName = "${book.centerName }";
+		        var facilityName = "${book.facilityName }";
+		        var userName = "${book.userName }";
+		        var userEmail = "${book.userEmail }";
+		        var useDate = "${book.useDate }";
+		        var startTime = "${book.startTime }";
+		        var endTime = "${book.endTime }";
+		        var bookPrice = "${book.bookPrice }";
+		        var numPeople = "${book.numPeople }";
+//                 var data = {
+//                     paidPrice: paidPrice,
+//                     pointChange: pointChange,
+//                     paidPrice: paidPrice,
+//                     pointChange: pointChange,
+//                     bookNo: bookNo,
+//                     userNo: userNo,
+//                     centerName: centerName,
+//                     facilityName: facilityName,
+//                     userName: userName,
+//                     userEmail: userEmail,
+//                     useDate: useDate,
+//                     startTime: startTime,
+//                     endTime: endTime,
+//                     bookPrice: bookPrice,
+//                     numPeople: numPeople
+//                 };
+                // 아임포트 결제 함수를 호출
+                var IMP = window.IMP;  
+                IMP.init('imp67410187'); // 아임포트 가맹점 코드
+                IMP.request_pay({
+                	pg : 'kakaopay.TC0ONETIME',  //카카오페이로 ㄱ
+ 				    pay_method : "card", //카드설정 ㄱ
+ 				    merchant_uid : bookNo,
+ 				    name : facilityName /*상품명*/,
+ 				    amount : paidPrice /*상품 가격*/, 
+ 				    buyer_email : userEmail /*구매자 이메일*/,
+ 				    buyer_name : userName,
+ 				    //buyer_tel : contactPhone/*구매자 연락처*/,
+ 				   // buyer_addr : address.replace(/,_/g," ")/*구매자 주소*/,
+ 				    //vbank_due : afterThreeDaysStr,
+                   
+                    m_redirect_url: '/book/bookView' // 결제 완료 후 리다이렉트할 URL을 입력합니다.
+                }, function(rsp) {
+                    if (rsp.success) {
+                        // 결제 성공 시, 서버로 결제 결과를 전송합니다.
+                        $("#paidPrice").val(paidPrice);
+                        $("#paymentForm").submit(); // 폼데이터 서버로 보내기
+                    } else {
+                        // 결제 실패 시, 에러 처리를 수행합니다.
+                        alert("결제 실패: " + rsp.error_msg);
+                    }
+                });
+            });
+        });
        	
+//           //결제시도!!!
+//           var IMP = window.IMP;  
+//           IMP.agency('가맹점 식별코드', 'imp67410187');  //  Tier Code
+//           var bookNo;
+//           var payNo;
+//           var facilityNo;
+//           var userNo;
+//           var userName;
+//           var userEmail;
+//           var useDate;
+//           var startTime;
+//           var endTime;
+//           var bookPrice;
+//           var priceToPay;
+//           var pointChange;
+//           var numPeople;
+          
+//           function kginisis(){
+        	  
+//           }
+////////////////////////////////
+//           function requestPay() {
+//         	    IMP.request_pay({
+//         	      pg: "kcp.{상점ID}",
+//         	      pay_method: "card",
+//         	      merchant_uid: "ORD20180131-0000011",   // 주문번호: bookNo
+//         	      name: "노르웨이 회전 의자",			//시설명
+//         	      //amount: 64900,                         // 숫자 타입 //양
+//         	      buyer_email: "gildong@gmail.com",
+//         	      buyer_name: "홍길동",
+//         	      //buyer_tel: "010-4242-4242",
+//         	      //buyer_addr: "서울특별시 강남구 신사동",
+//         	      //buyer_postcode: "01181"
+//         	    }, function (rsp) { // callback
+//         	      if (rsp.success) {
+//         	        // 결제 성공 시 로직
+//         	    	  console.log(rsp);
+//         	      } else {
+//         	        // 결제 실패 시 로직
+//         	    	  console.log(rsp);
+//         	      }
+//         	    });
+//         	  }
+          
+          //입력 받는 포인트에 따라서 최종 결제금액 출력되는 js
        	document.addEventListener('DOMContentLoaded', function() {
           	document.querySelector('input[type="text"]').addEventListener('keyup', function() {
         	  updatePrice();
@@ -200,7 +305,7 @@ body {
 	              priceToPay = bookPrice - pointToUse;
 	              console.log(priceToPay);
 	            }else {
-	              priceToPay = bookPrice; // 포인트가 부족한 경우에는 가격을 그대로 사용. 유효성검사로 고치자...으...으으...
+	              priceToPay = bookPrice; // 포인트가 부족한 경우에는 가격을 그대로 사용. 유효성검사로 고치자...으...으으... 많이고쳐야함...마이너스절대고쳐
 	            }
 	            document.querySelector("#priceToPay").innerHTML = priceToPay;
 	            document.querySelector("#paidPrice").value = priceToPay;
@@ -209,32 +314,6 @@ body {
 	            
           	
        	});
-          
-//           //결제시도!!!
-//           var IMP = window.IMP;  
-//           IMP.agency('가맹점 식별코드', 'imp67410187');  //  Tier Code
-//           function requestPay() {
-//         	    IMP.request_pay({
-//         	      pg: "kcp.{상점ID}",
-//         	      pay_method: "card",
-//         	      merchant_uid: "ORD20180131-0000011",   // 주문번호: bookNo
-//         	      name: "노르웨이 회전 의자",			//시설명
-//         	      //amount: 64900,                         // 숫자 타입 //양
-//         	      buyer_email: "gildong@gmail.com",
-//         	      buyer_name: "홍길동",
-//         	      //buyer_tel: "010-4242-4242",
-//         	      //buyer_addr: "서울특별시 강남구 신사동",
-//         	      //buyer_postcode: "01181"
-//         	    }, function (rsp) { // callback
-//         	      if (rsp.success) {
-//         	        // 결제 성공 시 로직
-//         	    	  console.log(rsp);
-//         	      } else {
-//         	        // 결제 실패 시 로직
-//         	    	  console.log(rsp);
-//         	      }
-//         	    });
-//         	  }
           
   </script>
         
