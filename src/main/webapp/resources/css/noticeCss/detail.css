@@ -54,6 +54,10 @@ table th{
 table td{
 	width: 80%;
 }
+.mainCenter .contentWrap{
+	width: 90%;
+	margin: 0 auto;
+}
 /* 버튼부분 */
 .mainFooter{
   width: 65%;

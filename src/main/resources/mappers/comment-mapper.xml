@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="CommentMapper">
+	<resultMap id="commentResultMap" type="Comment">
+		<id property="commentNo" column="COMMENT_NO"/>
+		<result property="userNo" column="USER_NO"/>
+		<result property="inquiriesNo" column="INQUIRIES_NO"/>
+		<result property="commentContent" column="COMMENT_CONTENT"/>
+		<result property="cCreateDate" column="C_CREATE_DATE"/>
+	</resultMap>
+	
+<!--	댓글등록-->
+	<insert id="writeComment">
+		INSERT INTO COMMENT_TBL VALUES(SEQ_COMMENT_NO.NEXTVAL, #{userNo}, #{inquiriesNo}, #{commentContent}, DEFAULT)
+	</insert>
+	
+	<select id="getCommentList" resultMap="commentResultMap">
+		SELECT * FROM COMMENT_TBL WHERE INQUIRIES_NO = #{inquiriesNo}		
+	</select>
+</mapper>

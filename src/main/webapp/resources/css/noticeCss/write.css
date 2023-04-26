@@ -57,3 +57,8 @@
 	#buttonArea{
 		margin-top: 10px;	
 	}
+
+	.btn-primary{
+		background-color: #1C3879;
+		border-color: #1C3879;
+	}

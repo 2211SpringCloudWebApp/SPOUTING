@@ -23,30 +23,37 @@
 		<jsp:include page="../common/header.jsp"></jsp:include>
 			
 		<div class="main">
-			<h1>공지사항 수정</h1>
-			<form action="/notice/modify" method="post" enctype="multipart/form-data">
-				<input type="hidden" name="noticeNo" value="${notice.noticeNo }">
-				<div id="titleArea">
-					<input name="noticeTitle" value="${notice.noticeTitle }">
-				</div>
-				<div id="contentArea">
-					<textarea rows="" cols="" id="summernote" name="noticeContent" >
-						${notice.noticeContent}
-					</textarea>
-				</div>
-				<div id="test">
-					<input type="file" name="reloadFile">
-					<c:if test="${! empty notice.noticeFilerename }">
-						<div class="filename">${notice.noticeFilename }</div>
-					</c:if>
-					<c:if test="${empty notice.noticeFilerename }">
-						<div class="filename">첨부된 파일이 없습니다.</div>
-					</c:if>
-				</div>
-				<div id="buttonArea">
-					<button id="saveBtn">저장</button>
-				</div>
-			</form>
+			<div class="mainHeader">
+		    	<div class="titleWrap">
+					<p>공지사항 수정✍</p>
+					<p>스파우팅의 새로운 소식을 작성해주세요!</p>
+		    	</div>
+	    	</div>
+			<div class="mainCenter">
+				<form action="/notice/modify" method="post" enctype="multipart/form-data">
+					<input type="hidden" name="noticeNo" value="${notice.noticeNo }">
+					<div id="titleArea">
+						<input name="noticeTitle" value="${notice.noticeTitle }">
+					</div>
+					<div id="contentArea">
+						<textarea rows="" cols="" id="summernote" name="noticeContent" >
+							${notice.noticeContent}
+						</textarea>
+					</div>
+					<div id="test">
+						<input type="file" name="reloadFile">
+						<c:if test="${! empty notice.noticeFilerename }">
+							<div class="filename">${notice.noticeFilename }</div>
+						</c:if>
+						<c:if test="${empty notice.noticeFilerename }">
+							<div class="filename">첨부된 파일이 없습니다.</div>
+						</c:if>
+					</div>
+					<div id="buttonArea">
+						<button id="saveBtn" class="btn btn-primary">저장</button>
+					</div>
+				</form>
+			</div>
 		</div>
 		
 		<jsp:include page="../common/footer.jsp"></jsp:include>
