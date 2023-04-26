@@ -8,6 +8,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SPOUTING-point</title>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
+    <!-- 포트원 결제 api 라이브러리 -->
+    <script src="https://cdn.iamport.kr/v1/iamport.js"></script>
     <link rel="stylesheet" href="/resources/css/pointCss/charge.css">
 </head>
 <body>
@@ -24,10 +26,10 @@
                 <div id="buy-select"><br>
                     <span>포인트 충전 금액</span>
                     <select name="pointBuy" id="pointBuy" onchange="valChange()">
-                        <option value="10000" selected>10,000</option>
-                        <option value="30000">30,000</option>
-                        <option value="51500">50,000</option>
-                        <option value="107000">100,000</option>
+                        <option value="10000">10000</option>
+                        <option value="30000">30000</option>
+                        <option value="51500">50000</option>
+                        <option value="107000">100000</option>
                     </select><br>
                     <p id="after-info">충전 후 잔여 포인트 : <span id="after-char" style="font-size: 17px; padding: 10px;"></span></p>
                     <div class="balloon"></div>
@@ -39,7 +41,7 @@
                         <li>회원 탈퇴 시 남은 포인트를 현금으로 환급받을 수 없습니다.</li>
                     </ul>
                 </div>
-                <input type="submit" value="충전하기" id="buy-btn" onclick="alertSucc();">
+                <input type="button" value="충전하기" id="buy-btn" onclick="payment();">
 
             </form>
             <div id="event-box">
@@ -53,6 +55,8 @@
                     100,000P 충전 시 추가 7% 충전
                 </div>
             </div>
+            <input type="hidden" id="userName" value="${sessionScope.loginUser.userName}">
+            <input type="hidden" id="userEmail" value="${sessionScope.loginUser.userEmail}">s
         </main>
     </section>
     <jsp:include page="../common/footer.jsp"></jsp:include>
@@ -86,10 +90,50 @@
                 afterChar.html(calc + 'P');
             }
         }
+        //결제 api
+        function payment() {
+            const addPoint = $("#pointBuy").find(":selected").val();
+            const totalPrice = $("#pointBuy").find(":selected").text();
+            const userName = $("#userName").val();
+            const userEmail = $("#userEmail").val();
+            console.log(totalPrice);
 
-        function alertSucc() {
-            alert("충전 완료!")
+            const IMP = window.IMP; // 생략 가능
+            IMP.init("imp60366253"); // 예: imp00000000a
+            IMP.request_pay({
+                pg: "kakaopay",
+                pay_method: "card",
+                merchant_uid: new Date().getTime(),   // 주문번호
+                name: "SPOUTING 포인트 충전",
+                amount: totalPrice, 
+                buyer_email: userEmail,
+                buyer_name: userName,
+            }, function (rsp) { // callback
+                //결제 검증
+                if(rsp.success) {
+                    $.ajax({
+                        type    : "POST",
+                        url     : "/point/charge",
+                        data    : {
+                                    "totalPrice" : addPoint
+                                    },
+                        success : function(data){
+                            if(data == "true") {
+                                alert("충전 성공💰")
+                                $(location).attr('href','/point/detail');
+                            } else {
+                                alert("포인트 충전 실패");
+                            }
+                        }
+                    })       
+                } else {
+                    alert("결제 오류");
+                }          
+            });   
         }
+
+        
+        
     </script>
 </body>
 </html>

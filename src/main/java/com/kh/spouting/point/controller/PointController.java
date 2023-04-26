@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.kh.spouting.common.PageInfo;
 import com.kh.spouting.point.domain.Point;
@@ -43,22 +44,22 @@ public class PointController {
 		}
 	}
 	
+	@ResponseBody
 	@PostMapping("/point/charge") //포인트 충전 Logic
 	public String pointChargeLogic(
 			HttpServletRequest request
-			, @RequestParam int pointBuy
+			, Integer totalPrice
 			, Point point
 			, Model model) {
 		HttpSession session = request.getSession();
 		int userNo = ((User)session.getAttribute("loginUser")).getUserNo();
-		point.setPointBuy(pointBuy);
+		point.setPointBuy(totalPrice);
 		point.setUserNo(userNo);
 		int result = pService.insertPoint(point);
 		if(result > 0) {
-			return "redirect:/point/detail";
+			return "true";
 		} else {
-			model.addAttribute("msg", "포인트 충전 오류입니다.");
-			return "common/error";
+			return "false";
 		}
 	}
 	
