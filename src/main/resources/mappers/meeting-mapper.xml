@@ -8,6 +8,9 @@
 		<result property="meetingDetail" 	column="MEETING_DETAIL"/>		
 		<result property="meetingPeople" 	column="MEETING_PEOPLE"/>
 		<result property="meetingDay" 	column="MEETING_DAY"/>
+		<result property="meetingFilename" 	column="MEETING_FILENAME"/>		
+		<result property="meetingFileRename" 	column="MEETING_FILERENAME"/>
+		<result property="meetingFilepath" 	column="MEETING_FILEPATH"/>
 	</resultMap>
 	
 	<!-- select -->
@@ -17,7 +20,7 @@
 	
 	<insert id="insertMeeting">
 		INSERT INTO MEETING_TBL VALUES(SEQ_MEETING_NO.NEXTVAL, #{readerNo}, #{meetingName}, #{meetingDetail}, #{meetingPeople}
-		, #{meetingDay})
+		, #{meetingDay}, #{meetingFilename},#{meetingFileRename}, #{meetingFilepath})
 	</insert>
 	
 	<select id="selectOneMeeting" resultMap="meetingResultMap">
@@ -30,6 +33,14 @@
 	
 	<select id="getLineupCount" resultType="_int">
 		SELECT COUNT(*) FROM LINEUP_TBL WHERE MEETING_NO = #{userNo}
+	</select>
+	
+	<select id="getReaderProfile" resultType="string">
+		SELECT S.PROFILE_FILERENAME 
+		FROM SNS_TBL S
+		JOIN MEETING_TBL M
+		ON S.USER_NO = M.READER_NO
+		WHERE M.READER_NO = #{readerNo} AND MEETING_NO = #{meetingNo}
 	</select>
 	
 </mapper>

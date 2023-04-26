@@ -4,10 +4,12 @@ import java.sql.Timestamp;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -15,14 +17,21 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttribute;
+import org.springframework.web.multipart.MultipartFile;
 
+import com.kh.spouting.common.FileUtil;
 import com.kh.spouting.meeting.domain.Lineup;
 import com.kh.spouting.meeting.domain.Meeting;
+import com.kh.spouting.meeting.domain.ReaderProfile;
 import com.kh.spouting.meeting.service.MeetingService;
 import com.kh.spouting.user.domain.User;
 
 @Controller
 public class MeetingController {
+	
+	@Autowired
+	@Qualifier("fileUtil")
+	private FileUtil fileUtil;
 	
 	@Autowired
 	private MeetingService meetingService;
@@ -56,12 +65,15 @@ public class MeetingController {
 	
 	//커뮤니티 주최 데이터 넘겨주기
 	@RequestMapping(value="/meetingOpen", method=RequestMethod.POST)
-	public String meetingOpen(HttpServletRequest request
+	public String meetingOpen(
+			HttpServletRequest request
 			,@ModelAttribute Meeting meeting
 			,@RequestParam("meetingDate") String meetingDate
 			,@SessionAttribute("loginUser") User loginUser
+			,@RequestParam(value="uploadFile", required=false) MultipartFile multi
 			,Model model) {
 			model.addAttribute("loginUser",loginUser);
+			Map<String, String> fileInfo = null;
 		try {
 			System.out.println(meetingDate);
 			request.setCharacterEncoding("UTF-8");
@@ -71,6 +83,12 @@ public class MeetingController {
 			LocalDateTime dateTime = LocalDateTime.parse(meetingDate, formatter);
 			
 			meeting.setMeetingDay(Timestamp.valueOf(dateTime));
+			
+			fileInfo = fileUtil.saveFile(multi, request, "meeting");
+			
+			meeting.setMeetingFilename(fileInfo.get("original"));
+			meeting.setMeetingFileRename(fileInfo.get("rename"));
+			meeting.setMeetingFilepath(fileInfo.get("renameFilepath"));		
 			
 			int result = meetingService.insertMeeting(meeting);
 			if(result>0) {
@@ -95,11 +113,17 @@ public class MeetingController {
 	
 	// 소셜링 상세 페이지
 	@RequestMapping(value="/meetingDetailPage", method=RequestMethod.GET)
-	public String meetingDetailPage(@RequestParam("meetingNo") int meetingNo, Model model) {
+	public String meetingDetailPage(@RequestParam("meetingNo") int meetingNo
+									,@RequestParam("readerNo") int readerNo
+									, Model model) {
 		Meeting meeting = meetingService.selectOneByNumber(meetingNo);
 		int lineupCount = meetingService.getLineupCount(meetingNo) + 1;
+		
+		ReaderProfile readerProfile = new ReaderProfile(meetingNo, readerNo);
+		String readerProfileImg = meetingService.getReaderProfile(readerProfile);
 		model.addAttribute("meeting", meeting);
 		model.addAttribute("lineupCount", lineupCount);
+		model.addAttribute("readerProfileImg", readerProfileImg);
 		return "meeting/meeting-detail";
 	}
 	

@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.kh.spouting.meeting.domain.Lineup;
 import com.kh.spouting.meeting.domain.Meeting;
+import com.kh.spouting.meeting.domain.ReaderProfile;
 import com.kh.spouting.meeting.service.MeetingService;
 import com.kh.spouting.meeting.store.MeetingStore;
 
@@ -54,5 +55,14 @@ public class MeetingServiceImpl implements MeetingService {
 		// TODO Auto-generated method stub
 		return meetingStore.getLineupCount(session, meetingNo);
 	}
+
+
+	@Override
+	public String getReaderProfile(ReaderProfile readerProfile) {
+		// TODO Auto-generated method stub
+		return meetingStore.getReaderProfile(session, readerProfile);
+	}
+
+
 
 }

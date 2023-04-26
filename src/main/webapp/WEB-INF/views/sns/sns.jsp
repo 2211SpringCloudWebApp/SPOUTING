@@ -68,17 +68,13 @@
 		    --width: 200px;
 		    height: 200px;
 		    display: flex;
+		    justify-content: space-between;
 		}
 		
+
 		#sns-content img {
-			--position: absolute;
-		    top: 0;
-		    left: 0;
-		    transform: translate(50, 50);
-		    width: 100%;
-		    height: 100%;
-		    object-fit: cover;
-		    margin: auto;
+			width: 245px;
+			height: 245px;
 		}
 
 
@@ -286,6 +282,7 @@
 	           , data : form
 	           , success:function(response) {
 	               alert("프로필 사진이 변경되었습니다.");
+	               document.location.reload();
 	               console.log(response);
 	           }
 	           ,error: function (jqXHR) 

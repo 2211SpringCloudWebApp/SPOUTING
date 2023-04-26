@@ -25,6 +25,7 @@ import com.google.gson.Gson;
 import com.kh.spouting.common.FileUtil;
 import com.kh.spouting.sns.domain.Sns;
 import com.kh.spouting.sns.domain.SnsComment;
+import com.kh.spouting.sns.domain.SnsCommentNew;
 import com.kh.spouting.sns.domain.SnsPhoto;
 import com.kh.spouting.sns.domain.SnsProfile;
 import com.kh.spouting.sns.service.SnsService;
@@ -184,8 +185,10 @@ public class SnsController {
 	public String snsDetailPage(@RequestParam("snsPhotoNo") int snsPhotoNo, Model model) {
 		SnsPhoto snsDetail = snsService.snsDetailPage(snsPhotoNo);
 		SnsProfile oneSns = snsService.selectOneById(snsDetail.getUserNo());
+		List<SnsCommentNew> commentList = snsService.selectAllComment(snsPhotoNo);
 		model.addAttribute("snsDetail", snsDetail);
 		model.addAttribute("oneSns", oneSns);
+		model.addAttribute("commentList",commentList);
 		return "sns/detail";
 	}
 	
@@ -208,6 +211,34 @@ public class SnsController {
 			return e.getMessage();
 		}
 		
+	}
+	
+	
+	//sns 댓글 목록 불러오기
+	@ResponseBody
+	@RequestMapping(value="/comment/list", method=RequestMethod.GET, produces="application/json;charset=utf-8")
+	public String viewCommentList(Integer snsPhotoNo) {
+		List<SnsCommentNew> commentList = snsService.selectAllComment(snsPhotoNo);
+		return new Gson().toJson(commentList);
+	}
+	
+	
+	
+	//댓글 삭제
+	@ResponseBody
+	@RequestMapping(value="/comment/delete", method=RequestMethod.GET)
+	public String deleteComment(Integer snsCommentNo) {
+		try {
+			int result = snsService.deleteComment(snsCommentNo);
+			if(result > 0) {
+				return "1";
+			} else {
+				return "0";
+			}
+		} catch (Exception e) {
+			// TODO: handle exception
+			return e.getMessage();
+		}
 	}
 	
 	

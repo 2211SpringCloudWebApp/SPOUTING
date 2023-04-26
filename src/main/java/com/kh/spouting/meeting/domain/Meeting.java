@@ -13,20 +13,12 @@ public class Meeting {
 	private int meetingPeople;
 	@DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
 	private Timestamp meetingDay;
+	private String meetingFilename;
+	private String meetingFileRename;
+	private String meetingFilepath;
 	
 	public Meeting() {
 		// TODO Auto-generated constructor stub
-	}
-
-	public Meeting(int meetingNo, int readerNo, String meetingName, String meetingDetail, int meetingPeople,
-			Timestamp meetingDay) {
-		super();
-		this.meetingNo = meetingNo;
-		this.readerNo = readerNo;
-		this.meetingName = meetingName;
-		this.meetingDetail = meetingDetail;
-		this.meetingPeople = meetingPeople;
-		this.meetingDay = meetingDay;
 	}
 
 	public int getMeetingNo() {
@@ -77,14 +69,52 @@ public class Meeting {
 		this.meetingDay = meetingDay;
 	}
 
+	public String getMeetingFilename() {
+		return meetingFilename;
+	}
+
+	public void setMeetingFilename(String meetingFilename) {
+		this.meetingFilename = meetingFilename;
+	}
+
+	public String getMeetingFileRename() {
+		return meetingFileRename;
+	}
+
+	public void setMeetingFileRename(String meetingFileRename) {
+		this.meetingFileRename = meetingFileRename;
+	}
+
+	public String getMeetingFilepath() {
+		return meetingFilepath;
+	}
+
+	public void setMeetingFilepath(String meetingFilepath) {
+		this.meetingFilepath = meetingFilepath;
+	}
+
+	public Meeting(int meetingNo, int readerNo, String meetingName, String meetingDetail, int meetingPeople,
+			Timestamp meetingDay, String meetingFilename, String meetingFileRename, String meetingFilepath) {
+		super();
+		this.meetingNo = meetingNo;
+		this.readerNo = readerNo;
+		this.meetingName = meetingName;
+		this.meetingDetail = meetingDetail;
+		this.meetingPeople = meetingPeople;
+		this.meetingDay = meetingDay;
+		this.meetingFilename = meetingFilename;
+		this.meetingFileRename = meetingFileRename;
+		this.meetingFilepath = meetingFilepath;
+	}
+
 	@Override
 	public String toString() {
 		return "Meeting [meetingNo=" + meetingNo + ", readerNo=" + readerNo + ", meetingName=" + meetingName
 				+ ", meetingDetail=" + meetingDetail + ", meetingPeople=" + meetingPeople + ", meetingDay=" + meetingDay
-				+ "]";
+				+ ", meetingFilename=" + meetingFilename + ", meetingFileRename=" + meetingFileRename
+				+ ", meetingFilepath=" + meetingFilepath + "]";
 	}
-
-
-
+	
+	
 
 }

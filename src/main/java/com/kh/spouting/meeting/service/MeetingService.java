@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.kh.spouting.meeting.domain.Lineup;
 import com.kh.spouting.meeting.domain.Meeting;
+import com.kh.spouting.meeting.domain.ReaderProfile;
 
 public interface MeetingService {
 
@@ -16,5 +17,8 @@ public interface MeetingService {
 	int joinMeeting(Lineup joinMember);
 
 	int getLineupCount(int meetingNo);
+
+	String getReaderProfile(ReaderProfile readerProfile);
+
 	
 }
