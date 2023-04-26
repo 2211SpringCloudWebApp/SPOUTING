@@ -13,10 +13,10 @@
 	
 	<!-- insert -->
 	<insert id="insertPoint">
-		INSERT INTO P_DETAIL_TBL VALUES(SEQ_POINT_NO.NEXTVAL, #{userNo}, DEFAULT, '충전', #{pointBuy})
+		INSERT INTO P_DETAIL_TBL VALUES(SEQ_POINT_NO.NEXTVAL, #{userNo}, DEFAULT, '포인트충전', #{pointBuy})
 	</insert>
 	<insert id="adminPoint">
-		INSERT INTO P_DETAIL_TBL VALUES(SEQ_POINT_NO.NEXTVAL, #{userNo}, DEFAULT, '관리자조정', #{pointChange})
+		INSERT INTO P_DETAIL_TBL VALUES(SEQ_POINT_NO.NEXTVAL, #{userNo}, DEFAULT, '관리자 조정', #{pointChange})
 	</insert>
 	
 	

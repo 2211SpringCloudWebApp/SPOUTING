@@ -52,10 +52,10 @@
                             <fmt:formatDate value="${point.pointDate}" pattern="yyyy.MM.dd." />
                         </td>
                         <td style="width: 20%;">
-                            <c:if test="${point.pointDetail == '충전'}">
+                            <c:if test="${point.pointChange > 0}">
                                 <img src="/resources/images/point/plus.png" alt="error">
                             </c:if>
-                            <c:if test="${point.pointDetail != '충전'}">
+                            <c:if test="${point.pointChange < 0}">
                                 <img src="/resources/images/point/minus.png" alt="error">
                             </c:if>
                         </td>

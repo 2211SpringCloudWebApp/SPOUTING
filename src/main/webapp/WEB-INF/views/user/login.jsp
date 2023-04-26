@@ -40,7 +40,7 @@
                     if(data === "false") {
                         alert('아이디 or 비밀번호가 등록된 정보와 다릅니다.');
                     } else if(data === "admin") {
-                        location.href = "/admin/user";    
+                        location.href = "/admin/check";    
                     } else {
                         location.href = "/";
                     }

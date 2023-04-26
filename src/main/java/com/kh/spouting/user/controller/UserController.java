@@ -235,6 +235,11 @@ public class UserController {
 	/*===================================================
 	 * 관리자 기능
 	 *===================================================*/	
+	//관리자 2차 확인 View
+	@GetMapping("/admin/check")
+	public String adminCheckView() {
+		return "admin/check";
+	}
 	
 	//회원 목록 View
 	@GetMapping("/admin/user")
