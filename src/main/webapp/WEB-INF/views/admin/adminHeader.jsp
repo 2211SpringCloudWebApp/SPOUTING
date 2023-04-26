@@ -10,12 +10,20 @@
     </div>
     <div id="admin-menu">
         <ul id="admin-nav">
-            <li class="main-nav"><a href="">지점</a></li>
+            <li class="main-nav"><a href="">지점</a>
+            	<ul class="drop-nav">
+                    <li><a href="/center/registerView">지점등록</a></li>
+                    <li><a href="/center/listView">지점관리</a></li>
+                </ul>
+            </li>
             
             <li class="main-nav"><a href="/admin/user">회원</a></li>
 
-            <li class="main-nav"><a href="">예약</a></li>
-
+            <li class="main-nav"><a href="/admin/bookingList">예약</a>
+            	<ul class="drop-nav">
+					<li><a href="/admin/bookingList">예약관리</a></li>
+				</ul>	
+			</li>	
             <li class="main-nav"><a href="/shop/adminProductList">쇼핑몰</a>
                 <ul class="drop-nav">
                     <li><a href="">상품관리</a></li>

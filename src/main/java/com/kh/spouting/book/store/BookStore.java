@@ -95,4 +95,11 @@ public interface BookStore {
 	 */
 	public int returnPoint(SqlSession session, PointDetail pDetail);
 
+	/**
+	 * (관리자)전체 예약내역 조회
+	 * @param session
+	 * @return
+	 */
+	public List<Book> selectAllBook(SqlSession session);
+
 }

@@ -18,7 +18,7 @@ public class Book {
 	//여기서부턴 예약확인페이지에서 보일것
 	private String facilityName; 
 	private String centerName; 
-	private String centerFilepath1;
+	private String centerFilepath1; //예약확인페이지에서 지점 사진 보이게할것
 	private String userName; //userNo로 받아올것.. 폰, 메일, ?? 폰이 없네...?
 	private String userEmail;
 	private int userPoint; //가용포인트 

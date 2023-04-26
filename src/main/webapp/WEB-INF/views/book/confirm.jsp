@@ -232,49 +232,7 @@ body {
             });
         });
        	
-//           //결제시도!!!
-//           var IMP = window.IMP;  
-//           IMP.agency('가맹점 식별코드', 'imp67410187');  //  Tier Code
-//           var bookNo;
-//           var payNo;
-//           var facilityNo;
-//           var userNo;
-//           var userName;
-//           var userEmail;
-//           var useDate;
-//           var startTime;
-//           var endTime;
-//           var bookPrice;
-//           var priceToPay;
-//           var pointChange;
-//           var numPeople;
-          
-//           function kginisis(){
-        	  
-//           }
-////////////////////////////////
-//           function requestPay() {
-//         	    IMP.request_pay({
-//         	      pg: "kcp.{상점ID}",
-//         	      pay_method: "card",
-//         	      merchant_uid: "ORD20180131-0000011",   // 주문번호: bookNo
-//         	      name: "노르웨이 회전 의자",			//시설명
-//         	      //amount: 64900,                         // 숫자 타입 //양
-//         	      buyer_email: "gildong@gmail.com",
-//         	      buyer_name: "홍길동",
-//         	      //buyer_tel: "010-4242-4242",
-//         	      //buyer_addr: "서울특별시 강남구 신사동",
-//         	      //buyer_postcode: "01181"
-//         	    }, function (rsp) { // callback
-//         	      if (rsp.success) {
-//         	        // 결제 성공 시 로직
-//         	    	  console.log(rsp);
-//         	      } else {
-//         	        // 결제 실패 시 로직
-//         	    	  console.log(rsp);
-//         	      }
-//         	    });
-//         	  }
+
           
           //입력 받는 포인트에 따라서 최종 결제금액 출력되는 js
        	document.addEventListener('DOMContentLoaded', function() {

@@ -26,8 +26,9 @@ body {
 #image-wrapper{
     background-color: #607EAA;
     width: 100%;
-    height: 250px;
+    height: 270px;
     position: relative;
+    margin-top: 40px;
 }
 #image-wrapper img {
   position: absolute;

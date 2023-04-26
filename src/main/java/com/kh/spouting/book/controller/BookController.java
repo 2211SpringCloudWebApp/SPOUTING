@@ -24,15 +24,25 @@ import com.kh.spouting.book.domain.Facilities;
 import com.kh.spouting.book.service.BookService;
 import com.kh.spouting.point.domain.PointDetail;
 
-@RequestMapping(value="/book")
+
 @Controller
 public class BookController {
 	
 	@Autowired
 	BookService bService;
-
+	
+	//admin 예약관리페이지 보이기
+	@RequestMapping(value="/admin/bookingList")
+	public String adminPage(Model model) {
+		List<Book> bList = bService.selectAllBook();
+		model.addAttribute("bList", bList);
+		return "/admin/bookingList";
+	}
+	
+//////////////////////////////////////////////////////////////////////////////////////////회원
+	
 	//시설예약페이지 보이기(시설정보 불러오기)
-	@RequestMapping(value="/bookView")
+	@RequestMapping(value="/book/bookView")
 	public String bookView(Model model) {
 		List<Facilities> fList = bService.selectAllFacil();
 		model.addAttribute("fList", fList);
@@ -40,7 +50,7 @@ public class BookController {
 	}
 	
 	//예약내역페이지(이용전) 보이기
-	@RequestMapping(value="/myBooking", method=RequestMethod.GET)
+	@RequestMapping(value="/book/myBooking", method=RequestMethod.GET)
 	public String showMyBooking(@RequestParam("userNo") int userNo, Model model) {
 		List<Book> myBookList = bService.getMyBooking(userNo);
 		model.addAttribute("bList", myBookList);
@@ -49,7 +59,7 @@ public class BookController {
 	
 	//기간만료 내역 보이기(에이젝스)
 	@ResponseBody
-	@RequestMapping(value="/myPastBooking", method=RequestMethod.GET, produces="application/json;charset=utf-8")
+	@RequestMapping(value="/book/myPastBooking", method=RequestMethod.GET, produces="application/json;charset=utf-8")
 	public String showMyPassedBooking(@RequestParam("userNo") int userNo) {
 		List<Book> myPastBookList = bService.getMyPBooking(userNo); 
 		//model.addAttribute("pList", myPastBookList);
@@ -59,7 +69,7 @@ public class BookController {
 	
 	//시설 리스트 예약페이지로 불러오기(에이젝스)
 	@ResponseBody
-	@RequestMapping(value="/getPrice", method=RequestMethod.GET, produces="application/json;charset=utf-8")
+	@RequestMapping(value="/book/getPrice", method=RequestMethod.GET, produces="application/json;charset=utf-8")
 	public String getPrice(@RequestParam("facilityName") String facilityName) {
 		List<Facilities> fList = bService.selectAllFacil();
 		return new Gson().toJson(fList);
@@ -69,7 +79,7 @@ public class BookController {
 
 	
 	//예약정보 저장하기(paytime/paidPrice =null 상태)
-	@RequestMapping(value="/confirm", method=RequestMethod.POST)
+	@RequestMapping(value="/book/confirm", method=RequestMethod.POST)
 	public String confirmBook(HttpServletRequest request, Model model
 							, @RequestParam("facilityNo") int facilityNo
 							, @RequestParam("bookPrice") int bookPrice
@@ -138,7 +148,7 @@ public class BookController {
 	}
 	
 	//예약확인->결제갈기기
-	@RequestMapping(value="/bookUp", method=RequestMethod.POST)
+	@RequestMapping(value="/book/bookUp", method=RequestMethod.POST)
 	public String confirmView(@RequestParam("bookNo") int bookNo
 							 ,@RequestParam(value="pointChange", defaultValue = "0") int pointChange 
 							 ,@RequestParam("userNo") int userNo
@@ -183,7 +193,7 @@ public class BookController {
 	
 
 	
-	@RequestMapping(value="/cancelBooking", method=RequestMethod.POST)
+	@RequestMapping(value="/book/cancelBooking", method=RequestMethod.POST)
 	public String cancelBooking(@RequestParam("bookNo") int bookNo
 							   ,@RequestParam("bookPrice") int bookPrice
 							   ,@RequestParam("paidPrice") int paidPrice
@@ -227,7 +237,7 @@ public class BookController {
 
 	//풀캘린더(에이젝스 , produces="application/json;charset=utf-8"
 	//@ResponseBody
-	@RequestMapping(value= "/calendar", method=RequestMethod.GET)
+	@RequestMapping(value= "/book/calendar", method=RequestMethod.GET)
 	public ModelAndView showCalendarList(ModelAndView mv, HttpServletRequest request) {
 		List<Book> bListCal = null; 
 		int facilityNo= 38; //일단하드코딩!!
