@@ -34,6 +34,8 @@ public interface ProductService {
 	// 상품 상세 조회
 	public Product selectOneByNo(int productNo);
 
+	// 주문 상세 내역
+	public Product printOneProduct(Product product);
 	
 	// ********** 관리자 기능 **********
 	
@@ -46,7 +48,9 @@ public interface ProductService {
 	// 상품 수정 페이지
 	public Product selectOneById(int productNo);
 
+	// 상품 삭제
 	public int deleteProduct(int productNo);
+
 
 
 

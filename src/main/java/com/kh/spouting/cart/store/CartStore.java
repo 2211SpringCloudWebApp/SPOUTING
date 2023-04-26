@@ -14,6 +14,12 @@ public interface CartStore {
 	// 기존 장바구니 상품 업데이트
 	int updateQtyCart(SqlSession session, Cart cart);
 
+	// 장바구니 수량 증가
+	int updateQtyCartPlus(SqlSession session, Cart cart);
+	
+	// 장바구니 수량 감소
+	int updateQtyCartMinus(SqlSession session, Cart cart);
+	
 	// 장바구니 추가
 	int insertCart(SqlSession session, Cart cart);
 
@@ -34,5 +40,6 @@ public interface CartStore {
 
 	// 장바구니 상태 마크
 	int getCountCart(SqlSession session, String userId);
+
 
 }

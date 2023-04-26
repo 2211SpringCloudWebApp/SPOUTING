@@ -55,10 +55,16 @@ public class CartServiceImpl implements CartService{
 		return cStore.selectCheckedCart(session, userId);
 	}
 
-	// 장바구니 수량 변경
+	// 장바구니 수량 증가
 	@Override
-	public int modiftQtyCart(Cart cart) {
-		return cStore.updateQtyCart(session, cart);
+	public int modifyQtyCartPlus(Cart cart) {
+		return cStore.updateQtyCartPlus(session, cart);
+	}
+
+	// 장바구니 수량 감소
+	@Override
+	public int modifyQtyCartMinus(Cart cart) {
+		return cStore.updateQtyCartMinus(session, cart);
 	}
 	
 	// 장바구니 삭제
@@ -84,6 +90,8 @@ public class CartServiceImpl implements CartService{
 	public int getCountCart(String userId) {
 		return cStore.getCountCart(session, userId);
 	}
+
+
 
 
 }

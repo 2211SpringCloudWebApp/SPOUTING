@@ -7,7 +7,7 @@
 	<title>상품 상세</title>
 </head>
 <body>
-	<jsp:include page="../common/header.jsp"></jsp:include>
+	<jsp:include page="../../common/header.jsp"></jsp:include>
 	<div id="maincontainer">
 		<h1>🔍 ️상품 상세</h1>
 		<p>상품 정보를 조회하세요.</p>
@@ -53,7 +53,7 @@
 	  <button a href="javascript:void(0);" onclick="removeCheck(${product.productNo});">상품 삭제</button>
 	</div>
 	
-	<jsp:include page="../common/footer.jsp"></jsp:include>
+	<jsp:include page="../../common/footer.jsp"></jsp:include>
 	
 	<script>
 		function removeCheck(productNo) {

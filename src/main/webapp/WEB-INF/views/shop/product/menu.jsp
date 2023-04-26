@@ -34,7 +34,7 @@
         #navcontainer{
         	width : 200px;
         	height : calc(100vh - 150px);
-        	padding-top : 200px;
+        	padding-top : 100px;
         	}
         
         #nav-v2{
@@ -91,11 +91,10 @@
 				</li>
 			</ul>
 		</c:if>
-		
 		<c:if test="${sessionScope.loginUser.userId ne null}">
 			<input type="hidden" id="userId" value="${sessionScope.loginUser.userId}"> 
 	        <ul id="nav-v2">
-	            <h3>카테고리</h3>
+	            <h3>CATEGORY</h3>
 				<li class="menu-v2"><a href="/shop/catelist1?c=1,2">APPAREL</a>
 					<ul class="submenu">
 						<li><a href="/shop/catelist2?c=1">CLOTHES</a></li>
@@ -114,10 +113,12 @@
 						<li><a href="/shop/catelist2?c=6">SPORTS</a></li>
 					</ul>
 				</li>
-				<li class="menu-v2"><a href="/shop/cartView">Cart</a>
+				<br><br>
+				<h3>MY SHOP</h3>
+				<li class="menu-v2"><a href="/shop/cartView">CART</a>
+				<li class="menu-v2"><a href="/shop/wishList">WISHLIST</a>
 			</ul>
         </c:if>
-
     </div>
 
     <script>

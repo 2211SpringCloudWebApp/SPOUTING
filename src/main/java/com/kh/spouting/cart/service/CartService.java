@@ -15,9 +15,12 @@ public interface CartService {
 	// 선택 상품 장바구니 목록
 	public List<Cart> printCheckedCart(String userId);
 	
-	// 장바구니 수량 변경
-	public int modiftQtyCart(Cart cart);
-
+	// 장바구니 수량 증가
+	public int modifyQtyCartPlus(Cart cart);
+	
+	// 장바구니 수량 감소
+	public int modifyQtyCartMinus(Cart cart);
+	
 	// 장바구니 삭제
 	public int removeCart(Cart cart);
 
@@ -29,5 +32,6 @@ public interface CartService {
 
 	// 장바구니 상태 마크
 	public int getCountCart(String userId);
+
 
 }

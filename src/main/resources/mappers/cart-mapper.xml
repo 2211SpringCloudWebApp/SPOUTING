@@ -26,12 +26,24 @@
 		INSERT INTO CART_TBL VALUES(SEQ_CART_NO.NEXTVAL, #{userId}, #{cartQuantity}, #{productNo}, DEFAULT)
 	</insert>
 
-	<!-- 기존 장바구니 수량 추가 -->	
+	<!-- 기존 장바구니 상품 업데이트 -->
 	<update id="updateQtyCart">
 		UPDATE CART_TBL SET CART_QUANTITY = CART_QUANTITY + #{cartQuantity}
 		WHERE USER_ID = #{userId} AND PRODUCT_NO = #{productNo}
 	</update>
+	
+	<!-- 기존 장바구니 수량 추가 -->	
+	<update id="updateQtyCartPlus">
+		UPDATE CART_TBL SET CART_QUANTITY = CART_QUANTITY + 1
+		WHERE USER_ID = #{userId} AND PRODUCT_NO = #{productNo} AND CART_QUANTITY > 0
+	</update>
 
+	<!-- 기존 장바구니 수량 감소 -->
+	<update id="updateQtyCartMinus">
+	    UPDATE CART_TBL SET CART_QUANTITY = CART_QUANTITY - 1
+	    WHERE USER_ID = #{userId} AND PRODUCT_NO = #{productNo} AND CART_QUANTITY > 1
+	</update>
+	
 	<!-- 기존 장바구니 체크 -->	
 	<select id="selectCheckCart" resultType="_int">
 		SELECT COUNT(*) FROM CART_TBL

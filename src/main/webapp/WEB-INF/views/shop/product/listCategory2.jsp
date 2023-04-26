@@ -7,18 +7,18 @@
 <head>
 	<meta charset="UTF-8">
 	<title>Category</title>
-	<link rel="stylesheet" href="../../../resources/css/shopCss/categoryList.css">
+	<link rel="stylesheet" href="../../../../resources/css/shopCss/categoryList.css">
 </head>
 <body>
-	<jsp:include page="../common/header.jsp"></jsp:include>
+	<jsp:include page="../../common/header.jsp"></jsp:include>
 	<div id="nav">
 		<jsp:include page="./menu.jsp"></jsp:include>
 	</div>
 	
 	
 	<div id="maincontainer">
-		<h1>CATEGORY</h1>
-		<p>APPAREL  |  LIFE  |  LEISURE</p>
+		<h1>APPAREL  |  LIFE  |  LEISURE</h1>
+		<p>스파우터의 회원이 되는 지름길,스파우팅 마켓</p>
 		<br><br>
 		<!-- 게시글 조건부 검색 -->
 		<div id="search">
@@ -36,33 +36,21 @@
 		<br><br>
 		<ul>
 			<c:forEach items="${cateList}" var="product">
-				<div id="outterbox">
-					<div>
-						<img src="/resources/images/product/items/${product.productFilename1}">
-						<div id="inner">
-							<a href="/product/detail?productNo=${product.productNo}">${product.productName}</a>
-							<br>
-							<a href="/product/detail?productNo=${product.productNo}">${product.productPrice}</a>
-						</div>
+			<div id="outterbox">
+				<div>
+					<img src="/resources/images/product/items/${product.productFilename1}">
+					<div id="inner">
+						<a href="/product/detail?productNo=${product.productNo}">${product.productName}</a>
+						<br>
+						<a href="/product/detail?productNo=${product.productNo}">${product.productPrice}</a>
 					</div>
 				</div>
+			</div>
 			</c:forEach>
 		</ul>
-		
-		<!-- 게시글 페이징 처리 -->
-		<div id="page">
-			<c:forEach begin="${pi.startNavi }" end="${pi.endNavi }" var="p">
-					<c:url var="pageUrl" value="/shop/catelist1">
-						<c:param name="page" value="${p }"></c:param>
-						<c:param name="c" value="${c }"></c:param>
-					</c:url>
-					<a href="${pageUrl }">${p }</a>&nbsp;&nbsp;&nbsp;
-			</c:forEach>
-		</div>
-	
 
 	</div>
 	
-	<jsp:include page="../common/footer.jsp"></jsp:include>
+	<jsp:include page="../../common/footer.jsp"></jsp:include>
 </body>
 </html>

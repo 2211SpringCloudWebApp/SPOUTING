@@ -16,18 +16,29 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.kh.spouting.cart.domain.Cart;
+import com.kh.spouting.cart.service.CartService;
 import com.kh.spouting.center.domain.Center;
 import com.kh.spouting.common.Alert;
 import com.kh.spouting.common.PageInfo;
 import com.kh.spouting.common.Search;
 import com.kh.spouting.product.domain.Product;
 import com.kh.spouting.product.service.ProductService;
+import com.kh.spouting.user.domain.User;
+import com.kh.spouting.user.service.UserService;
 
 @Controller
 public class ProductController {
 	
 	@Autowired
 	private ProductService pService;
+	
+	@Autowired
+	private CartService cService;
+	
+	@Autowired
+	private UserService uService;
+	
 	
 	// ******************** 이용자 기능 ********************
 	
@@ -82,7 +93,7 @@ public class ProductController {
 		int totalCount = pService.getListCount();
 		PageInfo pi = this.getPageInfoBo(page, totalCount);
 		List<Product> pList = pService.selectAllProduct(pi);
-		mv.addObject("pi", pi).addObject("pList", pList).setViewName("/shop/listProduct");
+		mv.addObject("pi", pi).addObject("pList", pList).setViewName("/shop/product/listProduct");
 	    return mv;
 	}
 	
@@ -104,7 +115,7 @@ public class ProductController {
 					strCategoryNo += categoryNos[i];
 				}
 			}
-			mv.addObject("pi", pi).addObject("cateList", cateList).addObject("c", strCategoryNo).setViewName("/shop/listCategory1");
+			mv.addObject("pi", pi).addObject("cateList", cateList).addObject("c", strCategoryNo).setViewName("/shop/product/listCategory1");
 		} catch (Exception e) {
 			mv.addObject("msg", "상위 카테고리 상품 조회에 실패했습니다.").setViewName("common/error");
 		}
@@ -117,7 +128,7 @@ public class ProductController {
 			@RequestParam("c") int categoryNo) {
 		try {
 			List<Product> cateList = pService.selectCateProduct2(categoryNo);
-			mv.addObject("cateList", cateList).setViewName("/shop/listCategory2");
+			mv.addObject("cateList", cateList).setViewName("/shop/product/listCategory2");
 		} catch (Exception e) {
 			mv.addObject("msg", "하위 카테고리 상품 조회에 실패했습니다.").setViewName("common/error");
 		}
@@ -139,7 +150,7 @@ public class ProductController {
 				model.addAttribute("search", search);
 				model.addAttribute("pi", pi);
 				model.addAttribute("sList", searchList);
-				return "shop/search";
+				return "shop/product/search";
 			} else {
 				model.addAttribute("msg", "데이터 조회에 실패했습니다.");
 				return "common/error";
@@ -156,7 +167,7 @@ public class ProductController {
 		try {
 			Product product = pService.selectOneByNo(productNo);
 			model.addAttribute("product", product);
-			return "shop/detailProduct";
+			return "shop/product/detailProduct";
 		} catch (Exception e) {
 			e.printStackTrace();
 			model.addAttribute("msg", e.getMessage());
@@ -164,13 +175,31 @@ public class ProductController {
 		}
 	}
 	
+	// 상세페이지 내 주문페이지 이동
+
+	// 장바구니 내 주문페이지 이동
+	@RequestMapping(value="/cart/orderView", method=RequestMethod.GET)
+	public ModelAndView viewOrderPageFromCart(ModelAndView mv, HttpSession session) {
+	    User loginUser = (User) session.getAttribute("loginUser");
+	    List<Cart> checkedCartList = cService.printCheckedCart(loginUser.getUserId());
+	    for (Cart cart : checkedCartList) {
+	        Product product = pService.printOneProduct(new Product(cart.getProductNo()));
+	        cart.setProduct(product);
+	    }
+	    mv.addObject("cList", checkedCartList).setViewName("/shop/pay/order");
+	    return mv;
+	}
+
+
+	
+	
 	
 	// ******************** 관리자 기능 ********************
 	
 	// 상품 등록 화면
 	@RequestMapping(value="/product/registserProductView", method=RequestMethod.GET)
 	public String productRegisterView() {
-		return "shop/adminRegisterProduct";
+		return "shop/admin/adminRegisterProduct";
 	}
 	
 	// 상품 등록
@@ -200,7 +229,7 @@ public class ProductController {
 			}
 			int result = pService.insertProduct(product);
 			if(result > 0) {
-				Alert alert = new Alert("/shop/adminProductList", "상품 등록이 완료되었습니다.");
+				Alert alert = new Alert("/shop/admin/adminProductList", "상품 등록이 완료되었습니다.");
 				model.addAttribute("alert", alert);
 				return "common/alert";
 			}else {
@@ -275,7 +304,7 @@ public class ProductController {
 					model.addAttribute("search", search);
 					model.addAttribute("pi", pi);
 					model.addAttribute("sList", searchList);
-					return "shop/adminSearch";
+					return "shop/admin/adminSearch";
 				} else {
 					model.addAttribute("msg", "데이터 조회에 실패했습니다.");
 					return "common/error";
@@ -293,7 +322,7 @@ public class ProductController {
 		int totalCount = pService.getListCount();
 		PageInfo pi = this.getPageInfoBo(page, totalCount);
 		List<Product> pList = pService.selectAllProduct(pi);
-		mv.addObject("pi", pi).addObject("pList", pList).setViewName("/shop/adminListProduct");
+		mv.addObject("pi", pi).addObject("pList", pList).setViewName("/shop/admin/adminListProduct");
 	    return mv;
 	}
 
@@ -303,7 +332,7 @@ public class ProductController {
 		try {
 			Product product = pService.selectOneByNo(productNo);
 			model.addAttribute("product", product);
-			return "shop/adminDetailProduct";
+			return "shop/admin/adminDetailProduct";
 		} catch (Exception e) {
 			e.printStackTrace();
 			model.addAttribute("msg", e.getMessage());
@@ -318,7 +347,7 @@ public class ProductController {
 			Product product = pService.selectOneById(productNo);
 			if(product != null) {
 				model.addAttribute("product", product);
-				return "shop/adminModifyProduct";
+				return "shop/admin/adminModifyProduct";
 			}else {
 				model.addAttribute("msg", "상품 정보 수정에 실패하였습니다.");
 				return "common/error";
@@ -363,7 +392,7 @@ public class ProductController {
 			// DB에서 지점정보 수정
 			int result = pService.updateProduct(product);
 			if(result > 0) {
-				Alert alert = new Alert("/shop/adminProductList", "상품 수정이 완료되었습니다.");
+				Alert alert = new Alert("/shop/admin/adminProductList", "상품 수정이 완료되었습니다.");
 				model.addAttribute("alert", alert);
 				return "common/alert";
 			}else {
@@ -405,7 +434,7 @@ public class ProductController {
 		try {
 			int result = pService.deleteProduct(productNo);
 			if(result > 0) {
-				Alert alert = new Alert("/shop/adminProductList", "상품이 삭제되었습니다.");
+				Alert alert = new Alert("/shop/admin/adminProductList", "상품이 삭제되었습니다.");
 				model.addAttribute("alert", alert);
 				return "common/alert";
 			}else {

@@ -23,6 +23,19 @@ public class CartStoreImpl implements CartStore{
 		return session.update("CartMapper.updateQtyCart", cart);	
 	}
 
+	// 장바구니 수량 추가
+	@Override
+	public int updateQtyCartPlus(SqlSession session, Cart cart) {
+		return session.update("CartMapper.updateQtyCartPlus", cart);
+	}
+
+	// 장바구니 수량감소
+	@Override
+	public int updateQtyCartMinus(SqlSession session, Cart cart) {
+		return session.update("CartMapper.updateQtyCartMinus", cart);
+	}
+
+	
 	// 장바구니 추가
 	@Override
 	public int insertCart(SqlSession session, Cart cart) {
@@ -65,5 +78,6 @@ public class CartStoreImpl implements CartStore{
 		return session.selectOne("CartMapper.getCountCart", userId);
 	}
 
+	
 	
 }

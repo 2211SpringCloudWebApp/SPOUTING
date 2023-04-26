@@ -12,6 +12,12 @@ public class Product {
 	private String productFilepath1;
 	private String productFilepath2;
 	
+	public Product() {}
+	   
+   // productNo를 인자로 받는 생성자
+   public Product(int productNo) {
+      this.productNo = productNo;
+   }
 
 	public int getProductNo() {
 		return productNo;

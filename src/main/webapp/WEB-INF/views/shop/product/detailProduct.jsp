@@ -6,12 +6,12 @@
 <head>
 	<meta charset="UTF-8">
 	<title>상품 상세</title>
-	<link rel="stylesheet" href="../../../resources/css/shopCss/detailProduct.css">
+	<link rel="stylesheet" href="../../../../resources/css/shopCss/detailProduct.css">
 	<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 </head>
 	<body>
-		<jsp:include page="../common/header.jsp"></jsp:include>
+		<jsp:include page="../../common/header.jsp"></jsp:include>
 		<div id="maincontainer">
 			<h1>🛒 상품 상세 페이지</h1>
 			<p>자세한 상품 정보를 확인해 보세요.</p>
@@ -188,6 +188,6 @@
 			</script>
 	</div>
 	
-	<jsp:include page="../common/footer.jsp"></jsp:include>
+	<jsp:include page="../../common/footer.jsp"></jsp:include>
 	</body>
 </html>

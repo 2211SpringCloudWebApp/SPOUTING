@@ -4,17 +4,14 @@
 <html>
 <head>
 	<meta charset="UTF-8">
-	<title>상품 수정</title>
+	<title>상품 등록</title>
 </head>
 <body>
-	<jsp:include page="../common/header.jsp"></jsp:include>
+	<jsp:include page="../../common/header.jsp"></jsp:include>
 	<div id="maincontainer">
-		<h1>🗑 ️상품 수정</h1>
-		<p>등록된 상품을 수정합니다.</p>
-		<form action="/product/modify" method="post" enctype="multipart/form-data">
-			<input type="hidden" name="productNo" value="${product.productNo }">
-			<input type="hidden" name="productFilepath1" value="${product.productFilepath1 }">
-			<input type="hidden" name="productFilepath2" value="${product.productFilepath2 }">
+		<h1>🗑 ️상품 등록</h1>
+		<p>사이트에 상품을 등록하세요</p>
+		<form action="/product/register" method="post" enctype="multipart/form-data">
 			<table>
 				<tr>
 					<td>카테고리 분류</td>
@@ -55,11 +52,37 @@
 					</td>
 				</tr>	
 			</table>
-			<input type="submit" value="수정하기">
+			<input type="submit" value="등록하기">
 			<input type="reset" value="취소">
 		</form>
 	</div>
 	
-	<jsp:include page="../common/footer.jsp"></jsp:include>
+	<jsp:include page="../../common/footer.jsp"></jsp:include>
+	
+	
+	<script>
+		function loadImg1(obj) {
+			if(obj.files.length != 0 && obj.files[0] != 0) {
+				let reader = new FileReader();
+				reader.readAsDataURL(obj.files[0]);
+				reader.onload = function(e) {
+					document.querySelector("#img-view1").setAttribute("src", e.target.result);
+				}
+			}else {
+				document.querySelector("#img-view1").setAttribute("src", "");
+			}
+		}
+		function loadImg2(obj) {
+			if(obj.files.length != 0 && obj.files[0] != 0) {
+				let reader = new FileReader();
+				reader.readAsDataURL(obj.files[0]);
+				reader.onload = function(e) {
+					document.querySelector("#img-view2").setAttribute("src", e.target.result);
+				}
+			}else {
+				document.querySelector("#img-view2").setAttribute("src", "");
+			}
+		}
+	</script>
 </body>
 </html>

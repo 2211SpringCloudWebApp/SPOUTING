@@ -7,7 +7,7 @@
 <head>
 	<meta charset="UTF-8">
 	<title>SPOUTING PRODUCT</title>
-	<link rel="stylesheet" href="../../../resources/css/shopCss/shop.css">
+	<link rel="stylesheet" href="../../../../resources/css/shopCss/shop.css">
 	<style>
 		#maincontainer {
 		    width: 100%;
@@ -18,7 +18,7 @@
 	</style>
 </head>
 <body>
-	<jsp:include page="../common/header.jsp"></jsp:include>
+	<jsp:include page="../../common/header.jsp"></jsp:include>
 	
 	<div id="maincontainer">
 	<h1 style="color:#1C3879">SPOUTING'S ALL PRODUCT</h1>
@@ -87,6 +87,6 @@
 		</tfoot>
 	</table>	
 	</div>
-	<jsp:include page="../common/footer.jsp"></jsp:include>
+	<jsp:include page="../../common/footer.jsp"></jsp:include>
 </body>
 </html>

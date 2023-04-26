@@ -2,7 +2,12 @@ package com.kh.spouting.cart.domain;
 
 import java.sql.Date;
 
+import com.kh.spouting.product.domain.Product;
+
 public class Order {
+
+	private Product product;
+	private Cart cart;
 	private int orderNo;
 	private int cartNo;
 	private String userId;
@@ -18,7 +23,7 @@ public class Order {
 	private int orderCost;
 	private int productNo;
 	
-	
+	public Order() {}
 	
 	public int getOrderNo() {
 		return orderNo;
@@ -131,18 +136,32 @@ public class Order {
 	public void setProductNo(int productNo) {
 		this.productNo = productNo;
 	}
+	
+	public Cart getCart() {
+		return cart;
+	}
 
+	public void setCart(Cart cart) {
+		this.cart = cart;
+	}
 
+	public Product getProduct() {
+		return product;
+	}
+
+	public void setProduct(Product product) {
+		this.product = product;
+	}
 
 	@Override
 	public String toString() {
-		return "Order [orderNo=" + orderNo + ", cartNo=" + cartNo + ", userId=" + userId + ", orderName=" + orderName
-				+ ", orderPhone=" + orderPhone + ", orderEmail=" + orderEmail + ", orderPostcode=" + orderPostcode
-				+ ", orderRoadaddr=" + orderRoadaddr + ", orderDetailaddr=" + orderDetailaddr + ", orderRequest="
-				+ orderRequest + ", orderDate=" + orderDate + ", orderState=" + orderState + ", orderCost=" + orderCost
-				+ ", productNo=" + productNo + "]";
+		return "Order [product=" + product + ", cart=" + cart + ", orderNo=" + orderNo + ", cartNo=" + cartNo
+				+ ", userId=" + userId + ", orderName=" + orderName + ", orderPhone=" + orderPhone + ", orderEmail="
+				+ orderEmail + ", orderPostcode=" + orderPostcode + ", orderRoadaddr=" + orderRoadaddr
+				+ ", orderDetailaddr=" + orderDetailaddr + ", orderRequest=" + orderRequest + ", orderDate=" + orderDate
+				+ ", orderState=" + orderState + ", orderCost=" + orderCost + ", productNo=" + productNo + "]";
 	}
-	
+
 	
 	
 }

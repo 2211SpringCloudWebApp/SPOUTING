@@ -7,7 +7,7 @@
 <head>
 	<meta charset="UTF-8">
 	<title>SPOUTING PRODUCT</title>
-	<link rel="stylesheet" href="../../../resources/css/shopCss/shop.css">
+	<link rel="stylesheet" href="../../../../resources/css/shopCss/shop.css">
 	<style>
 		#nav {
 		  float: left;
@@ -17,7 +17,7 @@
 	</style>
 </head>
 <body>
-	<jsp:include page="../common/header.jsp"></jsp:include>
+	<jsp:include page="../../common/header.jsp"></jsp:include>
 	<div id="nav">
 		<jsp:include page="./menu.jsp"></jsp:include>
 	</div>
@@ -84,6 +84,6 @@
 		</tfoot>
 	</table>	
 	</div>
-	<jsp:include page="../common/footer.jsp"></jsp:include>
+	<jsp:include page="../../common/footer.jsp"></jsp:include>
 </body>
 </html>
