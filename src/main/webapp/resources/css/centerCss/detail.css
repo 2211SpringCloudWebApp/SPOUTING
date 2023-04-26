@@ -40,7 +40,8 @@ main {
 	flex : 1;
   	text-align: center;
   	margin: 50px auto;
-  	width : 70%
+  	width : 70%;
+  	color:#2d4680;
 }
 
 .division-line {
@@ -51,6 +52,10 @@ main {
 
 .hTag {
 	display : inline;
+}
+
+.button {
+	background:blue;
 }
 
 

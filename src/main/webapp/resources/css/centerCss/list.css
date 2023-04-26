@@ -29,10 +29,6 @@ a{
 	padding : 2px auto;
 }
 
-img {
-  display: block;
-}
-
 
 /* body { */
 /* 	height : calc(100vh - 150px); */
@@ -43,7 +39,9 @@ main {
 	flex : 1;
   	text-align: center;
   	margin: 0 auto;
-  	width : 70%
+  	width : 70%;
+  	color: #2d4680;
+  	margin: 50px auto;
 }
 
 colgroup {
