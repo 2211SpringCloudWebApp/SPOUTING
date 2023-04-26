@@ -6,6 +6,7 @@ import org.apache.ibatis.session.SqlSession;
 
 import com.kh.spouting.meeting.domain.Lineup;
 import com.kh.spouting.meeting.domain.Meeting;
+import com.kh.spouting.meeting.domain.ReaderProfile;
 
 public interface MeetingStore {
 
@@ -18,6 +19,9 @@ public interface MeetingStore {
 	int joinMeeting(SqlSession session, Lineup joinMember);
 
 	int getLineupCount(SqlSession session, int meetingNo);
+
+	String getReaderProfile(SqlSession session, ReaderProfile readerProfile);
+
 
 
 }

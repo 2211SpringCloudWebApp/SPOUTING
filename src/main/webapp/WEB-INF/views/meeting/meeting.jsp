@@ -22,7 +22,7 @@
     <br><br>
     
 <!--     여기는 데이터 영역~!~! -->
-		<div id="meeting-data" style="overflow: scroll; height: 600px;">
+		<div id="meeting-data" style="overflow: auto; height: 600px;">
 		
 <!-- 		예시 영역 -->
 <!-- 		<div class="meeting-box" onclick="location.href='/meetingDetailPageHard'"> -->
@@ -50,20 +50,21 @@
 
 <!-- 반복되는 부분 -->
         <c:forEach items="${meetingList }" var="meeting" varStatus="i">
-	        <div class="meeting-box" onclick="location.href='/meetingDetailPage?meetingNo=${meeting.meetingNo}'">
+	        <div class="meeting-box" onclick="location.href='/meetingDetailPage?meetingNo=${meeting.meetingNo}&readerNo=${meeting.readerNo }'">
 	
 	            <div class="meeting-img-box">
-	                <img class="meeting-img" src="/resources/images/meeting/image1.jpg" alt="">
+	                <img class="meeting-img" src="/resources/images/meeting/${meeting.meetingFileRename }" alt="">
 	            </div>
 	
 	            <div id="meeting-content-box">
 	                <div class="meeting-title">
 	                	<input type="hidden" value="${meeting.meetingNo }" name="meetingNo">
+	                	<input type="hidden" value="${meeting.readerNo }" name="readerNo">
 	                    <h1 class="meeting-title-h1">${meeting.meetingName }</h1>
 	                </div> <br>
 	
 	                <div class="meeting-day">
-	                    <span>${meeting.meetingDay }</span>
+	                    <span>일시 : ${meeting.meetingDay }</span>
 	                </div>
 	
 	                <div class="meeting-people">

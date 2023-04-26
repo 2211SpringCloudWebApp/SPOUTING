@@ -6,6 +6,7 @@ import org.apache.ibatis.session.SqlSession;
 
 import com.kh.spouting.sns.domain.Sns;
 import com.kh.spouting.sns.domain.SnsComment;
+import com.kh.spouting.sns.domain.SnsCommentNew;
 import com.kh.spouting.sns.domain.SnsPhoto;
 import com.kh.spouting.sns.domain.SnsProfile;
 
@@ -26,6 +27,10 @@ public interface SnsStore {
 	SnsPhoto selectDetailPage(SqlSession session, int snsPhotoNo);
 
 	int insertComment(SqlSession session, SnsComment snsComment);
+
+	List<SnsCommentNew> selectAllComment(SqlSession session, Integer snsPhotoNo);
+
+	int deleteComment(SqlSession session, Integer snsCommentNo);
 
 
 }

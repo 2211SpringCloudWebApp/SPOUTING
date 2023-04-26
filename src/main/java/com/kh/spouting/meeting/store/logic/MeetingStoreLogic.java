@@ -7,6 +7,7 @@ import org.springframework.stereotype.Repository;
 
 import com.kh.spouting.meeting.domain.Lineup;
 import com.kh.spouting.meeting.domain.Meeting;
+import com.kh.spouting.meeting.domain.ReaderProfile;
 import com.kh.spouting.meeting.store.MeetingStore;
 
 @Repository
@@ -41,5 +42,12 @@ public class MeetingStoreLogic implements MeetingStore {
 		// TODO Auto-generated method stub
 		return session.selectOne("MeetingMapper.getLineupCount", meetingNo);
 	}
+
+	@Override
+	public String getReaderProfile(SqlSession session, ReaderProfile readerProfile) {
+		// TODO Auto-generated method stub
+		return session.selectOne("MeetingMapper.getReaderProfile", readerProfile);
+	}
+
 
 }

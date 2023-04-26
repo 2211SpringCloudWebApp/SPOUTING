@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.kh.spouting.sns.domain.Sns;
 import com.kh.spouting.sns.domain.SnsComment;
+import com.kh.spouting.sns.domain.SnsCommentNew;
 import com.kh.spouting.sns.domain.SnsPhoto;
 import com.kh.spouting.sns.domain.SnsProfile;
 
@@ -24,6 +25,10 @@ public interface SnsService {
 	SnsPhoto snsDetailPage(int snsPhotoNo);
 
 	int insertComment(SnsComment snsComment);
+
+	List<SnsCommentNew> selectAllComment(Integer snsPhotoNo);
+
+	int deleteComment(Integer snsCommentNo);
 
 
 }

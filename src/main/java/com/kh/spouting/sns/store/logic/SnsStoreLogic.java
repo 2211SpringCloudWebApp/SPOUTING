@@ -8,6 +8,7 @@ import org.springframework.stereotype.Repository;
 
 import com.kh.spouting.sns.domain.Sns;
 import com.kh.spouting.sns.domain.SnsComment;
+import com.kh.spouting.sns.domain.SnsCommentNew;
 import com.kh.spouting.sns.domain.SnsPhoto;
 import com.kh.spouting.sns.domain.SnsProfile;
 import com.kh.spouting.sns.store.SnsStore;
@@ -65,6 +66,18 @@ public class SnsStoreLogic implements SnsStore {
 	public int insertComment(SqlSession session, SnsComment snsComment) {
 		// TODO Auto-generated method stub
 		return session.insert("SnsMapper.insertComment", snsComment);
+	}
+
+	@Override
+	public List<SnsCommentNew> selectAllComment(SqlSession session, Integer snsPhotoNo) {
+		// TODO Auto-generated method stub
+		return session.selectList("SnsMapper.selectAllCommentList", snsPhotoNo);
+	}
+
+	@Override
+	public int deleteComment(SqlSession session, Integer snsCommentNo) {
+		// TODO Auto-generated method stub
+		return session.delete("SnsMapper.deleteComment",snsCommentNo);
 	}
 
 

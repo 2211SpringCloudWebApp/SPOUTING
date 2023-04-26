@@ -17,13 +17,41 @@
             }
 
         body {
-            background-color: rgb(237, 237, 237);
+            --background-color: rgb(237, 237, 237);
             font-family: 'Pretendard-Regular';       
         }
 
         h1 {
             text-align: center;
         }
+        
+        #meetingOpen-main{
+        	padding: 20px;
+			height: 700px;
+			width: 800px;
+			background-color: #F3F3F3FF;
+			margin: 0 auto;
+	 		border: solid 1px black;
+	        text-align: center;
+        }
+        
+       		#img-viewer {
+	            width: 600px;
+	            height: 350px;
+	            margin: 0 auto;
+	            border: solid 1px black;
+	            background-color: rgb(255, 255, 255);
+	            --display: flex;
+	
+	        }
+	
+	        #img-view {
+	            margin: 0 auto;
+	            align-items: center;
+	        }
+        
+        
+        
     </style>
 </head>
 <body>
@@ -40,30 +68,53 @@
 	
 	<br><br>
 	
-    <h1>🙌 SOCIALRING OPEN</h1>
+    <h1>🙌 SOCIALRING OPEN</h1> <br>
+    
 
-    <form action="/meetingOpen" method="POST" id="meetingForm">
-    <input type="hidden" id="readerNo" name="readerNo" value=${loginUser.userNo }>
-        제목 : <input type="text" name="meetingName"> 
-        <br>
-        내용 : <input type="text" name="meetingDetail">
-        <br>
-        인원 : <input type="number" value="2" name="meetingPeople">
-        <br>
-        날짜 : <input type="datetime-local" name="meetingDate">
-        <br>
-<!--         작성자 : <input type="number" value="3" name="readerNo"> -->
-        <br><br>
-
-        <input type="submit" value="등록">
-<!--         <input type="button" value="닫기" onclick="self.close()"> -->
+    <form action="/meetingOpen" method="POST" enctype="multipart/form-data" id="meetingForm">
+	    <div id="meetingOpen-main">
+	    
+		    <input type="hidden" id="readerNo" name="readerNo" value=${loginUser.userNo }>
+		        제목 : <input type="text" name="meetingName"> 
+		        <br>
+		        내용 : <input type="text" name="meetingDetail">
+		        <br>
+		        인원 : <input type="number" value="2" name="meetingPeople">
+		        <br>
+		        날짜 : <input type="datetime-local" name="meetingDate">
+		        <br>
+		        <input type="file" id="uploadFile" name="uploadFile" onchange="loadImg(this);"> <br><br>
+		        <div id="img-viewer">
+	                <img id="img-view" width="400">
+	            </div> <br>
+		<!--         작성자 : <input type="number" value="3" name="readerNo"> -->
+		        <br><br>
+		
+		        <input type="submit" value="등록">
+		<!--         <input type="button" value="닫기" onclick="self.close()"> -->
+		
+		</div>
     </form>
+    
     
     <br>
 	<jsp:include page="../common/footer.jsp"></jsp:include>
     
     
 	<script>
+	
+    	function loadImg(obj) {
+        if(obj.files.length != 0 && obj.files[0] != 0) {
+            let reader = new FileReader();
+            reader.readAsDataURL(obj.files[0]);
+            reader.onload = function(e) {
+                document.querySelector("#img-view").setAttribute("src", e.target.result);
+            }
+        }else{
+// 					$("#img-view").attr("src", "");
+            document.querySelector("#img-view").setAttribute("src", "");
+        }
+    }
 		
 // 	onclick="doMeetOpen();
 	

@@ -28,6 +28,22 @@
 		<result property="profileFileRename" 	column="PROFILE_FILERENAME"/>
 	</resultMap>
 	
+	<resultMap id="snsCommentResultMap" type="com.kh.spouting.sns.domain.SnsComment">
+		<id 	property="snsCommentNo" 		column="SNSCOMMENT_NO"/>
+		<result property="snsPhotoNo" 		column="SNSPHOTO_NO"/>
+		<result property="userNo" 		column="USER_NO"/>
+		<result property="snsComment" 	column="SNS_COMMENT"/>			
+	</resultMap>
+	
+	<resultMap id="snsCommentNewResultMap" type="com.kh.spouting.sns.domain.SnsCommentNew">
+		<id 	property="snsCommentNo" 		column="SNSCOMMENT_NO"/>
+		<result property="snsPhotoNo" 		column="SNSPHOTO_NO"/>
+		<result property="userNo" 		column="USER_NO"/>
+		<result property="snsComment" 	column="SNS_COMMENT"/>
+		<result property="userName" 		column="USER_NAME"/>
+		<result property="profileFileRename" 	column="PROFILE_FILERENAME"/>			
+	</resultMap>
+	
 	<insert id="insertPhoto">
 		INSERT INTO SNSPHOTO_TBL VALUES(SEQ_SNSPHOTO_NO.NEXTVAL, #{userNo}, #{snsContent}, #{snsFilename},#{snsFileRename}, #{snsFilepath}, DEFAULT)
 	</insert>
@@ -67,4 +83,17 @@
 		INSERT INTO SNSCOMMENT_TBL VALUES (SEQ_SNSCOMMENT_NO.NEXTVAL, #{snsPhotoNo}, #{userNo}, #{snsComment})
 	</insert>
 	
+	<select id="selectAllCommentList" resultMap="snsCommentNewResultMap">
+		SELECT  C.*, U.USER_NAME, S.PROFILE_FILERENAME
+		FROM SNSCOMMENT_TBL C
+		JOIN SNS_TBL S
+		ON C.USER_NO = S.USER_NO
+		JOIN USER_TBL U
+		ON C.USER_NO = U.USER_NO
+		WHERE C.SNSPHOTO_NO = #{snsPhotoNo}
+	</select>
+	
+	<delete id="deleteComment">
+		DELETE FROM SNSCOMMENT_TBL WHERE SNSCOMMENT_NO = #{snsCommentNo}
+	</delete>
 </mapper>

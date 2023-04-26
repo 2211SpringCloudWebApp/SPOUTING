@@ -25,7 +25,7 @@
 		
 		#sns-main {
 			padding: 15px;
-			height: 700px;
+			height: 730px;
 			width: 800px;
 			background-color: #F3F3F3FF;
  			margin: 0 auto;
@@ -91,7 +91,7 @@
 		
 		#sns-reply-list {
 			width: 770px;
-			height: 80px;
+			height:110px;
 			overflow: auto;
 			--background-color: pink;
 		}
@@ -121,8 +121,18 @@
 		}
 		
 		th, td {
-			border-bottom: 1px solid;
+			--border-bottom: 1px solid;
 			padding: 10px;
+		}
+		
+		.sns-comment-img {
+			border-radius: 50%;
+			border: solid 1px black;
+			width: 30px;
+			height: 30px;
+			display: flex;
+			justify-content: center;
+			align-items: center;
 		}
 		
     </style>
@@ -164,7 +174,11 @@
 		<br>
 		${snsDetail.snsContent }
 		</div>
-		<div id="sns-reply"> <b>댓글</b>
+		<div id="sns-reply"> 
+			<div id="sns-reply-header">
+				<b>댓글</b>
+			</div>
+			
 			<div id="sns-reply-list">
 				<!-- 댓글 목록 -->
 				<table align="center" width="700" id="replyTable">
@@ -175,16 +189,26 @@
 <!-- 						</tr> -->
 <!-- 					</thead> -->
 					<tbody>
+<!-- 						<tr> -->
+<!-- 							<td width= 70px;>프사</td> -->
+<!-- 							<td width= 100px;>닉네임</td> -->
+<!-- 							<td width= 470px;>안녕하세요 댓글 영역 테스트입니다.</td> -->
+<!-- 							<td>삭제</td> -->
+<!-- 						</tr> -->
+						
+						<c:forEach items="${commentList }" var="commentList" varStatus="i">
 						<tr>
-							<td width= 70px;>프사</td>
-							<td width= 100px;>닉네임</td>
-							<td>안녕하세요 댓글 영역 테스트입니다.</td>
+							<td width= 60px;><img class="sns-comment-img" src="/resources/images/profile/${commentList.profileFileRename }" alt=""></td>
+							<td width= 80px;><b>${commentList.userName }</b></td>
+							<td width= 510px;>${commentList.snsComment }</td>
+							<td>
+								<c:if test="${loginUser.userNo eq commentList.userNo }">
+									<input type="hidden" value="${commentList.snsCommentNo }" name="snsCommentNo" id="snsCommentNo">
+									<input type="button" value="삭제" onclick="removeComment(this);">
+								</c:if>
+							</td>
 						</tr>
-						<tr>
-							<td>프사</td>
-							<td>닉넴</td>
-							<td>ㅎㅇㅎㅇㅎㅇㅎㅇ</td>
-						</tr>
+						</c:forEach>
 					</tbody>
 				</table>
 			</div>
@@ -200,35 +224,87 @@
     <br>
 	<jsp:include page="../common/footer.jsp"></jsp:include>
 	
+	
+	
 	<script>
-		$("#reply-submit").on("click", function() {
-	//			alert("test");
+		
+		getCommentList();
+	
+		//댓글 리스트 불러오기
+		function getCommentList() {
 			const snsPhotoNo = "${snsDetail.snsPhotoNo }";
-			const userNo = "${sessionScope.loginUser.userNo }";
-			const snsComment = $("#reply-content").val();
+			
+			
 			$.ajax({
-				url:"/comment/register",
-				data: {
-					"snsPhotoNo" : snsPhotoNo, 
-					"userNo" : userNo, 
-					"snsComment" : snsComment, 
-					},
-				type: "post",
-				success : function(result) {
-					if(result == '1') {
-						alert("댓글 등록 성공");
-						$("#reply-content").val("");
-	//						location.href="";
-					} else {
-						alert("[에러 발생] 로그 확인 필요");
-						console.log(result);
+				url : "/comment/list",
+				data : {
+					"snsPhotoNo" : snsPhotoNo
+				},
+				type: "Get",
+				success : function(data) {
+					$("#sns-reply-header").append("(" + data.length + ")");
+				},
+				error : function(data) {
+					alert("AJAX 처리 실패, 관리자 문의 요망");
+				}
+			});
+		}
+		
+		
+		//댓글 삭제
+		function removeComment(obj) {
+			const snsCommentNo = $(obj).prev().val();
+			
+			$.ajax({
+				url : "/comment/delete",
+				data : {
+					"snsCommentNo" : snsCommentNo
+				},
+				type: "Get",
+				success : function(data) {
+					if(data == 1) {
+						alert("댓글이 삭제되었습니다.");
+						document.location.reload();
 					}
 				},
-				error : function() {
-					alert("ajax 처리 실패");
+				error : function(data) {
+					alert("AJAX 처리 실패, 관리자 문의 요망");
 				}
+			});
+		}
+		
+		
+	
+		//댓글 등록
+			$("#reply-submit").on("click", function() {
+		//			alert("test");
+				const snsPhotoNo = "${snsDetail.snsPhotoNo }";
+				const userNo = "${sessionScope.loginUser.userNo }";
+				const snsComment = $("#reply-content").val();
+				$.ajax({
+					url:"/comment/register",
+					data: {
+						"snsPhotoNo" : snsPhotoNo, 
+						"userNo" : userNo, 
+						"snsComment" : snsComment, 
+						},
+					type: "post",
+					success : function(result) {
+						if(result == '1') {
+							alert("댓글이 등록되었습니다.");
+							$("#reply-content").val("");
+							document.location.reload();
+		//						location.href="";
+						} else {
+							alert("[에러 발생] 로그 확인 필요");
+							console.log(result);
+						}
+					},
+					error : function() {
+						alert("ajax 처리 실패");
+					}
+				})
 			})
-		})
 	
 	
 	

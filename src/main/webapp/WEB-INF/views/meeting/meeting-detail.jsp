@@ -21,7 +21,7 @@
 		<div class="meeting-subject">
 
             <div class="meeting-img-box">
-                <img class="meeting-img" src="/resources/images/meeting/image1.jpg" alt="" onclick="location.href='/sns?userNo=${meeting.readerNo }'">
+                <img class="meeting-img" src="/resources/images/profile/${readerProfileImg}" alt="" onclick="location.href='/sns?userNo=${meeting.readerNo }'">
             </div>
 
             <div id="meeting-content-box">
@@ -32,7 +32,7 @@
                 </div>
 
                 <div class="meeting-day">
-                    <span>${meeting.meetingDay }</span>
+                    <span>⏰${meeting.meetingDay }</span>
                 </div>
 
                 <div class="meeting-people">
@@ -44,13 +44,15 @@
 
         <div id="meeting-detail-box">
             <br><br><br><br><br>
+
             <div class="meeting-detail">
-		                ${meeting.meetingDetail }
-            </div>
+	            <img class="meeting-content-img" src="/resources/images/meeting/${meeting.meetingFileRename }">
+			    ${meeting.meetingDetail }
+	        </div>
         </div>
 
         <div id="meeting-joinBtn" onclick="joinCheck(${meeting.meetingNo });">
-        	<input type="hidden" value="${meeting.meetingNo }" name="meetingNo">
+        	<input type = "hidden" value="${meeting.meetingNo }" name="meetingNo">
         	<b>소셜링 참여하기👀</b>
         </div>
 

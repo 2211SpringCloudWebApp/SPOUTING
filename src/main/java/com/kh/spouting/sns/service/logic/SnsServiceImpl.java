@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.kh.spouting.sns.domain.Sns;
 import com.kh.spouting.sns.domain.SnsComment;
+import com.kh.spouting.sns.domain.SnsCommentNew;
 import com.kh.spouting.sns.domain.SnsPhoto;
 import com.kh.spouting.sns.domain.SnsProfile;
 import com.kh.spouting.sns.service.SnsService;
@@ -68,6 +69,18 @@ public class SnsServiceImpl implements SnsService {
 	public int insertComment(SnsComment snsComment) {
 		// TODO Auto-generated method stub
 		return snsStore.insertComment(session, snsComment);
+	}
+
+	@Override
+	public List<SnsCommentNew> selectAllComment(Integer snsPhotoNo) {
+		// TODO Auto-generated method stub
+		return snsStore.selectAllComment(session, snsPhotoNo);
+	}
+
+	@Override
+	public int deleteComment(Integer snsCommentNo) {
+		// TODO Auto-generated method stub
+		return snsStore.deleteComment(session, snsCommentNo);
 	}
 
 
