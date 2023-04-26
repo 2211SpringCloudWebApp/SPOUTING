@@ -82,4 +82,10 @@ public interface BookService {
 	 */
 	public int cancelUsedPoint(PointDetail pDetail);
 
+	/**
+	 * 예약내역 전체 조회(관리자페이지)
+	 * @return List<Book>
+	 */
+	public List<Book> selectAllBook();
+
 }

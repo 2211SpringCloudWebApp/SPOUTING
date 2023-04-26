@@ -85,4 +85,10 @@ public class BookServiceImpl implements BookService{
 		return result;
 	}
 
+	@Override
+	public List<Book> selectAllBook() {
+		List<Book> bList  = bStore.selectAllBook(session);
+		return bList;
+	}
+
 }

@@ -80,4 +80,10 @@ public class BookStoreLogic implements BookStore{
 		return result;
 	}
 
+	@Override
+	public List<Book> selectAllBook(SqlSession session) {
+		List<Book> bList = session.selectList("BookMapper.selectAllBookList");
+		return bList;
+	}
+
 }
