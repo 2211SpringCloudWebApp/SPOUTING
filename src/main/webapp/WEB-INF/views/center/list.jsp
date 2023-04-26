@@ -10,11 +10,12 @@
 	</head>
 	<body>
 		<!-- header -->
-		<jsp:include page="../common/header.jsp"></jsp:include>
+		<jsp:include page="../admin/adminHeader.jsp"></jsp:include>
+		
 		<!-- main -->
 		<main>
-			<h1>지점 목록</h1>
-			<h2>SPOUTING</h2>
+			<h1>SPOUTING</h1>
+			<h2>우리의 스파우팅</h2>
 			<div class="listTbl">
 				<table>
 					<colgroup>

@@ -31,6 +31,7 @@
 			<h3 class="hTag">☎ ${center.centerTel}</h3><br>
 			
 			<button class="button" onclick="location.href='/center/listView'">목록</button>
+			<button class="button" onclick="location.href='/center/modifyView?centerNo=${center.centerNo}'">수정하기</button>
 		</main>
 		
 			
