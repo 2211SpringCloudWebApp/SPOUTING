@@ -34,7 +34,7 @@
 				<form action="/inquiry/modify" method="post" enctype="multipart/form-data">
 					<input type="hidden" name="inquiriesNo" value="${inquiry.inquiriesNo }">
 					<div id="selectArea">
-						테스트 : ${inquiry.inquiriesNo }
+						테스트 : ${inquiry.userNo}
 						<span>카테고리</span>
 						<select name="inquiriesCategory">
 							<option value="N">일반문의</option>
@@ -55,10 +55,10 @@
 <!-- 					첨부파일여부에따라다르게 -->
 					<div id="test">
 						<input type="file" name="reloadFile">
-						<c:if test="${! empty notice.noticeFilerename }">
-							<div class="filename">${notice.noticeFilename }</div>
+						<c:if test="${! empty inquiry.inquiriesFilerename }">
+							<div class="filename">${inquiry.inquiriesFilename }</div>
 						</c:if>
-						<c:if test="${empty notice.noticeFilerename }">
+						<c:if test="${empty inquiry.inquiriesFilerename }">
 							<div class="filename">첨부된 파일이 없습니다.</div>
 						</c:if>
 					</div>
@@ -73,6 +73,15 @@
 						<button id="saveBtn">저장</button>
 					</div>
 				</form>
+				<!-- 댓글부분(입력창 먼저) -->
+					<div id="commentArea">
+						<c:if test="${inquiry.userNo == sessionScope.loginUser.userNo}">
+							<div id="commentInput">
+
+							</div>
+						</c:if>
+
+					</div>
 			</div>
 		</div>
 		

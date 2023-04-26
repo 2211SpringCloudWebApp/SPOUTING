@@ -41,7 +41,7 @@
 						<input type="file" name="uploadFile">
 					</div>
 					<div id="buttonArea">
-						<button id="saveBtn">저장</button>
+						<button id="saveBtn" class="btn btn-primary">저장</button>
 					</div>
 				</form>
 			</div>

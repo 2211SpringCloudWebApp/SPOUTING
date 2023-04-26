@@ -21,13 +21,17 @@
 				margin-top: 50px;
 				margin-bottom: 50px;
 			}
+			.imageTag img{
+				width: 100px;
+				height: 100px;
+			}
  			.main button{ 
- 				color: #ECEFF1;
- 				border-color: #ECEFF1;
+ 				color: #a9ddff;
+ 				border-color: #a9ddff;
  			}
  			
 			.box {
-			  padding: 4.5em 0;
+			  /* padding: 4.5em 0; */
 			  display: -webkit-flex;
 			  display: -ms-flexbox;
 			  display: flex;
@@ -133,14 +137,26 @@
 	    <div class="main">
 	        <br><br>
 	        <c:if test="${msg eq '문의사항이 등록완료되었습니다!😎'}">
-		        <div class="imageTag"><img src="../../../resources/images/notice/check.png"/></div>
+		        <div class="imageTag"><img src="../../../resources/images/notice/question.png"/></div>
+	        </c:if>
+			<c:if test="${msg eq '문의사항수정이 완료되었습니다!'}">
+		        <div class="imageTag"><img src="../../../resources/images/notice/question.png"/></div>
+	        </c:if>
+			<c:if test="${msg eq '문의사항 삭제 완료'}">
+		        <div class="imageTag"><img src="../../../resources/images/notice/question.png"/></div>
 	        </c:if>
 	        <c:if test="${msg eq '공지사항 등록완료!'}">
-		        <div class="imageTag"><img src="../../../resources/images/notice/check.png" style="width:100px; height:100px;"/></div>
+		        <div class="imageTag"><img src="../../../resources/images/notice/check.png"/></div>
+	        </c:if>
+			<c:if test="${msg eq '공지사항 수정이 완료되었습니다!'}">
+		        <div class="imageTag"><img src="../../../resources/images/notice/check.png"/></div>
+	        </c:if>
+			<c:if test="${msg eq '공지사항 삭제 완료'}">
+		        <div class="imageTag"><img src="../../../resources/images/notice/bin.png"/></div>
 	        </c:if>
 	        <h2>${msg }</h2>
 	        <div class="box bg-2">
-		        <button class="button button--winona button--border-thick button--round-l button--text-upper button--size-s button--text-thick" data-text="Main"><span>Main</span></button>
+		        <button onclick="location.href='/'" class="button button--winona button--border-thick button--round-l button--text-upper button--size-s button--text-thick" data-text="Main"><span>Main</span></button>
 <!-- 		        <button onclick="location.href='/'">메인화면으로 가기</button> -->
 	        </div>
 	    </div>

@@ -24,6 +24,7 @@
 		<typeAlias type="com.kh.spouting.inquiry.domain.Inquiry" alias="Inquiry"/>
 		<typeAlias type="com.kh.spouting.center.domain.Search" alias="Search"/>
 		<typeAlias type="com.kh.spouting.inquiry.domain.InquiryJoin" alias="InquiryJoin"/>
+		<typeAlias type="com.kh.spouting.comment.domain.Comment" alias="Comment"/>
 		
 	</typeAliases>
 	<mappers>
@@ -39,6 +40,7 @@
 		<mapper resource="mappers/sns-mapper.xml"/>
 		<mapper resource="mappers/point-mapper.xml"/>
 		<mapper resource="mappers/inquiry-mapper.xml"/>
+		<mapper resource="mappers/comment-mapper.xml"/>
 
 	</mappers>
 </configuration>

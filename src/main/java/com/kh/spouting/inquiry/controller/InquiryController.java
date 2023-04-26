@@ -261,6 +261,7 @@ public class InquiryController {
 				}
 				modifyFile = fileUtil.saveFile(reloadFile, request, "inquiry");
 				if(modifyFile != null) {
+					inquiry.setInquiriesFilename(modifyFile.get("original"));
 					inquiry.setInquiriesFilepath(modifyFile.get("renameFilepath"));
 					inquiry.setInquiriesFilerename(modifyFile.get("rename"));
 				}
@@ -276,7 +277,7 @@ public class InquiryController {
 			}
 			int result = iService.modifyInquiry(inquiry);
 			if(result > 0) {
-				mv.addObject("msg", "문의사항수정이 완료되었습니다.").setViewName("notice/success");
+				mv.addObject("msg", "문의사항수정이 완료되었습니다!").setViewName("notice/success");
 			}else {
 				mv.addObject("msg", "문의사항수정이 완료되지 않았습니다.").setViewName("common/error");
 			}
@@ -316,7 +317,7 @@ public class InquiryController {
 	 */
 	private void deleteFile(HttpServletRequest request, String filename) {
 		String root = request.getSession().getServletContext().getRealPath("resources");
-		String deletePath = root + "\\images\\notice";
+		String deletePath = root + "\\images\\inquiry";
 		String deleteFilepath = deletePath + "\\" + filename;
 		File deleteFile = new File(deleteFilepath);
 		// 삭제할 파일 존재하면

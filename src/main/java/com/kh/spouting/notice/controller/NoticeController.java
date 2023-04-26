@@ -227,6 +227,7 @@ public class NoticeController {
 				}
 				modifyFile = fileUtil.saveFile(reloadFile, request, "notice");
 				if(modifyFile != null) {
+					notice.setNoticeFilename(modifyFile.get("original"));
 					notice.setNoticeFilerename(modifyFile.get("rename"));
 					notice.setNoticeFilepath(modifyFile.get("renameFilepath"));
 				}
@@ -242,7 +243,7 @@ public class NoticeController {
 			}
 			int result = nService.modifyNotice(notice);
 			if(result > 0) {
-				mv.setViewName("redirect:/notice/list");
+				mv.addObject("msg", "공지사항 수정이 완료되었습니다!").setViewName("notice/success");
 			}else {
 				mv.addObject("msg", "공지사항수정이 완료되지 않았습니다.").setViewName("common/error");
 			}

@@ -41,11 +41,13 @@
 						<td><fmt:formatDate value="${notice.nCreateDate }" pattern="yyyy-MM-dd" /></td>
 					</tr>
 				</table>
-				<div id="content">
-					${notice.noticeContent }
-				</div>
-				<div id="contentImg">
-					<img src="/resources/images/notice/${notice.noticeFilerename}" width="400">
+				<div class="contentWrap">
+					<div id="content">
+						${notice.noticeContent }
+					</div>
+					<div id="contentImg">
+						<img src="/resources/images/notice/${notice.noticeFilerename}" width="400">
+					</div>
 				</div>
 			</div>
 			<div class="mainFooter">
