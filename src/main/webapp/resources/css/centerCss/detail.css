@@ -44,19 +44,64 @@ main {
   	color:#2d4680;
 }
 
+.title h1 {
+	margin: 20px;
+}
+
 .division-line {
 	border-top: 1px solid #444;
 	margin: 10px auto;
 	width: 250px;
 }
 
-.hTag {
-	display : inline;
+
+#photo {
+	width: 1000px;
+    height: 600px;
+    border: 1px solid dimgrey;
+    margin: 20px auto;
 }
 
-.button {
-	background:blue;
+	#slide {
+		height: 300px;
+    	border-bottom: 1px solid dimgrey;
+	}
+	#slide>ul>li{
+	    position: absolute;
+/* 	    margin: 0 auto; */
+/* 	    width: 50%; */
+/* 		height: 50%; */
+    	font-size: 0;
+	}
+	
+	
+
+.bottom {
+	margin-bottom: 40px;
 }
+	.hTag {
+		display : inline;
+	}
+
+.button {
+	width: 100px;
+	height: 35px;
+	margin: 22px;
+	display: inline-block;
+	text-decoration: none;
+	cursor: pointer;
+	overflow: hidden;
+	color: rgba(0, 0, 0, 0);
+	text-shadow: 0 0 0 #fff, 0 3rem 0 #2d4680;
+	transition: text-shadow 200ms;
+	vertical-align: bottom;
+	background: darkblue;
+	border: #2d4680;
+	border-radius: 5px;
+	&:hover {
+		text-shadow: 0 -3rem 0 #fff, 0 0 0 yellow;
+	
+	}
 
 
 /* .photo { */

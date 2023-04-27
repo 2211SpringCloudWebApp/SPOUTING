@@ -25,8 +25,12 @@
 							<td><input type="text" name="centerName" class="inputTag" placeholder="NEW 스파우팅 지점명 입력"></td>
 						</tr>
 						<tr>
-							<th>주소*</th>
-							<td><input type="text" name="centerAddr" class="inputTag" placeholder="NEW 스파우팅 주소 입력"></td>
+							<th>지번주소*</th>
+							<td><input type="text" name="centerAddr" class="inputTag" placeholder="NEW 스파우팅 지번 주소 입력"></td>
+						</tr>
+						<tr>
+							<th>도로명주소*</th>
+							<td><input type="text" name="centerSnaddr" class="inputTag" placeholder="NEW 스파우팅 도로명 주소 입력"></td>
 						</tr>
 						<tr>
 							<th>전화번호*</th>
