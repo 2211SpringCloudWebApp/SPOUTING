@@ -38,6 +38,7 @@
        		#img-viewer {
 	            width: 600px;
 	            height: 350px;
+	            overflow: hidden;
 	            margin: 0 auto;
 	            border: solid 1px black;
 	            background-color: rgb(255, 255, 255);
@@ -47,7 +48,9 @@
 	
 	        #img-view {
 	            margin: 0 auto;
-	            align-items: center;
+	            width:100%;
+			    height:100%;
+			    object-fit:scale-down;
 	        }
         
         
@@ -66,9 +69,9 @@
 		</script>
 	</c:if>
 	
-	<br><br>
+	<br><br><br>
 	
-    <h1>🙌 SOCIALRING OPEN</h1> <br>
+    <h1>🙌 SOCIALRING OPEN</h1> <br><br>
     
 
     <form action="/meetingOpen" method="POST" enctype="multipart/form-data" id="meetingForm">

@@ -216,7 +216,7 @@ public class SnsController {
 	
 	//sns 댓글 목록 불러오기
 	@ResponseBody
-	@RequestMapping(value="/comment/list", method=RequestMethod.GET, produces="application/json;charset=utf-8")
+	@RequestMapping(value="/comment/list2", method=RequestMethod.GET, produces="application/json;charset=utf-8")
 	public String viewCommentList(Integer snsPhotoNo) {
 		List<SnsCommentNew> commentList = snsService.selectAllComment(snsPhotoNo);
 		return new Gson().toJson(commentList);

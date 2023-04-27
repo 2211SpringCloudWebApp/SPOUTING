@@ -46,17 +46,34 @@
             <br><br><br><br><br>
 
             <div class="meeting-detail">
-	            <img class="meeting-content-img" src="/resources/images/meeting/${meeting.meetingFileRename }">
-			    ${meeting.meetingDetail }
+	            <div class="meeting-content-img-box">
+		            <img class="meeting-content-img" src="/resources/images/meeting/${meeting.meetingFileRename }"> 
+		        </div>    
+		            <br><br>
+				    ${meeting.meetingDetail }
+				    
+				    <br><br>
+				    	참여중인 멤버
 	        </div>
         </div>
 
-        <div id="meeting-joinBtn" onclick="joinCheck(${meeting.meetingNo });">
-        	<input type = "hidden" value="${meeting.meetingNo }" name="meetingNo">
-        	<b>소셜링 참여하기👀</b>
-        </div>
+		<c:if test="${lineupCount ne meeting.meetingPeople }"> 
+	        <div id="meeting-joinBtn" onclick="joinCheck(${meeting.meetingNo });">
+	        	<input type = "hidden" value="${meeting.meetingNo }" name="meetingNo">
+	        	<b>소셜링 참여하기👀</b>
+	        </div>
+        </c:if>
+        
+        
+    	<c:if test="${lineupCount eq meeting.meetingPeople }"> 
+			<div id="meeting-joinBtn2">
+	        	<b>마감된 소셜링입니다 😥</b>
+	        </div>
+		</c:if>
 
 	</div>
+	
+	<br>
 	
 	<jsp:include page="../common/footer.jsp"></jsp:include>
 	
@@ -64,6 +81,7 @@
 		function joinCheck(meetingNo) {
 			if(confirm("소셜링에 참여하시겠습니까?")) {
 				location.href="/joinMeeting?meetingNo="+meetingNo;
+				alert("소셜링에 참여 되셨습니다.");
 			}
 		}
 	
