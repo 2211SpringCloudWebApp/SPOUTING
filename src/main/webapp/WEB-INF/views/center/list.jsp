@@ -15,7 +15,7 @@
 		<!-- main -->
 		<main>
 			<h1>SPOUTING</h1>
-			<h2>우리의 스파우팅</h2>
+			<h2>우리의 스파우팅 지점 목록</h2>
 			<div class="listTbl">
 				<table>
 					<colgroup>
@@ -36,12 +36,12 @@
 						<c:forEach items="${cList }" var="center">
 							<tr>
 								<td><a class="link" href="/center/detail/${center.centerNo }">${center.centerName}</a></td>
-								<td>${center.centerAddr}</td>
+								<td>${center.centerAddr}<br> ${center.centerSnaddr }</td>
 								<td>${center.centerTel}</td>
 								<td>
-								<a class="link" href="/center/modifyView?centerNo=${center.centerNo}">지점수정</a>
+								<a class="linkbtn" href="/center/modifyView?centerNo=${center.centerNo}">지점수정</a>
 	<%-- 							<a href="/center/remove?centerNo=${center.centerNo}">지점삭제</a> --%>
-								<a class="link" href="javascript:void(0);" onclick="removeCheck(${center.centerNo});">삭제</a>
+								<a class="linkbtn" href="javascript:void(0);" onclick="removeCheck(${center.centerNo});">삭제</a>
 								</td>
 							</tr>
 						</c:forEach>

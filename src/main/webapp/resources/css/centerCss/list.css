@@ -91,7 +91,6 @@ col {
 	margin-bottom : 20px;
     background-color: #1C3879;
     color : white;
-/*     border: none; */
 }
 
 .link {
@@ -101,15 +100,29 @@ col {
 	cursor: pointer;
 	overflow: hidden;
 	color: rgba(0, 0, 0, 0);
-	text-shadow: 0 0 0 #000000, 0 3rem 0 #f86868;
+	text-shadow: 0 0 0 #000000, 0 3rem 0 #1959ee;
 	transition: text-shadow 200ms;
 	vertical-align: bottom;
 }
 	.link:hover {
 		text-shadow: 0 -3rem 0 #748ffc, 0 0 0 #1959ee;
 		font-weight: 600;
-/*         background-color: #1450dd77; */
-/*         border-radius: 10px; */
-/*         padding : 2px auto; */
 	}
+	
+.linkbtn {
+	display: inline-block;
+	padding-right : 7px;
+	text-decoration: none;
+	cursor: pointer;
+	overflow: hidden;
+	color: rgba(0, 0, 0, 0);
+	text-shadow: 0 0 0 #000000, 0 3rem 0 #a300c4;
+	transition: text-shadow 200ms;
+	vertical-align: bottom;
+}
+	.linkbtn:hover {
+		text-shadow: 0 -3rem 0 #fc74a8, 0 0 0 #a300c4;
+		font-weight: 600;
+	}
+
 

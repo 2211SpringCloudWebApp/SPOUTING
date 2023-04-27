@@ -10,8 +10,10 @@ public class Center {
 	private String centerFilepath1;
 	private String centerFilename2;
 	private String centerFilepath2;
+	private String centerSnaddr;
 	
-	// getter/setter
+	
+	// getter/setter()
 	public int getCenterNo() {
 		return centerNo;
 	}
@@ -60,6 +62,13 @@ public class Center {
 	public void setCenterFilepath2(String centerFilepath2) {
 		this.centerFilepath2 = centerFilepath2;
 	}
+	public String getCenterSnaddr() {
+		return centerSnaddr;
+	}
+	public void setCenterSnaddr(String centerSnaddr) {
+		this.centerSnaddr = centerSnaddr;
+	}
+	
 	
 	// toString()
 	@Override
@@ -67,7 +76,7 @@ public class Center {
 		return "Center [centerNo=" + centerNo + ", centerName=" + centerName + ", centerAddr=" + centerAddr
 				+ ", centerTel=" + centerTel + ", centerFilename1=" + centerFilename1 + ", centerFilepath1="
 				+ centerFilepath1 + ", centerFilename2=" + centerFilename2 + ", centerFilepath2=" + centerFilepath2
-				+ "]";
+				+ ", centerSnaddr=" + centerSnaddr + "]";
 	}
 	
 	

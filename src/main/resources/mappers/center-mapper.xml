@@ -7,6 +7,7 @@
 		<id property="centerNo" column="CENTER_NO"/>
 		<result property="centerName" column="CENTER_NAME"/>
 		<result property="centerAddr" column="CENTER_ADDR"/>
+		<result property="centerSnaddr" column="CENTER_SNADDR"></result>
 		<result property="centerTel" column="CENTER_TEL"/>
 		<result property="centerFilename1" column="CENTER_FILENAME1"/>
 		<result property="centerFilepath1" column="CENTER_FILEPATH1"/>
@@ -17,13 +18,14 @@
 	<resultMap type="Search" id="searchResultMap">
 		<result property="centerName" column="CENTER_NAME"></result>
 		<result property="centerAddr" column="CENTER_ADDR"></result>
+		<result property="centerSnaddr" column="CENTER_SNADDR"></result>
 		<result property="centerTel" column="CENTER_TEL"></result>
 	</resultMap>
 
 
 	<!-- 지점 등록 -->
 	<insert id="insertCenter">
-		INSERT INTO CENTER_TBL VALUES(SEQ_CENTER_NO.NEXTVAL, #{centerName}, #{centerAddr}, #{centerTel}, #{centerFilename1}, #{centerFilepath1}, #{centerFilename2}, #{centerFilepath2})
+		INSERT INTO CENTER_TBL VALUES(SEQ_CENTER_NO.NEXTVAL, #{centerName}, #{centerAddr}, #{centerTel}, #{centerFilename1}, #{centerFilepath1}, #{centerFilename2}, #{centerFilepath2}, #{centerSnaddr})
 	</insert>
 	
 	<!-- 지점 상세조회 -->
@@ -44,6 +46,7 @@
 	    UPDATE CENTER_TBL SET 
 	        CENTER_NAME = #{centerName}, 
 	        CENTER_ADDR = #{centerAddr}, 
+	        CENTER_SNADDR = #{centerSnaddr},
 	        CENTER_TEL = #{centerTel}
 	        <if test="centerFilename1 != null">, CENTER_FILENAME1 = #{centerFilename1}</if>
 	        <if test="centerFilename2 != null">, CENTER_FILENAME2 = #{centerFilename2}</if>
