@@ -57,6 +57,7 @@ public class BookController {
 		return "book/myBooking";
 	}
 	
+	
 	//기간만료 내역 보이기(에이젝스)
 	@ResponseBody
 	@RequestMapping(value="/book/myPastBooking", method=RequestMethod.GET, produces="application/json;charset=utf-8")
