@@ -79,8 +79,17 @@
 				}
 				
 				
+		#sns-content-img-box {
+			width: 400px;
+			height: 300px;
+			overflow:hidden;
+		}	
+		
+			
 		#sns-content-img {
-			width: 500px;
+			width:100%;
+		    height:100%;
+		    object-fit:cover;
 		}
 		
 		#sns-reply {
@@ -133,7 +142,10 @@
 			display: flex;
 			justify-content: center;
 			align-items: center;
+			cursor: pointer;
+			
 		}
+
 		
     </style>
 
@@ -170,10 +182,13 @@
 		<input type="hidden" value="${snsDetail.snsPhotoNo }">
 		
 		<div id="sns-content">
-		<img id="sns-content-img" src="/resources/images/sns/${snsDetail.snsFileRename }" alt="">
-		<br>
-		${snsDetail.snsContent }
+			<div id="sns-content-img-box">
+				<img id="sns-content-img" src="/resources/images/sns/${snsDetail.snsFileRename }" alt="">
+			</div>
+			<br>
+			${snsDetail.snsContent }
 		</div>
+		
 		<div id="sns-reply"> 
 			<div id="sns-reply-header">
 				<b>댓글</b>
@@ -198,7 +213,7 @@
 						
 						<c:forEach items="${commentList }" var="commentList" varStatus="i">
 						<tr>
-							<td width= 60px;><img class="sns-comment-img" src="/resources/images/profile/${commentList.profileFileRename }" alt=""></td>
+							<td width= 60px;><img class="sns-comment-img" src="/resources/images/profile/${commentList.profileFileRename }" alt=""  onclick="location.href='/sns?userNo=${commentList.userNo }';"></td>
 							<td width= 80px;><b>${commentList.userName }</b></td>
 							<td width= 510px;>${commentList.snsComment }</td>
 							<td>
@@ -228,15 +243,15 @@
 	
 	<script>
 		
-		getCommentList();
+		getCommentList2();
 	
 		//댓글 리스트 불러오기
-		function getCommentList() {
+		function getCommentList2() {
 			const snsPhotoNo = "${snsDetail.snsPhotoNo }";
 			
 			
 			$.ajax({
-				url : "/comment/list",
+				url : "/comment/list2",
 				data : {
 					"snsPhotoNo" : snsPhotoNo
 				},

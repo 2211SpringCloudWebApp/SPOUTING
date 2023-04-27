@@ -11,9 +11,14 @@
 </head>
 <body>
 	<jsp:include page="../common/header.jsp"></jsp:include>
+	<br><br>
 	
 	<div id="meeting-main">
-	    <h1 id="meeting-header">🎯 SOCIALRING</h1>
+	    <h1 id="meeting-header">🎯 SOCIALRING</h1> <br>
+	    <div id="meeting-header2">
+	    	똑같은 일상을 다채롭게 <br>
+	    	만들어 줄 원데이 취향 모임 <br>
+	    </div>
 	
 	    <br>
 	    <div id="meeting-startBtn" onclick="location.href='/meetingOpenPage'"><b>소셜링 주최하기👆</b></div>
@@ -53,7 +58,12 @@
 	        <div class="meeting-box" onclick="location.href='/meetingDetailPage?meetingNo=${meeting.meetingNo}&readerNo=${meeting.readerNo }'">
 	
 	            <div class="meeting-img-box">
-	                <img class="meeting-img" src="/resources/images/meeting/${meeting.meetingFileRename }" alt="">
+		            <c:if test="${meeting.meetingFileRename ne null }"> 
+		                <img class="meeting-img" src="/resources/images/meeting/${meeting.meetingFileRename }" alt="">
+		            </c:if>
+		            <c:if test="${meeting.meetingFileRename eq null }"> 
+		                <img class="meeting-img-ex" src="/resources/images/meeting/exercise.png" alt="">
+		            </c:if>
 	            </div>
 	
 	            <div id="meeting-content-box">
@@ -79,7 +89,7 @@
         
 	</div>
     
-
+	<br><br>
 	<jsp:include page="../common/footer.jsp"></jsp:include>
 </body>
 </html>

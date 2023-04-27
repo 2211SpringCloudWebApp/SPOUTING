@@ -6,7 +6,7 @@
     }
 
 body {
-    background-color: rgb(230, 230, 230);
+    background-color: rgb(217, 227, 240);
     font-family: 'Pretendard-Regular';
 }
 
@@ -17,6 +17,16 @@ body {
 #meeting-header {
     --float: left;
     text-align: center;
+    font-size: 40px;
+    color: white;
+    text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+}
+
+#meeting-header2 {
+	    text-align: center;
+    	font-size: 25px;
+    	font-weight: 800px;
+	
 }
 
 #meeting-startBtn {
@@ -70,6 +80,13 @@ body {
 
 .meeting-img {
     border-radius: 50%;
+    border: solid 1px black;
+    width: 110px;
+    height: 110px;
+}
+
+.meeting-img-ex {
+	border-radius: 50%;
     border: solid 1px black;
     width: 110px;
     height: 110px;
