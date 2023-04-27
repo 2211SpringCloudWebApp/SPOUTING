@@ -40,28 +40,6 @@ public class CommentController {
 		}
 	}
 	
-	// 댓글작성
-//	@ResponseBody
-//	@RequestMapping(value="/commentList", produces="application/json;charset=utf-8")
-//	public String commentList(@RequestParam int inquiriesNo) {
-//			String commentContent = request.getParameter("commentContent");
-//			int inquiriesNo = Integer.parseInt(request.getParameter("inquiriesNo"));
-//			int userNo = Integer.parseInt(request.getParameter("userNo"));
-			
-//			Comment newComment = new Comment();
-//			newComment.setCommentContent(commentContent);
-//			newComment.setInquiriesNo(inquiriesNo);
-//			newComment.setUserNo(userNo);
-			
-//			int result = cService.insertComment(newComment);
-//			return null;
-//		List<Comment> cList = cService.printAllComment(inquiriesNo);
-//		if(!cList.isEmpty()) {
-//			Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd").create();
-//			return gson.toJson(cList);
-//		}
-//		return null;
-//	}
 	
 	@ResponseBody
 	@RequestMapping(value="/list")

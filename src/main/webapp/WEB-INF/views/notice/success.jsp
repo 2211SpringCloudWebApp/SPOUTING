@@ -143,7 +143,7 @@
 		        <div class="imageTag"><img src="../../../resources/images/notice/question.png"/></div>
 	        </c:if>
 			<c:if test="${msg eq '문의사항 삭제 완료'}">
-		        <div class="imageTag"><img src="../../../resources/images/notice/question.png"/></div>
+		        <div class="imageTag"><img src="../../../resources/images/notice/bin.png"/></div>
 	        </c:if>
 	        <c:if test="${msg eq '공지사항 등록완료!'}">
 		        <div class="imageTag"><img src="../../../resources/images/notice/check.png"/></div>

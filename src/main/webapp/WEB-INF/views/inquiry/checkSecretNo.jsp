@@ -12,12 +12,12 @@
 		<jsp:include page="../common/header.jsp"></jsp:include>
 		
 		<div id="main">
-	    	<div class="mainHeaderI">
+	    	<!-- <div class="mainHeaderI">
 		    	<div class="titleWrap">
 					<p>문의사항</p>
 					<p>궁금한 사항을 문의해주세요!</p>
 		    	</div>
-	    	</div>
+	    	</div> -->
 	    	<div class="mainCenter">
 	    		<div id="imageTag">
 	    			<img alt="" src="../../../resources/images/notice/padlock.png" style="width:200px; height:200px;">

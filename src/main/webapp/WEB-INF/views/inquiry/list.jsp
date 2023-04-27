@@ -38,18 +38,18 @@
 				            <col style="width:5%">
 				            <col style="width:15%">
 				            <col style="width:5%">
-				            <col style="width:55%">
-				            <col style="width:10%">
-				            <col style="width:10%">
+				            <col style="width:45%">
+				            <col style="width:15%">
+				            <col style="width:15%">
 				          </colgroup>
 			        <thead>
 				          <tr>
-				              <th style="background-color:red;">번호</th>
-				              <th style="background-color:yellow;">카테고리</th>
-				              <th style="background-color:yellowgreen;">비밀</th>
-				              <th style="background-color:skyblue;">제목</th>
-				              <th style="background-color:navy;">작성자</th>
-				              <th style="background-color:purple;">작성일</th>
+				              <th>번호</th>
+				              <th>카테고리</th>
+				              <th></th>
+				              <th>제목</th>
+				              <th>작성자</th>
+				              <th>작성일</th>
 				          </tr>
 			        </thead>
 			        <tbody class="table-group-divider" style="border-top-color : #1C3879;">

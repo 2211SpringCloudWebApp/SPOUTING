@@ -27,4 +27,8 @@ public interface InquiryService {
 
 	int deleteInquiry(int inquiriesNo);
 
+	void updateLike(Inquiry inquiry);
+
+	Inquiry getTotalLike(int inquiriesNo);
+
 }

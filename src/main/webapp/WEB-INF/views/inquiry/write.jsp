@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
 	<head>
@@ -40,13 +41,21 @@
 							<option value="P">결제취소문의</option>
 						</select>
 					</div>
+					<!-- 예약취소인경우 -->
+					<span>결제내역</span>
+					<select name="inquiriesCategory">
+					<c:forEach items="${bList }" var="book">
+						<option name="cancelPlz " value="${book.bookNo }">[${book.centerName.substring(5,8) }|${book.facilityName}]<fmt:formatDate value="${book.startTime }" pattern="MM.dd HH시"/></option>
+					</c:forEach>	
+					</select>
+					<!-- 여기까지 -->
 					<div id="titleArea">
 						<span>제목</span>
-						<input placeholder="제목을 입력해주세요." name="inquiriesTitle">
+						<input placeholder="제목을 입력해주세요." name="inquiriesTitle" required="required">
 					</div>
 					<div id="contentArea">
 						<span>내용</span>
-						<textarea rows="" cols="" id="summernote" name="inquiriesContent"></textarea>
+						<textarea rows="" cols="" id="summernote" name="inquiriesContent" required="required"></textarea>
 					</div>
 					<div id="test">
 						<span>파일첨부</span>
@@ -60,7 +69,7 @@
 						</div>
 					</div>
 					<div id="buttonArea">
-						<button id="saveBtn">저장</button>
+						<button id="saveBtn" class="btn btn-primary">저장</button>
 					</div>
 				</form>
 			</div>
@@ -106,15 +115,22 @@
 					// input태그가 이미 생성되어 있는지 체크
 					if ($("#secretNo").find("input[name='secretNo']").length === 0) {
 						// input태그가 생성되어 있지 않은 경우에만 생성
-						$("#secretNo").children().append("<input name='secretNo' placeholder='4자리 숫자'>");
+						$("#secretNo").children().append("<input type='password' id='secretNo' name='secretNo' placeholder='4자리 숫자'>");
 					}
 					$("#secretNo").show();
 				}
 			});
 			});
 
-
-
+		// 비밀번호 유효성검사
+		$("#saveBtn").click(function(){
+			var secretNo = $("input[name='secretNo']").val();
+			var regex = /^[0-9]{4}$/; // 비밀번호는 숫자 4자리로만 입력되어야 함
+			if($("#secretNo").is(":visible") && !regex.test(secretNo)){
+				alert("비밀번호는 숫자 4자리로 입력해주세요.");
+				return false;
+			}
+		});
 
 	
 	    </script>		

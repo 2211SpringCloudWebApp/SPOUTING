@@ -46,7 +46,9 @@
 						${notice.noticeContent }
 					</div>
 					<div id="contentImg">
-						<img src="/resources/images/notice/${notice.noticeFilerename}" width="400">
+						<c:if test="${notice.noticeFilerename ne null}">
+                       		<img src="/resources/images/notice/${notice.noticeFilerename}" width="400">
+						</c:if>
 					</div>
 				</div>
 			</div>

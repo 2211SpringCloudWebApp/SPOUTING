@@ -29,4 +29,8 @@ public interface InquiryStore {
 
 	int deleteInquiry(SqlSession session, int inquiriesNo);
 
+	void updateLike(SqlSession session, Inquiry inquiry);
+
+	Inquiry getTotalLike(SqlSession session, int inquiriesNo);
+
 }
