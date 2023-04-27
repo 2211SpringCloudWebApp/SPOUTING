@@ -11,7 +11,7 @@
 	<div id="img-box">
         <img class="img" src="/resources/images/homeImg/mainimg1.jpg" alt="mainimg1">
         <img class="img" src="/resources/images/homeImg/mainimg2.jpg" alt="mainimg2">
-        <img class="img" src="./resources/images/homeImg/mainimg3.jpg" alt="mainimg3">
+        <img class="img" src="/resources/images/homeImg/mainimg3.jpg" alt="mainimg3">
         <img class="img" src="/resources/images/homeImg/mainimg4.jpg" alt="mainimg4">
         <img class="img" src="/resources/images/homeImg/mainimg5.jpg" alt="mainimg5">
     </div>
@@ -43,7 +43,7 @@
     <div id="box2">
         <div class="box21">
             <h1>SPOUTING 만의 굿즈를 만나보세요.</h1><br>
-            <a href="">구매하러 가기</a>
+            <a href="/shop/main">구매하러 가기</a>
         </div>
         <div class="box22">
             <div class="box23">
