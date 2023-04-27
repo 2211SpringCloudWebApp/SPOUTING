@@ -54,9 +54,15 @@
                 <c:if test="${user.userType == '1'}">
                     <td style="color: rgb(255, 123, 0);">관리자</td>
                 </c:if>   
-                <td><input type="button" id="remo-btn" value="조회" onclick="location.href='/admin/point?userNo=${user.userNo}'"></td>
+                <c:if test="${user.userType != '1'}">
+                    <td><input type="button" id="remo-btn" value="조회" onclick="location.href='/admin/point?userNo=${user.userNo}'"></td>
+                </c:if>
+                <c:if test="${user.userType == '1'}">
+                    <td style="color: rgb(255, 136, 0);">관리자</td>
+                </c:if> 
             </tr>
             </c:forEach>
+            </c:if>
         </table>
         <table id="navi-box">
             <tr>
@@ -84,8 +90,7 @@
                         <a href="/admin/userSearch?page=${pi.maxPage}" id="navi-btn5"> ≫ </a>
                     </c:if>
                 </td>
-            </tr>
-            </c:if>
+            </tr>  
             <tr>
                 <td >
                     <form action="/admin/userSearch" method="get">

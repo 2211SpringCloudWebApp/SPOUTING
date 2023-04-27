@@ -19,7 +19,8 @@
             <input type="hidden" name="userNo" value="${diary.userNo}">
             <input type="hidden" name="diaryNo" value="${diary.diaryNo}">
             <div id="insert-title">
-                <span><fmt:formatDate value="${diary.diaryDate}" pattern="📗yyyy년 MM월 dd일" /></span>
+                <span><fmt:formatDate value="${diary.diaryDate}" pattern="📗yyyy년 MM월 dd일" /></span><br>
+                <p><a href="/diary/list" id="go-list">목록으로➰</a></p>
             </div>
             <table id="insert-detail">
                 <tr>

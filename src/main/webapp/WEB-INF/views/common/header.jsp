@@ -15,8 +15,8 @@
             </div>
             <div id="login">
                 <c:if test="${sessionScope.loginUser.userId eq null}">
-                    <br><a href="/user/login">LOGIN </a> | 
-                    <a href="/user/register"> JOIN</a>
+                    <a href="/user/register" class="login-btn">💙JOIN</a>
+                    <a href="/user/login" class="login-btn">⚽LOGIN</a>       
                 </c:if>
                 <c:if test="${sessionScope.loginUser.userId ne null}">
                     <input type="hidden" id="userId" value="${sessionScope.loginUser.userId}">                                
@@ -62,7 +62,7 @@
                         <div class="item_name"><a href="/meeting">커뮤니티</a></div>
                         <div class="item_content">
                             <li><a href="/meeting">소셜링</a></li>
-                            <li><a href="/sns?userNo=${sessionScope.loginUser.userNo }">문의사항</a></li>
+                            <li><a href="/sns?userNo=${sessionScope.loginUser.userNo }">SNS</a></li>
                         </div>
                     </div>
 ​

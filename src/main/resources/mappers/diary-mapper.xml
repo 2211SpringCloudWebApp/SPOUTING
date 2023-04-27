@@ -30,7 +30,7 @@
 		SELECT COUNT(*) FROM DIARY_TBL WHERE USER_NO = #{userNo}
 	</select>
 	<select id="selectDiaryList" resultMap="diaryResultMap">
-		SELECT * FROM DIARY_TBL WHERE USER_NO = #{userNo}
+		SELECT * FROM DIARY_TBL WHERE USER_NO = #{userNo} ORDER BY 1 DESC
 	</select>
 	<select id="selectByDiaryNo" resultMap="diaryResultMap">
 		SELECT * FROM DIARY_TBL WHERE DIARY_NO = #{diaryNo}
