@@ -8,13 +8,21 @@
 		<result property="commentContent" column="COMMENT_CONTENT"/>
 		<result property="cCreateDate" column="C_CREATE_DATE"/>
 	</resultMap>
+	<resultMap id="commentJoinResultMap" type="CommentJoin">
+		<id property="commentNo" column="COMMENT_NO"/>
+		<result property="userNo" column="USER_NO"/>
+		<result property="inquiriesNo" column="INQUIRIES_NO"/>
+		<result property="commentContent" column="COMMENT_CONTENT"/>
+		<result property="cCreateDate" column="C_CREATE_DATE"/>
+		<result property="userName" column="USER_NAME"/>
+	</resultMap>
 	
 <!--	댓글등록-->
 	<insert id="writeComment">
 		INSERT INTO COMMENT_TBL VALUES(SEQ_COMMENT_NO.NEXTVAL, #{userNo}, #{inquiriesNo}, #{commentContent}, DEFAULT)
 	</insert>
 	
-	<select id="getCommentList" resultMap="commentResultMap">
-		SELECT * FROM COMMENT_TBL WHERE INQUIRIES_NO = #{inquiriesNo}		
+	<select id="getCommentList" resultMap="commentJoinResultMap">
+		SELECT C.*, U.USER_NAME FROM COMMENT_TBL C JOIN USER_TBL U ON C.USER_NO = U.USER_NO WHERE INQUIRIES_NO = #{inquiriesNo}		
 	</select>
 </mapper>

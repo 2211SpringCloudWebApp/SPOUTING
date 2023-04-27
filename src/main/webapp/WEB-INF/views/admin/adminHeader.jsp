@@ -33,7 +33,7 @@
             </li>
             <li class="main-nav"><a href="">게시판</a>
                 <ul class="drop-nav">
-                    <li><a href="">공지사항</a></li>
+                    <li><a href="/notice/write">공지글작성</a></li>
                     <li><a href="">문의게시판</a></li>
                 </ul>
             </li>

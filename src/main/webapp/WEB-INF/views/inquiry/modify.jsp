@@ -34,7 +34,6 @@
 				<form action="/inquiry/modify" method="post" enctype="multipart/form-data">
 					<input type="hidden" name="inquiriesNo" value="${inquiry.inquiriesNo }">
 					<div id="selectArea">
-						테스트 : ${inquiry.userNo}
 						<span>카테고리</span>
 						<select name="inquiriesCategory">
 							<option value="N">일반문의</option>
@@ -73,15 +72,6 @@
 						<button id="saveBtn">저장</button>
 					</div>
 				</form>
-				<!-- 댓글부분(입력창 먼저) -->
-					<div id="commentArea">
-						<c:if test="${inquiry.userNo == sessionScope.loginUser.userNo}">
-							<div id="commentInput">
-
-							</div>
-						</c:if>
-
-					</div>
 			</div>
 		</div>
 		

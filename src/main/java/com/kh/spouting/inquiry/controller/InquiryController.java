@@ -14,9 +14,12 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.kh.spouting.book.domain.Book;
+import com.kh.spouting.book.service.BookService;
 import com.kh.spouting.common.FileUtil;
 import com.kh.spouting.common.PageInfo;
 import com.kh.spouting.common.Search;
@@ -31,6 +34,9 @@ public class InquiryController {
 
 	@Autowired
 	private InquiryService iService;
+	
+	@Autowired
+	private BookService bService;
 	
 	@Autowired
 	@Qualifier("fileUtil")
@@ -116,8 +122,11 @@ public class InquiryController {
 	 * @return mv
 	 */
 	@RequestMapping(value="/write", method=RequestMethod.GET)
-	public ModelAndView viewInquiryWrite(ModelAndView mv) {
-		mv.setViewName("inquiry/write");
+	public ModelAndView viewInquiryWrite(ModelAndView mv, HttpSession session) {
+		//츄가|문의게시판용: 예약내역페이지(이용전) 보이기
+		User user = (User) session.getAttribute("loginUser");
+		List<Book> myBookList = bService.getMyBooking(user.getUserNo());
+		mv.addObject("bList", myBookList).setViewName("inquiry/write");
 		return mv;
 	}
 	
@@ -136,6 +145,8 @@ public class InquiryController {
 			, HttpSession session
 			, HttpServletRequest request
 			, @ModelAttribute Inquiry inquiry
+			, @RequestParam(value="bookNo", required=false) Integer bookNo
+			//int는 null로 받아올수 없고 래퍼클래스는 가능!
 			, @RequestParam(value="uploadFile", required=false) MultipartFile multi) {
 		// 파일전송
 		Map<String, String> fileInfo = null;
@@ -324,5 +335,25 @@ public class InquiryController {
 		if(deleteFile.exists()) {
 			deleteFile.delete();
 		}
+	}
+	
+	// ******* 좋아요 테스트중
+	@ResponseBody
+	@RequestMapping(value="inputLike", method=RequestMethod.POST)
+	public String updateLike(Inquiry inquiry) {
+		try {
+			iService.updateLike(inquiry);
+			return "success";
+		} catch (Exception e) {
+			e.printStackTrace();
+			return " fail";
+		}
+	}
+	
+	@ResponseBody
+	@RequestMapping(value="/like")
+	public Inquiry getTotalLike(int inquiriesNo) {
+		Inquiry inquiry = iService.getTotalLike(inquiriesNo);
+		return inquiry;
 	}
 }

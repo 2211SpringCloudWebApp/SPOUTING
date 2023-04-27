@@ -86,4 +86,16 @@ public class InquiryStoreLogic implements InquiryStore{
 		return result;
 	}
 
+	@Override
+	public void updateLike(SqlSession session, Inquiry inquiry) {
+		session.update("InquiryMapper.updateLike", inquiry);
+		
+	}
+
+	@Override
+	public Inquiry getTotalLike(SqlSession session, int inquiriesNo) {
+		Inquiry inquiry = session.selectOne("InquiryMapper.getTotalLike", inquiriesNo);
+		return inquiry;
+	}
+
 }

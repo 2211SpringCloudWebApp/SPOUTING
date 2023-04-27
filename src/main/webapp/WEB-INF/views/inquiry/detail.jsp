@@ -49,19 +49,37 @@
                         ${inquiry.inquiriesContent }
                     </div>
                     <div id="contentImg">
-                        <img src="/resources/images/inquiry/${inquiry.inquiriesFilerename}" width="400">
+						<c:if test="${inquiry.inquiriesFilerename ne null}">
+                       		<img src="/resources/images/inquiry/${inquiry.inquiriesFilerename}" width="400">
+						</c:if>
                     </div>
                 </div>
+				<!-- 좋아요기능 -->
+				<div class="likeWrap">
+					<div id="likeInput">
+						<button type="button" id="insertLike"><img src="/resources/images/notice/likesIcon2.png" width="50px"></button>
+					</div>
+					<div id="likeOutput">
+
+					</div>
+				</div>
 				<!-- 댓글부분(입력창 먼저) -->
+				<div id="line"></div>
 				<div id="commentArea">
-					<h5>댓글</h5>
-						<c:if test="${inquiry.userNo == sessionScope.loginUser.userNo}">
-							<div id="commentInput" style="background-color: skyblue;">
+					<h5>댓글💬</h5>
+						<!-- 글작성자 댓글권한 -->
+						<div id="commentInput">
+							<c:if test="${inquiry.userNo == sessionScope.loginUser.userNo}">
 								<input type="text" name="commentContent" id="commentContent"/>
-								<button type="submit" id="insertComment">입력</button>
-							</div>
-						</c:if>
-					<div id="commentOutput" style="background-color: lightpink;">
+								<button type="submit" id="insertComment" class="btn btn-primary btn-sm">입력</button>
+							</c:if>
+							<!-- 관리자 댓글권한 -->
+							<c:if test="${sessionScope.loginUser.userType eq '1'}">
+								<input type="text" name="commentContent" id="commentContent"/>
+								<button type="button" id="insertComment" class="btn btn-primary btn-sm">입력</button>
+							</c:if>
+						</div>
+					<div id="commentOutput">
 						댓글내용창입니다.
 					</div>
 				</div>
@@ -150,10 +168,9 @@
 						"userNo" : userNo
 					},
 					type : "post",
-					contentType : "application/json",
 					success : function(result){
 						if(result == "success"){
-							alert("댓글등록성공");
+							// alert("댓글등록성공");
 							$("#content").val(""); // 댓글 등록 시 댓글 등록창 초기화
 							getCommentList();	// 등록 후 댓글목록 불러오기 함수 실행
 						}else{
@@ -165,9 +182,6 @@
 					}
 				})
 			}
-
-			$("#insertComment").on("click", function(){
-		})
 
 			// 댓글목록 Ajax
 			function getCommentList(){
@@ -183,8 +197,9 @@
 						if(result.length > 0){
 							for(var i = 0; i < result.length; i++){
 								html += "<div class='comment'>";
-								html += "<span class='username'>" + result[i].userNo + "</span>";
-								html += "<span class='content'>" + result[i].commentContent + "</span>";
+								html += "<span class='username'>" + result[i].userName + "💙 </span><br>";
+								html += "<span class='content'>" + result[i].commentContent + "</span><br>";
+								html += "<span class='date'>" + new Date(result[i].cCreateDate).toLocaleString() + "</span>"
 								html += "</div>";
 							}
 						}else{
@@ -198,13 +213,68 @@
 				})
 			}
 
-			// 버튼클릭 시 동작
+			// 댓글등록버튼 클릭 시 동작
 			$("#insertComment").click(function(e){
 				e.preventDefault();
 				writeComment();
 			})
 			$(function(){
 				getCommentList();
+			})
+
+			// 좋아요 입력 함수
+			function updateLike(){
+				var inquiriesNo = "${inquiry.inquiriesNo}";
+				$.ajax({
+					url : "/inquiry/inputLike",
+					data : {
+						"inquiriesNo" : inquiriesNo,
+					},
+					type : "post",
+					success : function(result){
+						if(result == "success"){
+							alert("좋아요 수 +1");
+							getTotalLike();	// 좋아요 클릭 후 좋아요수 올라가는 함수 실행
+						}else{
+							console.log("좋아요 기능 실패");
+						}
+					},
+					error : function(){
+						console.log("AJAX 오류 발생");
+					}
+				})
+			}
+
+			// 좋아요 출력 함수
+			function getTotalLike(){
+				var inquiriesNo = "${inquiry.inquiriesNo}";
+				$.ajax({
+					url : "/inquiry/like",
+					data : {
+						"inquiriesNo" : inquiriesNo
+					},
+					type : "get",
+					success : function(result){
+						if(result != null){
+							html = "<span class='like'> +" + result.inquiriesLikes + "</span>";
+						}else{
+							html = "+0";
+						}
+						$("#likeOutput").html(html);
+					},
+					error : function(){
+						alert("출력실패");
+					}
+				})
+			}
+
+			// 좋아요버튼 클릭 시 동작
+			$("#insertLike").click(function(e){
+				e.preventDefault();
+				updateLike();
+			})
+			$(function(){
+				getTotalLike();
 			})
 		</script>
 	</body>

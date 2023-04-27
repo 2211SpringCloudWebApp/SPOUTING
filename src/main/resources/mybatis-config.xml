@@ -25,6 +25,7 @@
 		<typeAlias type="com.kh.spouting.center.domain.Search" alias="Search"/>
 		<typeAlias type="com.kh.spouting.inquiry.domain.InquiryJoin" alias="InquiryJoin"/>
 		<typeAlias type="com.kh.spouting.comment.domain.Comment" alias="Comment"/>
+		<typeAlias type="com.kh.spouting.comment.domain.CommentJoin" alias="CommentJoin"/>
 		
 	</typeAliases>
 	<mappers>

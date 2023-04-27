@@ -32,12 +32,15 @@
 	    	<div class="mainCenter">
 				<form action="/notice/write" method="post" enctype="multipart/form-data">
 					<div id="titleArea">
-						<input placeholder="제목을 입력해주세요." name="noticeTitle">
+						<span>제목</span>
+						<input placeholder="제목을 입력해주세요." name="noticeTitle" required="required">
 					</div>
 					<div id="contentArea">
-						<textarea rows="" cols="" id="summernote" name="noticeContent"></textarea>
+						<span>내용</span>
+						<textarea rows="" cols="" id="summernote" name="noticeContent" required="required"></textarea>
 					</div>
 					<div id="test">
+						<span>파일첨부</span>
 						<input type="file" name="uploadFile">
 					</div>
 					<div id="buttonArea">

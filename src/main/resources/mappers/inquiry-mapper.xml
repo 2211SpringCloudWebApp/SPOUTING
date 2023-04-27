@@ -91,4 +91,11 @@
 	<delete id="deleteInquiry">
 		DELETE FROM INQUIRIES_TBL WHERE INQUIRIES_NO = #{inquiriesNo}
 	</delete>
+	
+	<update id="updateLike">
+		UPDATE INQUIRIES_TBL SET INQUIRIES_LIKES = INQUIRIES_LIKES + 1 WHERE INQUIRIES_NO = #{inquiriesNo}
+	</update>
+	<select id="getTotalLike" resultMap="inquiryResultMap">
+		SELECT INQUIRIES_LIKES FROM INQUIRIES_TBL WHERE INQUIRIES_NO = #{inquiriesNo}		
+	</select>
 </mapper>

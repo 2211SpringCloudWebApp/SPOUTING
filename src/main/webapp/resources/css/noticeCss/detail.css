@@ -50,14 +50,25 @@ table{
 		}
 table th{
 	width: 20%;
+	font-size: 20px;
+	font-weight: bolder;
 }
 table td{
 	width: 80%;
+	font-size: 16px;
 }
 .mainCenter .contentWrap{
 	width: 90%;
 	margin: 0 auto;
+	margin-bottom: 1rem;
 }
+/* 좋아요부분 */
+.likeWrap {
+    display: flex;
+    justify-content: center;
+	margin: 20px;
+}
+
 /* 버튼부분 */
 .mainFooter{
   width: 65%;
@@ -88,4 +99,48 @@ table td{
 /* 모달창 글씨*/
 .modal-content{
 	color: #1C3879;
+}
+
+#line{
+	border: 0.5px solid #dee2e6;
+}
+/* 댓글부분(문의사항) */
+#main  #commentArea{
+	width: 90%;
+	margin: 0 auto;
+	margin-top: 1rem;
+}
+	#main  #commentArea h5{
+		font-size: 20px;
+		font-weight: bolder;
+	}
+	#main #commentInput{
+		margin-bottom: 8px;
+	}
+	input#commentContent {
+		width: 90%;
+	}
+	#main #commentOutput .comment{
+		padding-bottom: 8px;
+		margin: 0 auto;
+		width: 97%;
+		border-bottom: 0.5px solid #dee2e6;
+	}
+		#main .comment span:first-child{
+			/* font-size: larger; */
+		}
+		#main .comment span:last-child{
+		}
+
+/* 좋아요부분(문의사항) */
+.likeWrap #insertLike{
+	border: none;
+	background: none;
+}
+
+span.like {
+	display: block;
+    font-size: 20px;
+    color: cornflowerblue;
+	margin-top: 20px;
 }

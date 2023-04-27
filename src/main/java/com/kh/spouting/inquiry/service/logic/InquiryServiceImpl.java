@@ -85,4 +85,15 @@ public class InquiryServiceImpl implements InquiryService{
 		return result;
 	}
 
+	@Override
+	public void updateLike(Inquiry inquiry) {
+		iStore.updateLike(session, inquiry);
+	}
+
+	@Override
+	public Inquiry getTotalLike(int inquiriesNo) {
+		Inquiry inquiry = iStore.getTotalLike(session, inquiriesNo);
+		return inquiry;
+	}
+
 }
