@@ -1,6 +1,7 @@
 package com.kh.spouting.product.controller;
 
 import java.io.File;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -18,14 +19,12 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.kh.spouting.cart.domain.Cart;
 import com.kh.spouting.cart.service.CartService;
-import com.kh.spouting.center.domain.Center;
 import com.kh.spouting.common.Alert;
 import com.kh.spouting.common.PageInfo;
 import com.kh.spouting.common.Search;
 import com.kh.spouting.product.domain.Product;
 import com.kh.spouting.product.service.ProductService;
 import com.kh.spouting.user.domain.User;
-import com.kh.spouting.user.service.UserService;
 
 @Controller
 public class ProductController {
@@ -35,10 +34,6 @@ public class ProductController {
 	
 	@Autowired
 	private CartService cService;
-	
-	@Autowired
-	private UserService uService;
-	
 	
 	// ******************** 이용자 기능 ********************
 	
@@ -176,23 +171,37 @@ public class ProductController {
 	}
 	
 	// 상세페이지 내 주문페이지 이동
+	@RequestMapping(value="/detail/orderView", method=RequestMethod.GET)
+	public ModelAndView viewOrderPageFromDetail(ModelAndView mv, @RequestParam("qty") Integer qty, @RequestParam("productNo") Integer productNo, HttpSession session) {
+	    // 상세 페이지에서 세션에 저장된 product 값을 cList 에 담아 주문서로 전달
+	    List<Cart> cList = new ArrayList<>();
+	    Product product = pService.printOneProduct(new Product(productNo));
+	    Cart cart = new Cart(product, product.getProductNo(), qty);
+	    cList.add(cart);
+	    // 상품 가격 계산
+	    
+	    mv.addObject("cList", cList).setViewName("/shop/pay/order");
+	    return mv;
+	}
 
 	// 장바구니 내 주문페이지 이동
 	@RequestMapping(value="/cart/orderView", method=RequestMethod.GET)
 	public ModelAndView viewOrderPageFromCart(ModelAndView mv, HttpSession session) {
 	    User loginUser = (User) session.getAttribute("loginUser");
-	    List<Cart> checkedCartList = cService.printCheckedCart(loginUser.getUserId());
-	    for (Cart cart : checkedCartList) {
+	    // 로그인한 회원의 장바구니에 체크된 상품을 cList로 가지고 와서 주문서로 전달
+	    List<Cart> cList = cService.printCheckedCart(loginUser.getUserId());
+	    double sum = 0;
+	    for (Cart cart : cList) {
+	    	// 카트에 product 담기
 	        Product product = pService.printOneProduct(new Product(cart.getProductNo()));
 	        cart.setProduct(product);
+	        // 결제 가격은 누적합으로 계산해서 가져옴
+	        sum += Double.parseDouble(product.getProductPrice()) * cart.getCartQuantity();
 	    }
-	    mv.addObject("cList", checkedCartList).setViewName("/shop/pay/order");
+	    mv.addObject("cList", cList).addObject("sum", sum).setViewName("/shop/pay/order");
 	    return mv;
 	}
 
-
-	
-	
 	
 	// ******************** 관리자 기능 ********************
 	

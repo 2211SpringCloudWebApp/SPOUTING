@@ -1,0 +1,315 @@
+@font-face {
+    font-family: 'Pretendard-Regular';
+    src: url('https://cdn.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Regular.woff') format('woff');
+    font-weight: 400;
+    font-style: normal;
+}
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Pretendard-Regular'; 
+}
+#maincontainer {
+    width: 100%;
+    height : 2000px;
+    padding-top : 150px;
+}
+
+#submit {
+	display: none;	
+}
+
+* {
+	font-weight: 600;
+}
+body{
+  margin: 0;
+}
+h1 { 
+	text-align : center;
+}
+/* --------------------------------------------- */
+ul{
+  list-style: none;
+}
+dd{
+  margin: 0px;
+}
+input, select, textarea{
+  border: 1px solid gray !important;
+}
+
+main{
+  background-color: #fff;
+  margin: 0 auto;
+  padding: 30px 50px 100px 50px;
+  margin: 0px 83px;
+  margin-top: 100px;
+}
+  #main-heading{
+    padding-top: 20px;
+    padding-bottom: 20px;
+    margin-top: 0px;
+    font-size: 34px;
+    font-weight: 800;
+    text-align: center;
+    letter-spacing: -.5px;
+    line-height: 1.2;
+    color: #000;
+  }
+  .contents{
+    display: flex;
+    justify-content: space-between;
+    height: 80%;
+    width: 80%;
+  }
+  .box-form-left{
+    width: 65%;
+  }
+    .space-info{
+      padding: 30px 30px 39px;
+      background-color: #fff;
+    }
+    .contents h3{
+      width: 100%;
+      margin-bottom: 15px;
+      padding-top: 2px;
+      padding-bottom: 20px;
+      border-bottom: 4px solid #1C3879;
+      font-weight: 800;
+      vertical-align: top;  
+      font-size: 18px;
+      line-height: 18px;
+      padding : 30px;
+    }
+    .info-photo{
+      height: 60px;
+      font-size: 15px;
+      margin : 0;
+      padding : 0;
+    }
+    .list-detail{
+      padding: 0px;
+      margin: 0px;
+    }
+    .list-detail li{
+      position: relative;
+      padding: 20px 0px 20px 120px;
+      font-size: 16px;
+      display: flex;
+      color: #000;
+      border-bottom: 1px solid #1C3879;
+    }
+      .list-detail li .tit{
+        position: absolute;
+        color: #1C3879;
+        left: 33px;
+        margin-right: 20px;
+      }
+      .list-detail li .data{
+        margin-left: 45px;
+      }
+    
+    .user-info{
+      position: relative;
+      margin-top: 90px;
+    }
+      .info-heading{
+        display: flex;
+        justify-content: space-between;
+      }
+      .info-requ{
+        color:#1C3879;
+        text-align: right;
+      }
+    
+    .flex-box{
+      padding: 4px;
+      position: relative;
+      display: table;
+      width: 100%;
+    }
+    .flex-tit{
+      width: 15%;
+      color: #1C3879;
+      font-weight: 800;
+      vertical-align: top;
+      font-size: 17px;
+      display: table-cell;
+    }
+      .ico-requ{
+        font-size: 12px;
+        color: #1C3879;
+      }
+    
+    .flex{
+      width: 95%;
+      margin: 0px;
+    }
+    .flex input{
+      display: inline-block;
+      width: 100%;
+      background-color: #fff;
+      height: 50px;
+      padding: 0 16px;
+      line-height: 1.2;
+      font-size: 18px;
+    }
+
+    .phone-col{
+      width: 30%;
+    }
+    .phone-col input, .phone-col select{
+      display: inline-block;
+      background-color: #fff;
+      height: 50px;
+      padding: 0 16px;
+      line-height: 1.2;
+      width: 83%;
+      font-size: 18px;
+    }
+    .flex-phone{
+      display: flex;
+      width: 100%;
+    }
+    
+    .flex-phone span{
+      text-align: center;
+      line-height: 50px;
+      width: 5%;
+    }
+    .phone-col select{
+      width: 100%;
+    }
+    .phone-col select option{
+      font-size: 18px;
+    } 
+    
+
+    .flex-addr{
+      margin: 0px;
+      width: 95%;
+    }
+      .flex-addr input[type=text]{
+        display: inline-block;
+        width: 20%;
+        height: 50px;
+        background-color: #fff;
+        padding: 0 16px;
+        line-height: 1.2;
+        font-size: 18px;
+      }
+      .flex-addr input[type=button]{
+        width: 25%;
+        height: 52.2px;
+        cursor: pointer;
+        margin-left: 15px;
+        padding: 0px;
+      }
+      .flex-addr-col{
+        margin-top: 16px;
+        width: 100% !important;
+      }
+
+      .flex textarea{
+        resize: none;
+        padding: 16px;
+        font-size: 18px; 
+        line-height: 1.2;
+        width: 100%;
+      } 
+
+
+
+      .info-notice{
+        margin-top: 70px;
+      }
+        .info-notice ul{
+          padding-left: 0px;
+        }
+        .info-notice li{
+          font-size: 18px;
+          padding: 20px 0px 20px 53px;
+          border-bottom: 1px solid gray;
+        }
+        .info-notice span{
+          font-size: 18px;
+          position: absolute;
+          left: 10px;
+        }
+
+
+
+
+  .box-form-right{
+    margin-left: 1000px;
+    width: 45%;
+    margin-top : -1200px;
+  }
+    .info-pay{
+      padding-left: 60px;
+    }
+    .info-pay ul{
+      padding-left: 0px;
+    }
+    .info-pay li{
+      font-size: 18px;
+      padding: 20px 0px 20px 10px;
+      border-bottom: 1px solid gray;
+    }
+    .info-pay span{
+      font-size: 18px;
+    }
+      .info-pay-col1{
+        color: #656565;
+      }
+      .info-pay-col2{
+        margin-left: 20px;
+        font-weight: 600;
+      }
+      .totalCount{
+      	padding: 10px 10px;
+	    border-radius: 4px;
+	    font-size: 18px;
+	    font-weight: 600;
+	    cursor: pointer;
+	    width: 90px;
+	    border: 1px solid gray !important;
+      }
+    #pay-result{
+      border-top: 4px solid #1C3879;
+      border-bottom: 0px;
+      display: flex;
+      justify-content: space-between;
+    }
+      #pay-result-left{
+        font-size: 44px;
+        font-weight: 800;
+        vertical-align: top;
+        color: white;
+      }
+      #pay-result-right{
+        font-size: 44px;
+        font-weight: 800;
+        vertical-align: top;
+        color: #1C3879;
+      }
+  #payment{
+    height: 60px;
+    background-color: #1C3879;
+    text-align: center;
+    line-height: 18px;
+    width: 100%;
+    color: white;
+    font-size: 24px;
+    font-weight: 600;
+    cursor: pointer;
+    border-radius:10px;
+  }
+  
+
+
+
+
+

@@ -60,8 +60,8 @@
 					</tr>
 				</table>
 				<div id="buttonbox">
-					<button class="btn btn_buy" onclick="order('${sessionScope.loginUser.userId}');">바로 주문</button>
-					<button class="btn btn-cart" onclick="loginCheck('${sessionScope.loginUser.userId}',function(){addCart('${sessionScope.loginUser.userId }',${product.productNo },document.querySelector('#qty').value)});">장바구니 담기</button>
+					<button  class="btn" onclick="orderProduct()">주문하기</button>
+					<button class="btn" onclick="loginCheck('${sessionScope.loginUser.userId}',function(){addCart('${sessionScope.loginUser.userId }',${product.productNo },document.querySelector('#qty').value)});">장바구니 담기</button>
 					<button class="btn btn-wishlist">위시리스트</button>
 				</div>
 			</div>
@@ -159,6 +159,20 @@
 				    totalPriceTag.innerHTML = "<span> " + totalPrice.toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, ",") + "</span><span id='wonSymbol'>원</span>";
 				}
 			
+				// 바로 결제
+				function orderProduct() {
+				  var qty = document.querySelector('#qty').value;
+				  var productNo = '${product.productNo}';
+				  var userId = '${loginUser.userId}';
+				  var confirmation = confirm('해당 상품을 구매하시겠습니까?');
+				  if (confirmation) {
+				    loginCheck(userId, function() {
+				      location.href='/detail/orderView?qty=' + qty + '&productNo=' + productNo;
+				    });
+				  }
+				}
+
+				
 				//장바구니 추가
 				function addCart(userId, productNo, cartQuantity){
 					$.ajax({

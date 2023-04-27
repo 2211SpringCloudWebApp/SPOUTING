@@ -18,7 +18,15 @@
 			<id>oracle</id>
 			<url>http://www.datanucleus.org/downloads/maven2/</url>
 		</repository>
+		
+		<!-- 아임포트 REST API연동 모듈 -->
+	    <repository>
+	        <id>jitpack.io</id>
+	        <url>https://jitpack.io</url>
+	    </repository>
+		
 	</repositories>	
+	
 	<dependencies>
 		<!-- 이메일 인증 -->
 		<dependency>
@@ -32,6 +40,13 @@
 		    <artifactId>spring-context-support</artifactId>
 		    <version>${org.springframework-version}</version>
 		</dependency>
+		 
+		<!-- 아임포트 REST API연동 모듈 -->
+		<dependency>
+		    <groupId>com.github.iamport</groupId>
+		    <artifactId>iamport-rest-client-java</artifactId>
+		    <version>0.2.14</version>
+		</dependency>
 		
 		<!-- AspectJ Weaver AOP를 사용하기 위해서 추가함. -->
 		<!-- https://mvnrepository.com/artifact/org.aspectj/aspectjweaver -->
@@ -40,6 +55,7 @@
 			<artifactId>aspectjweaver</artifactId>
 			<version>${org.aspectj-version}</version>
 		</dependency>
+		
 		<!-- GSON : List 데이터를 JSON 데이터로 변환해주는 라이브러리 -->
 		<!-- https://mvnrepository.com/artifact/com.google.code.gson/gson -->
 		<dependency>
