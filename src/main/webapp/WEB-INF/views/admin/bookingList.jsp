@@ -154,8 +154,8 @@
         </div>
         <table id="user-list">
             <tr>
-            	<th>
             	<th>-</th>
+            	<th>예약No.</th>
                 <th>지점명</th>
                 <th>사용시설</th>
                 <th>사용인원</th>
@@ -163,12 +163,13 @@
                 <th>예약자명</th>
                 <th>이메일</th>
                 <th>총금액</th>
-                
                 <th>실결제금액</th>
+                <td>취소요청</td>
             </tr>
             
             <c:forEach items="${bList}" var="book" varStatus="i">
             <tr>
+	            <input onload="expiredColor(this)" type="hidden" class="startTimeJs" value="${book.startTime}">
             	<td style="color: #cdcccc">${i.count } &nbsp;</td>
                 <td>${book.bookNo}</td>
                 <td id="branchName">${book.centerName.substring(5, 8)}</td>
@@ -181,9 +182,9 @@
                 <td>${book.bookPrice}</td>
                 <td>${book.paidPrice}</td>
             
+                <td> 뀨뀨씨이프 뀨뀨뀨 </td>
                 
-                
-                
+              <!--  
                 <c:if test="${user.userType != '1'}">
                     <td><input type="button" id="remo-btn" value="탈퇴" onclick="removeUser('${user.userId}')"></td>
                 </c:if>
@@ -196,7 +197,7 @@
                 <c:if test="${user.userType == '1'}">
                     <td style="color: rgb(255, 136, 0);">관리자</td>
                 </c:if>      
-                
+                 -->
             </tr>
             </c:forEach>
         </table>
@@ -229,10 +230,34 @@
     </div>
 
     <script>
-    	//기한 지난 예약건 색깔 바꾸기!
-    	//노드~선택하기~귀차나~~~히잏잏잉
     
+    //브라우저 로드됐을때 tr 내부 input태그(value=타임스탬프 타입) 반복 선택
+    window.onload = function() {
+        var startTimeInputs = document.querySelectorAll(".startTimeJs");
+        startTimeInputs.forEach(function(startTimeInput) {
+            expiredColor(startTimeInput);
+        });
+    };
+	//선택한 인풋 태그들 함수 처리
+    function expiredColor(startTimeInput) {
+        var startTimeDate = startTimeInput.value;
+        var startTime = new Date(startTimeDate); // 예약 시작 시간
+        var currentTime = new Date(); // 현재 시간
+
+        // 예약 시작 시간이 현재 시간보다 과거인 경우
+        if (startTime < currentTime) {
+            
+            var trElement = startTimeInput.parentNode; // 해당 tr 요소 가져오기
+          
+            trElement.style.backgroundColor = "#cdcccc"; // 백그라운드 컬러 변경
+            trElement.style.borderBottom = "1px solid white";
+        }
+    }
     
+
+    
+		
+		
     	//복붙한부분()
         function removeUser(userId) {
             if(window.confirm("해당 회원을 탈퇴시키겠습니까?")) {
