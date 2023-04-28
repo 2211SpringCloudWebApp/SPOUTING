@@ -62,7 +62,7 @@
                         <div class="item_name"><a href="/meeting">커뮤니티</a></div>
                         <div class="item_content">
                             <li><a href="/meeting">소셜링</a></li>
-                            <li><a href="/sns?userNo=${sessionScope.loginUser.userNo }">SNS</a></li>
+                            <li><a href="/sns">SNS</a></li>
                         </div>
                     </div>
 ​

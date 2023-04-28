@@ -20,10 +20,12 @@ import org.springframework.web.bind.annotation.SessionAttribute;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.kh.spouting.common.FileUtil;
+import com.kh.spouting.meeting.domain.AllMemberProfile;
 import com.kh.spouting.meeting.domain.Lineup;
 import com.kh.spouting.meeting.domain.Meeting;
 import com.kh.spouting.meeting.domain.ReaderProfile;
 import com.kh.spouting.meeting.service.MeetingService;
+import com.kh.spouting.sns.service.SnsService;
 import com.kh.spouting.user.domain.User;
 
 @Controller
@@ -35,6 +37,9 @@ public class MeetingController {
 	
 	@Autowired
 	private MeetingService meetingService;
+	
+	@Autowired
+	private SnsService snsService;
 
 	//커뮤니티 목록 페이지
 	@RequestMapping(value="/meeting", method=RequestMethod.GET)
@@ -118,12 +123,21 @@ public class MeetingController {
 									, Model model) {
 		Meeting meeting = meetingService.selectOneByNumber(meetingNo);
 		int lineupCount = meetingService.getLineupCount(meetingNo) + 1;
-		
+	
+		//소셜링 주최자 프로필 추출하기
 		ReaderProfile readerProfile = new ReaderProfile(meetingNo, readerNo);
-		String readerProfileImg = meetingService.getReaderProfile(readerProfile);
+//		String readerProfileImg = meetingService.getReaderProfile(readerProfile);
+		AllMemberProfile leaderProfile = meetingService.getReaderProfile2(readerProfile);
+		
+		
+		//소셜링 참여자 프로필 추출하기
+		List<AllMemberProfile> memberList = meetingService.getAllMemberList(meetingNo);
+		
 		model.addAttribute("meeting", meeting);
 		model.addAttribute("lineupCount", lineupCount);
-		model.addAttribute("readerProfileImg", readerProfileImg);
+//		model.addAttribute("readerProfileImg", readerProfileImg);
+		model.addAttribute("leaderProfile",leaderProfile);
+		model.addAttribute("memberList",memberList);
 		return "meeting/meeting-detail";
 	}
 	

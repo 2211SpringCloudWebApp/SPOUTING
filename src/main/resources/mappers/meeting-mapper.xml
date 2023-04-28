@@ -2,16 +2,25 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="MeetingMapper">
 	<resultMap id="meetingResultMap" type="com.kh.spouting.meeting.domain.Meeting">
-		<id 	property="meetingNo" 		column="MEETING_NO"/>
-		<result property="readerNo" 		column="READER_NO"/>
-		<result property="meetingName" 		column="MEETING_NAME"/>
-		<result property="meetingDetail" 	column="MEETING_DETAIL"/>		
-		<result property="meetingPeople" 	column="MEETING_PEOPLE"/>
-		<result property="meetingDay" 	column="MEETING_DAY"/>
-		<result property="meetingFilename" 	column="MEETING_FILENAME"/>		
-		<result property="meetingFileRename" 	column="MEETING_FILERENAME"/>
-		<result property="meetingFilepath" 	column="MEETING_FILEPATH"/>
+		<id 	property="meetingNo" 		 column="MEETING_NO"/>
+		<result property="readerNo" 		 column="READER_NO"/>
+		<result property="meetingName" 		 column="MEETING_NAME"/>
+		<result property="meetingDetail" 	 column="MEETING_DETAIL"/>		
+		<result property="meetingPeople" 	 column="MEETING_PEOPLE"/>
+		<result property="meetingDay" 		 column="MEETING_DAY"/>
+		<result property="meetingFilename" 	 column="MEETING_FILENAME"/>		
+		<result property="meetingFileRename" column="MEETING_FILERENAME"/>
+		<result property="meetingFilepath" 	 column="MEETING_FILEPATH"/>
 	</resultMap>
+	
+	
+	<resultMap id="allMemberListResultMap" type="com.kh.spouting.meeting.domain.AllMemberProfile">
+		<id 	property="userNo" 			 column="USER_NO"/>
+		<result property="userName" 		 column="USER_NAME"/>
+		<result property="profileFileRename" column="PROFILE_FILERENAME"/>
+		<result property="profileIntoduce" 	 column="PROFILE_INTRODUCE"/>		
+	</resultMap>
+	
 	
 	<!-- select -->
 	<select id="selectMeeting" resultMap="meetingResultMap">
@@ -36,11 +45,33 @@
 	</select>
 	
 	<select id="getReaderProfile" resultType="string">
-		SELECT S.PROFILE_FILERENAME 
+		SELECT U.USER_NAME, S.USER_NO, S.PROFILE_FILERENAME, S.PROFILE_INTRODUCE
 		FROM SNS_TBL S
 		JOIN MEETING_TBL M
 		ON S.USER_NO = M.READER_NO
-		WHERE M.READER_NO = #{readerNo} AND MEETING_NO = #{meetingNo}
+		JOIN USER_TBL U
+		ON S.USER_NO = U.USER_NO
+		WHERE M.MEETING_NO = #{meetingNo} AND S.USER_NO = #{readerNo} 
+	</select>
+	
+	<select id="getReaderProfile2" resultMap="allMemberListResultMap">
+		SELECT U.USER_NAME, S.USER_NO, S.PROFILE_FILERENAME, S.PROFILE_INTRODUCE
+		FROM SNS_TBL S
+		JOIN MEETING_TBL M
+		ON S.USER_NO = M.READER_NO
+		JOIN USER_TBL U
+		ON S.USER_NO = U.USER_NO
+		WHERE M.MEETING_NO = #{meetingNo} AND S.USER_NO = #{readerNo} 
+	</select>
+	
+	<select id="getAllMemberList" resultMap="allMemberListResultMap">
+		SELECT U.USER_NAME, S.USER_NO, S.PROFILE_FILERENAME, S.PROFILE_INTRODUCE
+		FROM SNS_TBL S
+		JOIN LINEUP_TBL L
+		ON S.USER_NO = L.USER_NO
+		JOIN USER_TBL U
+		ON S.USER_NO = U.USER_NO
+		WHERE L.MEETING_NO = #{meetingNo}
 	</select>
 	
 </mapper>
