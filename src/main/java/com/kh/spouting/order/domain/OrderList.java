@@ -1,13 +1,9 @@
-package com.kh.spouting.cart.domain;
+package com.kh.spouting.order.domain;
 
 import java.sql.Date;
 
-import com.kh.spouting.product.domain.Product;
+public class OrderList {
 
-public class Order {
-
-	private Product product;
-	private Cart cart;
 	private int orderNo;
 	private int cartNo;
 	private String userId;
@@ -23,8 +19,13 @@ public class Order {
 	private int orderCost;
 	private int productNo;
 	
-	public Order() {}
-	
+	private int categoryNo;
+	private String productName;
+	private String productPrice;
+	private String productDescription;
+
+	public OrderList() {}
+
 	public int getOrderNo() {
 		return orderNo;
 	}
@@ -136,32 +137,50 @@ public class Order {
 	public void setProductNo(int productNo) {
 		this.productNo = productNo;
 	}
-	
-	public Cart getCart() {
-		return cart;
+
+	public int getCategoryNo() {
+		return categoryNo;
 	}
 
-	public void setCart(Cart cart) {
-		this.cart = cart;
+	public void setCategoryNo(int categoryNo) {
+		this.categoryNo = categoryNo;
 	}
 
-	public Product getProduct() {
-		return product;
+	public String getProductName() {
+		return productName;
 	}
 
-	public void setProduct(Product product) {
-		this.product = product;
+	public void setProductName(String productName) {
+		this.productName = productName;
+	}
+
+	public String getProductPrice() {
+		return productPrice;
+	}
+
+	public void setProductPrice(String productPrice) {
+		this.productPrice = productPrice;
+	}
+
+	public String getProductDescription() {
+		return productDescription;
+	}
+
+	public void setProductDescription(String productDescription) {
+		this.productDescription = productDescription;
 	}
 
 	@Override
 	public String toString() {
-		return "Order [product=" + product + ", cart=" + cart + ", orderNo=" + orderNo + ", cartNo=" + cartNo
-				+ ", userId=" + userId + ", orderName=" + orderName + ", orderPhone=" + orderPhone + ", orderEmail="
-				+ orderEmail + ", orderPostcode=" + orderPostcode + ", orderRoadaddr=" + orderRoadaddr
-				+ ", orderDetailaddr=" + orderDetailaddr + ", orderRequest=" + orderRequest + ", orderDate=" + orderDate
-				+ ", orderState=" + orderState + ", orderCost=" + orderCost + ", productNo=" + productNo + "]";
+		return "OrderList [orderNo=" + orderNo + ", cartNo=" + cartNo + ", userId=" + userId + ", orderName="
+				+ orderName + ", orderPhone=" + orderPhone + ", orderEmail=" + orderEmail + ", orderPostcode="
+				+ orderPostcode + ", orderRoadaddr=" + orderRoadaddr + ", orderDetailaddr=" + orderDetailaddr
+				+ ", orderRequest=" + orderRequest + ", orderDate=" + orderDate + ", orderState=" + orderState
+				+ ", orderCost=" + orderCost + ", productNo=" + productNo + ", categoryNo=" + categoryNo
+				+ ", productName=" + productName + ", productPrice=" + productPrice + ", productDescription="
+				+ productDescription + "]";
 	}
-
+	
 	
 	
 }

@@ -17,7 +17,7 @@
 <body>
 	<jsp:include page="../../common/header.jsp"></jsp:include>
 	<div id="maincontainer">
-		<h1>🛒 ${sessionScope.loginUser.userId}님의 장바구니</h1>
+		<h1>🛒 ${sessionScope.loginUser.userName}님의 장바구니</h1>
 		<p>스파우팅 마켓은 전 상품 무료 배송 !</p>
 		<div id="contents" class="row">
 				<div class="contents col">
