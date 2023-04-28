@@ -89,7 +89,7 @@ header {
     #user-menu {
         position:absolute;
         right: 30px;
-        width: 450px;
+        width: 550px;
         display:none;
         z-index: 1;
         border-top: 1px solid #ccc;

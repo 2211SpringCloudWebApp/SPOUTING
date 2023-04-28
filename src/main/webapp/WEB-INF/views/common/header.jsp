@@ -26,6 +26,7 @@
                             <li><a href="/diary/list">TODAY'S SPOUTING</a></li>
                             <li><a href="/mypage/myinfo">MY PAGE</a></li>
                             <li><a href="/user/logout">LOGOUT</a></li>                    
+                            <li><a href="/shop/cartView">CART</a></li>                    
                         </ul>
                     </div>
                 </c:if>          

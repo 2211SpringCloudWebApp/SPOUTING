@@ -31,6 +31,9 @@
 				<div class="space-info">
 					<h3>상품 정보</h3>
 					<c:forEach items="${cList }" var="cart" varStatus="n" >
+						<!-- 넘겨줄 productNo는 히든 값으로 맨 위에 올려서 넘겨줄 수 있도록 하기 -->
+						<!-- cart. 이하의 값들은 form 태그 안에서만 사용하도록 하기 -->
+						<input type="hidden" name="productNo" value="${cart.product.productNo }">  
 						<ul class="list-detail">
 							<li>
 								<span class="info-photo"><img src="/resources/images/product/items/${cart.product.productFilename1}"></span>
@@ -69,20 +72,20 @@
 				                  <span class="ico-requ">*</span>
 				                </dt>
 				                <dd class="flex-phone">
-<!-- 				                  <div class="phone-col"> -->
-<!-- 				                    <input name="phone1" name="Phone1"  id="orderPhone1" title="휴대폰 앞자리" value="010" readonly> -->
-<!-- 				                  </div> -->
-<!-- 				                  <span>-</span> -->
-<!-- 				                  <div class="phone-col"> -->
-<%-- 				                    <input name="phone2" name="Phone2" value="${phone2 }" id="orderPhone2"  maxlength="4" onkeyup="this.value=this.value.replace(/[^0-9]/g,'');" required="required" title="휴대폰 중간자리" type="tel"> --%>
-<!-- 				                  </div> -->
-<!-- 				                  <span>-</span> -->
-<!-- 				                  <div class="phone-col"> -->
-<%-- 				                    <input name="phone3" name="Phone3" value="${phone3 }" id="orderPhone3" maxlength="4" onkeyup="this.value=this.value.replace(/[^0-9]/g,'');" required="required" title="휴대폰 뒷자리" type="tel"> --%>
-<!-- 				                  </div> -->
-								<div class="flex">
-									<input class="phone-col" type="text" name="orderPhone" value="${order.orderPhone }" id="orderPhone" required="required" placeholder="-를 제외한 숫자만 입력하세요.">
-								</div>
+				                  <div class="phone-col">
+			                    	<input name="phone1" name="phone1"  id="orderPhone1" title="휴대폰 앞자리" value="010" readonly>
+				                  </div>
+				                  <span>-</span>
+				                  <div class="phone-col">
+				                    <input name="phone2" name="phone2" value="${phone2 }" id="orderPhone2"  maxlength="4" onkeyup="this.value=this.value.replace(/[^0-9]/g,'');" required="required" title="휴대폰 중간자리" type="tel">
+				                  </div>
+				                  <span>-</span>
+				                  <div class="phone-col">
+				                    <input name="phone3" name="phone3" value="${phone3 }" id="orderPhone3" maxlength="4" onkeyup="this.value=this.value.replace(/[^0-9]/g,'');" required="required" title="휴대폰 뒷자리" type="tel">
+				                  </div>
+<!-- 								<div class="flex"> -->
+<%-- 									<input class="phone-col" type="text" name="orderPhone" value="${order.orderPhone }" id="orderPhone" required="required" placeholder="-를 제외한 숫자만 입력하세요."> --%>
+<!-- 								</div> -->
 				                </dd>
 				              </dl>
 				              <dl class="flex-box">
@@ -159,6 +162,10 @@
 		            <input type="button" id="payment" value="결제" onclick="iamport()">
 		          </div>
 				</div>
+				
+				<input type="hidden" name="userId" value="${sessionScope.loginUser.userId }">
+				<button type="submit" id="submit"></button>
+      
 			</form>
 			</div>
 		</div>
@@ -194,10 +201,6 @@
                 document.getElementById("orderRoadaddr").value = roadAddr;
                 document.getElementById("jibunAddress").value = data.jibunAddress;
                 
-             // 입력한 도로명 주소와 상세주소를 하나의 값으로 만들어서 orderAddress에 저장한다.
-//                 var orderAddress = roadAddr + ' ' + document.getElementById('orderDetailaddr').value;
-//                 document.getElementById("orderAddress").value = orderAddress;
-                
                 // 참고항목 문자열이 있을 경우 해당 필드에 넣는다.
                 if(roadAddr !== ''){
                     document.getElementById("extraAddress").value = extraRoadAddr;
@@ -213,7 +216,12 @@
 		// 변수 선언
 		var orderEmail = document.querySelector("#orderEmail").value
 		var orderName = document.querySelector("#orderName").value
-		var orderPhone = document.querySelector("#orderPhone").value
+		var orderPhone1 = document.querySelector("#orderPhone1").value;
+		var orderPhone2 = document.querySelector("#orderPhone2").value;
+		var orderPhone3 = document.querySelector("#orderPhone3").value;
+		var orderPhone = orderPhone1 + orderPhone2 + orderPhone3;
+
+// 		var orderPhone = document.querySelector("#orderPhone").value
 		
   		// 결제 실행
 		var IMP = window.IMP; 				// 생략 가능
@@ -231,25 +239,20 @@
   	    }, function (rsp) { // callback
   	      console.log(rsp);
   	      // 결제 검증
-	  	    if(rsp.success) {
-	            $.ajax({
-	                type    : "POST",
-	                url     : "/shop/order",
-	                data    : {
-	                            "totalPrice" : 10
-	                            },
-	                success : function(data){
-	                    if(data == "true") {
-	                        alert("결제가 완료되었습니다.")
-	                        $(location).attr('href','/order/detail');
-	                    } else {
-	                        alert("결제가 완료되지 않았습니다. 관리자에게 문의하세요.");
-	                    }
-	                }
-	            })       
-	        } else {
-	            alert("결제 오류입니다. 관리자에게 문의하세요.");
-	        }   	
+		  $.ajax({
+		   	type : "POST",
+		   	url : "/verifyIamport/" + rsp.imp_uid 
+		   }).done(function(data) {
+		   	
+		   	console.log(data);
+		   	// 위의 rsp.paid_amount 와 data.response.amount를 비교한후 로직 실행 (import 서버검증)
+		   	if(rsp.paid_amount == data.response.amount){
+		    	console.log("결제 및 결제검증완료");
+		    	document.querySelector("#submit").click();
+		   	} else {
+		   		console.log("결제 실패");
+		   	}
+		   });
   	    });
   	  }
   		

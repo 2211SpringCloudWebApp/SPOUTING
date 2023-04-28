@@ -116,7 +116,6 @@
 				<br><br>
 				<h3>MY SHOP</h3>
 				<li class="menu-v2"><a href="/shop/cartView">CART</a>
-				<li class="menu-v2"><a href="/shop/wishList">WISHLIST</a>
 			</ul>
         </c:if>
     </div>
