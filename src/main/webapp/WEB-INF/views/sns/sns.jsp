@@ -121,6 +121,14 @@
         	});
 		</script>
 	</c:if>
+	<c:if test="${sessionScope.loginUser.userNo ne null }">
+		<script>
+			$(document).ready(function () {
+				photoMoreAjax(1,userNo);
+        	});
+		</script>
+	</c:if>
+	
 	
 	<div id="sns-main">
 			
@@ -175,7 +183,7 @@
 	var userNo = $("#userNo").val();
 	const snsContent = $("#sns-content");
 	const moreVar = $("#more-var");
-	photoMoreAjax(1,userNo);
+	
 
 
 	//한줄 소개 수정버튼 닫기

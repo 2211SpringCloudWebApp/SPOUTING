@@ -6,6 +6,7 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.kh.spouting.meeting.domain.AllMemberProfile;
 import com.kh.spouting.meeting.domain.Lineup;
 import com.kh.spouting.meeting.domain.Meeting;
 import com.kh.spouting.meeting.domain.ReaderProfile;
@@ -61,6 +62,20 @@ public class MeetingServiceImpl implements MeetingService {
 	public String getReaderProfile(ReaderProfile readerProfile) {
 		// TODO Auto-generated method stub
 		return meetingStore.getReaderProfile(session, readerProfile);
+	}
+
+
+	@Override
+	public List<AllMemberProfile> getAllMemberList(int meetingNo) {
+		// TODO Auto-generated method stub
+		return meetingStore.getAllMemberList(session, meetingNo);
+	}
+
+
+	@Override
+	public AllMemberProfile getReaderProfile2(ReaderProfile readerProfile) {
+		// TODO Auto-generated method stub
+		return meetingStore.getReaderProfile2(session, readerProfile);
 	}
 
 

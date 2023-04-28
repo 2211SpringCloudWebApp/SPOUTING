@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.apache.ibatis.session.SqlSession;
 
+import com.kh.spouting.meeting.domain.AllMemberProfile;
 import com.kh.spouting.meeting.domain.Lineup;
 import com.kh.spouting.meeting.domain.Meeting;
 import com.kh.spouting.meeting.domain.ReaderProfile;
@@ -21,6 +22,10 @@ public interface MeetingStore {
 	int getLineupCount(SqlSession session, int meetingNo);
 
 	String getReaderProfile(SqlSession session, ReaderProfile readerProfile);
+
+	List<AllMemberProfile> getAllMemberList(SqlSession session, int meetingNo);
+
+	AllMemberProfile getReaderProfile2(SqlSession session, ReaderProfile readerProfile);
 
 
 

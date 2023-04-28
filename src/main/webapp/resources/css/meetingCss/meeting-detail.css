@@ -53,8 +53,8 @@
             position: relative;
             z-index: 1;
             width: 900px;
-            height: 900px;
-            background-color: rgb(217, 227, 240);
+            height: 800px;
+            background-color: rgb(236, 242, 248);
             margin: auto;
             top: -50px;
             --border-radius: 30px;
@@ -83,6 +83,60 @@
 		    object-fit:scale-down;
         
         }
+        
+        .meeting-people-content {
+        	width: 900px;
+        	height: 260px;
+        	background-color: rgba(221, 221, 221, 0.5);
+        	position: absolute;
+        	bottom: 0px;
+        	--margin: 50px;
+        	padding: 15px;
+        	overflow: auto;
+        }
+        
+        .member-info-list {
+        	display: flex;
+        	margin-bottom: 15px; 
+        }
+        
+        .img-box {
+			height: inherit;
+			width: 100px;
+			--background-color: beige;
+			float: left;
+			display: flex;
+			justify-content: center;
+			align-items: center;
+		}
+		
+		.sns-profile-img {
+			border-radius: 50%;
+			--border: solid 1px black;
+			width: 43px;
+			height: 43px;
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			cursor: pointer;
+				}
+		
+		.profile-box {
+			height: inherit;
+			width: 500px;
+			--background-color: coral;
+			float: left;
+			display: flex;
+			flex-direction: column;
+			justify-content: center;
+		}
+		
+		.profile-intro {
+			font-size: 14px;
+		}
+		
+        
+        
 
 
         #meeting-joinBtn {
@@ -105,7 +159,7 @@
         }
         
          #meeting-joinBtn2 {
-         	            font-size: 22px;
+         	font-size: 22px;
             width: 700px;
             height: 60px;
             background-color: rgb(231, 231, 231);

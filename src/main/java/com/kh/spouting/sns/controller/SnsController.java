@@ -43,7 +43,13 @@ public class SnsController {
 	
 	//개인 sns 페이지 화면
 	@RequestMapping(value="/sns", method=RequestMethod.GET)
-	public String snsPage(Model model, @RequestParam("userNo") int userNo) {
+	public String snsPage(Model model, HttpServletRequest request) {
+		//작성자 userNo 가져오기
+		HttpSession session = request.getSession();
+		int userNo = 0;
+		if((User)session.getAttribute("loginUser")!= null) {
+			userNo = ((User)session.getAttribute("loginUser")).getUserNo();
+		}
 		int totalCount = snsService.getTotalCount(userNo);
 		model.addAttribute("totalCount", totalCount);
 		try {
@@ -52,12 +58,11 @@ public class SnsController {
 			if(oneSns != null) {
 //				model.addAttribute("loginUser",loginUser);
 				model.addAttribute("oneSns", oneSns);
-				return "sns/sns";
 			} else {
 //				model.addAttribute("loginUser",loginUser);
 				model.addAttribute("msg", "데이터가 존재하지 않습니다.");
-				return "common/error";
 			}
+			return "sns/sns";
 		} catch (Exception e) {
 			// TODO: handle exception
 			model.addAttribute("msg", e.getMessage());

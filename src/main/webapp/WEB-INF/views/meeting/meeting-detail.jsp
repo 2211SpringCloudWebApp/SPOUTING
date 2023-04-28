@@ -21,7 +21,7 @@
 		<div class="meeting-subject">
 
             <div class="meeting-img-box">
-                <img class="meeting-img" src="/resources/images/profile/${readerProfileImg}" alt="" onclick="location.href='/sns?userNo=${meeting.readerNo }'">
+                <img class="meeting-img" src="/resources/images/profile/${leaderProfile.profileFileRename}" alt="" onclick="location.href='/sns?userNo=${meeting.readerNo }'">
             </div>
 
             <div id="meeting-content-box">
@@ -50,11 +50,55 @@
 		            <img class="meeting-content-img" src="/resources/images/meeting/${meeting.meetingFileRename }"> 
 		        </div>    
 		            <br><br>
-				    ${meeting.meetingDetail }
-				    
+				    ${meeting.meetingDetail }		    
 				    <br><br>
-				    	참여중인 멤버
 	        </div>
+	        
+	        <div class="meeting-people-content">
+				<b>멤버 소개</b> <br><br>
+				
+<!-- 				주최자 프로필 -->
+				<div class="member-info-list">
+				
+					<div class="img-box">
+						<img class="sns-profile-img" src="/resources/images/profile/${leaderProfile.profileFileRename }" alt="">
+					</div>
+					
+					<div class="profile-box">
+						<input type="hidden" value="${leaderProfile.userNo }" id="userNo" name="userNo">
+						<div class="profile-name-box">
+							<h3 class="profile-name">${leaderProfile.userName }</h3>
+						</div> 
+						<div class="profile-intro-box">
+							<span class="profile-intro">${leaderProfile.profileIntoduce }</span>
+						</div>
+					</div>
+				</div> 
+<!-- 				주최자 프로필 끝 -->
+
+<!-- 				소셜링 참여 멤버 리스트 시작 -->
+				<c:forEach items="${memberList }" var="memberList" varStatus="i">
+					<div class="member-info-list">
+				
+						<div class="img-box">
+							<img class="sns-profile-img" src="/resources/images/profile/${memberList.profileFileRename }" alt="">
+						</div>
+						
+						<div class="profile-box">
+							<input type="hidden" value="${memberList.userNo }" id="userNo" name="userNo">
+							<div class="profile-name-box">
+								<h3 class="profile-name">${memberList.userName }</h3>
+							</div> 
+							<div class="profile-intro-box">
+								<span class="profile-intro">${memberList.profileIntoduce }</span>
+							</div>
+						</div>
+					</div> 	
+				</c:forEach>
+
+<!-- 				소셜링 참여 멤버 리스트 끝 -->
+			</div>
+			
         </div>
 
 		<c:if test="${lineupCount ne meeting.meetingPeople }"> 

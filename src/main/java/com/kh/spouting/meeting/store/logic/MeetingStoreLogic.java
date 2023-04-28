@@ -5,6 +5,7 @@ import java.util.List;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
 
+import com.kh.spouting.meeting.domain.AllMemberProfile;
 import com.kh.spouting.meeting.domain.Lineup;
 import com.kh.spouting.meeting.domain.Meeting;
 import com.kh.spouting.meeting.domain.ReaderProfile;
@@ -47,6 +48,18 @@ public class MeetingStoreLogic implements MeetingStore {
 	public String getReaderProfile(SqlSession session, ReaderProfile readerProfile) {
 		// TODO Auto-generated method stub
 		return session.selectOne("MeetingMapper.getReaderProfile", readerProfile);
+	}
+
+	@Override
+	public List<AllMemberProfile> getAllMemberList(SqlSession session, int meetingNo) {
+		// TODO Auto-generated method stub
+		return session.selectList("MeetingMapper.getAllMemberList", meetingNo);
+	}
+
+	@Override
+	public AllMemberProfile getReaderProfile2(SqlSession session, ReaderProfile readerProfile) {
+		// TODO Auto-generated method stub
+		return session.selectOne("MeetingMapper.getReaderProfile2", readerProfile);
 	}
 
 
