@@ -54,16 +54,22 @@
                     <td>PW * </td>
                     <td>
                         <input type="hidden" value="${sessionScope.loginUser.userPw}" id="userPw">
-                        <input type="password" id="userCheckPw" class="info">
+                        <input type="password" id="userCheckPw" class="info" onkeydown="press();">
                     </td>
                 </tr>
             </table>
-            <button id="check-btn" onclick="return checkPw()">확인</button>
+            <button id="check-btn" onclick="checkPw();">확인</button>
         </div>
     </div>
     <jsp:include page="../common/footer.jsp"></jsp:include>
 
     <script>
+        function press() {
+            if(window.event.keyCode == 13) { //JS에서 13=enter키
+                checkPw();
+            }
+        }
+
         function checkPw() {
             var userPw = $("#userPw").val();
             var userCheckPw = $("#userCheckPw").val();
@@ -73,6 +79,8 @@
                 alert("비밀번호 오류!")
             }
         }
+
+        
     </script>
 </body>
 </html>

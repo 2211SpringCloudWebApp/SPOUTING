@@ -20,13 +20,13 @@
                 <tr>
                     <td>아이디</td>
                     <td>
-                        <input type="text" placeholder="아이디를 입력하세요" id="userId" name="userId" class="account">
+                        <input type="text" placeholder="아이디를 입력하세요" id="userId" name="userId" class="account" onkeydown="press();">
                     </td>
                 </tr>
                 <tr>
                     <td>이메일</td>
                     <td>
-                        <input type="text" placeholder="이메일을 입력하세요" id="userEmail" name="userEmail" class="account">
+                        <input type="text" placeholder="이메일을 입력하세요" id="userEmail" name="userEmail" class="account" onkeydown="press();">
                     </td>
                 </tr>
             </table>
@@ -37,6 +37,11 @@
 	<jsp:include page="../common/footer.jsp" />
 
     <script>
+        function press() {
+            if(window.event.keyCode == 13) { //JS에서 13=enter키
+                findCheck();
+            }
+        }
         function findCheck() {
             var userId = $("#userId").val();
             var userEmail = $("#userEmail").val();
