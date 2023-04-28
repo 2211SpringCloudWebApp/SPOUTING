@@ -8,6 +8,7 @@ import java.util.List;
 
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -23,6 +24,7 @@ import com.kh.spouting.book.domain.Book;
 import com.kh.spouting.book.domain.Facilities;
 import com.kh.spouting.book.service.BookService;
 import com.kh.spouting.point.domain.PointDetail;
+import com.kh.spouting.user.domain.User;
 
 
 @Controller
@@ -199,9 +201,12 @@ public class BookController {
 							   ,@RequestParam("bookPrice") int bookPrice
 							   ,@RequestParam("paidPrice") int paidPrice
 							   ,@RequestParam("userNo") int userNo
-							   ,Model model) {
+							   ,Model model, HttpSession session) {
 				
 		int result = bService.deleteBook(bookNo);
+		User user = (User) session.getAttribute("loginUser");
+		int loginUserNo = user.getUserNo();
+		
 		if(result>0) {
 			//삭제성공하면->포인트사용취소(인서트)
 			int pointChange = bookPrice - paidPrice; //사용한포인트
@@ -213,7 +218,12 @@ public class BookController {
 				if(pResult>0) {
 					//포인트 캔슬 성공하면
 					System.out.println("포인트 환급 완료");
-					return "redirect:/book/myBooking?userNo="+userNo;
+					
+					if(loginUserNo == userNo) {
+						return "redirect:/book/myBooking?userNo="+userNo;
+					}else {
+						return "redirect:/admin/bookingList";
+					}
 				}else {
 					//포인트캔슬 실패하면 
 					model.addAttribute("msg", "포인트 사용 취소 미반영 오류!!");
@@ -222,7 +232,11 @@ public class BookController {
 			}else {
 				//포인트 쓴거 없으면 바로 취소 완료
 				System.out.println("사용포인트 0 / 환급 0");
-				return "redirect:/book/myBooking?userNo="+userNo;
+				if(loginUserNo == userNo) {
+					return "redirect:/book/myBooking?userNo="+userNo;
+				}else {
+					return "redirect:/admin/bookingList";
+				}
 			}
 			
 		}else {

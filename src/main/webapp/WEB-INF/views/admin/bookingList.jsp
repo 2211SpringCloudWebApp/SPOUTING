@@ -66,6 +66,51 @@
 			        padding: 7px;
 			        cursor: pointer;
 			    }
+			    a{
+			    	color: #1C3879;
+			    }
+			    
+			    /* 모달 창 스타일 */
+     .modal {
+    position: fixed;
+    top: 50%;
+    left: 30%;
+    right: 30%;
+    bottom: 0;
+    --background-color: rgba(0, 0, 0, 0.5); /* 배경 투명도 조절 가능 */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .modal-content {
+    background-color: white;
+    border: 1px solid #1C3879;
+    --padding: 20px;
+    border-radius: 5px;
+    text-align: center;
+    margin: auto;
+  }
+  .modal-content p {
+    --margin: 0;
+    --padding: 0;
+    padding-top: 30px;
+  }
+  .modal-content button {
+    margin-top: 10px;
+   
+	margin-bottom: 30px;
+	
+	position: relative;
+	border: 0;
+	border-radius: 5px;
+	padding: 15px 25px;
+	display: inline-block;
+	text-align: center;
+	margin-left: 10px;
+	margin-right: 10px;
+	color: white;
+	background-color: #1C3879;
+  }
 			
 			
 			
@@ -164,7 +209,7 @@
                 <th>이메일</th>
                 <th>총금액</th>
                 <th>실결제금액</th>
-                <td>취소요청</td>
+                <th>취소요청</th>
             </tr>
             
             <c:forEach items="${bList}" var="book" varStatus="i">
@@ -182,22 +227,22 @@
                 <td>${book.bookPrice}</td>
                 <td>${book.paidPrice}</td>
             
-                <td> 뀨뀨씨이프 뀨뀨뀨 </td>
+            	<c:if test="${book.inquiryStatus == '1'}">
+            		<span class="cancelDiv">
+	            		<form id="cancelForm" action="/book/cancelBooking" method="post">
+	               			<input type="hidden" name="userNo" value="${book.userNo }">
+						    <input type="hidden" name="bookNo" value="${book.bookNo}">
+						    <input type="hidden" name="paidPrice" value="${book.paidPrice}">
+						    <input type="hidden" name="bookPrice" value="${book.bookPrice}">
+	                		<td> <a class="cancelLink" href="javascript:void(0);" onclick="cancelBooking();">요청🙏</a></td>
+	                	</form>	
+                	</span>
+                </c:if>
+                <c:if test="${book.inquiryStatus == '0'}">
+                	<td></td>
+                </c:if>
                 
-              <!--  
-                <c:if test="${user.userType != '1'}">
-                    <td><input type="button" id="remo-btn" value="탈퇴" onclick="removeUser('${user.userId}')"></td>
-                </c:if>
-                <c:if test="${user.userType == '1'}">
-                    <td style="color: rgb(255, 136, 0);">관리자</td>
-                </c:if>
-                <c:if test="${user.userType != '1'}">
-                    <td><input type="button" id="remo-btn" value="조회" onclick="location.href='/admin/point?userNo=${user.userNo}'"></td>
-                </c:if>
-                <c:if test="${user.userType == '1'}">
-                    <td style="color: rgb(255, 136, 0);">관리자</td>
-                </c:if>      
-                 -->
+             
             </tr>
             </c:forEach>
         </table>
@@ -254,17 +299,44 @@
         }
     }
     
-
-    
+//////////////////////////////////////////////////////////myBooking이랑 코드 겹침
+  //게시글 삭제하기 버튼 눌렀을때 확인 거치기
+	function cancelBooking() {
+	    showModal("정말 취소하시겠어요?", function(result) {
+	        if (result) {
+	            document.getElementById('cancelForm').submit();
+	        }
+	    });
+	}
+	
+	function showModal(msg, callback) {
+	    // 모달 창 요소 생성
+	    var modal = document.createElement("div");
+	    modal.className = "modal";
+	    modal.innerHTML =
+	        '<div class="modal-content">' +
+	        '<p>' + msg + '</p>' +
+	        '<button onclick="modalResult(true, ' + callback + ')">확인</button>' +
+	        '<button onclick="modalResult(false, ' + callback + ')">취소</button>' +
+	        '</div>';
+	    document.body.appendChild(modal);
+	
+	    // 모달 창 표시 로직 추가
+	    modal.style.display = "block";
+	}
+	
+	function modalResult(result, callback) {
+	    callback(result);
+	    closeModal();
+	}
+	
+	function closeModal() {
+	    var modal = document.querySelector(".modal");
+	    modal.parentNode.removeChild(modal);
+	}
 		
-		
-    	//복붙한부분()
-        function removeUser(userId) {
-            if(window.confirm("해당 회원을 탈퇴시키겠습니까?")) {
-                alert("처리 완료")
-                location.href = "/admin/delete?userId=" + userId;
-            }
-        }
+///////////////////////////////////////////////////////////////		
+    	
     </script>
 	</body>
 </html>

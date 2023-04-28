@@ -152,12 +152,13 @@ body {
 	              </tr>
 	              <tr>
 	                <td></td>
-	                <td><button type="button" id="fakePay">가짜결제갈겨</button></td>
+	               <!--  <td><button type="button" id="fakePay">가짜결제갈겨</button></td> -->
 	               
-	                <!-- <td><button onclick="requestPay()">결제갈겨:포트원 이걸로 바꿔야함</button></td> -->
+	               
 	              </tr>
 	            </table>
             <!--              	"수정내역이 있다면 뒤로가기눌러주셈"   -->
+	               <input type="submit" value="일단api건너뛰기">
           
             </form>
           </div>
@@ -166,71 +167,71 @@ body {
        	
        	<script>
           
-       	$(document).ready(function() {
-            // 결제요청 버튼 클릭 시 호출되는 함수
-            $("#fakePay").on("click", function() {
+//        	$(document).ready(function() {
+//             // 결제요청 버튼 클릭 시 호출되는 함수
+//             $("#fakePay").on("click", function() {
             	
-                // 결제금액을 가져옵니다.
-                var paidPrice = $("#bookPrice").text();
-                // 사용포인트를 가져옵니다.
-                var pointChange = $("#pointChange").val();
-                // 결제요청을 위한 데이터를 생성합니다.
-				var bookNo = "${book.bookNo }";
-		        var userNo = "${book.userNo }";
-		        var centerName = "${book.centerName }";
-		        var facilityName = "${book.facilityName }";
-		        var userName = "${book.userName }";
-		        var userEmail = "${book.userEmail }";
-		        var useDate = "${book.useDate }";
-		        var startTime = "${book.startTime }";
-		        var endTime = "${book.endTime }";
-		        var bookPrice = "${book.bookPrice }";
-		        var numPeople = "${book.numPeople }";
-//                 var data = {
-//                     paidPrice: paidPrice,
-//                     pointChange: pointChange,
-//                     paidPrice: paidPrice,
-//                     pointChange: pointChange,
-//                     bookNo: bookNo,
-//                     userNo: userNo,
-//                     centerName: centerName,
-//                     facilityName: facilityName,
-//                     userName: userName,
-//                     userEmail: userEmail,
-//                     useDate: useDate,
-//                     startTime: startTime,
-//                     endTime: endTime,
-//                     bookPrice: bookPrice,
-//                     numPeople: numPeople
-//                 };
-                // 아임포트 결제 함수를 호출
-                var IMP = window.IMP;  
-                IMP.init('imp67410187'); // 아임포트 가맹점 코드
-                IMP.request_pay({
-                	pg : 'kakaopay.TC0ONETIME',  //카카오페이로 ㄱ
- 				    pay_method : "card", //카드설정 ㄱ
- 				    merchant_uid : bookNo,
- 				    name : facilityName /*상품명*/,
- 				    amount : paidPrice /*상품 가격*/, 
- 				    buyer_email : userEmail /*구매자 이메일*/,
- 				    buyer_name : userName,
- 				    //buyer_tel : contactPhone/*구매자 연락처*/,
- 				   // buyer_addr : address.replace(/,_/g," ")/*구매자 주소*/,
- 				    //vbank_due : afterThreeDaysStr,
+//                 // 결제금액을 가져옵니다.
+//                 var paidPrice = $("#bookPrice").text();
+//                 // 사용포인트를 가져옵니다.
+//                 var pointChange = $("#pointChange").val();
+//                 // 결제요청을 위한 데이터를 생성합니다.
+// 				var bookNo = "${book.bookNo }";
+// 		        var userNo = "${book.userNo }";
+// 		        var centerName = "${book.centerName }";
+// 		        var facilityName = "${book.facilityName }";
+// 		        var userName = "${book.userName }";
+// 		        var userEmail = "${book.userEmail }";
+// 		        var useDate = "${book.useDate }";
+// 		        var startTime = "${book.startTime }";
+// 		        var endTime = "${book.endTime }";
+// 		        var bookPrice = "${book.bookPrice }";
+// 		        var numPeople = "${book.numPeople }";
+// //                 var data = {
+// //                     paidPrice: paidPrice,
+// //                     pointChange: pointChange,
+// //                     paidPrice: paidPrice,
+// //                     pointChange: pointChange,
+// //                     bookNo: bookNo,
+// //                     userNo: userNo,
+// //                     centerName: centerName,
+// //                     facilityName: facilityName,
+// //                     userName: userName,
+// //                     userEmail: userEmail,
+// //                     useDate: useDate,
+// //                     startTime: startTime,
+// //                     endTime: endTime,
+// //                     bookPrice: bookPrice,
+// //                     numPeople: numPeople
+// //                 };
+//                 // 아임포트 결제 함수를 호출
+//                 var IMP = window.IMP;  
+//                 IMP.init('imp67410187'); // 아임포트 가맹점 코드
+//                 IMP.request_pay({
+//                 	pg : 'kakaopay.TC0ONETIME',  //카카오페이로 ㄱ
+//  				    pay_method : "card", //카드설정 ㄱ
+//  				    merchant_uid : bookNo,
+//  				    name : facilityName /*상품명*/,
+//  				    amount : paidPrice /*상품 가격*/, 
+//  				    buyer_email : userEmail /*구매자 이메일*/,
+//  				    buyer_name : userName,
+//  				    //buyer_tel : contactPhone/*구매자 연락처*/,
+//  				   // buyer_addr : address.replace(/,_/g," ")/*구매자 주소*/,
+//  				    //vbank_due : afterThreeDaysStr,
                    
-                    m_redirect_url: '/book/bookView' // 결제 완료 후 리다이렉트할 URL을 입력합니다.
-                }, function(rsp) {
-                    if (rsp.success) {
-                        // 결제 성공 시, 서버로 결제 결과를 전송합니다.
-                        $("#paidPrice").val(paidPrice);
-                        $("#paymentForm").submit(); // 폼데이터 서버로 보내기
-                    } else {
-                        // 결제 실패 시, 에러 처리를 수행합니다.
-                        alert("결제 실패: " + rsp.error_msg);
-                    }
-                });
-            });
-        });
+//                     m_redirect_url: '/book/bookView' // 결제 완료 후 리다이렉트할 URL을 입력합니다.
+//                 }, function(rsp) {
+//                     if (rsp.success) {
+//                         // 결제 성공 시, 서버로 결제 결과를 전송합니다.
+//                         $("#paidPrice").val(paidPrice);
+//                         $("#paymentForm").submit(); // 폼데이터 서버로 보내기
+//                     } else {
+//                         // 결제 실패 시, 에러 처리를 수행합니다.
+//                         alert("결제 실패: " + rsp.error_msg);
+//                     }
+//                 });
+//             });
+//         });
        	
 
           
