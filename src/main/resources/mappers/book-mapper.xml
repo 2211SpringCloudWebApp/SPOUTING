@@ -18,6 +18,7 @@
 		<result property="userName" 		column="USER_NAME"/>
 		<result property="userEmail" 		column="USER_EMAIL"/>
 		<result property="userPoint" 		column="USER_POINT"/>
+		<result property="inquiryStatus"    column="INQUIRY_STATUS"/>
 	
 	</resultMap>
 	<!-- 전체 회원 예약 내역 조회 -->
@@ -46,11 +47,11 @@
 	</select>	
 	<!-- 가예약정보저장하기 -->
 	<insert id="insertBook">
-		INSERT INTO BOOK_TBL VALUES(#{bookNo}, #{facilityNo}, #{userNo}, #{useDate}, #{startTime}, #{endTime}, #{bookPrice}, #{numPeople}, NULL, NULL)
+		INSERT INTO BOOK_TBL VALUES(#{bookNo}, #{facilityNo}, #{userNo}, #{useDate}, #{startTime}, #{endTime}, #{bookPrice}, #{numPeople}, NULL, NULL, DEFAULT)
 	</insert>
 	<!-- 예약 시 포인트 사용할 경우 -->
 	<insert id="insertPDetail">
-		INSERT INTO P_DETAIL_TBL VALUES(SEQ_POINT_NO.NEXTVAL, #{userNo}, SYSTIMESTAMP, '시설예약차감', #-{pointChange})
+		INSERT INTO P_DETAIL_TBL VALUES(SEQ_POINT_NO.NEXTVAL, #{userNo}, SYSTIMESTAMP, '시설예약차감', -#{pointChange})
 	</insert>
 	<!-- 예약 취소 시 포인트 환급 -->
 	<insert id="returnPoint">
