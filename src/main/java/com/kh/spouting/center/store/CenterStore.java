@@ -82,6 +82,6 @@ public interface CenterStore {
 	 * @param center
 	 * @return List<Search>
 	 */
-	public List<Search> selectSearch(SqlSession session, Search search);
+	public List<Center> selectSearch(SqlSession session, Search search);
 
 }

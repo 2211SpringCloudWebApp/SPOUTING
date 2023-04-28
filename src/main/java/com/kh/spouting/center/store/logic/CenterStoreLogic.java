@@ -74,8 +74,8 @@ public class CenterStoreLogic implements CenterStore{
 	
 	/* 지점 검색 StoreLogic */
 	@Override
-	public List<Search> selectSearch(SqlSession session, Search search) {
-		List<Search> searchResult = session.selectList("CenterMapper.selectSearch", search);
+	public List<Center> selectSearch(SqlSession session, Search search) {
+		List<Center> searchResult = session.selectList("CenterMapper.selectSearch", search);
 		return searchResult;
 	}
 	

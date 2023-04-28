@@ -83,8 +83,8 @@ public class CenterServiceImpl implements CenterService{
 	
 	/* 지점 검색 ServiceImple */
 	@Override
-	public List<Search> selectSearch(Search search) {
-		List<Search> searchResult = cStore.selectSearch(session, search);
+	public List<Center> selectSearch(Search search) {
+		List<Center> searchResult = cStore.selectSearch(session, search);
 		return searchResult;
 	}
 
