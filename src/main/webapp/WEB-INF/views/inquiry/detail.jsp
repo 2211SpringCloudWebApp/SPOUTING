@@ -171,7 +171,7 @@
 					success : function(result){
 						if(result == "success"){
 							// alert("댓글등록성공");
-							$("#content").val(""); // 댓글 등록 시 댓글 등록창 초기화
+							$("#commentContent").val(""); // 댓글 등록 시 댓글 등록창 초기화
 							getCommentList();	// 등록 후 댓글목록 불러오기 함수 실행
 						}else{
 							console.log("댓글등록실패");

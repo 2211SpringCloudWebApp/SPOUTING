@@ -1,8 +1,12 @@
 package com.kh.spouting.inquiry.controller;
 
 import java.io.File;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
+import java.util.UUID;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -11,6 +15,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -18,8 +23,10 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.google.gson.JsonObject;
 import com.kh.spouting.book.domain.Book;
 import com.kh.spouting.book.service.BookService;
+import com.kh.spouting.common.Alert;
 import com.kh.spouting.common.FileUtil;
 import com.kh.spouting.common.PageInfo;
 import com.kh.spouting.common.Search;
@@ -126,6 +133,9 @@ public class InquiryController {
 		//츄가|문의게시판용: 예약내역페이지(이용전) 보이기
 		User user = (User) session.getAttribute("loginUser");
 		List<Book> myBookList = bService.getMyBooking(user.getUserNo());
+		// 썸머노트테스트중(쏘야)
+		mv.addObject("id",UUID.randomUUID());
+		//
 		mv.addObject("bList", myBookList).setViewName("inquiry/write");
 		return mv;
 	}
@@ -139,40 +149,117 @@ public class InquiryController {
 	 * @param multi
 	 * @return mv
 	 */
-	@RequestMapping(value="/write", method=RequestMethod.POST)
-	public ModelAndView writeInquiry(
-			ModelAndView mv
-			, HttpSession session
-			, HttpServletRequest request
-			, @ModelAttribute Inquiry inquiry
-			, @RequestParam(value="bookNo", required=false) Integer bookNo
-			//int는 null로 받아올수 없고 래퍼클래스는 가능!
-			, @RequestParam(value="uploadFile", required=false) MultipartFile multi) {
-		// 파일전송
-		Map<String, String> fileInfo = null;
+//	@RequestMapping(value="/write", method=RequestMethod.POST)
+//	public ModelAndView writeInquiry(
+//			ModelAndView mv
+//			, HttpSession session
+//			, HttpServletRequest request
+//			, @ModelAttribute Inquiry inquiry
+//			, @RequestParam(value="bookNo", required=false) Integer bookNo
+//			//int는 null로 받아올수 없고 래퍼클래스는 가능!
+//			, @RequestParam(value="uploadFile", required=false) MultipartFile multi) {
+//		// 파일전송
+//		Map<String, String> fileInfo = null;
+//		try {
+//			// 로그인한 정보 가져와서 작성자로 넣기
+//			User user = (User) session.getAttribute("loginUser"); 
+//			int inquiryWriterNo = user.getUserNo();
+//			
+//			// 첨부파일이 있는 경우
+//			if(multi.getSize() != 0 && !multi.getOriginalFilename().equals("")) {
+//				fileInfo = fileUtil.saveFile(multi, request, "inquiry");
+//				inquiry.setInquiriesFilename(fileInfo.get("original"));
+//				inquiry.setInquiriesFilerename(fileInfo.get("rename"));
+//				inquiry.setInquiriesFilepath(fileInfo.get("renameFilepath"));
+//			}
+//			inquiry.setUserNo(inquiryWriterNo);
+//			int result = iService.insertInquiry(inquiry);
+//			if(result > 0) {
+//				mv.addObject("msg", "문의사항이 등록완료되었습니다!😎").setViewName("notice/success");
+//			}else {
+//				mv.addObject("msg", "문의사항이 등록되지 않았습니다.").setViewName("common/error");
+//			}
+//		} catch (Exception e) {
+//			e.printStackTrace();
+//			mv.addObject("msg", e.getMessage()).setViewName("common/error");
+//		}
+//		return mv;
+//	}
+	
+	// 썸머노트로 파일추가하여 문의사항등록 테스트중
+	@RequestMapping(value = "/write", method = RequestMethod.POST)
+	public ModelAndView writeInquiry(ModelAndView mv, HttpServletRequest request, @ModelAttribute Inquiry inquiry
+			,@RequestParam("id") String id, HttpSession session) {
 		try {
 			// 로그인한 정보 가져와서 작성자로 넣기
 			User user = (User) session.getAttribute("loginUser"); 
 			int inquiryWriterNo = user.getUserNo();
-			
-			// 첨부파일이 있는 경우
-			if(multi.getSize() != 0 && !multi.getOriginalFilename().equals("")) {
-				fileInfo = fileUtil.saveFile(multi, request, "inquiry");
-				inquiry.setInquiriesFilename(fileInfo.get("original"));
-				inquiry.setInquiriesFilerename(fileInfo.get("rename"));
-				inquiry.setInquiriesFilepath(fileInfo.get("renameFilepath"));
-			}
 			inquiry.setUserNo(inquiryWriterNo);
+			
+			SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddHHmmssSSS");
+			// 뭔가 회원번호와 날짜를 붙여서 코드로 만들고 이걸 파일이름으로 쓰는듯하다.
+		    String code = inquiry.getUserNo() + sdf.format(new Date(System.currentTimeMillis()));
+			String content = inquiry.getInquiriesContent();
+			inquiry.setInquiriesContent(content.replaceAll(id , ""+code));
+			inquiry.setInquiriesFilename(code);
 			int result = iService.insertInquiry(inquiry);
-			if(result > 0) {
-				mv.addObject("msg", "문의사항이 등록완료되었습니다!😎").setViewName("notice/success");
-			}else {
-				mv.addObject("msg", "문의사항이 등록되지 않았습니다.").setViewName("common/error");
+			String[] iList = content.split("/");
+			List<String> fileList = new ArrayList<String>();
+			for(String aa : iList){
+			    if(aa.startsWith(".")){
+			        fileList.add(aa);
+			    }
+			}
+			String wasRoot = request.getSession().getServletContext().getRealPath("/resources/images");
+			String savePath = wasRoot + "/" + "inquiry/";
+			File diretory = new File(savePath + id);
+			File folder = new File(savePath + code);
+			if(!folder.exists()){
+				folder.mkdirs();
+			}
+			
+			if(!diretory.exists()){
+			    diretory.mkdirs();
+			}
+			if(diretory.exists()){ //파일존재여부확인
+			    if(diretory.isDirectory()){ //파일이 디렉토리인지 확인
+			        File[] files = diretory.listFiles();
+			        for(int i = 0; i < files.length; i++){
+			            for(String fileName : fileList) {
+			                if (("../../../resources/images/inquiry/"+id + "/" + files[i].getName()).equals(fileName)) {
+			                    files[i].renameTo(new File(savePath + code +"/" +files[i].getName()));
+			                }
+			            }
+			            if (files[i].delete()) {
+			                // 폴더 안 파일 삭제 성공시
+			            } else {
+			                // 삭제 실패시
+			            }
+			        }
+			    }
+			    if(diretory.delete()){
+			        // 폴더 삭제시
+			    }else{
+			        // 폴더 삭제 실패시
+			    }
+			}else{
+			    // 임시 폴더가 없을 시
+			}
+			
+			if (result > 0) {
+				Alert alert = new Alert("/inquiry/list", "등록이 완료되었습니다.");
+				mv.addObject("alert", alert);
+				mv.setViewName("common/alert");
+			} else {
+				Alert alert = new Alert("/inquiry/list", "등록에 실패하였습니다.");
+				mv.addObject("alert", alert);
+				mv.setViewName("common/alert");
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
 			mv.addObject("msg", e.getMessage()).setViewName("common/error");
 		}
+
 		return mv;
 	}
 	
@@ -355,5 +442,38 @@ public class InquiryController {
 	public Inquiry getTotalLike(int inquiriesNo) {
 		Inquiry inquiry = iService.getTotalLike(inquiriesNo);
 		return inquiry;
+	}
+	////////////
+	
+	// 여기는 썸머노트 파일테스트	
+	@PostMapping(value = "/ImgFileUpload", produces = "application/json; charset=utf8")
+	@ResponseBody
+	public String reviewImgUpload(@RequestParam("file") MultipartFile multipartFile 
+			,@RequestParam("id") String id
+			,HttpServletRequest request) {
+		JsonObject jsonObject = new JsonObject();
+		String wasRoot = request.getSession().getServletContext().getRealPath("/resources/images");
+		String savePath = wasRoot + "/" + "inquiry/" + id;
+		// 폴더가 없을 경우 자동으로 만들어주기 위한 코드(폴더가 있는 경우 동작 안함)
+		File folder = new File(savePath);
+		if (!folder.exists()) {
+			folder.mkdirs();
+		}
+		try {
+			String originalFilename = multipartFile.getOriginalFilename();
+			// 실제 파일 저장
+			/* SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddHHmmss"); */
+			String FileName = UUID.randomUUID() + "."
+					+ originalFilename.substring(originalFilename.lastIndexOf(".") + 1);
+			String filePath = savePath + "/" + FileName;
+			File file = new File(filePath);
+			multipartFile.transferTo(file);
+			filePath = "../../../resources/images/inquiry/" + id +"/" + FileName;
+			jsonObject.addProperty("src", filePath); // contextroot + resources + 저장할 내부 폴더명
+			jsonObject.addProperty("responseCode", "success");
+		} catch (Exception e) {
+		}
+		String a = jsonObject.toString();
+		return a;
 	}
 }
