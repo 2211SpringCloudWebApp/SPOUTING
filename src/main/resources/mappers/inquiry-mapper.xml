@@ -7,7 +7,6 @@
 		<result property="userNo" column="USER_NO"/>
 		<result property="inquiriesCategory" column="INQUIRIES_CATEGORY"/>
 		<result property="inquiriesTitle" column="INQUIRIES_TITLE"/>
-		<result property="inquiriesContent" column="INQUIRIES_CONTENT"/>
 		<result property="qCreateDate" column="Q_CREATE_DATE"/>
 		<result property="qUpdateDate" column="Q_UPDATE_DATE"/>
 		<result property="inquiriesViews" column="INQUIRIES_VIEWS"/>
@@ -17,6 +16,7 @@
 		<result property="inquiriesSecret" column="INQUIRIES_SECRET"/>
 		<result property="inquiriesLikes" column="INQUIRIES_LIKES"/>
 		<result property="secretNo" column="SECRET_NO"/>
+		<result property="inquiriesContent" column="INQUIRIES_CONTENT" jdbcType="CLOB" javaType="java.lang.String"/>
 	</resultMap>
 <!-- 	Join용 resultMap -->
 	<resultMap type="InquiryJoin" id="inquiryJoinResultMap">
@@ -69,7 +69,7 @@
 	
 <!-- 	문의사항 등록 -->
 	<insert id="insertInquiry">
-		INSERT INTO INQUIRIES_TBL VALUES(SEQ_INQUIRIES_NO.NEXTVAL, NULL, #{userNo}, #{inquiriesCategory}, #{inquiriesTitle}, #{inquiriesContent}, DEFAULT, NULL, DEFAULT, #{inquiriesFilename}, #{inquiriesFilepath}, #{inquiriesFilerename}, #{inquiriesSecret}, DEFAULT, #{secretNo})
+		INSERT INTO INQUIRIES_TBL VALUES(SEQ_INQUIRIES_NO.NEXTVAL, NULL, #{userNo}, #{inquiriesCategory}, #{inquiriesTitle}, DEFAULT, NULL, DEFAULT, #{inquiriesFilename}, #{inquiriesFilepath}, #{inquiriesFilerename}, #{inquiriesSecret}, DEFAULT, #{secretNo}, #{inquiriesContent})
 	</insert>
 	
 <!--	문의사항 디테일-->

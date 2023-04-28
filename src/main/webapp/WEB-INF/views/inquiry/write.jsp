@@ -7,6 +7,8 @@
 	<head>
 		<meta charset="UTF-8">
 		<title>문의사항 작성✍</title>
+
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
 <!-- 		썸머노트API -->
 		<!-- include libraries(jQuery, bootstrap) -->
 		<link href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" rel="stylesheet">
@@ -16,6 +18,7 @@
 		<!-- include summernote css/js -->
 		<link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.css" rel="stylesheet">
 		<script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.js"></script>
+		
 		
 <!-- 		css링크 -->
 		<link href="../../../resources/css/noticeCss/write.css" rel="stylesheet">
@@ -33,6 +36,8 @@
 	    	</div>
 	    	<div class="mainCenter">
 				<form action="/inquiry/write" method="post" enctype="multipart/form-data">
+					<!-- 썸머노트 보내줄값 -->
+					<input type="hidden" name="id" value="${id}" id="id">
 					<div id="selectArea">
 						<span>카테고리</span>
 						<select name="inquiriesCategory">
@@ -42,12 +47,17 @@
 						</select>
 					</div>
 					<!-- 예약취소인경우 -->
-					<span>결제내역</span>
-					<select name="inquiriesCategory">
-					<c:forEach items="${bList }" var="book">
-						<option name="cancelPlz " value="${book.bookNo }">[${book.centerName.substring(5,8) }|${book.facilityName}]<fmt:formatDate value="${book.startTime }" pattern="MM.dd HH시"/></option>
-					</c:forEach>	
-					</select>
+					<div>
+						<span>결제내역</span>
+						<select name="bookNo">
+							<c:forEach items="${bList }" var="book">
+								<option name="" value="${book.bookNo }">[${book.centerName.substring(5,8) }|${book.facilityName}]<fmt:formatDate value="${book.startTime }" pattern="MM.dd HH시"/></option>
+								${book.bookNo }
+							</c:forEach>	
+						</select>
+					</div>
+					<!-- 츄가끝 -->
+
 					<!-- 여기까지 -->
 					<div id="titleArea">
 						<span>제목</span>
@@ -81,25 +91,95 @@
 		console.log(${userNo})
 		// 썸머노트
 		// callbacks오류
-		var callbacks = null;
-		 $(document).ready(function() {
-			  $('#summernote').summernote({
-			         placeholder: '내용을 입력해주세요.',
-			         tabsize: 2,
-			         height: 500,
-			         maxHeight: 500,
-			         lang : 'ko-KR',
-			         // 이미지 업로드
-// 		        	   callbacks: {
-// 		        	     onImageLinkInsert: function(url) {
-// 		        	       // url is the image url from the dialog
-// 		        	       $img = $('<img>').attr({ src: url })
-// 		        	       $summernote.summernote('insertNode', $img[0]);
-// 		        	     }
-// 		        	   }
+		$(document).ready(function() {
+			$('#summernote').summernote({
+			    placeholder: '내용을 입력해주세요.',
+			    tabsize: 2,
+			    height: 500,
+			    maxHeight: 500,
+			    lang : 'ko-KR',
+			    // 이미지 업로드 콜백함수
+		        callbacks: {
+		        	onImageUpload : function(files, editor, welEditable) {
+						for (let i = files.length - 1; i >= 0; i--) {
+                           	uploadSummernoteImageFile(files[i],
+                            	this);
+                        }
+		        	}
+		        }
 			  
-			  });
+			});
 		});
+
+		function uploadSummernoteImageFile(file, el) {
+            let data = new FormData();
+            let id = document.getElementById("id").value;
+            data.append("file", file);
+            data.append("id", id);
+            $.ajax({
+                data : data,
+                type : "POST",
+                url : "/inquiry/ImgFileUpload",
+                contentType : false,
+                enctype : 'multipart/form-data',
+                processData : false,
+                success : function(data) {
+                    $img = $('<img>').attr({ src: data.src });
+                    $(el).summernote('insertNode', $img[0]);
+                }
+            });
+        }
+
+		// 주혜한테 받은 코드
+		// const fontList = ['Arial', 'Arial Black', 'Comic Sans MS', 'Courier New', 'MapoFlowerIsland', '맑은 고딕','궁서','굴림체','굴림','돋움체','바탕체'];
+        // $('#summernote').summernote({
+        //    placeholder: '내용을 작성하세요',
+        //    height: 500,
+        //     maxHeight: 400,
+        //  lang: "ko-KR",
+        //  toolbar: [
+        //         ['fontname', ['fontname']],
+        //         ['fontsize', ['fontsize']],
+        //         ['style', ['bold', 'italic', 'underline','strikethrough', 'clear']],
+        //         ['color', ['forecolor','color']],
+        //         ['table', ['table']],
+        //         ['para', ['ul', 'ol', 'paragraph']],
+        //         ['height', ['height']],
+        //         ['insert',['picture']],
+        //         ['view', ['fullscreen', 'help']]
+        //      ],
+        //      fontNames: fontList,
+        //      fontNamesIgnoreCheck: fontList,
+        //      fontSizes: ['8','9','10','11','12','14','16','18','20','22','24','28','30','36','50','72'],
+        //      callbacks : {
+        //            onImageUpload : function(files, editor, welEditable) {
+        //                for (let i = files.length - 1; i >= 0; i--) {
+        //                    uploadSummernoteImageFile(files[i],
+        //                        this);
+        //                }
+        //            }
+        //        }
+        //   });
+        
+        // function uploadSummernoteImageFile(file, el) {
+        //     let data = new FormData();
+        //     let id = document.getElementById("id").value;
+        //     data.append("file", file);
+        //     data.append("id", id);
+        //     $.ajax({
+        //         data : data,
+        //         type : "POST",
+        //         url : "/review/ImgFileUpload",
+        //         contentType : false,
+        //         enctype : 'multipart/form-data',
+        //         processData : false,
+        //         success : function(data) {
+        //             $img = $('<img>').attr({ src: data.src });
+        //             $(el).summernote('insertNode', $img[0]);
+        //         }
+        //     });
+        // }
+		// 여기까지
 			
 		// 비밀글 체크 시 비밀번호 입력할 수 있게 해주는 함수
 			$(document).ready(function(){
@@ -131,6 +211,7 @@
 				return false;
 			}
 		});
+		
 
 	
 	    </script>		
