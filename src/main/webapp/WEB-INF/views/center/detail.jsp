@@ -14,11 +14,11 @@
 	<body>
 		<!-- header -->
 		<!-- 관리자로 로그인한 경우 사용 헤더 -->
-		<c:if test="${userId eq 'admin'}">
+		<c:if test="${sessionScope.loginUser.userType eq '1'}">
 			<jsp:include page="../admin/adminHeader.jsp"></jsp:include>
 		</c:if>
 		<!-- 회원으로 로그인한 경우 사용 헤더 -->
-		<c:if test="${userId ne 'admin'}">
+		<c:if test="${sessionScope.loginUser.userType ne '1'}">
 			<jsp:include page="../common/header.jsp"></jsp:include>
 		</c:if>
 
@@ -44,11 +44,11 @@
 				<h3 class="hTag">☎ ${center.centerTel}</h3>
 			</div>
 			
-			<c:if test="${userId eq 'admin'}">
+			<c:if test="${sessionScope.loginUser.userType eq '1'}">
 				<button class="button" onclick="location.href='/center/listView'">목록</button>
 				<button class="button" onclick="location.href='/center/modifyView?centerNo=${center.centerNo}'">수정하기</button>
 			</c:if>
-			<c:if test="${userId ne 'admin'}">
+			<c:if test="${sessionScope.loginUser.userType ne '1'}">
 				<button class="button" onclick="location.href='/center/search'">돌아가기</button>
 			</c:if>
 		</main>

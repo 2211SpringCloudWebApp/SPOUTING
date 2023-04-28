@@ -58,13 +58,13 @@ main {
 #photo {
 	width: 1000px;
     height: 600px;
-    border: 1px solid dimgrey;
+/*     border: 1px solid dimgrey; */
     margin: 20px auto;
 }
 
 	#slide {
 		height: 300px;
-    	border-bottom: 1px solid dimgrey;
+/*     	border-bottom: 1px solid dimgrey; */
 	}
 	#slide>ul>li{
 	    position: absolute;
@@ -72,6 +72,7 @@ main {
 /* 	    width: 50%; */
 /* 		height: 50%; */
     	font-size: 0;
+    	background-size: cover;
 	}
 	
 	

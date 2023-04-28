@@ -24,6 +24,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.kh.spouting.center.domain.Center;
 import com.kh.spouting.center.domain.Search;
 import com.kh.spouting.center.service.CenterService;
+import com.kh.spouting.common.Alert;
 import com.kh.spouting.user.domain.User;
 
 @Controller
@@ -337,6 +338,12 @@ public class CenterController {
 	
 	/************************* 회원 서비스 **************************/
 
+	/* 소개 화면 */
+	@RequestMapping(value="/center/intro", method=RequestMethod.GET)
+	public String centerIntroduce() {
+		return "center/introduce";
+	}
+	
 	/* 지점 목록 조회 */
 	@RequestMapping(value="/center/userCenterList", method=RequestMethod.GET)
 	public String userCenterList(
@@ -363,7 +370,7 @@ public class CenterController {
 		try {
 			System.out.println(search.toString());
 			
-			List<Search> searchResult = cService.selectSearch(search);
+			List<Center> searchResult = cService.selectSearch(search);
 			
 			if(!searchResult.isEmpty()) {
 				model.addAttribute("search", search);

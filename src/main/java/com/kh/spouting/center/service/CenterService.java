@@ -70,7 +70,7 @@ public interface CenterService {
 	 * @param search
 	 * @return List<Center>
 	 */
-	public List<Search> selectSearch(Search search);
+	public List<Center> selectSearch(Search search);
 	
 	
 }
