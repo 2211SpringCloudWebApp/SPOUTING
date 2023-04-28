@@ -13,7 +13,8 @@
     color: rgb(94, 94, 94);
     font-size: 22px;
     font-weight: 800;
-    height: 70px;   
+    height: 70px; 
+    margin-top: 50px;  
 }
     #insert-title span {
         margin: 0 auto;
@@ -24,7 +25,7 @@
     }
 #insert-main {
     width: 850px;
-    margin: 0 auto;
+    margin: 30px auto;
 }
 #insert-detail {
     width: 410px;
@@ -36,16 +37,18 @@
     }
     #img-box {
         width: 410px;
-        height: 430px;
-        border: 1px solid rgba(94, 94, 94, 0.589);
+        height: 410px;
+        border: 1px solid #3d5a9e80;
         border-radius: 5px;
     }
     .input-box {
         width: 410px;
-        height: 30px;
+        height: 40px;
         font-size: 18px;
         border-radius: 5px;
         border: 1px solid #3d5a9e80;
+        margin: 1px;
+        padding: 5px;
     }
     .input-box:focus {
         background-color: #c3d5ff7c;
@@ -53,6 +56,40 @@
     #insert-detail textarea {
         height: 100px;
     }
+
+
+#file {
+    position: absolute;
+    width: 0;
+    height: 0;
+    padding: 0;
+    overflow: hidden;
+    border: 0;
+}
+#insert-detail label {
+    display: inline-block;
+    padding: 12px 20px;
+    color: #fff;
+    vertical-align: middle;
+    background-color: #0646da98;
+    cursor: pointer;
+    height: 40px;
+    margin-left: 10px;
+    border-radius: 5px;
+    font-size: 14px;
+}
+.upload-name {
+    display: inline-block;
+    height: 40px;
+    padding: 0 10px;
+    vertical-align: middle;
+    border: 1px solid #3d5a9e80;
+    width: 75%;
+    color: rgb(119, 119, 119);
+    border-radius: 5px;
+    font-size: 17px;
+}
+
 #diary-btn {
     width: 200px;
     height: 50px;
@@ -61,9 +98,10 @@
     border-radius: 5px;
     color: #fafafa;
     margin: 20px;
+    margin-bottom: 50px;
     font-size: 16px;
 }
-    #diary-btn:hover {
+    #diary-btn:hover, #insert-detail label:hover{
         color: #32529ec2;
         background-color: #d8d8d885;
         font-weight: 800;

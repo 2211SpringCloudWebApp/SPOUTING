@@ -15,8 +15,8 @@
     <div id="login-container">
             <div id="login-box">
                 <p>SPOUTING TOGETHER</p>
-                <input type="text" placeholder="  ID" id="userId" name="userId" class="login-input">
-                <input type="password" placeholder="  PW" id="userPw" name="userPw" class="login-input"><br>
+                <input type="text" placeholder="  ID" id="userId" name="userId" class="login-input" onkeydown="press();">
+                <input type="password" placeholder="  PW" id="userPw" name="userPw" class="login-input" onkeydown="press();"><br>
 				<button id="login-btn" onclick="return submitCheck()">LOGIN</button><br>
                 <a href="/user/findid">아이디 찾기</a> | 
                 <a href="/user/findpw">비밀번호 찾기</a><br><br><br><br>
@@ -26,6 +26,11 @@
     </div>
     <jsp:include page="../common/footer.jsp"></jsp:include>
     <script>
+        function press() {
+            if(window.event.keyCode == 13) { //JS에서 13=enter키
+                submitCheck();
+            }
+        }
         function submitCheck() {
             var userId = $("#userId").val();
             var userPw = $("#userPw").val();
@@ -42,7 +47,9 @@
                     } else if(data === "admin") {
                         location.href = "/admin/check";    
                     } else {
-                        location.href = "/";
+                        var referrer = document.referrer;
+	                    console.log("이전 페이지 URL: "+referrer); 
+                        location.href = referrer;
                     }
                 }
             });

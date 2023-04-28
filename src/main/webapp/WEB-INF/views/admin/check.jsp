@@ -23,7 +23,7 @@
                 <th>Second PW</th>  
             </tr>
             <tr>
-                <td><input type="password" id="admin-pw"></td>
+                <td><input type="password" id="admin-pw" onkeydown="press();"></td>
             </tr>
             <tr>
                 <td>
@@ -33,6 +33,11 @@
         </table>
 
         <script>
+            function press() {
+                if(window.event.keyCode == 13) { //JS에서 13=enter키
+                    double();
+                }
+            }
             function double() {
                 var inputPw = $("#admin-pw").val();
                 if(inputPw === "princess6") {

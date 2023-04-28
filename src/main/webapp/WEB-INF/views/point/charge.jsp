@@ -56,7 +56,7 @@
                 </div>
             </div>
             <input type="hidden" id="userName" value="${sessionScope.loginUser.userName}">
-            <input type="hidden" id="userEmail" value="${sessionScope.loginUser.userEmail}">s
+            <input type="hidden" id="userEmail" value="${sessionScope.loginUser.userEmail}">
         </main>
     </section>
     <jsp:include page="../common/footer.jsp"></jsp:include>
@@ -99,11 +99,10 @@
             console.log(totalPrice);
 
             const IMP = window.IMP; // 생략 가능
-            IMP.init("imp60366253"); // 예: imp00000000a
+            IMP.init("imp60366253"); 
             IMP.request_pay({
-                pg: "kakaopay",
+                pg: "html5_inicis.INIpayTest",
                 pay_method: "card",
-                merchant_uid: new Date().getTime(),   // 주문번호
                 name: "SPOUTING 포인트 충전",
                 amount: totalPrice, 
                 buyer_email: userEmail,
@@ -127,7 +126,7 @@
                         }
                     })       
                 } else {
-                    alert("결제 오류");
+                    alert("결제 오류입니다. 관리자에게 문의하세요.");
                 }          
             });   
         }
