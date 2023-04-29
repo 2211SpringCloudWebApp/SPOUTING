@@ -56,6 +56,16 @@
 			flex-direction: column;
 			justify-content: center;
 		}
+		
+		.profile-name-box {
+			display: flex;
+		}
+		
+		.letter-icon {
+			margin: 0 0 0 10px;
+			align-items: center;
+			cursor: pointer;
+		}
 
 
 		#sns-content {
@@ -153,6 +163,7 @@
 				<input type="hidden" value="${oneSns.userNo }" id="userNo" name="userNo">
 				<div class="profile-name-box">
 					<h1 class="profile-name">${oneSns.userName }</h1>
+					<img class="letter-icon" src="/resources/images/message/mail.png" alt="" width="30px" height="30px" onclick="location.href='/message?userNo=${oneSns.userNo}';">
 				</div> 
 				<br>
 				<div class="profile-intro-box">
