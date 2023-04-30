@@ -128,7 +128,6 @@
 	
 	
 	
-	
 	/* 검색값 유지 */
 	document.querySelector("#searchKeyword").addEventListener("submit", function(e) {
 		e.preventDefault();	// submit 이벤트를 취소합니다.
@@ -161,35 +160,51 @@
 	
 	function initMap() { 
 		
-		areaArr.push(
-						/*지점명*/								/*센터사진*/																							/*주소*/						/*도로명주소*/			/*전화번호*/			/*위도*/			/*경도*/				
-// 			 {location : '스파우팅 '+areaMap.centerName , photo:'<img src="/images/center/climbing.jpg" width="90%" height="100" alt="합정점" class="thumb" />', addr : areaMap.centerAddr + '<br>|' + areaMap.centerSnaddr, tel : areaMap.centerTel , lat : '37.549069' , lng : '126.911333'},  // 합정점 중심좌표
-// 			 {location : '스파우팅 '+areaMap.centerName , photo:'<img src="/images/center/swimming.jpg" width="90%" height="100" alt="성수점" class="thumb" />', addr : areaMap.centerAddr + '<br>|' + areaMap.centerSnaddr, tel : areaMap.centerTel ,lat : '37.544728' , lng : '127.062106'},  // 성수점 중심좌표
-// 			 {location : '스파우팅 '+areaMap.centerName , photo:'<img src="/images/center/tennis.jpg" width="90%" height="100" alt="여의도점" class="thumb" />', addr : areaMap.centerAddr + '<br>|' + areaMap.centerSnaddr, tel : areaMap.centerTel, lat : '37.523409' , lng : '126.923392'},  // 여의도점 중심좌표
-
-			{centerName : areaMap.centerName,
-			centerAddr : areaMap.centerAddr,
-			centerSnaddr : areaMap.centerSnaddr,
-			centerTel : areaMap.centerTel,
-			centerFilename1 : areaMap.centerFilename1}
-		);
-
-		
-		
-		let markers = new Array(); // 마커 정보를 담는 배열
-		let infoWindows = new Array(); // 정보창을 담는 배열
-		
-		
 		/* 지도를 그려주는 함수 */
 		var map = new naver.maps.Map('map', {
 	        center: new naver.maps.LatLng(37.530235, 126.952262), //지도 시작 지점
 	        zoom: 13
 	    });
 		
+// 		var HOME_PATH = window.HOME_PATH || '.';
+		
+		areaArr.push(
+						/*지점명*/								/*센터사진*/																							/*주소*/						/*도로명주소*/			/*전화번호*/			/*위도*/			/*경도*/				
+// 			 {location : '스파우팅 '+areaMap.centerName , photo:'<img src="/images/center/climbing.jpg" width="90%" height="100" alt="합정점" class="thumb" />', addr : areaMap.centerAddr + '<br>|' + areaMap.centerSnaddr, tel : areaMap.centerTel , lat : '37.549069' , lng : '126.911333'},  // 합정점 중심좌표
+// 			 {location : '스파우팅 '+areaMap.centerName , photo:'<img src="/images/center/swimming.jpg" width="90%" height="100" alt="성수점" class="thumb" />', addr : areaMap.centerAddr + '<br>|' + areaMap.centerSnaddr, tel : areaMap.centerTel ,lat : '37.544728' , lng : '127.062106'},  // 성수점 중심좌표
+// 			 {location : '스파우팅 '+areaMap.centerName , photo:'<img src="/images/center/tennis.jpg" width="90%" height="100" alt="여의도점" class="thumb" />', addr : areaMap.centerAddr + '<br>|' + areaMap.centerSnaddr, tel : areaMap.centerTel, lat : '37.523409' , lng : '126.923392'},  // 여의도점 중심좌표
+
+			// 이부분을 for문으로 변경해야 할 듯 -> 현재는 위도/경도 가 달라 겨우 마커 세 개가  뜨고 있는 상황
+			{centerName : areaMap.centerName,
+			centerAddr : areaMap.centerAddr,
+			centerSnaddr : areaMap.centerSnaddr,
+			centerTel : areaMap.centerTel,
+			centerFilename1 : areaMap.centerFilename1,
+			lat : '37.549069' , lng : '126.911333'}
+			
+// 			{centerName : areaMap.centerName,
+// 			centerAddr : areaMap.centerAddr,
+// 			centerSnaddr : areaMap.centerSnaddr,
+// 			centerTel : areaMap.centerTel,
+// 			centerFilename1 : areaMap.centerFilename1,
+// 			lat : '37.544728' , lng : '127.062106'},
+			
+// 			{centerName : areaMap.centerName,
+// 			centerAddr : areaMap.centerAddr,
+// 			centerSnaddr : areaMap.centerSnaddr,
+// 			centerTel : areaMap.centerTel,
+// 			centerFilename1 : areaMap.centerFilename1,
+// 			lat : '37.523409' , lng : '126.923392'},
+
+		);
+		
+		
+		let markers = new Array(); // 마커 정보를 담는 배열
+		let infoWindows = new Array(); // 정보창을 담는 배열
+		
 		
 		// 지점을 담은 배열의 길이만큼 for문으로 마커와 정보창의 정보를 반복
 		for (var i = 0; i < areaArr.length; i++) {
-	
 			
 			/* 지점 아이콘 설정 */
 // 			var markeroption = {
@@ -218,19 +233,33 @@
 
 		        centerphoto: areaArr[i].centerFilename1,	// 센터 사진
 		        title: areaArr[i].centerName, // 센터 지점명 
-		        position: new naver.maps.LatLng(areaArr[i].lat , areaArr[i].lng), // 지점의 위도와 경도 
 		        address : areaArr[i].centerAddr,	// 지점 주소
+		        position: new naver.maps.LatLng(areaArr[i].lat , areaArr[i].lng), // 지점의 위도와 경도 
+		        streetname : areaArr[i].centerSnaddr,	// 지점 도로명주소
 		        telephone : areaArr[i].centerTel	// 지점 전화번호
 		    });
 			
 			
+			var contentString = [
+				'<div style="width:200px;text-align:center;padding:10px;">',
+				'	<img src="resources/images/centeruploadFiles/' + areaMap.centerFilename1 + '">',
+				'	<h2>' + areaMap.centerName + '</h2>',
+				'	<p>' + areaMap.centerAddr + '</p>',
+				'	<p>' + areaMap.centerSnaddr + '</p>',
+				'	<p>' + '☎' + areaMap.centerTel + '</p>',
+				'</div>',
+				'<div style="width:200px;text-align:center;padding-bottom:10px;">',
+				'	<a href="/book/bookView">예약하기</a>',
+				'	<a href="/center/detail/'+ areaMap.centerNo +'">자세히보기</a>',
+				'</div>'
+			].join('');
 		    
 		    /* 정보창 */
 			 const centerNo = document.querySelector("#centerNo").value;
 			 var infoWindow = new naver.maps.InfoWindow({
 				 // HTML 작성 - 클릭 시 정보창에 띄울 정보 작성
-			     content: '<div style="width:200px;text-align:center;padding:10px;">' + areaArr[i].centerFilename1 + '<br><b>' + areaArr[i].centerName + '</b><br>' + areaArr[i].centerAddr + '<br><b>☎ ' + areaArr[i].centerTel + '</b></div><div style="width:200px;text-align:center;padding-bottom:10px;"><a href="/book/bookView">예약하기</a><a href="/center/detail/'+ areaMap.centerNo +'">자세히보기</a></div>',
-// 			     content: '<div style="width:200px;text-align:center;padding:10px;">' + areaArr[i].areaMap.centerFilename1 + '<br><b>' + areaArr[i].areaMap.centerName + '</b><br>' + areaArr[i].areaMap.centerAddr + '<br><b>☎ ' + areaArr[i].areaMap.centerTel + '</b></div><div style="width:200px;text-align:center;padding-bottom:10px;"><a href="/book/bookView">예약하기</a><a href="/center/detail/'+ areaMap.centerNo +'">자세히보기</a></div>',
+// 			     content: '<div style="width:200px;text-align:center;padding:10px;">' + areaArr[i].centerFilename1 + '<br><b>' + areaArr[i].centerName + '</b><br>' + areaArr[i].centerAddr + '<br><b>☎ ' + areaArr[i].centerTel + '</b></div><div style="width:200px;text-align:center;padding-bottom:10px;"><a href="/book/bookView">예약하기</a><a href="/center/detail/'+ areaMap.centerNo +'">자세히보기</a></div>',
+			     content: contentString,
 			     // CSS 작성 - 정보창의 디자인 작성
 			     maxWidth: 250,
 				 backgroundColor: "#fff",
@@ -250,9 +279,9 @@
 		
 		
 		
-		function selectMarker() {
-			console.log("test");
-		}
+// 		function selectMarker(seq) {
+// 			console.log("test");
+// 		}
 		 
 	    function getClickHandler(seq) {
 			
