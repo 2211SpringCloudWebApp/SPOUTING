@@ -139,30 +139,20 @@
         </div>
 
         <div class="message-list">
-
-            <div class="one-message">
-                <div class="one-message-header">
-                    <img class="letter-icon" src="/resources/images/message/mail.png" alt="" width="25px" height="25px">
-                    <span class="user-name">닉네임 영역</span>
-                    <span class="open-yn" style="color: rgb(226, 1, 1);">(읽지 않음)</span>
-                    <span class="send-time">전송 시간</span>
-                </div>
-                <div class="one-message-content">
-                    <span class="send-message">안녕하세용용용</span>
-                </div>
-            </div>
-
-            <div class="one-message">
-                <div class="one-message-header">
-                    <img class="letter-icon" src="/resources/images/message/letter.png" alt="" width="25px" height="25px">
-                    <span class="user-name">닉네임 영역</span>
-                    <span class="open-yn" style="color: rgb(59, 80, 201);">(읽음)</span>
-                    <span class="send-time">전송 시간</span>
-                </div>
-                <div class="one-message-content">
-                    <span class="send-message">안녕하세용용용</span>
-                </div>
-            </div>
+        
+			<c:forEach items="${sendMessageList }" var="sendMessageList" varStatus="i">
+	            <div class="one-message">
+	                <div class="one-message-header">
+	                    <img class="letter-icon" src="/resources/images/message/send.png" alt="" width="25px" height="25px">
+	                    <span class="user-name">${sendMessageList.userName }</span>
+	<!--                     <span class="open-yn" style="color: rgb(226, 1, 1);">(읽지 않음)</span> -->
+	                    <span class="send-time">${sendMessageList.sendTime }</span>
+	                </div>
+	                <div class="one-message-content">
+	                    <span class="send-message">${sendMessageList.msgContent }</span>
+	                </div>
+	            </div>
+            </c:forEach>
 
         </div>
 

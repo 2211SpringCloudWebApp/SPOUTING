@@ -229,33 +229,35 @@
             <button class="message-btn" onclick="location.href='/messageWrite?userNo=${loginUser.userNo}';">쪽지 보내기</button>
         </div>
 
-        <div class="message-write">
-            <div class="search-user">
-                <div class="search-user-header">
-                    <img class="person-icon" src="/resources/images/message/user.png" alt="" width="16px" height="16px">
-                   	 &nbsp;받는사람
-                </div>
-                <div class="search-user-main">
-                    <input type="text" class="search-user-textbox">
-                </div>
-            </div>
-
-            <div class="message-box">
-                <div class="message-box-header">
-                    <img class="chat-icon" src="/resources/images/message/chat.png" alt="" width="16px" height="16px">
-                    	&nbsp;쪽지내용
-                </div>
-                <div class="message-box-main">
-                    <textarea class="message-textbox" placeholder="전송할 내용을 입력하세요."></textarea>
-                </div>
-            </div>
-        </div>
-        <br><hr>
-        <div class="button-area">
-            <input type="reset" class="reset-btn" value="취소하기">
-            &nbsp;&nbsp;&nbsp;
-            <input type="submit" class="submit-btn" value="쪽지 보내기">
-        </div>
+		<form action="/msgSend" method="post">
+	        <div class="message-write">
+	            <div class="search-user">
+	                <div class="search-user-header">
+	                    <img class="person-icon" src="/resources/images/message/user.png" alt="" width="16px" height="16px">
+	                   	 &nbsp;받는사람
+	                </div>
+	                <div class="search-user-main">
+	                    <input type="text" class="search-user-textbox">
+	                </div>
+	            </div>
+	
+	            <div class="message-box">
+	                <div class="message-box-header">
+	                    <img class="chat-icon" src="/resources/images/message/chat.png" alt="" width="16px" height="16px">
+	                    	&nbsp;쪽지내용
+	                </div>
+	                <div class="message-box-main">
+	                    <textarea class="message-textbox" placeholder="전송할 내용을 입력하세요."></textarea>
+	                </div>
+	            </div>
+	        </div>
+	        <br><hr>
+	        <div class="button-area">
+	            <input type="reset" class="reset-btn" value="취소하기">
+	            &nbsp;&nbsp;&nbsp;
+	            <input type="submit" class="submit-btn" value="쪽지 보내기">
+	        </div>
+        </form>
 
 
 
