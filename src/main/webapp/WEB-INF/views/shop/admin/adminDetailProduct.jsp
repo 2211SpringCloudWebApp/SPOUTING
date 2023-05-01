@@ -7,7 +7,7 @@
 	<title>상품 상세</title>
 </head>
 <body>
-	<jsp:include page="../../common/header.jsp"></jsp:include>
+	<jsp:include page="../../admin/adminHeader.jsp"></jsp:include>
 	<div id="maincontainer">
 		<h1>🔍 ️상품 상세</h1>
 		<p>상품 정보를 조회하세요.</p>
@@ -18,19 +18,19 @@
 			</tr>
 			<tr>
 				<td>카테고리 분류</td>
-				<td><td>${product.categoryNo }</td>
+				<td>${product.categoryNo }</td>
 			</tr>
 			<tr>
 				<td>상품명</td>
-				<td><td>${product.productName }</td>
+				<td>${product.productName }</td>
 			</tr>	
 			<tr>
 				<td>상품가격</td>
-				<td><td>${product.productPrice }</td>
+				<td>${product.productPrice }</td>
 			</tr>	
 			<tr>
 				<td>상품설명</td>
-				<td><td>${product.productDescription }</td>
+				<td>${product.productDescription }</td>
 			</tr>	
 			<tr>
 				<td>첨부파일</td>

@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="ReviewMapper">
+	<resultMap type="Review" id="reviewResultMap">
+		<id property="reviewNo" column="REVIEW_NO"/>
+		<result property="reviewTitle" column="REVIEW_TITLE"/>
+		<result property="reviewContent" column="REVIEW_CONTENT"/>
+		<result property="reviewDate" column="REVIEW_DATE"/>
+		<result property="reviewFilename" column="REVIEW_FILENAME"/>
+		<result property="reviewFilepath" column="REVIEW_FILEPATH"/>
+		<result property="reviewGrade" column="REVIEW_GRADE"/>
+		<result property="userId" column="USER_ID"/>
+		<result property="productNo" column="PRODUCT_NO"/>
+	</resultMap>
+
+	<resultMap type="Order" id="orderResultMap">
+		<id property="orderNo" column="ORDER_NO"/>
+		<result property="userId" column="USER_ID"/>
+		<result property="orderName" column="ORDER_NAME"/>
+		<result property="orderPhone" column="ORDER_PHONE"/>
+		<result property="orderEmail" column="ORDER_EMAIL"/>
+		<result property="orderPostcode" column="ORDER_POSTCODE"/>
+		<result property="orderRoadaddr" column="ORDER_ROADADDR"/>
+		<result property="orderDetailaddr" column="ORDER_DETAILADDR"/>
+		<result property="orderRequest" column="ORDER_REQUEST"/>
+		<result property="orderDate" column="ORDER_DATE"/>
+		<result property="orderState" column="ORDER_STATE"/>
+		<result property="orderCost" column="ORDER_COST"/>
+		<result property="productNo" column="PRODUCT_NO"/>
+	</resultMap>
+	
+	<!-- ********** 이용자 ********** -->
+	<!-- 리뷰 작성 -->
+	<insert id="insertReview">
+		INSERT INTO REVIEW_TBL
+		VALUES (SEQ_REVIEW_NO.NEXTVAL, #{reviewTitle}, #{reviewContent}, DEFAULT, #{reviewFilename}, #{reviewFilepath}, 
+				#{reviewGrade}, #{userId}, #{productNo})
+	</insert>
+	
+	<!-- 리뷰 수정 -->
+	<update id="updateReview" parameterType="review">
+		UPDATE REVIEW_TBL SET
+			REVIEW_TITLE=#{reviewTitle}, REVIEW_GRADE=#{reviewGrade}, REVIEW_CONTENT=#{reviewContent}
+			<if test=" reviewFilename != null"> REVIEW_FILENAME = #{reviewFilename}</if>
+	    WHERE REVIEW_NO = #{reviewNo}
+	</update>
+	
+	<!-- 리뷰 삭제 -->
+	<delete id="deleteReview">
+		DELETE FROM REVIEW_TBL WHERE REVIEW_NO = #{reviewNo}
+	</delete>
+	
+	<!-- 리뷰 목록 조회 + 페이징 -->
+	<select id="getListCount" resultType="_int">
+		SELECT COUNT(*) FROM REVIEW_TBL
+	</select>
+	
+	<!-- 리뷰 목록 조회 -->
+	<select id="selectAllReview" resultMap="reviewResultMap">
+		SELECT REVIEW_NO, REVIEW_TITLE, USER_ID, REVIEW_DATE
+		FROM REVIEW_TBL
+		ORDER BY REVIEW_NO
+	</select>
+	
+	<!-- 리뷰 상세 조회 -->
+	<select id="selectOneByNo" resultMap="reviewResultMap">
+		SELECT * FROM REVIEW_TBL WHERE REVIEW_NO = #{reviewNo}
+	</select>
+	
+	<!-- 조건부 검색 페이징 처리 -->
+	<select id="getSearchListCount" resultType="_int">
+		SELECT COUNT(*) FROM REVIEW_TBL
+		<choose>
+			<when test="searchCondition == 'no'">
+				WHERE REVIEW_NO LIKE '%' || #{searchValue} || '%'
+			</when>
+			<when test="searchCondition == 'title'">
+				WHERE REVIEW_TITLE LIKE '%' || #{searchValue} || '%'
+			</when>
+		</choose>
+	</select>
+	
+	<!-- 조건부 검색 -->
+	<select id="selectListByKeyword" resultMap="reviewResultMap">
+		SELECT * FROM REVIEW_TBL 
+		<if test="searchCondition == 'all'">
+			WHERE REVIEW_NO LIKE '%' || #{searchValue} || '%'
+			OR REVIEW_TITLE LIKE '%' || #{searchValue} || '%'
+		</if>
+		<if test="searchCondition == 'no'">
+			WHERE REVIEW_NO LIKE '%' || #{searchValue} || '%'
+		</if>
+		<if test="searchCondition == 'title'">
+			WHERE REVIEW_TITLE LIKE '%' || #{searchValue} || '%'
+		</if>
+		ORDER BY PRODUCT_NO DESC
+	</select>
+	
+	<!-- 페이징 (아이디) -->
+	<select id="getReviewListCount" resultType="_int">
+		SELECT COUNT(*) FROM REVIEW_TBL WHERE USER_ID = #{userId}
+	</select>
+	
+	<!-- 아이디별 리뷰 목록 조회 -->
+	<select id="selectReview" resultMap="reviewResultMap">
+		SELECT * FROM ORDER_TBL WHERE USER_ID = #{userId}
+	</select>
+	
+	
+	<!-- ********** 관리자 ********** -->
+	
+	
+	
+</mapper>

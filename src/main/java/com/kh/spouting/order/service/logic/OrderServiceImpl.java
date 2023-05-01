@@ -51,6 +51,20 @@ public class OrderServiceImpl implements OrderService{
 		int result = oStore.getOrderListCount(userId);
 		return result;
 	}
+
+	// 주문 취소
+	@Override
+	public int deleteOrder(int orderNo) {
+		int result = oStore.deleteOrder(orderNo);
+		return result;
+	}
+
+	// 주문 목록 조회
+	@Override
+	public List<Order> orderView() {
+		List<Order> olist = oStore.orderView();
+		return olist;
+	}
 	
 	
 	

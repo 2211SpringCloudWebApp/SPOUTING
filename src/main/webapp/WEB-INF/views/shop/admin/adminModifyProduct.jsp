@@ -7,7 +7,7 @@
 	<title>상품 수정</title>
 </head>
 <body>
-	<jsp:include page="../../common/header.jsp"></jsp:include>
+	<jsp:include page="../../admin/adminHeader.jsp"></jsp:include>
 	<div id="maincontainer">
 		<h1>🗑 ️상품 수정</h1>
 		<p>등록된 상품을 수정합니다.</p>

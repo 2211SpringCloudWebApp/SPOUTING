@@ -126,8 +126,8 @@
 	<update id="updateProduct" parameterType="product">
 		UPDATE PRODUCT_TBL SET
 			CATEGORY_NO = #{categoryNo}, PRODUCT_NAME=#{productName}, PRODUCT_PRICE=#{productPrice}, PRODUCT_DESCRIPTION=#{productDescription}
-			<if test=" productFilename1!= null">, PRODUCT_FILENAME1 = #{centerFilename1}</if>
-	        <if test=" productFilename2!= null">, PRODUCT_FILENAME1 = #{centerFilename2}</if>
+			<if test=" productFilename1!= null">, PRODUCT_FILENAME1 = #{productFilename1}</if>
+	        <if test=" productFilename2!= null">, PRODUCT_FILENAME1 = #{productFilename2}</if>
 	    WHERE PRODUCT_NO = #{productNo}
 	</update>
 

@@ -56,6 +56,20 @@ public class OrderStoreImpl implements OrderStore{
 		int result = session.selectOne("OrderMapper.getOrderListCount", userId);
 		return result;
 	}
+
+	// 주문 삭제
+	@Override
+	public int deleteOrder(int orderNo) {
+		int result = session.delete("OrderMapper.deleteOrder", orderNo);
+		return result;
+	}
+
+	// 주문 목록 조회
+	@Override
+	public List<Order> orderView() {
+		List<Order> olist = session.selectList("OrderMapper.orderView"); 
+		return olist;
+	}
 	
 	
 	

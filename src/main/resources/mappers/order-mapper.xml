@@ -20,6 +20,7 @@
 	
 	<resultMap type="OrderList" id="OrderListResultMap">
 		<id property="productNo" column="PRODUCT_NO"/>
+		<result property="userId" column="USER_ID"/>
 		<result property="categoryNo" column="CATEGORY_NO"/>
 		<result property="productName" column="PRODUCT_NAME"/>
 		<result property="productPrice" column="PRODUCT_PRICE"/>
@@ -27,15 +28,19 @@
 	</resultMap>
 	
 	<!-- 주문 DB 등록 -->
-	<insert id="insertOrder">
-		INSERT INTO ORDER_TBL 
-		VALUES(SEQ_ORDER_NO.NEXTVAL, #{userId}, #{orderName}, #{orderPhone}, #{orderEmail}
-		, #{orderPostcode}, #{orderRoadaddr}, #{orderDetailaddr}, #{orderRequest}
-		, DEFAULT, '1', #{orderCost}, #{productNo})
+	<insert id="insertOrder" parameterType="Order">
+	    <selectKey keyProperty="orderNo" resultType="int" order="BEFORE">
+	        SELECT SEQ_ORDER_NO.NEXTVAL FROM DUAL
+	    </selectKey>
+	    INSERT INTO ORDER_TBL 
+	    VALUES(
+	        #{orderNo}, #{userId}, #{orderName}, #{orderPhone}, #{orderEmail},
+	        #{orderPostcode}, #{orderRoadaddr}, #{orderDetailaddr}, #{orderRequest},
+	        DEFAULT, '1', #{orderCost}, #{productNo})
 	</insert>
 
 	<!-- 주문 내역 조회 -->
-	<select id="selectOrderBoard" resultMap="OrderListResultMap"> 
+	<select id="selectOrderBoard" resultMap="orderResultMap"> 
 		SELECT O.ORDER_NO, O.ORDER_NAME, O.ORDER_EMAIL, O.ORDER_DATE, P.PRODUCT_NAME, P.PRODUCT_PRICE, 
 		(O.ORDER_DATE)
 		FROM ORDER_TBL O 
@@ -53,5 +58,15 @@
 	<!-- 페이징 -->
 	<select id="getOrderListCount" resultType="_int">
 		SELECT COUNT(*) FROM ORDER_TBL WHERE USER_ID = #{userId}
+	</select>
+	
+	<!-- 주문 취소 -->
+	<delete id="deleteOrder">
+		DELETE FROM ORDER_TBL WHERE ORDER_NO = #{orderNo}
+	</delete>
+	
+	<!-- 주문 목록 조회 -->
+	<select id="orderView" resultMap="orderResultMap">
+		SELECT * FROM ORDER_TBL
 	</select>
 </mapper>

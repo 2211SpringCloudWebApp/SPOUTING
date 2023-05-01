@@ -8,6 +8,7 @@ import com.kh.spouting.order.domain.OrderList;
 
 public interface OrderService {
 
+	// ********** 이용자 **********
 	// 주문 DB 등록
 	int insertOrder(Order order);
 
@@ -22,6 +23,14 @@ public interface OrderService {
 
 	// 페이징 처리
 	int getOrderListCount(String userId);
+
+	// 주문 취소
+	int deleteOrder(int orderNo);
+
+	
+	// ********** 관리자 **********
+	// 주문 목록 조회
+	List<Order> orderView();
 
 
 }

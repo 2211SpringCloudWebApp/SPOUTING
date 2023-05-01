@@ -16,25 +16,7 @@
 		<h1>🛒 주문 상세 조회</h1>
 		<p>주문 정보를 확인해 보세요.</p>
 		<br><br><br><br>
-		<form action="/order/detail" method="POST">
-			<div>
-				<h3>주문한 상품 목록</h3>
-				<c:forEach items="${cList }" var="cart" varStatus="n" >
-					<input type="hidden" name="productNo" value="${order.productNo }">  
-					<ul class="list-detail">
-						<li>
-							<span class="info-photo"><img src="/resources/images/product/items/${cart.product.productFilename1}"></span>
-							<span class="pName">${order.productName }</span>
-							<span id="cartPrice">
-								<fmt:formatNumber value="${order.productPrice}" pattern="#,###"/>
-							</span>
-							<span class='wonSymbol'>원</span>
-							<span> * </span>
-						</li>
-					</ul>
-				</c:forEach>
-			</div>
-		
+		<form action="/order/detailAdmin" method="POST">
 			<table>
 				<tr>
 					<td>주문번호</td>
@@ -89,9 +71,9 @@
 				</tr>
 				<tr>
 					<td>
-						<input type="button" value="예약취소" onclick="deleteCheck(${order.orderNo});">
+						<input type="button" value="주문취소" onclick="deleteCheck(${order.orderNo});">
 						<input type="button" value="쇼핑몰" onclick="location.href='/shop/productList'">
-						<input type="button" value="예약내역" onclick="location.href='/order/list'" class='btn btn-success'/>
+						<input type="button" value="주문목록" onclick="location.href='/order/listAdmin'" class='btn btn-success'/>
 					</td>
 				</tr>
 			</table>
@@ -102,7 +84,7 @@
 	<script>
 	function deleteCheck(orderNo){
 		if(confirm("주문을 취소하시겠습니까?")){
-			location.href="/order/delete?orderNo="+orderNo;
+			location.href="/order/deleteAdmin?orderNo="+orderNo;
 		} 
 	}
 	</script>

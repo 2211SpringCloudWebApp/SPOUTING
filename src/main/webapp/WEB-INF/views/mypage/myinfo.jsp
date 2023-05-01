@@ -30,7 +30,7 @@
     <ul id="left-nav">
         <li><a href="">예약내역</a></li>
         <li><a href="/order/list">주문내역</a></li>
-        <li><a href="">상품후기</a></li>
+        <li><a href="/review/reviewListUser">상품후기</a></li>
         <li><a href="">나의 커뮤니티</a></li>
         <li><a href="">나의 문의</a></li>
         <li><a href="/point/detail">포인트 관리</a></li>

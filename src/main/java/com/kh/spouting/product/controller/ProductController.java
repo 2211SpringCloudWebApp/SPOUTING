@@ -211,7 +211,7 @@ public class ProductController {
 	// ******************** 관리자 기능 ********************
 	
 	// 상품 등록 화면
-	@RequestMapping(value="/product/registserProductView", method=RequestMethod.GET)
+	@RequestMapping(value="/product/registserView", method=RequestMethod.GET)
 	public String productRegisterView() {
 		return "shop/admin/adminRegisterProduct";
 	}

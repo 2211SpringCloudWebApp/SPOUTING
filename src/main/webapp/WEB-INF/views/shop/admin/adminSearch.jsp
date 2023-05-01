@@ -17,7 +17,7 @@
 	</style>
 </head>
 <body>
-	<jsp:include page="../../common/header.jsp"></jsp:include>
+	<jsp:include page="../../admin/adminHeader.jsp"></jsp:include>
 	<div id="nav">
 		<jsp:include page="../../shop/product/menu.jsp"></jsp:include>
 	</div>

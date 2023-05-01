@@ -23,4 +23,10 @@ public interface OrderStore {
 	// 페이징 처리
 	int getOrderListCount(String userId);
 
+	// 주문 삭제
+	int deleteOrder(int orderNo);
+
+	// 주문 목록 조회
+	List<Order> orderView();
+
 }

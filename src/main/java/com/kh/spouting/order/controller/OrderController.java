@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.kh.spouting.cart.service.CartService;
+import com.kh.spouting.common.Alert;
 import com.kh.spouting.common.PageInfo;
 import com.kh.spouting.order.domain.Order;
 import com.kh.spouting.order.domain.OrderList;
@@ -31,12 +32,6 @@ import com.siot.IamportRestClient.response.Payment;
 
 @Controller
 public class OrderController {
-	
-	@Autowired
-	private CartService cService;
-	
-	@Autowired
-	private ProductService pService;
 	
 	@Autowired
 	private UserService uService;
@@ -64,7 +59,7 @@ public class OrderController {
 		return api.paymentByImpUid(imp_uid);
 	}
 	
-	// 결제완료 후 결제내역 DB 등록
+	// 결제완료 후 결제내역 DB 등록 -> 주문 상세 조회
 	@RequestMapping(value = "/payment", method = RequestMethod.POST)
 	public String payment(Order order, Model model, HttpServletRequest request
 			,@RequestParam("phone1") String phone1
@@ -74,68 +69,67 @@ public class OrderController {
 		String orderPhone = phone1+phone2+phone3;
 		order.setOrderPhone(orderPhone);
 		int orderNo = oService.insertOrder(order);
-//		int orderNo = order.getOrderNo(); -> 매퍼 수정
+//		int orderNo = order.getOrderNo(); // -> 이 코드를 사용했ㅈ만 db의 값을 가지고 오지 못함, 위의 코드 사용
+		
 		HttpSession session = request.getSession();
 		String userId = (String)session.getAttribute("user");
-//		// 해당 회원의 주문 목록 조회
-//		int totalCount = oService.getOrderListCount(userId);
-//		pi = this.getPageInfo(page, totalCount);
-//		List<OrderList> oList = oService.selectOrderBoard(pi, userId);
-//		if(!oList.isEmpty()) {
-//			model.addAttribute("pi", pi);
-//			model.addAttribute("oList", oList);
-//			model.addAttribute("userId", userId);
-//		}
+		// 해당 회원의 주문 목록 조회
 		Order orderOne = oService.selectOneByOrderNo(orderNo);
 		model.addAttribute("order", orderOne);
 		getUserName(model, request);
 		return "shop/pay/orderDetail";
 	}
 
-	// 결제 내역 목록 조회
+	// 결제 목록 조회
 	@RequestMapping(value = "/order/list", method = RequestMethod.GET)
-	public String orderList(
-			HttpServletRequest request,  Model model
-		 , @RequestParam(value="page", required=false, defaultValue="1") Integer page
-			) {
-		HttpSession session = request.getSession();
-		String userId = (String)session.getAttribute("user");
-		
-		int totalCount = oService.getOrderListCount(userId);
-		pi = this.getPageInfo(page, totalCount);
-		List<OrderList> oList = oService.selectOrderBoard(pi, userId);
-		if(!oList.isEmpty()) {
-			model.addAttribute("pi", pi);
-			model.addAttribute("oList", oList);
-			model.addAttribute("userId", userId);
-		}
-		getUserName(model, request);
-		return "shop/pay/orderList";
-			
-		}
-	
+	public String orderList(HttpServletRequest request, Model model,
+	                        @RequestParam(value="page", required=false, defaultValue="1") Integer page) {
+	    HttpSession session = request.getSession();
+	    User user = (User) session.getAttribute("loginUser"); // 로그인한 사용자 정보 가져오기
+	    String userId = user.getUserId(); // 사용자 아이디 가져오기
+
+	    int totalCount = oService.getOrderListCount(userId);
+	    PageInfo pi = this.getPageInfo(page, totalCount);
+	    List<OrderList> oList = oService.selectOrderBoard(pi, userId);
+	    if(!oList.isEmpty()) {
+	        model.addAttribute("pi", pi);
+	        model.addAttribute("oList", oList);
+	        model.addAttribute("userId", userId);
+	    }
+	    getUserName(model, request);
+	    return "shop/pay/orderList";
+	}
+
 	// 결제내역 상세 조회
 	@RequestMapping(value="/order/detail")
-	public String orderDetail(HttpServletRequest request, Model model
-						, @RequestParam(value="orderNo", defaultValue="0") int orderNo) {
-		HttpSession session = request.getSession();
-		String userId = (String)session.getAttribute("user");
-		if(userId == null) {
-			// 미로그인 시 로그인 페이지 이동
-			return "redirect:/user/login";
-		} else if(orderNo == 0) {
-			// url 을 통해 직접 접근할 경우 리스트로 되돌림
-			// 회원의 모든 주문 내역 조회
-			List<Order> oList = oService.selectOrderList(userId);
-			model.addAttribute("oList", oList);
-			getUserName(model, request);
-			return "shop/pay/orderList";
-		} else {
-			// 주문 내역 상세 조회
+	public String noticeDetail(@RequestParam("orderNo") int orderNo, Model model) {
+		try {
 			Order order = oService.selectOneByOrderNo(orderNo);
 			model.addAttribute("order", order);
-			getUserName(model, request);
 			return "shop/pay/orderDetail";
+		} catch (Exception e) {
+			model.addAttribute("msg", e.getMessage());
+			return "common/error";
+		}
+	}
+	
+	
+	// 주문 취소
+	@RequestMapping(value="/order/delete")
+	public String orderDelete(@RequestParam("orderNo") int orderNo, Model model) {
+		try {
+			int result = oService.deleteOrder(orderNo);
+			if (result > 0) {
+				Alert alert = new Alert("/order/list", "주문 취소가 완료되었습니다.");
+				model.addAttribute("alert", alert);
+				return "common/alert";
+			} else {
+				model.addAttribute("msg", "주문 취소에 실패했습니다. 관리자에게 문의하세요.");
+				return "common/error";
+			}
+		} catch (Exception e) {
+			model.addAttribute("msg", e.getMessage());
+			return "common/error";
 		}
 	}
 	
@@ -170,10 +164,51 @@ public class OrderController {
 		}
 		
 	}
-		
-		
-		
-		
-		
-		
+	
+	// ********** 관리자 **********
+	// 주문 목록 전체 조회
+	@RequestMapping(value="/order/listAdmin")
+	public String orderViewAdmin(Model model) {
+		try {
+			List<Order> oList = oService.orderView();
+			model.addAttribute("oList", oList);
+		} catch (Exception e) {
+			model.addAttribute("msg", e.getMessage());
+			return "common/error";
+		}
+		return "shop/admin/adminOrderList";
+ 	}
+	
+	// 주문 상세 조회
+	@RequestMapping(value="/order/detailAdmin")
+	public String orderDetailViewAdmin(@RequestParam("orderNo") int orderNo, Model model) {
+		try {
+			Order order = oService.selectOneByOrderNo(orderNo);
+			model.addAttribute("order", order);
+			return "shop/admin/adminOrderDetail";
+		} catch (Exception e) {
+			model.addAttribute("msg", e.getMessage());
+			return "common/error";
+		}
+	}
+	
+	// 주문 취소
+	@RequestMapping(value="/order/deleteAdmin")
+	public String orderDeleteAdmin(@RequestParam("orderNo") int orderNo, Model model) {
+		try {
+			int result = oService.deleteOrder(orderNo);
+			if (result > 0) {
+				Alert alert = new Alert("/order/listAdmin", "주문 취소가 완료되었습니다.");
+				model.addAttribute("alert", alert);
+				return "common/alert";
+			} else {
+				model.addAttribute("msg", "주문 취소에 실패했습니다. 관리자에게 문의하세요.");
+				return "common/error";
+			}
+		} catch (Exception e) {
+			model.addAttribute("msg", e.getMessage());
+			return "common/error";
+		}
+	}
+	
 }

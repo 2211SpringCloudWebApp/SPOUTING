@@ -7,7 +7,7 @@
 	<title>상품 등록</title>
 </head>
 <body>
-	<jsp:include page="../../common/header.jsp"></jsp:include>
+	<jsp:include page="../../admin/adminHeader.jsp"></jsp:include>
 	<div id="maincontainer">
 		<h1>🗑 ️상품 등록</h1>
 		<p>사이트에 상품을 등록하세요</p>
