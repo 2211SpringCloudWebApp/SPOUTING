@@ -11,64 +11,121 @@ public class Center {
 	private String centerFilename2;
 	private String centerFilepath2;
 	private String centerSnaddr;
+	private String centerLat;
+	private String centerLng;
 	
 	
 	// getter/setter()
 	public int getCenterNo() {
 		return centerNo;
 	}
+
+
 	public void setCenterNo(int centerNo) {
 		this.centerNo = centerNo;
 	}
+
+
 	public String getCenterName() {
 		return centerName;
 	}
+
+
 	public void setCenterName(String centerName) {
 		this.centerName = centerName;
 	}
+
+
 	public String getCenterAddr() {
 		return centerAddr;
 	}
+
+
 	public void setCenterAddr(String centerAddr) {
 		this.centerAddr = centerAddr;
 	}
+
+
 	public String getCenterTel() {
 		return centerTel;
 	}
+
+
 	public void setCenterTel(String centerTel) {
 		this.centerTel = centerTel;
 	}
+
+
 	public String getCenterFilename1() {
 		return centerFilename1;
 	}
+
+
 	public void setCenterFilename1(String centerFilename1) {
 		this.centerFilename1 = centerFilename1;
 	}
+
+
 	public String getCenterFilepath1() {
 		return centerFilepath1;
 	}
+
+
 	public void setCenterFilepath1(String centerFilepath1) {
 		this.centerFilepath1 = centerFilepath1;
 	}
+
+
 	public String getCenterFilename2() {
 		return centerFilename2;
 	}
+
+
 	public void setCenterFilename2(String centerFilename2) {
 		this.centerFilename2 = centerFilename2;
 	}
+
+
 	public String getCenterFilepath2() {
 		return centerFilepath2;
 	}
+
+
 	public void setCenterFilepath2(String centerFilepath2) {
 		this.centerFilepath2 = centerFilepath2;
 	}
+
+
 	public String getCenterSnaddr() {
 		return centerSnaddr;
 	}
+
+
 	public void setCenterSnaddr(String centerSnaddr) {
 		this.centerSnaddr = centerSnaddr;
 	}
-	
+
+
+	public String getCenterLat() {
+		return centerLat;
+	}
+
+
+	public void setCenterLat(String centerLat) {
+		this.centerLat = centerLat;
+	}
+
+
+	public String getCenterLng() {
+		return centerLng;
+	}
+
+
+	public void setCenterLng(String centerLng) {
+		this.centerLng = centerLng;
+	}
+
+
 	
 	// toString()
 	@Override
@@ -76,7 +133,7 @@ public class Center {
 		return "Center [centerNo=" + centerNo + ", centerName=" + centerName + ", centerAddr=" + centerAddr
 				+ ", centerTel=" + centerTel + ", centerFilename1=" + centerFilename1 + ", centerFilepath1="
 				+ centerFilepath1 + ", centerFilename2=" + centerFilename2 + ", centerFilepath2=" + centerFilepath2
-				+ ", centerSnaddr=" + centerSnaddr + "]";
+				+ ", centerSnaddr=" + centerSnaddr + ", centerLat=" + centerLat + ", centerLng=" + centerLng + "]";
 	}
 	
 	

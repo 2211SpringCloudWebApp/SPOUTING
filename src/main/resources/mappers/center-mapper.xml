@@ -13,11 +13,13 @@
 		<result property="centerFilepath1" column="CENTER_FILEPATH1"/>
 		<result property="centerFilename2" column="CENTER_FILENAME2"/>
 		<result property="centerFilepath2" column="CENTER_FILEPATH2"/>
+		<result property="centerLat" column="CENTER_LAT"/>
+		<result property="centerLng" column="CENTER_LNG"/>
 	</resultMap>
 
 	<!-- 지점 등록 -->
 	<insert id="insertCenter">
-		INSERT INTO CENTER_TBL VALUES(SEQ_CENTER_NO.NEXTVAL, #{centerName}, #{centerAddr}, #{centerTel}, #{centerFilename1}, #{centerFilepath1}, #{centerFilename2}, #{centerFilepath2}, #{centerSnaddr})
+		INSERT INTO CENTER_TBL VALUES(SEQ_CENTER_NO.NEXTVAL, #{centerName}, #{centerAddr}, #{centerLat}, #{centerLng}, #{centerTel}, #{centerFilename1}, #{centerFilepath1}, #{centerFilename2}, #{centerFilepath2}, #{centerSnaddr})
 	</insert>
 	
 	<!-- 지점 상세조회 -->
@@ -39,7 +41,9 @@
 	        CENTER_NAME = #{centerName}, 
 	        CENTER_ADDR = #{centerAddr}, 
 	        CENTER_SNADDR = #{centerSnaddr},
-	        CENTER_TEL = #{centerTel}
+	        CENTER_TEL = #{centerTel},
+	        CENTER_LAT = #{centerLat},
+	        CENTER_LNG = #{centerLng}
 	        <if test="centerFilename1 != null">, CENTER_FILENAME1 = #{centerFilename1}</if>
 	        <if test="centerFilename2 != null">, CENTER_FILENAME2 = #{centerFilename2}</if>
 	    WHERE CENTER_NO = #{centerNo}

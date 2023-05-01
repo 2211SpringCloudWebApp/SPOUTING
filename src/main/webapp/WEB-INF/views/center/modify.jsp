@@ -35,6 +35,13 @@
 							<td><input type="text" name="centerSnaddr" class="inputTag" value="${center.centerSnaddr }"></td>
 						</tr>
 						<tr>
+							<th>위도/경도 *</th>
+							<td>
+								<input type="text" name="centerLat" class="latlngTag" value="${center.centerLat }">
+								<input type="text" name="centerLng" class="latlngTag" value="${center.centerLng }">
+							</td>
+						</tr>
+						<tr>
 							<th>전화번호 * </th>
 							<td><input type="text" name="centerTel" class="inputTag" value="${center.centerTel }"></td>
 						</tr>

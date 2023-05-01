@@ -84,6 +84,15 @@ table {
 	    border-color: #2d4680;
 	}
 	
+	.latlngTag {
+		width: 18%;
+		padding : 5px 10px;
+	    border-top: 1px;
+	    border-left: 1px;
+	    border-right: 1px;
+	    border-color: #2d4680;
+	}
+	
 /* 	.selectFile { */
 /* 	  width: 0.1px; */
 /* 	  height: 0.1px; */
