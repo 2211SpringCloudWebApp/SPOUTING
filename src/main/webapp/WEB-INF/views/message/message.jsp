@@ -19,7 +19,7 @@
         }
 
         .message-main {
-            width: 530px;
+            width: 550px;
             height: 600px;
             --background-color: pink;
             border: 1px solid black;
@@ -60,7 +60,7 @@
 
         .message-list {
             --background-color: aqua;
-            width: 530px;
+            width: 540px;
             height: 400px;
             overflow: auto;
         }

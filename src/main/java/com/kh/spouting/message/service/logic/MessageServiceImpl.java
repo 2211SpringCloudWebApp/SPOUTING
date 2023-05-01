@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import com.kh.spouting.message.domain.Message;
 import com.kh.spouting.message.service.MessageService;
 import com.kh.spouting.message.store.MessageStore;
+import com.kh.spouting.user.domain.User;
 
 @Service
 public class MessageServiceImpl implements MessageService {
@@ -35,6 +36,12 @@ public class MessageServiceImpl implements MessageService {
 	public Message oneMessageDetail(int msgNo) {
 		// TODO Auto-generated method stub
 		return messageStore.oneMessageDetail(session, msgNo);
+	}
+
+	@Override
+	public List<User> searchUser(String word) {
+		// TODO Auto-generated method stub
+		return messageStore.searchUser(session, word);
 	}
 
 }
