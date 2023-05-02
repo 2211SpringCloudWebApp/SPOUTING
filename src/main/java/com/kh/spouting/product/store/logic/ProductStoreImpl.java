@@ -6,9 +6,9 @@ import org.apache.ibatis.session.RowBounds;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
 
-import com.kh.spouting.cart.domain.Cart;
 import com.kh.spouting.common.PageInfo;
 import com.kh.spouting.common.Search;
+import com.kh.spouting.inquiry.domain.Inquiry;
 import com.kh.spouting.product.domain.Product;
 import com.kh.spouting.product.store.ProductStore;
 
@@ -27,13 +27,6 @@ public class ProductStoreImpl implements ProductStore{
 	@Override
 	public int getListCountByCate(SqlSession session, int[] categoryNos) {
 		int result = session.selectOne("ProductMapper.getListCountByCate", categoryNos);
-		return result;
-	}
-
-	// 검색 게시글 갯수
-	@Override
-	public int getListCount(SqlSession session, Search search) {
-		int result = session.selectOne("ProductMapper.getSearchListCount", search);
 		return result;
 	}
 
@@ -65,17 +58,6 @@ public class ProductStoreImpl implements ProductStore{
         List<Product> cateList = session.selectList("ProductMapper.selectCateProduct2", categoryNo);
         return cateList;
     }
-
-	// 검색 상품 목록 조회
-	@Override
-	public List<Product> selectListByKeyword(SqlSession session, PageInfo pi, Search search) {
-		int limit = pi.getBoardLimit();
-		int currentPage = pi.getCurrentPage();
-		int offset = (currentPage - 1) * limit;
-		RowBounds rowBounds = new RowBounds(offset, limit);
-		List<Product> searchList = session.selectList("ProductMapper.selectListByKeyword", search, rowBounds);
-		return searchList;
-	}
 
 	// 상품 상세 조회
 	@Override
@@ -119,6 +101,24 @@ public class ProductStoreImpl implements ProductStore{
 	public int deleteProduct(SqlSession session, int productNo) {
 		int result = session.delete("ProductMapper.deleteProduct", productNo);
 		return result;
+	}
+
+	// 검색 페이징
+	@Override
+	public int getSearchProductCount(SqlSession session, Search search) {
+		int result = session.selectOne("ProductMapper.getSearchProductCount", search);
+		return result;
+	}
+
+	// 상품 검색
+	@Override
+	public List<Product> searchProduct(SqlSession session, Search search, PageInfo pi) {
+		int limit = pi.getBoardLimit();
+		int currentPage = pi.getCurrentPage();
+		int offset = (currentPage - 1) * limit;
+		RowBounds rowBounds = new RowBounds(offset, limit);
+		List<Product> pList = session.selectList("ProductMapper.searchProduct", search, rowBounds);
+		return pList;
 	}
 
 	

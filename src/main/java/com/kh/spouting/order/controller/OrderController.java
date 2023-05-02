@@ -62,23 +62,24 @@ public class OrderController {
 	// 결제완료 후 결제내역 DB 등록 -> 주문 상세 조회
 	@RequestMapping(value = "/payment", method = RequestMethod.POST)
 	public String payment(Order order, Model model, HttpServletRequest request
-			,@RequestParam("phone1") String phone1
-			,@RequestParam("phone2") String phone2
-			,@RequestParam("phone3") String phone3
-			,@RequestParam(value="page", required=false, defaultValue="1") Integer page) {
-		String orderPhone = phone1+phone2+phone3;
-		order.setOrderPhone(orderPhone);
-		int orderNo = oService.insertOrder(order);
-//		int orderNo = order.getOrderNo(); // -> 이 코드를 사용했ㅈ만 db의 값을 가지고 오지 못함, 위의 코드 사용
-		
-		HttpSession session = request.getSession();
-		String userId = (String)session.getAttribute("user");
-		// 해당 회원의 주문 목록 조회
-		Order orderOne = oService.selectOneByOrderNo(orderNo);
-		model.addAttribute("order", orderOne);
-		getUserName(model, request);
-		return "shop/pay/orderDetail";
+	        ,@RequestParam("phone1") String phone1
+	        ,@RequestParam("phone2") String phone2
+	        ,@RequestParam("phone3") String phone3
+	        ,@RequestParam(value="page", required=false, defaultValue="1") Integer page) {
+	    String orderPhone = phone1+phone2+phone3;
+	    order.setOrderPhone(orderPhone);
+	    oService.insertOrder(order); // 주문 등록
+	    int orderNo = order.getOrderNo(); // 등록된 주문의 orderNo를 가져옴
+	 // int orderNo = order.getOrderNo(); // -> 이 코드를 사용했지만 db의 값을 가지고 오지 못함, 위의 코드 사용
+	    HttpSession session = request.getSession();
+	    String userId = (String)session.getAttribute("user");
+	    // 해당 회원의 주문 목록 조회
+	    Order orderOne = oService.selectOneByOrderNo(orderNo);
+	    model.addAttribute("order", orderOne);
+	    getUserName(model, request);
+	    return "shop/pay/orderDetail";
 	}
+
 
 	// 결제 목록 조회
 	@RequestMapping(value = "/order/list", method = RequestMethod.GET)
@@ -102,7 +103,7 @@ public class OrderController {
 
 	// 결제내역 상세 조회
 	@RequestMapping(value="/order/detail")
-	public String noticeDetail(@RequestParam("orderNo") int orderNo, Model model) {
+	public String orderDetail(@RequestParam("orderNo") int orderNo, Model model) {
 		try {
 			Order order = oService.selectOneByOrderNo(orderNo);
 			model.addAttribute("order", order);

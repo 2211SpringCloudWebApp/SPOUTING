@@ -4,7 +4,6 @@ import java.util.List;
 
 import org.apache.ibatis.session.SqlSession;
 
-import com.kh.spouting.cart.domain.Cart;
 import com.kh.spouting.common.PageInfo;
 import com.kh.spouting.common.Search;
 import com.kh.spouting.product.domain.Product;
@@ -17,9 +16,6 @@ public interface ProductStore {
 	// 카테고리 별 게시글 갯수
 	int getListCountByCate(SqlSession session, int[] categoryNos);
 
-	// 검색 게시글 갯수
-	int getListCount(SqlSession session, Search search);
-
 	// 전체 상품 목록 조회
 	List<Product> selectAllProduct(SqlSession session, PageInfo pi);
 
@@ -28,9 +24,6 @@ public interface ProductStore {
 	
 	// 상품 2차 카테고리 목록 조회
 	List<Product> selectCateProduct2(SqlSession session, int categoryNo);
-
-	// 검색 상품 목록 조회
-	List<Product> selectListByKeyword(SqlSession session, PageInfo pi, Search search);
 
 	// 상품 상세 조회
 	Product selectOneByNo(SqlSession session, int productNo);
@@ -51,6 +44,12 @@ public interface ProductStore {
 
 	// 상품 삭제
 	int deleteProduct(SqlSession session, int productNo);
+
+	// 검색 페이징
+	int getSearchProductCount(SqlSession session, Search search);
+
+	// 상품 검색
+	List<Product> searchProduct(SqlSession session, Search search, PageInfo pi);
 	
 
 

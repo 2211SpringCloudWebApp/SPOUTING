@@ -174,7 +174,7 @@ public class ReviewController {
 		model.addAttribute("rList", rList);
 		model.addAttribute("userId", userId);
 		}
-		return "shop/review/list";
+		return "shop/review/listUser";
 		}
 
 	// 리뷰 상세 조회
@@ -216,6 +216,8 @@ public class ReviewController {
 			return "common/error";
 		}
 	}
+	
+	
 	
 	// ********** 메소드 **********
 	// 지점 경로로 파일 복사(파일업로드) : 첫번째 파일
@@ -272,9 +274,50 @@ public class ReviewController {
 	}
 
 	
+	
 	// ********** 관리자 **********
+	// 리뷰 목록 조회
+	@RequestMapping(value="/review/adminList", method=RequestMethod.GET)
+	public ModelAndView listAdmin(ModelAndView mv, @RequestParam(value="page", required=false, defaultValue="1") Integer page) {
+		int totalCount = rService.getListCount();
+		PageInfo pi = this.getPageInfo(page, totalCount);
+		List<Review> rList = rService.selectAllReview(pi);
+		mv.addObject("pi", pi).addObject("rList", rList).setViewName("/shop/admin/adminReviewList");
+	    return mv;
+	}
 	
+	// 리뷰 상세 조회
+	@RequestMapping(value="/review/adminDetail", method=RequestMethod.GET)
+	public String detailReviewAdmin(@RequestParam("reviewNo") int reviewNo, Model model) {
+		try {
+			Review review = rService.selectOneByNo(reviewNo);
+			model.addAttribute("review", review);
+			return "shop/admin/adminReviewDetail";
+		} catch (Exception e) {
+			e.printStackTrace();
+			model.addAttribute("msg", e.getMessage());
+			return "common/error";
+		}
+	}
 	
+	// 리뷰 삭제
+	@RequestMapping(value="/remove/adminReview", method=RequestMethod.GET)
+	public String reviewRemove(@RequestParam("reviewNo") int reviewNo, Model model) {
+		try {
+			int result = rService.deleteReview(reviewNo);
+			if(result > 0) {
+				Alert alert = new Alert("/review/adminList", "리뷰가 삭제되었습니다.");
+				model.addAttribute("alert", alert);
+				return "common/alert";
+			}else {
+				model.addAttribute("msg", "리뷰 삭제가 완료되지 않았습니다.");
+				return "common/error";
+			}
+		} catch (Exception e) {
+			model.addAttribute("msg", e.getMessage());
+			return "common/error";
+		}
+	}
 	
 	
 	

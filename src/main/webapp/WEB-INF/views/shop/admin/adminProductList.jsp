@@ -7,24 +7,27 @@
 <head>
 	<meta charset="UTF-8">
 	<title>SPOUTING PRODUCT</title>
-	<link rel="stylesheet" href="../../../../../resources/css/shopCss/shop.css">
+	<link rel="stylesheet" href="../../../../resources/css/shopCss/shop.css">
 	<style>
-		#nav {
-		  float: left;
-		  width: 200px;
-		  height : 50vh;
+		#maincontainer {
+		    width: 100%;
+		    height : 2000px;
+		    padding-top : 150px;
+		    margin : 0;
 		}
 	</style>
 </head>
 <body>
 	<jsp:include page="../../admin/adminHeader.jsp"></jsp:include>
-	<div id="nav">
-		<jsp:include page="../../shop/product/menu.jsp"></jsp:include>
-	</div>
+	
 	<div id="maincontainer">
 	<h1 style="color:#1C3879">SPOUTING'S ALL PRODUCT</h1>
-	<p>스파우팅 마켓의 모든 제품을 한 눈에 !</p>
-	<br><br><br><br>
+	<p>등록된 상품들을 조회해 보세요.</p>
+	<br><br>
+	<div id="buttonbox">
+	  <button class="btn" onclick="location.href='/shop/main';">스파우팅 마켓</button>
+	  <button class="btn" onclick="location.href='/product/registserView';">상품 등록</button>
+	</div>
 	<table>
 		<thead>
 			<tr>
@@ -35,11 +38,11 @@
 			</tr>
 		</thead>
 		<tbody>
-			<c:forEach var="row" items="${sList }">
+			<c:forEach var="row" items="${pList }">
 				<tr>
 					<td>${row.productNo }</td>
 					<td>
-						<a href="/product/adminDetailProduct/${row.productNo}">
+						<a href="/product/adminDetailProduct?productNo=${row.productNo}">
 							<img src="/resources/images/product/items/${row.productFilename1}">
 						</a>
 					</td>
@@ -52,25 +55,29 @@
 		<!-- 게시글 페이징 처리 -->
 			<tr>
 				<td colspan="5" align="center" style="height : 50px; border-bottom:0px;">
+					<c:if test="${pi.currentPage > 0}">
+	       				<a href="/shop/adminProductList?page=1" class="first-last-page">처음</a>
+	       			</c:if> 
 					<c:forEach begin="${pi.startNavi }" end="${pi.endNavi }" var="p">
-							<c:url var="pageUrl" value="/shop/productList">
+							<c:url var="pageUrl" value="/shop/adminProductList">
 								<c:param name="page" value="${p }"></c:param>
-								<c:param name="searchValue" value="${search.searchValue }"></c:param>
-								<c:param name="searchCondition" value="${search.searchCondition }"></c:param>
 							</c:url>
 							<a href="${pageUrl }">${p }</a>&nbsp;&nbsp;&nbsp;
 					</c:forEach>
+	       			<c:if test="${pi.currentPage < pi.maxPage}">
+	       				<a href="/shop/adminProductList?page=${pi.maxPage}" class="first-last-page">마지막</a>
+	       			</c:if>
 				</td>
 			</tr>
 		<!-- 게시글 조건부 검색 -->
 			<tr>
 				<td colspan="4" align="center" style="height : 50px;">
-					<form action="/product/search" method="get">
+					<form action="/product/adminSearch" method="get">
 						<select name="searchCondition">
-								<option value="all" <c:if test="${search.searchCondition == 'all' }">selected</c:if>>전체</option>
-								<option value="no" <c:if test="${search.searchCondition == 'no' }">selected</c:if>>상품번호</option>
-								<option value="title" <c:if test="${search.searchCondition == 'title' }">selected</c:if>>상품명</option>
-								<option value="description" <c:if test="${search.searchCondition == 'description' }">selected</c:if>>상품설명</option>
+								<option value="all">전체</option>
+								<option value="no">상품번호</option>
+								<option value="title">상품명</option>
+								<option value="description">상품설명</option>
 							</select>
 							<input type="text" name="searchValue" placeholder="검색어를 입력하세요.">
 							<input type="submit" value="검색">
@@ -80,6 +87,6 @@
 		</tfoot>
 	</table>	
 	</div>
-	<jsp:include page="../..//common/footer.jsp"></jsp:include>
+	<jsp:include page="../../common/footer.jsp"></jsp:include>
 </body>
 </html>

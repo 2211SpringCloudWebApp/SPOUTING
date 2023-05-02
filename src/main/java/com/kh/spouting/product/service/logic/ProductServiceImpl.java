@@ -36,12 +36,6 @@ public class ProductServiceImpl implements ProductService {
 		return result;
 	}
 
-	// 검색 게시글 갯수
-	@Override
-	public int getListCount(Search search) {
-		int totalCount = pStore.getListCount(session, search);
-		return totalCount;
-	}
 
 	// 전체 상품 목록 조회
 	@Override
@@ -64,12 +58,6 @@ public class ProductServiceImpl implements ProductService {
 		return cateList;
 	}
 
-	// 검색 상품 목록 조회
-	@Override
-	public List<Product> selectListByKeyword(PageInfo pi, Search search) {
-		List<Product> searchList = pStore.selectListByKeyword(session, pi, search);
-		return searchList;
-	}
 
 	// 상품 상세 조회
 	@Override
@@ -112,6 +100,20 @@ public class ProductServiceImpl implements ProductService {
 	public int deleteProduct(int productNo) {
 		int result = pStore.deleteProduct(session, productNo);
 		return result;
+	}
+
+	// 검색 페이징
+	@Override
+	public int getSearchProductCount(Search search) {
+		int result = pStore.getSearchProductCount(session, search);
+		return result;
+	}
+
+	// 상품 검색
+	@Override
+	public List<Product> searchProduct(Search search, PageInfo pi) {
+		List<Product> pList = pStore.searchProduct(session, search, pi);
+		return pList;
 	}
 
 }

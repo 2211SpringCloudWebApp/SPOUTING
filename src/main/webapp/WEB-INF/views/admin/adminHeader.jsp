@@ -28,7 +28,7 @@
                 <ul class="drop-nav">
                     <li><a href="/shop/adminProductList">상품관리</a></li>
                     <li><a href="/order/listAdmin">주문관리</a></li>
-                    <li><a href="">리뷰관리</a></li>
+                    <li><a href="/review/adminList">리뷰관리</a></li>
                 </ul>
             </li>
             <li class="main-nav"><a href="">게시판</a>

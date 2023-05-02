@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<!-- 날짜변환용 -->
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html lang="en">
@@ -8,7 +9,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>주문 내역 조회</title>
+    <title>리뷰 관리</title>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
     <link rel="stylesheet" href="/resources/css/adminCss/user.css">
 </head>
@@ -16,37 +17,32 @@
     <jsp:include page="../../admin/adminHeader.jsp"></jsp:include>
     <div id="main-box">
         <div id="user-title">
-            SPOUTING ORDER LIST
+            SPOUTING REVIEW LIST
         </div>
         <table id="user-list">
             <tr>
-                <th>ORDER_NO</th>
+                <th>REVIEW_NO</th>
                 <th>ID</th>
-                <th>NAME</th>
-                <th>EMAIL</th>
-                <th>ORDER_DATE</th>
-                <th>ORDER_COST</th>
+                <th>REVIEW_TITLE</th>
+                <th>REVIEW_DATE</th>
+                <th>REVIEW_GRADE</th>
             </tr>
             
-            <c:forEach items="${oList }" var="order" varStatus="i">
+            <c:forEach items="${rList}" var="review" varStatus="i">
             <tr>
-                <td>${order.orderNo}</td>
-                <td>${order.userId}</td>
-                <td>${order.orderName}</td>
-                <td>${order.orderEmail}</td>
-                <td>
-                	<fmt:formatDate value="${order.orderDate}" pattern="yyyy.MM.dd  HH:mm" />
-               	</td>
-                <td>${order.orderCost}</td>
-
+                <td>${review.reviewNo}</td>
+                <td>${review.userId}</td>
+                <td>${review.reviewTitle}</td>
+                <td><fmt:formatDate value="${review.reviewDate}" pattern="yyyy.MM.dd" /></td>
+                <td>${review.reviewGrade}</td>
                 <c:if test="${user.userType != '1'}">
-                    <td><input type="button" id="remo-btn" value="조회" onclick="location.href='/order/detailAdmin?orderNo=${order.orderNo}'"></td>
+                    <td><input type="button" id="remo-btn" value="조회" onclick="location.href='/review/adminDetail?reviewNo=${review.reviewNo}'"></td>
                 </c:if>
                 <c:if test="${user.userType == '1'}">
                     <td style="color: rgb(255, 136, 0);">관리자</td>
                 </c:if>      
                 <c:if test="${user.userType != '1'}">
-                    <td><input type="button" id="remo-btn" value="주문취소" onclick="deleteCheck(${order.orderNo});"></td>
+                    <td><input type="button" id="remo-btn" value="삭제" onclick="removeReview('${review.reviewNo}')"></td>
                 </c:if>
                 <c:if test="${user.userType == '1'}">
                     <td style="color: rgb(255, 136, 0);">관리자</td>
@@ -59,7 +55,7 @@
             <tr>
                 <td>                  
                     <c:forEach begin="${pi.startNavi}" end="${pi.endNavi}" var="p">
-                        <c:url var="pageUrl" value="/admin/adminSearch">
+                        <c:url var="pageUrl" value="/admin/reviewSearch">
                             <c:param name="page" value="${p } "></c:param>
                             <c:param name="searchValue" value="${search.searchValue }"></c:param>
 							<c:param name="searchCondition" value="${search.searchCondition }"></c:param>
@@ -70,10 +66,10 @@
             </tr>
             <tr>
                 <td >
-                    <form action="/admin/orderSearch" method="get">
+                    <form action="/admin/reviewSearch" method="get">
                         <select name="searchCondition" id="search-select">
                             <option value="userId">ID</option>
-                            <option value="orderName">NAME</option>
+                            <option value="reviewTitle">TITLE</option>
                         </select>
                         <input type="text" id="search-box" name="searchValue" placeholder="검색어를 입력하세요.">
                         <input type="submit" id="search-btn" value="검색">
@@ -84,11 +80,11 @@
     </div>
 
     <script>
-	function deleteCheck(orderNo){
-		if(confirm("주문을 취소하시겠습니까?")){
-			location.href="/order/deleteAdmin?orderNo="+orderNo;
-		} 
-	}
-	</script>
+        function removeReview(reviewNo) {
+            if(window.confirm("해당 리뷰를 삭제하시겠습니까?")) {
+                location.href = "/remove/adminReview?reviewNo=" + reviewNo;
+            }
+        }
+    </script>
 </body>
 </html>
