@@ -24,9 +24,9 @@
                         <span id="user-box">${sessionScope.loginUser.userName} SPOUTER🏆</span>
                         <ul id="user-menu">
                             <li><a href="/diary/list">TODAY'S SPOUTING</a></li>
+                            <li><a href="/shop/cartView">CART</a></li> 
                             <li><a href="/mypage/myinfo">MY PAGE</a></li>
-                            <li><a href="/user/logout">LOGOUT</a></li>                    
-                            <li><a href="/shop/cartView">CART</a></li>                    
+                            <li><a href="/user/logout">LOGOUT</a></li>                                                      
                         </ul>
                     </div>
                 </c:if>          
@@ -60,10 +60,10 @@
                     </div>
 ​
                     <div class="item_part">
-                        <div class="item_name"><a href="/meeting">커뮤니티</a></div>
+                        <div class="item_name"><a href="">커뮤니티</a></div>
                         <div class="item_content">
                             <li><a href="/meeting">소셜링</a></li>
-                            <li><a href="/sns">SNS</a></li>
+                            <li><a href="/sns?userNo=${loginUser.userNo }">SNS</a></li>
                         </div>
                     </div>
 ​

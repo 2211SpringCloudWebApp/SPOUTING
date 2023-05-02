@@ -62,7 +62,6 @@
 				<div id="buttonbox">
 					<button  class="btn" onclick="orderProduct()">주문하기</button>
 					<button class="btn" onclick="loginCheck('${sessionScope.loginUser.userId}',function(){addCart('${sessionScope.loginUser.userId }',${product.productNo },document.querySelector('#qty').value)});">장바구니 담기</button>
-					<button class="btn btn-wishlist">위시리스트</button>
 				</div>
 			</div>
 			<div id="box1">
@@ -194,10 +193,6 @@
 					});
 				}
 				
-				// 위시리스트 추가 알람창
-				$(".btn-wishlist").click(function() {
-					alert("상품을 위시리스트에 추가했습니다.");
-				});
 				
 			</script>
 	</div>

@@ -34,7 +34,15 @@ public interface UserStore {
 	 * @return User
 	 */
 	public User selectOneById(SqlSession session, String userId);
-
+	
+	/** 
+	 * 이메일로 회원 조회 Store
+	 * @param session
+	 * @param userEmail
+	 * @return User
+	 */
+	public User selectOneByMail(SqlSession session, String userEmail);
+	
 	/**
 	 * 회원 아이디찾기 Store
 	 * @param session
@@ -110,4 +118,5 @@ public interface UserStore {
 	 * @return User
 	 */
 	public User selectName(SqlSession session, int userNo);
+
 }

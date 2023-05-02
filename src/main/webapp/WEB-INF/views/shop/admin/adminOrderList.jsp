@@ -40,17 +40,17 @@
                 <td>${order.orderCost}</td>
 
                 <c:if test="${user.userType != '1'}">
-                    <td><input type="button" id="remo-btn" value="주문취소" onclick="deleteCheck(${order.orderNo});"></td>
-                </c:if>
-                <c:if test="${user.userType == '1'}">
-                    <td style="color: rgb(255, 136, 0);">관리자</td>
-                </c:if>
-                <c:if test="${user.userType != '1'}">
                     <td><input type="button" id="remo-btn" value="조회" onclick="location.href='/order/detailAdmin?orderNo=${order.orderNo}'"></td>
                 </c:if>
                 <c:if test="${user.userType == '1'}">
                     <td style="color: rgb(255, 136, 0);">관리자</td>
                 </c:if>      
+                <c:if test="${user.userType != '1'}">
+                    <td><input type="button" id="remo-btn" value="주문취소" onclick="deleteCheck(${order.orderNo});"></td>
+                </c:if>
+                <c:if test="${user.userType == '1'}">
+                    <td style="color: rgb(255, 136, 0);">관리자</td>
+                </c:if>
                 
             </tr>
             </c:forEach>

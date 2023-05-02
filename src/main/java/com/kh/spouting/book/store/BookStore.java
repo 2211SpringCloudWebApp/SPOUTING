@@ -6,6 +6,7 @@ import org.apache.ibatis.session.SqlSession;
 
 import com.kh.spouting.book.domain.Book;
 import com.kh.spouting.book.domain.Facilities;
+import com.kh.spouting.common.PageInfo;
 import com.kh.spouting.point.domain.PointDetail;
 
 public interface BookStore {
@@ -100,6 +101,21 @@ public interface BookStore {
 	 * @param session
 	 * @return
 	 */
-	public List<Book> selectAllBook(SqlSession session);
+	public List<Book> selectAllBook(SqlSession session, PageInfo pi);
+
+	/**
+	 * 페이징)전체 예약 리스트 개수
+	 * @param session
+	 * @return
+	 */
+	public int getBookingCount(SqlSession session);
+
+	/**
+	 * facilName으로 facilNo 찾아오기
+	 * @param session
+	 * @param facilityName
+	 * @return
+	 */
+	public int getfacilNo(SqlSession session, String facilityName);
 
 }

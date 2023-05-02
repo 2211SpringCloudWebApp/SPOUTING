@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -33,18 +34,22 @@
 				<td>${product.productDescription }</td>
 			</tr>	
 			<tr>
-				<td>첨부파일</td>
+				<c:if test="${not empty product.productFilename1}">
+				<td>첨부파일1</td>
 				<td>
-					<input type="file" name="uploadFile1" onchange="loadImg1(this);">
-						<div id="img-viewer1">
-							<img id="img-view1" width="200">
-						</div>
-					<input type="file" name="uploadFile2" onchange="loadImg2(this);">
-						<div id="img-viewer2">
-							<img id="img-view2" width="200">
-						</div>
+					<img id="img-view1" width="200"src="/resources/images/product/items/${product.productFilename1 }" >
 				</td>
+				</c:if>
+			</tr>
+			<tr>
+				<c:if test="${not empty product.productFilename2}">
+				<td>첨부파일2</td>
+				<td>
+					<img id="img-view2" width="200"src="/resources/images/product/description/${product.productFilename2 }" >
+				</td>
+				</c:if>
 			</tr>	
+		
 		</table>
 	</div>
 	<div id="buttonbox">
@@ -59,6 +64,30 @@
 		function removeCheck(productNo) {
 			if(confirm("정말 삭제하시겠습니까?")) {
 				location.href="/product/remove?productNo=" + productNo;					
+			}
+		}
+
+		function loadImg1(obj) {
+			if(obj.files.length != 0 && obj.files[0] != 0) {
+				let reader = new FileReader();
+				reader.readAsDataURL(obj.files[0]);
+				reader.onload = function(e) {
+					document.querySelector("#img-view1").setAttribute("src", e.target.result);
+				}
+			}else {
+				document.querySelector("#img-view1").setAttribute("src", "");
+			}
+		}
+		
+		function loadImg2(obj) {
+			if(obj.files.length != 0 && obj.files[0] != 0) {
+				let reader = new FileReader();
+				reader.readAsDataURL(obj.files[0]);
+				reader.onload = function(e) {
+					document.querySelector("#img-view2").setAttribute("src", e.target.result);
+				}
+			}else {
+				document.querySelector("#img-view2").setAttribute("src", "");
 			}
 		}
 	</script>

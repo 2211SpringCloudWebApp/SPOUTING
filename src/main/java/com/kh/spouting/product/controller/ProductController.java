@@ -46,8 +46,8 @@ public class ProductController {
 		int startNavi;
 		int endNavi;
 		
-		maxPage = (int) Math.ceil((double)totalCount / boardLimit);
-		startNavi = (((int)((double)currentPage / naviLimit + 0.9)) - 1) * naviLimit + 1 ;
+		maxPage = (int)((double)totalCount/boardLimit+0.9);
+		startNavi = (((int)((double)currentPage/naviLimit+0.9))-1)*naviLimit+1;
 		endNavi = startNavi + naviLimit - 1;
 		if(endNavi > maxPage) {
 			endNavi = maxPage;
@@ -138,13 +138,13 @@ public class ProductController {
 			, Model model) {
 		try {
 			System.out.println(search.toString());
-			int totalCount = pService.getListCount(search);
+			int totalCount = pService.getSearchProductCount(search);
 			PageInfo pi = this.getPageInfoBo(currentPage, totalCount);
-			List<Product> searchList = pService.selectListByKeyword(pi, search);
-			if(!searchList.isEmpty()) {
+			List<Product> pList = pService.searchProduct(search, pi);
+			if(!pList.isEmpty()) {
 				model.addAttribute("search", search);
 				model.addAttribute("pi", pi);
-				model.addAttribute("sList", searchList);
+				model.addAttribute("sList", pList);
 				return "shop/product/search";
 			} else {
 				model.addAttribute("msg", "데이터 조회에 실패했습니다.");
@@ -155,6 +155,7 @@ public class ProductController {
 			return "common/error";
 		}
 	}
+	
 
 	// 상품 상세페이지 조회
 	@RequestMapping(value="/product/detail", method=RequestMethod.GET)
@@ -175,12 +176,13 @@ public class ProductController {
 	public ModelAndView viewOrderPageFromDetail(ModelAndView mv, @RequestParam("qty") Integer qty, @RequestParam("productNo") Integer productNo, HttpSession session) {
 	    // 상세 페이지에서 세션에 저장된 product 값을 cList 에 담아 주문서로 전달
 	    List<Cart> cList = new ArrayList<>();
+	    int sum = 0;
 	    Product product = pService.printOneProduct(new Product(productNo));
 	    Cart cart = new Cart(product, product.getProductNo(), qty);
+	    // 상품 가격 계산 : jsp 에서 sum 으로 값을 받기 때문에 계산 식을 따로 적어줘야함
+	    sum = Integer.parseInt(product.getProductPrice()) * qty; // productPrice의 타입이 String이기 때문에 형변환해줘야 함
 	    cList.add(cart);
-	    // 상품 가격 계산
-	    
-	    mv.addObject("cList", cList).setViewName("/shop/pay/order");
+	    mv.addObject("cList", cList).addObject("sum", sum).setViewName("/shop/pay/order");
 	    return mv;
 	}
 
@@ -213,7 +215,7 @@ public class ProductController {
 	// 상품 등록 화면
 	@RequestMapping(value="/product/registserView", method=RequestMethod.GET)
 	public String productRegisterView() {
-		return "shop/admin/adminRegisterProduct";
+		return "shop/admin/adminProductRegister";
 	}
 	
 	// 상품 등록
@@ -231,19 +233,19 @@ public class ProductController {
 				String filePath = saveFile1(uploadFile1, request);
 				if(filePath != null) {	
 					product.setProductFilename1(uploadFile1.getOriginalFilename());
-					product.setProductFilename1(filePath);
+					product.setProductFilepath1(filePath);
 				}
 			}
 			if(!uploadFile2.getOriginalFilename().equals("")) {
 				String filePath = saveFile2(uploadFile2, request);
 				if(filePath != null) {	
 					product.setProductFilename2(uploadFile2.getOriginalFilename());
-					product.setProductFilename2(filePath);
+					product.setProductFilepath2(filePath);
 				}
 			}
 			int result = pService.insertProduct(product);
 			if(result > 0) {
-				Alert alert = new Alert("/shop/admin/adminProductList", "상품 등록이 완료되었습니다.");
+				Alert alert = new Alert("/shop/adminProductList", "상품 등록이 완료되었습니다.");
 				model.addAttribute("alert", alert);
 				return "common/alert";
 			}else {
@@ -310,15 +312,14 @@ public class ProductController {
 				, @RequestParam(value="page", required=false, defaultValue="1") Integer currentPage
 				, Model model) {
 			try {
-				System.out.println(search.toString());
-				int totalCount = pService.getListCount(search);
+				int totalCount = pService.getSearchProductCount(search);
 				PageInfo pi = this.getPageInfoBo(currentPage, totalCount);
-				List<Product> searchList = pService.selectListByKeyword(pi, search);
-				if(!searchList.isEmpty()) {
+				List<Product> pList = pService.searchProduct(search, pi);
+				if(!pList.isEmpty()) {
 					model.addAttribute("search", search);
 					model.addAttribute("pi", pi);
-					model.addAttribute("sList", searchList);
-					return "shop/admin/adminSearch";
+					model.addAttribute("sList", pList);
+					return "shop/admin/adminProductSearch";
 				} else {
 					model.addAttribute("msg", "데이터 조회에 실패했습니다.");
 					return "common/error";
@@ -336,7 +337,7 @@ public class ProductController {
 		int totalCount = pService.getListCount();
 		PageInfo pi = this.getPageInfoBo(page, totalCount);
 		List<Product> pList = pService.selectAllProduct(pi);
-		mv.addObject("pi", pi).addObject("pList", pList).setViewName("/shop/admin/adminListProduct");
+		mv.addObject("pi", pi).addObject("pList", pList).setViewName("/shop/admin/adminProductList");
 	    return mv;
 	}
 
@@ -346,7 +347,7 @@ public class ProductController {
 		try {
 			Product product = pService.selectOneByNo(productNo);
 			model.addAttribute("product", product);
-			return "shop/admin/adminDetailProduct";
+			return "shop/admin/adminProductDetail";
 		} catch (Exception e) {
 			e.printStackTrace();
 			model.addAttribute("msg", e.getMessage());
@@ -361,7 +362,7 @@ public class ProductController {
 			Product product = pService.selectOneById(productNo);
 			if(product != null) {
 				model.addAttribute("product", product);
-				return "shop/admin/adminModifyProduct";
+				return "shop/admin/adminProductModify";
 			}else {
 				model.addAttribute("msg", "상품 정보 수정에 실패하였습니다.");
 				return "common/error";
@@ -385,12 +386,11 @@ public class ProductController {
 			if(reloadFile1 != null && !reloadFile1.isEmpty()) {
 				if(product.getProductFilename1() != null) {
 					this.deleteFile1(product.getProductFilename1(), request);
-					this.deleteFile2(product.getProductFilename2(), request);
 				}
 				String modifyPath = this.saveFile1(reloadFile1, request);
 				if(modifyPath != null) {
 					product.setProductFilename1(reloadFile1.getOriginalFilename());
-					product.setProductFilename2(modifyPath);
+					product.setProductFilepath1(modifyPath);
 				}
 			}
 			if(reloadFile2 != null && !reloadFile2.isEmpty()) {
@@ -399,14 +399,14 @@ public class ProductController {
 				}
 				String modifyPath2 = this.saveFile2(reloadFile2, request);
 				if(modifyPath2 != null) {
-					product.setProductFilename1(reloadFile2.getOriginalFilename());
-					product.setProductFilename2(modifyPath2);
+					product.setProductFilename2(reloadFile2.getOriginalFilename());
+					product.setProductFilepath2(modifyPath2);
 				}
 			}
 			// DB에서 지점정보 수정
 			int result = pService.updateProduct(product);
 			if(result > 0) {
-				Alert alert = new Alert("/shop/admin/adminProductList", "상품 수정이 완료되었습니다.");
+				Alert alert = new Alert("/shop/adminProductList", "상품 수정이 완료되었습니다.");
 				model.addAttribute("alert", alert);
 				return "common/alert";
 			}else {
@@ -448,7 +448,7 @@ public class ProductController {
 		try {
 			int result = pService.deleteProduct(productNo);
 			if(result > 0) {
-				Alert alert = new Alert("/shop/admin/adminProductList", "상품이 삭제되었습니다.");
+				Alert alert = new Alert("/shop/adminProductList", "상품이 삭제되었습니다.");
 				model.addAttribute("alert", alert);
 				return "common/alert";
 			}else {

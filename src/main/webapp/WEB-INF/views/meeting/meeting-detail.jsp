@@ -54,52 +54,61 @@
 				    <br><br>
 	        </div>
 	        
-	        <div class="meeting-people-content">
-				<b>멤버 소개</b> <br><br>
-				
-<!-- 				주최자 프로필 -->
-				<div class="member-info-list">
-				
-					<div class="img-box">
-						<img class="sns-profile-img" src="/resources/images/profile/${leaderProfile.profileFileRename }" alt="">
-					</div>
+	<!-- 	        전체 멤버 리스트 시작 -->
+		        
+		        <div class="meeting-people-content">
+					<b>멤버 소개</b> <br><br>
 					
-					<div class="profile-box">
-						<input type="hidden" value="${leaderProfile.userNo }" id="userNo" name="userNo">
-						<div class="profile-name-box">
-							<h3 class="profile-name">${leaderProfile.userName }</h3>
-						</div> 
-						<div class="profile-intro-box">
-							<span class="profile-intro">${leaderProfile.profileIntoduce }</span>
-						</div>
-					</div>
-				</div> 
-<!-- 				주최자 프로필 끝 -->
-
-<!-- 				소셜링 참여 멤버 리스트 시작 -->
-				<c:forEach items="${memberList }" var="memberList" varStatus="i">
+					<div class="meeting-people-list-scroll">
+					
+	<!-- 				주최자 프로필 -->
 					<div class="member-info-list">
-				
+					
 						<div class="img-box">
-							<img class="sns-profile-img" src="/resources/images/profile/${memberList.profileFileRename }" alt="">
+							<img class="sns-profile-img" src="/resources/images/profile/${leaderProfile.profileFileRename }" onclick="location.href='/sns?userNo=${leaderProfile.userNo }';">
 						</div>
 						
 						<div class="profile-box">
-							<input type="hidden" value="${memberList.userNo }" id="userNo" name="userNo">
+							<input type="hidden" value="${leaderProfile.userNo }" id="userNo" name="userNo">
 							<div class="profile-name-box">
-								<h3 class="profile-name">${memberList.userName }</h3>
+								<h3 class="profile-name">${leaderProfile.userName }</h3>
 							</div> 
 							<div class="profile-intro-box">
-								<span class="profile-intro">${memberList.profileIntoduce }</span>
+								<span class="profile-intro">${leaderProfile.profileIntoduce }</span>
 							</div>
 						</div>
-					</div> 	
-				</c:forEach>
-
-<!-- 				소셜링 참여 멤버 리스트 끝 -->
-			</div>
-			
+					</div> 
+	<!-- 				주최자 프로필 끝 -->
+	
+	<!-- 				소셜링 참여 멤버 리스트 시작 -->
+					<c:forEach items="${memberList }" var="memberList" varStatus="i">
+						<div class="member-info-list">
+					
+							<div class="img-box">
+								<img class="sns-profile-img" src="/resources/images/profile/${memberList.profileFileRename }" onclick="location.href='/sns?userNo=${memberList.userNo }';">
+							</div>
+							
+							<div class="profile-box">
+								<input type="hidden" value="${memberList.userNo }" id="userNo" name="userNo">
+								<div class="profile-name-box">
+									<h3 class="profile-name">${memberList.userName }</h3>
+								</div> 
+								<div class="profile-intro-box">
+									<span class="profile-intro">${memberList.profileIntoduce }</span>
+								</div>
+							</div>
+						</div> 	
+					</c:forEach>
+	<!-- 				소셜링 참여 멤버 리스트 끝 -->
+	
+				</div>
+				
+	        </div>
+	        <!--         전체 멤버 리스트 끝 -->
+	        
         </div>
+        
+
 
 		<c:if test="${lineupCount ne meeting.meetingPeople }"> 
 	        <div id="meeting-joinBtn" onclick="joinCheck(${meeting.meetingNo });">

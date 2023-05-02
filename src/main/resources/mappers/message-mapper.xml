@@ -2,17 +2,63 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="MessageMapper">
 	
-	<resultMap id="allMemberListResultMap" type="com.kh.spouting.meeting.domain.AllMemberProfile">
-		<id 	property="userNo" 			 column="USER_NO"/>
-		<result property="userName" 		 column="USER_NAME"/>
-		<result property="profileFileRename" column="PROFILE_FILERENAME"/>
-		<result property="profileIntoduce" 	 column="PROFILE_INTRODUCE"/>		
+	<resultMap id="messageResultMap" type="com.kh.spouting.message.domain.Message">
+		<id 	property="msgNo" 			 	column="MSG_NO"/>
+		<result property="sendUser" 		 	column="SEND_USER"/>
+		<result property="receiveUser" 			column="RECEIVE_USER"/>
+		<result property="userName" 	 		column="USER_NAME"/>
+		<result property="sendTime" 		 	column="SEND_TIME"/>
+		<result property="msgContent" 			column="MSG_CONTENT"/>
+		<result property="msgOpenCk" 	 		column="MSG_OPEN_CK"/>		
+	</resultMap>
+	
+	<resultMap type="User" id="UserResultMap">
+		<id 	property="userNo" 		column="USER_NO"/>
+		<result property="userId" 		column="USER_ID"/>
+		<result property="userPw" 		column="USER_PW"/>
+		<result property="userName" 	column="USER_NAME"/>		
+		<result property="userEmail" 	column="USER_EMAIL"/>
+		<result property="userGender" 	column="USER_GENDER"/>
+		<result property="userType" 	column="USER_TYPE"/>
+		<result property="userDate" 	column="USER_DATE"/>
 	</resultMap>
 	
 	
 	<!-- select -->
-	<select id="selectMeeting" resultMap="meetingResultMap">
-		SELECT * FROM MEETING_TBL WHERE MEETING_DAY > SYSTIMESTAMP ORDER BY MEETING_DAY ASC
+	<select id="getMessageList" resultMap="messageResultMap">
+		SELECT M.*, U.USER_NAME
+		FROM MESSAGE_TBL M
+		JOIN USER_TBL U
+		ON M.SEND_USER = U.USER_NO
+		WHERE RECEIVE_USER = #{userNo}
 	</select>
+	
+	<select id="getSendMessageList" resultMap="messageResultMap">
+		SELECT M.*, U.USER_NAME
+		FROM MESSAGE_TBL M
+		JOIN USER_TBL U
+		ON M.RECEIVE_USER = U.USER_NO
+		WHERE SEND_USER = #{userNo}
+	</select>
+	
+	<select id="oneMessageDetail" resultMap="messageResultMap">
+		SELECT M.*, U.USER_NAME
+		FROM MESSAGE_TBL M
+		JOIN USER_TBL U
+		ON M.RECEIVE_USER = U.USER_NO
+		WHERE MSG_NO = #{msgNo}
+	</select>
+	
+	<update id="msgOpenUpdate">
+		UPDATE MESSAGE_TBL SET MSG_OPEN_CK = MSG_OPEN_CK+1 WHERE MSG_NO = #{msgNo}
+	</update>
+	
+	<select id="searchUser" resultMap="UserResultMap">
+		SELECT USER_NO, USER_NAME FROM USER_TBL WHERE USER_NAME LIKE '%' || #{word} || '%'
+	</select>
+	
+	<insert id="sendMessage">
+		INSERT INTO MESSAGE_TBL VALUES(SEQ_MSG_NO.NEXTVAL, #{sendUser}, #{receiveUser}, SYSTIMESTAMP, #{msgContent}, DEFAULT)
+	</insert>
 	
 </mapper>

@@ -53,7 +53,7 @@ public class UserController {
 			, String userId
 			, String userPw) {
 		HttpSession session = request.getSession();
-		User uParam = new User(userId, userPw);
+		User uParam = new User(           userId, userPw);
 		User user = uService.selectIdPw(uParam);
 		if(user != null) {
 			if(user.getUserType() == 0) {
@@ -152,6 +152,18 @@ public class UserController {
 	@ResponseBody
 	public String idCheckLogic(String userId) {
 		User user = uService.selectOneById(userId);
+		if(user != null) {
+			return "false";
+		} else {
+			return "true";
+		}
+	}
+	
+	//이메일 중복 체크 ajax
+	@GetMapping("/user/register/emailCheck")
+	@ResponseBody
+	public String emailCheckLogic(String userEmail) {
+		User user = uService.selectOneByMail(userEmail);
 		if(user != null) {
 			return "false";
 		} else {

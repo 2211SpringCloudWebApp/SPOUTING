@@ -93,6 +93,11 @@
         	--margin: 50px;
         	padding: 15px;
         	overflow: auto;
+        	--display: block;
+        }
+        
+        .meeting-people-list-scroll {
+        	--overflow: auto;
         }
         
         .member-info-list {
@@ -135,9 +140,6 @@
 			font-size: 14px;
 		}
 		
-        
-        
-
 
         #meeting-joinBtn {
             font-size: 22px;

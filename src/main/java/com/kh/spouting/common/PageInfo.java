@@ -23,7 +23,19 @@ public class PageInfo {
 		this.totalCount = totalCount;
 		this.maxPage = maxPage;
 	}
-
+	
+	
+	public PageInfo(int currentPage, int boardLimit, int naviLimit, int totalCount) {
+		this.currentPage = currentPage;
+		this.boardLimit = boardLimit;
+		this.naviLimit = naviLimit;
+		this.startNavi = (currentPage-1)/naviLimit*naviLimit+1;
+		this.endNavi = startNavi+naviLimit -1;
+		this.maxPage = (int)(Math.ceil(totalCount/(double)boardLimit));
+		if(maxPage < endNavi) {
+			endNavi = maxPage;
+		}
+	}	
 
 
 	public int getCurrentPage() {

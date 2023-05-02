@@ -40,12 +40,12 @@
 		    display: block;
 		}
 		#list-title {
-    width: 600px;
-    height: 50px;
-    margin: 50px auto;
-    text-align: center;
-    padding: 10px;
-}
+		    width: 600px;
+		    height: 50px;
+		    margin: 50px auto;
+		    text-align: center;
+		    padding: 10px;
+		}
     </style>
 </head>
 <body>

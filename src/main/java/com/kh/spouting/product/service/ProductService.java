@@ -16,9 +16,6 @@ public interface ProductService {
 	// 카테고리 별 게시글 갯수
 	public int getListCountByCate(int[] categoryNos);
 
-	// 검색 게시글 갯수
-	public int getListCount(Search search);
-	
 	// 전체 상품 목록 조회
 	public List<Product> selectAllProduct(PageInfo pi);
 
@@ -27,9 +24,6 @@ public interface ProductService {
 	
 	// 상품 2차 카테고리 목록 조회
 	public List<Product> selectCateProduct2(int categoryNo);
-
-	// 검색 상품 목록 조회
-	public List<Product> selectListByKeyword(PageInfo pi, Search search);
 
 	// 상품 상세 조회
 	public Product selectOneByNo(int productNo);
@@ -50,6 +44,12 @@ public interface ProductService {
 
 	// 상품 삭제
 	public int deleteProduct(int productNo);
+
+	// 검색 페이징
+	public int getSearchProductCount(Search search);
+
+	// 상품 검색
+	public List<Product> searchProduct(Search search, PageInfo pi);
 
 
 

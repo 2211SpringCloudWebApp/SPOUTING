@@ -33,20 +33,20 @@
 		</foreach>
 	</select>
 	
-	<!--조건부 검색-->
-	<select id="getSearchListCount" resultType="_int">
+	<!-- 검색 페이징 -->
+	<select id="getSearchProductCount" resultType="_int">
 		SELECT COUNT(*) FROM PRODUCT_TBL
-		<choose>
-			<when test="searchCondition == 'no'">
-				WHERE PRODUCT_NO LIKE '%' || #{searchValue} || '%'
-			</when>
-			<when test="searchCondition == 'title'">
-				WHERE PRODUCT_NAME LIKE '%' || #{searchValue} || '%'
-			</when>
-			<when test="searchCondition == 'description'">
-				WHERE PRODUCT_DESCRIPTION LIKE '%' || #{searchValue} || '%'
-			</when>
-		</choose>
+		<where>
+			<if test="searchCondition == 'no'">PRODUCT_NO LIKE '%' || #{searchValue} || '%'</if>
+			<if test="searchCondition == 'title'">PRODUCT_NAME LIKE '%' || #{searchValue} || '%'</if>
+			<if test="searchCondition == 'description'">PRODUCT_DESCRIPTION LIKE '%' || #{searchValue} || '%'</if>
+			<!-- 검색 결과 값을 가져오지 못하는 문제 -> 전체 검색이 있기 때문에 all 로 검색하는 코드를 수정해야 함 -->
+			<if test="searchCondition == 'all'">
+				PRODUCT_NO LIKE '%' || #{searchValue} || '%' or 
+				PRODUCT_NAME LIKE '%' || #{searchValue} || '%' or
+				PRODUCT_DESCRIPTION LIKE '%' || #{searchValue} || '%'
+			</if>
+		</where>
 	</select>
 	
 	<!--상품 목록 전체 조회-->
@@ -82,7 +82,7 @@
 	</select>
 
 	<!--검색 결과 조회-->
-	<select id="selectListByKeyword" resultMap="productResultMap">
+	<select id="searchProduct" resultMap="productResultMap">
 		SELECT * FROM PRODUCT_TBL 
 		<if test="searchCondition == 'all'">
 			WHERE PRODUCT_NO LIKE '%' || #{searchValue} || '%'

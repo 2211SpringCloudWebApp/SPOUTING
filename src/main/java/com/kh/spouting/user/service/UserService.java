@@ -28,6 +28,13 @@ public interface UserService {
 	 * @return User
 	 */
 	public User selectOneById(String userId);
+	
+	/**
+	 * 이메일로 회원 조회 Service
+	 * @param userEmail
+	 * @return User
+	 */
+	public User selectOneByMail(String userEmail);
 
 	/**
 	 * 회원 아이디찾기 Service
@@ -89,11 +96,12 @@ public interface UserService {
 	public List<User> selectByKeyWord(PageInfo pi, Search search);
 
 	/**
-	 * 번호로 이름 찾기
+	 * 번호로 이름 찾기 Service
 	 * @param userNo
 	 * @return User
 	 */
 	public User selectName(int userNo);
+
 
 	
 

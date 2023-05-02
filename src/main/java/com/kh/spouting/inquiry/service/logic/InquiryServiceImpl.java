@@ -1,5 +1,6 @@
 package com.kh.spouting.inquiry.service.logic;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.ibatis.session.SqlSession;
@@ -95,5 +96,37 @@ public class InquiryServiceImpl implements InquiryService{
 		Inquiry inquiry = iStore.getTotalLike(session, inquiriesNo);
 		return inquiry;
 	}
+
+	@Override
+	public List<InquiryJoin> getTopInquiry(int i) {
+		List<InquiryJoin> iList = iStore.getTopInquiry(session, 5);
+		return iList;
+	}
+
+//	@Override
+//	public List<InquiryJoin> selectInquiryWithTop5(PageInfo pi) {
+//	    int offset = (pi.getCurrentPage() - 1) * pi.getBoardLimit();
+//	    int limit = pi.getBoardLimit();
+//	    List<InquiryJoin> topInquiries = iStore.selectTopInquiries(5);
+//	    List<InquiryJoin> inquiries = iStore.selectInquiriesWithPaging(offset, limit);
+//	    List<InquiryJoin> result = new ArrayList<>();
+//	    // 상단 고정 게시물 추가
+//	    result.addAll(topInquiries);
+//	    // 일반 게시물 추가
+//	    for (InquiryJoin inquiry : inquiries) {
+//	        boolean isTop = false;
+//	        for (InquiryJoin topInquiry : topInquiries) {
+//	            if (inquiry.getInquiriesNo() == topInquiry.getInquiriesNo()) {
+//	                isTop = true;
+//	                break;
+//	            }
+//	        }
+//	        if (!isTop) {
+//	            result.add(inquiry);
+//	        }
+//	    }
+//	    return result;
+//	}
+
 
 }

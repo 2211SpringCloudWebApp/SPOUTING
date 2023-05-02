@@ -33,6 +33,13 @@
 							<td><input type="text" name="centerSnaddr" class="inputTag" placeholder="NEW 스파우팅 도로명 주소 입력"></td>
 						</tr>
 						<tr>
+							<th>위도/경도*</th>
+							<td>
+								<input type="text" name="centerLat" class="latlngTag" placeholder="위도 입력">
+								<input type="text" name="centerLng" class="latlngTag" placeholder="경도 입력">
+							</td>
+						</tr>
+						<tr>
 							<th>전화번호*</th>
 							<td><input type="text" name="centerTel" class="inputTag" placeholder="NEW 스파우팅 전화번호 입력"></td>
 						</tr>

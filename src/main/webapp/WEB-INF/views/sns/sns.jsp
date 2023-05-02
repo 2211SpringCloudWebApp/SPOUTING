@@ -56,6 +56,16 @@
 			flex-direction: column;
 			justify-content: center;
 		}
+		
+		.profile-name-box {
+			display: flex;
+		}
+		
+		.letter-icon {
+			margin: 0 0 0 10px;
+			align-items: center;
+			cursor: pointer;
+		}
 
 
 		#sns-content {
@@ -73,8 +83,8 @@
 		
 
 		#sns-content img {
-			width: 245px;
-			height: 245px;
+			width: 230px;
+			height: 230px;
 		}
 
 
@@ -153,6 +163,9 @@
 				<input type="hidden" value="${oneSns.userNo }" id="userNo" name="userNo">
 				<div class="profile-name-box">
 					<h1 class="profile-name">${oneSns.userName }</h1>
+					<c:if test="${loginUser.userNo eq oneSns.userNo }">
+						<img class="letter-icon" src="/resources/images/message/mail.png" alt="" width="30px" height="30px" onclick="window.open('/message?userNo=${loginUser.userNo}','메세지함','width=510,height=550,location=no,status=no,scrollbars=yes');">
+					</c:if>
 				</div> 
 				<br>
 				<div class="profile-intro-box">

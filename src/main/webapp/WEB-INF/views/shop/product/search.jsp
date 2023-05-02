@@ -39,7 +39,7 @@
 				<tr>
 					<td>${row.productNo }</td>
 					<td>
-						<a href="/shop/product/detail/${row.productNo}">
+						<a href="/product/detail?productNo=${row.productNo}">
 							<img src="/resources/images/product/items/${row.productFilename1}">
 						</a>
 					</td>
@@ -53,12 +53,12 @@
 			<tr>
 				<td colspan="5" align="center" style="height : 50px; border-bottom:0px;">
 					<c:forEach begin="${pi.startNavi }" end="${pi.endNavi }" var="p">
-							<c:url var="pageUrl" value="/shop/productList">
+							<c:url var="pageUrl" value="/product/search">
 								<c:param name="page" value="${p }"></c:param>
 								<c:param name="searchValue" value="${search.searchValue }"></c:param>
 								<c:param name="searchCondition" value="${search.searchCondition }"></c:param>
 							</c:url>
-							<a href="${pageUrl }">${p }</a>&nbsp;&nbsp;&nbsp;
+							<a href="${pageUrl }" >${p }</a>&nbsp;&nbsp;&nbsp;
 					</c:forEach>
 				</td>
 			</tr>

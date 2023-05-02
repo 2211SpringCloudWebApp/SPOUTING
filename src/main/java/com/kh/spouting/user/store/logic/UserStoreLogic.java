@@ -31,6 +31,12 @@ public class UserStoreLogic implements UserStore {
 		User user = session.selectOne("UserMapper.selectUserId", userId);
 		return user;
 	}
+	
+	@Override //이메일로 회원찾기
+	public User selectOneByMail(SqlSession session, String userEmail) {
+		User user = session.selectOne("UserMapper.selectOneByMail", userEmail);
+		return user;
+	}
 
 	@Override //아이디찾기
 	public User findId(SqlSession session, User uParam) {
@@ -97,5 +103,7 @@ public class UserStoreLogic implements UserStore {
 		User result = session.selectOne("UserMapper.selectName", userNo);
 		return result;
 	}
+
+
 }
 	
