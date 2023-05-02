@@ -97,8 +97,7 @@ body {
            <div id="invoice">
             invoice
           </div>
-          <!--            //a지점//시설이름//인원수//이용날짜//이용시간//총금액//포인트불러오기 -->
-          <!-- 			//--//사용포인트입력//결제금액//api -->
+        
           <div id="tableDiv">
             <form id="paymentForm" action ="/book/bookUp" method="post">   
                 <input type="hidden" id="paidPrice" name="paidPrice">
@@ -246,9 +245,9 @@ body {
          	updatePrice();
         	  
 	       	function updatePrice(){
-	            let totalPoint = Number(document.querySelector("#totalPoint").innerHTML);
-	            let bookPrice = Number(document.querySelector("#bookPrice").innerHTML);
-	            let pointToUse = Number(document.querySelector('input[type="text"]').value);
+	            let totalPoint = Number(document.querySelector("#totalPoint").innerHTML); //보유포인트
+	            let bookPrice = Number(document.querySelector("#bookPrice").innerHTML); //총이용금액
+	            let pointToUse = Number(document.querySelector('input[type="text"]').value); //입력받는 사용포인트
 	                console.log(totalPoint);
 	                console.log(bookPrice);
 	                console.log(pointToUse);
@@ -260,11 +259,11 @@ body {
 	       	    }
 	       	 	document.querySelector('input[name="pointChange"]').value = pointToUse;
 		       	 	
-	            if(totalPoint >= pointToUse) {
+	            if(totalPoint >= pointToUse && bookPrice>=pointToUse) {
 	              priceToPay = bookPrice - pointToUse;
 	              console.log(priceToPay);
 	            }else {
-	              priceToPay = bookPrice; // 포인트가 부족한 경우에는 가격을 그대로 사용. 유효성검사로 고치자...으...으으... 많이고쳐야함...마이너스절대고쳐
+	              priceToPay = bookPrice; // 포인트가 부족한 경우에는 가격을 그대로 사용. 정규표현식 나중.....으...으으... 많이고쳐야함...마이너스절대고쳐
 	            }
 	            document.querySelector("#priceToPay").innerHTML = priceToPay;
 	            document.querySelector("#paidPrice").value = priceToPay;

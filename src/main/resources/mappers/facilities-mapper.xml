@@ -21,6 +21,9 @@
 	<select id="selectAllFacil" resultMap="FacilResultMap">
 		SELECT * FROM FACILITIES_TBL LEFT JOIN TIME_TBL USING(FACILITY_NO)
 	</select>
-
+	<!-- facilName으로 facilNo찾아오기 -->
+	<select	id="getFacilityNo" resultType="_int">
+		SELECT FACILITY_NO FROM FACILITIES_TBL WHERE FACILITY_NAME = #{facilityName}
+	</select>
 	
 </mapper>

@@ -20,9 +20,11 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import com.kh.spouting.book.domain.Book;
 import com.kh.spouting.book.domain.Facilities;
 import com.kh.spouting.book.service.BookService;
+import com.kh.spouting.common.PageInfo;
 import com.kh.spouting.point.domain.PointDetail;
 import com.kh.spouting.user.domain.User;
 
@@ -34,12 +36,15 @@ public class BookController {
 	BookService bService;
 	
 	//admin 예약관리페이지 보이기
-	@RequestMapping(value="/admin/bookingList")
-	public String adminPage(Model model) {
-		List<Book> bList = bService.selectAllBook();
-		model.addAttribute("bList", bList);
-		return "/admin/bookingList";
-	}
+		@RequestMapping(value="/admin/bookingList")
+		public String adminPage(Model model
+							   ,@RequestParam(value="page", required=false, defaultValue="1") Integer page) {
+			int totalCount = bService.getBookingCount();
+			PageInfo pi = new PageInfo(page, 20, 5, totalCount);
+			List<Book> bList = bService.selectAllBook(pi);
+			model.addAttribute("bList", bList);
+			return "/admin/bookingList";
+		}
 	
 //////////////////////////////////////////////////////////////////////////////////////////회원
 	
@@ -195,7 +200,7 @@ public class BookController {
 	}
 	
 
-	
+	//예약취소(+포인트환급)
 	@RequestMapping(value="/book/cancelBooking", method=RequestMethod.POST)
 	public String cancelBooking(@RequestParam("bookNo") int bookNo
 							   ,@RequestParam("bookPrice") int bookPrice
@@ -250,7 +255,7 @@ public class BookController {
 	
 	
 
-	//풀캘린더(에이젝스 , produces="application/json;charset=utf-8"
+	//풀캘린더실험(에이젝스 , produces="application/json;charset=utf-8"
 	//@ResponseBody
 	@RequestMapping(value= "/book/calendar", method=RequestMethod.GET)
 	public ModelAndView showCalendarList(ModelAndView mv, HttpServletRequest request) {
@@ -267,6 +272,16 @@ public class BookController {
 		String viewPage = "/book/calendar";
 		mv.setViewName(viewPage);
 		return mv;
+	}
+	
+	//에이젝스 캘린더
+	@ResponseBody
+	@RequestMapping(value="/book/calendarView", method=RequestMethod.GET, produces="application/json;charset=utf-8")
+	public String getCalendar(@RequestParam("facilityNo") Integer facilityNo) {
+		Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd HH:mm:ss.S").create();
+		//데이터 그냥 넘기면 포맷이 이상하게 변해서 데이터가 안나옴
+		List<Book> CurrBookings= bService.getBListCal(facilityNo);
+		return gson.toJson(CurrBookings);
 	}
 	
 }

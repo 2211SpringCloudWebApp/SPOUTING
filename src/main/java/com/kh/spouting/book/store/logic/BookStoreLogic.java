@@ -2,12 +2,14 @@ package com.kh.spouting.book.store.logic;
 
 import java.util.List;
 
+import org.apache.ibatis.session.RowBounds;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
 
 import com.kh.spouting.book.domain.Book;
 import com.kh.spouting.book.domain.Facilities;
 import com.kh.spouting.book.store.BookStore;
+import com.kh.spouting.common.PageInfo;
 import com.kh.spouting.point.domain.PointDetail;
 @Repository
 public class BookStoreLogic implements BookStore{
@@ -81,9 +83,25 @@ public class BookStoreLogic implements BookStore{
 	}
 
 	@Override
-	public List<Book> selectAllBook(SqlSession session) {
-		List<Book> bList = session.selectList("BookMapper.selectAllBookList");
+	public List<Book> selectAllBook(SqlSession session, PageInfo pi) {
+		int limit = pi.getBoardLimit();
+		int currentPage = pi.getCurrentPage();
+		int offset = (currentPage - 1) * limit;
+		RowBounds rowBounds = new RowBounds(offset, limit);
+		List<Book> bList = session.selectList("BookMapper.selectAllBookList", null, rowBounds);
 		return bList;
+	}
+
+	@Override
+	public int getBookingCount(SqlSession session) {
+		int result =  session.selectOne("BookMapper.getBookingCount");
+		return result;
+	}
+
+	@Override
+	public int getfacilNo(SqlSession session, String facilityName) {
+		int facilityNo = session.selectOne("FacilitiesMapper.getFacilityNo", facilityName);
+		return facilityNo;
 	}
 
 }
