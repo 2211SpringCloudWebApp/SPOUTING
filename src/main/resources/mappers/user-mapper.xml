@@ -19,6 +19,9 @@
 	<select id="selectUserId" resultMap="UserResultMap">
 		SELECT * FROM USER_TBL WHERE USER_ID = #{userId}
 	</select>
+	<select id="selectOneByMail" resultMap="UserResultMap">
+		SELECT * FROM USER_TBL WHERE USER_EMAIL = #{userEmail}
+	</select>
 	<select id="findId" resultMap="UserResultMap">
 		SELECT * FROM USER_TBL WHERE USER_NAME = #{userName} AND USER_EMAIL = #{userEmail}
 	</select>

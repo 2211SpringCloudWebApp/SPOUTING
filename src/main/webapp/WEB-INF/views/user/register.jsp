@@ -173,6 +173,19 @@
                 $("#userEmail").focus();
                 return false;
             } 
+            
+            //이메일 중복확인 ajax
+            $.ajax({
+                type : "get",
+                url : "/user/register/emailCheck?userEmail="+userEmail,
+                success : function(data) {
+                    answer = data;
+                    if(answer == "false") {
+                        alert("사용중인 이메일입니다. 다시 입력해주세요");
+                        return false;
+                    }
+                }
+            })
 
             //hidden 상태의 input 태그 활성화
             $('#check-code').attr("type", "text");

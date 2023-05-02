@@ -33,12 +33,18 @@ public class UserServiceImpl implements UserService{
 		return result;
 	}
 
-	@Override //아이디로찾기
+	@Override //아이디로 찾기
 	public User selectOneById(String userId) {
 		User user = uStore.selectOneById(session, userId);
 		return user;
 	}
-
+	
+	@Override //이메일로 찾기
+	public User selectOneByMail(String userEmail) {
+		User user = uStore.selectOneByMail(session, userEmail);
+		return user;
+	}
+	
 	@Override //아이디찾기
 	public User findId(User uParam) {
 		User user = uStore.findId(session, uParam);
@@ -96,5 +102,7 @@ public class UserServiceImpl implements UserService{
 		User user = uStore.selectName(session, userNo);
 		return user;
 	}
+
+
 	
 }
