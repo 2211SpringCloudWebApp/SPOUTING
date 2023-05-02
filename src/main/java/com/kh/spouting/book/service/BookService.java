@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.kh.spouting.book.domain.Book;
 import com.kh.spouting.book.domain.Facilities;
+import com.kh.spouting.common.PageInfo;
 import com.kh.spouting.point.domain.PointDetail;
 
 public interface BookService {
@@ -86,6 +87,19 @@ public interface BookService {
 	 * 예약내역 전체 조회(관리자페이지)
 	 * @return List<Book>
 	 */
-	public List<Book> selectAllBook();
+	public List<Book> selectAllBook(PageInfo pi);
+	
+	/**
+	 * 페이징)전체 리스트 갯수 세기
+	 * @return int
+	 */
+	public int getBookingCount();
+
+	/**
+	 * facil이름으로 facilNo 찾아오기
+	 * @param facilityName
+	 * @return int
+	 */
+	public int getFacilityNo(String facilityName);
 
 }

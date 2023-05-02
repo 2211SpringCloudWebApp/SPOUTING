@@ -10,6 +10,7 @@ import com.kh.spouting.book.domain.Book;
 import com.kh.spouting.book.domain.Facilities;
 import com.kh.spouting.book.service.BookService;
 import com.kh.spouting.book.store.BookStore;
+import com.kh.spouting.common.PageInfo;
 import com.kh.spouting.point.domain.PointDetail;
 @Service
 public class BookServiceImpl implements BookService{
@@ -86,9 +87,21 @@ public class BookServiceImpl implements BookService{
 	}
 
 	@Override
-	public List<Book> selectAllBook() {
-		List<Book> bList  = bStore.selectAllBook(session);
+	public List<Book> selectAllBook(PageInfo pi) {
+		List<Book> bList  = bStore.selectAllBook(session, pi);
 		return bList;
 	}
 
+	@Override
+	public int getBookingCount() {
+		int result = bStore.getBookingCount(session);
+		return result;
+	}
+
+	@Override
+	public int getFacilityNo(String facilityName) {
+		int facilityNo = bStore.getfacilNo(session, facilityName);
+		return facilityNo;
+	}
+	
 }
