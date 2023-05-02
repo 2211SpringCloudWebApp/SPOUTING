@@ -7,7 +7,7 @@ table{
 /* 헤더부분(공지사항) */
 .mainHeader{
 	width:65%;
-	height: 200px;
+	height: 250px;
 	margin: 0 auto;
 	background-image: url(../../images/notice/pool.jpg);
 	background-position: bottom;
@@ -20,7 +20,7 @@ table{
 /* 헤더부분(문의사항) */
 .mainHeaderI{
 	width:65%;
-	height: 200px;
+	height: 250px;
 	margin: 0 auto;
 	background-image: url(../../images/notice/court2.jpg);
 	background-position: right;
@@ -143,4 +143,9 @@ span.like {
     font-size: 20px;
     color: cornflowerblue;
 	margin-top: 20px;
+}
+
+/* 부트스트랩때문에 내비바 움직임 방지*/
+ol, ul {
+    padding-left: 0;
 }

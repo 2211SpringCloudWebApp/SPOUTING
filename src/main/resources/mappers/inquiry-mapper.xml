@@ -25,7 +25,6 @@
 		<result property="userNo" column="USER_NO"/>
 		<result property="inquiriesCategory" column="INQUIRIES_CATEGORY"/>
 		<result property="inquiriesTitle" column="INQUIRIES_TITLE"/>
-		<result property="inquiriesContent" column="INQUIRIES_CONTENT"/>
 		<result property="qCreateDate" column="Q_CREATE_DATE"/>
 		<result property="qUpdateDate" column="Q_UPDATE_DATE"/>
 		<result property="inquiriesViews" column="INQUIRIES_VIEWS"/>
@@ -36,6 +35,7 @@
 		<result property="inquiriesLikes" column="INQUIRIES_LIKES"/>
 		<result property="userName" column="USER_NAME"/>
 		<result property="secretNo" column="SECRET_NO"/>
+		<result property="inquiriesContent" column="INQUIRIES_CONTENT" jdbcType="CLOB" javaType="java.lang.String"/>
 	</resultMap>
 	
 <!-- 	문의사항 리스트 -->
@@ -84,7 +84,7 @@
 	
 <!-- 	문의사항 수정 -->
 	<update id="modifyInquiry">
-		UPDATE INQUIRIES_TBL SET INQUIRIES_CATEGORY = #{inquiriesCategory}, INQUIRIES_TITLE = #{inquiriesTitle}, INQUIRIES_CONTENT = #{inquiriesContent}, Q_UPDATE_DATE = DEFAULT, INQUIRIES_FILENAME = NULL, INQUIRIES_FILEPATH = #{inquiriesFilepath}, INQUIRIES_FILERENAME = #{inquiriesFilerename}, SECRET_NO = #{secretNo} WHERE INQUIRIES_NO = #{inquiriesNo}
+		UPDATE INQUIRIES_TBL SET INQUIRIES_CATEGORY = #{inquiriesCategory}, INQUIRIES_TITLE = #{inquiriesTitle}, INQUIRIES_CONTENT = #{inquiriesContent}, Q_UPDATE_DATE = DEFAULT, INQUIRIES_FILENAME = #{inquiriesFilename}, INQUIRIES_FILEPATH = #{inquiriesFilepath}, INQUIRIES_FILERENAME = #{inquiriesFilerename}, SECRET_NO = #{secretNo} WHERE INQUIRIES_NO = #{inquiriesNo}
 	</update>
 	
 <!-- 	문의사항 삭제 -->
@@ -97,5 +97,9 @@
 	</update>
 	<select id="getTotalLike" resultMap="inquiryResultMap">
 		SELECT INQUIRIES_LIKES FROM INQUIRIES_TBL WHERE INQUIRIES_NO = #{inquiriesNo}		
+	</select>
+	
+	<select id="getTopInquiry" resultMap="inquiryJoinResultMap">
+		SELECT I.*, U.USER_NAME FROM (SELECT * FROM INQUIRIES_TBL ORDER BY INQUIRIES_LIKES DESC) I JOIN USER_TBL U ON I.USER_NO = U.USER_NO <![CDATA[WHERE ROWNUM <= 5]]>
 	</select>
 </mapper>

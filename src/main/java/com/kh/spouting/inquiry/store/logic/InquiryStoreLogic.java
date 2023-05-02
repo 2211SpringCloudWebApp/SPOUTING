@@ -98,4 +98,11 @@ public class InquiryStoreLogic implements InquiryStore{
 		return inquiry;
 	}
 
+	@Override
+	public List<InquiryJoin> getTopInquiry(SqlSession session, int i) {
+		List<InquiryJoin> iList = session.selectList("InquiryMapper.getTopInquiry", 5);
+		return iList;
+	}
+
+
 }

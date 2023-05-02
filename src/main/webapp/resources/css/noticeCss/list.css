@@ -35,6 +35,10 @@ a{
 	.mainCenter #contentTag span{
 		color: #95b5ff;
 	}
+	/* 상단고정게시물 */
+	.mainCenter #topInquiry{
+		background-color: #d7edff;
+	}
 /* 헤더부분(공지사항) */
 .mainHeader{
 	width:65%;

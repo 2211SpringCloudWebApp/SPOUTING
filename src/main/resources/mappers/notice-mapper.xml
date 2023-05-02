@@ -5,19 +5,18 @@
 		<id property="noticeNo" column="NOTICE_NO"/>
 		<result property="userNo" column="USER_NO"/>
 		<result property="noticeTitle" column="NOTICE_TITLE"/>
-		<result property="noticeContent" column="NOTICE_CONTENT"/>
 		<result property="nCreateDate" column="N_CREATE_DATE"/>
 		<result property="nUpdateDate" column="N_UPDATE_DATE"/>
 		<result property="noticeViews" column="NOTICE_VIEWS"/>
 		<result property="noticeFilename" column="NOTICE_FILENAME"/>
 		<result property="noticeFilepath" column="NOTICE_FILEPATH"/>
 		<result property="noticeFilerename" column="NOTICE_FILERENAME"/>
+		<result property="noticeContent" column="NOTICE_CONTENT" jdbcType="CLOB" javaType="java.lang.String"/>
 	</resultMap>
 	<resultMap type="NoticeJoin" id="noticeJoinResultMap">
 		<id property="noticeNo" column="NOTICE_NO"/>
 		<result property="userNo" column="USER_NO"/>
 		<result property="noticeTitle" column="NOTICE_TITLE"/>
-		<result property="noticeContent" column="NOTICE_CONTENT"/>
 		<result property="nCreateDate" column="N_CREATE_DATE"/>
 		<result property="nUpdateDate" column="N_UPDATE_DATE"/>
 		<result property="noticeViews" column="NOTICE_VIEWS"/>
@@ -25,6 +24,7 @@
 		<result property="noticeFilepath" column="NOTICE_FILEPATH"/>
 		<result property="noticeFilerename" column="NOTICE_FILERENAME"/>
 		<result property="userId" column="USER_ID"/>
+		<result property="noticeContent" column="NOTICE_CONTENT" jdbcType="CLOB" javaType="java.lang.String"/>
 	</resultMap>
 
 <!-- 	공지사항 리스트 -->
@@ -39,7 +39,7 @@
 	
 <!-- 	공지사항 등록 -->
 	<insert id="insertNotice">
-		INSERT INTO NOTICE_TBL VALUES(SEQ_NOTICE_NO.NEXTVAL, #{userNo}, #{noticeTitle}, #{noticeContent}, DEFAULT, NULL, DEFAULT, #{noticeFilename}, #{noticeFilepath}, #{noticeFilerename})
+		INSERT INTO NOTICE_TBL VALUES(SEQ_NOTICE_NO.NEXTVAL, #{userNo}, #{noticeTitle}, DEFAULT, NULL, DEFAULT, #{noticeFilename}, #{noticeFilepath}, #{noticeFilerename}, #{noticeContent})
 	</insert>
 	
 <!-- 	페이징처리(공지사항 총 갯수) -->
@@ -68,7 +68,7 @@
 	
 <!-- 	공지사항 수정 -->
 	<update id="modifyNotice">
-		UPDATE NOTICE_TBL SET NOTICE_TITLE = #{noticeTitle}, NOTICE_CONTENT = #{noticeContent}, N_UPDATE_DATE = DEFAULT, NOTICE_FILENAME = NULL, NOTICE_FILEPATH = #{noticeFilepath}, NOTICE_FILERENAME = #{noticeFilerename} WHERE NOTICE_NO = #{noticeNo} 
+		UPDATE NOTICE_TBL SET NOTICE_TITLE = #{noticeTitle}, NOTICE_CONTENT = #{noticeContent}, N_UPDATE_DATE = DEFAULT, NOTICE_FILENAME = #{noticeFilename}, NOTICE_FILEPATH = #{noticeFilepath}, NOTICE_FILERENAME = #{noticeFilerename} WHERE NOTICE_NO = #{noticeNo} 
 	</update>
 	
 <!-- 	공지사항 삭제 -->
