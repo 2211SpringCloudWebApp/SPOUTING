@@ -4,9 +4,12 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <html>
 <head>
-<meta charset="EUC-KR">
-<title>메세지함</title>
-<style>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>메세지함</title>
+
+    <style>
         @font-face {
         font-family: 'Pretendard-Regular';
         src: url('https://cdn.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Regular.woff') format('woff');
@@ -124,6 +127,94 @@
             margin: 0 15px 0 15px;
         }
 
+        .message-write {
+            width: 480px;
+            height: 370px;
+            --background-color: bisque;
+            margin: auto;
+        }
+
+        .search-user {
+            width: 480px;
+            height: 100px;
+            --background-color: aqua;
+            margin: auto;
+        }
+
+        .search-user-header {
+            padding: 20px 5px 5px 5px;
+        }
+
+        .search-user-main {
+            padding: 5px;
+        }
+
+        .search-user-textbox {
+            width: 455px;
+            height: 35px;
+            background-color: rgb(226, 226, 226);
+            border: 0;
+            border-radius: 3px;
+            padding: 5px;
+            font-family: 'Pretendard-Regular';
+        }
+
+        .message-box {
+            width: 480px;
+            height: 270px;
+            --background-color: blue;
+            margin: auto;
+        }
+
+        .message-box-header {
+            padding: 15px 5px 5px 5px;
+        }
+
+        .message-box-main {
+            padding: 5px;
+        }
+
+        .message-textbox {
+            width: 455px;
+            height: 200px;
+            font-family: 'Pretendard-Regular';
+            resize: none;
+        }
+
+        .button-area {
+            --width: 480px;
+            height: 50px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+
+
+        .reset-btn {
+            width: 100px;
+            height: 30px;
+            background-color: rgb(255, 255, 255);
+            border: 1px solid #0D6EFD;
+            color: #0D6EFD;
+            font-family: 'Pretendard-Regular';
+            cursor: pointer;
+            border-radius: 3px;
+
+        }
+
+        .submit-btn {
+            width: 100px;
+            height: 30px;
+            background-color: #0D6EFD;
+            border: 0;
+            color: rgb(255, 255, 255);
+            font-family: 'Pretendard-Regular';
+            cursor: pointer;
+            border-radius: 3px;
+
+        }
+
     </style>
 </head>
 <body>
@@ -138,48 +229,34 @@
             <button class="message-btn" onclick="location.href='/messageWrite?userNo=${loginUser.userNo}';">쪽지 보내기</button>
         </div>
 
-        <div class="message-list">
-        
-		<c:forEach items="${messageList }" var="messageList" varStatus="i">
-            <div class="one-message">
-                <div class="one-message-header">
-                	<input type="hidden" value="${messageList.msgNo }">
-                    <img class="letter-icon" src="/resources/images/message/mail.png" alt="" width="25px" height="25px">
-                    <span class="user-name">${messageList.userName }</span>
-                    
-<!--                     메세지 읽음 여부 체크 -->
-                    <c:if test="${messageList.msgOpenCk eq 0 }">
-                    	<span class="open-yn" style="color: rgb(226, 1, 1);">(읽지 않음)</span>
-                    </c:if>
-                    <c:if test="${messageList.msgOpenCk ne 0 }">
-                    	<span class="open-yn" style="color: rgb(59, 80, 201);">(읽음)</span>
-                    </c:if>
-                    
-                    <span class="send-time">${messageList.sendTime }</span>
-                </div>
-                <div class="one-message-content" onclick="location.href='/messageDetail?msgNo=${messageList.msgNo}';">
-                    <span class="send-message">${messageList.msgContent }</span>
-                </div>
-            </div>
-            </c:forEach>
-            
+	        <div class="message-write">
+	            <div class="search-user">
+	                <div class="search-user-header">
+	                    <img class="person-icon" src="/resources/images/message/user.png" alt="" width="16px" height="16px">
+	                   	 &nbsp;받는사람
+	                </div>
+	                <div class="search-user-main">
+	                    <input type="text" class="search-user-textbox" value="${oneMessage.userName }">
+	                </div>
+	            </div>
+	
+	            <div class="message-box">
+	                <div class="message-box-header">
+	                    <img class="chat-icon" src="/resources/images/message/chat.png" alt="" width="16px" height="16px">
+	                    	&nbsp;쪽지내용
+	                </div>
+	                <div class="message-box-main">
+	                    <textarea class="message-textbox">${oneMessage.msgContent }</textarea>
+	                </div>
+	            </div>
+	        </div>
+	        <br><hr>
+	        <div class="button-area">
+	            <input type="reset" class="reset-btn" value="취소하기">
+	            &nbsp;&nbsp;&nbsp;
+	            <input type="submit" class="submit-btn" value="쪽지 보내기">
+	        </div>
 
-<!-- 하드코딩 영역 -->
-<!--             <div class="one-message"> -->
-<!--                 <div class="one-message-header"> -->
-<!--                     <img class="letter-icon" src="/resources/images/message/letter.png" alt="" width="25px" height="25px"> -->
-<!--                     <span class="user-name">닉네임 영역</span> -->
-<%--                     <c:if test="${messageList.msgOpenCk eq 1 }"> --%>
-<!--                     <span class="open-yn" style="color: rgb(59, 80, 201);">(읽음)</span> -->
-<%--                     </c:if> --%>
-<!--                     <span class="send-time">전송 시간</span> -->
-<!--                 </div> -->
-<!--                 <div class="one-message-content"> -->
-<!--                     <span class="send-message">안녕하세용용용</span> -->
-<!--                 </div> -->
-<!--             </div> -->
-
-        </div>
 
 
     </div>

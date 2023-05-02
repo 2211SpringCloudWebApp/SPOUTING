@@ -43,13 +43,13 @@ public class SnsController {
 	
 	//개인 sns 페이지 화면
 	@RequestMapping(value="/sns", method=RequestMethod.GET)
-	public String snsPage(Model model, HttpServletRequest request) {
+	public String snsPage(Model model, HttpServletRequest request, @RequestParam("userNo") int userNo) {
 		//작성자 userNo 가져오기
 		HttpSession session = request.getSession();
-		int userNo = 0;
-		if((User)session.getAttribute("loginUser")!= null) {
-			userNo = ((User)session.getAttribute("loginUser")).getUserNo();
-		}
+		/*
+		 * int userNo = 0; if((User)session.getAttribute("loginUser")!= null) { userNo =
+		 * ((User)session.getAttribute("loginUser")).getUserNo(); }
+		 */
 		int totalCount = snsService.getTotalCount(userNo);
 		model.addAttribute("totalCount", totalCount);
 		try {

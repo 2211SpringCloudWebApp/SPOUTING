@@ -163,7 +163,9 @@
 				<input type="hidden" value="${oneSns.userNo }" id="userNo" name="userNo">
 				<div class="profile-name-box">
 					<h1 class="profile-name">${oneSns.userName }</h1>
-					<img class="letter-icon" src="/resources/images/message/mail.png" alt="" width="30px" height="30px" onclick="location.href='/message?userNo=${oneSns.userNo}';">
+					<c:if test="${loginUser.userNo eq oneSns.userNo }">
+						<img class="letter-icon" src="/resources/images/message/mail.png" alt="" width="30px" height="30px" onclick="window.open('/message?userNo=${loginUser.userNo}','메세지함','width=490,height=550,location=no,status=no,scrollbars=yes');">
+					</c:if>
 				</div> 
 				<br>
 				<div class="profile-intro-box">
