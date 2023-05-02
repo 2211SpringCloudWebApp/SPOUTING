@@ -132,7 +132,14 @@
 		</style>
 	</head>
 	<body>
-		<jsp:include page="../common/header.jsp"></jsp:include>
+		<!-- 관리자헤더 -->
+		<c:if test="${sessionScope.loginUser.userType eq '1'}">
+			<jsp:include page="../admin/adminHeader.jsp"></jsp:include>
+		</c:if>
+		<!-- 일반회원헤더 -->
+		<c:if test="${sessionScope.loginUser.userType eq '0'}">
+			<jsp:include page="../common/header.jsp"></jsp:include>
+		</c:if>
 		
 	    <div class="main">
 	        <br><br>
@@ -156,9 +163,13 @@
 	        </c:if>
 	        <h2>${msg }</h2>
 	        <div class="box bg-2">
-		        <button onclick="location.href='/'" class="button button--winona button--border-thick button--round-l button--text-upper button--size-s button--text-thick" data-text="Main"><span>Main</span></button>
-<!-- 		        <button onclick="location.href='/'">메인화면으로 가기</button> -->
-	        </div>
+				<c:if test="${sessionScope.loginUser.userType eq '1'}">
+					<button onclick="location.href='/admin/user'" class="button button--winona button--border-thick button--round-l button--text-upper button--size-s button--text-thick" data-text="AdminMain"><span>AdminMain</span></button>
+				</c:if>
+				<c:if test="${sessionScope.loginUser.userType eq '0'}">
+		        	<button onclick="location.href='/'" class="button button--winona button--border-thick button--round-l button--text-upper button--size-s button--text-thick" data-text="Main"><span>Main</span></button>
+				</c:if>
+				</div>
 	    </div>
 	    
 		<jsp:include page="../common/footer.jsp"></jsp:include>

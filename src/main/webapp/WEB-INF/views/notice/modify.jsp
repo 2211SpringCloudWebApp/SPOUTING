@@ -31,7 +31,10 @@
 	    	</div>
 			<div class="mainCenter">
 				<form action="/notice/modify" method="post" enctype="multipart/form-data">
+					<!-- 썸머노트 보내줄값 -->
+					<input type="hidden" name="id" value="${id}" id="id">
 					<input type="hidden" name="noticeNo" value="${notice.noticeNo }">
+					<input type="hidden" name="noticeFilename" value="${notice.noticeFilename }">
 					<div id="titleArea">
 						<input name="noticeTitle" value="${notice.noticeTitle }">
 					</div>
@@ -59,54 +62,46 @@
 		<jsp:include page="../common/footer.jsp"></jsp:include>
 	  <script>
 		// textarea로 인식되는 오류고침		
-// 		$('#summernote').summernote('code', '');
+		// 썸머노트
 		// callbacks오류
-		var callbacks = null;
-		 $(document).ready(function() {
-			  $('#summernote').summernote({
-			         placeholder: '공지사항을 작성하세요.',
-			         tabsize: 2,
-			         height: 500,
-			         maxHeight: 500,
-			         lang : 'ko-KR',
-			         // 이미지 업로드
-// 		        	   callbacks: {
-// 		        	     onImageLinkInsert: function(url) {
-// 		        	       // url is the image url from the dialog
-// 		        	       $img = $('<img>').attr({ src: url })
-// 		        	       $summernote.summernote('insertNode', $img[0]);
-// 		        	     }
-// 		        	   }
+		$(document).ready(function() {
+			$('#summernote').summernote({
+			    placeholder: '내용을 입력해주세요.',
+			    tabsize: 2,
+			    height: 500,
+			    maxHeight: 500,
+			    lang : 'ko-KR',
+			    // 이미지 업로드 콜백함수
+		        callbacks: {
+		        	onImageUpload : function(files, editor, welEditable) {
+						for (let i = files.length - 1; i >= 0; i--) {
+                           	uploadSummernoteImageFile(files[i],
+                            	this);
+                        }
+		        	}
+		        }
 			  
-			  });
+			});
 		});
-		 
-		 // 수정할때 값 불러오기
-// 		 var setting = {
-// 	          height : 242,
-// 	          minHeight : null,
-// 	          maxHeight : null,
-// 	          focus : true,
-// 	          lang : 'ko-KR',
-// 	          toolbar : toolbar,
-// 	          fontSizes : fontSizes,
-// 	          fontNames : fontNames,
-// 	          callbacks : { //여기 부분이 이미지를 첨부하는 부분
-// 	              onImageUpload : function(files, editor,	welEditable) 
-// 	              {
-// 	                  for (var i = files.length - 1; i >= 0; i--) 
-// 	                  {
-// 	                      uploadSummernoteImageFile(files[i],
-// 	                      this);
-// 	                  }
-// 	              },
-// 	              onMediaDelete : function(target) 
-// 	                {
-// 	                    console.log(target[0]);
-// 	                    deleteFile(target[0].src);
-// 	                }
-// 	              } 
-// 		 };
+
+		function uploadSummernoteImageFile(file, el) {
+            let data = new FormData();
+            let id = document.getElementById("id").value;
+            data.append("file", file);
+            data.append("id", id);
+            $.ajax({
+                data : data,
+                type : "POST",
+                url : "/notice/ImgFileUpload",
+                contentType : false,
+                enctype : 'multipart/form-data',
+                processData : false,
+                success : function(data) {
+                    $img = $('<img>').attr({ src: data.src });
+                    $(el).summernote('insertNode', $img[0]);
+                }
+            });
+        }
 
 		 
 

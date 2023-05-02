@@ -1,4 +1,7 @@
 @charset "UTF-8";
+.main{
+	/* margin-top: 50px; */
+}
 /* 메인부분 */
 .mainCenter{
   width: 65%;
@@ -9,7 +12,7 @@
 /* 헤더부분(공지사항) */
 .mainHeader{
 	width:65%;
-	height: 200px;
+	height: 250px;
 	margin: 0 auto;
 	background-image: url(../../images/notice/pool.jpg);
 	background-position: center;
@@ -22,7 +25,7 @@
 /* 메인헤더(문의사항) */
 .mainHeaderI{
 	width:65%;
-	height: 200px;
+	height: 250px;
 	margin: 0 auto;
 	background-image: url(../../images/notice/court2.jpg);
 	background-position: center;
@@ -61,4 +64,10 @@
 	.btn-primary{
 		background-color: #1C3879;
 		border-color: #1C3879;
+	}
+
+	/* 비밀번호보이게처리 */
+	.mainCenter #checkBtn{
+		border: none;
+		background: none;
 	}

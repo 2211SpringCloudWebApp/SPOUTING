@@ -33,4 +33,7 @@ public interface InquiryStore {
 
 	Inquiry getTotalLike(SqlSession session, int inquiriesNo);
 
+	List<InquiryJoin> getTopInquiry(SqlSession session, int i);
+
+
 }

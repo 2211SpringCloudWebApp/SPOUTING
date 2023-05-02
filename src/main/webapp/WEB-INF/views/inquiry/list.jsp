@@ -54,6 +54,49 @@
 			        </thead>
 			        <tbody class="table-group-divider" style="border-top-color : #1C3879;">
 			        	<c:set var="num" value="${pi.totalCount - ((pi.currentPage-1) * 10)}"/>
+						<!-- 상단노출글 -->
+						<c:forEach items="${topInquiry}" var="topInquiry">
+							<tr id="topInquiry">
+								<td>💜</td>
+								<!-- 카테고리부분 -->
+								<c:if test="${topInquiry.inquiriesCategory eq 'N'}">
+									<td>일반문의</td>
+								</c:if>
+								<c:if test="${topInquiry.inquiriesCategory eq 'M'}">
+									<td>MD관련문의</td>
+								</c:if>
+								<c:if test="${topInquiry.inquiriesCategory eq 'P'}">
+									<td>결제취소문의</td>
+								</c:if>
+								<!-- 비밀글여부 -->
+								<c:if test="${topInquiry.inquiriesSecret eq 'Y' }">
+									<td><img alt="" src="../../../resources/images/notice/padlock.png" style="width:30px; height:30px;"></td>
+								</c:if>
+								<c:if test="${topInquiry.inquiriesSecret eq 'N' }">
+									<td></td>
+								</c:if>
+								<!--비회원일경우 디테일제한-->
+								<c:choose>
+									<c:when test="${user.userNo ne null}">
+									  <!-- 회원이면서 비밀번호여부 -->
+									  <c:choose>
+										  <c:when test="${topInquiry.inquiriesSecret eq 'N'}">
+											  <td><a href="detail?inquiriesNo=${topInquiry.inquiriesNo }">${topInquiry.inquiriesTitle }</a></td>
+										  </c:when>
+										  <c:otherwise>
+											  <td><a href="checkSecretNo?inquiriesNo=${topInquiry.inquiriesNo }" id="click">${topInquiry.inquiriesTitle }</a></td>
+										  </c:otherwise>
+									  </c:choose>
+								  </c:when>
+								  <c:otherwise>
+									  <td><a href="detail?inquiriesNo=${topInquiry.inquiriesNo }" data-bs-toggle="modal" data-bs-target="#exampleModal">${topInquiry.inquiriesTitle }</a></td>
+								  </c:otherwise>
+								</c:choose>
+								<td>${topInquiry.userName }</td>
+								<td><fmt:formatDate value="${topInquiry.qCreateDate }" pattern="yyyy-MM-dd" /></td>
+							</tr>
+						</c:forEach>
+						<!-- 그냥문의글 -->
 				        <c:forEach items="${iList }" var="inquiry" varStatus="i">
 				          <tr>
 				              <td>${num }</td>
@@ -125,7 +168,8 @@
 			      	</form>
 			      </div>
 			   	  <div class="buttonWrap">
-			      	<c:if test="${user.userType eq '0' }">
+					<!-- 일반 회원인경우에만 글작성버튼생성 -->
+			      	<c:if test="${sessionScope.loginUser.userType eq '0' }">
 			      		<button type="button" class="btn btn-primary"onclick="location.href='/inquiry/write'">문의사항 작성</button>
 			      	</c:if>		     
 			      </div>

@@ -31,4 +31,8 @@ public interface InquiryService {
 
 	Inquiry getTotalLike(int inquiriesNo);
 
+	List<InquiryJoin> getTopInquiry(int i);
+
+//	List<InquiryJoin> selectInquiryWithTop5(PageInfo pi);
+
 }
