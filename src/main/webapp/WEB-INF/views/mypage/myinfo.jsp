@@ -18,7 +18,7 @@
         <table>
             <tr>
                 <td id="user-msg">
-                    ${sessionScope.loginUser.userName}님 <br>
+                    ${sessionScope.loginUser.userName}님 
                     오늘도 Spouting!
                 </td>
                 <td>

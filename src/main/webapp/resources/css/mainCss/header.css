@@ -60,7 +60,7 @@ header {
     .login-btn {
         display: block;
         float: right;
-        width: 110px;
+        width: 120px;
         height: 45px;
         border-radius: 7px;
         text-align: center;
@@ -68,12 +68,12 @@ header {
     }
     .login-btn:visited, .login-btn:link {
         color: rgb(73, 73, 73);
-        font-size: 16px;
+        font-size: 18px;
     }
     .login-btn:hover {
         cursor: pointer;
         border: 2px solid #0537acc9;
-        font-size: 17px;
+        font-size: 19px;
         transition: all 0.1s linear;
     }
 
