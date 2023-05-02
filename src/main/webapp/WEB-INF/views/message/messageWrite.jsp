@@ -22,7 +22,7 @@
         }
 
         .message-main {
-            width: 530px;
+            width: 550px;
             height: 600px;
             --background-color: pink;
             border: 1px solid black;
@@ -63,7 +63,7 @@
 
         .message-list {
             --background-color: aqua;
-            width: 530px;
+            width: 540px;
             height: 400px;
             overflow: auto;
         }
@@ -237,7 +237,7 @@
 	                   	 &nbsp;받는사람
 	                </div>
 	                <div class="search-user-main">
-	                    <input type="text" class="search-user-textbox">
+	                    <input type="text" class="search-user-textbox" placeholder="회원 검색" onkeyup="searchUser(this)">
 	                </div>
 	            </div>
 	
@@ -258,9 +258,32 @@
 	            <input type="submit" class="submit-btn" value="쪽지 보내기">
 	        </div>
         </form>
-
-
-
     </div>
+    
+    <script>
+    
+    	function searchUser(target) {
+    		var word = $(".search-user-textbox").val();
+    		var encodeWord = encodeURI(word);
+    		
+    		$.ajax({
+    			type: "get",
+    			dataType : 'json',
+    			url: "/msgSearchUser",
+    			data: {
+    				"word" : word,
+    			}
+    			success : function(result) {
+    				
+    			}, 
+    			error : {
+    				alert("ajax 처리 실패");
+    			}
+    		})
+    		
+    	}
+     	
+    </script>
+    
 </body>
 </html>

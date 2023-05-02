@@ -8,6 +8,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttribute;
 
 import com.kh.spouting.message.domain.Message;
@@ -90,6 +91,24 @@ public class MessageController {
 			// TODO: handle exception
 			model.addAttribute("msg",e.getMessage());
 			return "common/error";
+		}
+	}
+	
+	//회원 검색
+	@ResponseBody
+	@RequestMapping(value="/msgSearchUser", method=RequestMethod.GET)
+	public String searchUser(Model model, String word) {
+		try {
+			List<User> userList = messageService.searchUser(word);
+			if(!userList.isEmpty()) {
+				return "1";
+			} else {
+				return "0";
+			}
+			
+		} catch (Exception e) {
+			// TODO: handle exception
+			return e.getMessage();
 		}
 	}
 

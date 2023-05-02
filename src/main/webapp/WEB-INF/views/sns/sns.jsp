@@ -164,7 +164,7 @@
 				<div class="profile-name-box">
 					<h1 class="profile-name">${oneSns.userName }</h1>
 					<c:if test="${loginUser.userNo eq oneSns.userNo }">
-						<img class="letter-icon" src="/resources/images/message/mail.png" alt="" width="30px" height="30px" onclick="window.open('/message?userNo=${loginUser.userNo}','메세지함','width=490,height=550,location=no,status=no,scrollbars=yes');">
+						<img class="letter-icon" src="/resources/images/message/mail.png" alt="" width="30px" height="30px" onclick="window.open('/message?userNo=${loginUser.userNo}','메세지함','width=510,height=550,location=no,status=no,scrollbars=yes');">
 					</c:if>
 				</div> 
 				<br>

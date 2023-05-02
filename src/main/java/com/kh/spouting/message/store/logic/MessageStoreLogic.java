@@ -7,6 +7,7 @@ import org.springframework.stereotype.Repository;
 
 import com.kh.spouting.message.domain.Message;
 import com.kh.spouting.message.store.MessageStore;
+import com.kh.spouting.user.domain.User;
 
 @Repository
 public class MessageStoreLogic implements MessageStore{
@@ -28,6 +29,12 @@ public class MessageStoreLogic implements MessageStore{
 		// TODO Auto-generated method stub
 		session.update("MessageMapper.msgOpenUpdate",msgNo);
 		return session.selectOne("MessageMapper.oneMessageDetail", msgNo);
+	}
+
+	@Override
+	public List<User> searchUser(SqlSession session, String word) {
+		// TODO Auto-generated method stub
+		return session.selectList("MessageMapper.searchUser", word);
 	}
 
 }

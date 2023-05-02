@@ -12,6 +12,17 @@
 		<result property="msgOpenCk" 	 		column="MSG_OPEN_CK"/>		
 	</resultMap>
 	
+	<resultMap type="User" id="UserResultMap">
+		<id 	property="userNo" 		column="USER_NO"/>
+		<result property="userId" 		column="USER_ID"/>
+		<result property="userPw" 		column="USER_PW"/>
+		<result property="userName" 	column="USER_NAME"/>		
+		<result property="userEmail" 	column="USER_EMAIL"/>
+		<result property="userGender" 	column="USER_GENDER"/>
+		<result property="userType" 	column="USER_TYPE"/>
+		<result property="userDate" 	column="USER_DATE"/>
+	</resultMap>
+	
 	
 	<!-- select -->
 	<select id="getMessageList" resultMap="messageResultMap">
@@ -41,5 +52,9 @@
 	<update id="msgOpenUpdate">
 		UPDATE MESSAGE_TBL SET MSG_OPEN_CK = MSG_OPEN_CK+1 WHERE MSG_NO = #{msgNo}
 	</update>
+	
+	<select id="searchUser" resultMap="UserResultMap">
+		SELECT USER_NO, USER_NAME FROM USER_TBL WHERE USER_NAME LIKE '%' || #{word} || '%'
+	</select>
 	
 </mapper>
