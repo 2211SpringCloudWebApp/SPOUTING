@@ -6,7 +6,7 @@
 	<head>
 		<script type="text/javascript" src="https://openapi.map.naver.com/openapi/v3/maps.js?ncpClientId=wzop7hd7a1&submodules=geocoder"></script>
 		<script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
-		<script  src="http://code.jquery.com/jquery-latest.min.js"></script>
+		<script src="http://code.jquery.com/jquery-latest.min.js"></script>
 		<script type="text/javascript" src="http://code.jquery.com/jquery-2.2.4.min.js"></script>
 		<title>지점 위치 확인</title>
 		
@@ -80,7 +80,7 @@
 								<c:if test="${!empty searchResult }">
 									<c:forEach items="${searchResult }" var="center">
 										<input type="hidden" id="centerNo" value="${center.centerNo }">
-										<tr onclick="selectMarker(marker, infoWindow)">
+										<tr id="clickName" onclick="clickName();">
 										    <td>스파우팅 ${center.centerName }</td>
 									    </tr>
 										<tr><td>${center.centerAddr }</td></tr>
@@ -109,10 +109,10 @@
 	
 	
 	<script type="text/javascript">
-	
-	var areaArr = new Array();  // 지점 정보를 담는 배열 ( 지역명/위도경도 )
+	let areaMap = null;
+	let areaArr = new Array();  // 지점 정보를 담는 배열 ( 지역명/위도경도 )
 		<c:forEach var="area" items="${searchResult }">
-			var areaMap = new Object();
+			areaMap = new Object();
 			areaMap.centerNo = "${area.centerNo}";
 			areaMap.centerName = "${area.centerName}";
 			areaMap.centerAddr = "${area.centerAddr}";
@@ -153,6 +153,8 @@
 	});
 	
 	
+	
+	
 	/* 지도 */
 	$(function() {
 		
@@ -168,28 +170,13 @@
 	        zoom: 13
 	    });
 		
-		areaArr.push(
-						/*지점명*/								/*센터사진*/																							/*주소*/						/*도로명주소*/			/*전화번호*/			/*위도*/			/*경도*/				
-// 			 {location : '스파우팅 '+areaMap.centerName , photo:'<img src="/images/center/climbing.jpg" width="90%" height="100" alt="합정점" class="thumb" />', addr : areaMap.centerAddr + '<br>|' + areaMap.centerSnaddr, tel : areaMap.centerTel , lat : '37.549069' , lng : '126.911333'},  // 합정점 중심좌표
-// 			 {location : '스파우팅 '+areaMap.centerName , photo:'<img src="/images/center/swimming.jpg" width="90%" height="100" alt="성수점" class="thumb" />', addr : areaMap.centerAddr + '<br>|' + areaMap.centerSnaddr, tel : areaMap.centerTel ,lat : '37.544728' , lng : '127.062106'},  // 성수점 중심좌표
-// 			 {location : '스파우팅 '+areaMap.centerName , photo:'<img src="/images/center/tennis.jpg" width="90%" height="100" alt="여의도점" class="thumb" />', addr : areaMap.centerAddr + '<br>|' + areaMap.centerSnaddr, tel : areaMap.centerTel, lat : '37.523409' , lng : '126.923392'},  // 여의도점 중심좌표
-
-			{centerName : areaMap.centerName,
-			centerAddr : areaMap.centerAddr,
-			centerSnaddr : areaMap.centerSnaddr,
-			centerTel : areaMap.centerTel,
-			centerFilename1 : areaMap.centerFilename1,
-			lat : areaMap.centerLat , lng : areaMap.centerLng}
-			
-		);
-		
 		
 		let markers = new Array(); // 마커 정보를 담는 배열
 		let infoWindows = new Array(); // 정보창을 담는 배열
 		
 		
 		// 지점을 담은 배열의 길이만큼 for문으로 마커와 정보창의 정보를 반복
-		for (var i = 0; i < areaArr.length; i++) {
+		for (let i = 0; i < areaArr.length; i++) {
 			
 			/* 지점 아이콘 설정 */
 // 			var markeroption = {
@@ -208,14 +195,10 @@
 			 
 			 
 			// 지점정보를 담은 배열을 각각 부여 (마커 표시)
-		    var marker = new naver.maps.Marker({
+		    let marker = new naver.maps.Marker({
 		        map: map,
-// 		        centerphoto: areaArr[i].photo,	// 센터 사진
-// 		        title: areaArr[i].location, // 센터 지점명 
-// 		        position: new naver.maps.LatLng(areaArr[i].lat , areaArr[i].lng), // 지점의 위도와 경도 
-// 		        address : areaArr[i].addr,	// 지점 주소
-// 		        telephone : areaArr[i].tel	// 지점 전화번호
 
+				centernumber : areaArr[i].centerNo,
 		        centerphoto: areaArr[i].centerFilename1,	// 센터 사진
 		        title: areaArr[i].centerName, // 센터 지점명 
 		        address : areaArr[i].centerAddr,	// 지점 주소
@@ -224,27 +207,33 @@
 		        telephone : areaArr[i].centerTel	// 지점 전화번호
 		    });
 			
-			/* 정보창 */
-			var contentString = [
+			/* 정보창 구현 */
+			// 검색목록의 centerNo 값(value) 가져오기
+			const centerNo = document.querySelector("#centerNo").value;
+			
+			let contentString = [
 				'<div style="width:200px;text-align:center;padding:10px;">',
 				'	<div style="width:90%; height:50px; margin: 0 auto;">',
-				'		<img src="../../../resources/images/centeruploadFiles/' + areaMap.centerFilename1 + '" style="width:100%; height:100%;">',
+				'		<img src="../../../resources/images/centeruploadFiles/' + areaArr[i].centerFilename1 + '" style="width:100%; height:100%;">',
 				'	</div>',
-				'	<input type="hidden" value="' + areaMap.centerNo + '">',
-				'	<h2>' + areaMap.centerName + '</h2>',
-				'	<p>' + areaMap.centerAddr + '</p>',
-				'	<p>' + areaMap.centerSnaddr + '</p>',
-				'	<p>' + '☎ ' + areaMap.centerTel + '</p>',
+				'	<input type="hidden" id="centerNo" value="' + areaArr[i].centerNo + '">',
+				'	<h2>' + areaArr[i].centerName + '</h2>',
+				'	<p>' + areaArr[i].centerAddr + '</p>',
+				'	<p>' + areaArr[i].centerSnaddr + '</p>',
+				'	<p>' + '☎ ' + areaArr[i].centerTel + '</p>',
 				'</div>',
 				'<div style="width:200px;text-align:center;padding-bottom:10px;">',
 				'	<a href="/book/bookView">예약하기</a>',
-				'	<a href="/center/detail/'+ areaMap.centerNo +'">자세히보기</a>',
+				'	<a href="/center/detail/'+ areaArr[i].centerNo +'">자세히보기</a>',
 				'</div>'
 			].join('');
 		    
 			
+// 			// 검색목록의 centerNo 값(value) 가져오기
 // 			 const centerNo = document.querySelector("#centerNo").value;
-			 var infoWindow = new naver.maps.InfoWindow({
+
+
+			 let infoWindow = new naver.maps.InfoWindow({
 				 
 			     content: contentString,
 			     
@@ -265,17 +254,14 @@
 		
 		
 		
-		
-// 		function selectMarker(seq) {
-// 			console.log("test");
-// 		}
-		 
+		/* 마커 클릭 시 정보창 띄우기 */
 	    function getClickHandler(seq) {
-			
+	    	console.log(infoWindows[seq]);
 	            return function(e) {  // 마커를 클릭하는 부분
-	                var marker = markers[seq], // 클릭한 마커의 시퀀스로 찾는다
-	                    infoWindow = infoWindows[seq]; // 클릭한 마커의 시퀀스로 찾는다
-	
+	                let marker = markers[seq], // 클릭한 마커의 시퀀스로 찾는다
+	                
+                    infoWindow = infoWindows[seq]; // 클릭한 마커의 시퀀스로 찾는다
+					
 	                if (infoWindow.getMap()) {
 	                    infoWindow.close();
 	                } else {
@@ -284,13 +270,34 @@
 	    		}
     	}
 	    
-	    for (var i=0, ii=markers.length; i<ii; i++) {
+	    for (let i=0, ii=markers.length; i<ii; i++) {
 	    	console.log(markers[i] , getClickHandler(i));
 	        naver.maps.Event.addListener(markers[i], 'click', getClickHandler(i))	// 클릭한 마커 핸들러
 	    }
 	    
 	    
 	}
+	
+	 /* 검색 결과 클릭 시 해당 지점 정보창 띄우기 */
+	 // onclick 이벤트(clickName())를 불러와야 한다
+    function clickName() {
+// //	    	return function(e) {
+// //	    		let marker = markers[getClickHandler], // 클릭한 마커의 시퀀스로 찾는다
+            
+// //          infoWindow = infoWindows[getClickHandler]; // 클릭한 마커의 시퀀스로 찾는다
+    		
+//         // 정보창 열림 여부
+// //     	if (infoWindow.getMap()) {
+// // 	        infoWindow.close();
+// // 	    } else { 
+// // 	        infoWindow.open(map, marker);
+// // 	    }
+		alert("Test");
+		
+    
+
+	}
+	
 	
 	
 	
