@@ -15,4 +15,6 @@ public interface MessageService {
 
 	List<User> searchUser(String word);
 
+	int sendMessage(Message message);
+
 }

@@ -214,6 +214,24 @@
             border-radius: 3px;
 
         }
+        
+         .search-ul{
+            border: 1px solid #ccc;
+            position: fixed;
+            background-color: white;
+            width: 455px;
+            font-size: 20px;
+            margin-top: 3px;
+            list-style:none;
+            padding-left:0px;
+        }
+
+        .search-li{
+            background-color: white;
+            border-radius: 10px;
+            font-size: 16px;
+            padding-left: 20px;
+        }
 
     </style>
 </head>
@@ -234,10 +252,15 @@
 	            <div class="search-user">
 	                <div class="search-user-header">
 	                    <img class="person-icon" src="/resources/images/message/user.png" alt="" width="16px" height="16px">
+	                    <input type="hidden" name="sendUser" value="${loginUser.userNo }" class="">
+	                    <input type="hidden" name="receiveUser" value="" class="receive-user-no">
 	                   	 &nbsp;받는사람
 	                </div>
 	                <div class="search-user-main">
 	                    <input type="text" class="search-user-textbox" placeholder="회원 검색" onkeyup="searchUser(this)">
+		                <ul class="search-ul">
+	                        <!-- <li class="search-li">테스트</li> -->
+	                    </ul>
 	                </div>
 	            </div>
 	
@@ -247,7 +270,7 @@
 	                    	&nbsp;쪽지내용
 	                </div>
 	                <div class="message-box-main">
-	                    <textarea class="message-textbox" placeholder="전송할 내용을 입력하세요."></textarea>
+	                    <textarea class="message-textbox" placeholder="전송할 내용을 입력하세요." name="msgContent"></textarea>
 	                </div>
 	            </div>
 	        </div>
@@ -262,6 +285,15 @@
     
     <script>
     
+    <!--    앤터키 막기 -->
+    document.addEventListener('keydown', function (event) {
+        if (event.keyCode === 13) {
+            event.preventDefault();
+        }
+        ;
+    }, true);
+    
+    
     	function searchUser(target) {
     		var word = $(".search-user-textbox").val();
     		var encodeWord = encodeURI(word);
@@ -272,15 +304,54 @@
     			url: "/msgSearchUser",
     			data: {
     				"word" : word,
-    			}
-    			success : function(result) {
-    				
     			}, 
-    			error : {
-    				alert("ajax 처리 실패");
+    			contentType : "application/json; charset:UTF-8",
+    			success : function(data) {
+    				$('.search-ul').css("display", "block");
+    				var str = "";
+//                     var dataParse = JSON.parse(data);
+					console.log(data);
+                    if(data != null) {
+                    	if (data.length > 0) {
+                    		for (var i = 0; i < data.length; i++) {
+                    			let userNo = data[i].userNo;
+                                let userName = data[i].userName;
+                                str += "<li class='search-li' style='cursor: pointer' onclick='selectUser(" + userNo + ",\"" + userName + "\")'>" + userName + "</li>";
+                                $('.receive-user-no').val(userNo);
+                    		}
+                    		$('.search-ul').html(str);
+                    	}
+                		$('html').click(function(e) {   
+                    		if(!$(e.target).hasClass("search-user-textbox")) {
+                    			$('.search-ul').html(str);
+                    		}
+                    	});  
+                    } else {
+                    	$('.search-ul').html(str);
+                        $('.search-ul').css("display", "none");
+                    }
+                    
+    			}, 
+    			error : function(data) {
+    				console.log(data);
     			}
     		})
     		
+    	}
+    	
+    	
+//     	클래스 영역 밖 선택 시 이벤트
+/*     	$('html').click(function(e) {   
+    		if(!$(e.target).hasClass("search-user-textbox")) {
+    			alert('영역 밖입니다.');
+    		}
+    	});     */
+    	
+    	
+    	function selectUser(userNo, userName) {
+    		$('.receive-user-no').val(userNo);
+    		$('.search-user-textbox').val(userName);
+    		$('.search-ul').css("display", "none");
     	}
      	
     </script>
