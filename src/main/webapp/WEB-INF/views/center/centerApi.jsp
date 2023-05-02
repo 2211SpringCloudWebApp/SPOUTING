@@ -71,8 +71,8 @@
 									<td class="al">
 										<label for="searchKeyword"></label>
 										<input type="text" name="centerName" required value="${center.centerName }" id="searchKeyword" class="cLocal" placeholder="지점명을 검색해보세요">
-										 <input type="submit" class="cLocal" value="검색" >
-									 </td>
+										<input type="submit" class="cLocal" value="검색" >
+									</td>
 								</tr>
 								<c:if test="${empty searchResult }">
 									<tr><td>해당 지점이 존재하지 않습니다.</td></tr>
@@ -81,7 +81,7 @@
 									<c:forEach items="${searchResult }" var="center">
 										<input type="hidden" id="centerNo" value="${center.centerNo }">
 										<tr onclick="selectMarker(marker, infoWindow)">
-										    <td>${center.centerName }</td>
+										    <td>스파우팅 ${center.centerName }</td>
 									    </tr>
 										<tr><td>${center.centerAddr }</td></tr>
 										<tr><td>${center.centerTel }</td></tr>
@@ -120,6 +120,8 @@
 			areaMap.centerTel = "${area.centerTel}";
 			areaMap.centerFilename1 = "${area.centerFilename1}";
 			areaMap.centerFilename2 = "${area.centerFilename2}";
+			areaMap.centerLat = "${area.centerLat}";
+			areaMap.centerLng = "${area.centerLng}";
 	// 		areaMap.centerFilepath1 = "${area.centerFilepath1}";
 	// 		areaMap.centerFilepath2 = "${area.centerFilepath2}";
 	
@@ -166,36 +168,19 @@
 	        zoom: 13
 	    });
 		
-// 		var HOME_PATH = window.HOME_PATH || '.';
-		
 		areaArr.push(
 						/*지점명*/								/*센터사진*/																							/*주소*/						/*도로명주소*/			/*전화번호*/			/*위도*/			/*경도*/				
 // 			 {location : '스파우팅 '+areaMap.centerName , photo:'<img src="/images/center/climbing.jpg" width="90%" height="100" alt="합정점" class="thumb" />', addr : areaMap.centerAddr + '<br>|' + areaMap.centerSnaddr, tel : areaMap.centerTel , lat : '37.549069' , lng : '126.911333'},  // 합정점 중심좌표
 // 			 {location : '스파우팅 '+areaMap.centerName , photo:'<img src="/images/center/swimming.jpg" width="90%" height="100" alt="성수점" class="thumb" />', addr : areaMap.centerAddr + '<br>|' + areaMap.centerSnaddr, tel : areaMap.centerTel ,lat : '37.544728' , lng : '127.062106'},  // 성수점 중심좌표
 // 			 {location : '스파우팅 '+areaMap.centerName , photo:'<img src="/images/center/tennis.jpg" width="90%" height="100" alt="여의도점" class="thumb" />', addr : areaMap.centerAddr + '<br>|' + areaMap.centerSnaddr, tel : areaMap.centerTel, lat : '37.523409' , lng : '126.923392'},  // 여의도점 중심좌표
 
-			// 이부분을 for문으로 변경해야 할 듯 -> 현재는 위도/경도 가 달라 겨우 마커 세 개가  뜨고 있는 상황
 			{centerName : areaMap.centerName,
 			centerAddr : areaMap.centerAddr,
 			centerSnaddr : areaMap.centerSnaddr,
 			centerTel : areaMap.centerTel,
 			centerFilename1 : areaMap.centerFilename1,
-			lat : '37.549069' , lng : '126.911333'}
+			lat : areaMap.centerLat , lng : areaMap.centerLng}
 			
-// 			{centerName : areaMap.centerName,
-// 			centerAddr : areaMap.centerAddr,
-// 			centerSnaddr : areaMap.centerSnaddr,
-// 			centerTel : areaMap.centerTel,
-// 			centerFilename1 : areaMap.centerFilename1,
-// 			lat : '37.544728' , lng : '127.062106'},
-			
-// 			{centerName : areaMap.centerName,
-// 			centerAddr : areaMap.centerAddr,
-// 			centerSnaddr : areaMap.centerSnaddr,
-// 			centerTel : areaMap.centerTel,
-// 			centerFilename1 : areaMap.centerFilename1,
-// 			lat : '37.523409' , lng : '126.923392'},
-
 		);
 		
 		
@@ -234,19 +219,22 @@
 		        centerphoto: areaArr[i].centerFilename1,	// 센터 사진
 		        title: areaArr[i].centerName, // 센터 지점명 
 		        address : areaArr[i].centerAddr,	// 지점 주소
-		        position: new naver.maps.LatLng(areaArr[i].lat , areaArr[i].lng), // 지점의 위도와 경도 
+		        position: new naver.maps.LatLng(areaArr[i].centerLat , areaArr[i].centerLng), // 지점의 위도와 경도
 		        streetname : areaArr[i].centerSnaddr,	// 지점 도로명주소
 		        telephone : areaArr[i].centerTel	// 지점 전화번호
 		    });
 			
-			
+			/* 정보창 */
 			var contentString = [
 				'<div style="width:200px;text-align:center;padding:10px;">',
-				'	<img src="resources/images/centeruploadFiles/' + areaMap.centerFilename1 + '">',
+				'	<div style="width:90%; height:50px; margin: 0 auto;">',
+				'		<img src="../../../resources/images/centeruploadFiles/' + areaMap.centerFilename1 + '" style="width:100%; height:100%;">',
+				'	</div>',
+				'	<input type="hidden" value="' + areaMap.centerNo + '">',
 				'	<h2>' + areaMap.centerName + '</h2>',
 				'	<p>' + areaMap.centerAddr + '</p>',
 				'	<p>' + areaMap.centerSnaddr + '</p>',
-				'	<p>' + '☎' + areaMap.centerTel + '</p>',
+				'	<p>' + '☎ ' + areaMap.centerTel + '</p>',
 				'</div>',
 				'<div style="width:200px;text-align:center;padding-bottom:10px;">',
 				'	<a href="/book/bookView">예약하기</a>',
@@ -254,13 +242,12 @@
 				'</div>'
 			].join('');
 		    
-		    /* 정보창 */
-			 const centerNo = document.querySelector("#centerNo").value;
+			
+// 			 const centerNo = document.querySelector("#centerNo").value;
 			 var infoWindow = new naver.maps.InfoWindow({
-				 // HTML 작성 - 클릭 시 정보창에 띄울 정보 작성
-// 			     content: '<div style="width:200px;text-align:center;padding:10px;">' + areaArr[i].centerFilename1 + '<br><b>' + areaArr[i].centerName + '</b><br>' + areaArr[i].centerAddr + '<br><b>☎ ' + areaArr[i].centerTel + '</b></div><div style="width:200px;text-align:center;padding-bottom:10px;"><a href="/book/bookView">예약하기</a><a href="/center/detail/'+ areaMap.centerNo +'">자세히보기</a></div>',
+				 
 			     content: contentString,
-			     // CSS 작성 - 정보창의 디자인 작성
+			     
 			     maxWidth: 250,
 				 backgroundColor: "#fff",
 				 borderColor: "#3E54AC",
@@ -299,12 +286,8 @@
 	    
 	    for (var i=0, ii=markers.length; i<ii; i++) {
 	    	console.log(markers[i] , getClickHandler(i));
-	        naver.maps.Event.addListener(markers[i], 'click', getClickHandler(i)); // 클릭한 마커 핸들러
+	        naver.maps.Event.addListener(markers[i], 'click', getClickHandler(i))	// 클릭한 마커 핸들러
 	    }
-	    
-	    
-	    
-	    
 	    
 	    
 	}
@@ -314,13 +297,13 @@
 	<!-- 지도를 움직이게 해주는 함수 -->
 // 	function moveMap(len, lat) {
 // 		var mapOptions = {
-// 			    center: new naver.maps.LatLng(len, lat),
+// 			    center: new naver.maps.LatLng(areaArr[i].centerLat , areaArr[i].centerLng),
 // 			    zoom: 15,
 // 			    mapTypeControl: true
 // 			};
 // 	    var map = new naver.maps.Map('map', mapOptions);
 // 	    var marker = new naver.maps.Marker({
-// 	        position: new naver.maps.LatLng(len, lat),
+// 	        position: new naver.maps.LatLng(areaArr[i].centerLat , areaArr[i].centerLng),
 // 	        map: map
 // 	    });
 // 	}
