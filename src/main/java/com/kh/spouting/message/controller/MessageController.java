@@ -1,16 +1,21 @@
 package com.kh.spouting.message.controller;
 
+import java.net.URLEncoder;
 import java.util.List;
+
+import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttribute;
 
+import com.google.gson.Gson;
 import com.kh.spouting.message.domain.Message;
 import com.kh.spouting.message.service.MessageService;
 import com.kh.spouting.user.domain.User;
@@ -82,11 +87,14 @@ public class MessageController {
 	
 	
 	//메세지 전송
-	@RequestMapping(value="/msgSend", method=RequestMethod.GET)
-	public String sendMessage(Model model, @SessionAttribute("loginUser") User loginUser) {
+	@RequestMapping(value="/msgSend", method=RequestMethod.POST)
+	public String sendMessage(Model model, @SessionAttribute("loginUser") User loginUser,
+								@ModelAttribute Message message) {
 		try {
-			
-			return "message/messageWrite";
+			int result = messageService.sendMessage(message);
+			List<Message> sendMessageList = messageService.getSendMessageList(loginUser.getUserNo());
+			model.addAttribute("sendMessageList", sendMessageList);
+			return "message/messageSend";
 		} catch (Exception e) {
 			// TODO: handle exception
 			model.addAttribute("msg",e.getMessage());
@@ -97,13 +105,16 @@ public class MessageController {
 	//회원 검색
 	@ResponseBody
 	@RequestMapping(value="/msgSearchUser", method=RequestMethod.GET)
-	public String searchUser(Model model, String word) {
+	public String searchUser(Model model, @RequestParam(value="word", required=false, defaultValue="") String word, HttpServletResponse response) {
 		try {
 			List<User> userList = messageService.searchUser(word);
+			response.setCharacterEncoding("UTF-8");
 			if(!userList.isEmpty()) {
-				return "1";
+				return new Gson().toJson(userList);
 			} else {
-				return "0";
+//				return null;
+				return new Gson().toJson(userList);
+
 			}
 			
 		} catch (Exception e) {

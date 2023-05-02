@@ -44,4 +44,10 @@ public class MessageServiceImpl implements MessageService {
 		return messageStore.searchUser(session, word);
 	}
 
+	@Override
+	public int sendMessage(Message message) {
+		// TODO Auto-generated method stub
+		return messageStore.sendMessage(session, message);
+	}
+
 }

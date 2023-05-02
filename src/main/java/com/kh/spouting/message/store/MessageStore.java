@@ -17,4 +17,6 @@ public interface MessageStore {
 
 	List<User> searchUser(SqlSession session, String word);
 
+	int sendMessage(SqlSession session, Message message);
+
 }

@@ -37,4 +37,10 @@ public class MessageStoreLogic implements MessageStore{
 		return session.selectList("MessageMapper.searchUser", word);
 	}
 
+	@Override
+	public int sendMessage(SqlSession session, Message message) {
+		// TODO Auto-generated method stub
+		return session.insert("MessageMapper.sendMessage", message);
+	}
+
 }
