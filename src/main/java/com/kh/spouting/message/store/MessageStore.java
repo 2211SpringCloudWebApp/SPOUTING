@@ -19,4 +19,6 @@ public interface MessageStore {
 
 	int sendMessage(SqlSession session, Message message);
 
+	Message oneSendMessageDetail(SqlSession session, int msgNo);
+
 }

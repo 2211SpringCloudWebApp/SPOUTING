@@ -198,6 +198,27 @@ public class SnsController {
 	}
 	
 	
+	//sns 글 삭제
+	@RequestMapping(value="/sns/snsDelete", method=RequestMethod.GET)
+	public String snsDelete(@RequestParam("snsPhotoNo") int snsPhotoNo, Model model
+							,@SessionAttribute("loginUser") User loginUser) {
+		try {
+			int result = snsService.snsDelete(snsPhotoNo);
+			if(result > 0) {
+				return "redirect:/sns?userNo="+loginUser.getUserNo();
+			} else {
+				model.addAttribute("msg", "삭제가 완료되지 않았습니다.");
+				return "common/error";
+			}
+			
+		} catch (Exception e) {
+			// TODO: handle exception
+			model.addAttribute("msg", e.getMessage());
+			return "common/error";
+		}
+	}
+	
+	
 	//sns 댓글 등록
 	@ResponseBody
 	@RequestMapping(value="/comment/register", method=RequestMethod.POST)

@@ -70,7 +70,7 @@
 	                <div class="meeting-title">
 	                	<input type="hidden" value="${meeting.meetingNo }" name="meetingNo">
 	                	<input type="hidden" value="${meeting.readerNo }" name="readerNo">
-	                    <h1 class="meeting-title-h1">${meeting.meetingName }</h1>
+	                    <h2 class="meeting-title-h1">${meeting.meetingName }</h2>
 	                </div> <br>
 	
 	                <div class="meeting-day">

@@ -30,5 +30,7 @@ public interface SnsService {
 
 	int deleteComment(Integer snsCommentNo);
 
+	int snsDelete(int snsPhotoNo);
+
 
 }

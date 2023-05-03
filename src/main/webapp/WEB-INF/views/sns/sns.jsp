@@ -24,7 +24,7 @@
 		
 		#sns-main {
 			padding: 25px;
-			height: 700px;
+			height: 900px;
 			width: 800px;
 			background-color: #F3F3F3FF;
  			margin: 0 auto;
@@ -62,9 +62,15 @@
 		}
 		
 		.letter-icon {
-			margin: 0 0 0 10px;
+			margin: 3px 0 0 10px;
 			align-items: center;
 			cursor: pointer;
+			transition-duration: 0.3s;
+		}
+		
+		.letter-icon:active {
+			margin-left: 1px;
+			margin-top: 1px;
 		}
 
 
@@ -83,8 +89,8 @@
 		
 
 		#sns-content img {
-			width: 230px;
-			height: 230px;
+			width: 240px;
+			height: 240px;
 		}
 
 
@@ -115,6 +121,28 @@
 			cursor: pointer;
 		}
 
+		#sns-write-btn {
+			width: 80px;
+			height: 35px;
+			border: solid 1px black;
+			background-color: white;
+			border-radius: 5px;
+			box-shadow: 1px 1px 1px gray;
+			transition-duration: 0.3s;
+		}
+		
+		#sns-write-btn:active {
+			margin-left: 5px;
+			margin-top: 5px;
+			box-shadow: none;
+		}
+		
+		hr {
+			width:100%;
+			margin-top: 15px;
+			margin-bottom: 15px;
+			
+		}
     	
     </style>
 
@@ -143,7 +171,7 @@
 	<div id="sns-main">
 			
 		<c:if test="${loginUser != null and loginUser.userNo eq oneSns.userNo }">
-			<input type="button" onclick="location.href='/sns/uploadPage'" value="sns사진 등록" style="float: right; cursor: pointer;">
+			<input type="button" id="sns-write-btn" onclick="location.href='/sns/uploadPage'" value="&nbsp;&nbsp;글쓰기✏️" style="float: right; cursor: pointer;">
 		</c:if>
 	
 	<c:if test="${loginUser != null and loginUser.userNo eq oneSns.userNo }">
@@ -152,6 +180,8 @@
 			<button type="button" class="modify-btn">한줄소개 수정</button>
 		</div>
 	</c:if>
+	
+	<br>
 	
 	
 		<!-- 프로필 영역 -->
@@ -164,7 +194,7 @@
 				<div class="profile-name-box">
 					<h1 class="profile-name">${oneSns.userName }</h1>
 					<c:if test="${loginUser.userNo eq oneSns.userNo }">
-						<img class="letter-icon" src="/resources/images/message/mail.png" alt="" width="30px" height="30px" onclick="window.open('/message?userNo=${loginUser.userNo}','메세지함','width=510,height=550,location=no,status=no,scrollbars=yes');">
+						<img class="letter-icon" src="/resources/images/message/mail.png" alt="" width="30px" height="30px" onclick="window.open('/message?userNo=${loginUser.userNo}','메세지함','width=570,height=620,location=no,status=no,scrollbars=yes');">
 					</c:if>
 				</div> 
 				<br>
@@ -173,7 +203,9 @@
 				</div>
 			</div>
 		</div>
-
+		
+		<hr>
+		
 		<!-- sns 사진 영역 -->
 <%-- 		<c:if test="${loginUser != null and loginUser.userNo eq oneSns.userNo }"> --%>
 <!-- 			<input type="button" onclick="location.href='/sns/uploadPage'" value="sns사진 등록"> -->

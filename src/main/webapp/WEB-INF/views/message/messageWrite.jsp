@@ -297,6 +297,9 @@
     	function searchUser(target) {
     		var word = $(".search-user-textbox").val();
     		var encodeWord = encodeURI(word);
+    		if(word.length == 0) {
+    			return 
+    		}
     		
     		$.ajax({
     			type: "get",

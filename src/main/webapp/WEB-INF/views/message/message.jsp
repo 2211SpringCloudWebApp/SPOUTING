@@ -108,6 +108,7 @@
             margin: 0 15px 0 0;
             float: right;
             margin-left: auto;
+            font-size: 13px;
 
         }
 
@@ -155,7 +156,7 @@
                     	<span class="open-yn" style="color: rgb(59, 80, 201);">(읽음)</span>
                     </c:if>
                     
-                    <span class="send-time">${messageList.sendTime }</span>
+                    <span class="send-time">${messageList.sendTimeNew }</span>
                 </div>
                 <div class="one-message-content" onclick="location.href='/messageDetail?msgNo=${messageList.msgNo}';">
                     <span class="send-message">${messageList.msgContent }</span>

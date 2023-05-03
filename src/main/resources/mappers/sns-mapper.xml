@@ -96,4 +96,8 @@
 	<delete id="deleteComment">
 		DELETE FROM SNSCOMMENT_TBL WHERE SNSCOMMENT_NO = #{snsCommentNo}
 	</delete>
+	
+	<delete id="snsDelete">
+		DELETE FROM SNSPHOTO_TBL WHERE SNSPHOTO_NO = #{snsPhotoNo}
+	</delete>
 </mapper>

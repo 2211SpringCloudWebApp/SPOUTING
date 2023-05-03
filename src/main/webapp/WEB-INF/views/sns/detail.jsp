@@ -35,6 +35,9 @@
 		#sns-profile {
 			width: 700px;
 			height: 100px;
+			margin: 0 auto;
+			display: flex;
+			align-items: center;
 			--background-color:rgb(187, 187, 255);
 		}
 
@@ -145,6 +148,14 @@
 			cursor: pointer;
 			
 		}
+		
+		#sns-delete-btn {
+			float: right;
+			width: 80px;
+			height: 30px;
+			margin: 10px;
+			cursor: pointer;
+		}
 
 		
     </style>
@@ -177,6 +188,9 @@
 					<h2 class="profile-name">${oneSns.userName }</h2>
 				</div> 
 			</div>
+				<c:if test="${loginUser.userNo eq oneSns.userNo }">
+					<button id="sns-delete-btn" onclick="removeCheck(${snsDetail.snsPhotoNo});">글 삭제</button>
+				</c:if>
 		</div>
 		
 		<input type="hidden" value="${snsDetail.snsPhotoNo }">
@@ -187,7 +201,9 @@
 			</div>
 			<br>
 			${snsDetail.snsContent }
+			
 		</div>
+		
 		
 		<div id="sns-reply"> 
 			<div id="sns-reply-header">
@@ -320,7 +336,16 @@
 					}
 				})
 			})
-	
+			
+			
+			
+		
+		//sns 글 삭제
+		function removeCheck(snsPhotoNo) {
+				if(confirm("정말 삭제하시겠습니까?")) {
+					location.href="/sns/snsDelete?snsPhotoNo="+snsPhotoNo;
+				}
+			}
 	
 	
 	</script>

@@ -17,4 +17,6 @@ public interface MessageService {
 
 	int sendMessage(Message message);
 
+	Message oneSendMessageDetail(int msgNo);
+
 }
