@@ -11,21 +11,10 @@ public class Message {
 	private Timestamp sendTime;
 	private String msgContent;
 	private int msgOpenCk;
+	private String sendTimeNew;
 	
 	public Message() {
 		// TODO Auto-generated constructor stub
-	}
-
-	public Message(int msgNo, int sendUser, int receiveUser, String userName, Timestamp sendTime, String msgContent,
-			int msgOpenCk) {
-		super();
-		this.msgNo = msgNo;
-		this.sendUser = sendUser;
-		this.receiveUser = receiveUser;
-		this.userName = userName;
-		this.sendTime = sendTime;
-		this.msgContent = msgContent;
-		this.msgOpenCk = msgOpenCk;
 	}
 
 	public int getMsgNo() {
@@ -84,11 +73,34 @@ public class Message {
 		this.msgOpenCk = msgOpenCk;
 	}
 
+	public String getSendTimeNew() {
+		return sendTimeNew;
+	}
+
+	public void setSendTimeNew(String sendTimeNew) {
+		this.sendTimeNew = sendTimeNew;
+	}
+
+	public Message(int msgNo, int sendUser, int receiveUser, String userName, Timestamp sendTime, String msgContent,
+			int msgOpenCk, String sendTimeNew) {
+		super();
+		this.msgNo = msgNo;
+		this.sendUser = sendUser;
+		this.receiveUser = receiveUser;
+		this.userName = userName;
+		this.sendTime = sendTime;
+		this.msgContent = msgContent;
+		this.msgOpenCk = msgOpenCk;
+		this.sendTimeNew = sendTimeNew;
+	}
+
 	@Override
 	public String toString() {
 		return "Message [msgNo=" + msgNo + ", sendUser=" + sendUser + ", receiveUser=" + receiveUser + ", userName="
-				+ userName + ", sendTime=" + sendTime + ", msgContent=" + msgContent + ", msgOpenCk=" + msgOpenCk + "]";
+				+ userName + ", sendTime=" + sendTime + ", msgContent=" + msgContent + ", msgOpenCk=" + msgOpenCk
+				+ ", sendTimeNew=" + sendTimeNew + "]";
 	}
+	
 	
 	
 

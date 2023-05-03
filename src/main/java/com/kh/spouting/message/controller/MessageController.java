@@ -72,6 +72,26 @@ public class MessageController {
 	}
 	
 	
+	//보낸메세지 상세 페이지
+	@RequestMapping(value="/messageSendDetail", method=RequestMethod.GET)
+	public String sendMessageDetailView(Model model, @RequestParam("msgNo") int msgNo) {
+		try {
+			Message oneSendMessage = messageService.oneSendMessageDetail(msgNo);
+			model.addAttribute("oneMessage", oneSendMessage);
+			return "message/messageSendDetail";
+		} catch (Exception e) {
+			// TODO: handle exception
+			model.addAttribute("msg",e.getMessage());
+			return "common/error";
+		}
+	}
+	
+	
+	
+	
+	
+	
+	
 	//메세지 전송 페이지
 	@RequestMapping(value="/messageWrite", method=RequestMethod.GET)
 	public String messageWrite(Model model, @SessionAttribute("loginUser") User loginUser) {

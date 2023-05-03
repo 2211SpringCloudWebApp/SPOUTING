@@ -110,7 +110,7 @@
         
 
 
-		<c:if test="${lineupCount ne meeting.meetingPeople }"> 
+		<c:if test="${lineupCount ne meeting.meetingPeople and loginUser.userNo ne meeting.readerNo}"> 
 	        <div id="meeting-joinBtn" onclick="joinCheck(${meeting.meetingNo });">
 	        	<input type = "hidden" value="${meeting.meetingNo }" name="meetingNo">
 	        	<b>소셜링 참여하기👀</b>
@@ -119,16 +119,29 @@
         
         
     	<c:if test="${lineupCount eq meeting.meetingPeople }"> 
-			<div id="meeting-joinBtn2">
+			<div class="meeting-joinBtn2">
 	        	<b>마감된 소셜링입니다 😥</b>
 	        </div>
 		</c:if>
+		
+		<c:if test="${loginUser.userNo eq meeting.readerNo }"> 
+			<div id="meeting-joinBtn2">
+	        	<b>이미 참여 중인 소셜링입니다 🤩</b>
+	        </div>
+		</c:if>
+		
+<%-- 		<c:if test="${loginUser.userNo eq memberList.userNo }">  --%>
+<!-- 			<div id="meeting-joinBtn2"> -->
+<!-- 	        	<b>이미 참여 중인 소셜링입니다 🤩</b> -->
+<!-- 	        </div> -->
+<%-- 		</c:if> --%>
 
 	</div>
 	
 	<br>
 	
 	<jsp:include page="../common/footer.jsp"></jsp:include>
+	
 	
 	<script>
 		function joinCheck(meetingNo) {

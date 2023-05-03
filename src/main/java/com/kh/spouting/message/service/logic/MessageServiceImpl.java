@@ -50,4 +50,10 @@ public class MessageServiceImpl implements MessageService {
 		return messageStore.sendMessage(session, message);
 	}
 
+	@Override
+	public Message oneSendMessageDetail(int msgNo) {
+		// TODO Auto-generated method stub
+		return messageStore.oneSendMessageDetail(session, msgNo);
+	}
+
 }

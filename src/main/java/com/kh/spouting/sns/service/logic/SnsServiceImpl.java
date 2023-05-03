@@ -83,5 +83,11 @@ public class SnsServiceImpl implements SnsService {
 		return snsStore.deleteComment(session, snsCommentNo);
 	}
 
+	@Override
+	public int snsDelete(int snsPhotoNo) {
+		// TODO Auto-generated method stub
+		return snsStore.snsDelete(session, snsPhotoNo);
+	}
+
 
 }

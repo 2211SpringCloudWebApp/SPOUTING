@@ -108,6 +108,7 @@
             margin: 0 15px 0 0;
             float: right;
             margin-left: auto;
+            font-size: 13px;
 
         }
 
@@ -143,12 +144,13 @@
 			<c:forEach items="${sendMessageList }" var="sendMessageList" varStatus="i">
 	            <div class="one-message">
 	                <div class="one-message-header">
+	                	<input type="hidden" value="${sendMessageList.msgNo }">
 	                    <img class="letter-icon" src="/resources/images/message/send.png" alt="" width="25px" height="25px">
 	                    <span class="user-name">${sendMessageList.userName }</span>
 	<!--                     <span class="open-yn" style="color: rgb(226, 1, 1);">(읽지 않음)</span> -->
-	                    <span class="send-time">${sendMessageList.sendTime }</span>
+	                    <span class="send-time">${sendMessageList.sendTimeNew }</span>
 	                </div>
-	                <div class="one-message-content">
+	                <div class="one-message-content" onclick="location.href='/messageSendDetail?msgNo=${sendMessageList.msgNo}';">
 	                    <span class="send-message">${sendMessageList.msgContent }</span>
 	                </div>
 	            </div>

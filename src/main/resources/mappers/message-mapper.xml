@@ -9,7 +9,8 @@
 		<result property="userName" 	 		column="USER_NAME"/>
 		<result property="sendTime" 		 	column="SEND_TIME"/>
 		<result property="msgContent" 			column="MSG_CONTENT"/>
-		<result property="msgOpenCk" 	 		column="MSG_OPEN_CK"/>		
+		<result property="msgOpenCk" 	 		column="MSG_OPEN_CK"/>
+		<result property="sendTimeNew" 	 		column="SEND_TIME_NEW"/>		
 	</resultMap>
 	
 	<resultMap type="User" id="UserResultMap">
@@ -26,7 +27,7 @@
 	
 	<!-- select -->
 	<select id="getMessageList" resultMap="messageResultMap">
-		SELECT M.*, U.USER_NAME
+		SELECT M.*, U.USER_NAME, TO_CHAR(M.SEND_TIME, 'YYYY-MM-DD HH24:MI:SS') AS SEND_TIME_NEW
 		FROM MESSAGE_TBL M
 		JOIN USER_TBL U
 		ON M.SEND_USER = U.USER_NO
@@ -34,7 +35,7 @@
 	</select>
 	
 	<select id="getSendMessageList" resultMap="messageResultMap">
-		SELECT M.*, U.USER_NAME
+		SELECT M.*, U.USER_NAME, TO_CHAR(M.SEND_TIME, 'YYYY-MM-DD HH24:MI:SS') AS SEND_TIME_NEW
 		FROM MESSAGE_TBL M
 		JOIN USER_TBL U
 		ON M.RECEIVE_USER = U.USER_NO
@@ -45,16 +46,26 @@
 		SELECT M.*, U.USER_NAME
 		FROM MESSAGE_TBL M
 		JOIN USER_TBL U
+		ON M.SEND_USER = U.USER_NO
+		WHERE MSG_NO = #{msgNo}
+	</select>
+	
+	<select id="oneSendMessageDetail" resultMap="messageResultMap">
+		SELECT M.*, U.USER_NAME
+		FROM MESSAGE_TBL M
+		JOIN USER_TBL U
 		ON M.RECEIVE_USER = U.USER_NO
 		WHERE MSG_NO = #{msgNo}
 	</select>
+	
+	
 	
 	<update id="msgOpenUpdate">
 		UPDATE MESSAGE_TBL SET MSG_OPEN_CK = MSG_OPEN_CK+1 WHERE MSG_NO = #{msgNo}
 	</update>
 	
 	<select id="searchUser" resultMap="UserResultMap">
-		SELECT USER_NO, USER_NAME FROM USER_TBL WHERE USER_NAME LIKE '%' || #{word} || '%'
+		SELECT USER_NO, USER_NAME FROM USER_TBL WHERE USER_NAME LIKE '%' || #{word} || '%' AND USER_NAME IS NOT NULL
 	</select>
 	
 	<insert id="sendMessage">

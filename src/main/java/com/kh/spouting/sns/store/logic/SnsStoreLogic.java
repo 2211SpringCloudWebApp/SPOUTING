@@ -80,5 +80,11 @@ public class SnsStoreLogic implements SnsStore {
 		return session.delete("SnsMapper.deleteComment",snsCommentNo);
 	}
 
+	@Override
+	public int snsDelete(SqlSession session, int snsPhotoNo) {
+		// TODO Auto-generated method stub
+		return session.delete("SnsMapper.snsDelete",snsPhotoNo);
+	}
+
 
 }

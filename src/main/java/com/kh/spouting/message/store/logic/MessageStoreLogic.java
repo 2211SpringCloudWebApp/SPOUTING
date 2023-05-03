@@ -43,4 +43,10 @@ public class MessageStoreLogic implements MessageStore{
 		return session.insert("MessageMapper.sendMessage", message);
 	}
 
+	@Override
+	public Message oneSendMessageDetail(SqlSession session, int msgNo) {
+		// TODO Auto-generated method stub
+		return session.selectOne("MessageMapper.oneSendMessageDetail", msgNo);
+	}
+
 }

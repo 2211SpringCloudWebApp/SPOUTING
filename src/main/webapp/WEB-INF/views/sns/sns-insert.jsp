@@ -25,7 +25,7 @@
 	
 	        #sns-insert-main {
 	            padding: 20px;
-				height: 700px;
+				height: 750px;
 				width: 800px;
 				background-color: #F3F3F3FF;
 	 			margin: 0 auto;
@@ -75,6 +75,9 @@
 	        }
 	
 	        #upload-btn {
+				width: 130px;
+				height: 40px;
+				cursor: pointer;	        
 	
 	        }
 	

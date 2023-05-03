@@ -32,5 +32,7 @@ public interface SnsStore {
 
 	int deleteComment(SqlSession session, Integer snsCommentNo);
 
+	int snsDelete(SqlSession session, int snsPhotoNo);
+
 
 }
