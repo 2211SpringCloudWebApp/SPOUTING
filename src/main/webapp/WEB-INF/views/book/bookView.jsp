@@ -19,6 +19,10 @@
         <script src='https://cdn.jsdelivr.net/npm/fullcalendar@5.8.0/main.min.js'></script>
         <!-- fullcalendar 언어 CDN -->
         <script src='https://cdn.jsdelivr.net/npm/fullcalendar@5.8.0/locales-all.min.js'></script>
+        
+        <!-- 로컬타임 변경 라이브러리 CDN -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
+        
         <!-- css -->
         <link rel="stylesheet" href="/resources/css/bookCss/bookView.css">
         <title>시설예약하기</title>
@@ -61,8 +65,9 @@
 				                  <p>지점 선택</p><br>
 				                    <select id="select-branch" >
 				                        <option value="" selected>선택</option>
-				                        <option value="a">a 지점</option>
-				                        <option value="b">b 지점</option>
+				                        <option value="a">합정점</option>
+				                        <option value="b">성수점</option>
+				                        <option value="c">여의도점</option>
 				                        
 				                        
 				                    </select>
@@ -73,7 +78,7 @@
 				                    <select class="facilBox" id="facilities-a"  name= "facilityName">
 				                        <option value="" selected>선택</option>
 				                        <option value="a-1">클라이밍센터</option>
-				                        <option value="a-2">잠수풀</option>
+<!-- 				                        <option value="a-2">잠수풀</option> -->
 				                    </select>
 				                </div>
 				            
@@ -87,15 +92,18 @@
 				                    <div id="infoNumBasket" style="color:red; margin-bottom:20px;"></div>
 				                </div>
 				                
-				                <!--시설선택하면 input type number 보이기-->
+				                 <div class="booking-option" id="branch-c" style="display: none;">
+				                   <p>b-지점 시설 선택</p><br>
+				                    <select class="facilBox" id="facilities-c" name= "facilityName">
+				                        <option value="" selected>선택</option>
+				                        <option value="c-1">잠수풀</option>
+				                      
+				                    </select>
+				                    <div id="infoNumBasket" style="color:red; margin-bottom:20px;"></div>
+				                </div>
+				                
 				
-				                <div class="booking-option" id="num-people" style="display:none;">
-				               
-				                    <p>인원 수 입력</p><br>
-				                    <input type="number" id="numOfPpl" onchange="showDateInput()" min="1" id="numPpl" name="numPeople">
-				                </div>    
-				
-				                <!--인원 입력하고 입력란에서 빠져나오면 date 선택란 보이기-->
+				                <!--시설 입력하고 입력란에서 빠져나오면 date 선택란 보이기-->
 				                <div class="booking-option" id="date" style="display:none;">
 				                    <p>이용 날짜</p><br>
 				                    <input type="date" onchange="showTimeInput()" name="useDate">
@@ -104,21 +112,22 @@
 				                
 				                <!--date 선택하면 time 란 보이기-->
 				                <div class="booking-option" id="time" style="display:none;">
-				                    
 				               		<p>이용 시간</p>
-				                  
 				<!--                     input type을 time으로 쓰면 분까지 선택하는게 필수인데 굳이 그렇게 넣어서 파싱할 이유도 없음 -->
 				<!--                     예)오후 1시~3시까지 이용할 경우<br>13~15 입력<br> -->
-								
-								
 				                    <div id="timeInput">
-					                    <input type="number" id="startTime" placeholder="시작시간" min="10" name="startParam">~
-					                    <input type="number" id="endTime" placeholder="종료시간" onchange="showPrice()" min="11" max="18" name="endParam">
-					                    
+					                    <input type="number" id="startTime" placeholder="시작시간" onchange="showPeopleInput()" min="10" name="startParam">~
+					                    <input type="number" id="endTime" placeholder="종료시간" onchange="showPeopleInput()" min="11" max="18" name="endParam">
 				                    </div>
-				                   
 				                </div>
-				                <!--time까지 선택하면 요금란 보이기-->
+				                
+				                <!--타임선택하면 input type number 보이기-->
+				                <div class="booking-option" id="num-people" style="display:none;">
+				                    <p>인원 수 입력</p><br>
+				                    <input type="number" id="numOfPpl" onchange="showPrice()" min="1" id="numPpl" name="numPeople">
+				                </div>    
+				                
+				                <!--인원수까지 선택하면 요금란 보이기-->
 				                <div class="booking-option" id="price" style="display:none;">
 				                    <!-- 요금 뿅 튀어나오는자리 -->                     
 				                </div>
@@ -170,13 +179,14 @@
 
            
 
-            //브랜치, 시설 입력(선택)하면 동작하는 함수(display, 스크롤)
+            //브랜치 입력(선택)하면 동작하는 함수(display, 스크롤)
             document.getElementById("select-branch").addEventListener("change", function() {
 	            const branchSelect = document.getElementById("select-branch");
 	            const branchValue = branchSelect.options[branchSelect.selectedIndex].value;
 	                        
 	            if (branchValue === "a") {
 	                document.getElementById("branch-b").style.display = "none";
+	                document.getElementById("branch-c").style.display = "none";
 	                document.getElementById("branch-a").style.display = "flex";
 	
 	                const chosenBranchDiv = document.getElementById("branch-a");
@@ -187,6 +197,7 @@
 	
 	            } else if (branchValue === "b") {
 	                document.getElementById("branch-a").style.display = "none";
+	                document.getElementById("branch-c").style.display = "none";
 	                document.getElementById("branch-b").style.display = "flex";
 	
 	                const chosenBranchDiv = document.getElementById("branch-b");
@@ -194,7 +205,17 @@
 	                    top: chosenBranchDiv.offsetTop,
 	                    behavior: "smooth"
 	                });
-	            }
+	            } else if (branchValue === "c") {
+	            	 document.getElementById("branch-a").style.display = "none";
+	            	 document.getElementById("branch-b").style.display = "none";
+		                document.getElementById("branch-c").style.display = "flex";
+		
+		                const chosenBranchDiv = document.getElementById("branch-c");
+		                window.scrollTo({
+		                    top: chosenBranchDiv.offsetTop,
+		                    behavior: "smooth"
+		            });
+	            }        
        		});
           
             //시설 고르기
@@ -209,6 +230,11 @@
             document.querySelector('#facilities-b').addEventListener("change", function() {
                 chooseFacil('#facilities-b');
             });
+            
+            document.querySelector('#facilities-c').addEventListener("change", function() {
+                chooseFacil('#facilities-c');
+            });
+
 
             function chooseFacil(facilityId) {
                 document.querySelector("#leftSide").style.display = "block";
@@ -249,8 +275,10 @@
 
 //////////////////////////////풀캘린더//
 		   
+		   let timeAndPeople=[];
+		   let timeAndPeopleObjArr = [];
            function renderCalendar(facilityNo) {
-            console.log(facilityNo); //아 요청까진 갔는디 왜 데이터 못뿌려->타임스탬프타입 가져올때 지멋대로 형변환 돼서 그럼ㅇㅇ지슨으로 고침
+            console.log(facilityNo); //아 요청까진 갔는디 왜 데이터 못뿌려->타임스탬프타입 가져올때 지멋대로 형식이 변환 돼서 그럼ㅇㅇ지슨으로 고침
 			  var calendarEl = document.getElementById('calendar');
 			  var calendar = new FullCalendar.Calendar(calendarEl, {
 			    initialView : 'dayGridMonth',
@@ -272,7 +300,7 @@
 			        success: function(CurrBookings) { 
 			          var events = []; //읽기전용 events는 배열임ㅇㅇ
 			
-			          // 서버에서 받아온 이벤트 리스트를 FullCalendar에서 사용하는 형식으로 변환합니다.
+			          // 서버에서 받아온 이벤트 리스트를 FullCalendar에서 사용하는 형식으로 변환.
 			          CurrBookings.forEach(function(eventData) {
 			        	  var event = {
 			        			  title: eventData.numPeople + '명',
@@ -298,21 +326,39 @@
 						  
 						  // 이벤트가 포함된 모든 시간대를 가져와서, 시간대별로 그룹화합니다.
 						  for (var t = new Date(startTime); t < new Date(endTime); t.setHours(t.getHours()+1)) {
-  var timeKey = t.toISOString();
-  eventsByTime[timeKey] = eventsByTime[timeKey] || [];
-  eventsByTime[timeKey].push(event);
-}
+							  var timeKey = t.toISOString();
+							  eventsByTime[timeKey] = eventsByTime[timeKey] || [];
+							  eventsByTime[timeKey].push(event);
+							}
 						});
 						
-						// 각 시간대에서의 사용자 수를 계산합니다.
+						// 시간대를 로컬 시간대로 변환하여 출력합니다.
 						for (var timeKey in eventsByTime) {
 						  var eventsInTime = eventsByTime[timeKey];
 						  var numPeople = eventsInTime.reduce(function(acc, event) {
 						    return acc + parseInt(event.title, 10);
 						  }, 0);
 						  
-						  console.log('시간대:', timeKey, '사용자 수:', numPeople);
+						  // 시간대를 UTC에서 로컬 시간대로 변환(moment.js 라이브러리 必)
+						  var localTime = moment.utc(timeKey).local().format('YY-MM-DD-HH시');
+						  timeAndPeople.push(localTime, numPeople);
+							
+// 						  console.log('시간대:', localTime, '사용자 수:', numPeople, 'maxPeople:', getMaxPeople);
+// 						  console.log(timeAndPeople);
 						}
+						//배열이 한거뻔에 나오냐ㅠㅠ
+						function mergeTimeAndPeople(arr) {
+							  const result = [];
+							  for (let i = 0; i < arr.length; i += 2) {
+							    result.push({
+							      time: arr[i],
+							      people: arr[i+1]
+							    });
+							  }
+							  return result;
+						}
+						timeAndPeopleObjArr = mergeTimeAndPeople(timeAndPeople);
+						console.log(timeAndPeopleObjArr); //0:{time: '23-04-12-01시', people: 3}...{}
 			          
 			          
 			          ////////////////////////////
@@ -335,7 +381,7 @@
 			
 			
 //////////////////////////////////
-            
+            //으악날짜시간배열//
             
             
             
@@ -347,6 +393,7 @@
                                     
                 if (facilitiesValue === "b-2") {
                     document.getElementById("infoNumBasket").innerHTML = "※1~5명, 6~10명의 이용 요금이 동일합니다";
+                    document.getElementById("infoNumBasket").style.fontSize = "smaller";
                 } else {
                     document.getElementById("infoNumBasket").innerHTML = "";
                 }
@@ -385,9 +432,9 @@
             }
             
             //document.getElementById("select-branch").addEventListener("change", showFacilitiesInput);
-            document.getElementById("facilities-a").addEventListener("change", showPeopleInput);
-            document.getElementById("facilities-b").addEventListener("change", showPeopleInput);
-            document.getElementById("num-people").addEventListener("blur", showDateInput);
+            document.getElementById("facilities-a").addEventListener("change", showDateInput);
+            document.getElementById("facilities-b").addEventListener("change", showDateInput);
+            document.getElementById("num-people").addEventListener("blur", showTimeInput);
 
             function showTimeInput() {
               document.getElementById("time").style.display = "flex";
@@ -403,42 +450,7 @@
                 });
             }
 
-            //startTime<endTime 고정하긩
-//             document.addEventListener('DOMContentLoaded', function() {
-//             	  var startTimeInput = document.getElementById('startTime');
-//             	  var endTimeInput = document.getElementById('endTime');
 
-//             	  function checkTimeInputs() {
-//             	    var startTimeValue = parseInt(startTimeInput.value);
-//             	    var endTimeValue = parseInt(endTimeInput.value);
-
-//             	    if (startTimeValue >= endTimeValue) {
-//             	      endTimeInput.value = startTimeValue + 1;
-//             	    }
-//             	  }
-            	  
-//             	  startTimeInput.addEventListener('input', checkTimeInputs);
-//             	  endTimeInput.addEventListener('input', checkTimeInputs);
-            	  
-//             	  //그담에 이 시간에 사람 얼마나 있는지 체크
-//             	  $.ajax({
-//                       url: "/book/checkAvailable",
-//                       data:{
-//                    	    "facilityNo": getFacilNo, 
-//                    	    "startTimeValue": startTime, 
-//                    	    "endTimeValue" : endTime
-//                     	    },
-//                       type:"post",
-//                       //async : false,
-//                       success: function(facility){
-                         
-//                       },
-//                       error: function(){
-//                           console.log("ajax 실패 서버 처리 실패 실패실패");
-//                       }
-//                   });
-            	  
-//             	});
             
             function showPrice() {
             	  let numOfPpl = document.getElementById("numOfPpl").value;
@@ -457,12 +469,63 @@
             	  let price = str * numOfPpl * (endTime - startTime);
             		  
             	  let priceElement = document.getElementById("price");
-            	  priceElement.innerHTML = "요금: " + price;
+            	  priceElement.innerHTML = "요금💸 " + price;
             	  document.querySelector("#bookPrice").value=price; //폼에 태워보낼애
             	  priceElement.style.display = "flex";
             	  
-                document.getElementById("numOfPpl").addEventListener("change", showPrice);
-                
+            	  
+            	  ///////////////////////
+//                 document.getElementById("numOfPpl").addEventListener("change", showPrice);
+                document.getElementById("numOfPpl").addEventListener("change", function(){
+                	// 입력받은 날짜
+                	let date = new Date(document.querySelector("input[name=useDate]").value);
+					console.log("date", date);
+                	// 입력받은 시작 시간과 종료 시간
+                	let startTime = Number(document.querySelector("input[name=startParam]").value);
+                	let endTime = Number(document.querySelector("input[name=endParam]").value)-1;
+                	console.log("startTime", startTime);
+                	console.log("endTime", endTime);
+                	
+              	//한시간단위로 잘라서 배열에 저장
+                	let hourData = Array.from({ length: endTime - startTime + 1 }, (_, i) => startTime + i);
+                	console.log("hourData", hourData);
+                	
+                	let dateString = date.getFullYear().toString().substr(-2) + '-' + ("0" + (date.getMonth() + 1)).slice(-2) + '-' + ("0" + date.getDate()).slice(-2) + '-';
+                	let hourDateData = Array.from({ length: endTime - startTime + 1 }, (_, i) => dateString + ('0' + (startTime + i)).slice(-2) + '시');
+                	console.log("hourDateData",hourDateData);
+                	
+                	
+                	let resultArr = hourDateData.map((hour) => {
+                		  let peopleSum = 0;
+                		  timeAndPeopleObjArr.forEach((obj) => {
+                		    if (obj.time === hour) {
+                		      peopleSum += obj.people;
+                		    }
+                		  });
+                		  return peopleSum;
+                		});
+                		console.log(resultArr); //명수만 뽑아서 배열됨. 이중에 최대값을 뽑아야겠다.
+                	
+
+                	//최대값 출력(펼쳐서(...) 맥스값 전달)
+                	let bookedPeople = Math.max(...resultArr);
+                	console.log("bookedPeople", bookedPeople);//얘랑 이제 getMaxPeople 비교해서 
+                	
+                	let inputNumOfPpl=document.querySelector("#numOfPpl").value                	
+                	let spaceAvailable = getMaxPeople-bookedPeople; //input 입력 가능 최대인원
+                	console.log("inputNumOfPpl", inputNumOfPpl);
+                	console.log("spaceAvailable", spaceAvailable);
+                	
+                	if(inputNumOfPpl<=spaceAvailable){
+	                	showPrice();
+                	}else{
+                		alert("이용 가능 인원 수를 초과했습니다. 최대 수용 인원수:"+getMaxPeople);
+                		document.querySelector("#numOfPpl").value= getMaxPeople-bookedPeople;
+                	}
+                	
+                	
+                });
+                //////////////////
                 
                 
                 // 예약하기버튼 위치로 스크롤 이동
@@ -475,7 +538,7 @@
                 setTimeout(function() {
                     document.querySelector("button").style.display = "flex";
                 }, 2000);
-                // 요소의 위치로 스크롤 이동
+                // 버튼 위치로 스크롤 이동
                 const btnDiv = document.getElementsByTagName("button");
                 window.scrollTo({
                     top: btnDiv.offsetTop,
@@ -483,6 +546,8 @@
                 });
             }
 
+            
+            
            
         </script>
        
