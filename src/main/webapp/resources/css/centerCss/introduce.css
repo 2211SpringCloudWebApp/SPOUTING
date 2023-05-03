@@ -28,6 +28,104 @@ main {
   	margin: 50px auto;
 }
 
+/* 상단 */
+.intro {
+	width: 100%;
+	height: 60%;
+	margin-top: 5px; 
+}
+	.container {
+/* 		width: 75%; */
+		height: 100%;
+		margin: 0 auto;
+		background: linear-gradient(
+			to bottom,
+			rgba(255, 255, 255, 0) 10%,
+			rgba(255, 255, 255, 0.2) 25%,
+			rgba(255, 255, 255, 0.7) 40%,
+/* 			rgba(255, 255, 255, 1) 50%, */
+/* 			rgba(255, 255, 255, 1) 75%, */
+			rgba(255, 255, 255, 1) 100%
+		), url(../../images/center/intro/intro2.jpg);
+/* 		background-image: url(../../images/center/intro/intro2.jpg); */
+		background-repeat: no-repeat;
+		background-size: cover;
+		position: relative;
+	}
+	.headerText {
+		text-align: center;
+/* 		display: flex; */
+/* 		flex-direction: column; */
+/* 		justify-content: center;       가운데정렬 (간격조정:space-around/space-between/space-evenly) */
+/*     	align-items: center; */
+		margin: auto 40%;
+    	position: absolute;
+    	top: 50%;
+	}
+
+/* 상단 tab바 */
+.tabBar {
+	height: 56px;
+	line-height: 56px;
+	background: #dc2c34;
+	color: #fff;
+}
+	.home {
+		width: 69px;
+		background: url() no-repeat center center;
+		border-left: 1px solid #ea8085;
+		float: left;
+	}
+		.home img {
+			width: 20px;
+			height: 20px;
+			background-color: white;
+		}
+	
+	.dropname {
+		position: relative;
+		display: inline-block;
+		height: 2.1em;
+	}
+	
+	.dropdwon{
+		background: #eee;
+		 border: 1px solid #ddd;
+		 border-radius: 1%;
+		 display: none;
+		 position: relative;
+		 top: -1.5em;
+	}
+	.dropdown:hover{
+		display: block;
+	}
+	.tabBar li {
+		float: left;
+		height: 56px;
+		line-height: 56px;
+		position: relative;
+		display: list-item;
+		cursor:pointer;
+	}
+	
+	.dropdown{
+/* 		width: 163px; */
+/* 		position: absolute; */
+/* 		top: 0px; */
+/* 		left: 0px; */
+/* 		opacity: 1; */
+/* 		display: none; */
+		background-color: #fff;
+		min-width: 100px;
+		max-height: 800px;
+		overflow-y: auto;
+		z-index: 999;
+		
+		
+	}
+
+
+/* 콘텐츠 */
 .Content {
 	width: 70%;
 	margin: 0 auto;

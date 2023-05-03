@@ -11,6 +11,43 @@
 		<!-- header -->
 		<jsp:include page="../common/header.jsp"></jsp:include>
 		
+		<div class="intro">
+			<div class="container">
+				<div class="headerText">
+					<h2 class="header">(주)스파우팅</h2>
+					<h3>회사 소개</h3>
+					<p>(주)스파우팅 임직원은 스포츠를 통해 인류의 건강과 행복을 추구하고 있습니다.</p>
+				</div>
+			</div>
+		</div>
+		
+		<div class="tabBar">
+			<div class="tabContainer">
+				<ul class="tabContents">
+					<li class="home">
+						<a href="/"><img src="../../../resources/images/center/intro/home.png">home</a>
+					</li>
+					
+					<li class="dep1 valign-wrapper">
+						<a href="/center/intro" class="dropname">회사 소개</a>
+<!-- 						<ul id="dropdown11" class="dropdown"> -->
+<!-- 							<li> -->
+<!-- 								<a href="/center/intro">스파우팅 소개</a> -->
+<!-- 							</li> -->
+<!-- 							<li> -->
+<!-- 								<a href="/center/search">지점 찾기</a> -->
+<!-- 							</li> -->
+<!-- 						</ul>						 -->
+					</li>
+					
+					<li class="dep2 valign-wrapper">
+						<a href="/center/intro">(주)스파우팅</a>
+					</li>
+				</ul>
+				
+			</div>
+		</div>
+		
 		<main>
 			<div class="Content">
 				<div class="textContent">
