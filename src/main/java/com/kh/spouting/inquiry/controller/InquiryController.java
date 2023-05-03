@@ -15,6 +15,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -581,7 +582,7 @@ public class InquiryController {
 		}
 	}
 	
-	// ******* 좋아요 테스트중
+	// 좋아요 등록(AJAX)
 	@ResponseBody
 	@RequestMapping(value="inputLike", method=RequestMethod.POST)
 	public String updateLike(Inquiry inquiry) {
@@ -594,15 +595,15 @@ public class InquiryController {
 		}
 	}
 	
+	// 좋아요 리스트(AJAX)
 	@ResponseBody
 	@RequestMapping(value="/like")
 	public Inquiry getTotalLike(int inquiriesNo) {
 		Inquiry inquiry = iService.getTotalLike(inquiriesNo);
 		return inquiry;
 	}
-	////////////
 	
-	// 여기는 썸머노트 파일테스트	
+	// 썸머노트 파일등록 
 	@PostMapping(value = "/ImgFileUpload", produces = "application/json; charset=utf8")
 	@ResponseBody
 	public String reviewImgUpload(@RequestParam("file") MultipartFile multipartFile 
@@ -632,5 +633,18 @@ public class InquiryController {
 		}
 		String a = jsonObject.toString();
 		return a;
+	}
+	
+	// 관리자페이지용(답변대기중인 문의사항)
+	@GetMapping(value="/admin")
+	public ModelAndView adminInquiryList(ModelAndView mv
+			, @RequestParam(value="page", required=false, defaultValue="1") Integer page) {
+		// 페이징처리
+		int totalCount = iService.getAdminInquiryCount();
+		PageInfo pi = this.getPageInfo(page, totalCount);
+		
+		List<InquiryJoin> iList = iService.selectAdminInquiry(pi);
+		mv.addObject("iList", iList).addObject("pi", pi).setViewName("admin/inquiryList");
+		return mv;
 	}
 }

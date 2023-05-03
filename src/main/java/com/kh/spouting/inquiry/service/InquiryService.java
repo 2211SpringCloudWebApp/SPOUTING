@@ -33,6 +33,9 @@ public interface InquiryService {
 
 	List<InquiryJoin> getTopInquiry(int i);
 
-//	List<InquiryJoin> selectInquiryWithTop5(PageInfo pi);
+	int getAdminInquiryCount();
+
+	List<InquiryJoin> selectAdminInquiry(PageInfo pi);
+
 
 }

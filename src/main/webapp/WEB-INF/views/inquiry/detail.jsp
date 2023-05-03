@@ -101,6 +101,17 @@
 <!-- 							<button type="submit" onclick="deleteBtn()">삭제</button> -->
 						</form>
 					</c:if>
+					<!-- 관리자면 삭제버튼생기게 -->
+					<c:if test="${sessionScope.loginUser.userType eq '1'}">
+						<form action="/inquiry/delete" method="post">
+							<!-- Button trigger modal -->
+							<input type="hidden" name="inquiriesNo" value="${inquiry.inquiriesNo }">
+							<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+							  삭제
+							</button>
+<!-- 							<button type="submit" onclick="deleteBtn()">삭제</button> -->
+						</form>
+					</c:if>
 					<button type="button" class="btn btn-outline-light" onclick="location.href='/inquiry/list'">목록</button>
 				</div>
 			</div>
@@ -233,7 +244,7 @@
 					type : "post",
 					success : function(result){
 						if(result == "success"){
-							alert("좋아요 수 +1");
+							// alert("좋아요 수 +1");
 							getTotalLike();	// 좋아요 클릭 후 좋아요수 올라가는 함수 실행
 						}else{
 							console.log("좋아요 기능 실패");
