@@ -86,47 +86,39 @@ public class InquiryServiceImpl implements InquiryService{
 		return result;
 	}
 
+	// 좋아요 등록 Service
 	@Override
 	public void updateLike(Inquiry inquiry) {
 		iStore.updateLike(session, inquiry);
 	}
 
+	// 좋아요 리스트 Service
 	@Override
 	public Inquiry getTotalLike(int inquiriesNo) {
 		Inquiry inquiry = iStore.getTotalLike(session, inquiriesNo);
 		return inquiry;
 	}
 
+	// 상단고정게시물 Service
 	@Override
 	public List<InquiryJoin> getTopInquiry(int i) {
 		List<InquiryJoin> iList = iStore.getTopInquiry(session, 5);
 		return iList;
 	}
 
-//	@Override
-//	public List<InquiryJoin> selectInquiryWithTop5(PageInfo pi) {
-//	    int offset = (pi.getCurrentPage() - 1) * pi.getBoardLimit();
-//	    int limit = pi.getBoardLimit();
-//	    List<InquiryJoin> topInquiries = iStore.selectTopInquiries(5);
-//	    List<InquiryJoin> inquiries = iStore.selectInquiriesWithPaging(offset, limit);
-//	    List<InquiryJoin> result = new ArrayList<>();
-//	    // 상단 고정 게시물 추가
-//	    result.addAll(topInquiries);
-//	    // 일반 게시물 추가
-//	    for (InquiryJoin inquiry : inquiries) {
-//	        boolean isTop = false;
-//	        for (InquiryJoin topInquiry : topInquiries) {
-//	            if (inquiry.getInquiriesNo() == topInquiry.getInquiriesNo()) {
-//	                isTop = true;
-//	                break;
-//	            }
-//	        }
-//	        if (!isTop) {
-//	            result.add(inquiry);
-//	        }
-//	    }
-//	    return result;
-//	}
+	// 관리자페이지(페이징처리) Service
+	@Override
+	public int getAdminInquiryCount() {
+		int totalCount = iStore.getAdminInquiryCount(session);
+		return totalCount;
+	}
+
+	// 관리자페이지 Service
+	@Override
+	public List<InquiryJoin> selectAdminInquiry(PageInfo pi) {
+		List<InquiryJoin> iList = iStore.selectAdminInquiry(session, pi);
+		return iList;
+	}
 
 
 }

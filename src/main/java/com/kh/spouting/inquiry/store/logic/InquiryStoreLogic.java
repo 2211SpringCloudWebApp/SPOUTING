@@ -86,21 +86,42 @@ public class InquiryStoreLogic implements InquiryStore{
 		return result;
 	}
 
+	// 좋아요 등록 Store
 	@Override
 	public void updateLike(SqlSession session, Inquiry inquiry) {
 		session.update("InquiryMapper.updateLike", inquiry);
 		
 	}
 
+	// 좋아요 리스트 Store
 	@Override
 	public Inquiry getTotalLike(SqlSession session, int inquiriesNo) {
 		Inquiry inquiry = session.selectOne("InquiryMapper.getTotalLike", inquiriesNo);
 		return inquiry;
 	}
 
+	// 상단고정 게시물 Store
 	@Override
 	public List<InquiryJoin> getTopInquiry(SqlSession session, int i) {
 		List<InquiryJoin> iList = session.selectList("InquiryMapper.getTopInquiry", 5);
+		return iList;
+	}
+
+	// 관리자페이지(페이징처리) Store
+	@Override
+	public int getAdminInquiryCount(SqlSession session) {
+		int totalCount = session.selectOne("InquiryMapper.getAdminInquiryCount");
+		return totalCount;
+	}
+
+	// 관리자페이지 Store
+	@Override
+	public List<InquiryJoin> selectAdminInquiry(SqlSession session, PageInfo pi) {
+		int limit = pi.getBoardLimit();
+		int currentPage = pi.getCurrentPage();
+		int offset = (currentPage - 1) * limit;
+		RowBounds rowBounds = new RowBounds(offset, limit);
+		List<InquiryJoin> iList = session.selectList("InquiryMapper.selectAdminInquiry", null, rowBounds);
 		return iList;
 	}
 

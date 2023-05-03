@@ -92,14 +92,28 @@
 		DELETE FROM INQUIRIES_TBL WHERE INQUIRIES_NO = #{inquiriesNo}
 	</delete>
 	
+<!--	좋아요등록-->
 	<update id="updateLike">
 		UPDATE INQUIRIES_TBL SET INQUIRIES_LIKES = INQUIRIES_LIKES + 1 WHERE INQUIRIES_NO = #{inquiriesNo}
 	</update>
+	
+<!--	좋아요리스트-->
 	<select id="getTotalLike" resultMap="inquiryResultMap">
 		SELECT INQUIRIES_LIKES FROM INQUIRIES_TBL WHERE INQUIRIES_NO = #{inquiriesNo}		
 	</select>
 	
+<!--	상단고정게시물-->
 	<select id="getTopInquiry" resultMap="inquiryJoinResultMap">
 		SELECT I.*, U.USER_NAME FROM (SELECT * FROM INQUIRIES_TBL ORDER BY INQUIRIES_LIKES DESC) I JOIN USER_TBL U ON I.USER_NO = U.USER_NO <![CDATA[WHERE ROWNUM <= 5]]>
+	</select>
+	
+<!--	관리자페이지(페이징처리)-->
+	<select id="getAdminInquiryCount" resultType="_int">
+		SELECT COUNT(*) FROM INQUIRIES_TBL WHERE IS_ADMIN_COMMENT = 'N'
+	</select>
+	
+<!--	관리자페이지-->
+	<select id="selectAdminInquiry" resultMap="inquiryJoinResultMap">
+		SELECT I.*, U.USER_NAME FROM INQUIRIES_TBL I JOIN USER_TBL U ON I.USER_NO = U.USER_NO WHERE IS_ADMIN_COMMENT = 'N' ORDER BY Q_CREATE_DATE ASC
 	</select>
 </mapper>

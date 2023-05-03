@@ -35,5 +35,9 @@ public interface InquiryStore {
 
 	List<InquiryJoin> getTopInquiry(SqlSession session, int i);
 
+	int getAdminInquiryCount(SqlSession session);
+
+	List<InquiryJoin> selectAdminInquiry(SqlSession session, PageInfo pi);
+
 
 }

@@ -47,15 +47,15 @@
 						</select>
 					</div>
 					<!-- 예약취소인경우 -->
-					<div>
-						<span>결제내역</span>
-						<select name="bookNo">
-							<c:forEach items="${bList }" var="book">
-								<option name="" value="${book.bookNo }">[${book.centerName.substring(5,8) }|${book.facilityName}]<fmt:formatDate value="${book.startTime }" pattern="MM.dd HH시"/></option>
-								${book.bookNo }
-							</c:forEach>	
-						</select>
-					</div>
+<!-- 					<div> -->
+<!-- 						<span>결제내역</span> -->
+<!-- 						<select name="bookNo"> -->
+<%-- 							<c:forEach items="${bList }" var="book"> --%>
+<%-- 								<option name="" value="${book.bookNo }">[${book.centerName.substring(5,8) }|${book.facilityName}]<fmt:formatDate value="${book.startTime }" pattern="MM.dd HH시"/></option> --%>
+<%-- 								${book.bookNo } --%>
+<%-- 							</c:forEach>	 --%>
+<!-- 						</select> -->
+<!-- 					</div> -->
 					<!-- 츄가끝 -->
 
 					<!-- 여기까지 -->
@@ -67,14 +67,14 @@
 						<span>내용</span>
 						<textarea rows="" cols="" id="summernote" name="inquiriesContent" required="required"></textarea>
 					</div>
-					<div id="test">
-						<span>파일첨부</span>
-						<input type="file" name="uploadFile">
-					</div>
+<!-- 					<div id="test"> -->
+<!-- 						<span>파일첨부</span> -->
+<!-- 						<input type="file" name="uploadFile"> -->
+<!-- 					</div> -->
 					<div id="secretArea">
-						<input type="radio" name="inquiriesSecret" value="N" checked="checked" />일반글<input type="radio" name="inquiriesSecret" value="Y" />비밀글
+						<input type="radio" name="inquiriesSecret" value="N" checked="checked" />일반글 <input type="radio" name="inquiriesSecret" value="Y" />비밀글
 						<div id="secretNo" style="display:none;">
-							<span>비밀번호</span>
+							<span>비밀번호 </span>
 <!-- 							<input name="secretNo" placeholder="4자리 숫자"> -->
 						</div>
 					</div>
