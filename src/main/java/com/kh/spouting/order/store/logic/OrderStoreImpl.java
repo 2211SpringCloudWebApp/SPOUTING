@@ -8,9 +8,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.kh.spouting.common.PageInfo;
+import com.kh.spouting.common.Search;
 import com.kh.spouting.order.domain.Order;
 import com.kh.spouting.order.domain.OrderList;
 import com.kh.spouting.order.store.OrderStore;
+import com.kh.spouting.product.domain.Product;
 
 @Repository
 public class OrderStoreImpl implements OrderStore{
@@ -18,6 +20,7 @@ public class OrderStoreImpl implements OrderStore{
 	@Autowired
 	private SqlSession session;
 
+	// ********** 이용자 **********
 	// 주문 DB 등록
 	@Override
 	public int insertOrder(Order order) {
@@ -64,13 +67,44 @@ public class OrderStoreImpl implements OrderStore{
 		return result;
 	}
 
-	// 주문 목록 조회
+	
+
+	// ********** 관리자 **********
+	// 전체 주문 수
 	@Override
-	public List<Order> orderView() {
-		List<Order> olist = session.selectList("OrderMapper.orderView"); 
-		return olist;
+	public int getListCount() {
+		int result = session.selectOne("OrderMapper.getListCount");
+		return result;
 	}
 	
+	// 주문 목록 + 페이징
+	@Override
+	public List<Order> selectAllOrder(PageInfo pi) {
+		int limit = pi.getBoardLimit();
+		int currentPage = pi.getCurrentPage();
+		int offset = (currentPage - 1) * limit;
+		RowBounds rowBounds = new RowBounds(offset, limit);
+		List<Order> oList = session.selectList("OrderMapper.selectAllOrder", null, rowBounds);
+		return oList;
+	}
+
+	// 검색 결과 수
+	@Override
+	public int getSearchOrderCount(Search search) {
+		int result = session.selectOne("OrderMapper.getSearchOrderCount", search);
+		return result;
+	}
+
+	// 조건부 검색
+	@Override
+	public List<Order> searchOrder(Search search, PageInfo pi) {
+		int limit = pi.getBoardLimit();
+		int currentPage = pi.getCurrentPage();
+		int offset = (currentPage - 1) * limit;
+		RowBounds rowBounds = new RowBounds(offset, limit);
+		List<Order> oList = session.selectList("OrderMapper.searchOrder", search, rowBounds);
+		return oList;
+	}
 	
 	
 }

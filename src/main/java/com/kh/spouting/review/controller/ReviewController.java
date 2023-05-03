@@ -198,14 +198,13 @@ public class ReviewController {
 			, @RequestParam(value="page", required=false, defaultValue="1") Integer currentPage
 			, Model model) {
 		try {
-			System.out.println(search.toString());
-			int totalCount = rService.getListCount(search);
+			int totalCount = rService.getListSearchCount(search);
 			PageInfo pi = this.getPageInfo(currentPage, totalCount);
-			List<Review> searchList = rService.selectListByKeyword(pi, search);
-			if(!searchList.isEmpty()) {
+			List<Review> rList = rService.selectListByKeyword(pi, search);
+			if(!rList.isEmpty()) {
 				model.addAttribute("search", search);
 				model.addAttribute("pi", pi);
-				model.addAttribute("sList", searchList);
+				model.addAttribute("rList", rList);
 				return "shop/review/search";
 			} else {
 				model.addAttribute("msg", "데이터 조회에 실패했습니다.");
@@ -301,7 +300,7 @@ public class ReviewController {
 	}
 	
 	// 리뷰 삭제
-	@RequestMapping(value="/remove/adminReview", method=RequestMethod.GET)
+	@RequestMapping(value="/review/adminDeleteReview", method=RequestMethod.GET)
 	public String reviewRemove(@RequestParam("reviewNo") int reviewNo, Model model) {
 		try {
 			int result = rService.deleteReview(reviewNo);
@@ -318,6 +317,32 @@ public class ReviewController {
 			return "common/error";
 		}
 	}
+	
+	// 리뷰 검색
+	@RequestMapping(value="/review/adminSearch")
+	public String productSearchAdmin(
+			@ModelAttribute Search search
+			, @RequestParam(value="page", required=false, defaultValue="1") Integer currentPage
+			, Model model) {
+		try {
+			int totalCount = rService.getListSearchCount(search);
+			PageInfo pi = this.getPageInfo(currentPage, totalCount);
+			List<Review> rList = rService.selectListByKeyword(pi, search);
+			if(!rList.isEmpty()) {
+				model.addAttribute("search", search);
+				model.addAttribute("pi", pi);
+				model.addAttribute("rList", rList);
+				return "shop/admin/adminReviewSearch";
+			} else {
+				model.addAttribute("msg", "데이터 조회에 실패했습니다.");
+				return "common/error";
+			}
+		} catch (Exception e) {
+			model.addAttribute("msg", e.getMessage());
+			return "common/error";
+		}
+	}
+	
 	
 	
 	

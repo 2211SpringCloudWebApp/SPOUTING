@@ -55,7 +55,7 @@
             <tr>
                 <td>                  
                     <c:forEach begin="${pi.startNavi}" end="${pi.endNavi}" var="p">
-                        <c:url var="pageUrl" value="/review/adminList">
+                        <c:url var="pageUrl" value="/review/adminSearch">
                             <c:param name="page" value="${p } "></c:param>
                             <c:param name="searchValue" value="${search.searchValue }"></c:param>
 							<c:param name="searchCondition" value="${search.searchCondition }"></c:param>

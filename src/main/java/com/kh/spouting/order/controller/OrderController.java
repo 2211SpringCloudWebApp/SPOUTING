@@ -9,19 +9,24 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.kh.spouting.cart.service.CartService;
 import com.kh.spouting.common.Alert;
 import com.kh.spouting.common.PageInfo;
+import com.kh.spouting.common.Search;
 import com.kh.spouting.order.domain.Order;
 import com.kh.spouting.order.domain.OrderList;
 import com.kh.spouting.order.service.OrderService;
+import com.kh.spouting.product.domain.Product;
 import com.kh.spouting.product.service.ProductService;
 import com.kh.spouting.user.domain.User;
 import com.kh.spouting.user.service.UserService;
@@ -35,12 +40,12 @@ public class OrderController {
 	
 	@Autowired
 	private UserService uService;
-	PageInfo pi = null;
 	
 	@Autowired
 	private OrderService oService;
 	
 	private IamportClient api;
+	
 	
 	public OrderController() {
 		// REST API 키와 REST API secret 를 아래처럼 순서대로 입력한다.
@@ -168,17 +173,15 @@ public class OrderController {
 	
 	// ********** 관리자 **********
 	// 주문 목록 전체 조회
-	@RequestMapping(value="/order/listAdmin")
-	public String orderViewAdmin(Model model) {
-		try {
-			List<Order> oList = oService.orderView();
-			model.addAttribute("oList", oList);
-		} catch (Exception e) {
-			model.addAttribute("msg", e.getMessage());
-			return "common/error";
-		}
-		return "shop/admin/adminOrderList";
- 	}
+	@RequestMapping(value="/order/listAdmin", method=RequestMethod.GET)
+	public ModelAndView listAdmin(ModelAndView mv, 
+			@RequestParam(value="page", required=false, defaultValue="1") Integer page) {
+		int totalCount = oService.getListCount();
+		PageInfo pi = this.getPageInfo(page, totalCount);
+		List<Order> oList = oService.selectAllOrder(pi);
+		mv.addObject("pi", pi).addObject("oList", oList).setViewName("/shop/admin/adminOrderList");
+	    return mv;
+	}
 	
 	// 주문 상세 조회
 	@RequestMapping(value="/order/detailAdmin")
@@ -211,5 +214,30 @@ public class OrderController {
 			return "common/error";
 		}
 	}
+	
+	// 조건부 검색
+		@RequestMapping(value="/order/searchAdmin", method=RequestMethod.GET)
+		public String orderSearch(
+				@ModelAttribute Search search
+				, @RequestParam(value="page", required=false, defaultValue="1") Integer currentPage
+				, Model model) {
+			try {
+				int totalCount = oService.getSearchOrderCount(search);
+				PageInfo pi = this.getPageInfo(currentPage, totalCount);
+				List<Order> oList = oService.searchOrder(search, pi);
+				if(!oList.isEmpty()) {
+					model.addAttribute("search", search);
+					model.addAttribute("pi", pi);
+					model.addAttribute("oList", oList);
+					return "shop/admin/adminOrderSearch";
+				} else {
+					model.addAttribute("msg", "데이터 조회에 실패했습니다.");
+					return "common/error";
+				}
+			} catch (Exception e) {
+				model.addAttribute("msg", e.getMessage());
+				return "common/error";
+			}
+		}
 	
 }

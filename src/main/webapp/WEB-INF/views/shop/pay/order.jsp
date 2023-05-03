@@ -173,6 +173,17 @@
 	<jsp:include page="../../common/footer.jsp"></jsp:include>
 	
 	<script>
+	// 로그인 체크
+	function loginCheck(loginId,action){
+		event.preventDefault();
+		if(loginId==""){
+			alert("로그인이 필요합니다.");
+			location.href="/user/login";		
+		}else{
+			location.href="/cart/register";
+		}
+	}
+	
 	// 도로명 주소
 	//본 예제에서는 도로명 주소 표기 방식에 대한 법령에 따라, 내려오는 데이터를 조합하여 올바른 주소를 구성하는 방법을 설명합니다.
     function execDaumPostcode() {

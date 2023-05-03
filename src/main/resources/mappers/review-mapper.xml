@@ -69,17 +69,24 @@
 	</select>
 	
 	<!-- 조건부 검색 페이징 처리 -->
-	<select id="getSearchListCount" resultType="_int">
+	<select id="getListSearchCount" resultType="_int">
 		SELECT COUNT(*) FROM REVIEW_TBL
-		<choose>
-			<when test="searchCondition == 'no'">
-				WHERE REVIEW_NO LIKE '%' || #{searchValue} || '%'
-			</when>
-			<when test="searchCondition == 'title'">
-				WHERE REVIEW_TITLE LIKE '%' || #{searchValue} || '%'
-			</when>
-		</choose>
+			<where>
+				<choose>
+					<when test="searchCondition == 'no'">
+						REVIEW_NO LIKE '%' || #{searchValue} || '%'
+					</when>
+					<when test="searchCondition == 'title'">
+						REVIEW_TITLE LIKE '%' || #{searchValue} || '%'
+					</when>
+					<otherwise>
+						REVIEW_NO LIKE '%' || #{searchValue} || '%' OR
+						REVIEW_TITLE LIKE '%' || #{searchValue} || '%'
+					</otherwise>
+				</choose>
+			</where>
 	</select>
+
 	
 	<!-- 조건부 검색 -->
 	<select id="selectListByKeyword" resultMap="reviewResultMap">

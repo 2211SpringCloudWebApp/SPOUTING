@@ -15,6 +15,12 @@
 <body>
     <jsp:include page="../../admin/adminHeader.jsp"></jsp:include>
     <div id="main-box">
+    	<c:if test="${oList eq null}">
+			<div id="no-one">
+				<p>해당 주문이 없음</p>
+				<a href="/order/listAdmin">[전체 상품 보기]</a>
+			</div>
+		</c:if>
         <div id="user-title">
             SPOUTING ORDER LIST
         </div>
@@ -23,7 +29,6 @@
                 <th>ORDER_NO</th>
                 <th>ID</th>
                 <th>NAME</th>
-                <th>EMAIL</th>
                 <th>ORDER_DATE</th>
                 <th>ORDER_COST</th>
             </tr>
@@ -33,7 +38,6 @@
                 <td>${order.orderNo}</td>
                 <td>${order.userId}</td>
                 <td>${order.orderName}</td>
-                <td>${order.orderEmail}</td>
                 <td>
                 	<fmt:formatDate value="${order.orderDate}" pattern="yyyy.MM.dd  HH:mm" />
                	</td>
@@ -55,11 +59,13 @@
             </tr>
             </c:forEach>
         </table>
+        
         <table id="navi-box">
-            <tr>
+            <!-- 게시글 페이징 처리 -->
+			<tr>
                 <td>                  
                     <c:forEach begin="${pi.startNavi}" end="${pi.endNavi}" var="p">
-                        <c:url var="pageUrl" value="/admin/adminSearch">
+                        <c:url var="pageUrl" value="/order/listAdmin">
                             <c:param name="page" value="${p } "></c:param>
                             <c:param name="searchValue" value="${search.searchValue }"></c:param>
 							<c:param name="searchCondition" value="${search.searchCondition }"></c:param>
@@ -68,10 +74,12 @@
                     </c:forEach>
                 </td>
             </tr>
+            <!-- 게시글 검색 -->
             <tr>
                 <td >
-                    <form action="/admin/orderSearch" method="get">
+                    <form action="/order/searchAdmin" method="get">
                         <select name="searchCondition" id="search-select">
+                            <option value="all">ALL</option>
                             <option value="userId">ID</option>
                             <option value="orderName">NAME</option>
                         </select>

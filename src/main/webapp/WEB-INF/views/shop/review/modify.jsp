@@ -10,7 +10,7 @@
 <body>
 	<jsp:include page="../../common/header.jsp"></jsp:include>
 	<div id="maincontainer">
-		<h1>🔍 ️리뷰 상세</h1>
+		<h1>🔍 ️리뷰 수정</h1>
 		<p>스파우터 회원들이 남긴 리뷰를 확인해 보세요.</p>
 		<form action="/review/modify" method="post" enctype="multipart/form-data">
 			<input type="hidden" name="reviewNo" value=${review.reviewNo }>
@@ -51,10 +51,6 @@
 			<input type="submit" value="수정하기">
 			<input type="reset" value="취소">
 		</form>
-	</div>
-	<div id="buttonbox">
-	  <button onclick="location.href='/review/reviewList';">후기 목록</button>
-	  <button a href="javascript:void(0);" onclick="removeCheck(${review.reviewNo});">후기 삭제</button>
 	</div>
 	
 	<jsp:include page="../../common/footer.jsp"></jsp:include>
@@ -107,6 +103,20 @@
 				inputStars.childNodes[2*i-1].style.color="#c0c0c0";
 			}
 		}
+		
+		// 파일 첨부
+		function loadImg1(obj) {
+				if(obj.files.length != 0 && obj.files[0] != 0) {
+					let reader = new FileReader();
+					reader.readAsDataURL(obj.files[0]);
+					reader.onload = function(e) {
+						document.querySelector("#img-view1").setAttribute("src", e.target.result);
+					}
+				}else {
+					document.querySelector("#img-view1").setAttribute("src", "");
+				}
+			}
+		
 	</script>
 </body>
 </html>

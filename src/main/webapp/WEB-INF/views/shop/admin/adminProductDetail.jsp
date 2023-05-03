@@ -49,7 +49,6 @@
 				</td>
 				</c:if>
 			</tr>	
-		
 		</table>
 	</div>
 	<div id="buttonbox">

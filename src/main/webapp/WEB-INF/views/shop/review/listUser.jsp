@@ -74,25 +74,24 @@
     
     <div id="main">
         <div id="list-title">
-            <p>${sessionScope.loginUser.userName}님의 리뷰 내역</p>
+            <p>${sessionScope.loginUser.userName}님의 후기 내역</p>
         </div>
         <div id="list-wrapper">
        		<table id="point-list">
-	                <tr class="table-line">
-	                	<th scope="row" style="width: 25%;">번호</th>
-	                	<th scope="row" style="width: 25%;">제목</th>
-	                	<th scope="row" style="width: 25%;">작성자</th>
-	                	<th scope="row" style="width: 25%;">등록일자</th>
-	                </tr>
-	                <c:forEach var="review" items="${rList }">
-				<tr>
-					<td>${review.reviewNo }</td>
-					<td>${review.reviewTitle }</td>
-					<td>${review.userId }</td>
-					<td><fmt:formatDate value="${review.reviewDate}" pattern="yyyy.MM.dd" /></td>
-					<td><input type="button" id="remo-btn" value="조회" onclick="location.href='/review/detail?reviewNo=${review.reviewNo}'"></td>
-				</tr>
-			</c:forEach>
+				<tr class="table-line">
+				 	<th scope="row" style="width: 25%;">번호</th>
+				 	<th scope="row" style="width: 25%;">제목</th>
+				 	<th scope="row" style="width: 25%;">작성자</th>
+				 	<th scope="row" style="width: 25%;">등록일자</th>
+				 </tr>
+				 <c:forEach var="review" items="${rList }">
+					<tr class="table-line" onclick="location.href='/review/detail?reviewNo=${review.reviewNo}'"style="cursor: pointer;">
+						<td style="width: 25%;">${review.reviewNo }</td>
+						<td style="width: 25%;">${review.reviewTitle }</td>
+						<td style="width: 25%;">${review.userId }</td>
+						<td style="width: 25%;"><fmt:formatDate value="${review.reviewDate}" pattern="yyyy.MM.dd" /></td>
+					</tr>
+				</c:forEach>
             </table>
         </div>
 	</div>

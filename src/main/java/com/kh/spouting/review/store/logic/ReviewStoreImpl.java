@@ -82,8 +82,8 @@ public class ReviewStoreImpl implements ReviewStore{
 
 	// 회원별 리뷰 상세 조회 + 페이징
 	@Override
-	public int getListCount(SqlSession session, Search search) {
-		int result = session.selectOne("ReviewMapper.getSearchListCount", search);
+	public int getListSearchCount(SqlSession session, Search search) {
+		int result = session.selectOne("ReviewMapper.getListSearchCount", search);
 		return result;
 	}
 
@@ -94,8 +94,8 @@ public class ReviewStoreImpl implements ReviewStore{
 		int currentPage = pi.getCurrentPage();
 		int offset = (currentPage - 1) * limit;
 		RowBounds rowBounds = new RowBounds(offset, limit);
-		List<Review> searchList = session.selectList("ReviewMapper.selectListByKeyword", search, rowBounds);
-		return searchList;
+		List<Review> rList = session.selectList("ReviewMapper.selectListByKeyword", search, rowBounds);
+		return rList;
 	}
 	
 	

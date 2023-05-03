@@ -38,13 +38,15 @@
 			</tr>
 		</thead>
 		<tbody>
-			<c:forEach var="review" items="${rList }">
+			<c:forEach var="row" items="${rList }">
 				<tr>
-					<td>${review.reviewNo }</td>
-					<td>${review.reviewTitle }</td>
-					<td>${review.userId }</td>
-					<td><fmt:formatDate value="${review.reviewDate}" pattern="yyyy.MM.dd" /></td>
-					<td><input type="button" id="remo-btn" value="조회" onclick="location.href='/review/detail?reviewNo=${review.reviewNo}'"></td>
+					<td>${row.reviewNo }</td>
+					<td>
+						<a href="/review/detail?reviewNo=${row.reviewNo}">${row.reviewTitle }</a>
+					</td>
+					<td>${row.userId }</td>
+					<td><fmt:formatDate value="${row.reviewDate}" pattern="yyyy.MM.dd" /></td>
+<%-- 					<td><input type="button" id="remo-btn" value="조회" onclick="location.href='/review/detail?reviewNo=${row.reviewNo}'"></td> --%>
 				</tr>
 			</c:forEach>
 		</tbody>
@@ -53,16 +55,18 @@
 			<tr>
 				<td colspan="5" align="center" style="height : 50px; border-bottom:0px;">
 					<c:if test="${pi.currentPage > 0}">
-	       				<a href="/review/reviewList?page=1" class="first-last-page">처음</a>
+	       				<a href="/review/search?page=1" class="first-last-page">처음</a>
 	       			</c:if> 
 					<c:forEach begin="${pi.startNavi }" end="${pi.endNavi }" var="p">
-							<c:url var="pageUrl" value="/review/reviewList">
+							<c:url var="pageUrl" value="/review/search">
 								<c:param name="page" value="${p }"></c:param>
+								<c:param name="searchValue" value="${search.searchValue }"></c:param>
+								<c:param name="searchCondition" value="${search.searchCondition }"></c:param>
 							</c:url>
 							<a href="${pageUrl }">${p }</a>&nbsp;&nbsp;&nbsp;
 					</c:forEach>
 	       			<c:if test="${pi.currentPage < pi.maxPage}">
-	       				<a href="/review/reviewList?page=${pi.maxPage}" class="first-last-page">마지막</a>
+	       				<a href="/review/search?page=${pi.maxPage}" class="first-last-page">마지막</a>
 	       			</c:if>
 				</td>
 			</tr>

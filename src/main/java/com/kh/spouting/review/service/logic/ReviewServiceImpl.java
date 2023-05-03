@@ -57,7 +57,30 @@ public class ReviewServiceImpl implements ReviewService {
 		int result = rStore.getListCount(session, userId);
 		return result;
 	}
+	
+	// 회원별 리뷰 상세 조회 + 페이징
+		@Override
+		public List<Review> selectReview(PageInfo pi, String userId) {
+			List<Review> rList = rStore.selectReview(session, pi, userId);
+			return rList;
+		}
 
+	// 페이징 처리 (조건부 검색)
+	@Override
+	public int getListSearchCount(Search search) {
+		int totalCount = rStore.getListSearchCount(session, search);
+		return totalCount;
+	}
+
+	// 조건부 검색
+	@Override
+	public List<Review> selectListByKeyword(PageInfo pi, Search search) {
+		List<Review> rList = rStore.selectListByKeyword(session, pi, search);
+		return rList;
+	}
+		
+
+	// ********** 관리자 **********
 	// 리뷰 목록 조회
 	@Override
 	public List<Review> selectAllReview(PageInfo pi) {
@@ -72,29 +95,8 @@ public class ReviewServiceImpl implements ReviewService {
 		return review;
 	}
 
-	// 회원별 리뷰 상세 조회 + 페이징
-	@Override
-	public List<Review> selectReview(PageInfo pi, String userId) {
-		List<Review> rList = rStore.selectReview(session, pi, userId);
-		return rList;
-	}
-
-	// 조건부 검색
-	@Override
-	public List<Review> selectListByKeyword(PageInfo pi, Search search) {
-		List<Review> searchList = rStore.selectListByKeyword(session, pi, search);
-		return searchList;
-	}
-
-	// 페이징 처리 (조건부 검색)
-	@Override
-	public int getListCount(Search search) {
-		int totalCount = rStore.getListCount(session, search);
-		return totalCount;
-	}
 
 	
-	// ********** 관리자 **********
 	
 	
 	

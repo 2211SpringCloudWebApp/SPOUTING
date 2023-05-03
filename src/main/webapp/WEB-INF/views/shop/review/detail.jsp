@@ -23,7 +23,7 @@
 			</tr>	
 			<tr>
 				<td>별점</td>
-				<td>${review.reviewGrade }</td>
+				<td>${review.reviewGrade } / 5</td>
 			</tr>	
 			<tr>
 				<td>후기</td>
@@ -35,7 +35,6 @@
 					<c:if test="${not empty review.reviewFilename}">
 						첨부파일 : ${review.reviewFilename }<br>
 						<img id="img-view1" width="200"src="../../../resources/images/review/${review.reviewFilename }" >
-						</div>
 					</c:if>
 				</td>
 			</tr>	
@@ -46,7 +45,7 @@
 	    <button onclick="location.href='/review/modifyView?reviewNo=${review.reviewNo}';">후기 수정</button>
 	</c:if>
 	<c:if test="${review.userId eq loginUser.userId}">
-	   <button a href="javascript:void(0);" onclick="removeCheck(${review.reviewNo});">후기 삭제</button>
+	   <button onclick="removeCheck(${review.reviewNo});">후기 삭제</button>
 	</c:if>
   	
 	<jsp:include page="../../common/footer.jsp"></jsp:include>

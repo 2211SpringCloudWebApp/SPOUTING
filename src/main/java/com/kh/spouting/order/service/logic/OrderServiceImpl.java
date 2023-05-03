@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.kh.spouting.common.PageInfo;
+import com.kh.spouting.common.Search;
 import com.kh.spouting.order.domain.Order;
 import com.kh.spouting.order.domain.OrderList;
 import com.kh.spouting.order.service.OrderService;
@@ -17,6 +18,7 @@ public class OrderServiceImpl implements OrderService{
 	@Autowired
 	private OrderStore oStore;
 
+	// ********** 이용자 **********
 	// 주문 DB 등록
 	@Override
 	public int insertOrder(Order order) {
@@ -58,12 +60,35 @@ public class OrderServiceImpl implements OrderService{
 		int result = oStore.deleteOrder(orderNo);
 		return result;
 	}
+	
 
-	// 주문 목록 조회
+	// ********** 관리자 **********
+	// 전체 주문 수
 	@Override
-	public List<Order> orderView() {
-		List<Order> olist = oStore.orderView();
-		return olist;
+	public int getListCount() {
+		int result = oStore.getListCount();
+		return result;
+	}
+
+	// 주문 목록 + 페이징
+	@Override
+	public List<Order> selectAllOrder(PageInfo pi) {
+		List<Order> oList = oStore.selectAllOrder(pi);
+		return oList;
+	}
+
+	// 검색 결과 수
+	@Override
+	public int getSearchOrderCount(Search search) {
+		int result = oStore.getSearchOrderCount(search);
+		return result;
+	}
+
+	// 조건부 검색
+	@Override
+	public List<Order> searchOrder(Search search, PageInfo pi) {
+		List<Order> oList = oStore.searchOrder(search, pi);
+		return oList;
 	}
 	
 	

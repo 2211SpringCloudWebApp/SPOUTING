@@ -2,7 +2,9 @@ package com.kh.spouting.order.service;
 
 import java.util.List;
 
+
 import com.kh.spouting.common.PageInfo;
+import com.kh.spouting.common.Search;
 import com.kh.spouting.order.domain.Order;
 import com.kh.spouting.order.domain.OrderList;
 
@@ -27,10 +29,20 @@ public interface OrderService {
 	// 주문 취소
 	int deleteOrder(int orderNo);
 
+
 	
 	// ********** 관리자 **********
-	// 주문 목록 조회
-	List<Order> orderView();
+	// 전체 주문 수
+	int getListCount();
+	
+	// 주문 목록 페이징
+	List<Order> selectAllOrder(PageInfo pi);
+
+	// 검색 결과 수
+	int getSearchOrderCount(Search search);
+
+	// 조건부 검색
+	List<Order> searchOrder(Search search, PageInfo pi);
 
 
 }

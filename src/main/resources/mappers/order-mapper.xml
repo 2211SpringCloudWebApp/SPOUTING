@@ -27,6 +27,7 @@
 		<result property="productDescription" column="PRODUCT_DESCRIPTION"/>
 	</resultMap>
 	
+	<!-- *********** 이용자 *********** -->
 	<!-- 주문 DB 등록 -->
 	<insert id="insertOrder" parameterType="Order">
 	    <selectKey keyProperty="orderNo" resultType="int" order="BEFORE">
@@ -69,4 +70,48 @@
 	<select id="orderView" resultMap="orderResultMap">
 		SELECT * FROM ORDER_TBL
 	</select>
+	
+	
+	<!-- *********** 관리자 *********** -->
+	<!-- 전체 주문 수 -->
+	<select id="getListCount" resultType="_int">
+		SELECT COUNT(*) FROM ORDER_TBL
+	</select>
+	
+	<!-- 주문 목록 + 페이징 -->
+	<select id="selectAllOrder" resultMap="orderResultMap">
+	  SELECT ORDER_NO, USER_ID, ORDER_NAME, ORDER_DATE, ORDER_COST
+	  FROM ORDER_TBL
+	  ORDER BY ORDER_NO
+	</select>
+	
+	<!-- 검색 결과 수 -->
+	<select id="getSearchOrderCount" resultType="_int">
+		SELECT COUNT(*) FROM ORDER_TBL
+		<where>
+			<if test="searchCondition == 'userId'">USER_ID LIKE '%' || #{searchValue} || '%'</if>
+			<if test="searchCondition == 'orderName'">ORDER_NAME LIKE '%' || #{searchValue} || '%'</if>
+			<if test="searchCondition == 'all'">
+				USER_ID LIKE '%' || #{searchValue} || '%' or 
+				ORDER_NAME LIKE '%' || #{searchValue}  || '%'
+			</if>
+		</where>
+	</select>
+	
+	<!-- 조건부 검색 -->
+	<select id="searchOrder" resultMap="orderResultMap">
+		SELECT * FROM ORDER_TBL 
+		<if test="searchCondition == 'all'">
+			WHERE USER_ID LIKE '%' || #{searchValue} || '%'
+			OR ORDER_NAME LIKE '%' || #{searchValue} || '%'
+		</if>
+		<if test="searchCondition == 'userId'">
+			WHERE USER_ID LIKE '%' || #{searchValue} || '%'
+		</if>
+		<if test="searchCondition == 'orderName'">
+			WHERE ORDER_NAME LIKE '%' || #{searchValue} || '%'
+		</if>
+		ORDER BY ORDER_NO DESC
+	</select>
+	
 </mapper>

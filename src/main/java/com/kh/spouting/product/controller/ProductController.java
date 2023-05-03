@@ -36,7 +36,6 @@ public class ProductController {
 	private CartService cService;
 	
 	// ******************** 이용자 기능 ********************
-	
 	// 페이징 처리 (게시판형)
 	private PageInfo getPageInfoBo(int currentPage, int totalCount) {
 		PageInfo pi = null;
@@ -144,7 +143,7 @@ public class ProductController {
 			if(!pList.isEmpty()) {
 				model.addAttribute("search", search);
 				model.addAttribute("pi", pi);
-				model.addAttribute("sList", pList);
+				model.addAttribute("pList", pList);
 				return "shop/product/search";
 			} else {
 				model.addAttribute("msg", "데이터 조회에 실패했습니다.");
@@ -211,7 +210,6 @@ public class ProductController {
 	
 	
 	// ******************** 관리자 기능 ********************
-	
 	// 상품 등록 화면
 	@RequestMapping(value="/product/registserView", method=RequestMethod.GET)
 	public String productRegisterView() {
@@ -318,7 +316,7 @@ public class ProductController {
 				if(!pList.isEmpty()) {
 					model.addAttribute("search", search);
 					model.addAttribute("pi", pi);
-					model.addAttribute("sList", pList);
+					model.addAttribute("pList", pList);
 					return "shop/admin/adminProductSearch";
 				} else {
 					model.addAttribute("msg", "데이터 조회에 실패했습니다.");
@@ -331,7 +329,7 @@ public class ProductController {
 		}
 	
 	// 상품 목록 조회
-	@RequestMapping(value="/shop/adminProductList", method=RequestMethod.GET)
+	@RequestMapping(value="/product/adminProductList", method=RequestMethod.GET)
 	public ModelAndView listAdmin(ModelAndView mv, 
 			@RequestParam(value="page", required=false, defaultValue="1") Integer page) {
 		int totalCount = pService.getListCount();

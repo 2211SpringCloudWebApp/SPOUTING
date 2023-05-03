@@ -1,17 +1,19 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html>
 <head>
 	<meta charset="UTF-8">
 	<title>상품 후기 작성</title>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 </head>
 <body>
 	<jsp:include page="../../common/header.jsp"></jsp:include>
 	<div id="maincontainer">
 		<h1>🖍️ ️상품 후기 작성</h1>
 		<p>구매한 제품의 후기를 남겨보세요</p>
-		<p>※ ${sessionScope.loginUser.userName}님 ! 상품 후기는 구매 건당 7일 이내 1회 작성 가능합니다.</p>
+		<p>※ ${sessionScope.loginUser.userId }님 ! 상품 후기는 구매 건당 7일 이내 1회 작성 가능합니다.</p>
 		<form action="/review/register" method="post" enctype="multipart/form-data">
 			<div id="inputGrade">
 				<div id="inputStarGrade" style="font-weight:bold;font-size:30px;">
@@ -55,18 +57,7 @@
 	<jsp:include page="../../common/footer.jsp"></jsp:include>
 	
 	
-	<script>
-	// 로그인 체크
-	function loginCheck(loginId, action, event){
-		event.preventDefault();
-		if(loginId==""){
-			alert("로그인이 필요합니다.");
-			location.href="/user/login";		
-		}else{
-			location.href="/review/reviewList";
-		}
-	}
-	
+	<script> 
 	//리뷰 별점 주기
 	var inputStars = document.querySelector("#inputStarGrade");
 	var inputGrade = document.querySelector("#inputGrade");

@@ -40,10 +40,11 @@
 			<c:forEach var="review" items="${rList }">
 				<tr>
 					<td>${review.reviewNo }</td>
-					<td>${review.reviewTitle }</td>
+					<td>${row.reviewTitle }
+						<a href="/review/detail?reviewNo=${review.reviewNo}">${review.reviewTitle }</a>
+					</td>
 					<td>${review.userId }</td>
 					<td><fmt:formatDate value="${review.reviewDate}" pattern="yyyy.MM.dd" /></td>
-					<td><input type="button" id="remo-btn" value="조회" onclick="location.href='/review/detail?reviewNo=${review.reviewNo}'"></td>
 				</tr>
 			</c:forEach>
 		</tbody>
@@ -83,5 +84,6 @@
 	</table>	
 	</div>
 	<jsp:include page="../../common/footer.jsp"></jsp:include>
+	
 </body>
 </html>

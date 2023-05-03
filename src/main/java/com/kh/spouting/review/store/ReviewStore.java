@@ -39,7 +39,7 @@ public interface ReviewStore {
 	List<Review> selectListByKeyword(SqlSession session, PageInfo pi, Search search);
 
 	// 페이징 처리 (조건부 검색)
-	int getListCount(SqlSession session, Search search);
+	int getListSearchCount(SqlSession session, Search search);
 	
 	
 	// ********** 관리자 **********

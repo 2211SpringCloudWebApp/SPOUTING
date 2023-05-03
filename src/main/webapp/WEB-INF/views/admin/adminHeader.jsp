@@ -26,9 +26,9 @@
                 <li><a href="/admin/bookingList">예약관리</a></li>
             </ul>	
         </li>	
-        <li class="main-nav"><a href="/shop/adminProductList">쇼핑몰</a>
+        <li class="main-nav"><a href="/product/adminProductList">쇼핑몰</a>
                 <ul class="drop-nav">
-                    <li><a href="/shop/adminProductList">상품관리</a></li>
+                    <li><a href="/product/adminProductList">상품관리</a></li>
                     <li><a href="/order/listAdmin">주문관리</a></li>
                     <li><a href="/review/adminList">리뷰관리</a></li>
                 </ul>
@@ -36,7 +36,7 @@
         <li class="main-nav"><a href="">게시판</a>
             <ul class="drop-nav">
                 <li><a href="/notice/write">공지글작성</a></li>
-                <li><a href="">문의게시판</a></li>
+                <li><a href="/inquiry/admin">문의글목록</a></li>
             </ul>
         </li>
     </ul>
