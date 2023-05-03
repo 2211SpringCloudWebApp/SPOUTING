@@ -34,9 +34,9 @@
             <nav>
                 <ul class="drop_nav">
                     <div class="item_part">
-                        <div class="item_name"><a href="">소개</a></div>
+                        <div class="item_name"><a href="/center/intro">소개</a></div>
                         <div class="item_content">
-                            <li><a href="">스파우팅 소개</a></li>
+                            <li><a href="/center/intro">스파우팅 소개</a></li>
                             <li><a href="/center/search">지점 찾기</a></li>
                         </div>
                     </div>
