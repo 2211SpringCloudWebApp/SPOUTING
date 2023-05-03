@@ -28,7 +28,7 @@
         </table>
     </div>
     <ul id="left-nav">
-        <li><a href="">예약내역</a></li>
+        <li><a href="/book/myBooking?userNo=${sessionScope.loginUser.userNo}">예약내역</a></li>
         <li><a href="/order/list">주문내역</a></li>
         <li><a href="/review/reviewListUser">상품후기</a></li>
         <li><a href="">나의 커뮤니티</a></li>

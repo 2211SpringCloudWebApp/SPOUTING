@@ -150,6 +150,42 @@
 	background-color: #1C3879;
   }
 
+/*왼쪽내비*/
+#left-nav {
+    width: 200px;
+    list-style: none;
+    border: 1px solid rgb(242, 242, 242);
+    float: left;
+    position: fixed;
+}
+    #left-nav li {
+        height: 50px;
+        text-align: center;
+        border-top: 1px solid rgb(242, 242, 242);
+    }
+    #left-nav a {
+        padding: 14px 15px 14px 15px;
+        display: block;
+        text-decoration: none;
+        color: rgb(102, 102, 102);
+        font-size: 15px;
+    }
+        #left-nav li:hover {
+            cursor: pointer;
+            font-weight: 700;
+            background-color: rgb(242, 242, 242);
+        }
+        #left-nav a:hover {
+            color: #1c4197;
+        }
+        .selected { 
+            font-weight: 700;
+            background-color: rgb(242, 242, 242);
+            color: #1c4197;
+        }
+
+
+
     </style>
 	</head>
 	<body>
@@ -158,6 +194,17 @@
 		<!-- c:forEach이거 쓰면되겟다
 		회원 예약내역 가져오기(사용일/시, 사용인원, 센터명-시설명 -->
 		<!--${bList }-->
+		
+		  <ul id="left-nav">
+		        <li class="selected"><a href="/book/myBooking?userNo=${sessionScope.loginUser.userNo}">예약내역</a></li>
+		        <li><a href="/order/list">주문내역</a></li>
+		        <li><a href="">상품후기</a></li>
+		        <li><a href="">나의 커뮤니티</a></li>
+		        <li><a href="#">나의 문의</a></li>
+		        <li><a href="/point/detail">포인트 관리</a></li>
+		        <li><a href="/mypage/myinfo">개인정보 수정</a></li>
+		    </ul>
+		
 	        <input type="hidden" id="hiddenUserNo" value="${loginUser.userNo }" name="userNo">
 			<c:forEach items="${bList }" var="book">
 				<div class="bookingEachDiv">
