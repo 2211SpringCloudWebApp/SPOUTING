@@ -53,7 +53,7 @@ public class UserController {
 			, String userId
 			, String userPw) {
 		HttpSession session = request.getSession();
-		User uParam = new User(           userId, userPw);
+		User uParam = new User(userId, userPw);
 		User user = uService.selectIdPw(uParam);
 		if(user != null) {
 			if(user.getUserType() == 0) {
@@ -132,8 +132,14 @@ public class UserController {
 
 	// 회원가입
 	@GetMapping("/user/register") //회원가입 View
-	public String registerView() {
-		return "user/register";
+	public String registerView(HttpSession session, Model model) {
+		User user = (User)session.getAttribute("loginUser");
+		if(user != null) {
+			model.addAttribute("msg", "로그인 상태에서는 회원가입을 진행할 수 없습니다.");
+			return "common/error"; 
+		} else {
+			return "user/register";		
+		}
 	}
 	
 	@PostMapping("/user/register") //회원가입 Logic
@@ -251,6 +257,12 @@ public class UserController {
 	@GetMapping("/admin/check")
 	public String adminCheckView() {
 		return "admin/check";
+	}
+	
+	//관리자 메인 View
+	@GetMapping("/admin/adminMain")
+	public String adminMainView() {
+		return "admin/adminMain";
 	}
 	
 	//회원 목록 View
