@@ -25,7 +25,6 @@
 		<main>
 			<div class="title">
 				<h1>SPOUTING</h1>
-<%-- 				<input type="hidden" value="${center.centerName }"> --%>
 				<h3>${center.centerName }</h3>
 				<div class="division-line"></div>
 				<h3>${center.centerAddr}</h3>
@@ -35,7 +34,7 @@
 				<div id="slide">
 					<ul>
 						<c:if test="${empty center.centerFilename1 || empty center.centerFilename2 }">
-							<li><img alt="center대표이미지1" src="${pageContext.request.contextPath}/resources/images/center/intro/intro1.jpg"></li>
+							<li><img alt="center대표이미지1" src="${pageContext.request.contextPath}/resources/images/center/detail1.jpg"></li>
 							<li><img alt="center대표이미지2" src="${pageContext.request.contextPath}/resources/images/center/intro/intro2.jpg"></li>
 						</c:if>
 						<c:if test="${!empty center.centerFilename1 && !empty center.centerFilename2 }">

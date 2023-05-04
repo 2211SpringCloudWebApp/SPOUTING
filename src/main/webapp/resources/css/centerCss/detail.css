@@ -56,23 +56,52 @@ main {
 
 
 #photo {
+    position: relative;
 	width: 1000px;
     height: 600px;
-/*     border: 1px solid dimgrey; */
     margin: 20px auto;
+    overflow: hidden;
 }
 
 	#slide {
-		height: 300px;
-/*     	border-bottom: 1px solid dimgrey; */
+		height: inherit;
 	}
+	
 	#slide>ul>li{
-	    position: absolute;
-/* 	    margin: 0 auto; */
-/* 	    width: 50%; */
-/* 		height: 50%; */
     	font-size: 0;
     	background-size: cover;
+	}
+	
+	#slide>ul>li>img {
+		width: 1000px;
+    	height: 600px;
+	}
+	
+	/* 자동 슬라이드 구현을 위한 애니메이션 */
+	@keyframes slideshow {
+	    0% {
+	        opacity: 0;
+	    }
+	    5% {
+	        opacity: 1;
+	    }
+	    25% {
+	        opacity: 1;
+	    }
+	    30% {
+	        opacity: 0;
+	    }
+	    100% {
+	        opacity: 0;
+	    }
+	}
+	
+	/* 자동 슬라이드 구현을 위한 설정 */
+	#slide > ul > li:nth-child(1) {
+	    animation: slideshow 10s infinite; /* 10초마다 애니메이션 반복 */
+	}
+	#slide > ul > li:nth-child(2) {
+	    animation: slideshow 10s infinite 5s; /* 5초 후부터 애니메이션 시작 */
 	}
 	
 	

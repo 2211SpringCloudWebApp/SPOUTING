@@ -33,9 +33,6 @@
 	</select>
 	
 	<!-- 지점정보 수정 -->
-<!-- 	<update id="updateCenter"> -->
-<!-- 		UPDATE CENTER_TBL SET CENTER_NAME = #{centerName}, CENTER_ADDR = #{centerAddr}, CENTER_TEL = #{centerTel}, CENTER_FILENAME1 = #{reloadFile1}, CENTER_FILENAME2 = #{reloadFile2} WHERE CENTER_NO = #{centerNo} -->
-<!-- 	</update> -->
 	<update id="updateCenter" parameterType="center">
 	    UPDATE CENTER_TBL SET 
 	        CENTER_NAME = #{centerName}, 
