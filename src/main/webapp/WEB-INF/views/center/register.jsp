@@ -7,6 +7,7 @@
 		<meta charset="UTF-8">
 		<title>지점 등록</title>
 		<link rel="stylesheet" href="../../../resources/css/centerCss/register.css">
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
 	</head>
 	<body>
 		<!-- header -->

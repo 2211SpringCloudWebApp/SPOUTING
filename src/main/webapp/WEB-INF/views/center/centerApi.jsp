@@ -35,7 +35,7 @@
 		/* MAIN */
 			#map{
 				width:100%;
-				height:75vh;
+				height:90vh;
 				position:absolute;
  				overflow:hidden;
 				margin: 0 auto;
@@ -46,14 +46,34 @@
 			}
 			
 			.search_tbl {
+				width: 350px;
+				height: 80%;
+				border-radius: 15px;
 				background-color: white;
 				margin : 20px;
 				padding : 20px;
+				
+			}
+			
+/* 			.search_tbl>table>tbody>tr>td>.searchKeyword { */
+/* 				margin : 20px auto; */
+/* 			} */
+			
+			hr {
+				margin: 10px 0px 10px;
 			}
 			
 			.cLocal {
 				padding: 10px;
 				margin-bottom: 15px;
+			}
+			
+			tr span {
+				border: 1px solid #444;
+				border-radius: 3px;
+				font-size: 13px;
+				padding: 1.05px;
+				color: #444;
 			}
 		</style>
 	
@@ -92,11 +112,12 @@
 										<input type="hidden" id="centerLat" value="${center.centerLat }">
 										<input type="hidden" id="centerLng" value="${center.centerLng }">
 										<!-- item의 index 불러오기 -->
-										<tr id="clickName" onclick="clickName(${i.index});">
-										    <td>스파우팅 ${center.centerName }</td>
+										<tr id="clickName" onclick="clickName(${i.index});" style="color: #003cc7; font-weight:600;">
+										    <td><img src="../../../resources/images/center/marker.png" width=15 height=15>  스파우팅 ${center.centerName }</td>
 									    </tr>
-										<tr><td>${center.centerAddr }</td></tr>
-										<tr><td>${center.centerTel }</td></tr>
+										<tr><td style="color: #444;"><span>지번</span> ${center.centerAddr }</td></tr>
+										<tr><td style="color: #444;"><span>도로명</span> ${center.centerSnaddr }</td></tr>
+										<tr><td style="color: #003cc7;">${center.centerTel }</td></tr>
 										<tr><td><hr></td></tr>
 									</c:forEach>
 								</c:if>
@@ -154,6 +175,7 @@
 		});
 		
 		
+		
 		function initMap() {
 			
 			// 지도 생성 함수
@@ -176,7 +198,7 @@
 				// 지점정보를 담은 배열을 각각 부여
 			    let marker = new naver.maps.Marker({
 			        map: map,
-	
+			        
 					centernumber : areaArr[i].centerNo,
 			        centerphoto: areaArr[i].centerFilename1,	// 센터 사진
 			        title: areaArr[i].centerName, 	// 센터 지점명
@@ -185,14 +207,17 @@
 			        streetname : areaArr[i].centerSnaddr,	// 지점 도로명주소
 			        telephone : areaArr[i].centerTel,	// 지점 전화번호
 			        
+			        
 			        // 마커 아이콘
-// 			        icon: {
-// 			            url: '../../../resources/images/center/marker.png',
-// 			            size: {width: 100, height: 100},
-// 			            origin: new naver.maps.Point(0, 0),
-// 			            anchor: new naver.maps.Point(50, 50)
-// 			        }
-// 			    	new naver.maps.Marker(markeroption);
+			        icon: {
+			            url: '../../../resources/images/center/marker.png',	// 이미지의 경로
+			            size: new naver.maps.Size(50, 50),				// 이미지 크기 지정
+			            origin: new naver.maps.Point(0, 0),				// 이미지 파일의 최상단 좌표 지정
+			            anchor: new naver.maps.Point(15, 15),		// 마커의 어느 지점을 기준으로 지도상에 표시할지
+			            scaledSize: new naver.maps.Size(25, 25),	// 이미지 크기 조절
+			            scale: 0.5	// 이미지 크기 비율 조절
+			        }
+			    
 			    });
 				
 				// 마커의 위치 및 이동 위치
