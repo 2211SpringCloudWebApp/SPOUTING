@@ -237,10 +237,10 @@
 	            <div class="search-user">
 	                <div class="search-user-header">
 	                    <img class="person-icon" src="/resources/images/message/user.png" alt="" width="16px" height="16px">
-	                   	 &nbsp;보낸사람
+	                   	 &nbsp;받은사람
 	                </div>
 	                <div class="search-user-main">
-	                    <input type="text" class="search-user-textbox" value="${oneMessage.userName }">
+	                    <input type="text" class="search-user-textbox" value="${oneMessage.userName }" readonly>
 	                </div>
 	            </div>
 	
@@ -250,7 +250,7 @@
 	                    	&nbsp;쪽지내용
 	                </div>
 	                <div class="message-box-main">
-	                    <textarea class="message-textbox">${oneMessage.msgContent }</textarea>
+	                    <textarea class="message-textbox" readonly>${oneMessage.msgContent }</textarea>
 	                </div>
 	            </div>
 	        </div>

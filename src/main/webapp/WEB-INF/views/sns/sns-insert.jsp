@@ -58,6 +58,9 @@
 	        #img-view {
 	            margin: 0 auto;
 	            align-items: center;
+	            width:100%;
+			    height:100%;
+			    object-fit:scale-down;
 	        }
 	
 	        #write-viewer{
@@ -72,6 +75,7 @@
 	            margin: 0 auto;
 	            width: 600px;
 	            height: 70px;
+	            padding: 10px;
 	        }
 	
 	        #upload-btn {

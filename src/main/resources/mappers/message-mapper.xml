@@ -32,6 +32,7 @@
 		JOIN USER_TBL U
 		ON M.SEND_USER = U.USER_NO
 		WHERE RECEIVE_USER = #{userNo}
+		ORDER BY SEND_TIME_NEW DESC
 	</select>
 	
 	<select id="getSendMessageList" resultMap="messageResultMap">
@@ -40,6 +41,7 @@
 		JOIN USER_TBL U
 		ON M.RECEIVE_USER = U.USER_NO
 		WHERE SEND_USER = #{userNo}
+		ORDER BY SEND_TIME_NEW DESC
 	</select>
 	
 	<select id="oneMessageDetail" resultMap="messageResultMap">
