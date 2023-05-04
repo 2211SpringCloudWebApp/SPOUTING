@@ -70,12 +70,14 @@
             const diaryDetail = $("#diaryDetail").val();
             if(diaryTitle === "") {
                 alert("하루기록의 제목을 입력해주세요.")
+                $("#diaryTitle").focus();
                 return false;
             } else if(diaryDetail === "") {
                 alert("오늘 하루를 짧게 기록해봐요!")
+                $("#diaryDetail").focus();
                 return false;
             }
-            alert("수고하셨어요🤍 내일도 SPOUTING!")
+            alert("수고하셨어요! 내일도 SPOUTING✊")
         }
     </script>
     

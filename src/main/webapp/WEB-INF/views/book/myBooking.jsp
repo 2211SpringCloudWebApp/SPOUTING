@@ -194,14 +194,14 @@ img{
 		<jsp:include page="../common/header.jsp"></jsp:include>
 		<main>
 		  <ul id="left-nav">
-		        <li class="selected"><a href="/book/myBooking?userNo=${sessionScope.loginUser.userNo}">예약내역</a></li>
-		        <li><a href="/order/list">주문내역</a></li>
-		        <li><a href="">상품후기</a></li>
-		        <li><a href="">나의 커뮤니티</a></li>
-		        <li><a href="#">나의 문의</a></li>
-		        <li><a href="/point/detail">포인트 관리</a></li>
-		        <li><a href="/mypage/myinfo">개인정보 수정</a></li>
-		    </ul>
+			<li class="selected"><a href="/book/myBooking?userNo=${sessionScope.loginUser.userNo}">예약내역</a></li>
+			<li><a href="/order/list">주문내역</a></li>
+			<li><a href="/review/reviewListUser">상품후기</a></li>
+			<li><a href="">나의 커뮤니티</a></li>
+			<li><a href="/inquiry/myInquiry">나의 문의</a></li>
+			<li><a href="/point/detail">포인트 관리</a></li>
+			<li><a href="/mypage/myinfo">개인정보 수정</a></li>
+		</ul>
 		
 		<!-- c:forEach이거 쓰면되겟다
 		회원 예약내역 가져오기(사용일/시, 사용인원, 센터명-시설명 -->

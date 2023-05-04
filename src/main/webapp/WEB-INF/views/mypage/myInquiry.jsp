@@ -21,7 +21,7 @@
         <table>
             <tr>
                 <td id="user-msg">
-                    ${sessionScope.loginUser.userName}님 <br>
+                    ${sessionScope.loginUser.userName}님 
                     오늘도 Spouting!
                 </td>
                 <td>
@@ -33,7 +33,7 @@
     <ul id="left-nav">
         <li><a href="/book/myBooking?userNo=${sessionScope.loginUser.userNo}">예약내역</a></li>
         <li><a href="/order/list">주문내역</a></li>
-        <li><a href="">상품후기</a></li>
+        <li><a href="/review/reviewListUser">상품후기</a></li>
         <li><a href="">나의 커뮤니티</a></li>
         <li class="selected"><a href="/inquiry/myInquiry">나의 문의</a></li>
         <li><a href="/point/detail">포인트 관리</a></li>
