@@ -49,7 +49,7 @@ a{
   	background-color: #eee;
 }
 .centerTbl {
-	width: 65%;
+	width: 55%;
 	margin: 0 auto;
     display: flex;
     flex-direction: row;
@@ -69,14 +69,32 @@ a{
 
 table {
 	width: 55%;
-	margin: 20px auto;
+	margin: 20px 0px auto;
 }
 
-.centerTbl tr {
+.centerTbl tr:not(:last-child) {
     line-height: 3em;
 }
 
+tr td:nth-child(5) {
+	margin-top: 20px;
+}
+
+.centerTbl th {
+	text-align: left;
+}
+
+.centerTbl td {
+	text-align: left;
+	padding-left: 40px;
+}
+
+.centerTbl .div {
+	height: 20px;
+}
+
 	.inputTag {
+		width: 55%;
 		padding : 5px 10px;
 	    border-top: 1px;
 	    border-left: 1px;
@@ -84,8 +102,10 @@ table {
 	    border-color: #2d4680;
 	}
 	.latlngTag {
-		width: 18%;
+		width: 26%;
+		text-align: center;
 		padding : 5px 10px;
+		margin: 0px 3px;
 	    border-top: 1px;
 	    border-left: 1px;
 	    border-right: 1px;
@@ -93,7 +113,7 @@ table {
 	}
 		
 	.file-input {
-		
+		margin-left: 12px;
 	}
 		
 	.selectFile {

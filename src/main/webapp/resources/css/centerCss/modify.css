@@ -64,11 +64,11 @@ a{
 .centerTbl_header {
 	float: left;
 	margin: 30px auto;
-	width: 30%;
+	width: 35%;
 }
 
 table {
-	width: 70%;
+	width: 65%;
 	margin: 20px auto;
 }
 
@@ -76,7 +76,18 @@ table {
     line-height: 3em;
 }
 
+.centerTbl th {
+	text-align: left;
+	width: 15%;
+}
+
+.centerTbl td {
+	text-align: left;
+	padding-left: 40px;
+}
+
 	.inputTag {
+		width: 100%;
 		padding : 5px 10px;
 	    border-top: 1px;
 	    border-left: 1px;
@@ -85,36 +96,14 @@ table {
 	}
 	
 	.latlngTag {
-		width: 18%;
+		width: 40%;
 		padding : 5px 10px;
+		margin-right: 10px;
 	    border-top: 1px;
 	    border-left: 1px;
 	    border-right: 1px;
 	    border-color: #2d4680;
 	}
-	
-/* 	.selectFile { */
-/* 	  width: 0.1px; */
-/* 	  height: 0.1px; */
-/* 	  opacity: 0; */
-/* 	  overflow: hidden; */
-/* 	  position: absolute; */
-/* 	  z-index: -1; */
-/* 	} */
-	
-/* 	.selectFile_label { */
-/* 	  cursor: pointer; */
-/* /* 	  display: inline-flex; */ */
-/* 	  align-items: center; */
-/* 	  border-radius: 4px; */
-/* 	  font-size: 14px; */
-/* 	  font-weight: 600; */
-/* 	  color: #fff; */
-/* 	  font-size: 14px; */
-/* 	  padding: 10px 12px; */
-/* 	  background-color: #2d4680; */
-/* 	  box-shadow: 0px 0px 2px rgba(0, 0, 0, 0.25); */
-/* 	} */
 	
 	.selectFile_label svg {
 	  height: 16px;
@@ -140,12 +129,6 @@ table {
 	&:hover {
 		text-shadow: 0 -3rem 0 #fff, 0 0 0 yellow;
 	}
-
-.link a {
-	padding : 22px;
-	background-color: white;
-}
-
 
 
 	
