@@ -136,7 +136,6 @@ public class ProductController {
 			, @RequestParam(value="page", required=false, defaultValue="1") Integer currentPage
 			, Model model) {
 		try {
-			System.out.println(search.toString());
 			int totalCount = pService.getSearchProductCount(search);
 			PageInfo pi = this.getPageInfoBo(currentPage, totalCount);
 			List<Product> pList = pService.searchProduct(search, pi);
@@ -243,7 +242,7 @@ public class ProductController {
 			}
 			int result = pService.insertProduct(product);
 			if(result > 0) {
-				Alert alert = new Alert("/shop/adminProductList", "상품 등록이 완료되었습니다.");
+				Alert alert = new Alert("/product/adminProductList", "상품 등록이 완료되었습니다.");
 				model.addAttribute("alert", alert);
 				return "common/alert";
 			}else {
@@ -404,7 +403,7 @@ public class ProductController {
 			// DB에서 지점정보 수정
 			int result = pService.updateProduct(product);
 			if(result > 0) {
-				Alert alert = new Alert("/shop/adminProductList", "상품 수정이 완료되었습니다.");
+				Alert alert = new Alert("/product/adminProductList", "상품 수정이 완료되었습니다.");
 				model.addAttribute("alert", alert);
 				return "common/alert";
 			}else {
@@ -446,7 +445,7 @@ public class ProductController {
 		try {
 			int result = pService.deleteProduct(productNo);
 			if(result > 0) {
-				Alert alert = new Alert("/shop/adminProductList", "상품이 삭제되었습니다.");
+				Alert alert = new Alert("/product/adminProductList", "상품이 삭제되었습니다.");
 				model.addAttribute("alert", alert);
 				return "common/alert";
 			}else {

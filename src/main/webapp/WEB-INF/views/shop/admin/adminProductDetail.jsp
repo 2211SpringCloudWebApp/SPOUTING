@@ -6,6 +6,16 @@
 <head>
 	<meta charset="UTF-8">
 	<title>상품 상세</title>
+	<link rel="stylesheet" href="../../../../resources/css/shopCss/table.css">
+	<style>
+  		#maincontainer {
+			height : 1200px;
+		}
+		td {
+			height : 50px;
+			padding : 10px;
+		}
+  	</style>
 </head>
 <body>
 	<jsp:include page="../../admin/adminHeader.jsp"></jsp:include>
@@ -50,11 +60,11 @@
 				</c:if>
 			</tr>	
 		</table>
-	</div>
-	<div id="buttonbox">
-	  <button onclick="location.href='/shop/adminProductList';">상품 목록</button>
-	  <button onclick="location.href='/product/modifyView?productNo=${product.productNo}';">정보 수정</button>
-	  <button a href="javascript:void(0);" onclick="removeCheck(${product.productNo});">상품 삭제</button>
+		<div id="buttonbox">
+		  <button class="btn" onclick="location.href='/product/adminProductList';">상품 목록</button>
+		  <button class="btn" onclick="location.href='/product/modifyView?productNo=${product.productNo}';">정보 수정</button>
+		  <button class="btn" onclick="removeCheck(${product.productNo});">상품 삭제</button>
+		</div>
 	</div>
 	
 	<jsp:include page="../../common/footer.jsp"></jsp:include>

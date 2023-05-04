@@ -33,7 +33,7 @@
 								</tr>
 								<tr>
 									<td>상품가격</td>
-									<td><fmt:formatNumber value="${product.productPrice }" pattern="#,###"/></td>
+									<td><fmt:formatNumber value="${product.productPrice }" pattern="#,###"/> 원</td>
 								</tr>
 								<tr>
 									<td>상품설명</td>

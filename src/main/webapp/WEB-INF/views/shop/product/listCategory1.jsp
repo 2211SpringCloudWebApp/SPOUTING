@@ -23,14 +23,14 @@
 		<!-- 게시글 조건부 검색 -->
 		<div id="search">
 			<form action="/product/search" method="get">
-				<select name="searchCondition">
+				<select name="searchCondition" id="search-select">
 						<option value="all">전체</option>
 						<option value="no">상품번호</option>
 						<option value="title">상품명</option>
 						<option value="description">상품설명</option>
 					</select>
-					<input type="text" name="searchValue" placeholder="검색어를 입력하세요.">
-					<input type="submit" value="검색">
+					<input type="text" id="search-box" name="searchValue" placeholder="검색어를 입력하세요.">
+					<input type="submit" id="search-btn" value="검색">
 			</form>
 		</div>
 		<br><br>
@@ -50,13 +50,13 @@
 		</ul>
 		
 		<!-- 게시글 페이징 처리 -->
-		<div id="page">
+		<div id="navi-box">
 			<c:forEach begin="${pi.startNavi }" end="${pi.endNavi }" var="p">
 					<c:url var="pageUrl" value="/shop/catelist1">
 						<c:param name="page" value="${p }"></c:param>
 						<c:param name="c" value="${c }"></c:param>
 					</c:url>
-					<a href="${pageUrl }">${p }</a>&nbsp;&nbsp;&nbsp;
+					<a href="${pageUrl }" class="navi-btn3">${p }</a>&nbsp;&nbsp;&nbsp;
 			</c:forEach>
 		</div>
 	

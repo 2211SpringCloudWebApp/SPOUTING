@@ -50,42 +50,36 @@
 				</tr>
 			</c:forEach>
 		</tbody>
-		<tfoot>
+	</table>
+	<table id="navi-box">
 		<!-- 게시글 페이징 처리 -->
-			<tr>
-				<td colspan="5" align="center" style="height : 50px; border-bottom:0px;">
-					<c:if test="${pi.currentPage > 0}">
-	       				<a href="/review/search?page=1" class="first-last-page">처음</a>
-	       			</c:if> 
-					<c:forEach begin="${pi.startNavi }" end="${pi.endNavi }" var="p">
-							<c:url var="pageUrl" value="/review/search">
-								<c:param name="page" value="${p }"></c:param>
-								<c:param name="searchValue" value="${search.searchValue }"></c:param>
-								<c:param name="searchCondition" value="${search.searchCondition }"></c:param>
-							</c:url>
-							<a href="${pageUrl }">${p }</a>&nbsp;&nbsp;&nbsp;
-					</c:forEach>
-	       			<c:if test="${pi.currentPage < pi.maxPage}">
-	       				<a href="/review/search?page=${pi.maxPage}" class="first-last-page">마지막</a>
-	       			</c:if>
-				</td>
-			</tr>
+		<tr>
+			<td>
+				<c:forEach begin="${pi.startNavi }" end="${pi.endNavi }" var="p">
+						<c:url var="pageUrl" value="/review/search">
+							<c:param name="page" value="${p }"></c:param>
+							<c:param name="searchValue" value="${search.searchValue }"></c:param>
+							<c:param name="searchCondition" value="${search.searchCondition }"></c:param>
+						</c:url>
+						<a href="${pageUrl }" class="navi-btn3">${p }</a>&nbsp;
+				</c:forEach>
+			</td>
+		</tr>
 		<!-- 게시글 조건부 검색 -->
-			<tr>
-				<td colspan="4" align="center" style="height : 50px;">
-					<form action="/review/search" method="get">
-						<select name="searchCondition">
-							<option value="all" <c:if test="${search.searchCondition == 'all' }">selected</c:if>>전체</option>
-							<option value="no" <c:if test="${search.searchCondition == 'no' }">selected</c:if>>상품번호</option>
-							<option value="title" <c:if test="${search.searchCondition == 'title' }">selected</c:if>>제목</option>
-						</select>
-						<input type="text" name="searchValue" placeholder="검색어를 입력하세요.">
-						<input type="submit" value="검색">
-					</form>
-				</td>
-			</tr>	
-		</tfoot>
-	</table>	
+		<tr>
+			<td>
+				<form action="/review/search" method="get">
+					<select name="searchCondition" id="search-select">
+						<option value="all">전체</option>
+						<option value="no">번호</option>
+						<option value="title">제목</option>
+					</select>
+					<input id="search-box" type="text" name="searchValue" placeholder="검색어를 입력하세요.">
+					<input id="search-btn" type="submit" value="검색">
+				</form>
+			</td>
+		</tr>	
+	</table>
 	</div>
 	<jsp:include page="../../common/footer.jsp"></jsp:include>
 </body>

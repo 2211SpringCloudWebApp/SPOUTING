@@ -21,11 +21,11 @@
         </div>
         <table id="user-list">
             <tr>
-                <th>REVIEW_NO</th>
-                <th>ID</th>
-                <th>REVIEW_TITLE</th>
-                <th>REVIEW_DATE</th>
-                <th>REVIEW_GRADE</th>
+                <th>리뷰번호</th>
+                <th>아이디</th>
+                <th>제목</th>
+                <th>등록일자</th>
+                <th>별점</th>
             </tr>
             
             <c:forEach items="${rList}" var="review" varStatus="i">

@@ -26,11 +26,11 @@
         </div>
         <table id="user-list">
             <tr>
-                <th>ORDER_NO</th>
-                <th>ID</th>
-                <th>NAME</th>
-                <th>ORDER_DATE</th>
-                <th>ORDER_COST</th>
+                <th>주문번호</th>
+                <th>아이디</th>
+                <th>주문자명</th>
+                <th>주문일자</th>
+                <th>결제가격</th>
             </tr>
             
             <c:forEach items="${oList }" var="order" varStatus="i">

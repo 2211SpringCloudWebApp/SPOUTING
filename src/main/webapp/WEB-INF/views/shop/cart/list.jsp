@@ -19,15 +19,16 @@
 	<div id="maincontainer">
 		<h1>🛒 ${sessionScope.loginUser.userName}님의 장바구니</h1>
 		<p>스파우팅 마켓은 전 상품 무료 배송 !</p>
+		<br><br><br>
 		<div id="contents" class="row">
-				<div class="contents col">
+				<div class="contents">
 					<div id="inner-header">
-						<span>장바구니(${cList.size() })</span>
+						<span>장바구니 (${cList.size() })</span>
 					</div>
-					<div class="col-10">
+					<div id="inner-header">
 						전체선택 <input id="allCheckbox" type="checkbox" onchange="allCheck(this);">
 					</div>
-					<div class="col-11" >
+					<div class="inner-content" >
 						<c:forEach items="${cList }" var="cart" varStatus="n" >
 							<div class="oneCart row m-auto" >
 								<!-- 체크박스 -->
@@ -61,9 +62,9 @@
 								    <span class="cartPrice"></span>
 								    <span class='wonSymbol'>원</span>
 								</div>
-								<div class="col-1">
+								<div class="col-2">
 									<!-- 삭제버튼 -->
-									<button type="button" onclick="removeCart(${cart.productNo},'${sessionScope.loginUser.userId }');">X</button>
+									<button class="btn" type="button" onclick="removeCart(${cart.productNo},'${sessionScope.loginUser.userId }');">X</button>
 								</div>
 							</div>
 						</c:forEach>
@@ -72,14 +73,15 @@
 						<div id="totalPrice-wrap" class="row">
 							<div class="col">
 								<div>총 상품 금액</div> 
-								<span id="totalPrice"></span>
-								<span class='wonSymbol'>원</span>
+								<span id="totalPrice" style="font-size : 20px;"></span>
+								<span class='wonSymbol' style="font-size : 20px;">원</span>
 							</div>
 						</div>
 						<hr>
-						<div id="cartBtn" style="text-align:center;margin:10px;">
+						<div id="buttonbox">
 							<button class="shopbtn" onclick="location.href='/shop/productList';">쇼핑계속</button>
-							<button class="cartbtn" onclick="if(confirm('선택 상품을 구매하시겠습니까?')&& totalPrice!=0){location.href='/cart/orderView';} else{alert('구매할 상품을 선택해주세요.');}">구매하기</button>
+							<button class="cartbtn" onclick="if(totalPrice==0){alert('구매할 상품을 선택해주세요.');} else if(confirm('선택 상품을 구매하시겠습니까?')){location.href='/cart/orderView';}">구매하기</button>
+
 						</div>
 					</div>
 				</div>

@@ -9,13 +9,24 @@
 	<title>주문 내역 상세</title>
 	<!-- jquery -->
   	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
+  	<link rel="stylesheet" href="../../../../resources/css/shopCss/table.css">
+  	<style>
+  		#maincontainer {
+			height : 1200px;
+		}
+		td {
+			height : 50px;
+			padding : 10px;
+		}
+  	</style>
 </head>
 <body>
 	<jsp:include page="../../common/header.jsp"></jsp:include>
 	<div id="maincontainer">
+		<br><br><br>
 		<h1>🛒 주문 상세 조회</h1>
 		<p>주문 정보를 확인해 보세요.</p>
-		<br><br><br><br>
+		<br><br><br>
 		<form action="/order/detailAdmin" method="POST">
 			<table>
 				<tr>
@@ -48,11 +59,20 @@
 				</tr>
 				<tr>
 					<td>배송 요청사항</td>
-					<td>${order.orderRequest }</td>
+					<td>
+						<c:if test="${order.orderRequest eq  null }">
+					 		없음
+					 	</c:if>
+					 	<c:if test="${order.orderRequest ne  null }">
+					 		${order.orderRequest}
+					 	</c:if>
+					</td>
 				</tr>
 				<tr>
 					<td>주문일자</td>
-					<td>${order.orderDate }</td>
+					<td>
+						<fmt:formatDate value="${order.orderDate}" pattern="yyyy.MM.dd" />
+					</td>
 				</tr>
 				<tr>
 					<td>배송상태</td>
@@ -69,14 +89,11 @@
 					<td>결제금액</td>
 					<td>${order.orderCost }</td>
 				</tr>
-				<tr>
-					<td>
-						<input type="button" value="주문취소" onclick="deleteCheck(${order.orderNo});">
-						<input type="button" value="쇼핑몰" onclick="location.href='/shop/productList'">
-						<input type="button" value="주문목록" onclick="location.href='/order/listAdmin'" class='btn btn-success'/>
-					</td>
-				</tr>
 			</table>
+			<div id="buttonbox">
+				<input class='btn btn-success' type="button" value="주문목록" onclick="location.href='/order/listAdmin'"/>
+				<input class="btn" type="button" value="주문취소" onclick="deleteCheck(${order.orderNo});">
+			</div>
 		</form>
 	</div>
 	<jsp:include page="../../common/footer.jsp"></jsp:include>

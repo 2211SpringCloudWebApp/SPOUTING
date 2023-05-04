@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@taglib prefix="c"  uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
   
 <!DOCTYPE html>
 <html>
@@ -21,6 +22,21 @@
 			display : flex;
 			align-items : center;
 			padding : 10px;
+		}
+		#buttonbox {
+			text-align : center;
+			height : 100px;
+			display : flex;
+			align-items : center;
+			justify-content : center;
+		}
+		.btn {
+			width : 100px;
+			height : 30px;
+			background-color : #1C3879;
+			border : none;
+			margin : 20px;
+			color : white;
 		}
 	</style>
 </head>
@@ -50,7 +66,9 @@
 					<img src="/resources/images/product/items/${product.productFilename1}"> 
 				</td>
 				<td>${product.productName }</td>
-				<td>${product.productPrice }</td>
+				<td>
+					<fmt:formatNumber value="${product.productPrice }" pattern="#,###"/> 원
+				</td>
 				
 				<c:if test="${user.userType != '1'}">
                     <td><input type="button" id="remo-btn" value="조회" onclick="location.href='/product/adminDetailProduct?productNo=${product.productNo}'"></td>
@@ -85,14 +103,14 @@
             <tr>
                 <td >
                     <form action="/product/adminSearch" method="get">
-						<select name="searchCondition">
+						<select name="searchCondition" id="search-select">
 								<option value="all">전체</option>
 								<option value="no">상품번호</option>
 								<option value="title">상품명</option>
 								<option value="description">상품설명</option>
 							</select>
-							<input type="text" name="searchValue" placeholder="검색어를 입력하세요.">
-							<input type="submit" value="검색">
+							<input type="text" id="search-box" name="searchValue" placeholder="검색어를 입력하세요.">
+							<input type="submit" id="search-btn" value="검색">
 					</form>
                 </td>                       
             </tr>

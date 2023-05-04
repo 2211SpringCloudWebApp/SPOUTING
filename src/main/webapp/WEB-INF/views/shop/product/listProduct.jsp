@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@taglib prefix="c"  uri="http://java.sun.com/jsp/jstl/core"%>
-  
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -44,45 +44,41 @@
 						</a>
 					</td>
 					<td>${row.productName }</td>
-					<td>${row.productPrice }</td>
+					<td><fmt:formatNumber value="${row.productPrice }" pattern="#,###"/> 원</td>
 				</tr>
 			</c:forEach>
 		</tbody>
-		<tfoot>
-		<!-- 게시글 페이징 처리 -->
+		</table>
+		<table id="navi-box">
+			<!-- 게시글 페이징 처리 -->
 			<tr>
-				<td colspan="5" align="center" style="height : 50px; border-bottom:0px;">
-					<c:if test="${pi.currentPage > 0}">
-	       				<a href="/shop/productList?page=1" class="first-last-page">처음</a>
-	       			</c:if> 
+				<td>
 					<c:forEach begin="${pi.startNavi }" end="${pi.endNavi }" var="p">
 							<c:url var="pageUrl" value="/shop/productList">
 								<c:param name="page" value="${p }"></c:param>
+								<c:param name="searchValue" value="${search.searchValue }"></c:param>
+								<c:param name="searchCondition" value="${search.searchCondition }"></c:param>
 							</c:url>
-							<a href="${pageUrl }">${p }</a>&nbsp;&nbsp;&nbsp;
+							<a href="${pageUrl }" class="navi-btn3">${p }</a>&nbsp;
 					</c:forEach>
-	       			<c:if test="${pi.currentPage < pi.maxPage}">
-	       				<a href="/shop/productList?page=${pi.maxPage}" class="first-last-page">마지막</a>
-	       			</c:if>
 				</td>
 			</tr>
-		<!-- 게시글 조건부 검색 -->
+			<!-- 게시글 조건부 검색 -->
 			<tr>
-				<td colspan="4" align="center" style="height : 50px;">
+				<td>
 					<form action="/product/search" method="get">
-						<select name="searchCondition">
-								<option value="all">전체</option>
-								<option value="no">상품번호</option>
-								<option value="title">상품명</option>
-								<option value="description">상품설명</option>
-							</select>
-							<input type="text" name="searchValue" placeholder="검색어를 입력하세요.">
-							<input type="submit" value="검색">
+						<select name="searchCondition" id="search-select">
+							<option value="all" <c:if test="${search.searchCondition == 'all' }">selected</c:if>>전체</option>
+							<option value="no" <c:if test="${search.searchCondition == 'no' }">selected</c:if>>상품번호</option>
+							<option value="title" <c:if test="${search.searchCondition == 'title' }">selected</c:if>>상품명</option>
+							<option value="description" <c:if test="${search.searchCondition == 'description' }">selected</c:if>>상품설명</option>
+						</select>
+						<input id="search-box" type="text" name="searchValue" placeholder="검색어를 입력하세요.">
+						<input id="search-btn" type="submit" value="검색">
 					</form>
 				</td>
 			</tr>	
-		</tfoot>
-	</table>	
+		</table>
 	</div>
 	<jsp:include page="../../common/footer.jsp"></jsp:include>
 </body>

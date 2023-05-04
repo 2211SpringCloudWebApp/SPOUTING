@@ -58,7 +58,7 @@
 	
 	<!-- 리뷰 목록 조회 -->
 	<select id="selectAllReview" resultMap="reviewResultMap">
-		SELECT REVIEW_NO, REVIEW_TITLE, USER_ID, REVIEW_DATE
+		SELECT REVIEW_NO, REVIEW_TITLE, USER_ID, REVIEW_DATE, REVIEW_GRADE
 		FROM REVIEW_TBL
 		ORDER BY REVIEW_NO
 	</select>
