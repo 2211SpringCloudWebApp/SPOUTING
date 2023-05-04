@@ -42,7 +42,7 @@
                 var inputPw = $("#admin-pw").val();
                 if(inputPw === "princess6") {
                     alert("관리자 인증 완료👩‍🚒")
-                    location.href = "/admin/user";
+                    location.href = "/admin/adminMain";
                 } else {
                     alert("관리자 인증 실패")
                 }
