@@ -34,8 +34,14 @@
 			<div id="photo">
 				<div id="slide">
 					<ul>
-						<li><img alt="center이미지" src="${pageContext.request.contextPath}/resources/images/centeruploadFiles/${center.centerFilename1 }"></li>
-						<li><img alt="center이미지" src="${pageContext.request.contextPath}/resources/images/centeruploadFiles/${center.centerFilename2 }"></li>
+						<c:if test="${empty center.centerFilename1 && center.centerFilename2 }">
+							<li><img alt="center대표이미지1" src="${pageContext.request.contextPath}/resources/images/center/intro/home.png"></li>
+							<li><img alt="center대표이미지2" src="${pageContext.request.contextPath}/resources/images/center/intro/intro.png"></li>
+						</c:if>
+						<c:if test="${!empty center.centerFilename1 && center.centerFilename2 }">
+							<li><img alt="center이미지" src="${pageContext.request.contextPath}/resources/images/centeruploadFiles/${center.centerFilename1 }"></li>
+							<li><img alt="center이미지" src="${pageContext.request.contextPath}/resources/images/centeruploadFiles/${center.centerFilename2 }"></li>
+						</c:if>
 					</ul>
 				</div>
 			</div>

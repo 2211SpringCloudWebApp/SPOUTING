@@ -106,7 +106,7 @@ public class CenterController {
 			
 		}catch (Exception e) {
 			e.printStackTrace();
-			model.addAttribute("msg", "모든 정보를 입력해주세요");
+			model.addAttribute("msg", "지점 등록에 실패하였습니다.");
 			return "common/error";
 		}
 
