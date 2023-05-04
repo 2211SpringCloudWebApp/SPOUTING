@@ -200,7 +200,7 @@
 				<img id="sns-content-img" src="/resources/images/sns/${snsDetail.snsFileRename }" alt="">
 			</div>
 			<br>
-			${snsDetail.snsContent }
+			<pre>${snsDetail.snsContent }</pre>
 			
 		</div>
 		

@@ -218,7 +218,7 @@
 			<div id="sns-content">
 				<input type="hidden" id="more-var" totalCount="${totalCount}" currentSum="0" currentCount="0" value="1">
 			</div>
-			<button onclick="photoMoreAjax(2,3)">More</button>
+			<button onclick="photoMoreAjax(2,${oneSns.userNo})">More</button>
 		</div>
 
 <!--     </div> -->

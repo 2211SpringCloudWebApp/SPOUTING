@@ -50,7 +50,7 @@
 		            <img class="meeting-content-img" src="/resources/images/meeting/${meeting.meetingFileRename }"> 
 		        </div>  
 		        <div class="meeting-content-info-box">
-		        	${meeting.meetingDetail }
+		        	<pre>${meeting.meetingDetail }</pre>
 		        </div>  
 		        	<c:if test="${loginUser.userNo eq meeting.readerNo }">
 				    	<button class="meeting-delete-btn" onclick="deleteMeeting(${meeting.meetingNo });">소셜링 삭제하기</button>
@@ -111,23 +111,53 @@
 	        
         </div>
         
-
-		<c:if test="${lineupCount ne meeting.meetingPeople and loginUser.userNo ne meeting.readerNo}">
-			<c:forEach items="${memberList }" var="memberList" varStatus="i">
-				<c:choose>
-					<c:when test="${loginUser.userNo ne memberList.userNo }">
-						<div id="meeting-joinBtn" onclick="joinCheck(${meeting.meetingNo });">
-							<input type = "hidden" value="${meeting.meetingNo }" name="meetingNo">
+<!--         	챗지피티 -->
+        <c:if test="${lineupCount ne meeting.meetingPeople and loginUser.userNo ne meeting.readerNo}">
+			<c:set var="alreadyJoined" value="false"/>
+			<c:forEach items="${memberList}" var="member">
+				<c:if test="${loginUser.userNo eq member.userNo}">
+					<c:set var="alreadyJoined" value="true"/>
+				</c:if>
+			</c:forEach>
+			<c:choose>
+				<c:when test="${alreadyJoined eq 'false'}">
+					<div id="meeting-joinBtn" onclick="joinCheck(${meeting.meetingNo});">
+						<input type="hidden" value="${meeting.meetingNo}" name="meetingNo">
 						<b>소셜링 참여하기👀</b>
-					</c:when>
-					<c:otherwise>
-						<div class="meeting-joinBtn2">
-		        			<b>이미 참여 중인 소셜링입니다 🤩</b>
-		        		</div>
-					</c:otherwise>
-				</c:choose>
-	        </c:forEach>
-        </c:if>
+					</div>
+				</c:when>
+				<c:otherwise>
+					<div class="meeting-joinBtn2">
+						<b>이미 참여 중인 소셜링입니다 🤩</b>
+					</div>
+				</c:otherwise>
+			</c:choose>
+		</c:if>
+<!-- 		챗지피티끝 -->
+        
+        
+        
+        
+        
+        
+        
+<!-- 복원용 코드 -->
+<%-- 		<c:if test="${lineupCount ne meeting.meetingPeople and loginUser.userNo ne meeting.readerNo}"> --%>
+<%-- 			<c:forEach items="${memberList }" var="memberList" varStatus="i"> --%>
+<%-- 				<c:choose> --%>
+<%-- 					<c:when test="${loginUser.userNo ne memberList.userNo }"> --%>
+<%-- 						<div id="meeting-joinBtn" onclick="joinCheck(${meeting.meetingNo });"> --%>
+<%-- 							<input type = "hidden" value="${meeting.meetingNo }" name="meetingNo"> --%>
+<!-- 						<b>소셜링 참여하기👀</b> -->
+<%-- 					</c:when> --%>
+<%-- 					<c:otherwise> --%>
+<!-- 						<div class="meeting-joinBtn2"> -->
+<!-- 		        			<b>이미 참여 중인 소셜링입니다 🤩</b> -->
+<!-- 		        		</div> -->
+<%-- 					</c:otherwise> --%>
+<%-- 				</c:choose> --%>
+<%-- 	        </c:forEach> --%>
+<%--         </c:if> --%>
         
 <%--         					<c:if test="${loginUser.userNo ne memberList.userNo }"> --%>
 <%-- 				        <div id="meeting-joinBtn" onclick="joinCheck(${meeting.meetingNo });"> --%>
