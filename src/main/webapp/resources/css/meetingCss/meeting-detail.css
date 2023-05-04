@@ -84,6 +84,22 @@
         
         }
         
+        .meeting-content-info-box {
+        	width: 600px;
+			height: 100px;
+			overflow: hidden;
+			margin: 20 auto;
+        }
+        
+        
+        .meeting-delete-btn {
+        	float: right;
+        	width: 100px;
+        	height: 30px;
+        	cursor: pointer;
+        }
+
+        
         .meeting-people-content {
         	width: 900px;
         	height: 260px;

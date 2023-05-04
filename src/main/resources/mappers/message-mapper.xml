@@ -59,13 +59,12 @@
 	</select>
 	
 	
-	
 	<update id="msgOpenUpdate">
 		UPDATE MESSAGE_TBL SET MSG_OPEN_CK = MSG_OPEN_CK+1 WHERE MSG_NO = #{msgNo}
 	</update>
 	
 	<select id="searchUser" resultMap="UserResultMap">
-		SELECT USER_NO, USER_NAME FROM USER_TBL WHERE USER_NAME LIKE '%' || #{word} || '%' AND USER_NAME IS NOT NULL
+		SELECT USER_NO, USER_NAME FROM USER_TBL WHERE USER_NAME LIKE '%' || #{word} || '%' AND USER_NO != 1
 	</select>
 	
 	<insert id="sendMessage">

@@ -171,7 +171,11 @@
         }
 
         .message-box-main {
+        	display: block;
             padding: 5px;
+            white-space: nowrap;
+			  overflow: hidden;
+			  text-overflow: ellipsis;
         }
 
         .message-textbox {

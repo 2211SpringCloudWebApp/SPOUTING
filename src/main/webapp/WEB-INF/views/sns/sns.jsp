@@ -27,8 +27,9 @@
 			height: 900px;
 			width: 800px;
 			background-color: #F3F3F3FF;
- 			margin: 0 auto;
+ 			margin: auto;
  			border: solid 1px black;
+ 			margin-top: 20px;
 		}
 
 		#sns-profile {
@@ -76,15 +77,16 @@
 
 		#sns-content {
 			--width: inherit;
-			height: 430px;
+			height: 600px;
 			--background-color: aqua;
 			--overflow: auto;
 			margin-top: 20px;
 			--position: relative;
 		    --width: 200px;
-		    height: 200px;
 		    display: flex;
 		    justify-content: space-between;
+		    flex-wrap : wrap;
+		    overflow: auto;
 		}
 		
 
@@ -100,9 +102,10 @@
 			width: 130px;
 			height: 130px;
 			display: flex;
-			justify-content: center;
-			align-items: center;
-				}
+		    justify-content: flex-start;
+		    flex-wrap: wrap;
+		    align-content: flex-start;
+		}
 				
 		.modify-btn {
 			--float: right;
@@ -212,9 +215,10 @@
 <%-- 		</c:if> --%>
 		
 <!-- 		<div id="photo-box"> -->
-		<div id="sns-content">
+			<div id="sns-content">
 				<input type="hidden" id="more-var" totalCount="${totalCount}" currentSum="0" currentCount="0" value="1">
 			</div>
+			<button onclick="photoMoreAjax(2,3)">More</button>
 		</div>
 
 <!--     </div> -->
@@ -376,6 +380,8 @@
 			});
 			
 		}
+		
+		
 // 		$(window).scroll(function() {
 // 			let scrollTop = $(window).scrollTop();
 // 			let innerHeight = $(window).innerHeight();

@@ -25,5 +25,7 @@ public interface MeetingService {
 
 	AllMemberProfile getReaderProfile2(ReaderProfile readerProfile);
 
+	int deleteMeeting(int meetingNo);
+
 	
 }

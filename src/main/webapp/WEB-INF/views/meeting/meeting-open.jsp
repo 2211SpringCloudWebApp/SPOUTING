@@ -7,7 +7,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>소셜링 오픈 페이지 ㅋ</title>
+    <title>소셜링 오픈 페이지</title>
     <style>
         @font-face {
             font-family: 'Pretendard-Regular';
@@ -27,7 +27,7 @@
         
         #meetingOpen-main{
         	padding: 20px;
-			height: 700px;
+			height: 800px;
 			width: 800px;
 			background-color: #F3F3F3FF;
 			margin: 0 auto;
@@ -37,11 +37,11 @@
         
        		#img-viewer {
 	            width: 600px;
-	            height: 350px;
+	            height: 250px;
 	            overflow: hidden;
 	            margin: 0 auto;
 	            border: solid 1px black;
-	            background-color: rgb(255, 255, 255);
+	            background-color: rgba(168, 168, 168, 0.8);
 	            --display: flex;
 	
 	        }
@@ -52,7 +52,37 @@
 			    height:100%;
 			    object-fit:scale-down;
 	        }
+	        
+	        .meeting-info-input {
+	        	width: 300px;
+	        	height: 30px;
+	        	border-radius: 10px;
+	        	padding: 10px;
+	        	margin: 7px;
+	        	
+	        }
+	        
+	        .meeting-info-textarea {
+	        	width: 600px;
+	        	height: 150px;
+	        	resize: none;
+	        	padding: 10px;
+	        }
         
+        	.meeting-info-btn {
+        		width: 230px;
+        		height: 40px;
+        		cursor: pointer;
+        		background-color: white;
+        		font-size: 18px;
+        		border-radius: 15px;
+        	}
+        	
+        	.meeting-info-btn:hover {
+        		box-shadow: 0 10px 35px rgba(0, 0, 0, 0.05), 0 6px 6px rgba(0, 0, 0, 0.1);
+			    transition: box-shadow 0.1s linear;
+			    cursor: pointer;
+        	}
         
         
     </style>
@@ -78,22 +108,31 @@
 	    <div id="meetingOpen-main">
 	    
 		    <input type="hidden" id="readerNo" name="readerNo" value=${loginUser.userNo }>
-		        제목 : <input type="text" name="meetingName"> 
+		    <br><br>
+		        제목  <input type="text" name="meetingName" class="meeting-info-input" placeholder="소셜링을 한줄로 소개해주세요."> 
 		        <br>
-		        내용 : <input type="text" name="meetingDetail">
+		        인원  <input type="number" value="2" name="meetingPeople" class="meeting-info-input">
 		        <br>
-		        인원 : <input type="number" value="2" name="meetingPeople">
+		        날짜  <input type="datetime-local" name="meetingDate" class="meeting-info-input">
 		        <br>
-		        날짜 : <input type="datetime-local" name="meetingDate">
-		        <br>
-		        <input type="file" id="uploadFile" name="uploadFile" onchange="loadImg(this);"> <br><br>
+		        
+		        <br><br>
+		        
 		        <div id="img-viewer">
 	                <img id="img-view" width="400">
-	            </div> <br>
+	            </div> 
+	            
+		        <textarea name="meetingDetail" placeholder="소셜링 설명을 입력하세요." class="meeting-info-textarea"></textarea>
+		        <br>
+		        
+		        
+		        
+	            <br>
+		        <input type="file" id="uploadFile" name="uploadFile" onchange="loadImg(this);"> <br><br>
 		<!--         작성자 : <input type="number" value="3" name="readerNo"> -->
 		        <br><br>
 		
-		        <input type="submit" value="등록">
+		        <input type="submit" value="소셜링 주최하기 👋" class="meeting-info-btn">
 		<!--         <input type="button" value="닫기" onclick="self.close()"> -->
 		
 		</div>

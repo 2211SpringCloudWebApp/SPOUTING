@@ -120,6 +120,10 @@
             display: flex;
             align-items: center;
             cursor: pointer;
+            --display: block;
+            white-space: nowrap;
+			overflow: hidden;
+			text-overflow: ellipsis;
         }
         .send-message {
             margin: 0 15px 0 15px;

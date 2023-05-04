@@ -48,10 +48,13 @@
             <div class="meeting-detail">
 	            <div class="meeting-content-img-box">
 		            <img class="meeting-content-img" src="/resources/images/meeting/${meeting.meetingFileRename }"> 
-		        </div>    
-		            <br><br>
-				    ${meeting.meetingDetail }		    
-				    <br><br>
+		        </div>  
+		        <div class="meeting-content-info-box">
+		        	${meeting.meetingDetail }
+		        </div>  
+		        	<c:if test="${loginUser.userNo eq meeting.readerNo }">
+				    	<button class="meeting-delete-btn" onclick="deleteMeeting(${meeting.meetingNo });">소셜링 삭제하기</button>
+				    </c:if>
 	        </div>
 	        
 	<!-- 	        전체 멤버 리스트 시작 -->
@@ -109,13 +112,29 @@
         </div>
         
 
-
-		<c:if test="${lineupCount ne meeting.meetingPeople and loginUser.userNo ne meeting.readerNo}"> 
-	        <div id="meeting-joinBtn" onclick="joinCheck(${meeting.meetingNo });">
-	        	<input type = "hidden" value="${meeting.meetingNo }" name="meetingNo">
-	        	<b>소셜링 참여하기👀</b>
-	        </div>
+		<c:if test="${lineupCount ne meeting.meetingPeople and loginUser.userNo ne meeting.readerNo}">
+			<c:forEach items="${memberList }" var="memberList" varStatus="i">
+				<c:choose>
+					<c:when test="${loginUser.userNo ne memberList.userNo }">
+						<div id="meeting-joinBtn" onclick="joinCheck(${meeting.meetingNo });">
+							<input type = "hidden" value="${meeting.meetingNo }" name="meetingNo">
+						<b>소셜링 참여하기👀</b>
+					</c:when>
+					<c:otherwise>
+						<div class="meeting-joinBtn2">
+		        			<b>이미 참여 중인 소셜링입니다 🤩</b>
+		        		</div>
+					</c:otherwise>
+				</c:choose>
+	        </c:forEach>
         </c:if>
+        
+<%--         					<c:if test="${loginUser.userNo ne memberList.userNo }"> --%>
+<%-- 				        <div id="meeting-joinBtn" onclick="joinCheck(${meeting.meetingNo });"> --%>
+<%-- 				        	<input type = "hidden" value="${meeting.meetingNo }" name="meetingNo"> --%>
+<!-- 				        	<b>소셜링 참여하기👀</b> -->
+<!-- 				        </div> -->
+<%-- 			        </c:if> --%>
         
         
     	<c:if test="${lineupCount eq meeting.meetingPeople }"> 
@@ -125,16 +144,18 @@
 		</c:if>
 		
 		<c:if test="${loginUser.userNo eq meeting.readerNo }"> 
-			<div id="meeting-joinBtn2">
+			<div class="meeting-joinBtn2">
 	        	<b>이미 참여 중인 소셜링입니다 🤩</b>
 	        </div>
 		</c:if>
 		
-<%-- 		<c:if test="${loginUser.userNo eq memberList.userNo }">  --%>
-<!-- 			<div id="meeting-joinBtn2"> -->
-<!-- 	        	<b>이미 참여 중인 소셜링입니다 🤩</b> -->
-<!-- 	        </div> -->
-<%-- 		</c:if> --%>
+<%-- 		<c:forEach items="${memberList }" var="memberList" varStatus="i"> --%>
+<%-- 			<c:if test="${loginUser.userNo eq memberList.userNo }">  --%>
+<!-- 				<div class="meeting-joinBtn2"> -->
+<!-- 		        	<b>이미 참여 중인 소셜링입니다 🤩</b> -->
+<!-- 		        </div> -->
+<%-- 			</c:if> --%>
+<%-- 		</c:forEach> --%>
 
 	</div>
 	
@@ -148,6 +169,12 @@
 			if(confirm("소셜링에 참여하시겠습니까?")) {
 				location.href="/joinMeeting?meetingNo="+meetingNo;
 				alert("소셜링에 참여 되셨습니다.");
+			}
+		}
+		
+		function deleteMeeting(meetingNo) {
+			if(confirm("소셜링을 삭제하시겠습니까?")) {
+				location.href="/deleteMeeting?meetingNo="+meetingNo;
 			}
 		}
 	

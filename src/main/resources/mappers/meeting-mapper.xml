@@ -74,4 +74,8 @@
 		WHERE L.MEETING_NO = #{meetingNo}
 	</select>
 	
+	<delete id="deleteMeeting">
+		DELETE FROM MEETING_TBL WHERE MEETING_NO = #{meetingNo}
+	</delete>
+	
 </mapper>
