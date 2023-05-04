@@ -17,6 +17,7 @@
 		<result property="inquiriesLikes" column="INQUIRIES_LIKES"/>
 		<result property="secretNo" column="SECRET_NO"/>
 		<result property="inquiriesContent" column="INQUIRIES_CONTENT" jdbcType="CLOB" javaType="java.lang.String"/>
+		<result property="isAdminComment" column="IS_ADMIN_COMMENT"/>
 	</resultMap>
 <!-- 	Join용 resultMap -->
 	<resultMap type="InquiryJoin" id="inquiryJoinResultMap">
@@ -36,6 +37,7 @@
 		<result property="userName" column="USER_NAME"/>
 		<result property="secretNo" column="SECRET_NO"/>
 		<result property="inquiriesContent" column="INQUIRIES_CONTENT" jdbcType="CLOB" javaType="java.lang.String"/>
+		<result property="isAdminComment" column="IS_ADMIN_COMMENT"/>
 	</resultMap>
 	
 <!-- 	문의사항 리스트 -->
@@ -115,5 +117,15 @@
 <!--	관리자페이지-->
 	<select id="selectAdminInquiry" resultMap="inquiryJoinResultMap">
 		SELECT I.*, U.USER_NAME FROM INQUIRIES_TBL I JOIN USER_TBL U ON I.USER_NO = U.USER_NO WHERE IS_ADMIN_COMMENT = 'N' ORDER BY Q_CREATE_DATE ASC
+	</select>
+	
+<!--	마이페이지(페이징처리)-->
+	<select id="getMyInquiryCount" resultType="_int">
+		SELECT COUNT(*) FROM INQUIRIES_TBL WHERE USER_NO = #{userNo}
+	</select>
+	
+<!--	마이페이지 -->
+	<select id="myInquiryList" resultMap="inquiryResultMap">
+		SELECT * FROM INQUIRIES_TBL WHERE USER_NO = #{userNo} ORDER BY Q_CREATE_DATE DESC
 	</select>
 </mapper>

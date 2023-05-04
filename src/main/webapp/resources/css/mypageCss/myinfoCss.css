@@ -58,3 +58,78 @@
             cursor: pointer;
             background-color: #1C3879;
         }
+        
+/* 문의게시글전용 */
+#i-main-box {
+    width: calc(100% - 200px);
+    height: 500px;
+    border-top: 1px solid rgb(242, 242, 242);
+    margin: 0 auto;
+
+}
+#i-check-box {
+    width: 700px;
+    height: 300px;
+    margin: 20px auto;
+    text-align: center;  
+}
+	#i-info-box{
+        margin: 0 auto;
+        color: #1C3879;
+        width: 700px;
+	}
+	
+	/* 페이징처리 */
+	#navi-box {
+	    width: 700px;
+	    height: 120px;
+	    margin: 0 auto;
+	    margin-bottom: 50px;
+	    text-align: center;
+	    padding-top: 30px;
+	}
+    #navi-box a{
+        text-decoration: none;
+        color: #1b5dff;
+    }
+        #navi-box a:link{
+            color: #1b5dff;
+        }
+        #navi-box a:visited{
+            color: #1b5dff;
+        }
+    #navi-btn1{
+        padding: 8px;
+        border-radius: 10px;
+        font-weight: 900;
+    }
+    #navi-btn2{
+        padding: 8px;
+        margin-right: 20px;
+        border-radius: 10px;
+        font-weight: 900;
+    }
+    .navi-btn3{
+        font-size: 13px;
+        padding: 7px;
+        padding-left: 10px;
+        padding-right: 10px;
+        border-radius: 10px;
+    }
+        .navi-btn3:hover{
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: 800;
+            background-color: #ebebeb;
+        }
+    #navi-btn4{
+        padding: 8px;
+        margin-left: 20px;
+        border-radius: 10px;
+        font-weight: 900;
+    }  
+    #navi-btn5{
+        padding: 8px;
+        border-radius: 10px;
+        font-weight: 900;
+    }

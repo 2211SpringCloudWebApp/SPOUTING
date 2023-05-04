@@ -20,6 +20,7 @@ public class InquiryJoin {
 	private int inquiriesLikes;
 	private String userName;
 	private int secretNo;
+	private String isAdminComment;
 	
 	public InquiryJoin() {}
 	
@@ -159,6 +160,14 @@ public class InquiryJoin {
 	public void setSecretNo(int secretNo) {
 		this.secretNo = secretNo;
 	}
+	
+	public String getIsAdminComment() {
+		return isAdminComment;
+	}
+	
+	public void setIsAdminComment(String isAdminComment) {
+		this.isAdminComment = isAdminComment;
+	}
 
 	@Override
 	public String toString() {
@@ -168,7 +177,7 @@ public class InquiryJoin {
 				+ qUpdateDate + ", inquiriesViews=" + inquiriesViews + ", inquiriesFilename=" + inquiriesFilename
 				+ ", inquiriesFilepath=" + inquiriesFilepath + ", inquiriesFilerename=" + inquiriesFilerename
 				+ ", inquiriesSecret=" + inquiriesSecret + ", inquiriesLikes=" + inquiriesLikes + ", userName="
-				+ userName + "]";
+				+ userName + ", secretNo=" + secretNo + ", isAdminComment=" + isAdminComment + "]";
 	}
 	
 	

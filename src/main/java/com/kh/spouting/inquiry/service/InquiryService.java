@@ -37,5 +37,9 @@ public interface InquiryService {
 
 	List<InquiryJoin> selectAdminInquiry(PageInfo pi);
 
+	int getMyInquiryCount(int writerNo);
+
+	List<Inquiry> myInquiryList(PageInfo pi, int writerNo);
+
 
 }

@@ -125,5 +125,23 @@ public class InquiryStoreLogic implements InquiryStore{
 		return iList;
 	}
 
+	// 마이페이지(페이징처리) Store
+	@Override
+	public int getMyInquiryCount(SqlSession session, int writerNo) {
+		int totalCount = session.selectOne("InquiryMapper.getMyInquiryCount", writerNo);
+		return totalCount;
+	}
+
+	// 마이페이지 Store
+	@Override
+	public List<Inquiry> myInquiryList(SqlSession session, PageInfo pi, int writerNo) {
+		int limit = pi.getBoardLimit();
+		int currentPage = pi.getCurrentPage();
+		int offset = (currentPage - 1) * limit;
+		RowBounds rowBounds = new RowBounds(offset, limit);
+		List<Inquiry> iList = session.selectList("InquiryMapper.myInquiryList", writerNo, rowBounds);
+		return iList;
+	}
+
 
 }
