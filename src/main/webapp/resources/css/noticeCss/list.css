@@ -124,3 +124,12 @@ ol, ul {
 	box-sizing:border-box; padding:74px 0;
 	line-height:23px; cursor:pointer;
   }
+  
+
+/* 답변완료 */
+.comment{
+	background-color: navy;
+	color: white;
+	margin-left: 10px;
+	padding: 3px;
+}

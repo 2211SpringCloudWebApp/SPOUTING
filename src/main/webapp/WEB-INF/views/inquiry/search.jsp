@@ -75,15 +75,30 @@
 									  <!-- 회원이면서 비밀번호여부 -->
 									  <c:choose>
 										  <c:when test="${topInquiry.inquiriesSecret eq 'N'}">
-											  <td><a href="detail?inquiriesNo=${topInquiry.inquiriesNo }">${topInquiry.inquiriesTitle }</a></td>
+											  <td>
+											  	<a href="detail?inquiriesNo=${topInquiry.inquiriesNo }">${topInquiry.inquiriesTitle }</a>
+											  	<c:if test="${topInquiry.isAdminComment eq 'Y' }">
+											  		<span class="comment">답변완료</span>
+											  	</c:if>
+											  </td>
 										  </c:when>
 										  <c:otherwise>
-											  <td><a href="checkSecretNo?inquiriesNo=${topInquiry.inquiriesNo }" id="click">${topInquiry.inquiriesTitle }</a></td>
+											  <td>
+											  	<a href="checkSecretNo?inquiriesNo=${topInquiry.inquiriesNo }" id="click">${topInquiry.inquiriesTitle }</a>
+											  	<c:if test="${topInquiry.isAdminComment eq 'Y' }">
+											  		<span class="comment">답변완료</span>
+											  	</c:if>
+											  </td>
 										  </c:otherwise>
 									  </c:choose>
 								  </c:when>
 								  <c:otherwise>
-									  <td><a href="detail?inquiriesNo=${topInquiry.inquiriesNo }" data-bs-toggle="modal" data-bs-target="#exampleModal">${topInquiry.inquiriesTitle }</a></td>
+									  <td>
+									  	<a href="detail?inquiriesNo=${topInquiry.inquiriesNo }" data-bs-toggle="modal" data-bs-target="#exampleModal">${topInquiry.inquiriesTitle }</a>
+									  	<c:if test="${topInquiry.isAdminComment eq 'Y' }">
+											<span class="comment">답변완료</span>
+										</c:if>
+									  </td>
 								  </c:otherwise>
 								</c:choose>
 								<td>${topInquiry.userName }</td>
@@ -117,15 +132,30 @@
 									<!-- 회원이면서 비밀번호여부 -->
 									<c:choose>
 										<c:when test="${inquiry.inquiriesSecret eq 'N'}">
-											<td><a href="detail?inquiriesNo=${inquiry.inquiriesNo }">${inquiry.inquiriesTitle }</a></td>
+											<td>
+												<a href="detail?inquiriesNo=${inquiry.inquiriesNo }">${inquiry.inquiriesTitle }</a>
+												<c:if test="${inquiry.isAdminComment eq 'Y' }">
+											  		<span class="comment">답변완료</span>
+											  	</c:if>
+											</td>
 										</c:when>
 										<c:otherwise>
-											<td><a href="checkSecretNo?inquiriesNo=${inquiry.inquiriesNo }" id="click">${inquiry.inquiriesTitle }</a></td>
+											<td>
+												<a href="checkSecretNo?inquiriesNo=${inquiry.inquiriesNo }" id="click">${inquiry.inquiriesTitle }</a>
+												<c:if test="${inquiry.isAdminComment eq 'Y' }">
+											  		<span class="comment">답변완료</span>
+											  	</c:if>
+											</td>
 										</c:otherwise>
 									</c:choose>
 								</c:when>
 								<c:otherwise>
-									<td><a href="detail?inquiriesNo=${inquiry.inquiriesNo }" data-bs-toggle="modal" data-bs-target="#exampleModal">${inquiry.inquiriesTitle }</a></td>
+									<td>
+										<a href="detail?inquiriesNo=${inquiry.inquiriesNo }" data-bs-toggle="modal" data-bs-target="#exampleModal">${inquiry.inquiriesTitle }</a>
+										<c:if test="${inquiry.isAdminComment eq 'Y' }">
+											<span class="comment">답변완료</span>
+										</c:if>
+									</td>
 								</c:otherwise>
 							  </c:choose>
 				              <td>${inquiry.userName }</td>

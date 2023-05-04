@@ -120,5 +120,19 @@ public class InquiryServiceImpl implements InquiryService{
 		return iList;
 	}
 
+	// 마이페이지(페이징처리) Service
+	@Override
+	public int getMyInquiryCount(int writerNo) {
+		int totalCount = iStore.getMyInquiryCount(session, writerNo);
+		return totalCount;
+	}
+
+	// 마이페이지 Service
+	@Override
+	public List<Inquiry> myInquiryList(PageInfo pi, int writerNo) {
+		List<Inquiry> iList = iStore.myInquiryList(session, pi, writerNo);
+		return iList;
+	}
+
 
 }

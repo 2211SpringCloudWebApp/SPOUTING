@@ -647,4 +647,17 @@ public class InquiryController {
 		mv.addObject("iList", iList).addObject("pi", pi).setViewName("admin/inquiryList");
 		return mv;
 	}
+	
+	// 마이페이지용(본인이 작성한 문의글리스트)
+	@GetMapping(value="/myInquiry")
+	public ModelAndView myInquiryList(ModelAndView mv, HttpSession session, @RequestParam(value="page", required=false, defaultValue="1")Integer page) {
+		int writerNo = ((User)session.getAttribute("loginUser")).getUserNo();
+		// 페이징처리
+		int totalCount = iService.getMyInquiryCount(writerNo);
+		PageInfo pi = this.getPageInfo(page, totalCount);
+		
+		List<Inquiry> iList = iService.myInquiryList(pi, writerNo);
+		mv.addObject("iList", iList).addObject("pi", pi).setViewName("mypage/myInquiry");
+		return mv;
+	}
 }

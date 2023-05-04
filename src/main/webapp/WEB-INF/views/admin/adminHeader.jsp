@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>       
 <link rel="stylesheet" href="/resources/css/adminCss/adminHeader.css">
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
+<!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script> -->
 
 <div id="for-logo">
     <img src="/resources/images/homeImg/logo_black.png" alt="error">
@@ -19,7 +19,11 @@
             </ul>
         </li>
         
-        <li class="main-nav"><a href="/admin/user">회원</a></li>
+        <li class="main-nav"><a href="/admin/user">회원</a>
+            <ul class="drop-nav">
+                <li><a href="/admin/user">회원관리</a></li>
+            </ul>
+		</li>
 
         <li class="main-nav"><a href="/admin/bookingList">예약</a>
             <ul class="drop-nav">
@@ -43,11 +47,9 @@
 </div>
 
 <script>
-    var userType = $("#adminCheck").val();
-    if(userType == "0") {
-        alert("관리자페이지 입니다.")
-        location.href = "/";
-    } else if(userType != "1") {
+    var userType = document.querySelector("#adminCheck").value;
+    console.log(userType);
+    if(userType != "1") {
         alert("관리자 로그인이 필요합니다.")
         location.href = "/user/login";
     }

@@ -19,6 +19,7 @@ public class Inquiry {
 	private String inquiriesSecret;
 	private int inquiriesLikes;
 	private int secretNo;
+	private String isAdminComment;
 	
 	
 	public Inquiry() {}
@@ -142,6 +143,14 @@ public class Inquiry {
 	public void setSecretNo(int secretNo) {
 		this.secretNo = secretNo;
 	}
+	
+	public String getIsAdminComment() {
+		return isAdminComment;
+	}
+	
+	public void setIsAdminComment(String isAdminComment) {
+		this.isAdminComment = isAdminComment;
+	}
 
 	@Override
 	public String toString() {
@@ -150,7 +159,7 @@ public class Inquiry {
 				+ ", inquiriesContent=" + inquiriesContent + ", qCreateDate=" + qCreateDate + ", qUpdateDate="
 				+ qUpdateDate + ", inquiriesViews=" + inquiriesViews + ", inquiriesFilename=" + inquiriesFilename
 				+ ", inquiriesFilepath=" + inquiriesFilepath + ", inquiriesFilerename=" + inquiriesFilerename
-				+ ", inquiriesSecret=" + inquiriesSecret + ", inquiriesLikes=" + inquiriesLikes + ", secretNo=" + secretNo + "]";
+				+ ", inquiriesSecret=" + inquiriesSecret + ", inquiriesLikes=" + inquiriesLikes + ", secretNo=" + secretNo + ", isAdminComment=" + isAdminComment + "]";
 	}
 	
 }

@@ -58,7 +58,7 @@
 						<c:forEach items="${topInquiry}" var="topInquiry">
 							<tr id="topInquiry">
 								<td>💜</td>
-								<!-- 카테고리부분 -->
+								<%-- 카테고리부분 --%>
 								<c:if test="${topInquiry.inquiriesCategory eq 'N'}">
 									<td>일반문의</td>
 								</c:if>
@@ -68,28 +68,46 @@
 								<c:if test="${topInquiry.inquiriesCategory eq 'P'}">
 									<td>결제취소문의</td>
 								</c:if>
-								<!-- 비밀글여부 -->
+								<%-- 비밀글여부 --%>
 								<c:if test="${topInquiry.inquiriesSecret eq 'Y' }">
 									<td><img alt="" src="../../../resources/images/notice/padlock.png" style="width:30px; height:30px;"></td>
 								</c:if>
 								<c:if test="${topInquiry.inquiriesSecret eq 'N' }">
 									<td></td>
 								</c:if>
-								<!--비회원일경우 디테일제한-->
+								<%--비회원일경우 디테일제한--%>
 								<c:choose>
 									<c:when test="${user.userNo ne null}">
-									  <!-- 회원이면서 비밀번호여부 -->
+									  <%-- 회원이면서 비밀번호여부 --%>
 									  <c:choose>
+									  	<%-- 비밀번호 없을때 --%>
 										  <c:when test="${topInquiry.inquiriesSecret eq 'N'}">
-											  <td><a href="detail?inquiriesNo=${topInquiry.inquiriesNo }">${topInquiry.inquiriesTitle }</a></td>
+											  <td>
+											  	<a href="detail?inquiriesNo=${topInquiry.inquiriesNo }">${topInquiry.inquiriesTitle }</a>
+											  	<c:if test="${topInquiry.isAdminComment eq 'Y' }">
+											  		<span class="comment">답변완료</span>
+											  	</c:if>
+											  </td>
 										  </c:when>
+										  <%-- 비밀번호 있을때 --%>
 										  <c:otherwise>
-											  <td><a href="checkSecretNo?inquiriesNo=${topInquiry.inquiriesNo }" id="click">${topInquiry.inquiriesTitle }</a></td>
+											  <td>
+											  	<a href="checkSecretNo?inquiriesNo=${topInquiry.inquiriesNo }" id="click">${topInquiry.inquiriesTitle }</a>
+											  	<c:if test="${topInquiry.isAdminComment eq 'Y' }">
+											  		<span class="comment">답변완료</span>
+											  	</c:if>	
+											  </td>
 										  </c:otherwise>
 									  </c:choose>
 								  </c:when>
+<%-- 								  비회원인 경우 --%>
 								  <c:otherwise>
-									  <td><a href="detail?inquiriesNo=${topInquiry.inquiriesNo }" data-bs-toggle="modal" data-bs-target="#exampleModal">${topInquiry.inquiriesTitle }</a></td>
+									  <td>
+									  	<a href="detail?inquiriesNo=${topInquiry.inquiriesNo }" data-bs-toggle="modal" data-bs-target="#exampleModal">${topInquiry.inquiriesTitle }</a>
+									  	<c:if test="${topInquiry.isAdminComment eq 'Y' }">
+											<span class="comment">답변완료</span>
+										</c:if>
+									  </td>
 								  </c:otherwise>
 								</c:choose>
 								<td>${topInquiry.userName }</td>
@@ -120,18 +138,36 @@
 							  <!--비회원일경우 디테일제한-->
 							  <c:choose>
 							  	<c:when test="${user.userNo ne null}">
-									<!-- 회원이면서 비밀번호여부 -->
+									<%-- 회원이면서 비밀번호여부 --%>
 									<c:choose>
+									<%-- 비밀번호 없음 --%>
 										<c:when test="${inquiry.inquiriesSecret eq 'N'}">
-											<td><a href="detail?inquiriesNo=${inquiry.inquiriesNo }">${inquiry.inquiriesTitle }</a></td>
+											<td>
+												<a href="detail?inquiriesNo=${inquiry.inquiriesNo }">${inquiry.inquiriesTitle }</a>
+												<c:if test="${inquiry.isAdminComment eq 'Y' }">
+											  		<span class="comment">답변완료</span>
+											  	</c:if>
+											</td>
 										</c:when>
+										<%-- 비밀번호 있음 --%>
 										<c:otherwise>
-											<td><a href="checkSecretNo?inquiriesNo=${inquiry.inquiriesNo }" id="click">${inquiry.inquiriesTitle }</a></td>
+											<td>
+												<a href="checkSecretNo?inquiriesNo=${inquiry.inquiriesNo }" id="click">${inquiry.inquiriesTitle }</a>
+												<c:if test="${inquiry.isAdminComment eq 'Y' }">
+											  		<span class="comment">답변완료</span>
+											  	</c:if>
+											</td>
 										</c:otherwise>
 									</c:choose>
 								</c:when>
+								<%-- 비회원일때 --%>
 								<c:otherwise>
-									<td><a href="detail?inquiriesNo=${inquiry.inquiriesNo }" data-bs-toggle="modal" data-bs-target="#exampleModal">${inquiry.inquiriesTitle }</a></td>
+									<td>
+										<a href="detail?inquiriesNo=${inquiry.inquiriesNo }" data-bs-toggle="modal" data-bs-target="#exampleModal">${inquiry.inquiriesTitle }</a>
+										<c:if test="${inquiry.isAdminComment eq 'Y' }">
+											<span class="comment">답변완료</span>
+										</c:if>
+									</td>
 								</c:otherwise>
 							  </c:choose>
 				              <td>${inquiry.userName }</td>
@@ -211,6 +247,7 @@
 		
 	    <script type="text/javascript">
 	    	console.log(${user.userNo})
+	    	
 // 	    	모달창
 // 			$(function(){
 // 				$("#click").click(function(){
@@ -254,7 +291,19 @@
 				
 // 			})
 			
-			
+			// 답변완료
+			  var inquiries = document.getElementsByTagName('a');
+			  for (var i = 0; i < inquiries.length; i++) {
+			    var inquiry = inquiries[i];
+			    var inquiriesNo = inquiry.href.split('/').pop();
+			    var span = document.getElementById('status-' + inquiriesNo);
+			    if (!span) {
+			      continue;
+			    }
+			    if (inquiry.getAttribute('isAdminComment') === 'Y') {
+			      span.innerText = '답변완료';
+			    }
+			  }
 	    </script>
 	</body>
 </html>
