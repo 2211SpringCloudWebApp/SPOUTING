@@ -46,18 +46,19 @@
 							<option value="P">결제취소문의</option>
 						</select>
 					</div>
-					<!-- 예약취소인경우 -->
-<!-- 					<div id="bookNo" > -->
-<!-- 						<span>결제내역</span> -->
-<!-- 						<select name="bookNo"> -->
-<!-- 							<c:forEach items="${bList }" var="book"> -->
-<!-- 								<option value="${book.bookNo }">[${book.centerName}|${book.facilityName}]<fmt:formatDate value="${book.startTime }" pattern="MM.dd HH시"/></option> -->
-<!-- 							</c:forEach>	 -->
-<!-- 						</select> -->
-<!-- 					</div> -->
-<!-- 					츄가끝 -->
-
+					<!-- 예약취소인경우 나타날 결제내역div -->
+					<div id="bookNo" style="display:none">
+						<span>결제내역</span>
+						<select name="bookNo" id="bookingInfo">
+							<option value="0">----------선택하기----------</option>
+							<c:forEach items="${bList }" var="book">
+								<option value="${book.bookNo }">[${book.centerName}|${book.facilityName}]<fmt:formatDate value="${book.startTime }" pattern="MM.dd HH시"/></option>
+							</c:forEach>	
+						</select>
+						<input type="hidden" id="bookingInfoToSave" name="inquiriesContent" value="">
+					</div>
 					<!-- 여기까지 -->
+
 					<div id="titleArea">
 						<span>제목</span>
 						<input placeholder="제목을 입력해주세요." name="inquiriesTitle" required="required">
@@ -213,24 +214,26 @@
 		
 		///////////////////////////////
 		//취소문의했을때 예약내역 선택 보이기
-// 		const categorySelect = document.querySelector('select[name="inquiriesCategory"]');
-// 		const bookSelect = document.getElementById("bookNo");
+		const categorySelect = document.querySelector('select[name="inquiriesCategory"]');
+		const bookSelect = document.getElementById("bookNo");
 		
-// 		categorySelect.addEventListener("change", function () {
-// 		  if (categorySelect.value === "P") {
-// 		    bookSelect.style.display = "flex";
-// 		  } else {
-// 		    bookSelect.style.display = "none";
-// 		  }
-// 		});
+		categorySelect.addEventListener("change", function () {
+		  if (categorySelect.value === "P") {
+		    bookSelect.style.display = "flex";
+		  } else {
+		    bookSelect.style.display = "none";
+		  }
+		});
 		
-// 		//예약내역 내용란에 자동 합저장 할것	
-// 		document.getElementById("bookNo").addEventListener("change", function(){
-// 			const bookingInfoSelect = document.getElementById("bookNo");
-// 			const bookingInfoText = bookingInfoSelect.options[bookingInfoSelect.selectedIndex].innerHTML;
-// 			document.querySelector("#bookingInfoToSave").value="예약취소요청:" + bookingInfoText ;
-// 			console.log(bookingInfoText)
-// 		});
+		//예약내역 내용란에 자동 합저장 할것	
+		document.querySelector("#bookingInfo").addEventListener("change", function(){
+			const bookingInfoSelect = document.querySelector("#bookingInfo");
+			const bookingInfoText = bookingInfoSelect.options[bookingInfoSelect.selectedIndex].innerHTML;
+			let bookNo = bookingInfoSelect.value;
+			document.querySelector("#bookingInfoToSave").value="예약취소요청:" + bookingInfoText ;
+			console.log(bookingInfoText)
+			console.log(bookNo);
+		});
 		
 		
 		
