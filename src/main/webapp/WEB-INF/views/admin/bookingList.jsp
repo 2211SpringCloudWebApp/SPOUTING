@@ -217,7 +217,7 @@
 	            <input onload="expiredColor(this)" type="hidden" class="startTimeJs" value="${book.startTime}">
             	<td style="color: #cdcccc">${i.count } &nbsp;</td>
                 <td>${book.bookNo}</td>
-                <td id="branchName">${book.centerName.substring(5, 8)}</td>
+                <td id="branchName">${book.centerName}</td>
                 <td>${book.facilityName}</td>
                 <td>${book.numPeople}</td>
                 <td><fmt:formatDate value="${book.startTime}" pattern="MM/dd | HH시"/>

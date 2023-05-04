@@ -19,7 +19,6 @@
         <script src='https://cdn.jsdelivr.net/npm/fullcalendar@5.8.0/main.min.js'></script>
         <!-- fullcalendar 언어 CDN -->
         <script src='https://cdn.jsdelivr.net/npm/fullcalendar@5.8.0/locales-all.min.js'></script>
-        
         <!-- 로컬타임 변경 라이브러리 CDN -->
         <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
         
@@ -64,7 +63,7 @@
 				
 				                  <p>지점 선택</p><br>
 				                    <select id="select-branch" >
-				                        <option value="" selected>선택</option>
+				                        <option value="" selected>👉선택👈</option>
 				                        <option value="a">합정점</option>
 				                        <option value="b">성수점</option>
 				                        <option value="c">여의도점</option>
@@ -74,16 +73,16 @@
 				                </div>
 				                <!--지점선택하면 시설선택 selectbox 보이기-->    
 				                <div class="booking-option" id="branch-a" style="display: none;">
-				                   <p>a-지점 시설 선택</p><br>
+				                   <p>합정점 시설 선택</p><br>
 				                    <select class="facilBox" id="facilities-a"  name= "facilityName">
-				                        <option value="" selected>선택</option>
+				                        <option value="" selected>👉선택👈</option>
 				                        <option value="a-1">클라이밍센터</option>
 <!-- 				                        <option value="a-2">잠수풀</option> -->
 				                    </select>
 				                </div>
 				            
 				                <div class="booking-option" id="branch-b" style="display: none;">
-				                   <p>b-지점 시설 선택</p><br>
+				                   <p>성수점 시설 선택</p><br>
 				                    <select class="facilBox" id="facilities-b" name= "facilityName">
 				                        <option value="" selected>선택</option>
 				                        <option value="b-1">테니스코트</option>
@@ -93,7 +92,7 @@
 				                </div>
 				                
 				                 <div class="booking-option" id="branch-c" style="display: none;">
-				                   <p>b-지점 시설 선택</p><br>
+				                   <p>여의도점 시설 선택</p><br>
 				                    <select class="facilBox" id="facilities-c" name= "facilityName">
 				                        <option value="" selected>선택</option>
 				                        <option value="c-1">잠수풀</option>
@@ -116,8 +115,8 @@
 				<!--                     input type을 time으로 쓰면 분까지 선택하는게 필수인데 굳이 그렇게 넣어서 파싱할 이유도 없음 -->
 				<!--                     예)오후 1시~3시까지 이용할 경우<br>13~15 입력<br> -->
 				                    <div id="timeInput">
-					                    <input type="number" id="startTime" placeholder="시작시간" onchange="showPeopleInput()" min="10" name="startParam">~
-					                    <input type="number" id="endTime" placeholder="종료시간" onchange="showPeopleInput()" min="11" max="18" name="endParam">
+					                    <input type="number" id="startTime" placeholder="시작시간" onchange=showPrice() min="10" name="startParam" required>~
+					                    <input type="number" id="endTime" placeholder="종료시간" onchange="showPeopleInput()" min="11" max="18" name="endParam" required>
 				                    </div>
 				                </div>
 				                
@@ -135,7 +134,7 @@
 						        <input type="hidden" id="facilNo" value="" name="facilityNo">
 						        <input type="hidden" id="bookPrice" value="" name="bookPrice">
 				                <!--요금 보이고 2초 후에 결제 버튼 보이기-->
-				                <button id="payment-btn" style="display:flex;">이 정보로 예약하기</button>
+				                <button id="payment-btn" disabled="true" style="opacity:0.5">이 정보로 예약하기</button>
 				        	</div>
 			   
 		       		 	</form>
@@ -404,6 +403,7 @@
             function showPeopleInput() {
                 document.getElementById("num-people").style.display = "flex";
                 document.getElementById("num-people").querySelector("input[type=number]").focus();
+                showPrice();
 
                 // 요소의 위치로 스크롤 이동
                 const numPeopleDiv = document.getElementById("num-people");
@@ -545,7 +545,9 @@
                     behavior: "smooth"
                 });
             }
-
+            
+            
+           
             
             
            

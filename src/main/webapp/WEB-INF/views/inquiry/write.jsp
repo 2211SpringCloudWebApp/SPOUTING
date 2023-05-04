@@ -47,16 +47,15 @@
 						</select>
 					</div>
 					<!-- 예약취소인경우 -->
-<!-- 					<div> -->
+<!-- 					<div id="bookNo" > -->
 <!-- 						<span>결제내역</span> -->
 <!-- 						<select name="bookNo"> -->
-<%-- 							<c:forEach items="${bList }" var="book"> --%>
-<%-- 								<option name="" value="${book.bookNo }">[${book.centerName.substring(5,8) }|${book.facilityName}]<fmt:formatDate value="${book.startTime }" pattern="MM.dd HH시"/></option> --%>
-<%-- 								${book.bookNo } --%>
-<%-- 							</c:forEach>	 --%>
+<!-- 							<c:forEach items="${bList }" var="book"> -->
+<!-- 								<option value="${book.bookNo }">[${book.centerName}|${book.facilityName}]<fmt:formatDate value="${book.startTime }" pattern="MM.dd HH시"/></option> -->
+<!-- 							</c:forEach>	 -->
 <!-- 						</select> -->
 <!-- 					</div> -->
-					<!-- 츄가끝 -->
+<!-- 					츄가끝 -->
 
 					<!-- 여기까지 -->
 					<div id="titleArea">
@@ -211,6 +210,31 @@
 				return false;
 			}
 		});
+		
+		///////////////////////////////
+		//취소문의했을때 예약내역 선택 보이기
+// 		const categorySelect = document.querySelector('select[name="inquiriesCategory"]');
+// 		const bookSelect = document.getElementById("bookNo");
+		
+// 		categorySelect.addEventListener("change", function () {
+// 		  if (categorySelect.value === "P") {
+// 		    bookSelect.style.display = "flex";
+// 		  } else {
+// 		    bookSelect.style.display = "none";
+// 		  }
+// 		});
+		
+// 		//예약내역 내용란에 자동 합저장 할것	
+// 		document.getElementById("bookNo").addEventListener("change", function(){
+// 			const bookingInfoSelect = document.getElementById("bookNo");
+// 			const bookingInfoText = bookingInfoSelect.options[bookingInfoSelect.selectedIndex].innerHTML;
+// 			document.querySelector("#bookingInfoToSave").value="예약취소요청:" + bookingInfoText ;
+// 			console.log(bookingInfoText)
+// 		});
+		
+		
+		
+		//////////////////////////////
 		
 
 	
