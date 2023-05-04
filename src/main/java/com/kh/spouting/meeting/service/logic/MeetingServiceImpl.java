@@ -79,5 +79,12 @@ public class MeetingServiceImpl implements MeetingService {
 	}
 
 
+	@Override
+	public int deleteMeeting(int meetingNo) {
+		// TODO Auto-generated method stub
+		return meetingStore.deleteMeeting(session, meetingNo);
+	}
+
+
 
 }

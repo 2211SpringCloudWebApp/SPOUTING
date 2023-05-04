@@ -62,5 +62,11 @@ public class MeetingStoreLogic implements MeetingStore {
 		return session.selectOne("MeetingMapper.getReaderProfile2", readerProfile);
 	}
 
+	@Override
+	public int deleteMeeting(SqlSession session, int meetingNo) {
+		// TODO Auto-generated method stub
+		return session.delete("MeetingMapper.deleteMeeting", meetingNo);
+	}
+
 
 }

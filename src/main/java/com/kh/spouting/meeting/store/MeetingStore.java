@@ -27,6 +27,8 @@ public interface MeetingStore {
 
 	AllMemberProfile getReaderProfile2(SqlSession session, ReaderProfile readerProfile);
 
+	int deleteMeeting(SqlSession session, int meetingNo);
+
 
 
 }

@@ -162,4 +162,24 @@ public class MeetingController {
 		}
 	}
 	
+	
+	//소셜링 삭제 
+	@RequestMapping(value="/deleteMeeting", method=RequestMethod.GET)
+	public String deleteMeeting(@RequestParam("meetingNo") int meetingNo, Model model) {
+		try {
+			int result = meetingService.deleteMeeting(meetingNo);
+			if(result > 0) {
+				return "redirect:/meeting";
+			} else {
+				model.addAttribute("msg","소셜링 삭제가 되지 않았습니다..");
+				return "common/error";
+			}
+		} catch (Exception e) {
+			// TODO: handle exception
+			model.addAttribute("msg","이미 참여신청한 소셜링입니다.");
+			return "common/error";
+		}
+	}
+	
+	
 }

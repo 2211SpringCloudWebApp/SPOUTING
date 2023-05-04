@@ -38,8 +38,8 @@ public class SnsStoreLogic implements SnsStore {
 	@Override
 	public List<SnsPhoto> morePhoto(SqlSession session, Integer start, int userNo) {
 		// TODO Auto-generated method stub
-		int limit = 3;
-		int offset = (start - 1) * limit;
+		int limit = 3; //한 페이지당 몇개를 보여줄 것인가
+		int offset = (start - 1) * limit; //커런트 페이지에 따라서 몇번째부터 갖고 올 것인가
 		RowBounds rowBounds = new RowBounds(offset, limit);
 		return session.selectList("SnsMapper.morePhotoList", userNo, rowBounds);
 	}

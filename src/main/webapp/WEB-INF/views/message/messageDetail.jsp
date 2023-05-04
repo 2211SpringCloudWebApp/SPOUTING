@@ -233,7 +233,7 @@
 	            <div class="search-user">
 	                <div class="search-user-header">
 	                    <img class="person-icon" src="/resources/images/message/user.png" alt="" width="16px" height="16px">
-	                   	 &nbsp;보낸사람
+	                   	 &nbsp;받은사람
 	                </div>
 	                <div class="search-user-main">
 	                    <input type="text" class="search-user-textbox" value="${oneMessage.userName }">
