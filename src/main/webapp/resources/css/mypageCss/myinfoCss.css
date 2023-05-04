@@ -133,3 +133,7 @@
         border-radius: 10px;
         font-weight: 900;
     }
+    /* 문의게시글목록에서 게시글이 없는경우 */
+    #noInquiry{
+    	text-align: center;
+    }

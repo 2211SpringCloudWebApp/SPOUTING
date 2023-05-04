@@ -15,6 +15,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -146,13 +147,21 @@ public class InquiryController {
 	 */
 	@RequestMapping(value="/write", method=RequestMethod.GET)
 	public ModelAndView viewInquiryWrite(ModelAndView mv, HttpSession session) {
-		//츄가|문의게시판용: 예약내역페이지(이용전) 보이기
-		User user = (User) session.getAttribute("loginUser");
-		List<Book> myBookList = bService.getMyBooking(user.getUserNo());
-		// 썸머노트테스트중(쏘야)
-		mv.addObject("id",UUID.randomUUID());
-		//
-		mv.addObject("bList", myBookList).setViewName("inquiry/write");
+		User checkUser = (User) session.getAttribute("loginUser");
+		// 로그인여부 확인하기
+        if (checkUser == null) {
+            // 로그인되어 있지 않은 경우, alert창을 띄우고 로그인 페이지로 redirect
+        	Alert alert = new Alert("/user/login", "로그인 후 이용 가능합니다.");
+            mv.addObject("alert", alert).addObject(alert).setViewName("common/alert");
+        }else {
+        	//츄가|문의게시판용: 예약내역페이지(이용전) 보이기
+        	User user = (User) session.getAttribute("loginUser");
+        	List<Book> myBookList = bService.getMyBooking(user.getUserNo());
+        	// 썸머노트테스트중(쏘야)
+        	mv.addObject("id",UUID.randomUUID());
+        	//
+        	mv.addObject("bList", myBookList).setViewName("inquiry/write");
+        }
 		return mv;
 	}
 	
@@ -265,8 +274,7 @@ public class InquiryController {
 				mv.addObject("msg", "문의사항이 등록완료되었습니다!😎").setViewName("notice/success");
 			} else {
 				Alert alert = new Alert("/inquiry/list", "등록에 실패하였습니다.");
-				mv.addObject("alert", alert);
-				mv.setViewName("common/alert");
+				mv.addObject("alert", alert).setViewName("common/alert");
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -287,14 +295,22 @@ public class InquiryController {
 	public ModelAndView detailInquiry(
 			ModelAndView mv, @RequestParam Integer inquiriesNo
 			, HttpSession session) {
-		try {
-			//글 작성자 확인
-			User user = (User) session.getAttribute("loginUser");
-			InquiryJoin inquiry = iService.detailInquiry(inquiriesNo);
-			mv.addObject("user", user).addObject("inquiry", inquiry).setViewName("inquiry/detail");
-		} catch (Exception e) {
-			mv.addObject("msg", "해당 문의사항이 존재하지 않습니다.").setViewName("common/error");
-		}
+		User checkUser = (User) session.getAttribute("loginUser");
+		// 로그인여부 확인하기
+        if (checkUser == null) {
+            // 로그인되어 있지 않은 경우, alert창을 띄우고 로그인 페이지로 redirect
+        	Alert alert = new Alert("/user/login", "로그인 후 이용 가능합니다.");
+            mv.addObject("alert", alert).addObject(alert).setViewName("common/alert");
+        }else {
+        	try {
+        		//글 작성자 확인
+//        		User user = (User) session.getAttribute("loginUser");
+        		InquiryJoin inquiry = iService.detailInquiry(inquiriesNo);
+        		mv.addObject("user", checkUser).addObject("inquiry", inquiry).setViewName("inquiry/detail");
+        	} catch (Exception e) {
+        		mv.addObject("msg", "해당 문의사항이 존재하지 않습니다.").setViewName("common/error");
+        	}
+        }
 		return mv;
 	}
 	
@@ -326,7 +342,8 @@ public class InquiryController {
 			if(inquiry != null) {
 				mv.addObject("inquiry", inquiry).setViewName("redirect:/inquiry/detail?inquiriesNo=" + inquiriesNo);
 			}else {
-				mv.addObject("msg", "비밀번호틀림").setViewName("common/error");
+				Alert alert = new Alert("/inquiry/checkSecretNo?inquiriesNo=" + inquiriesNo, "비밀번호가 일치하지 않습니다.");
+				mv.addObject("alert", alert).setViewName("common/alert");
 			}
 		} catch (Exception e) {
 			mv.addObject("msg", e.getMessage()).setViewName("common/error");
@@ -651,13 +668,20 @@ public class InquiryController {
 	// 마이페이지용(본인이 작성한 문의글리스트)
 	@GetMapping(value="/myInquiry")
 	public ModelAndView myInquiryList(ModelAndView mv, HttpSession session, @RequestParam(value="page", required=false, defaultValue="1")Integer page) {
-		int writerNo = ((User)session.getAttribute("loginUser")).getUserNo();
-		// 페이징처리
-		int totalCount = iService.getMyInquiryCount(writerNo);
-		PageInfo pi = this.getPageInfo(page, totalCount);
+		User checkUser = (User) session.getAttribute("loginUser");
+		if(checkUser == null) {
+			Alert alert = new Alert("/user/login", "로그인 후 이용 가능합니다.");
+            mv.addObject("alert", alert).addObject(alert).setViewName("common/alert");
+		}else {
+			int writerNo = ((User)session.getAttribute("loginUser")).getUserNo();
+			// 페이징처리
+			int totalCount = iService.getMyInquiryCount(writerNo);
+			PageInfo pi = this.getPageInfo(page, totalCount);
+			
+			List<Inquiry> iList = iService.myInquiryList(pi, writerNo);
+			mv.addObject("iList", iList).addObject("pi", pi).setViewName("mypage/myInquiry");
+		}
 		
-		List<Inquiry> iList = iService.myInquiryList(pi, writerNo);
-		mv.addObject("iList", iList).addObject("pi", pi).setViewName("mypage/myInquiry");
 		return mv;
 	}
 }

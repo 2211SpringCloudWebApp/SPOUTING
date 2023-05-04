@@ -54,6 +54,11 @@
 	            </tr>
 	            
 	<%--             <c:set var="num" value="${pi.totalCount - ((pi.currentPage-1) * 10)}"/> --%>
+				<c:if test="${empty iList}">
+				    <tr>
+				        <td colspan="4" id="noInquiry">작성된 문의글이 없습니다.</td>
+				    </tr>
+				</c:if>
 	            <c:forEach items="${iList}" var="inquiry" varStatus="i">
 	            <tr>
 	                <td>${inquiry.inquiriesNo}</td>
