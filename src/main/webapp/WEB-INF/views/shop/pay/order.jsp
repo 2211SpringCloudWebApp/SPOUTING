@@ -28,6 +28,7 @@
 		<div class="contents">
 			<div class="box-form-left">
 				<form id="form1" action="/payment" method="post">
+				<input type="hidden" name="orderCost" value="${sum }">
 				<div class="space-info">
 					<h3>상품 정보</h3>
 					<c:forEach items="${cList }" var="cart" varStatus="n" >

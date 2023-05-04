@@ -80,7 +80,7 @@
 						<hr>
 						<div id="buttonbox">
 							<button class="shopbtn" onclick="location.href='/shop/productList';">쇼핑계속</button>
-							<button class="cartbtn" onclick="if(totalPrice==0){alert('구매할 상품을 선택해주세요.');} else if(confirm('선택 상품을 구매하시겠습니까?')){location.href='/cart/orderView';}">구매하기</button>
+							<button class="cartbtn" onclick="if(totalPrice.innerText=='0'){alert('구매할 상품을 선택해주세요.');} else if(confirm('선택 상품을 구매하시겠습니까?')){location.href='/cart/orderView';}">구매하기</button>
 
 						</div>
 					</div>
@@ -270,6 +270,7 @@
 		    type: "get",
 		    success: function(result) {
 		      if (result == "success") {
+		    	//$(".inner-content").load();
 		        calCartTotalPrice();
 		        alert("상품이 삭제되었습니다."); 
 		      } else {

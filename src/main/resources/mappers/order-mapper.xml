@@ -43,7 +43,7 @@
 	<!-- 주문 내역 조회 -->
 	<select id="selectOrderBoard" resultMap="orderResultMap"> 
 		SELECT O.ORDER_NO, O.ORDER_NAME, O.ORDER_EMAIL, O.ORDER_DATE, P.PRODUCT_NAME, P.PRODUCT_PRICE, 
-		(O.ORDER_DATE)
+		O.ORDER_DATE, O.ORDER_COST
 		FROM ORDER_TBL O 
 		JOIN PRODUCT_TBL P ON O.PRODUCT_NO = P.PRODUCT_NO
 		WHERE USER_ID = #{userId}
