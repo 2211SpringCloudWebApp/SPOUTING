@@ -6,6 +6,7 @@
 		<meta charset="UTF-8">
 		<title>지점정보 수정</title>
 		<link rel="stylesheet" href="../../../resources/css/centerCss/modify.css">
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
 	</head>
 	<body>
 		<!-- header -->
