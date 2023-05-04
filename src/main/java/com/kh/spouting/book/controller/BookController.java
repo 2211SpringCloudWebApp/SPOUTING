@@ -255,7 +255,7 @@ public class BookController {
 	
 	
 
-	//풀캘린더실험(에이젝스 , produces="application/json;charset=utf-8"
+	//풀캘린더실험
 	//@ResponseBody
 	@RequestMapping(value= "/book/calendar", method=RequestMethod.GET)
 	public ModelAndView showCalendarList(ModelAndView mv, HttpServletRequest request) {

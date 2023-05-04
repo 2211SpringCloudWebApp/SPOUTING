@@ -30,7 +30,7 @@
         .branchPhotoDiv{ 
             width: 250px;
             height: 250px;
-            border: 1px solid blue;
+            --border: 1px solid blue;
             margin-right: 20px;
             text-align: center;
             display: flex;
@@ -44,7 +44,7 @@
         .bookingInfoDiv{
             width: 250px;
             height: 250px;
-            border: 1px solid green;
+            --border: 1px solid green;
             margin-left: 20px;
             padding: 10px;
             box-sizing: border-box; /*이거 줘야 패딩값에 따라 width,height 안움직임*/
@@ -184,17 +184,15 @@
             color: #1c4197;
         }
 
-
+img{
+ 	object-fit: cover;
+}
 
     </style>
 	</head>
 	<body>
 		<jsp:include page="../common/header.jsp"></jsp:include>
 		<main>
-		<!-- c:forEach이거 쓰면되겟다
-		회원 예약내역 가져오기(사용일/시, 사용인원, 센터명-시설명 -->
-		<!--${bList }-->
-		
 		  <ul id="left-nav">
 		        <li class="selected"><a href="/book/myBooking?userNo=${sessionScope.loginUser.userNo}">예약내역</a></li>
 		        <li><a href="/order/list">주문내역</a></li>
@@ -205,12 +203,15 @@
 		        <li><a href="/mypage/myinfo">개인정보 수정</a></li>
 		    </ul>
 		
+		<!-- c:forEach이거 쓰면되겟다
+		회원 예약내역 가져오기(사용일/시, 사용인원, 센터명-시설명 -->
+		<!--${bList }-->
+		
 	        <input type="hidden" id="hiddenUserNo" value="${loginUser.userNo }" name="userNo">
 			<c:forEach items="${bList }" var="book">
 				<div class="bookingEachDiv">
 		            <div class="branchPhotoDiv">
-		               <img src="${book.centerFilepath1}" alt="branchPhoto">
-	<!-- 	                <img src="./images/logo.png"> -->
+						 <img src="/${book.centerFilepath1.substring(book.centerFilepath1.indexOf('resources'))}" alt="branchPhoto">
 		            </div>
 		            <div class="bookingInfoDiv">
 		                <span class="dateDiv"><fmt:formatDate pattern="MM/dd" value="${book.useDate}"/></span>
@@ -256,10 +257,11 @@
 						var bookingHtml="";
 						for( var i=0; i<pList.length; i++){
 							var pbook = pList[i];
+							var filepath1 = pbook.centerFilepath1.substring(pbook.centerFilepath1.indexOf('resources'));
 							bookingHtml += 
 								'<div class="bookingEachDiv">'+
 								'<div class="branchPhotoDiv">' +
-								'<img src="'+pbook.centerFilepath1+'" alt="branchPhoto">' +
+								'<img src="/' + filepath1 + '" alt="branchPhoto">' +
 								'</div>' +
 								'<div class="bookingInfoDiv">' +
 								'<span class="dateDiv">' + new Intl.DateTimeFormat('ko-KR', {month: '2-digit', day: '2-digit'}).format(new Date(pbook.useDate)).replace('.','/').replace(' ','').replace('.','') + '</span>' +
