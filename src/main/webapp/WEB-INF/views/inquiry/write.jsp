@@ -181,7 +181,7 @@
         // }
 		// 여기까지
 			
-		// 비밀글 체크 시 비밀번호 입력할 수 있게 해주는 함수
+			// 비밀글 체크 시 비밀번호 입력할 수 있게 해주는 함수
 			$(document).ready(function(){
 				$("#secretNo").hide();  // 초기값 설정
 				
@@ -195,7 +195,17 @@
 						// input태그가 이미 생성되어 있는지 체크
 						if ($("#secretNo").find("input[name='secretNo']").length === 0) {
 							// input태그가 생성되어 있지 않은 경우에만 생성
-							$("#secretNo").children().append("<input type='password' id='secretNo' name='secretNo' placeholder='4자리 숫자'>");
+							$("#secretNo").children().append("<input type='password' name='secretNo' placeholder='4자리 숫자' value='${inquiry.secretNo}' id='SECRET'><button type='button' id='checkBtn'><img src='../../../resources/images/notice/secretEye.png' width='30px'></button>");
+							$('#checkBtn').on('click', function() {
+								var input = $('#SECRET');
+								if (input.attr('type') === 'password') {
+									input.attr('type', 'text');
+									$(this).html('<img src="../../../resources/images/notice/noSecretEye.png" width="30px">');
+								} else {
+									input.attr('type', 'password');
+									$(this).html('<img src="../../../resources/images/notice/secretEye.png" width="30px">');
+								}
+							});
 						}
 						$("#secretNo").show();
 					}
