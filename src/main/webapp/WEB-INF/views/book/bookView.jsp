@@ -323,7 +323,7 @@
 						  var startTime = event.start;
 						  var endTime = event.end;
 						  
-						  // 이벤트가 포함된 모든 시간대를 가져와서, 시간대별로 그룹화합니다.
+						  // 이벤트가 포함된 모든 시간대를 가져와서, 시간대별로 그룹화
 						  for (var t = new Date(startTime); t < new Date(endTime); t.setHours(t.getHours()+1)) {
 							  var timeKey = t.toISOString();
 							  eventsByTime[timeKey] = eventsByTime[timeKey] || [];
@@ -331,7 +331,7 @@
 							}
 						});
 						
-						// 시간대를 로컬 시간대로 변환하여 출력합니다.
+						// 시간대를 로컬 시간대로 변환
 						for (var timeKey in eventsByTime) {
 						  var eventsInTime = eventsByTime[timeKey];
 						  var numPeople = eventsInTime.reduce(function(acc, event) {
@@ -434,6 +434,7 @@
             //document.getElementById("select-branch").addEventListener("change", showFacilitiesInput);
             document.getElementById("facilities-a").addEventListener("change", showDateInput);
             document.getElementById("facilities-b").addEventListener("change", showDateInput);
+            document.getElementById("facilities-c").addEventListener("change", showDateInput);
             document.getElementById("num-people").addEventListener("blur", showTimeInput);
 
             function showTimeInput() {

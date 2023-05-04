@@ -71,7 +71,7 @@
 	
 <!-- 	문의사항 등록 -->
 	<insert id="insertInquiry">
-		INSERT INTO INQUIRIES_TBL VALUES(SEQ_INQUIRIES_NO.NEXTVAL, NULL, #{userNo}, #{inquiriesCategory}, #{inquiriesTitle}, DEFAULT, NULL, DEFAULT, #{inquiriesFilename}, #{inquiriesFilepath}, #{inquiriesFilerename}, #{inquiriesSecret}, DEFAULT, #{secretNo}, #{inquiriesContent})
+		INSERT INTO INQUIRIES_TBL VALUES(SEQ_INQUIRIES_NO.NEXTVAL, #{bookNo}, #{userNo}, #{inquiriesCategory}, #{inquiriesTitle}, DEFAULT, NULL, DEFAULT, #{inquiriesFilename}, #{inquiriesFilepath}, #{inquiriesFilerename}, #{inquiriesSecret}, DEFAULT, #{secretNo}, #{inquiriesContent}, DEFAULT)
 	</insert>
 	
 <!--	문의사항 디테일-->

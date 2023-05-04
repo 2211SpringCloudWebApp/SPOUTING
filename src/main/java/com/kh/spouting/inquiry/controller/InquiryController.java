@@ -204,9 +204,19 @@ public class InquiryController {
 	
 	// 썸머노트로 파일추가하여 문의사항등록 테스트중
 	@RequestMapping(value = "/write", method = RequestMethod.POST)
-	public ModelAndView writeInquiry(ModelAndView mv, HttpServletRequest request, @ModelAttribute Inquiry inquiry
-			,@RequestParam("id") String id, HttpSession session) {
+	public ModelAndView writeInquiry(ModelAndView mv, HttpServletRequest request
+			,@ModelAttribute Inquiry inquiry
+			,@RequestParam("id") String id
+			,@RequestParam(value="bookNo", required=false) Integer bookNo
+			, HttpSession session) {
 		try {
+			
+			if(bookNo>0) {
+				inquiry.setBookNo(bookNo);
+			}else {
+				inquiry.setBookNo(0);
+			}
+			
 			// 로그인한 정보 가져와서 작성자로 넣기
 			User user = (User) session.getAttribute("loginUser"); 
 			int inquiryWriterNo = user.getUserNo();
