@@ -1,6 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>  
+<%
+  // 로그인한 사용자가 아니면 로그인 페이지로 이동
+  if (session.getAttribute("loginUser") == null) {
+    response.sendRedirect(request.getContextPath() + "/user/login");
+  }
+%>
 <html>
 <head>
     <meta charset="UTF-8">
@@ -12,6 +19,15 @@
 <body>
 	<jsp:include page="../common/header.jsp"></jsp:include>
 	<br><br>
+	
+	<c:if test="${sessionScope.loginUser.userNo eq null }">
+		<script>
+			$(document).ready(function () {
+	            alert("로그인이 필요합니다.")
+	            window.location.replace("http://localhost:8999/user/login");
+        	});
+		</script>
+	</c:if>
 	
 	<div id="meeting-main">
 	    <h1 id="meeting-header">🎯 SOCIALRING</h1> <br>
@@ -74,7 +90,7 @@
 	                </div> <br>
 	
 	                <div class="meeting-day">
-	                    <span>일시 : ${meeting.meetingDay }</span>
+	                    <span>일시 : <fmt:formatDate value="${meeting.meetingDay}" pattern="yyyy.MM.dd hh:mm:00" /></span>
 	                </div>
 	
 	                <div class="meeting-people">

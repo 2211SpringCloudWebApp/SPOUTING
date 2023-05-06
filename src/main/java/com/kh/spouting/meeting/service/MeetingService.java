@@ -27,5 +27,9 @@ public interface MeetingService {
 
 	int deleteMeeting(int meetingNo);
 
+	List<Meeting> selectMyMeeting(int userNo);
+
+	
+
 	
 }

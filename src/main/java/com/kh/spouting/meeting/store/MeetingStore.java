@@ -29,6 +29,12 @@ public interface MeetingStore {
 
 	int deleteMeeting(SqlSession session, int meetingNo);
 
+	List<Meeting> selectMyMeeting(SqlSession session, int userNo);
+
+	
+
+	
+
 
 
 }

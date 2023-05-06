@@ -90,7 +90,7 @@
 <body>
 	<jsp:include page="../common/header.jsp"></jsp:include>
 
-	<c:if test="${sessionScope.loginUser.userNo eq null }">
+		<c:if test="${sessionScope.loginUser.userNo eq null }">
 		<script>
 			$(document).ready(function () {
 	            alert("로그인이 필요합니다.")

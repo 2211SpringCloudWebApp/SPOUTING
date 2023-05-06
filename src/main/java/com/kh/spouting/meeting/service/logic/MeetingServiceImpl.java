@@ -86,5 +86,14 @@ public class MeetingServiceImpl implements MeetingService {
 	}
 
 
+	@Override
+	public List<Meeting> selectMyMeeting(int userNo) {
+		// TODO Auto-generated method stub
+		return meetingStore.selectMyMeeting(session, userNo);
+	}
+
+
+
+
 
 }

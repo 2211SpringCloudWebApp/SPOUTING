@@ -28,9 +28,10 @@
 				height: 750px;
 				width: 800px;
 				background-color: #F3F3F3FF;
-	 			margin: 0 auto;
+	 			margin: auto;
 	 			border: solid 1px black;
 	            text-align: center;
+	            margin-top: 20px;
 	        }
 	        
 	        #header-block {

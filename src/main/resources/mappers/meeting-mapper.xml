@@ -78,4 +78,13 @@
 		DELETE FROM MEETING_TBL WHERE MEETING_NO = #{meetingNo}
 	</delete>
 	
+	<select id="selectMyList" resultMap="meetingResultMap">
+		SELECT * 
+		FROM MEETING_TBL M
+		JOIN LINEUP_TBL L
+		ON M.MEETING_NO = L.MEETING_NO
+		WHERE L.USER_NO = #{userNo} OR M.READER_NO = #{userNo}
+		ORDER BY MEETING_DAY DESC
+	</select>
+	
 </mapper>

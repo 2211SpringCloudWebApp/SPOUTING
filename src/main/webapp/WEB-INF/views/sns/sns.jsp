@@ -59,7 +59,12 @@
 		}
 		
 		.profile-name-box {
-			display: flex;
+			--display: flex;
+		}
+		
+		.profile-name {
+			font-size: 35px;
+			font-weight: bold;
 		}
 		
 		.letter-icon {
@@ -73,6 +78,27 @@
 			margin-left: 1px;
 			margin-top: 1px;
 		}
+		
+		.follow-user-box {
+			float: right;
+			font-size: 20px;
+			text-align: right;
+		}
+		
+		.follow-user {
+			padding: 5px;
+			margin: 10px;
+			border: 1px solid black;
+			cursor: pointer;
+			background-color: white;
+		}
+		
+/* 		.follow-user:hover { */
+/* 			box-shadow: 0 10px 35px rgba(0, 0, 0, 0.05), 0 6px 6px rgba(0, 0, 0, 0.1); */
+/*     		transition: box-shadow 0.1s linear; */
+/* 		} */
+		
+		
 
 
 		#sns-content {
@@ -162,6 +188,8 @@
         	});
 		</script>
 	</c:if>
+	
+	
 	<c:if test="${sessionScope.loginUser.userNo ne null }">
 		<script>
 			$(document).ready(function () {
@@ -194,16 +222,42 @@
 			</div>
 			<div id="profile-box">
 				<input type="hidden" value="${oneSns.userNo }" id="userNo" name="userNo">
-				<div class="profile-name-box">
-					<h1 class="profile-name">${oneSns.userName }</h1>
+				<span class="profile-name-box">
+					<span class="profile-name">${oneSns.userName }</span>
+					
 					<c:if test="${loginUser.userNo eq oneSns.userNo }">
 						<img class="letter-icon" src="/resources/images/message/mail.png" alt="" width="30px" height="30px" onclick="window.open('/message?userNo=${loginUser.userNo}','메세지함','width=570,height=620,location=no,status=no,scrollbars=yes');">
 					</c:if>
-				</div> 
+					
+					<c:if test="${loginUser.userNo ne oneSns.userNo }">
+						<c:set var="alreadyfollowed" value="false"/>
+						<c:forEach items="${followingCheckList}" var="followingCheckList">
+							<c:if test="${oneSns.userNo eq followingCheckList.userNo}">
+								<c:set var="alreadyfollowed" value="true"/>
+							</c:if>
+						</c:forEach>
+					
+						<c:choose>
+							<c:when test="${alreadyfollowed eq 'false'}">
+								<img class="letter-icon" src="/resources/images/sns/follow.png" alt="" width="30px" height="30px" onclick="followCheck();">
+							</c:when>
+							<c:otherwise>
+								<img class="letter-icon2" src="/resources/images/sns/followers.png" alt="" width="30px" height="30px">
+							</c:otherwise>
+						</c:choose>		
+					</c:if>
+					
+					
+					
+					<span class="follow-user-box">
+						<span class="follow-user" onclick="location.href='/sns/followingPage?userNo=${oneSns.userNo }'"><b>팔로잉&nbsp</b>${followingCount }</span>
+						<span class="follow-user" onclick="location.href='/sns/followerPage?userNo=${oneSns.userNo }'"><b>팔로워&nbsp</b>${followerCount }</span>
+					</span>
+				</span> 
 				<br>
-				<div class="profile-intro-box">
+				<span class="profile-intro-box">
 					<span class="profile-intro">${oneSns.profileIntoduce }</span>
-				</div>
+				</span>
 			</div>
 		</div>
 		
@@ -262,7 +316,7 @@
 		$(".modify-btn").click(function() {
 			imgModifyClose();
 			if(!profileStatus) {
-				var str = "<textarea type='text' class='profile-intro-input' spellcheck='false' style='resize: none; width: 300px;'></textarea>";
+				var str = "<textarea type='text' class='profile-intro-input' spellcheck='false' style='resize: none; width: 300px; height: 30px; padding: 5px;'></textarea>";
 				var btn = "<button type='button' onclick='ajaxProfileModify();' value='저장' class='modify-submit-btn'>저장</button><button type='button' onclick='modifyClose();' value='저장' class='modify-submit-btn' id='modify-close-btn'>취소</button>";
 				$(".btn-box").append(btn);
 				$(".profile-intro-box").append(str);
@@ -394,6 +448,15 @@
 // 				}
 // 			}
 // 		});
+
+
+		//유저 팔로우
+		function followCheck() {
+			if(confirm("팔로우 하시겠습니까?")) {
+				location.href="/sns/follow?userNo="+userNo;
+			}
+			
+		}
 		
 	
 		
