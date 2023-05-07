@@ -24,105 +24,56 @@ main {
 	flex : 1;
   	text-align: center;
   	margin: 0 auto;
-  	width : 70%;
-  	margin: 50px auto;
+  	width : 100%;
+  	margin: 0 auto;
 }
 
 /* 상단 */
+.container {
+	scroll-snap-type: y mandatory;
+	height: 100vh;
+	overflow-y: scroll;
+}
+
+section {
+    scroll-snap-align: start;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+}
+
 .intro {
 	width: 100%;
-	height: 60%;
-	margin-top: 5px; 
+	height: 100%;
+	margin-top: 5px;
+	background-image: url(../../images/center/intro/main.jpg);
+	background-repeat: no-repeat;
+	background-size: cover;
+	position: relative;
 }
-	.container {
-/* 		width: 75%; */
-		height: 100%;
-		margin: 0 auto;
-		background: linear-gradient(
-			to bottom,
-			rgba(255, 255, 255, 0) 10%,
-			rgba(255, 255, 255, 0.2) 25%,
-			rgba(255, 255, 255, 0.7) 40%,
-/* 			rgba(255, 255, 255, 1) 50%, */
-/* 			rgba(255, 255, 255, 1) 75%, */
-			rgba(255, 255, 255, 1) 100%
-		), url(../../images/center/intro/intro2.jpg);
-/* 		background-image: url(../../images/center/intro/intro2.jpg); */
-		background-repeat: no-repeat;
-		background-size: cover;
-		position: relative;
-	}
 	.headerText {
 		text-align: center;
-/* 		display: flex; */
-/* 		flex-direction: column; */
-/* 		justify-content: center;       가운데정렬 (간격조정:space-around/space-between/space-evenly) */
-/*     	align-items: center; */
-		margin: auto 40%;
+		font-size: x-large;
+		color: #2d4680;
     	position: absolute;
-    	top: 50%;
+    	top: 20%;
+	}
+	
+
+.main1 {
+	height: 100%;
+	background-image: url(../../images/center/intro/main1.jpg);
+	background-repeat: no-repeat;
+	background-size: cover;
+	position: relative;
+}
+	.option {
+		background-color: rgba(255, 255, 255, 0.644);
+		border-radius: 10px;
 	}
 
-/* 상단 tab바 */
-.tabBar {
-	height: 56px;
-	line-height: 56px;
-	background: #dc2c34;
-	color: #fff;
-}
-	.home {
-		width: 69px;
-		background: url() no-repeat center center;
-		border-left: 1px solid #ea8085;
-		float: left;
-	}
-		.home img {
-			width: 20px;
-			height: 20px;
-			background-color: white;
-		}
-	
-	.dropname {
-		position: relative;
-		display: inline-block;
-		height: 2.1em;
-	}
-	
-	.dropdwon{
-		background: #eee;
-		 border: 1px solid #ddd;
-		 border-radius: 1%;
-		 display: none;
-		 position: relative;
-		 top: -1.5em;
-	}
-	.dropdown:hover{
-		display: block;
-	}
-	.tabBar li {
-		float: left;
-		height: 56px;
-		line-height: 56px;
-		position: relative;
-		display: list-item;
-		cursor:pointer;
-	}
-	
-	.dropdown{
-/* 		width: 163px; */
-/* 		position: absolute; */
-/* 		top: 0px; */
-/* 		left: 0px; */
-/* 		opacity: 1; */
-/* 		display: none; */
-		background-color: #fff;
-		min-width: 100px;
-		max-height: 800px;
-		overflow-y: auto;
-		z-index: 999;
-		
-		
-	}
 
 
 /* 콘텐츠 */
@@ -132,24 +83,36 @@ main {
 }
 
 .textContent {
+	width: 53%;
 	padding: 20px;
+	font-size: x-large;
 }
 
 h1 {
   	color: #2d4680;
+  	padding: 10px;
+}
+p {
+  	color: #2d4680;
+  	padding: 10px;
+}
+
+h3 {
+	padding: 10px;
 }
 
 
+
+
 .imageContent {
-	width: 500px;
-	height: 200px;
+	width: 46%;
+	height: 400px;
 	margin: 0 auto;
 }
 	.left {
 		width: 50%;
 		height: 100%;
 		float: left;
-/* 		background-color: grey; */
 		display: flex;
 	}
 	.right{
@@ -160,5 +123,9 @@ h1 {
 		color: white;
 	}
 	.right-content{
-		margin: 50px auto;
+		margin: 20px 10px 0px 10px;
+	}
+	
+	.coment {
+		text-align: left;
 	}

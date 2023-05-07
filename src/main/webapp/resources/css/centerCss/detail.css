@@ -20,10 +20,6 @@ html, body {
   height: 100%;
 }
 
-/* body { */
-/* 	height : calc(100vh - 150px); */
-	
-/* } */
 
 ul {
     list-style-type: none;
@@ -133,11 +129,4 @@ main {
 	
 	}
 
-
-/* .photo { */
-/*     display: none; */
-/*     width: 100%; */
-/*     height: 100%; */
-/*     margin: 0 auto; */
-/* } */
 
