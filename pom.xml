@@ -28,6 +28,12 @@
 	</repositories>	
 	
 	<dependencies>
+		<!-- 자바메일api -->
+		<dependency>
+            <groupId>javax.mail</groupId>
+            <artifactId>javax.mail-api</artifactId>
+            <version>1.5.5</version>
+        </dependency>
 		<!-- 이메일 인증 -->
 		<dependency>
 		    <groupId>javax.mail</groupId>

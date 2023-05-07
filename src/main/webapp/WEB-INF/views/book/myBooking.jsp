@@ -203,9 +203,7 @@ img{
 			<li><a href="/mypage/myinfo">개인정보 수정</a></li>
 		</ul>
 		
-		<!-- c:forEach이거 쓰면되겟다
-		회원 예약내역 가져오기(사용일/시, 사용인원, 센터명-시설명 -->
-		<!--${bList }-->
+		
 		
 	        <input type="hidden" id="hiddenUserNo" value="${loginUser.userNo }" name="userNo">
 			<c:forEach items="${bList }" var="book">

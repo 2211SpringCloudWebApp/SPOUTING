@@ -6,11 +6,15 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
-
+import javax.activation.FileDataSource;
+import javax.mail.internet.MimeMessage;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpRequest;
+import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -31,6 +35,9 @@ import com.kh.spouting.user.domain.User;
 
 @Controller
 public class BookController {
+	
+	@Autowired
+	private JavaMailSender mailSender;
 	
 	@Autowired
 	BookService bService;
@@ -161,6 +168,7 @@ public class BookController {
 							 ,@RequestParam(value="pointChange", defaultValue = "0") int pointChange 
 							 ,@RequestParam("userNo") int userNo
 							 ,@RequestParam("paidPrice") int paidPrice
+							 , HttpServletRequest request
 							 , Model model){
 		
 		
@@ -181,12 +189,14 @@ public class BookController {
 				
 				int pResult = bService.insertPDtail(pDetail);
 				if(pResult>0) {
+					sendMail(request, bookNo);
 					return "book/bookView";   //예약완료되엇읍니다페이지 하나 만들어서 바까주기
 				}else {
 					model.addAttribute("msg", "포인트가 제대로 사용되지 않았어요!!");
 					return "common/error";
 				}
 			}else {
+				sendMail(request, bookNo);
 				//쓴포인트가 없을때
 				return "book/bookView";   //예약완료되엇읍니다페이지 하나 만들어서 바까주기(그페이지에서 /book/myBooking링크걸기
 			}
@@ -284,4 +294,50 @@ public class BookController {
 		return gson.toJson(CurrBookings);
 	}
 	
+	//메일링
+	public void sendMail(HttpServletRequest request, int bookNo) {
+		Book book = bService.selectBook(bookNo);
+		String filepath ="";
+		
+		try {
+			long startTimestamp = book.getStartTime().getTime(); // 시작 시간 timestamp
+            long currentTimestamp = System.currentTimeMillis(); // 현재 시간 timestamp
+            long diff = startTimestamp - currentTimestamp; // 시작 시간과 현재 시간의 차이 계산 (밀리초 단위)
+            long diffHours = diff / (60 * 60 * 1000); // 시간 단위로 변환
+            
+            if (diffHours <= 24) { // 24시간 이내일 경우에만 메일 보내기
+                
+            	MimeMessage mail = mailSender.createMimeMessage(); //true=text말고 html메시지 쓰겠다
+            	MimeMessageHelper mailHelper = new MimeMessageHelper(mail, true, "UTF-8");
+            	
+            	String path = request.getSession().getServletContext().getRealPath("resources");
+            	filepath = path+"\\images\\homeImg\\logo.png";
+//            	String path = request.getServletContext().getRealPath("/");
+//            	File resourceDirectory = new File(path, "resources");
+//            	File imageFile = new File(resourceDirectory, "images/homeImg/logo.png");
+//            	String filepath = imageFile.getPath();
+            	
+            	
+            	StringBuilder sb = new StringBuilder();
+            	//메일내용담기(이용일이랑 현재 시간 비교해서....)
+            	
+            	sb.append("<img src='cid:logos'/>");
+            	
+            	String subject = book.getUserName()+"님의 다가오는 SPOUTING!";
+            	String content = sb.toString();
+            	String from = "heoxuagac89@gmail.com";
+            	String to = "heomina89@gmail.com"; //테스트용내껑
+            	mailHelper.addInline("logos", new FileDataSource(filepath));
+            	mailHelper.setFrom(from);
+            	mailHelper.setSubject(subject);
+            	mailHelper.setText(content, true);
+            	mailHelper.setTo(to);
+            	mailHelper.setTo(book.getUserEmail());
+            	
+            	mailSender.send(mail);
+            }
+		}catch (Exception e) {
+			e.printStackTrace();
+		}
+		}
 }
