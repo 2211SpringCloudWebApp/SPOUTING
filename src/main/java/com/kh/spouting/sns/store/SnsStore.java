@@ -46,5 +46,7 @@ public interface SnsStore {
 
 	List<AllMemberProfile> getFollowerList(SqlSession session, int userNo);
 
+	List<SnsPhoto> getPhotos(SqlSession session, int userNo);
+
 
 }

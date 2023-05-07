@@ -104,22 +104,36 @@
 		#sns-content {
 			--width: inherit;
 			height: 600px;
-			--background-color: aqua;
-			--overflow: auto;
 			margin-top: 20px;
-			--position: relative;
-		    --width: 200px;
 		    display: flex;
-		    justify-content: space-between;
+		    justify-content: flex-start;
 		    flex-wrap : wrap;
 		    overflow: auto;
 		}
 		
-
-		#sns-content img {
-			width: 240px;
-			height: 240px;
+		.one-photo {
+			width: 220px; 
+ 			height: 220px; 
+			cursor: pointer; 
+ 			margin: 10px; 
 		}
+		
+		.one-photo:hover {
+			box-shadow: 1px 1px 20px #ddd;
+		}
+		
+
+/*  		#sns-content img {  */
+/* 			width: 220px;  */
+/*  			height: 220px;  */
+/* 			cursor: pointer;  */
+/*  			margin: 10px;  */
+/* 	}  */
+	
+/* 	#sns-content img:hover { */
+	
+/* 		box-shadow: 1px 1px 20px #ddd; */
+/* 	} */
 
 
 		#sns-profile-img {
@@ -189,14 +203,14 @@
 		</script>
 	</c:if>
 	
-	
-	<c:if test="${sessionScope.loginUser.userNo ne null }">
-		<script>
-			$(document).ready(function () {
-				photoMoreAjax(1,userNo);
-        	});
-		</script>
-	</c:if>
+<!-- 	에이잭스로 사진 불러오기 구현한 부분 -->
+<%-- 	<c:if test="${sessionScope.loginUser.userNo ne null }"> --%>
+<!-- 		<script> -->
+<!-- // 			$(document).ready(function () { -->
+<!-- // 				photoMoreAjax(1,userNo); -->
+<!-- //         	}); -->
+<!-- 		</script> -->
+<%-- 	</c:if> --%>
 	
 	
 	<div id="sns-main">
@@ -270,9 +284,13 @@
 		
 <!-- 		<div id="photo-box"> -->
 			<div id="sns-content">
-				<input type="hidden" id="more-var" totalCount="${totalCount}" currentSum="0" currentCount="0" value="1">
+<%-- 				<input type="hidden" id="more-var" totalCount="${totalCount}" currentSum="0" currentCount="0" value="1"> --%>
+
+				<c:forEach items="${oneSnsPhoto }" var="oneSnsPhoto" varStatus="i">
+					<img class="one-photo" src="/resources/images/sns/${oneSnsPhoto.snsFileRename }" alt="" onclick="location.href='/sns/detail?snsPhotoNo=${oneSnsPhoto.snsPhotoNo}'">
+				
+				</c:forEach>
 			</div>
-			<button onclick="photoMoreAjax(2,${oneSns.userNo})">More</button>
 		</div>
 
 <!--     </div> -->

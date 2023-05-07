@@ -68,6 +68,10 @@ public class SnsController {
 		List<AllMemberProfile> followingCheckList = snsService.getFollowingList(loginUser.getUserNo());
 		model.addAttribute("followingCheckList", followingCheckList);
 		
+		//sns 사진 가져오기
+		List<SnsPhoto> oneSnsPhoto = snsService.getPhotos(userNo);
+		model.addAttribute("oneSnsPhoto", oneSnsPhoto);
+		
 		try {
 			SnsProfile oneSns = snsService.selectOneById(userNo);
 //			model.addAttribute("loginUser",loginUser);

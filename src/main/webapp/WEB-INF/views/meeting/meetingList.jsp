@@ -46,6 +46,8 @@
 		    text-align: center;
 		    padding: 10px;
 		}
+
+		
     </style>
 </head>
 <body>
@@ -96,10 +98,10 @@
 	                	<th style="width: 30%;">날짜</th>
 	                </tr>
 	                <c:forEach items="${myMeetingList}" var="myMeetingList" varStatus="i">
-	                <tr class="table-line" onclick="location.href='/meetingDetailPage?meetingNo=${myMeetingList.meetingNo}&readerNo=${myMeetingList.readerNo }'" style="cursor: pointer;">
+	                <tr class="table-line" onclick="location.href='/meetingDetailPage?meetingNo=${myMeetingList.meetingNo}&readerNo=${myMeetingList.leaderNo }'" style="cursor: pointer;">
 	                    <td style="width: 10%;">${myMeetingList.meetingNo}</td>
 	                    <td style="width: 40%;">${myMeetingList.meetingName}</td>
-	                    <td style="width: 20%;">${myMeetingList.readerNo}</td>
+	                    <td style="width: 20%;">${myMeetingList.leaderName}</td>
 	                    <td style="width: 30%;">
 	                        <fmt:formatDate value="${myMeetingList.meetingDay}" pattern="yyyy.MM.dd" />
 	                    </td>
@@ -108,33 +110,28 @@
             </table>
         </div>
 
-        <!-- 페이징 -->
-<!--         <table id="navi-box"> -->
-<!--             <tr> -->
-<!--                 <td> -->
-<%--                     <c:if test="${pi.currentPage ne 1}"> --%>
-<!--                         <a href="/order/list?page=1" id="navi-btn1"> ≪ </a> -->
-<%--                     </c:if> --%>
-<%--                     <c:if test="${pi.currentPage ne 1}"> --%>
-<%--                         <a href="/order/list?page=${pi.currentPage-1}" id="navi-btn2"> ＜ </a> --%>
-<%--                     </c:if> --%>
-                    
-<%--                     <c:forEach begin="${pi.startNavi}" end="${pi.endNavi}" var="p"> --%>
-<%--                         <c:url var="pageUrl" value="/order/list"> --%>
-<%--                             <c:param name="page" value="${p } "></c:param> --%>
-<%--                         </c:url> --%>
-<%--                         <a href="${pageUrl }" class="navi-btn3">${p }</a>&nbsp; --%>
-<%--                     </c:forEach> --%>
-
-<%--                     <c:if test="${pi.currentPage + 1 <= pi.maxPage}"> --%>
-<%--                         <a href="/order/list?page=${pi.currentPage+1}" id="navi-btn4"> ＞ </a> --%>
-<%--                     </c:if>  --%>
-<%--                     <c:if test="${pi.currentPage + 1 <= pi.maxPage}"> --%>
-<%--                         <a href="/order/list?page=${pi.maxPage}" id="navi-btn5"> ≫ </a> --%>
-<%--                     </c:if> --%>
-<!--                 </td> -->
-<!--             </tr> -->
-<!--         </table> -->
+<!--             페이징처리 -->
+            <table id="navi-box">
+            <tbody id="table-tbody">
+	            <tr>
+	                <td>
+						<c:if test="${pi.currentPage > 1}">
+				       		<a href="/meeting/myMeetingList?page=1" id="navi-btn3"><<</a>
+				       	</c:if>
+				     	<c:forEach begin="${pi.startNavi}" end="${pi.endNavi}" var="page">
+				       		<c:url var="pageUrl" value="/meeting/myMeetingList">
+				       			<c:param name="page" value="${page}" />
+				       		</c:url>
+				       		<a href="${pageUrl}" id="navi-btn3"<c:if test="${pi.currentPage == page}"></c:if>>${page}</a>
+				       	</c:forEach>
+				       		<c:if test="${pi.currentPage < pi.maxPage}">
+				       			<a href="/meeting/myMeetingList?page=${pi.maxPage}" id="navi-btn3">>></a>
+				       		</c:if>
+	                </td>
+	            </tr>
+            </tbody>
+        </table>
+        
     </div>
 
     <jsp:include page="../common/footer.jsp"></jsp:include>

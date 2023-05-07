@@ -121,5 +121,11 @@ public class SnsServiceImpl implements SnsService {
 		return snsStore.getFollowerList(session, userNo);
 	}
 
+	@Override
+	public List<SnsPhoto> getPhotos(int userNo) {
+		// TODO Auto-generated method stub
+		return snsStore.getPhotos(session, userNo);
+	}
+
 
 }
