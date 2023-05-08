@@ -103,5 +103,11 @@ public class BookServiceImpl implements BookService{
 		int facilityNo = bStore.getfacilNo(session, facilityName);
 		return facilityNo;
 	}
+
+	@Override
+	public List<Book> selectAllBook() {
+		List<Book> bList = bStore.selectAllForMailing(session);
+		return bList;
+	}
 	
 }

@@ -134,7 +134,8 @@
 						        <input type="hidden" id="facilNo" value="" name="facilityNo">
 						        <input type="hidden" id="bookPrice" value="" name="bookPrice">
 				                <!--요금 보이고 2초 후에 결제 버튼 보이기-->
-				                <button id="payment-btn" disabled="true" style="opacity:0.5">이 정보로 예약하기</button>
+				                <button id="payment-btn" >이 정보로 예약하기</button>
+<!-- 				                <button id="payment-btn" style="display:none" disabled="true" style="opacity:0.5">이 정보로 예약하기</button> -->
 				        	</div>
 			   
 		       		 	</form>
@@ -536,9 +537,10 @@
                     behavior: "smooth"
                 });
 
-                setTimeout(function() {
-                    document.querySelector("button").style.display = "flex";
-                }, 2000);
+//                 setTimeout(function() {
+//                 	document.getElementById("payment-btn").style.display = "flex";
+//                     document.querySelector("button").disabled = false;
+//                 }, 2000);
                 // 버튼 위치로 스크롤 이동
                 const btnDiv = document.getElementsByTagName("button");
                 window.scrollTo({
