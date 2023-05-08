@@ -256,9 +256,9 @@
 	        </div>
 	        <br><hr>
 	        <div class="button-area">
-	            <input type="reset" class="reset-btn" value="취소하기">
-	            &nbsp;&nbsp;&nbsp;
-	            <input type="submit" class="submit-btn" value="쪽지 보내기">
+	            <input type="reset" class="reset-btn" value="목록으로 가기" onclick="location.href='messageSend?userNo=${loginUser.userNo}';">
+<!-- 	            &nbsp;&nbsp;&nbsp; -->
+<!-- 	            <input type="submit" class="submit-btn" value="쪽지 보내기"> -->
 	        </div>
 
 

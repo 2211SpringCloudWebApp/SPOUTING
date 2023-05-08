@@ -9,44 +9,178 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>주문내역</title>
-    <link rel="stylesheet" href="/resources/css/pointCss/detail.css">
+<!--     <link rel="stylesheet" href="/resources/css/pointCss/detail.css"> -->
     <link rel="stylesheet" href="/resources/css/mypageCss/nav.css">
     <style>
-	    #point-list {
+	    
+	    @font-face {
+    font-family: 'Pretendard-Regular';
+    src: url('https://cdn.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Regular.woff') format('woff');
+    font-weight: 400;
+    font-style: normal;
+}
+
+* {
+    font-family: 'Pretendard-Regular'; 
+}
+
+#main {
+    width: calc(100% - 200px);
+    height: 1000px;
+    border-top: 1px solid rgb(242, 242, 242);
+    padding-bottom: 50px;
+    padding-left: 20px;
+    margin: 0 auto;
+}
+#list-title {
+    width: 600px;
+    height: 50px;
+    margin: 50px auto;
+    text-align: center;
+    padding: 10px;
+}
+    #list-title p {
+        font-size: 21px;
+        padding: 5px;
+        padding-left: 30px;
+        padding-right: 30px;
+        border-bottom: 2px solid #0645daab;    
+    }
+    #list-title span {
+        margin: 30px;
+        font-size: 18px;
+        color: #555555;
+    }
+    #charge-btn {
+        width: 250px;
+        height: 40px;
+        border: none;
+        background-color: #0645daab;
+        border-radius: 5px;
+        color: #fafafa;
+        margin: 30px;
+        font-size: 16px;
+    }
+        #charge-btn:hover {
+            color: #32529ec2;
+            background-color: #d8d8d885;
+            font-weight: 800;
+            cursor: pointer;
+        }
+#list-wrapper {
+    width: 900px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+}
+    #point-list {
         width: 800px;
         display: block;
         margin: 0 auto;
         line-height: 3;
         text-align: center;
-    	}
+    }
         .table-line {
-            width:800px;
+            width: 800px;
             border-bottom: 1px solid #ccc;
             display: table;
             padding-right: 10px;
             padding-left: 10px;
         }
-        #navi-box {
-		    width: 800px;
-		    height: 120px;
-		    margin: 0 auto;
-		    margin-bottom: 50px;
-		    text-align: center;
-		    padding-top: 30px;
-		}
-		#list-wrapper {
-		    width: 900px;
-		    margin: 0 auto;
-		    display: block;
-		}
-		#list-title {
-		    width: 600px;
-		    height: 50px;
-		    margin: 50px auto;
-		    text-align: center;
-		    padding: 10px;
-		}
+        
+        .table-line2 {
+            width: 800px;
+            border-bottom: 1px solid #ccc;
+            display: table;
+            padding-right: 10px;
+            padding-left: 10px;
+        }
+        
+        .table-line2:hover {
+        	 background-color: #607EAA;
+        }
+        
+        
+        
+        
+        .table-line img {
+            width: 30px;
+            height: 30px;
+            margin-top: 20px;
+            
+        }
+        #point-list:first-child {
+            border-top: 1px solid #ccc;
+        }
+    #ad-box {
+    width: 200px;
+    height: 600px;
+       background-image: url(/resources/images/point/ad.png);
+       background-repeat: no-repeat;
+       background-size: 100%;
+       cursor: pointer;
+    }
 
+
+/*페이징///////////////////////////////////////*/
+#navi-box2 {
+    width: 800px;
+    height: 120px;
+    margin: 0 auto;
+    margin-bottom: 50px;
+    text-align: center;
+    padding-top: 30px;
+    --padding-right: 200px;
+}
+    #navi-box2 a{
+        text-decoration: none;
+        color: #1b5dff;
+    }
+        #navi-box2 a:link{
+            color: #1b5dff;
+        }
+        #navi-box2 a:visited{
+            color: #1b5dff;
+        }
+    #navi-btn1{
+        padding: 8px;
+        border-radius: 10px;
+        font-weight: 900;
+    }
+    #navi-btn2{
+        padding: 8px;
+        margin-right: 20px;
+        border-radius: 10px;
+        font-weight: 900;
+    }
+    .navi-btn3{
+        font-size: 13px;
+        padding: 7px;
+        padding-left: 10px;
+        padding-right: 10px;
+        border-radius: 10px;
+    }
+        .navi-btn3:hover{
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: 800;
+            background-color: #ebebeb;
+        }
+    #navi-btn4{
+        padding: 8px;
+        margin-left: 20px;
+        border-radius: 10px;
+        font-weight: 900;
+    }  
+    #navi-btn5{
+        padding: 8px;
+        border-radius: 10px;
+        font-weight: 900;
+    }
+	    
+	    
+	    
+	    
 		
     </style>
 </head>
@@ -98,7 +232,7 @@
 	                	<th style="width: 30%;">날짜</th>
 	                </tr>
 	                <c:forEach items="${myMeetingList}" var="myMeetingList" varStatus="i">
-	                <tr class="table-line" onclick="location.href='/meetingDetailPage?meetingNo=${myMeetingList.meetingNo}&readerNo=${myMeetingList.leaderNo }'" style="cursor: pointer;">
+	                <tr class="table-line2" onclick="location.href='/meetingDetailPage?meetingNo=${myMeetingList.meetingNo}&readerNo=${myMeetingList.leaderNo }'" style="cursor: pointer;">
 	                    <td style="width: 10%;">${myMeetingList.meetingNo}</td>
 	                    <td style="width: 40%;">${myMeetingList.meetingName}</td>
 	                    <td style="width: 20%;">${myMeetingList.leaderName}</td>
@@ -111,8 +245,7 @@
         </div>
 
 <!--             페이징처리 -->
-            <table id="navi-box">
-            <tbody id="table-tbody">
+            <table id="navi-box2">
 	            <tr>
 	                <td>
 						<c:if test="${pi.currentPage > 1}">
@@ -129,7 +262,6 @@
 				       		</c:if>
 	                </td>
 	            </tr>
-            </tbody>
         </table>
         
     </div>

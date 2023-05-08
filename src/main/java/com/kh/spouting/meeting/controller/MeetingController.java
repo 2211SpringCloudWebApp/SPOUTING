@@ -190,7 +190,7 @@ public class MeetingController {
 		int userNo = loginUser.getUserNo();
 		int totalCount = meetingService.getMeetingListCount(userNo);
 		PageInfo pi = this.getPageInfo(page, totalCount);
-		
+		model.addAttribute("pi", pi);
 		try {
 			List<Meeting> myMeetingList = meetingService.selectMyMeeting(pi, userNo);
 			model.addAttribute("myMeetingList", myMeetingList);
