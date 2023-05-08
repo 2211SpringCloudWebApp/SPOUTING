@@ -4,6 +4,8 @@ import java.util.List;
 
 import org.apache.ibatis.session.SqlSession;
 
+import com.kh.spouting.meeting.domain.AllMemberProfile;
+import com.kh.spouting.sns.domain.Follow;
 import com.kh.spouting.sns.domain.Sns;
 import com.kh.spouting.sns.domain.SnsComment;
 import com.kh.spouting.sns.domain.SnsCommentNew;
@@ -33,6 +35,16 @@ public interface SnsStore {
 	int deleteComment(SqlSession session, Integer snsCommentNo);
 
 	int snsDelete(SqlSession session, int snsPhotoNo);
+
+	int followUser(SqlSession session, Follow followUser);
+
+	int getFollowingCount(SqlSession session, int userNo);
+
+	int getFollowerCount(SqlSession session, int userNo);
+
+	List<AllMemberProfile> getFollowingList(SqlSession session, int userNo);
+
+	List<AllMemberProfile> getFollowerList(SqlSession session, int userNo);
 
 
 }

@@ -2,6 +2,8 @@ package com.kh.spouting.sns.service;
 
 import java.util.List;
 
+import com.kh.spouting.meeting.domain.AllMemberProfile;
+import com.kh.spouting.sns.domain.Follow;
 import com.kh.spouting.sns.domain.Sns;
 import com.kh.spouting.sns.domain.SnsComment;
 import com.kh.spouting.sns.domain.SnsCommentNew;
@@ -31,6 +33,16 @@ public interface SnsService {
 	int deleteComment(Integer snsCommentNo);
 
 	int snsDelete(int snsPhotoNo);
+
+	int followUser(Follow followUser);
+
+	int getFollowingCount(int userNo);
+
+	int getFollowerCount(int userNo);
+
+	List<AllMemberProfile> getFollowingList(int userNo);
+
+	List<AllMemberProfile> getFollowerList(int userNo);
 
 
 }

@@ -23,6 +23,8 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.gson.Gson;
 import com.kh.spouting.common.FileUtil;
+import com.kh.spouting.meeting.domain.AllMemberProfile;
+import com.kh.spouting.sns.domain.Follow;
 import com.kh.spouting.sns.domain.Sns;
 import com.kh.spouting.sns.domain.SnsComment;
 import com.kh.spouting.sns.domain.SnsCommentNew;
@@ -43,7 +45,8 @@ public class SnsController {
 	
 	//개인 sns 페이지 화면
 	@RequestMapping(value="/sns", method=RequestMethod.GET)
-	public String snsPage(Model model, HttpServletRequest request, @RequestParam("userNo") int userNo) {
+	public String snsPage(Model model, HttpServletRequest request, @RequestParam("userNo") int userNo
+							,@SessionAttribute("loginUser") User loginUser) {
 		//작성자 userNo 가져오기
 		HttpSession session = request.getSession();
 		/*
@@ -52,6 +55,19 @@ public class SnsController {
 		 */
 		int totalCount = snsService.getTotalCount(userNo);
 		model.addAttribute("totalCount", totalCount);
+		
+		//팔로잉 수 가져오기
+		int followingCount = snsService.getFollowingCount(userNo);
+		model.addAttribute("followingCount", followingCount);
+		
+		//팔로워 수 가져오기
+		int followerCount = snsService.getFollowerCount(userNo);
+		model.addAttribute("followerCount", followerCount);
+		
+		//팔로잉 목록 가져오기
+		List<AllMemberProfile> followingCheckList = snsService.getFollowingList(loginUser.getUserNo());
+		model.addAttribute("followingCheckList", followingCheckList);
+		
 		try {
 			SnsProfile oneSns = snsService.selectOneById(userNo);
 //			model.addAttribute("loginUser",loginUser);
@@ -61,6 +77,7 @@ public class SnsController {
 			} else {
 //				model.addAttribute("loginUser",loginUser);
 				model.addAttribute("msg", "데이터가 존재하지 않습니다.");
+				return "common/error";
 			}
 			return "sns/sns";
 		} catch (Exception e) {
@@ -268,5 +285,43 @@ public class SnsController {
 	}
 	
 	
+	//유저 팔로우
+	@RequestMapping(value="/sns/follow", method=RequestMethod.GET)
+	public String userFollow(@SessionAttribute("loginUser") User loginUser, @RequestParam("userNo") int followNo, Model model) {
+		int userNo = loginUser.getUserNo();
+		try {
+			Follow followUser = new Follow(userNo, followNo);
+			int result = snsService.followUser(followUser);
+			if(result > 0) {
+				return "redirect:/sns?userNo="+loginUser.getUserNo();
+			} else {
+				model.addAttribute("msg", "팔로우 실패");
+				return "common/error";
+			}
+			
+		} catch (Exception e) {
+			// TODO: handle exception
+			model.addAttribute("msg", e.getMessage());
+			return "common/error";
+		}
+		
+	}
+	
+	//팔로잉 페이지 뷰
+	@RequestMapping(value="/sns/followingPage", method=RequestMethod.GET)
+	public String followingPage(@RequestParam("userNo") int userNo, Model model) {
+		List<AllMemberProfile> followingList = snsService.getFollowingList(userNo);
+		model.addAttribute("followingList", followingList);
+		return "sns/followingPage";
+	}
+	
+	
+	//팔로워 페이지 뷰
+	@RequestMapping(value="/sns/followerPage", method=RequestMethod.GET)
+	public String followerPage(@RequestParam("userNo") int userNo, Model model) {
+		List<AllMemberProfile> followerList = snsService.getFollowerList(userNo);
+		model.addAttribute("followerList", followerList);
+		return "sns/followerPage";
+	}
 
 }

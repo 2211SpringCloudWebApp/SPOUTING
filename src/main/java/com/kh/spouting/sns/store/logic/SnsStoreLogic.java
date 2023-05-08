@@ -6,6 +6,8 @@ import org.apache.ibatis.session.RowBounds;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
 
+import com.kh.spouting.meeting.domain.AllMemberProfile;
+import com.kh.spouting.sns.domain.Follow;
 import com.kh.spouting.sns.domain.Sns;
 import com.kh.spouting.sns.domain.SnsComment;
 import com.kh.spouting.sns.domain.SnsCommentNew;
@@ -84,6 +86,36 @@ public class SnsStoreLogic implements SnsStore {
 	public int snsDelete(SqlSession session, int snsPhotoNo) {
 		// TODO Auto-generated method stub
 		return session.delete("SnsMapper.snsDelete",snsPhotoNo);
+	}
+
+	@Override
+	public int followUser(SqlSession session, Follow followUser) {
+		// TODO Auto-generated method stub
+		return session.insert("SnsMapper.followUser", followUser);
+	}
+
+	@Override
+	public int getFollowingCount(SqlSession session, int userNo) {
+		// TODO Auto-generated method stub
+		return session.selectOne("SnsMapper.getFollowingCount", userNo);
+	}
+
+	@Override
+	public int getFollowerCount(SqlSession session, int userNo) {
+		// TODO Auto-generated method stub
+		return session.selectOne("SnsMapper.getFollowerCount", userNo);
+	}
+
+	@Override
+	public List<AllMemberProfile> getFollowingList(SqlSession session, int userNo) {
+		// TODO Auto-generated method stub
+		return session.selectList("SnsMapper.getFollowingList", userNo);
+	}
+
+	@Override
+	public List<AllMemberProfile> getFollowerList(SqlSession session, int userNo) {
+		// TODO Auto-generated method stub
+		return session.selectList("SnsMapper.getFollowerList", userNo);
 	}
 
 

@@ -182,4 +182,20 @@ public class MeetingController {
 	}
 	
 	
+	//마이페이지 내 소셜링 리스트
+	@RequestMapping(value="/meeting/myMeetingList", method=RequestMethod.GET)
+	public String myMeetingList(Model model, @SessionAttribute("loginUser") User loginUser) {
+		int userNo = loginUser.getUserNo();
+		try {
+			List<Meeting> myMeetingList = meetingService.selectMyMeeting(userNo);
+			model.addAttribute("myMeetingList", myMeetingList);
+			return "meeting/meetingList"; 
+		} catch (Exception e) {
+			// TODO: handle exception
+			model.addAttribute("msg","나의 소셜링 리스트 에러 페이지.");
+			return "common/error";
+		}
+	}
+	
+	
 }

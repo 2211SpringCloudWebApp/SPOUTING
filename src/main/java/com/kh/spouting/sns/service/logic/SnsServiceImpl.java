@@ -6,6 +6,8 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.kh.spouting.meeting.domain.AllMemberProfile;
+import com.kh.spouting.sns.domain.Follow;
 import com.kh.spouting.sns.domain.Sns;
 import com.kh.spouting.sns.domain.SnsComment;
 import com.kh.spouting.sns.domain.SnsCommentNew;
@@ -87,6 +89,36 @@ public class SnsServiceImpl implements SnsService {
 	public int snsDelete(int snsPhotoNo) {
 		// TODO Auto-generated method stub
 		return snsStore.snsDelete(session, snsPhotoNo);
+	}
+
+	@Override
+	public int followUser(Follow followUser) {
+		// TODO Auto-generated method stub
+		return snsStore.followUser(session, followUser);
+	}
+
+	@Override
+	public int getFollowingCount(int userNo) {
+		// TODO Auto-generated method stub
+		return snsStore.getFollowingCount(session, userNo);
+	}
+
+	@Override
+	public int getFollowerCount(int userNo) {
+		// TODO Auto-generated method stub
+		return snsStore.getFollowerCount(session, userNo);
+	}
+
+	@Override
+	public List<AllMemberProfile> getFollowingList(int userNo) {
+		// TODO Auto-generated method stub
+		return snsStore.getFollowingList(session, userNo);
+	}
+
+	@Override
+	public List<AllMemberProfile> getFollowerList(int userNo) {
+		// TODO Auto-generated method stub
+		return snsStore.getFollowerList(session, userNo);
 	}
 
 

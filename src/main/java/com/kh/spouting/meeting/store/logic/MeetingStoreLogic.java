@@ -68,5 +68,14 @@ public class MeetingStoreLogic implements MeetingStore {
 		return session.delete("MeetingMapper.deleteMeeting", meetingNo);
 	}
 
+	@Override
+	public List<Meeting> selectMyMeeting(SqlSession session, int userNo) {
+		// TODO Auto-generated method stub
+		return session.selectList("MeetingMapper.selectMyList", userNo);
+	}
+
+
+
+
 
 }
