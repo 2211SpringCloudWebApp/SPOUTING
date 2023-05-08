@@ -27,6 +27,7 @@
 	<beans:bean id="mailSender" class="org.springframework.mail.javamail.JavaMailSenderImpl">
 		<beans:property name="host" value="smtp.gmail.com"/> <!-- 메이서버 호스트 -->
 		<beans:property name="port" value="587"/> <!-- 메이서버 포트번호 -->
+		<beans:property name="defaultEncoding" value="utf-8"/>
 		<beans:property name="username" value="spoutingcheck@gmail.com"/> 
 		<beans:property name="password" value="dlvsuophzsqyimqy"/> 
 		<!-- 보안연결 SSL과 관련된 설정 -->

@@ -104,4 +104,10 @@ public class BookStoreLogic implements BookStore{
 		return facilityNo;
 	}
 
+	@Override
+	public List<Book> selectAllForMailing(SqlSession session) {
+		List<Book> bList = session.selectList("BookMapper.selectAllBookList");
+		return bList;
+	}
+
 }

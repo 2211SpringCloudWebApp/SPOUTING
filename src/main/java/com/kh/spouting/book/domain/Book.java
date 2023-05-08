@@ -24,6 +24,13 @@ public class Book {
 	private int userPoint; //가용포인트
 	private int inquiryStatus;
 	
+	private boolean MailSent; //메일발송체킹용. 서버에 저장 안해놓으면 서버 재시작시 필드값초기화ㅠ
+	
+	
+
+
+
+
 	public Book() {
 		super();
 	}
@@ -53,6 +60,13 @@ public class Book {
 	}
 
 
+	public boolean isMailSent() {
+		return MailSent;
+	}
+
+	public void setMailSent(boolean mailSent) {
+		MailSent = mailSent;
+	}
 
 
 	public int getBookNo() {

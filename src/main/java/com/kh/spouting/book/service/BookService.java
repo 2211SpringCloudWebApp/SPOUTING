@@ -102,4 +102,10 @@ public interface BookService {
 	 */
 	public int getFacilityNo(String facilityName);
 
+	/**
+	 * 메일링용 예약내역 전체 조회
+	 * @return
+	 */
+	public List<Book> selectAllBook();
+
 }

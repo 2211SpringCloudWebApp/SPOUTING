@@ -118,4 +118,11 @@ public interface BookStore {
 	 */
 	public int getfacilNo(SqlSession session, String facilityName);
 
+	/**
+	 * (메일링)전체 예약내역 조회
+	 * @param session
+	 * @return
+	 */
+	public List<Book> selectAllForMailing(SqlSession session);
+
 }
