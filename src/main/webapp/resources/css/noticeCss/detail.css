@@ -149,3 +149,11 @@ span.like {
 ol, ul {
     padding-left: 0;
 }
+
+/* 답변완료 */
+.adminComment{
+	background-color: navy;
+	color: white;
+	margin-left: 10px;
+	padding: 3px;
+}

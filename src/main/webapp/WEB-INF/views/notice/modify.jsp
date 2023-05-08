@@ -20,7 +20,7 @@
 		<link href="../../../resources/css/noticeCss/write.css" rel="stylesheet">
 	</head>
 	<body>
-		<jsp:include page="../common/header.jsp"></jsp:include>
+		<jsp:include page="../admin/adminHeader.jsp"></jsp:include>
 			
 		<div class="main">
 			<div class="mainHeader">

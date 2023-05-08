@@ -17,12 +17,18 @@
 		<result property="userName" column="USER_NAME"/>
 	</resultMap>
 	
-<!--	댓글등록-->
+<!--	댓글등록 -->
 	<insert id="writeComment">
 		INSERT INTO COMMENT_TBL VALUES(SEQ_COMMENT_NO.NEXTVAL, #{userNo}, #{inquiriesNo}, #{commentContent}, DEFAULT)
 	</insert>
 	
+<!-- 	댓글목록 -->
 	<select id="getCommentList" resultMap="commentJoinResultMap">
 		SELECT C.*, U.USER_NAME FROM COMMENT_TBL C JOIN USER_TBL U ON C.USER_NO = U.USER_NO WHERE INQUIRIES_NO = #{inquiriesNo}		
 	</select>
+	
+<!-- 	댓글삭제 -->
+	<delete id="deleteComment">
+		DELETE FROM COMMENT_TBL WHERE COMMENT_NO = #{commentNo}
+	</delete>
 </mapper>

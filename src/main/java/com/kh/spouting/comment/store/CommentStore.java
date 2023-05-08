@@ -12,4 +12,6 @@ public interface CommentStore {
 
 	List<Comment> getCommentList(SqlSession session, int inquiriesNo);
 
+	int deleteComment(SqlSession session, Integer inquiryCommentNo);
+
 }

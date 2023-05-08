@@ -16,7 +16,14 @@
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
 	</head>
 	<body>
-		<jsp:include page="../common/header.jsp"></jsp:include>
+		<!-- 관리자헤더 -->
+		<c:if test="${sessionScope.loginUser.userType eq '1'}">
+			<jsp:include page="../admin/adminHeader.jsp"></jsp:include>
+		</c:if>
+		<!-- 일반회원헤더 -->
+		<c:if test="${sessionScope.loginUser.userType eq '0'}">
+			<jsp:include page="../common/header.jsp"></jsp:include>
+		</c:if>
 		
 <!-- 		메인테이블 -->
 		<div id="main">
@@ -33,7 +40,24 @@
 				<table class="table table-borderless">
 					<tr>
 						<th>제목</th>
-						<td>${inquiry.inquiriesTitle } </td>
+						<td>
+							${inquiry.inquiriesTitle }
+							<c:if test="${inquiry.isAdminComment eq 'Y' }">
+						  		<span class="adminComment">답변완료</span>
+						  	</c:if>
+						</td>
+					</tr>
+					<tr>
+						<th>카테고리</th>
+						<c:if test="${inquiry.inquiriesCategory eq 'N'}">
+							<td>일반문의</td>
+						</c:if>
+						<c:if test="${inquiry.inquiriesCategory eq 'M'}">
+							<td>MD관련문의</td>
+						</c:if>
+						<c:if test="${inquiry.inquiriesCategory eq 'P'}">
+							<td>결제취소문의</td>
+						</c:if>
 					</tr>
 					<tr>
 						<th>작성자</th>
@@ -197,6 +221,7 @@
 			// 댓글목록 Ajax
 			function getCommentList(){
 				var inquiriesNo = "${inquiry.inquiriesNo}";
+// 				var userNo ="${sessionScope.loginUser.userNo}";
 				$.ajax({
 					url : "/comment/list",
 					data : {
@@ -207,10 +232,16 @@
 						var html = "";
 						if(result.length > 0){
 							for(var i = 0; i < result.length; i++){
+								console.log("댓글작성자 : " + result[i].userNo);
 								html += "<div class='comment'>";
 								html += "<span class='username'>" + result[i].userName + "💙 </span><br>";
 								html += "<span class='content'>" + result[i].commentContent + "</span><br>";
-								html += "<span class='date'>" + new Date(result[i].cCreateDate).toLocaleString() + "</span>"
+								html += "<input type='hidden' value='result[i].commentNo' name='commentNo'>";
+								html += "<span class='date'>" + new Date(result[i].cCreateDate).toLocaleString() + "</span><br>"
+								// 댓글 작성자와 로그인한 사용자가 같으면 삭제 버튼 생성
+			                    if(result[i].userNo == "${sessionScope.loginUser.userNo}"){
+			                    	html += "<button class='delete-comment btn btn-primary btn-sm' onClick='deleteComment(" + result[i].commentNo + ")'>삭제</button>";
+			                    }
 								html += "</div>";
 							}
 						}else{
@@ -232,6 +263,29 @@
 			$(function(){
 				getCommentList();
 			})
+			
+			//댓글 삭제
+			function deleteComment(commentNo) {
+			    $.ajax({
+			        url : "/comment/deleteIComment",
+			        data : {
+			            "commentNo" : commentNo
+			        },
+			        type : "post",
+			        success : function(result){
+			            if(result == "success"){
+			                alert("댓글이 삭제되었습니다.");
+			                getCommentList();   // 삭제 후 댓글목록 불러오기 함수 실행
+			            }else{
+			                console.log("댓글삭제실패");
+			            }
+			        },
+			        error : function(){
+			            console.log("AJAX오류발생");
+			        }
+			    })
+			}
+
 
 			// 좋아요 입력 함수
 			function updateLike(){
