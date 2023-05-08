@@ -55,9 +55,6 @@
 				
 			}
 			
-/* 			.search_tbl>table>tbody>tr>td>.searchKeyword { */
-/* 				margin : 20px auto; */
-/* 			} */
 			
 			hr {
 				margin: 10px 0px 10px;
@@ -210,7 +207,7 @@
 			        
 			        // 마커 아이콘
 			        icon: {
-			            url: '../../../resources/images/center/marker.png',	// 이미지의 경로
+			            url: '../../../resources/images/center/marker1.png',	// 이미지의 경로
 			            size: new naver.maps.Size(50, 50),				// 이미지 크기 지정
 			            origin: new naver.maps.Point(0, 0),				// 이미지 파일의 최상단 좌표 지정
 			            anchor: new naver.maps.Point(15, 15),		// 마커의 어느 지점을 기준으로 지도상에 표시할지
@@ -231,20 +228,25 @@
 				
 				// 정보윈도우 내용
 				let contentString = [
-					'<div style="width:200px;text-align:center;padding:10px;">',
-					'	<div style="width:90%; height:50px; margin: 0 auto;">',
+					'<div style="width:200px;text-align:center;padding:11px;color:black;">',
+					'	<div style="width:97%; height:100px; margin: 0 auto;">',
 					'		<img src="../../../resources/images/centeruploadFiles/' + areaArr[i].centerFilename1 + '" style="width:100%; height:100%;">',
 					'	</div>',
+					'	<br>',
 					'	<input type="hidden" id="centerNo" value="' + areaArr[i].centerNo + '">',
-					'	<h2>' + areaArr[i].centerName + '</h2>',
-					'	<p>' + areaArr[i].centerAddr + '</p>',
-					'	<p>' + areaArr[i].centerSnaddr + '</p>',
-					'	<p>' + '☎ ' + areaArr[i].centerTel + '</p>',
+					'	<h3>' + areaArr[i].centerName + '</h3>',
+					'	<br>',
+					'	<div style="text-align:left;">',
+					'		<span style="border:1px solid black; border-radius:3px; padding:1px; margin-right:6px; color:black; font-size:small; float:left;">지번</span><p style="font-size:small;">' + areaArr[i].centerAddr + '</p>',
+					'		<span style="border:1px solid black; border-radius:3px; padding:1px; margin-right:6px; color:black; font-size:small; float:left;">도로명</span><p style="font-size:small;">' + areaArr[i].centerSnaddr + '</p>',
+					'		<p style="font-size:medium; margin:7px 0px 4px 5px;">' + '☎ ' + areaArr[i].centerTel + '</p>',
+					'	</div>',
 					'</div>',
 					'<div style="width:200px;text-align:center;padding-bottom:10px;">',
-					'	<a href="/book/bookView">예약하기</a>',
-					'	<a href="/center/detail/'+ areaArr[i].centerNo +'">자세히보기</a>',
-					'</div>'
+					'	<a href="/book/bookView" style="color: white; background-color: brown; font-size:medium;">예약하기</a>',
+					'	<a href="/center/detail/'+ areaArr[i].centerNo +'" style="color: white; background-color: brown; font-size:medium;">자세히보기</a>',
+					'</div>',
+					'<br>'
 				].join('');
 			    
 			    
@@ -254,13 +256,13 @@
 				     content: contentString,
 				     
 				     maxWidth: 250,
-					 backgroundColor: "#fff",
-					 borderColor: "#3E54AC",
+					 backgroundColor: "white",
+					 borderColor: "brown",
 					 borderWidth: 1,
 					 anchorSize: new naver.maps.Size(30, 30),
 					 anchorSkew: true,
-					 anchorColor: "#fff",
-					 pixelOffset: new naver.maps.Point(20, -20)
+					 anchorColor: "white",
+					 pixelOffset: new naver.maps.Point(20, -20),
 				 });
 				 
 				
