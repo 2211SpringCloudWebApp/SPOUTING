@@ -139,4 +139,11 @@
 		ON S.USER_NO = U.USER_NO
 		WHERE F.FOLLOW_NO = #{userNo}
 	</select>
+	
+	<select id="getPhotos" resultMap="snsPhotoResultMap">
+		SELECT SNSPHOTO_NO, SNS_FILERENAME
+		FROM SNSPHOTO_TBL
+		WHERE USER_NO = #{userNo}
+		ORDER BY SNSPHOTO_NO DESC
+	</select>
 </mapper>

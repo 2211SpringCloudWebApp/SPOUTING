@@ -6,6 +6,7 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.kh.spouting.common.PageInfo;
 import com.kh.spouting.meeting.domain.AllMemberProfile;
 import com.kh.spouting.meeting.domain.Lineup;
 import com.kh.spouting.meeting.domain.Meeting;
@@ -87,9 +88,16 @@ public class MeetingServiceImpl implements MeetingService {
 
 
 	@Override
-	public List<Meeting> selectMyMeeting(int userNo) {
+	public List<Meeting> selectMyMeeting(PageInfo pi, int userNo) {
 		// TODO Auto-generated method stub
-		return meetingStore.selectMyMeeting(session, userNo);
+		return meetingStore.selectMyMeeting(session, pi, userNo);
+	}
+
+
+	@Override
+	public int getMeetingListCount(int userNo) {
+		// TODO Auto-generated method stub
+		return meetingStore.getMeetingListCount(session, userNo);
 	}
 
 

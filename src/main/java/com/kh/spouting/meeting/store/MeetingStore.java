@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.apache.ibatis.session.SqlSession;
 
+import com.kh.spouting.common.PageInfo;
 import com.kh.spouting.meeting.domain.AllMemberProfile;
 import com.kh.spouting.meeting.domain.Lineup;
 import com.kh.spouting.meeting.domain.Meeting;
@@ -29,7 +30,9 @@ public interface MeetingStore {
 
 	int deleteMeeting(SqlSession session, int meetingNo);
 
-	List<Meeting> selectMyMeeting(SqlSession session, int userNo);
+	List<Meeting> selectMyMeeting(SqlSession session, PageInfo pi, int userNo);
+
+	int getMeetingListCount(SqlSession session, int userNo);
 
 	
 

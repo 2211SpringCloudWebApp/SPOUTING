@@ -21,6 +21,15 @@
 		<result property="profileIntoduce" 	 column="PROFILE_INTRODUCE"/>		
 	</resultMap>
 	
+	<resultMap id="myMeetingListResultMap" type="com.kh.spouting.meeting.domain.MyMeetingList">
+		<id 	property="meetingNo" 			 column="MEETING_NO"/>
+		<result property="meetingName" 		 column="MEETING_NAME"/>
+		<result property="leaderNo" 		 column="READER_NO"/>
+		<result property="leaderName" column="USER_NAME"/>
+		<result property="meetingDay" 	 column="MEETING_DAY"/>		
+	</resultMap>
+	
+	
 	
 	<!-- select -->
 	<select id="selectMeeting" resultMap="meetingResultMap">
@@ -78,13 +87,25 @@
 		DELETE FROM MEETING_TBL WHERE MEETING_NO = #{meetingNo}
 	</delete>
 	
-	<select id="selectMyList" resultMap="meetingResultMap">
-		SELECT * 
+	<select id="selectMyList" resultMap="myMeetingListResultMap">
+		SELECT M.MEETING_NO, M.MEETING_NAME, M.READER_NO, U.USER_NAME, M.MEETING_DAY
 		FROM MEETING_TBL M
 		JOIN LINEUP_TBL L
 		ON M.MEETING_NO = L.MEETING_NO
+		JOIN USER_TBL U
+		ON M.READER_NO = U.USER_NO
 		WHERE L.USER_NO = #{userNo} OR M.READER_NO = #{userNo}
-		ORDER BY MEETING_DAY DESC
+		ORDER BY M.MEETING_NO DESC
+	</select>
+	
+	<select id="getMeetingListCount" resultType="_int">
+		SELECT COUNT(*)
+		FROM MEETING_TBL M
+		JOIN LINEUP_TBL L
+		ON M.MEETING_NO = L.MEETING_NO
+		JOIN USER_TBL U
+		ON M.READER_NO = U.USER_NO
+		WHERE L.USER_NO = #{userNo} OR M.READER_NO = #{userNo}
 	</select>
 	
 </mapper>

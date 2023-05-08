@@ -2,6 +2,7 @@ package com.kh.spouting.meeting.service;
 
 import java.util.List;
 
+import com.kh.spouting.common.PageInfo;
 import com.kh.spouting.meeting.domain.AllMemberProfile;
 import com.kh.spouting.meeting.domain.Lineup;
 import com.kh.spouting.meeting.domain.Meeting;
@@ -27,7 +28,9 @@ public interface MeetingService {
 
 	int deleteMeeting(int meetingNo);
 
-	List<Meeting> selectMyMeeting(int userNo);
+	List<Meeting> selectMyMeeting(PageInfo pi, int userNo);
+
+	int getMeetingListCount(int userNo);
 
 	
 

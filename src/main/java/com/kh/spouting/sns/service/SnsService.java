@@ -44,5 +44,7 @@ public interface SnsService {
 
 	List<AllMemberProfile> getFollowerList(int userNo);
 
+	List<SnsPhoto> getPhotos(int userNo);
+
 
 }

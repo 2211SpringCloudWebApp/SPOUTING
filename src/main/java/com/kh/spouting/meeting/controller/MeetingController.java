@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.SessionAttribute;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.kh.spouting.common.FileUtil;
+import com.kh.spouting.common.PageInfo;
 import com.kh.spouting.meeting.domain.AllMemberProfile;
 import com.kh.spouting.meeting.domain.Lineup;
 import com.kh.spouting.meeting.domain.Meeting;
@@ -184,18 +185,45 @@ public class MeetingController {
 	
 	//마이페이지 내 소셜링 리스트
 	@RequestMapping(value="/meeting/myMeetingList", method=RequestMethod.GET)
-	public String myMeetingList(Model model, @SessionAttribute("loginUser") User loginUser) {
+	public String myMeetingList(Model model, @SessionAttribute("loginUser") User loginUser,
+					@RequestParam(value="page", required=false, defaultValue="1") Integer page) {
 		int userNo = loginUser.getUserNo();
+		int totalCount = meetingService.getMeetingListCount(userNo);
+		PageInfo pi = this.getPageInfo(page, totalCount);
+		
 		try {
-			List<Meeting> myMeetingList = meetingService.selectMyMeeting(userNo);
+			List<Meeting> myMeetingList = meetingService.selectMyMeeting(pi, userNo);
 			model.addAttribute("myMeetingList", myMeetingList);
 			return "meeting/meetingList"; 
 		} catch (Exception e) {
 			// TODO: handle exception
-			model.addAttribute("msg","나의 소셜링 리스트 에러 페이지.");
+			model.addAttribute("msg",e.getMessage());
 			return "common/error";
 		}
 	}
+	
+	
+	
+	
+	// ********** 메소드 **********
+	// 페이징 처리 (게시판형)
+		private PageInfo getPageInfo(int currentPage, int totalCount) {
+			PageInfo pi = null;
+			int boardLimit = 10;
+			int naviLimit = 5;
+			int maxPage;
+			int startNavi;
+			int endNavi;
+			
+			maxPage = (int) Math.ceil((double)totalCount / boardLimit);
+			startNavi = (((int)((double)currentPage / naviLimit + 0.9)) - 1) * naviLimit + 1 ;
+			endNavi = startNavi + naviLimit - 1;
+			if(endNavi > maxPage) {
+				endNavi = maxPage;
+			}
+			pi = new PageInfo(currentPage, boardLimit, naviLimit, startNavi, endNavi, totalCount, maxPage);
+			return pi;
+		}
 	
 	
 }

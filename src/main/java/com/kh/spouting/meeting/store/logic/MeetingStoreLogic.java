@@ -2,9 +2,11 @@ package com.kh.spouting.meeting.store.logic;
 
 import java.util.List;
 
+import org.apache.ibatis.session.RowBounds;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
 
+import com.kh.spouting.common.PageInfo;
 import com.kh.spouting.meeting.domain.AllMemberProfile;
 import com.kh.spouting.meeting.domain.Lineup;
 import com.kh.spouting.meeting.domain.Meeting;
@@ -68,10 +70,22 @@ public class MeetingStoreLogic implements MeetingStore {
 		return session.delete("MeetingMapper.deleteMeeting", meetingNo);
 	}
 
+	
+	//마이페이지 소셜링 리스트  + 페이징
 	@Override
-	public List<Meeting> selectMyMeeting(SqlSession session, int userNo) {
+	public List<Meeting> selectMyMeeting(SqlSession session, PageInfo pi, int userNo) {
 		// TODO Auto-generated method stub
-		return session.selectList("MeetingMapper.selectMyList", userNo);
+		int limit = pi.getBoardLimit();
+		int currentPage = pi.getCurrentPage();
+		int offset = (currentPage - 1) * limit;
+		RowBounds rowBounds = new RowBounds(offset, limit);
+		return session.selectList("MeetingMapper.selectMyList", userNo, rowBounds);
+	}
+
+	@Override
+	public int getMeetingListCount(SqlSession session, int userNo) {
+		// TODO Auto-generated method stub
+		return session.selectOne("MeetingMapper.getMeetingListCount", userNo);
 	}
 
 

@@ -118,5 +118,11 @@ public class SnsStoreLogic implements SnsStore {
 		return session.selectList("SnsMapper.getFollowerList", userNo);
 	}
 
+	@Override
+	public List<SnsPhoto> getPhotos(SqlSession session, int userNo) {
+		// TODO Auto-generated method stub
+		return session.selectList("SnsMapper.getPhotos", userNo);
+	}
+
 
 }
