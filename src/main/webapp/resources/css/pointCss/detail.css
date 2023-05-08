@@ -65,7 +65,14 @@
         line-height: 3;
         text-align: center;
     }
-        .table-line {
+        .table-line2 {
+            width: 600px;
+            border-bottom: 1px solid #ccc;
+            display: table;
+            padding-right: 10px;
+            padding-left: 10px;
+        }
+         .table-line {
             width: 600px;
             border-bottom: 1px solid #ccc;
             display: table;
