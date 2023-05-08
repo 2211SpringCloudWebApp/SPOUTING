@@ -9,7 +9,6 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -19,15 +18,12 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.kh.spouting.cart.service.CartService;
 import com.kh.spouting.common.Alert;
 import com.kh.spouting.common.PageInfo;
 import com.kh.spouting.common.Search;
 import com.kh.spouting.order.domain.Order;
 import com.kh.spouting.order.domain.OrderList;
 import com.kh.spouting.order.service.OrderService;
-import com.kh.spouting.product.domain.Product;
-import com.kh.spouting.product.service.ProductService;
 import com.kh.spouting.user.domain.User;
 import com.kh.spouting.user.service.UserService;
 import com.siot.IamportRestClient.IamportClient;

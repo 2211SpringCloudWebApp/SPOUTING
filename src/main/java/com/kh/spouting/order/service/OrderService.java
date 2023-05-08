@@ -23,6 +23,9 @@ public interface OrderService {
 	// 주문 번호에 따른 주문 내역 조회
 	Order selectOneByOrderNo(int orderNo);
 
+	// 주문 상세 조회
+	List<OrderList> selectOrderDetail(int orderNo);
+	
 	// 페이징 처리
 	int getOrderListCount(String userId);
 
@@ -43,6 +46,7 @@ public interface OrderService {
 
 	// 조건부 검색
 	List<Order> searchOrder(Search search, PageInfo pi);
+
 
 
 }

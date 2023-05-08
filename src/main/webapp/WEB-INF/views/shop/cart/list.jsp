@@ -270,7 +270,7 @@
 		    type: "get",
 		    success: function(result) {
 		      if (result == "success") {
-		    	//$(".inner-content").load();
+				location.reload(); // 삭제 후 페이지 리로드
 		        calCartTotalPrice();
 		        alert("상품이 삭제되었습니다."); 
 		      } else {
@@ -279,7 +279,7 @@
 		    error: function() {}
 		  });
 		}
-
+		
 	</script>
 </body>
 </html>

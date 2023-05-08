@@ -21,6 +21,7 @@ public class OrderList {
 	
 	private int categoryNo;
 	private String productName;
+	private String productFilename1;
 	private String productPrice;
 	private String productDescription;
 
@@ -154,6 +155,14 @@ public class OrderList {
 		this.productName = productName;
 	}
 
+	public String getProductFilename1() {
+		return productFilename1;
+	}
+
+	public void setProductFilename1(String productFilename1) {
+		this.productFilename1 = productFilename1;
+	}
+
 	public String getProductPrice() {
 		return productPrice;
 	}
@@ -177,10 +186,10 @@ public class OrderList {
 				+ orderPostcode + ", orderRoadaddr=" + orderRoadaddr + ", orderDetailaddr=" + orderDetailaddr
 				+ ", orderRequest=" + orderRequest + ", orderDate=" + orderDate + ", orderState=" + orderState
 				+ ", orderCost=" + orderCost + ", productNo=" + productNo + ", categoryNo=" + categoryNo
-				+ ", productName=" + productName + ", productPrice=" + productPrice + ", productDescription="
-				+ productDescription + "]";
+				+ ", productName=" + productName + ", productFilename1=" + productFilename1 + ", productPrice="
+				+ productPrice + ", productDescription=" + productDescription + "]";
 	}
-	
+
 	
 	
 }

@@ -54,8 +54,7 @@
                     <div class="item_part">
                         <div class="item_name"><a href="/shop/main">마켓</a></div>
                         <div class="item_content">
-                            <li><a href="/shop/productList">카테고리</a></li>
-                            <li><a href="/review/reviewList">상품후기</a></li>
+                            <li><a href="/shop/productList">상품</a></li>
                         </div>
                     </div>
 ​
