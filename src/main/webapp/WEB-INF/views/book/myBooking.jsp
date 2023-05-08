@@ -159,6 +159,7 @@ img{
 	</head>
 	<body>
 		<jsp:include page="../common/header.jsp"></jsp:include>
+<<<<<<< HEAD
 		<div id="head-info">
 	        <table>
 	            <tr>
@@ -172,18 +173,15 @@ img{
 	            </tr>
 	        </table>
  	   </div>
-	   <ul id="left-nav">
-			<li class="selected"><a href="/book/myBooking?userNo=${sessionScope.loginUser.userNo}">예약내역</a></li>
-			<li><a href="/order/list">주문내역</a></li>
-			<li><a href="/review/reviewListUser">상품후기</a></li>
-			<li><a href="/meeting/myMeetingList">나의 커뮤니티</a></li>
-			<li><a href="/inquiry/myInquiry">나의 문의</a></li>
-			<li><a href="/point/detail">포인트 관리</a></li>
-			<li><a href="/mypage/myinfo">개인정보 수정</a></li>
-	   </ul>
-	
 		<main>
-		
+		  <ul id="left-nav">
+	        <li class="selected"><a href="/book/myBooking?userNo=${sessionScope.loginUser.userNo}">예약내역</a></li>
+	        <li><a href="/order/list">주문내역</a></li>
+	        <li><a href="/meeting/myMeetingList">나의 커뮤니티</a></li>
+	        <li><a href="/inquiry/myInquiry">나의 문의</a></li>
+	        <li><a href="/point/detail">포인트 관리</a></li>
+	        <li><a href="/mypage/myinfo">개인정보 수정</a></li>
+		</ul>
 		
 	        <input type="hidden" id="hiddenUserNo" value="${loginUser.userNo }" name="userNo">
 			<c:forEach items="${bList }" var="book">

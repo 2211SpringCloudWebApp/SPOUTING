@@ -26,13 +26,14 @@
             padding-right: 10px;
             padding-left: 10px;
         }
-        #navi-box {
+		#navi-box {
 		    width: 800px;
 		    height: 120px;
 		    margin: 0 auto;
 		    margin-bottom: 50px;
 		    text-align: center;
 		    padding-top: 30px;
+		   	padding-left : 200px;
 		}
 		#list-wrapper {
 		    width: 900px;
@@ -46,6 +47,23 @@
 		    text-align: center;
 		    padding: 10px;
 		}
+        .table-line2 {
+            width: 800px;
+            border-bottom: 1px solid #ccc;
+            display: table;
+            padding-right: 10px;
+            padding-left: 10px;
+        }
+         .table-line {
+            width: 800px;
+            border-bottom: 1px solid #ccc;
+            display: table;
+            padding-right: 10px;
+            padding-left: 10px;
+        }
+        .table-line:hover {
+        	 background-color: #607EAA;
+        }
     </style>
 </head>
 <body>
@@ -66,7 +84,6 @@
     <ul id="left-nav">
         <li><a href="/book/myBooking?userNo=${sessionScope.loginUser.userNo}">예약내역</a></li>
         <li class="selected"><a href="/order/list">주문내역</a></li>
-        <li><a href="/review/reviewListUser">상품후기</a></li>
         <li><a href="/meeting/myMeetingList">나의 커뮤니티</a></li>
         <li><a href="/inquiry/myInquiry">나의 문의</a></li>
         <li><a href="/point/detail">포인트 관리</a></li>
@@ -79,7 +96,7 @@
         </div>
         <div id="list-wrapper">
        		<table id="point-list">
-	                <tr class="table-line">
+	                <tr class="table-line2">
 	                	<th style="width: 25%;">주문번호</th>
 	                	<th style="width: 25%;">주문자명</th>
 	                	<th style="width: 25%;">결제금액</th>
@@ -93,7 +110,6 @@
 	                    <td style="width: 25%;">
 	                        <fmt:formatDate value="${order.orderDate}" pattern="yyyy.MM.dd" />
 	                    </td>
-	                    <td style="width: 25%;">${order.orderState}</td>
 	                </tr>
                 </c:forEach>
             </table>

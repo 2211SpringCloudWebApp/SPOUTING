@@ -180,7 +180,7 @@ public class ProductController {
 	    // 상품 가격 계산 : jsp 에서 sum 으로 값을 받기 때문에 계산 식을 따로 적어줘야함
 	    sum = Integer.parseInt(product.getProductPrice()) * qty; // productPrice의 타입이 String이기 때문에 형변환해줘야 함
 	    cList.add(cart);
-	    mv.addObject("cList", cList).addObject("sum", sum).setViewName("/shop/pay/order");
+	    mv.addObject("cList", cList).addObject("sum", String.format("%.0f", sum)).setViewName("/shop/pay/order");
 	    return mv;
 	}
 
@@ -198,7 +198,8 @@ public class ProductController {
 	        // 결제 가격은 누적합으로 계산해서 가져옴
 	        sum += Double.parseDouble(product.getProductPrice()) * cart.getCartQuantity();
 	    }
-	    mv.addObject("cList", cList).addObject("sum", sum).setViewName("/shop/pay/order");
+	    // 상품 가격이 String이고 double로 가지고 오기 때문에 format 해줘야 함
+	    mv.addObject("cList", cList).addObject("sum", String.format("%.0f", sum)).setViewName("/shop/pay/order");
 	    return mv;
 	}
 
