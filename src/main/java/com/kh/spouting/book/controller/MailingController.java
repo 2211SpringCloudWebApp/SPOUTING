@@ -1,6 +1,7 @@
 package com.kh.spouting.book.controller;
 
 import java.io.File;
+import java.text.SimpleDateFormat;
 import java.util.List;
 
 import javax.activation.FileDataSource;
@@ -53,8 +54,8 @@ public class MailingController {
 
 					if (diffHours <= 24) { // 24시간 이내일 경우에만 메일 보내기
 						MimeMessage mail = mailSender.createMimeMessage(); // true=text말고 html메시지 쓰겠다
-						//MimeMessageHelper mailHelper = new MimeMessageHelper(mail, true, "UTF-8");
-						MimeMessageHelper mailHelper = new MimeMessageHelper(mail, "UTF-8");
+						MimeMessageHelper mailHelper = new MimeMessageHelper(mail, true, "UTF-8");
+						//MimeMessageHelper mailHelper = new MimeMessageHelper(mail, "UTF-8");
 
 
 
@@ -62,15 +63,18 @@ public class MailingController {
 						// 메일내용담기(이용일이랑 현재 시간 비교해서....)
 
 						// sb.append("<img src='cid:logos'/>");
+						String startTime = new SimpleDateFormat("MM / dd HH시 ").format(book.getStartTime());
+						String endTime = new SimpleDateFormat("MM / dd HH시 ").format(book.getEndTime());
 
 						String subject = book.getUserName() + "님의 다가오는 SPOUTING!";
-						String content = "예약일이 다가오고있습니다." + book.getCenterName() +"-"+ book.getFacilityName() + book.getStartTime()+"~"+book.getEndTime();
-						String from = "heoxuagac89@gmail.com";
-						String to = "heomina89@gmail.com"; // 테스트용내껑
-						mailHelper.setFrom(from);
+						String content = "[시설 예약일이 다가오고있습니다.]<br>" + book.getCenterName() +"-"+ book.getFacilityName() +"<br>"+ startTime+"~"+endTime;
+						//String from = "heoxuagac89@gmail.com";
+						//String to = "heomina89@gmail.com"; // 테스트용내껑
+						//mailHelper.setFrom(from);
 						mailHelper.setSubject(subject);
-						mailHelper.setText(content);
-						mailHelper.setTo(to);
+						
+						mailHelper.setText(content, true);
+						//mailHelper.setTo(to);
 						mailHelper.setTo(book.getUserEmail());
 
 						mailSender.send(mail);
@@ -84,52 +88,5 @@ public class MailingController {
 		}
 	}
 
-//	@RequestMapping(value="/book/sendMail", method=RequestMethod.POST)
-//	public String sendMail(HttpServletRequest request, HttpSession session) {
-//		User user = (User) session.getAttribute("loginUser");
-//		int userNo = user.getUserNo();
-//		List<Book> bList = bService.getMyBooking(userNo);
-//		String filepath ="";
-//		
-//		if(!bList.isEmpty()) {
-//			try {
-//				for (Book book : bList) {
-//		            long startTimestamp = book.getStartTime().getTime(); // 시작 시간 timestamp
-//		            long currentTimestamp = System.currentTimeMillis(); // 현재 시간 timestamp
-//		            long diff = startTimestamp - currentTimestamp; // 시작 시간과 현재 시간의 차이 계산 (밀리초 단위)
-//		            long diffHours = diff / (60 * 60 * 1000); // 시간 단위로 변환
-//		            
-//		            if (diffHours <= 24) { // 24시간 이내일 경우에만 메일 보내기
-//		                
-//		            	MimeMessage mail = mailSender.createMimeMessage(); //true=text말고 html메시지 쓰겠다
-//		            	MimeMessageHelper mailHelper = new MimeMessageHelper(mail, true, "UTF-8");
-//		            	
-//		            	String path = request.getSession().getServletContext().getRealPath("resources");
-//		            	StringBuilder sb = new StringBuilder();
-//		            	//메일내용담기(이용일이랑 현재 시간 비교해서....)
-//		            	
-//		            	filepath = path+"\\images\\homeImg\\logo.png";
-//		            	sb.append("<img src='cid:logos'/>");
-//		            	
-//		            	String subject = user.getUserName()+"님의 다가오는 SPOUTING!";
-//		            	String content = sb.toString();
-//		            	String from = "heoxuagac89@gmail.com";
-//		            	String to = "heomina89@gmail.com"; //테스트용내껑
-//		            	mailHelper.addInline("logos", new FileDataSource(filepath));
-//		            	mailHelper.setFrom(from);
-//		            	mailHelper.setSubject(subject);
-//		            	mailHelper.setText(content, true);
-//		            	mailHelper.setTo(to);
-//		            	mailHelper.setTo(user.getUserEmail());
-//		            	
-//		            	mailSender.send(mail);
-//		            }
-//				}
-//			}catch(Exception e) {
-//				e.printStackTrace();
-//			}
-//			
-//		}
-//		return "redirect:/";
-//	}
+
 }

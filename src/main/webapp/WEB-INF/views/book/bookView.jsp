@@ -77,7 +77,7 @@
 				                    <select class="facilBox" id="facilities-a"  name= "facilityName">
 				                        <option value="" selected>👉선택👈</option>
 				                        <option value="a-1">클라이밍센터</option>
-<!-- 				                        <option value="a-2">잠수풀</option> -->
+
 				                    </select>
 				                </div>
 				            
@@ -86,7 +86,7 @@
 				                    <select class="facilBox" id="facilities-b" name= "facilityName">
 				                        <option value="" selected>선택</option>
 				                        <option value="b-1">테니스코트</option>
-				                        <option value="b-2">농구코트</option>
+<!-- 				                        <option value="b-2">농구코트</option> -->
 				                    </select>
 				                    <div id="infoNumBasket" style="color:red; margin-bottom:20px;"></div>
 				                </div>
@@ -398,7 +398,6 @@
                     document.getElementById("infoNumBasket").innerHTML = "";
                 }
             });    
-
             
 			//인원수 입력란
             function showPeopleInput() {
@@ -413,8 +412,7 @@
                     behavior: "smooth"
                 });
                 
-                let numOfPpl = document.querySelector("#numOfPpl").value;
-				
+                let numOfPpl = document.querySelector("#numOfPpl").value;				
                 		
             }
 

@@ -55,6 +55,13 @@ public class BookController {
 	
 //////////////////////////////////////////////////////////////////////////////////////////회원
 	
+	//예약 완료 랜딩
+	@RequestMapping(value="/book/confirmed")
+	public String confirmedView() {
+		return "book/thanksForBooking";
+	}
+		
+		
 	//시설예약페이지 보이기(시설정보 불러오기)
 	@RequestMapping(value="/book/bookView")
 	public String bookView(Model model) {
@@ -190,7 +197,8 @@ public class BookController {
 				int pResult = bService.insertPDtail(pDetail);
 				if(pResult>0) {
 					//sendMail(request, bookNo);
-					return "book/bookView";   //예약완료되엇읍니다페이지 하나 만들어서 바까주기
+					model.addAttribute("msg", " 예 약 완 료 ");
+					return "book/thanksForBooking"; 
 				}else {
 					model.addAttribute("msg", "포인트가 제대로 사용되지 않았어요!!");
 					return "common/error";
@@ -198,7 +206,8 @@ public class BookController {
 			}else {
 				//sendMail(request, bookNo);
 				//쓴포인트가 없을때
-				return "book/bookView";   //예약완료되엇읍니다페이지 하나 만들어서 바까주기(그페이지에서 /book/myBooking링크걸기
+				model.addAttribute("msg", " 예 약 완 료 ");
+				return "book/thanksForBooking";   
 			}
 			
 			
@@ -218,9 +227,15 @@ public class BookController {
 							   ,@RequestParam("userNo") int userNo
 							   ,Model model, HttpSession session) {
 				
-		int result = bService.deleteBook(bookNo);
+		int loginUserNo = 0;
 		User user = (User) session.getAttribute("loginUser");
-		int loginUserNo = user.getUserNo();
+		if(user !=null) {
+			loginUserNo = user.getUserNo();
+		} else {
+			model.addAttribute("msg", "로그인을 해주세요!!");
+			return "common/error";
+		}
+		int result = bService.deleteBook(bookNo);
 		
 		if(result>0) {
 			//삭제성공하면->포인트사용취소(인서트)
@@ -294,50 +309,5 @@ public class BookController {
 		return gson.toJson(CurrBookings);
 	}
 	
-	//메일링: 이렇게 하면 하루 이내 스케줄 있는 경우만 전송됨
-//	public void sendMail(HttpServletRequest request, int bookNo) {
-//		Book book = bService.selectBook(bookNo);
-//		String filepath ="";
-//		
-//		try {
-//			long startTimestamp = book.getStartTime().getTime(); // 시작 시간 timestamp
-//            long currentTimestamp = System.currentTimeMillis(); // 현재 시간 timestamp
-//            long diff = startTimestamp - currentTimestamp; // 시작 시간과 현재 시간의 차이 계산 (밀리초 단위)
-//            long diffHours = diff / (60 * 60 * 1000); // 시간 단위로 변환
-//            
-//            if (diffHours <= 24) { // 24시간 이내일 경우에만 메일 보내기
-//                
-//            	MimeMessage mail = mailSender.createMimeMessage(); //true=text말고 html메시지 쓰겠다
-//            	MimeMessageHelper mailHelper = new MimeMessageHelper(mail, true, "UTF-8");
-//            	
-//            	String path = request.getSession().getServletContext().getRealPath("resources");
-//            	filepath = path+"\\images\\homeImg\\logo.png";
-////            	String path = request.getServletContext().getRealPath("/");
-////            	File resourceDirectory = new File(path, "resources");
-////            	File imageFile = new File(resourceDirectory, "images/homeImg/logo.png");
-////            	String filepath = imageFile.getPath();
-//            	
-//            	
-//            	StringBuilder sb = new StringBuilder();
-//            	//메일내용담기(이용일이랑 현재 시간 비교해서....)
-//            	
-//            	sb.append("<img src='cid:logos'/>");
-//            	
-//            	String subject = book.getUserName()+"님의 다가오는 SPOUTING!";
-//            	String content = sb.toString();
-//            	String from = "heoxuagac89@gmail.com";
-//            	String to = "heomina89@gmail.com"; //테스트용내껑
-//            	mailHelper.addInline("logos", new FileDataSource(filepath));
-//            	mailHelper.setFrom(from);
-//            	mailHelper.setSubject(subject);
-//            	mailHelper.setText(content, true);
-//            	mailHelper.setTo(to);
-//            	mailHelper.setTo(book.getUserEmail());
-//            	
-//            	mailSender.send(mail);
-//            }
-//		}catch (Exception e) {
-//			e.printStackTrace();
-//		}
-//		}
+
 }
