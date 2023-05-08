@@ -127,7 +127,6 @@ tr td:nth-child(5) {
 	
 	.selectFile_label {
 	  cursor: pointer;
-/* 	  display: inline-flex; */
 	  align-items: center;
 	  border-radius: 4px;
 	  font-size: 14px;

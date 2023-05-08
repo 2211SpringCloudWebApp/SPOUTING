@@ -111,6 +111,7 @@
 		
 		
 		<script>
+		/* 등록하기 버튼 클릭 시 */
 			var checkRegister = () => {
 				const centerName = $("#centerName").val();
 				const centerAddr = $("#centerAddr").val();
@@ -118,88 +119,51 @@
 				const centerLat = $("#centerLat").val();
 				const centerLng = $("#centerLng").val();
 				const centerTel = $("#centerTel").val();
-				const uploadFile1 = $("#inputFile1").val();
-				const uploadFile2 = $("#inputFile2").val();
 				
+				/* 센터명 공백 확인 */
 				if(centerName == "") {
 					alert("센터명을 입력해주세요");
 					$("#centerName").focus();
 	                return false;
 				}
+				/* 지번주소 공백 확인 */
 				if(centerAddr == "") {
 					alert("지번주소를 입력해주세요");
 					$("#centerAddr").focus();
 	                return false;
 				}
+				/* 도로명주소 공백 확인 */
 				if(centerSnaddr == "") {
 					alert("도로명주소를 입력해주세요");
 					$("#centerSnaddr").focus();
 	                return false;
 				}
+				/* 위도 공백 확인 */
 				if(centerLat == "") {
 					alert("지점의 위도를 입력해주세요");
 					$("#centerLat").focus();
 	                return false;
 				}
+				/* 경도 공백 확인 */
 				if(centerLng == "") {
 					alert("지점의 경도를 입력해주세요");
 					$("#centerLng").focus();
 	                return false;
 				}
+				/* 전화번호 공백 확인 */
 				if(centerTel == "") {
 					alert("지점의 전화번호를 입력해주세요");
 					$("#centerTel").focus();
 	                return false;
 				}
 				
-				alert("지점 등록이 완료되었습니다.")
+				alert("📌 새로운 스파우팅 지점이 등록되었습니다 :D");
 				
 			}
-// 			var ckeckRegister = () => {
-// // 				const centerName = $("#centerName").val();
-// // 				$.ajax({
-// // 					if(centerName == "") {
-// // 						alert("센터명을 입력해주세요");
-// // 					}
-// // 				})
-// 				alert("센터명을 입력해주세요");
-// 			}
-				
-				
-				// 세션 스토리지에 입력된 값들 저장
-// 				sessionStorage.setItem("centerName", centerName);
-// 				sessionStorage.setItem("centerAddr", centerAddr);
-// 				sessionStorage.setItem("centerSnaddr", centerSnaddr);
-// 				sessionStorage.setItem("centerLat", centerLat);
-// 				sessionStorage.setItem("centerLng", centerLng);
-// 				sessionStorage.setItem("centerTel", centerTel);
-// 				sessionStorage.setItem("uploadFile1", uploadFile1);
-// 				sessionStorage.setItem("uploadFile2", uploadFile2);
-				
-				
-				
+
 			
-// 				if(uploadFile1 == "") {
-// 					alert("사진을 업로드하세요");
-// 				}
-// 				if(uploadFile2 == "") {
-// 					alert("모든 정보를 입력하세요");
-// 				}
-			
-			
-// 			$(document).ready(function () {
-// 			  // 페이지가 로드될 때 세션 스토리지에 저장된 값들 가져와서 입력 폼에 설정
-// 			  $("#centerName").val(sessionStorage.getItem("centerName"));
-// 			  $("#centerAddr").val(sessionStorage.getItem("centerAddr"));
-// 			  $("#centerSnaddr").val(sessionStorage.getItem("centerSnaddr"));
-// 			  $("#centerLat").val(sessionStorage.getItem("centerLat"));
-// 			  $("#centerLng").val(sessionStorage.getItem("centerLng"));
-// 			  $("#centerTel").val(sessionStorage.getItem("centerTel"));
-// 			  $("#inputFile1").val(sessionStorage.getItem("uploadFile1"));
-// 			  $("#inputFile2").val(sessionStorage.getItem("uploadFile2"));
-// 			});
-		
-		
+			/* 선택(첨부)한 이미지 확인 */
+			// uploadFile1
 			function loadImg1(obj) {
 				if(obj.files.length != 0 && obj.files[0] != 0) {
 					let reader = new FileReader();
@@ -211,6 +175,8 @@
 					document.querySelector("#img-view1").setAttribute("src", "");
 				}
 			}
+			
+			// uploadFile2
 			function loadImg2(obj) {
 				if(obj.files.length != 0 && obj.files[0] != 0) {
 					let reader = new FileReader();
