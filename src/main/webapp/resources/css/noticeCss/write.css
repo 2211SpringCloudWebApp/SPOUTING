@@ -71,3 +71,8 @@
 		border: none;
 		background: none;
 	}
+	
+	/* 결제내역 */
+	#bookNo{
+		margin-top: 10px;
+	}

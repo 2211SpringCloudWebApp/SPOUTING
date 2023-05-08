@@ -10,4 +10,6 @@ public interface CommentService {
 
 	List<Comment> getCommentList(int inquiriesNo);
 
+	int deleteComment(Integer commentNo);
+
 }

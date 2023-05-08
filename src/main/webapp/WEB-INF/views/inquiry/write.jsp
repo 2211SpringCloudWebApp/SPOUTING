@@ -48,7 +48,7 @@
 					</div>
 					<!-- 예약취소인경우 나타날 결제내역div -->
 					<div id="bookNo" style="display:none">
-						<span>결제내역</span>
+						<span>결제내역 </span>
 						<select name="bookNo" id="bookingInfo">
 							<option value="0">----------선택하기----------</option>
 							<c:forEach items="${bList }" var="book">

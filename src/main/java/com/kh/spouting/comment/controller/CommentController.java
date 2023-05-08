@@ -28,6 +28,7 @@ public class CommentController {
 	@Autowired
 	private CommentService cService;
 	
+	// 댓글등록
 	@ResponseBody
 	@RequestMapping(value="/write", method=RequestMethod.POST)
 	public String writeComment(Comment comment) {
@@ -40,11 +41,29 @@ public class CommentController {
 		}
 	}
 	
-	
+	// 댓글목록
 	@ResponseBody
 	@RequestMapping(value="/list")
 	public List<Comment> getCommentList(int inquiriesNo){
 		List<Comment> cList = cService.getCommentList(inquiriesNo);
 		return cList;
+	}
+	
+	//댓글삭제
+	@ResponseBody
+	@RequestMapping(value="/deleteIComment", method=RequestMethod.POST)
+	public String deleteComment(Integer commentNo) {
+		try {
+			System.out.println(commentNo);
+			int result = cService.deleteComment(commentNo);
+			if(result > 0) {
+				return "success";
+			} else {
+				return "fail";
+			}
+		} catch (Exception e) {
+			// TODO: handle exception
+			return e.getMessage();
+		}
 	}
 }

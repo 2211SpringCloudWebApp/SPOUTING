@@ -19,16 +19,25 @@ public class CommentServiceImpl implements CommentService{
 	@Autowired
 	private SqlSession session;
 
+	// 댓글등록
 	@Override
 	public void writeComment(Comment comment) {
 		cStore.writeComment(session, comment);
 		
 	}
 
+	// 댓글목록 
 	@Override
 	public List<Comment> getCommentList(int inquiriesNo) {
 		List<Comment> cList = cStore.getCommentList(session, inquiriesNo);
 		return cList;
+	}
+
+	// 댓글삭제 
+	@Override
+	public int deleteComment(Integer commentNo) {
+		int result = cStore.deleteComment(session, commentNo);
+		return result;
 	}
 
 
