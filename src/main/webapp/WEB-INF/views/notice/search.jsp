@@ -21,6 +21,10 @@
 		<c:if test="${sessionScope.loginUser.userType eq '0'}">
 			<jsp:include page="../common/header.jsp"></jsp:include>
 		</c:if>
+		<!-- 비회원헤더 -->
+		<c:if test="${sessionScope.loginUser.userType eq null}">
+			<jsp:include page="../common/header.jsp"></jsp:include>
+		</c:if>
 		
 <!-- 		메인테이블 -->
 	    <div id="main">
@@ -51,7 +55,7 @@
 				          <tr>
 				              <td>${notice.noticeNo }</td>
 				              <td><a href="detail?noticeNo=${notice.noticeNo }">${notice.noticeTitle }</a></td>
-				              <td>${notice.userId }</td>
+				              <td>${notice.userName }</td>
 				              <td><fmt:formatDate value="${notice.nCreateDate }" pattern="yyyy-MM-dd" /></td>
 				          </tr>
 				        </c:forEach>

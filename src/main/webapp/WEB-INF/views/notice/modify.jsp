@@ -36,22 +36,24 @@
 					<input type="hidden" name="noticeNo" value="${notice.noticeNo }">
 					<input type="hidden" name="noticeFilename" value="${notice.noticeFilename }">
 					<div id="titleArea">
+						<span>제목</span>
 						<input name="noticeTitle" value="${notice.noticeTitle }">
 					</div>
 					<div id="contentArea">
+						<span>내용</span>
 						<textarea rows="" cols="" id="summernote" name="noticeContent" >
 							${notice.noticeContent}
 						</textarea>
 					</div>
-					<div id="test">
-						<input type="file" name="reloadFile">
-						<c:if test="${! empty notice.noticeFilerename }">
-							<div class="filename">${notice.noticeFilename }</div>
-						</c:if>
-						<c:if test="${empty notice.noticeFilerename }">
-							<div class="filename">첨부된 파일이 없습니다.</div>
-						</c:if>
-					</div>
+<!-- 					<div id="test"> -->
+<!-- 						<input type="file" name="reloadFile"> -->
+<%-- 						<c:if test="${! empty notice.noticeFilerename }"> --%>
+<%-- 							<div class="filename">${notice.noticeFilename }</div> --%>
+<%-- 						</c:if> --%>
+<%-- 						<c:if test="${empty notice.noticeFilerename }"> --%>
+<!-- 							<div class="filename">첨부된 파일이 없습니다.</div> -->
+<%-- 						</c:if> --%>
+<!-- 					</div> -->
 					<div id="buttonArea">
 						<button id="saveBtn" class="btn btn-primary">저장</button>
 					</div>

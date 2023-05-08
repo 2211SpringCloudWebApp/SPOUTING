@@ -14,7 +14,7 @@ public class NoticeJoin {
 	private String noticeFilename;
 	private String noticeFilepath;
 	private String noticeFilerename;
-	private String userId;
+	private String userName;
 	
 	public NoticeJoin() {}
 	
@@ -78,18 +78,18 @@ public class NoticeJoin {
 	public void setNoticeFilerename(String noticeFilerename) {
 		this.noticeFilerename = noticeFilerename;
 	}
-	public String getUserId() {
-		return userId;
+	public String getUserName() {
+		return userName;
 	}
-	public void setUserId(String userId) {
-		this.userId = userId;
+	public void setUserName(String userName) {
+		this.userName = userName;
 	}
 	@Override
 	public String toString() {
 		return "NoticeJoin [noticeNo=" + noticeNo + ", userNo=" + userNo + ", noticeTitle=" + noticeTitle
 				+ ", noticeContent=" + noticeContent + ", nCreateDate=" + nCreateDate + ", nUpdateDate=" + nUpdateDate
 				+ ", noticeViews=" + noticeViews + ", noticeFilename=" + noticeFilename + ", noticeFilepath="
-				+ noticeFilepath + ", noticeFilerename=" + noticeFilerename + ", userId=" + userId + "]";
+				+ noticeFilepath + ", noticeFilerename=" + noticeFilerename + ", userName=" + userName + "]";
 	}
 	
 	

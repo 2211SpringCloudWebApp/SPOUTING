@@ -24,6 +24,10 @@
 		<c:if test="${sessionScope.loginUser.userType eq '0'}">
 			<jsp:include page="../common/header.jsp"></jsp:include>
 		</c:if>
+		<!-- 비회원헤더 -->
+		<c:if test="${sessionScope.loginUser.userType eq null}">
+			<jsp:include page="../common/header.jsp"></jsp:include>
+		</c:if>
 		
 <!-- 		메인테이블 -->
 		<div id="main">
@@ -41,7 +45,7 @@
 					</tr>
 					<tr>
 						<th>작성자</th>
-						<td>${notice.userId }</td>
+						<td>${notice.userName }</td>
 					</tr>
 					<tr>
 						<th>작성일</th>

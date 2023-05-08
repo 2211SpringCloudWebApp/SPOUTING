@@ -57,7 +57,7 @@
             </div>
         </div>
     </div>
-    <div id="box3">
+    <div id="box3" onclick="location.href='/notice/detail?noticeNo=305'">
 
     </div>
     
