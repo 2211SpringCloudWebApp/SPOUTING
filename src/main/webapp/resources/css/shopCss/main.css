@@ -106,10 +106,6 @@
 	cursor: pointer;
 }
 
-.controller span:hover {
-	background-color: #00ff0000;
-}
-
 .prevmm {
 	left: 0px;
 }

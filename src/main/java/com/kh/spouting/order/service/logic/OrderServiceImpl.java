@@ -46,6 +46,15 @@ public class OrderServiceImpl implements OrderService{
 		Order order = oStore.selectOneByOrderNo(orderNo);
 		return order;
 	}
+	
+	// 주문 상세 조회
+	@Override
+	public List<OrderList> selectOrderDetail(int orderNo) {
+		List<OrderList> oList = oStore.selectOrderDetail(orderNo);
+		return oList;
+	}
+
+	
 
 	// 페이징 처리
 	@Override
@@ -90,7 +99,7 @@ public class OrderServiceImpl implements OrderService{
 		List<Order> oList = oStore.searchOrder(search, pi);
 		return oList;
 	}
-	
+
 	
 	
 }

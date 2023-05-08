@@ -53,6 +53,13 @@ public class OrderStoreImpl implements OrderStore{
 		return order;
 	}
 
+	// 주문 상세 조회
+	@Override
+	public List<OrderList> selectOrderDetail(int orderNo) {
+		List<OrderList> oList = session.selectList("OrderMapper.selectOrderDetail", orderNo);
+		return oList;
+	}
+
 	// 페이징 처리
 	@Override
 	public int getOrderListCount(String userId) {
@@ -105,6 +112,7 @@ public class OrderStoreImpl implements OrderStore{
 		List<Order> oList = session.selectList("OrderMapper.searchOrder", search, rowBounds);
 		return oList;
 	}
+
 	
 	
 }

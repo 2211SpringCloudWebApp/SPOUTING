@@ -48,7 +48,7 @@
                     <h2>PICNIC SET</h2>
                 </div>
                 <div class="slides-box">
-                    <img src="/resources/images/product/items/living7.jpg">
+                    <img src="/resources/images/product/items/sports6.jpg">
                     <p>for SPOUTER</p>
                     <h2>CHEERING KIT</h2>
                 </div>
@@ -65,25 +65,25 @@
 			<div>
 				<img src="/resources/images/product/ad/ad1.jpg">
 				<div id="inner">
-					<a>스파우터 한정 무료배송</a>
+					<a style="color:#607EAA; font-size:13px;">스파우터 한정 무료배송</a>
 					<br>
-					<a>합리적인 가격으로 만나보세요</a>
+					<a style="color:#1C3879; font-size:20px;">합리적인 가격으로 만나보세요</a>
 				</div>
 			</div>
 			<div>
 				<img src="/resources/images/product/ad/ad2.jpg">
 				<div id="inner">
-					<a>스파우터들과 함께</a>
+					<a style="color:#607EAA; font-size:13px;">스파우터들과 함께</a>
 					<br>
-					<a>전용 굿즈로 모임해요</a>
+					<a style="color:#1C3879; font-size:20px;">전용 굿즈로 모임해요</a>
 				</div>
 			</div>
 			<div>
 				<img src="/resources/images/product/ad/ad3.jpg">
 				<div id="inner">
-					<a>언제나 열려있는 스파우팅 마켓</a>
+					<a style="color:#607EAA; font-size:13px;">언제나 열려있는 스파우팅 마켓</a>
 					<br>
-					<a>궁금한 사항을 물어보세요</a>
+					<a style="color:#1C3879; font-size:20px;">궁금한 사항을 물어보세요</a>
 				</div>
 			</div>
 		</div>
@@ -93,25 +93,25 @@
 			<div>
 				<img src="/resources/images/product/ad/ad4.jpg">
 				<div id="inner">
-					<a>스파우터 한정 무료배송</a>
+					<a style="color:#607EAA; font-size:13px;">생활 속 액티비티,</a>
 					<br>
-					<a>합리적인 가격으로 만나보세요</a>
+					<a style="color:#1C3879; font-size:20px;">SPOUTING</a>
 				</div>
 			</div>
 			<div>
 				<img src="/resources/images/product/ad/ad5.jpg">
 				<div id="inner">
-					<a>스파우터 한정 무료배송</a>
+					<a style="color:#607EAA; font-size:13px;">시설 이용부터 소통까지</a>
 					<br>
-					<a>합리적인 가격으로 만나보세요</a>
+					<a style="color:#1C3879; font-size:20px;">모든 걸 스파우팅에서 만나보세요</a>
 				</div>
 			</div>
 			<div>
 				<img src="/resources/images/product/ad/ad6.jpg">
 				<div id="inner">
-					<a>스파우터 한정 무료배송</a>
+					<a style="color:#607EAA; font-size:13px;">생활 속 작은 즐거움</a>
 					<br>
-					<a>합리적인 가격으로 만나보세요</a>
+					<a style="color:#1C3879; font-size:20px;">SPOUTER</a>
 				</div>
 			</div>
 		</div>
@@ -135,7 +135,7 @@
     
     	
 	</div>
-
+	<jsp:include page="../common/footer.jsp"></jsp:include>
 
     <script>
 	// 상위 슬라이드

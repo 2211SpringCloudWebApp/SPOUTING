@@ -22,9 +22,22 @@
 		<id property="productNo" column="PRODUCT_NO"/>
 		<result property="userId" column="USER_ID"/>
 		<result property="categoryNo" column="CATEGORY_NO"/>
+		<result property="productFilename1" column="PRODUCT_FILENAME1"/>
 		<result property="productName" column="PRODUCT_NAME"/>
 		<result property="productPrice" column="PRODUCT_PRICE"/>
 		<result property="productDescription" column="PRODUCT_DESCRIPTION"/>
+		<result property="orderNo" column="ORDER_NO"/>
+		<result property="orderName" column="ORDER_NAME"/>
+		<result property="orderPhone" column="ORDER_PHONE"/>
+		<result property="orderEmail" column="ORDER_EMAIL"/>
+		<result property="orderPostcode" column="ORDER_POSTCODE"/>
+		<result property="orderRoadaddr" column="ORDER_ROADADDR"/>
+		<result property="orderDetailaddr" column="ORDER_DETAILADDR"/>
+		<result property="orderRequest" column="ORDER_REQUEST"/>
+		<result property="orderDate" column="ORDER_DATE"/>
+		<result property="orderState" column="ORDER_STATE"/>
+		<result property="orderCost" column="ORDER_COST"/>
+		
 	</resultMap>
 	
 	<!-- *********** 이용자 *********** -->
@@ -41,7 +54,7 @@
 	</insert>
 
 	<!-- 주문 내역 조회 -->
-	<select id="selectOrderBoard" resultMap="orderResultMap"> 
+	<select id="selectOrderBoard" resultMap="OrderListResultMap"> 
 		SELECT O.ORDER_NO, O.ORDER_NAME, O.ORDER_EMAIL, O.ORDER_DATE, P.PRODUCT_NAME, P.PRODUCT_PRICE, 
 		O.ORDER_DATE, O.ORDER_COST
 		FROM ORDER_TBL O 
@@ -51,6 +64,13 @@
 	
 	<!-- 주문 상세 조회 -->
 	<select id="selectOneByOrderNo" resultMap="orderResultMap">
+		SELECT * FROM ORDER_TBL O
+		JOIN PRODUCT_TBL P ON O.PRODUCT_NO = P.PRODUCT_NO
+		WHERE ORDER_NO = #{orderNo}
+	</select>
+
+	<!-- 주문 상세 조회 -->
+	<select id="selectOrderDetail" resultMap="OrderListResultMap">
 		SELECT * FROM ORDER_TBL O
 		JOIN PRODUCT_TBL P ON O.PRODUCT_NO = P.PRODUCT_NO
 		WHERE ORDER_NO = #{orderNo}
