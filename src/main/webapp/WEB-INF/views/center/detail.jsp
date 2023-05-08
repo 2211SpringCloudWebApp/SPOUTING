@@ -34,8 +34,8 @@
 				<div id="slide">
 					<ul>
 						<c:if test="${empty center.centerFilename1 || empty center.centerFilename2 }">
-							<li><img alt="center대표이미지1" src="${pageContext.request.contextPath}/resources/images/center/detail1.jpg"></li>
-							<li><img alt="center대표이미지2" src="${pageContext.request.contextPath}/resources/images/center/intro/intro2.jpg"></li>
+							<li><img alt="center대표이미지1" src="${pageContext.request.contextPath}/resources/images/homeImg/mainimg2.jpg"></li>
+							<li><img alt="center대표이미지2" src="${pageContext.request.contextPath}/resources/images/homeImg/mainimg3.jpg"></li>
 						</c:if>
 						<c:if test="${!empty center.centerFilename1 && !empty center.centerFilename2 }">
 							<li><img alt="center이미지" src="${pageContext.request.contextPath}/resources/images/centeruploadFiles/${center.centerFilename1 }"></li>
