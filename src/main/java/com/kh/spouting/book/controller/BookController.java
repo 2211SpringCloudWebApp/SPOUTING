@@ -49,6 +49,7 @@ public class BookController {
 			int totalCount = bService.getBookingCount();
 			PageInfo pi = new PageInfo(page, 20, 5, totalCount);
 			List<Book> bList = bService.selectAllBook(pi);
+			model.addAttribute("pi", pi);
 			model.addAttribute("bList", bList);
 			return "/admin/bookingList";
 		}
@@ -197,7 +198,7 @@ public class BookController {
 				int pResult = bService.insertPDtail(pDetail);
 				if(pResult>0) {
 					//sendMail(request, bookNo);
-					model.addAttribute("msg", " 예 약 완 료 ");
+					model.addAttribute("msg", " · 예 약 완 료 · ");
 					return "book/thanksForBooking"; 
 				}else {
 					model.addAttribute("msg", "포인트가 제대로 사용되지 않았어요!!");
@@ -206,7 +207,7 @@ public class BookController {
 			}else {
 				//sendMail(request, bookNo);
 				//쓴포인트가 없을때
-				model.addAttribute("msg", " 예 약 완 료 ");
+				model.addAttribute("msg", " · 예 약 완 료 · ");
 				return "book/thanksForBooking";   
 			}
 			

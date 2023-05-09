@@ -94,5 +94,15 @@ public class PageInfo {
 		this.maxPage = maxPage;
 	}
 
+
+	@Override
+	public String toString() {
+		return "PageInfo [currentPage=" + currentPage + ", boardLimit=" + boardLimit + ", naviLimit=" + naviLimit
+				+ ", startNavi=" + startNavi + ", endNavi=" + endNavi + ", totalCount=" + totalCount + ", maxPage="
+				+ maxPage + "]";
+	}
+
+	
+	
 	
 }

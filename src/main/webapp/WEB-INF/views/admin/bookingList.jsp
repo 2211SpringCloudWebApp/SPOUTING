@@ -248,14 +248,22 @@
         </table>
         <table id="navi-box">
             <tr>
-                <td>                  
-                    <c:forEach begin="${pi.startNavi}" end="${pi.endNavi}" var="p">
-                       <a href="/admin/bookingList?page=${p}" class="navi-btn3">${p }</a>&nbsp;
-                    </c:forEach>
+                 <td>    
+                 	<input id="page" type="hidden" value="${pi.currentPage }">
+					<c:if test="${pi.currentPage ne 1 }">
+						<a href="/admin/bookingList?page=${pi.currentPage -1}">이전</a>&nbsp;
+					</c:if> 
+					<c:forEach begin="${pi.startNavi }" end="${pi.endNavi }" var="p">
+						<a href="/admin/bookingList?page=${p}" >${p}</a>&nbsp;
+					</c:forEach> 
+					<c:if test="${pi.currentPage ne pi.maxPage }">
+						<a href="/admin/bookingList?page=${pi.currentPage + 1}">다음</a>&nbsp;
+					</c:if>
                 </td>
             </tr>
         
         </table>
+      
     </div>
 
     <script>

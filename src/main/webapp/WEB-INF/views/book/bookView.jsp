@@ -105,7 +105,7 @@
 				                <!--시설 입력하고 입력란에서 빠져나오면 date 선택란 보이기-->
 				                <div class="booking-option" id="date" style="display:none;">
 				                    <p>이용 날짜</p><br>
-				                    <input type="date" onchange="showTimeInput()" name="useDate">
+				                    <input type="date" onchange="showTimeInput()" name="useDate" id="useDate">
 				                </div>
 				                
 				                
@@ -177,6 +177,11 @@
 			
 			showImage();
 
+			
+			var now_utc = Date.now()
+			var timeOff = new Date().getTimezoneOffset()*60000;
+			var today = new Date(now_utc-timeOff).toISOString().split("T")[0];
+			document.getElementById("useDate").setAttribute("min", today);
            
 
             //브랜치 입력(선택)하면 동작하는 함수(display, 스크롤)

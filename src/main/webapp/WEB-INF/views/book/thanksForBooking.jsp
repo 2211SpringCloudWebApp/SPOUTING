@@ -159,7 +159,7 @@ img{
                     	<a href="/"><img src="https://drive.google.com/u/0/uc?id=16U__U5dJdaTfNGobB_OpwAJ73vM50rPV&export=download" alt="">메인페이지로</a>
                     </div>
                     <div class="contact">
-                      ${msg}
+                      ${msg}<br><br><br>
                 
                     </div>
                   </div>
@@ -167,7 +167,7 @@ img{
                     <div class="right-text">
                       <span class="right-text1">고맙습니다,</span>
                       <span id="right-text2">『스파우팅』
-                      <span class="right-text1" style="font-size: 70%">에서 만날 날을 고대하겠습니다.</span></span>
+                      <span class="right-text1">에서 만날 날을 고대하겠습니다.</span></span>
                     </div>
                   </div>
                   <div class="right-inductor">
