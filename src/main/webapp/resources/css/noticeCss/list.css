@@ -139,3 +139,8 @@ ol, ul {
 	border: none;
 	background: none;
 }
+
+/* a태그에 밑줄제거하기 */
+a {
+    text-decoration: none;
+}
