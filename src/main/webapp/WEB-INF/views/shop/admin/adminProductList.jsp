@@ -58,10 +58,10 @@
 			<th>상품명</th>
 			<th>가격</th>
 		</tr>
-		
+		<c:set var="num" value="${pi.totalCount - ((pi.currentPage-1) * 10)}"/>
 		<c:forEach var="product" items="${pList }">
 			<tr>
-				<td>${product.productNo }</td>
+				<td>${num}</td>
 				<td>
 					<img src="/resources/images/product/items/${product.productFilename1}"> 
 				</td>
@@ -83,13 +83,17 @@
                     <td style="color: rgb(255, 136, 0);">관리자</td>
                 </c:if>
 			</tr>
+		<c:set var="num" value="${num-1 }"/>
 		</c:forEach>
 	</table>	
 	
 	<table id="navi-box">
             <!-- 게시글 페이징 처리 -->
 			<tr>
-                <td>                  
+                <td>       
+                	<c:if test="${pi.currentPage > 1}">
+			       		<a href="/product/adminProductList?page=1" class="navi-btn3"><<</a>
+			       	</c:if>           
                     <c:forEach begin="${pi.startNavi}" end="${pi.endNavi}" var="p">
                         <c:url var="pageUrl" value="/product/adminProductList">
                             <c:param name="page" value="${p } "></c:param>
@@ -98,6 +102,9 @@
                         </c:url>
                         <a href="${pageUrl }" class="navi-btn3">${p }</a>&nbsp;
                     </c:forEach>
+                    <c:if test="${pi.currentPage < pi.maxPage}">
+		       			<a href="/product/adminProductList?page=${pi.maxPage}" class="navi-btn3">>></a>
+		       		</c:if>
                 </td>
             </tr>
             <tr>

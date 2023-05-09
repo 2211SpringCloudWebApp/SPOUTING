@@ -33,31 +33,32 @@
                 <th>결제가격</th>
             </tr>
             
-            <c:forEach items="${oList }" var="order" varStatus="i">
-            <tr>
-                <td>${order.orderNo}</td>
-                <td>${order.userId}</td>
-                <td>${order.orderName}</td>
-                <td>
-                	<fmt:formatDate value="${order.orderDate}" pattern="yyyy.MM.dd  HH:mm" />
-               	</td>
-                <td>${order.orderCost}</td>
-
-                <c:if test="${user.userType != '1'}">
-                    <td><input type="button" id="remo-btn" value="조회" onclick="location.href='/order/detailAdmin?orderNo=${order.orderNo}'"></td>
-                </c:if>
-                <c:if test="${user.userType == '1'}">
-                    <td style="color: rgb(255, 136, 0);">관리자</td>
-                </c:if>      
-                <c:if test="${user.userType != '1'}">
-                    <td><input type="button" id="remo-btn" value="주문취소" onclick="deleteCheck(${order.orderNo});"></td>
-                </c:if>
-                <c:if test="${user.userType == '1'}">
-                    <td style="color: rgb(255, 136, 0);">관리자</td>
-                </c:if>
-                
-            </tr>
-            </c:forEach>
+            <c:set var="num" value="${pi.totalCount - ((pi.currentPage-1) * 10)}"/>
+			<c:forEach items="${oList }" var="order" varStatus="i">
+				<tr>
+					<td>${num}</td>
+					<td>${order.userId}</td>
+	                <td>${order.orderName}</td>
+	                <td>
+	                	<fmt:formatDate value="${order.orderDate}" pattern="yyyy.MM.dd  HH:mm" />
+	               	</td>
+	                <td><fmt:formatNumber value="${order.orderCost}" pattern="#,###"/> 원</td>
+	
+	                <c:if test="${user.userType != '1'}">
+	                    <td><input type="button" id="remo-btn" value="조회" onclick="location.href='/order/detailAdmin?orderNo=${order.orderNo}'"></td>
+	                </c:if>
+	                <c:if test="${user.userType == '1'}">
+	                    <td style="color: rgb(255, 136, 0);">관리자</td>
+	                </c:if>      
+	                <c:if test="${user.userType != '1'}">
+	                    <td><input type="button" id="remo-btn" value="주문취소" onclick="deleteCheck(${order.orderNo});"></td>
+	                </c:if>
+	                <c:if test="${user.userType == '1'}">
+	                    <td style="color: rgb(255, 136, 0);">관리자</td>
+	                </c:if>
+                </tr>
+			<c:set var="num" value="${num-1 }"/>
+			</c:forEach>
         </table>
         
         <table id="navi-box">

@@ -3,8 +3,8 @@
 <link rel="stylesheet" href="/resources/css/adminCss/adminHeader.css">
 <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script> -->
 
-<div id="for-logo">
-    <img src="/resources/images/homeImg/logo_black.png" alt="error">
+	<div id="for-logo">
+       <a href="/admin/adminMain"><img src="../../resources/images/homeImg/logo.png" alt="logo"></a>
     <div>
         ADMIN👩‍🚒 <a href="/user/logout">  LOGOUT</a>
         <input type="hidden" value="${loginUser.userType}" id="adminCheck">
@@ -12,7 +12,7 @@
 </div>
 <div id="admin-menu">
     <ul id="admin-nav">
-        <li class="main-nav"><a href="">지점</a>
+        <li class="main-nav"><a href="/center/listView">지점</a>
             <ul class="drop-nav">
                 <li><a href="/center/registerView">지점등록</a></li>
                 <li><a href="/center/listView">지점관리</a></li>

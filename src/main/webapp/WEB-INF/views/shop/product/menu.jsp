@@ -70,7 +70,7 @@
 		<c:if test="${sessionScope.loginUser.userId eq null}">
 			<input type="hidden" id="userId" value="${sessionScope.loginUser.userId}"> 
 			<ul id="nav-v2">
-	            <h3>카테고리</h3>
+	            <h3><a href="/shop/productList" style="color:#1C3879;">카테고리</a></h3>
 				<li class="menu-v2"><a href="/shop/catelist1?c=1,2">APPAREL</a>
 					<ul class="submenu">
 						<li><a href="/shop/catelist2?c=1">CLOTHES</a></li>
@@ -94,7 +94,7 @@
 		<c:if test="${sessionScope.loginUser.userId ne null}">
 			<input type="hidden" id="userId" value="${sessionScope.loginUser.userId}"> 
 	        <ul id="nav-v2">
-	            <h3>CATEGORY</h3>
+	            <h3><a href="/shop/productList" style="color:#1C3879;">카테고리</a></h3>
 				<li class="menu-v2"><a href="/shop/catelist1?c=1,2">APPAREL</a>
 					<ul class="submenu">
 						<li><a href="/shop/catelist2?c=1">CLOTHES</a></li>

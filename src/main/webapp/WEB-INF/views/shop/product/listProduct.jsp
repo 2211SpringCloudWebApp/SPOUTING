@@ -35,9 +35,10 @@
 			</tr>
 		</thead>
 		<tbody>
-			<c:forEach var="row" items="${pList }">
+			<c:set var="num" value="${pi.totalCount - ((pi.currentPage-1) * 10)}"/>
+			<c:forEach items="${pList }" var="row" varStatus="i">
 				<tr>
-					<td>${row.productNo }</td>
+					<td>${num}</td>
 					<td>
 						<a href="/product/detail?productNo=${row.productNo}">
 							<img src="/resources/images/product/items/${row.productFilename1}">
@@ -46,6 +47,7 @@
 					<td>${row.productName }</td>
 					<td><fmt:formatNumber value="${row.productPrice }" pattern="#,###"/> 원</td>
 				</tr>
+			<c:set var="num" value="${num-1 }"/>
 			</c:forEach>
 		</tbody>
 		</table>
@@ -53,6 +55,9 @@
 			<!-- 게시글 페이징 처리 -->
 			<tr>
 				<td>
+					<c:if test="${pi.currentPage > 1}">
+			       		<a href="/shop/productList?page=1" class="navi-btn3"><<</a>
+			       	</c:if>
 					<c:forEach begin="${pi.startNavi }" end="${pi.endNavi }" var="p">
 							<c:url var="pageUrl" value="/shop/productList">
 								<c:param name="page" value="${p }"></c:param>
@@ -61,6 +66,9 @@
 							</c:url>
 							<a href="${pageUrl }" class="navi-btn3">${p }</a>&nbsp;
 					</c:forEach>
+					<c:if test="${pi.currentPage < pi.maxPage}">
+		       			<a href="/shop/productList?page=${pi.maxPage}" class="navi-btn3">>></a>
+		       		</c:if>
 				</td>
 			</tr>
 			<!-- 게시글 조건부 검색 -->
