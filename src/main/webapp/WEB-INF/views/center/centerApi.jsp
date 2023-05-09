@@ -230,7 +230,7 @@
 				let contentString = [
 					'<div style="width:200px;text-align:center;padding:11px;color:black;">',
 					'	<div style="width:97%; height:100px; margin: 0 auto;">',
-					'		<img src="../../../resources/images/centeruploadFiles/' + areaArr[i].centerFilename1 + '" style="width:100%; height:100%;">',
+					'		<img alt="center대표이미지1" src="${pageContext.request.contextPath}/resources/images/homeImg/mainimg3.jpg" style="width:100%; height:100%;">',
 					'	</div>',
 					'	<br>',
 					'	<input type="hidden" id="centerNo" value="' + areaArr[i].centerNo + '">',
@@ -248,6 +248,12 @@
 					'</div>',
 					'<br>'
 				].join('');
+			    
+			    //  centerFilename1과 centerFilename2 값 존재 여부 체크 후, 값 존재 시 이미지 소스를 변경
+				if (areaArr[i].centerFilename1 && areaArr[i].centerFilename2) {
+				    let imgSrc = '../../../resources/images/centeruploadFiles/' + areaArr[i].centerFilename1;
+				    contentString = contentString.replace('<img alt="center대표이미지2" src="${pageContext.request.contextPath}/resources/images/homeImg/mainimg3.jpg" style="width:100%; height:100%;">', '<img src="' + imgSrc + '" style="width:100%; height:100%;">');
+				}
 			    
 			    
 				// 정보윈도우 CSS
