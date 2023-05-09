@@ -102,16 +102,20 @@
 	                	<th style="width: 25%;">결제금액</th>
 	                	<th style="width: 25%;">주문일자</th>
 	                </tr>
-	                <c:forEach items="${oList}" var="order" varStatus="i">
-	                <tr class="table-line" onclick="location.href='/order/detail?orderNo=${order.orderNo }'"style="cursor: pointer;">
-	                    <td style="width: 25%;">${order.orderNo}</td>
-	                    <td style="width: 25%;">${order.orderName}</td>
-	                    <td style="width: 25%;">${order.orderCost}</td>
-	                    <td style="width: 25%;">
-	                        <fmt:formatDate value="${order.orderDate}" pattern="yyyy.MM.dd" />
-	                    </td>
-	                </tr>
-                </c:forEach>
+	                <c:set var="num" value="${pi.totalCount - ((pi.currentPage-1) * 10)}"/>
+					<c:forEach items="${oList }" var="order" varStatus="i">
+						<tr class="table-line" onclick="location.href='/order/detail?orderNo=${order.orderNo }'"style="cursor: pointer;">
+		                    <td style="width: 25%;">${num}</td>
+		                    <td style="width: 25%;">${order.orderName}</td>
+		                    <td style="width: 25%;">
+		                    	<fmt:formatNumber value="${order.orderCost}" pattern="#,###"/> 원
+	                    	</td>
+		                    <td style="width: 25%;">
+		                        <fmt:formatDate value="${order.orderDate}" pattern="yyyy.MM.dd" />
+		                    </td>
+		                </tr>
+					<c:set var="num" value="${num-1 }"/>
+					</c:forEach>
             </table>
         </div>
 

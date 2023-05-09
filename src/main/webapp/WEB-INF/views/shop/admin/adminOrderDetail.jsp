@@ -21,7 +21,7 @@
   	</style>
 </head>
 <body>
-	<jsp:include page="../../common/header.jsp"></jsp:include>
+	<jsp:include page="../../admin/adminHeader.jsp"></jsp:include>
 	<div id="maincontainer">
 		<br><br><br>
 		<h1>🛒 주문 상세 조회</h1>
@@ -87,7 +87,7 @@
 				</tr>
 				<tr>
 					<td>결제금액</td>
-					<td>${order.orderCost }</td>
+					<td><fmt:formatNumber value="${order.orderCost }" pattern="#,###"/> 원</td>
 				</tr>
 			</table>
 			<div id="buttonbox">

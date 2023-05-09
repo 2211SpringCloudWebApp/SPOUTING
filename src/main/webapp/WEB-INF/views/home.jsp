@@ -47,13 +47,13 @@
         </div>
         <div class="box22">
             <div class="box23">
-                <img src="/resources/images/homeImg/goods1.jpg" alt="goods1">
+                <img src="/resources/images/homeImg/goods3.jpg" alt="goods1">
             </div>
             <div class="box23">
-                <img src="/resources/images/homeImg/goods2.jpg" alt="goods2">
+                <img src="/resources/images/product/items/sports6.jpg" alt="goods2">
             </div>
             <div class="box23">
-                <img src="/resources/images/homeImg/goods3.jpg" alt="goods3">
+                <img src="/resources/images/homeImg/goods2.jpg" alt="goods3">
             </div>
         </div>
     </div>

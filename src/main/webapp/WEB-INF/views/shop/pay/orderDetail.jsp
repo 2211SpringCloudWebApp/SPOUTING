@@ -102,7 +102,9 @@
 				</tr>
 				<tr>
 					<td>결제금액</td>
-					<td>${order.orderCost }</td>
+					<td>
+						<fmt:formatNumber value="${order.orderCost}" pattern="#,###"/> 원
+					</td>
 				</tr>
 			</table>
 				<div id="buttonbox">
