@@ -100,9 +100,7 @@
         	 background-color: #607EAA;
         }
         
-        
-        
-        
+  
         .table-line img {
             width: 30px;
             height: 30px;
