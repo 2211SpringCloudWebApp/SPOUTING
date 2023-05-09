@@ -49,7 +49,7 @@
 					</div>
 					<div id="titleArea">
 						<span>제목</span>
-						<input name="inquiriesTitle" value=${inquiry.inquiriesTitle }>
+						<input name="inquiriesTitle" value="${inquiry.inquiriesTitle }">
 					</div>
 					<div id="contentArea">
 						<span>내용</span>

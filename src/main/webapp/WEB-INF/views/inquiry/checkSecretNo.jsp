@@ -30,7 +30,7 @@
 	    		<div id="contentTag">
 					<form action="/inquiry/checkSecretNo" method="post">
 						<p>비밀글입니다.</p>
-						<p>해당 글은 비밀글입니다. <span>등하신 비밀번호를 입력해주세요!</span></p>
+						<p>해당 글은 비밀글입니다. <span>등록하신 비밀번호를 입력해주세요!</span></p>
 						<input type="hidden" name="inquiriesNo" value="${inquiry.inquiriesNo}">
 						<input type="password" name="secretNo" placeholder="4자리 숫자" id="SECRET">
 						<button type='button' id='checkBtn'><img src='../../../resources/images/notice/secretEye.png' width='30px'></button>
