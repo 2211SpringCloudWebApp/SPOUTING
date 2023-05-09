@@ -18,8 +18,20 @@
 	</resultMap>
 
 	<!-- 지점 등록 -->
+<!-- 	<insert id="insertCenter"> -->
+<!-- 		INSERT INTO CENTER_TBL VALUES(SEQ_CENTER_NO.NEXTVAL, #{centerName}, #{centerAddr}, #{centerLat}, #{centerLng}, #{centerTel}, #{centerFilename1}, #{centerFilepath1}, #{centerFilename2}, #{centerFilepath2}, #{centerSnaddr}) -->
+<!-- 	</insert> -->
 	<insert id="insertCenter">
-		INSERT INTO CENTER_TBL VALUES(SEQ_CENTER_NO.NEXTVAL, #{centerName}, #{centerAddr}, #{centerLat}, #{centerLng}, #{centerTel}, #{centerFilename1}, #{centerFilepath1}, #{centerFilename2}, #{centerFilepath2}, #{centerSnaddr})
+		INSERT INTO CENTER_TBL (
+			CENTER_NO, CENTER_NAME, CENTER_ADDR, 
+			CENTER_LAT, CENTER_LNG, CENTER_TEL, 
+			CENTER_FILENAME1, CENTER_FILEPATH1, 
+			CENTER_FILENAME2, CENTER_FILEPATH2, CENTER_SNADDR
+		) VALUES (
+			SEQ_CENTER_NO.NEXTVAL, #{centerName}, #{centerAddr}, 
+			#{centerLat}, #{centerLng}, #{centerTel}, 
+			#{centerFilename1}, #{centerFilepath1}, #{centerFilename2}, #{centerFilepath2}, #{centerSnaddr}
+		)
 	</insert>
 	
 	<!-- 지점 상세조회 -->
