@@ -252,7 +252,7 @@
 			    //  centerFilename1과 centerFilename2 값 존재 여부 체크 후, 값 존재 시 이미지 소스를 변경
 				if (areaArr[i].centerFilename1 && areaArr[i].centerFilename2) {
 				    let imgSrc = '../../../resources/images/centeruploadFiles/' + areaArr[i].centerFilename1;
-				    contentString = contentString.replace('<img alt="center대표이미지2" src="${pageContext.request.contextPath}/resources/images/homeImg/mainimg3.jpg" style="width:100%; height:100%;">', '<img src="' + imgSrc + '" style="width:100%; height:100%;">');
+				    contentString = contentString.replace('<img alt="center대표이미지1" src="${pageContext.request.contextPath}/resources/images/homeImg/mainimg3.jpg" style="width:100%; height:100%;">', '<img src="' + imgSrc + '" style="width:100%; height:100%;">');
 				}
 			    
 			    
