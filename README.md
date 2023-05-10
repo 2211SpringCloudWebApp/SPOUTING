@@ -100,9 +100,17 @@
 <img width="1437" alt="스크린샷 2023-05-10 오전 10 03 58" src="https://github.com/2211SpringCloudWebApp/SPOUTING/assets/119032818/0f146253-4618-4ff0-954a-88a0a33fb257">
  
 4-6 예약내역
+<img width="1440" alt="스크린샷 2023-05-10 오전 10 09 35" src="https://github.com/2211SpringCloudWebApp/SPOUTING/assets/119032818/8a1bf5e1-bbf5-4dc0-94d5-db02e0069b42">
+<img width="1440" alt="스크린샷 2023-05-10 오전 10 11 03" src="https://github.com/2211SpringCloudWebApp/SPOUTING/assets/119032818/d11d2635-301d-4fff-93f2-af8c423a2050">
+
 ### 5. 시설 예약
+<img width="1440" alt="스크린샷 2023-05-10 오전 10 13 00" src="https://github.com/2211SpringCloudWebApp/SPOUTING/assets/119032818/0ad8dbc4-8360-47fc-aee2-0132919d05a1">
+<img width="1440" alt="스크린샷 2023-05-10 오전 10 13 41" src="https://github.com/2211SpringCloudWebApp/SPOUTING/assets/119032818/4b38d74e-0a5f-4f16-8d5e-66cdf9326ea4">
+<img width="1440" alt="스크린샷 2023-05-10 오전 10 14 55" src="https://github.com/2211SpringCloudWebApp/SPOUTING/assets/119032818/4c3f749c-8207-4ab7-8785-0f90fcfd3207">
 
 ### 6. 지점 정보
+<img width="1440" alt="스크린샷 2023-05-10 오전 10 17 09" src="https://github.com/2211SpringCloudWebApp/SPOUTING/assets/119032818/8262dbcf-486f-4bff-b6c2-30be42de9b7b">
+<img width="1440" alt="스크린샷 2023-05-10 오전 10 19 11" src="https://github.com/2211SpringCloudWebApp/SPOUTING/assets/119032818/d7335fc0-afe9-40c4-b80c-29a2dcc3df5c">
 
 ### 7. 마켓
 
