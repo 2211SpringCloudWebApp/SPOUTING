@@ -63,6 +63,10 @@
 ## 🎯 SPOUTING 살펴보기
 
 ### 1. 메인화면
+<img width="1440" alt="스크린샷 2023-05-10 오전 9 35 38" src="https://github.com/2211SpringCloudWebApp/SPOUTING/assets/119032818/a99e6271-ad19-4cb8-9001-6101ede49729">
+<img width="1440" alt="스크린샷 2023-05-10 오전 9 36 06" src="https://github.com/2211SpringCloudWebApp/SPOUTING/assets/119032818/a3fd848d-5eef-4575-82e9-2c816fcda7c1">
+![Uploading 스크린샷 2023-05-10 오전 9.36.21.png…]()
+<img width="1440" alt="스크린샷 2023-05-10 오전 9 36 33" src="https://github.com/2211SpringCloudWebApp/SPOUTING/assets/119032818/333a23ee-1990-4307-bb14-f1adda43693e">
 
 ### 2. 회원가입
 
