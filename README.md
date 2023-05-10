@@ -160,3 +160,7 @@
 ![image](https://github.com/2211SpringCloudWebApp/SPOUTING/assets/119032693/f6429092-a02d-4fda-9a4c-faaf75c48265)
 ![image](https://github.com/2211SpringCloudWebApp/SPOUTING/assets/119032693/593a49da-b768-4fbf-a192-b712d0d9aa77)
 
+### 11. 포인트
+![image](https://github.com/2211SpringCloudWebApp/SPOUTING/assets/119032693/fd2fffff-c76e-44dd-b1ea-1eb2d8345a70)
+![image](https://github.com/2211SpringCloudWebApp/SPOUTING/assets/119032693/422ed7f9-a215-4d03-b076-e52f0823ae78)
+![image](https://github.com/2211SpringCloudWebApp/SPOUTING/assets/119032693/42863835-1c95-4f0e-982a-4b9bf0f8b21f)
