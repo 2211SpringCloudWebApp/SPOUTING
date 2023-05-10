@@ -100,28 +100,33 @@
 <img width="1437" alt="스크린샷 2023-05-10 오전 10 03 58" src="https://github.com/2211SpringCloudWebApp/SPOUTING/assets/119032818/0f146253-4618-4ff0-954a-88a0a33fb257">
  
 4-6 예약내역
-<img width="1440" alt="스크린샷 2023-05-10 오전 10 09 35" src="https://github.com/2211SpringCloudWebApp/SPOUTING/assets/119032818/8a1bf5e1-bbf5-4dc0-94d5-db02e0069b42">
-<img width="1440" alt="스크린샷 2023-05-10 오전 10 11 03" src="https://github.com/2211SpringCloudWebApp/SPOUTING/assets/119032818/d11d2635-301d-4fff-93f2-af8c423a2050">
+![127 0 0 1_8999_book_myBooking_userNo=21 (1)](https://github.com/2211SpringCloudWebApp/SPOUTING/assets/119032818/328f2b46-4daa-4794-84c3-c6188a1cf98e)
+
 
 ### 5. 시설 예약
-<img width="1440" alt="스크린샷 2023-05-10 오전 10 13 00" src="https://github.com/2211SpringCloudWebApp/SPOUTING/assets/119032818/0ad8dbc4-8360-47fc-aee2-0132919d05a1">
-<img width="1440" alt="스크린샷 2023-05-10 오전 10 13 41" src="https://github.com/2211SpringCloudWebApp/SPOUTING/assets/119032818/4b38d74e-0a5f-4f16-8d5e-66cdf9326ea4">
-<img width="1440" alt="스크린샷 2023-05-10 오전 10 14 55" src="https://github.com/2211SpringCloudWebApp/SPOUTING/assets/119032818/4c3f749c-8207-4ab7-8785-0f90fcfd3207">
+![127 0 0 1_8999_book_bookView](https://github.com/2211SpringCloudWebApp/SPOUTING/assets/119032818/392dade1-d2dc-4f31-b97f-89ffcf976afc)
+![127 0 0 1_8999_book_confirm](https://github.com/2211SpringCloudWebApp/SPOUTING/assets/119032818/f7ad9cf7-5b43-4dab-b890-c721478605ba)
+![127 0 0 1_8999_book_confirm (1)](https://github.com/2211SpringCloudWebApp/SPOUTING/assets/119032818/8503b401-d2d7-4a33-8cf1-f8dfcd375eed)
+
 
 ### 6. 지점 정보
+6-1 스파우팅소개
+<img width="1440" alt="스크린샷 2023-05-10 오전 10 59 08" src="https://github.com/2211SpringCloudWebApp/SPOUTING/assets/119032818/17655c33-d613-42d8-9041-ddd43d21e230">
+<img width="1440" alt="스크린샷 2023-05-10 오전 11 00 08" src="https://github.com/2211SpringCloudWebApp/SPOUTING/assets/119032818/0de9cfb0-eb23-4d0c-aa6a-f9a732e2344f">
+<img width="1440" alt="스크린샷 2023-05-10 오전 11 00 34" src="https://github.com/2211SpringCloudWebApp/SPOUTING/assets/119032818/5e7e04e3-7611-48bb-9baf-08b7e9bb6663">
+
+6-2 지점찾기
 <img width="1440" alt="스크린샷 2023-05-10 오전 10 17 09" src="https://github.com/2211SpringCloudWebApp/SPOUTING/assets/119032818/8262dbcf-486f-4bff-b6c2-30be42de9b7b">
 <img width="1440" alt="스크린샷 2023-05-10 오전 10 19 11" src="https://github.com/2211SpringCloudWebApp/SPOUTING/assets/119032818/d7335fc0-afe9-40c4-b80c-29a2dcc3df5c">
 
 ### 7. 마켓
-<img width="1440" alt="스크린샷 2023-05-10 오전 10 22 36" src="https://github.com/2211SpringCloudWebApp/SPOUTING/assets/119032818/11c51965-4c79-4529-b253-b15cb0b62bdc">
-<img width="1440" alt="스크린샷 2023-05-10 오전 10 23 26" src="https://github.com/2211SpringCloudWebApp/SPOUTING/assets/119032818/dffe961b-0797-4ad9-8ca3-3481099f978e">
-<img width="1440" alt="스크린샷 2023-05-10 오전 10 24 18" src="https://github.com/2211SpringCloudWebApp/SPOUTING/assets/119032818/54ea2ff1-f2d6-4040-b855-071062292b5d">
+![sonof iptime org_9511_shop_main](https://github.com/2211SpringCloudWebApp/SPOUTING/assets/119032818/d055cba1-5381-40f0-8c93-22d97da7d7c0)
 
 7-1 제품리스트
-<img width="1440" alt="스크린샷 2023-05-10 오전 10 26 03" src="https://github.com/2211SpringCloudWebApp/SPOUTING/assets/119032818/afe570fa-1c06-412c-a644-e69bfdd9c80f">
+![sonof iptime org_9511_shop_productList](https://github.com/2211SpringCloudWebApp/SPOUTING/assets/119032818/0de48b91-67ba-400e-a348-bc178e7a5dc2)
 
 7-2 장바구니
-<img width="1440" alt="스크린샷 2023-05-10 오전 10 27 28" src="https://github.com/2211SpringCloudWebApp/SPOUTING/assets/119032818/508a455b-14e0-4f5d-a243-ae0e2e524310">
+![sonof iptime org_9511_shop_cartView](https://github.com/2211SpringCloudWebApp/SPOUTING/assets/119032818/8989d2cb-369b-4b4e-a295-920388f7d340)
 
 7-3 주문서
 ![127 0 0 1_8999_cart_orderView (1)](https://github.com/2211SpringCloudWebApp/SPOUTING/assets/119032818/0e93137b-09ec-4acc-97ee-92c19ea6b32d)
