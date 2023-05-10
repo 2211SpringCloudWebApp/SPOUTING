@@ -28,8 +28,8 @@
 
 ## 🏐 팀 소개 및 팀원 소개
 ### 육공주 > 6명의 공주들이 합심하는 팀
-![4](https://user-images.githubusercontent.com/119032693/235042031-212556fc-1397-4973-aff6-5a71ffdb53f3.jpg)
-![5](https://user-images.githubusercontent.com/119032693/235042058-87b4a811-c611-4bfc-bd44-66e0776005d2.jpg)
+![image](https://github.com/2211SpringCloudWebApp/SPOUTING/assets/119032693/f759929c-c037-45cd-81d8-45189f117dfa)
+![image](https://github.com/2211SpringCloudWebApp/SPOUTING/assets/119032693/0d84a39f-6c2e-4cfb-8fba-abd999b7b5b5)
 </br>
 
 ## 🏈 주요 기능
