@@ -154,3 +154,9 @@
 ![sonof iptime org_9511_inquiry_checkSecretNo_inquiriesNo=191](https://github.com/2211SpringCloudWebApp/SPOUTING/assets/119032818/ac85ac0a-c3d8-442e-af0d-f896c3dc7af1)
 ![sonof iptime org_9511_inquiry_detail_inquiriesNo=185](https://github.com/2211SpringCloudWebApp/SPOUTING/assets/119032818/2ba0e39d-7a4d-471d-99b3-ad2bead402e7)
 
+
+### 10. 하루기록
+![image](https://github.com/2211SpringCloudWebApp/SPOUTING/assets/119032693/f5fa34b6-25e6-45a4-a6f1-384577254c5a)
+![image](https://github.com/2211SpringCloudWebApp/SPOUTING/assets/119032693/f6429092-a02d-4fda-9a4c-faaf75c48265)
+![image](https://github.com/2211SpringCloudWebApp/SPOUTING/assets/119032693/593a49da-b768-4fbf-a192-b712d0d9aa77)
+
