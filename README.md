@@ -76,7 +76,7 @@
 
 3-1 아이디찾기
 <img width="1440" alt="스크린샷 2023-05-10 오전 9 52 44" src="https://github.com/2211SpringCloudWebApp/SPOUTING/assets/119032818/6437ba91-7d4f-41cf-9231-6c58d3c9d04b">
-<img width="1440" alt="스크린샷 2023-05-10 오전 9 52 44" src="https://github.com/2211SpringCloudWebApp/SPOUTING/assets/119032818/f4bcc486-2440-4b28-82ef-228f8fc83c28">
+<img width="1440" alt="스크린샷 2023-05-10 오전 9 54 03" src="https://github.com/2211SpringCloudWebApp/SPOUTING/assets/119032818/40c6afdd-328d-4ef9-8f8e-448fa52b6cbd">
 
 3-2 비밀번호찾기
 <img width="1440" alt="스크린샷 2023-05-10 오전 9 54 37" src="https://github.com/2211SpringCloudWebApp/SPOUTING/assets/119032818/fd005a75-3cfb-4a9a-9e7b-2de3dac749e4">
