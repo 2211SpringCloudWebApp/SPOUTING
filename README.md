@@ -65,21 +65,21 @@
 ## 🎯 SPOUTING 살펴보기
 
 ### 1. 메인화면
-![127 0 0 1_8999_](https://github.com/2211SpringCloudWebApp/SPOUTING/assets/119032818/24eff39c-0603-490c-80e2-9d287eb9e313)
+![127 0 0 1_8999_](https://github.com/2211SpringCloudWebApp/SPOUTING/assets/119032818/fa480a0d-9d60-4077-988c-d00bdf748b5c)
 
 ### 2. 회원가입
-<img width="1440" alt="스크린샷 2023-05-10 오전 9 47 15" src="https://github.com/2211SpringCloudWebApp/SPOUTING/assets/119032818/4cab7193-ec82-4ce6-9aeb-0105c2c9e138">
+<img width="1440" alt="스크린샷 2023-05-10 오전 9 47 15" src="https://github.com/2211SpringCloudWebApp/SPOUTING/assets/119032818/f562dfeb-0f5e-4bb0-9c8f-9107cf4ed229">
 
 ### 3. 로그인
-<img width="1440" alt="스크린샷 2023-05-10 오전 9 48 55" src="https://github.com/2211SpringCloudWebApp/SPOUTING/assets/119032818/eb17f78d-d6ca-4ca7-9474-9e93968341e7">
+<img width="1440" alt="스크린샷 2023-05-10 오전 9 48 55" src="https://github.com/2211SpringCloudWebApp/SPOUTING/assets/119032818/cb338d78-a7b2-42b6-b583-4ffa144452c2">
 
 3-1 아이디찾기
-<img width="1440" alt="스크린샷 2023-05-10 오전 9 52 44" src="https://github.com/2211SpringCloudWebApp/SPOUTING/assets/119032818/6437ba91-7d4f-41cf-9231-6c58d3c9d04b">
-<img width="1440" alt="스크린샷 2023-05-10 오전 9 54 03" src="https://github.com/2211SpringCloudWebApp/SPOUTING/assets/119032818/40c6afdd-328d-4ef9-8f8e-448fa52b6cbd">
+<img width="1440" alt="스크린샷 2023-05-10 오전 9 52 44" src="https://github.com/2211SpringCloudWebApp/SPOUTING/assets/119032818/c644f7ba-7493-483e-89a6-d0038771aa5f">
+<img width="1440" alt="스크린샷 2023-05-10 오전 9 54 03" src="https://github.com/2211SpringCloudWebApp/SPOUTING/assets/119032818/261b0027-fc7f-406f-9a48-1c617e8c4b8c">
 
 3-2 비밀번호찾기
-<img width="1440" alt="스크린샷 2023-05-10 오전 9 54 37" src="https://github.com/2211SpringCloudWebApp/SPOUTING/assets/119032818/fd005a75-3cfb-4a9a-9e7b-2de3dac749e4">
-<img width="1439" alt="스크린샷 2023-05-10 오전 9 56 51" src="https://github.com/2211SpringCloudWebApp/SPOUTING/assets/119032818/51bbb746-fe9b-48bb-be75-c76ea0d3c6ad">
+<img width="1440" alt="스크린샷 2023-05-10 오전 9 54 37" src="https://github.com/2211SpringCloudWebApp/SPOUTING/assets/119032818/51097ec1-62a7-40ed-a3a0-d37b1f6227a2">
+<img width="1439" alt="스크린샷 2023-05-10 오전 9 56 51" src="https://github.com/2211SpringCloudWebApp/SPOUTING/assets/119032818/1aeb3585-d29c-4113-8d4a-67a2d8e6f35a">
 
 ### 4. 마이페이지
 
@@ -90,7 +90,7 @@
 <img width="1440" alt="스크린샷 2023-05-10 오전 9 59 32" src="https://github.com/2211SpringCloudWebApp/SPOUTING/assets/119032818/909f7862-1128-4997-809c-18b25ffae21f">
 
 4-3 나의 문의
-<img width="1440" alt="스크린샷 2023-05-10 오전 10 00 46" src="https://github.com/2211SpringCloudWebApp/SPOUTING/assets/119032818/08889f2c-e629-4950-87cd-03944d10fb2c">
+<img width="1440" alt="스크린샷 2023-05-10 오전 10 00 46" src="https://github.com/2211SpringCloudWebApp/SPOUTING/assets/119032818/4005d30d-d723-418e-a84e-3d4d9afcff56">
 
 4-4 나의 커뮤니티
 <img width="1439" alt="스크린샷 2023-05-10 오전 10 02 05" src="https://github.com/2211SpringCloudWebApp/SPOUTING/assets/119032818/95b74f79-76b5-43cf-b825-cbbd639c62fb">
@@ -151,9 +151,9 @@
 ![sonof iptime org_9511_notice_detail_noticeNo=305](https://github.com/2211SpringCloudWebApp/SPOUTING/assets/119032818/4433528b-a99f-4f5e-9f45-a23027bfaac6)
 
 9-2 문의사항
-![sonof iptime org_9511_inquiry_list](https://github.com/2211SpringCloudWebApp/SPOUTING/assets/119032818/a10ab478-be43-4c12-926d-5035b6ac09cd)
-![sonof iptime org_9511_inquiry_checkSecretNo_inquiriesNo=191](https://github.com/2211SpringCloudWebApp/SPOUTING/assets/119032818/ac85ac0a-c3d8-442e-af0d-f896c3dc7af1)
-![sonof iptime org_9511_inquiry_detail_inquiriesNo=185](https://github.com/2211SpringCloudWebApp/SPOUTING/assets/119032818/2ba0e39d-7a4d-471d-99b3-ad2bead402e7)
+![sonof iptime org_9511_inquiry_list](https://github.com/2211SpringCloudWebApp/SPOUTING/assets/119032818/ddc689f0-7a2e-4b7a-b8b9-faf52b4b3377)
+![sonof iptime org_9511_inquiry_detail_inquiriesNo=185](https://github.com/2211SpringCloudWebApp/SPOUTING/assets/119032818/6d3fdfde-0941-4706-88fc-b94dba254cc2)
+![sonof iptime org_9511_inquiry_checkSecretNo_inquiriesNo=191](https://github.com/2211SpringCloudWebApp/SPOUTING/assets/119032818/93033b91-cc45-4c67-916a-3aff13f7e25b)
 
 
 ### 10. 하루기록
