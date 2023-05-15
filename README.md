@@ -147,8 +147,8 @@
 
 ### 9. 게시판
 9-1 공지사항
-![sonof iptime org_9511_notice_list (1)](https://github.com/2211SpringCloudWebApp/SPOUTING/assets/119032818/fc88c864-597b-4f0a-a1a6-456e6ef832f6)
-![sonof iptime org_9511_notice_detail_noticeNo=305](https://github.com/2211SpringCloudWebApp/SPOUTING/assets/119032818/5509c3a2-742d-4485-bb51-70bbd13755b3)
+![sonof iptime org_9511_notice_list (1)](https://github.com/2211SpringCloudWebApp/SPOUTING/assets/119032818/f48f65ae-fad2-4789-ac5c-5aec0473d47b)
+![sonof iptime org_9511_notice_detail_noticeNo=305](https://github.com/2211SpringCloudWebApp/SPOUTING/assets/119032818/4433528b-a99f-4f5e-9f45-a23027bfaac6)
 
 9-2 문의사항
 ![sonof iptime org_9511_inquiry_list](https://github.com/2211SpringCloudWebApp/SPOUTING/assets/119032818/a10ab478-be43-4c12-926d-5035b6ac09cd)
