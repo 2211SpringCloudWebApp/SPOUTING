@@ -4,7 +4,6 @@
 # SPOUTING<br>시설예약, 쇼핑, SNS까지 올인원 피트니스 서비스
 </br>
 
-
 ## ⚽ 프로젝트 목적
 
 ✔ 2030 세대를 공략한 1인 가구 중심의 운동 예약 서비스</br>
@@ -84,71 +83,75 @@
 ### 4. 마이페이지
 
 4-1 개인정보 수정
-<img width="1440" alt="스크린샷 2023-05-10 오전 9 57 33" src="https://github.com/2211SpringCloudWebApp/SPOUTING/assets/119032818/b22787bf-f55b-4543-b625-aa9aed0cd6cc">
+<img width="1440" alt="스크린샷 2023-05-10 오전 9 57 33" src="https://github.com/2211SpringCloudWebApp/SPOUTING/assets/119032818/df41c46b-40ca-44fa-b9cd-d8a1e2b29f7d">
 
 4-2 포인트 내역
-<img width="1440" alt="스크린샷 2023-05-10 오전 9 59 32" src="https://github.com/2211SpringCloudWebApp/SPOUTING/assets/119032818/909f7862-1128-4997-809c-18b25ffae21f">
+<img width="1440" alt="스크린샷 2023-05-10 오전 9 59 32" src="https://github.com/2211SpringCloudWebApp/SPOUTING/assets/119032818/a1215da8-8ab9-4145-af87-831fed96021f">
 
 4-3 나의 문의
 <img width="1440" alt="스크린샷 2023-05-10 오전 10 00 46" src="https://github.com/2211SpringCloudWebApp/SPOUTING/assets/119032818/4005d30d-d723-418e-a84e-3d4d9afcff56">
 
 4-4 나의 커뮤니티
-<img width="1439" alt="스크린샷 2023-05-10 오전 10 02 05" src="https://github.com/2211SpringCloudWebApp/SPOUTING/assets/119032818/95b74f79-76b5-43cf-b825-cbbd639c62fb">
+<img width="1439" alt="스크린샷 2023-05-10 오전 10 02 05" src="https://github.com/2211SpringCloudWebApp/SPOUTING/assets/119032818/4894fced-3343-4913-9780-6b44372e4673">
 
 4-5 주문내역
-<img width="1437" alt="스크린샷 2023-05-10 오전 10 03 58" src="https://github.com/2211SpringCloudWebApp/SPOUTING/assets/119032818/0f146253-4618-4ff0-954a-88a0a33fb257">
+<img width="1437" alt="스크린샷 2023-05-10 오전 10 03 58" src="https://github.com/2211SpringCloudWebApp/SPOUTING/assets/119032818/140915d0-088f-4257-90d1-b3076e4c0139">
  
 4-6 예약내역
-![127 0 0 1_8999_book_myBooking_userNo=21 (1)](https://github.com/2211SpringCloudWebApp/SPOUTING/assets/119032818/328f2b46-4daa-4794-84c3-c6188a1cf98e)
+<img width="1440" alt="스크린샷 2023-05-10 오전 10 09 35" src="https://github.com/2211SpringCloudWebApp/SPOUTING/assets/119032818/7ef9ada8-cecd-4d32-9c47-bffe4763c8d1">
+<img width="1440" alt="스크린샷 2023-05-10 오전 10 11 03" src="https://github.com/2211SpringCloudWebApp/SPOUTING/assets/119032818/2faeae89-e5c9-4bb3-9d78-38ee8611c75f">
+
 
 
 ### 5. 시설 예약
-![127 0 0 1_8999_book_bookView](https://github.com/2211SpringCloudWebApp/SPOUTING/assets/119032818/392dade1-d2dc-4f31-b97f-89ffcf976afc)
-![127 0 0 1_8999_book_confirm](https://github.com/2211SpringCloudWebApp/SPOUTING/assets/119032818/f7ad9cf7-5b43-4dab-b890-c721478605ba)
-![127 0 0 1_8999_book_confirm (1)](https://github.com/2211SpringCloudWebApp/SPOUTING/assets/119032818/8503b401-d2d7-4a33-8cf1-f8dfcd375eed)
+<img width="1440" alt="스크린샷 2023-05-10 오전 10 13 00" src="https://github.com/2211SpringCloudWebApp/SPOUTING/assets/119032818/edfa1c02-3f72-4f58-9778-917160884a22">
+<img width="1440" alt="스크린샷 2023-05-10 오전 10 13 41" src="https://github.com/2211SpringCloudWebApp/SPOUTING/assets/119032818/9e5e04c0-c540-477c-9cf8-440d42da4af9">
+<img width="1440" alt="스크린샷 2023-05-10 오전 10 14 55" src="https://github.com/2211SpringCloudWebApp/SPOUTING/assets/119032818/cfaead0f-c9a7-4150-a4e6-e2c23913a8dc">
 
 
 ### 6. 지점 정보
 6-1 스파우팅소개
-<img width="1440" alt="스크린샷 2023-05-10 오전 10 59 08" src="https://github.com/2211SpringCloudWebApp/SPOUTING/assets/119032818/17655c33-d613-42d8-9041-ddd43d21e230">
-<img width="1440" alt="스크린샷 2023-05-10 오전 11 00 08" src="https://github.com/2211SpringCloudWebApp/SPOUTING/assets/119032818/0de9cfb0-eb23-4d0c-aa6a-f9a732e2344f">
-<img width="1440" alt="스크린샷 2023-05-10 오전 11 00 34" src="https://github.com/2211SpringCloudWebApp/SPOUTING/assets/119032818/5e7e04e3-7611-48bb-9baf-08b7e9bb6663">
+<img width="1440" alt="스크린샷 2023-05-10 오전 10 59 08" src="https://github.com/2211SpringCloudWebApp/SPOUTING/assets/119032818/a683ebb6-7339-4c7e-a671-33d8d4b5380c">
+<img width="1440" alt="스크린샷 2023-05-10 오전 11 00 08" src="https://github.com/2211SpringCloudWebApp/SPOUTING/assets/119032818/8b4b391a-4fa6-4fae-9236-d4b734526fdd">
+<img width="1440" alt="스크린샷 2023-05-10 오전 11 00 34" src="https://github.com/2211SpringCloudWebApp/SPOUTING/assets/119032818/b4268e0b-c11e-49a3-aa92-226dd3907794">
 
 6-2 지점찾기
-<img width="1440" alt="스크린샷 2023-05-10 오전 10 17 09" src="https://github.com/2211SpringCloudWebApp/SPOUTING/assets/119032818/8262dbcf-486f-4bff-b6c2-30be42de9b7b">
-<img width="1440" alt="스크린샷 2023-05-10 오전 10 19 11" src="https://github.com/2211SpringCloudWebApp/SPOUTING/assets/119032818/d7335fc0-afe9-40c4-b80c-29a2dcc3df5c">
+<img width="1440" alt="스크린샷 2023-05-10 오전 10 17 09" src="https://github.com/2211SpringCloudWebApp/SPOUTING/assets/119032818/abf730b9-8306-4a7b-8485-1e4b12f6f0f0">
+<img width="1440" alt="스크린샷 2023-05-10 오전 10 19 11" src="https://github.com/2211SpringCloudWebApp/SPOUTING/assets/119032818/6b947ccd-9706-4e2a-8863-8ee30d92a50f">
+
 
 ### 7. 마켓
-![sonof iptime org_9511_shop_main](https://github.com/2211SpringCloudWebApp/SPOUTING/assets/119032818/d055cba1-5381-40f0-8c93-22d97da7d7c0)
+![sonof iptime org_9511_shop_main](https://github.com/2211SpringCloudWebApp/SPOUTING/assets/119032818/253e958c-aa86-467b-aa8b-004aeaef8683)
 
 7-1 제품리스트
-![sonof iptime org_9511_shop_productList](https://github.com/2211SpringCloudWebApp/SPOUTING/assets/119032818/0de48b91-67ba-400e-a348-bc178e7a5dc2)
+![sonof iptime org_9511_shop_productList](https://github.com/2211SpringCloudWebApp/SPOUTING/assets/119032818/abe38f36-50d5-433f-b60c-c5dd7e26bd7f)
 
 7-2 장바구니
-![sonof iptime org_9511_shop_cartView](https://github.com/2211SpringCloudWebApp/SPOUTING/assets/119032818/8989d2cb-369b-4b4e-a295-920388f7d340)
+![sonof iptime org_9511_shop_cartView](https://github.com/2211SpringCloudWebApp/SPOUTING/assets/119032818/0849d74d-b216-4ad7-8034-405313dda8b1)
 
 7-3 주문서
-![127 0 0 1_8999_cart_orderView (1)](https://github.com/2211SpringCloudWebApp/SPOUTING/assets/119032818/0e93137b-09ec-4acc-97ee-92c19ea6b32d)
+![127 0 0 1_8999_cart_orderView](https://github.com/2211SpringCloudWebApp/SPOUTING/assets/119032818/fc31676a-b90d-4520-a2cc-4e192122c1c3)
 
 7-4 결제
-![127 0 0 1_8999_cart_orderView (2)](https://github.com/2211SpringCloudWebApp/SPOUTING/assets/119032818/6b691fb2-6246-44c2-8943-97355d6d5925)
+![127 0 0 1_8999_cart_orderView (2)](https://github.com/2211SpringCloudWebApp/SPOUTING/assets/119032818/99e712e3-ee0b-4801-b09a-6c17f474e98e)
 
 
 ### 8. 커뮤니티
 8-1 소셜링
-![sonof iptime org_9511_meeting](https://github.com/2211SpringCloudWebApp/SPOUTING/assets/119032818/51b05dee-d65b-4c08-9ed4-f62d0081b151)
-![sonof iptime org_9511_meetingDetailPage_meetingNo=201 readerNo=4](https://github.com/2211SpringCloudWebApp/SPOUTING/assets/119032818/30709b71-cbe6-4956-9f4c-1e431f160ddf)
-![sonof iptime org_9511_meetingOpenPage](https://github.com/2211SpringCloudWebApp/SPOUTING/assets/119032818/d46ba7e2-a2a5-471f-bed4-2aeb956ae617)
+![sonof iptime org_9511_meeting](https://github.com/2211SpringCloudWebApp/SPOUTING/assets/119032818/a5f73abd-85ac-4cef-b136-705c466db560)
+![sonof iptime org_9511_meetingDetailPage_meetingNo=201 readerNo=4](https://github.com/2211SpringCloudWebApp/SPOUTING/assets/119032818/a262f250-5b22-46b9-a784-17d6716271b2)
+![sonof iptime org_9511_meetingOpenPage](https://github.com/2211SpringCloudWebApp/SPOUTING/assets/119032818/ff2751d9-3a23-498a-a2d7-e695632d34d1)
 
 8-2 SNS
-![sonof iptime org_9511_sns_userNo=3](https://github.com/2211SpringCloudWebApp/SPOUTING/assets/119032818/bb526d1d-f0f6-433a-ba1e-71b0db15d343)
-![sonof iptime org_9511_sns_detail_snsPhotoNo=143](https://github.com/2211SpringCloudWebApp/SPOUTING/assets/119032818/71e518d1-b81d-46c7-821b-3fe4727d4389)
-![sonof iptime org_9511_sns_uploadPage](https://github.com/2211SpringCloudWebApp/SPOUTING/assets/119032818/27275704-243f-4176-b4c8-5a3b9041fe4d)
+![sonof iptime org_9511_sns_userNo=3](https://github.com/2211SpringCloudWebApp/SPOUTING/assets/119032818/44e84ecc-302c-49c6-96dd-fe8784b39de5)
+![sonof iptime org_9511_sns_detail_snsPhotoNo=143](https://github.com/2211SpringCloudWebApp/SPOUTING/assets/119032818/18b8b824-a4ed-402f-8992-ffa91f8f7127)
+![sonof iptime org_9511_sns_uploadPage](https://github.com/2211SpringCloudWebApp/SPOUTING/assets/119032818/7dd2c363-f040-4cb4-ae5c-0220853b5213)
 
 ### 9. 게시판
 9-1 공지사항
 ![sonof iptime org_9511_notice_list (1)](https://github.com/2211SpringCloudWebApp/SPOUTING/assets/119032818/f48f65ae-fad2-4789-ac5c-5aec0473d47b)
 ![sonof iptime org_9511_notice_detail_noticeNo=305](https://github.com/2211SpringCloudWebApp/SPOUTING/assets/119032818/4433528b-a99f-4f5e-9f45-a23027bfaac6)
+<img width="1440" alt="스크린샷 2023-05-15 오후 3 27 05" src="https://github.com/2211SpringCloudWebApp/SPOUTING/assets/119032818/9b516676-5734-4e9f-b403-3b4293e8ed8f">
 
 9-2 문의사항
 ![sonof iptime org_9511_inquiry_list](https://github.com/2211SpringCloudWebApp/SPOUTING/assets/119032818/ddc689f0-7a2e-4b7a-b8b9-faf52b4b3377)
