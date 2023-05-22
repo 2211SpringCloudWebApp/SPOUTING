@@ -28,8 +28,9 @@
 
 ## 🏐 팀 소개 및 팀원 소개
 ### 육공주 > 6명의 공주들이 합심하는 팀
-![image](https://github.com/2211SpringCloudWebApp/SPOUTING/assets/119032693/f759929c-c037-45cd-81d8-45189f117dfa)
-![image](https://github.com/2211SpringCloudWebApp/SPOUTING/assets/119032693/0d84a39f-6c2e-4cfb-8fba-abd999b7b5b5)
+![image](https://github.com/2211SpringCloudWebApp/SPOUTING/assets/87892248/ee449c9d-b108-4e0d-bf9e-c9b1c36d0fde)
+![image](https://github.com/2211SpringCloudWebApp/SPOUTING/assets/87892248/adfbf19d-13f4-4691-ab29-d0ac1037f131)
+
 </br>
 
 ## 🏈 주요 기능
@@ -48,6 +49,12 @@
 기능명 | 상세
 -------|-----
 하루기록 작성 | 하루기록은 해당 회원만 열람할 수 있으며 작성 시 10P를 적립받는다. 제목, 내용의 수정과 글 삭제가 가능하다.
+### 커뮤니티
+기능명 | 상세
+-------|-----
+소셜링 | 소셜링은 해당 회원만 접근 할 수 있으며, 주최자는 원하는 날짜와 인원을 지정하여 소셜링을 오픈할 수 있고 회원은 소셜링을 자유롭게 참여할 수 있다.
+SNS | 프로필 사진과 한줄소개를 수정할 수 있으며, 본인이 원하는 사진과 글을 자유롭게 등록, 삭제할 수 있다. 회원은 글에 댓글을 남길 수 있다. sns 팔로우 기능을 통해 원하는 회원의 sns를 팔로우 할 수 있고 팔로잉, 팔로워 수가 sns 페이지에 공개되며, 버튼 선택 시 팔로잉 목록을 볼 수 있다.
+쪽지 | 검색 기능을 이용하여 회원 검색을 하고 쪽지를 발송할 회원을 선택할 수 있다. 발송한 쪽지는 읽음 여부를 확인할 수 있다.
 ### 게시판
 기능명 | 상세
 -------|-----
